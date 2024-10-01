@@ -279,7 +279,7 @@
                                                                 @endif
                                                             @endif
 
-                                                            <span class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
+                                                            <span style="font-size:14px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -459,7 +459,7 @@
 
                                     <div class="brand-car-inner">
                                         <div class="brand-car-inner-item">
-                                            <span> @if(session('front_lang')=='en')
+                                            <span > @if(session('front_lang')=='en')
                                                         {{ $car['model_name_en'] }}
                                                     @else
                                                        {{ $car['model_name'] }}
@@ -474,8 +474,8 @@
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('listing', $car['id']) }}">
-                                            <h3>
+                                        <a  href="{{ route('listing', $car['id']) }}">
+                                            <h3 style="">
                                             @if(session('front_lang')=='en')
                                                 {{ html_decode($car['model_name_en']) }}
                                             @else
@@ -534,7 +534,7 @@
                                         </div>
 
                                         <div class="brand-car-btm-txt-btm">
-                                            <h6 class="brand-car-btm-txt"><span><i class="bi bi-geo-alt-fill"></i> Hyogo, Japan&nbsp; &nbsp; &nbsp;     2024-02-02</span></h6>
+                                            <p class="brand-car-btm-txt" style="word-spacing:70px; padding-bottom:17px;"><span><i class="bi bi-geo-alt-fill" style="font-family: var(--DMSans) !important; font-size:16px !important; color:black">Hyogo,Japan 2024-02-02</i> </span></p>
                                         </div>
                                     </div>
 
@@ -777,10 +777,12 @@
                             </div>
                         </div>
                     </div>
-                    @if ($cars->hasPages())
-                    {{ $cars->appends(request()->query())->links() }}
-                    @endif
-
+                    
+                    <div style="padding-top:30px;padding-bottom:30px">
+                        @if ($cars->hasPages())
+                            {{ $cars->appends(request()->query())->links() }}
+                        @endif
+                    </div>
 
                 </div>
             </div>
@@ -789,8 +791,12 @@
 
     <!-- Inventory-part-end -->
 
+    <!-- pagination Starts -->
 
+  
 
+    <!-- pagination ends -->
+                   
 </main>
 @endsection
 
