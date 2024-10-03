@@ -350,9 +350,13 @@
                             @else
                                 <img src="{{ asset($setting->logo) }}" alt="logo">
                             @endif
-                        </a>
+
+                            <p style="color:white; font-size:30px; font-weight:bold; display: inline; padding-left:100px; padding-top: ">Alpine Japan</p>
+                        </a>  
                     </div>
+                    
                 </div>
+
                 <div class="p-right">
                     <button id="nav-opn-btn">
                         <i class="fa-solid fa-bars"></i>
@@ -453,7 +457,6 @@
                             <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-twitter"></i></span>
                         </div>
                     </div>
-
 
                 </div>
             </div>
