@@ -279,7 +279,7 @@
                                                                 @endif
                                                             @endif
 
-                                                            <span style="font-size:14px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
+                                                            <span style="font-size:10px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -475,7 +475,7 @@
                                         </div>
 
                                         <a  href="{{ route('listing', $car['id']) }}">
-                                            <h3 style="">
+                                            <h3 style="s">
                                             @if(session('front_lang')=='en')
                                                 {{ html_decode($car['model_name_en']) }}
                                             @else

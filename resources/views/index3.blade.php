@@ -1711,7 +1711,6 @@
                                         Seamlessly browse thousands of MRL Certified cars </h6>        
                             </div>
                         </div>
-                        </div>
                     </div> 
             </section>
     <!-- Buy in 3 Easy Steps end -->
