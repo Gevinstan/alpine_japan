@@ -733,7 +733,7 @@
                                         </span>{{ __('About Us') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('contact-us') }}">  <span>
+                                        <a href="{{ route('join-as-dealer') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -744,7 +744,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('terms-conditions') }}">  <span>
+                                        <a href="{{ route('join-as-dealer') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -754,7 +754,7 @@
                                         </span>{{ __('Terms & Conditions') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('privacy-policy') }}">  <span>
+                                        <a href="{{ route('join-as-dealer') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path

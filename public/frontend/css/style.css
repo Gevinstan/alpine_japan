@@ -15057,4 +15057,27 @@ input::placeholder {
 
 
 
+        /************ NAV-BAR DROPDOWN STYLE START **************/
+
+        .nav-dropdown-header {
+            color: #0d274e !important;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .nav-dropdown-list .nav-dropdown-item {
+            color: #0d6efd !important;
+            background: linear-gradient(#0d6efd 0 0) no-repeat
+            calc(200% - var(--p,0%)) 100% / 200% var(--p,.08em);
+            transition: .3s var(--t,0s), background-position .3s calc(.3s - var(--t,0s));
+        }
+
+        .nav-dropdown-list .nav-dropdown-item:hover {
+            color: #fff !important;
+            background-color: #038ffc !important;
+            --p: 100%;
+            --t: .3s;
+        }
+
+        /************ NAV-BAR DROPDOWN STYLE END **************/
 
