@@ -293,7 +293,7 @@
                                                                 @endif
                                                             @endif
 
-                                                            <span class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
+                                                            <span style="font-size:10px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -622,10 +622,12 @@
                             @endif
                         </div>
                     </div>
-                    @if ($cars->hasPages())
-                       {{ $cars->appends(request()->query())->links() }}
-                    @endif
-
+                    
+                    <div style="padding-top:30px;padding-bottom:30px">
+                        @if ($cars->hasPages())
+                            {{ $cars->appends(request()->query())->links() }}
+                        @endif
+                    </div>
 
                 </div>
             </div>
@@ -634,8 +636,12 @@
 
     <!-- Inventory-part-end -->
 
+    <!-- pagination Starts -->
 
+  
 
+    <!-- pagination ends -->
+                   
 </main>
 @endsection
 

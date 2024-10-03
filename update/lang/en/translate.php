@@ -40,5 +40,6 @@
   'to Upload' => 'to Upload',
   'New File' => 'New File',
   'Approved' => 'Approved',
+  
 );
  ?>
