@@ -14939,7 +14939,7 @@ input::placeholder {
         height: 450%;
         left: 0;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
+        z-index: 999;
         padding-top: 5px;
         padding-left: 20px;
         padding-right: 20px;
@@ -15000,64 +15000,7 @@ input::placeholder {
         }
 
 
-        /* Extra Css for Buy 3 cars */
-
-        .Easy-test {
-            background-color: #333; /* Background color for visibility */
-        }
-
-        .buy-img {
-            text-align: center; /* Center text for all devices */
-        }
-
-        .row {
-            margin: 0; /* Remove default margin */
-        }
-
-        .col-md-4 {
-            padding: 0 15px; /* Consistent padding */
-        }
-
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            .col-md-4 {
-                flex: 0 0 100%; /* Full width on small screens */
-                max-width: 100%; /* Full width on small screens */
-                padding: 10px 0; /* Adjust padding for mobile */
-            }
-            
-            h2 {
-                font-size: 24px; /* Adjust heading size */
-            }
-            
-            h6 {
-                font-size: 12px; /* Adjust subheading size */
-            }
-        }
-
-        @media (min-width: 769px) {
-            .col-md-4 {
-                flex: 0 0 33.3333%; /* 3 columns on medium and larger screens */
-                max-width: 33.3333%; /* 3 columns on medium and larger screens */
-            }
-            
-            h2 {
-                font-size: 32px; /* Adjust heading size */
-            }
-            
-            h6 {
-                font-size: 14px; /* Adjust subheading size */
-            }
-        }
-
-
-
-
-
-
-
-
-        /************ NAV-BAR DROPDOWN STYLE START **************/
+         /************ NAV-BAR DROPDOWN STYLE START **************/
 
         .nav-dropdown-header {
             color: #0d274e !important;
