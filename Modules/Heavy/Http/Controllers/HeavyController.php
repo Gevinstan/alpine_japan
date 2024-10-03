@@ -151,6 +151,22 @@ class HeavyController extends Controller
         $Heavy->title=$request->title;
         $Heavy->make=$request->maker;
         $Heavy->model=$request->model;
+        $model=ModelsCars::whereId($request->model)->value('model');    
+        if(!empty($model)){
+            $Heavy->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.heavy.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $Heavy->brand=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.heavy.index',)->with($notification); 
+        }
         $Heavy->year_of_reg=$request->year_of_registration;
         // $Heavy->grade
         $Heavy->chassis=$request->chassis_number;

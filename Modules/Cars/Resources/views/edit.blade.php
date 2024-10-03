@@ -499,6 +499,23 @@
                         '<option value='+element.id+' '+ (element.model == cars.model ? 'selected' : '') + '>'+element.model+'</option>'
                     )
                     }
+
+
+                    $("#category").on('change',function(e){
+                    var models=@json($models);
+                    $("#model").empty();
+                    var user_comments = models.filter(p => p.category == $(this).val());
+                    console.log(user_comments)
+                    $("#model").append(
+                        '<option value="">Select Model</option>'
+                    );
+                    for (let index = 0; index < user_comments.length; index++) {
+                    const element = user_comments[index];
+                    $("#model").append(
+                        '<option value='+element.id+'>'+element.model+'</option>'
+                    )
+                }
+                })     
             });
         })(jQuery);
 

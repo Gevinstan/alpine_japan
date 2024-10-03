@@ -128,7 +128,9 @@ class SmallHeavyController extends Controller
     {
         $category=ProductCategories::get();
         $smallHeavy=SmallHeavy::find($id);
-        return view('smallheavy::edit',compact('category','smallHeavy'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('smallheavy::edit',compact('category','smallHeavy','brands','models'));
     }
 
     /**
@@ -154,6 +156,22 @@ class SmallHeavyController extends Controller
         $smallHeavy->title=$request->title;
         $smallHeavy->make=$request->maker;
         $smallHeavy->model=$request->model;
+        $model=ModelsCars::whereId($request->model)->value('model');    
+        if(!empty($model)){
+            $smallHeavy->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.small-heavy.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $smallHeavy->brand=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.small-heavy.index',)->with($notification); 
+        }
         $smallHeavy->year_of_reg=$request->year_of_registration;
         $smallHeavy->grade=$request->grade;
         $smallHeavy->chassis=$request->chassis_number;

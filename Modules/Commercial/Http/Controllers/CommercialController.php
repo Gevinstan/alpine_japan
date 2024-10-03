@@ -147,7 +147,9 @@ class CommercialController extends Controller
     {
         $category=ProductCategories::get();
         $commercial=Commercial::find($id);
-        return view('commercial::edit',compact('category','commercial'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('commercial::edit',compact('category','commercial','brands','models'));
     }
 
     /**
