@@ -478,9 +478,12 @@ class HomeController extends Controller
         }    
     }
 
-    // if($request->year){
-    //     $carsQuery->whereIn('model_year_en', $request->year); 
-    // }
+    if($request->year){
+        if($request->year !="1960")
+        {
+            $carsQuery->where('model_year_en', $request->year); 
+        }
+    }
 
     if($request->price_range){
         $priceRanges = [
@@ -587,6 +590,7 @@ class HomeController extends Controller
         ];
     });
 
+
     // Get additional data
     $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
     $cities = City::with('translate')->get();
@@ -612,6 +616,7 @@ class HomeController extends Controller
 
     $price_range = $this->getPriceRange();
 
+  
 
     return view('listing', [
         'seo_setting' => $seo_setting,

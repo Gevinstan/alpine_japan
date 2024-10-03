@@ -15,6 +15,7 @@ class Cars extends Model
         'image',
         'title',
         'make',
+        'brand',
         'model',
         'color',
         'year_of_reg',

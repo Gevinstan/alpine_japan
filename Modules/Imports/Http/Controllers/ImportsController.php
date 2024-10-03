@@ -43,7 +43,7 @@ class ImportsController extends Controller
 
     public function getNumberFromUrl($url) {
         $parsed_url = parse_url($url);
-        parse_str($parsed_url['query'], $query_params);
+        parse_str( isset($parsed_url['query']) ? $parsed_url['query'] : '', $query_params);
         return isset($query_params['number']) ? (int)$query_params['number'] : null;
     }
 

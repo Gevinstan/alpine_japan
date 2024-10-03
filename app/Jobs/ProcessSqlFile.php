@@ -27,6 +27,8 @@ class ProcessSqlFile implements ShouldQueue
     // Function to extract .bz2 file to .sql
     private function extractBz2File($bz2File)
     {
+        set_time_limit(800);
+        ini_set('memory_limit', '4G');
         $bz = bzopen($bz2File, "r");
 
         if (!$bz) {
@@ -78,7 +80,7 @@ class ProcessSqlFile implements ShouldQueue
                     // Display the cleaned SQL
                     echo $cleanedSql;
                     //  print_r($createTableSQL);
-                    echo "end";
+                   
                     try {
                         DB::statement($cleanedSql);
                     } catch (\Illuminate\Database\QueryException $e) {

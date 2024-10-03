@@ -92,13 +92,32 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Brand') }} * </label>
+                                                        <select  name="brand" id="brand"  class="crancy__item-input">
+                                                            <option value="">Select brand</option>
+                                                           @foreach($brands as $brand)
+                                                              <option value="{{$brand->id}}" {{$brand->slug == $cars->brand ? 'selected' : ''}}>{{$brand->slug}}</option>
+                                                           @endforeach  
+                                                        </select>
+                                                        @error('maker')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Model') }} * </label>
-                                                        <input class="crancy__item-input" type="text" name="model" id="model" value="{{$cars->model}}">
+                                                        <select  name="model" id="model"  class="crancy__item-input">
+                                                            <option value="">Select Model</option> 
+                                                        </select>
                                                         @error('model')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                
+                                            </div>
+                                            <div class="row mg-top-30">
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Grade') }}  </label>
@@ -108,8 +127,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30">
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Color') }} * </label>
@@ -128,18 +145,18 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Year Of Registration') }}  </label>
-                                                        <input class="crancy__item-input" type="text" name="year_of_registration" id="year_of_registration"
-                                                        value="{{$cars->year_of_reg}}">
-                                                        @error('year_of_registration')
-                                                            <div style="color: red;">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="row mg-top-30">
+                                            <div class="col-4">
+                                                <div class="crancy__item-form--group w-100 h-100">
+                                                    <label class="crancy__item-label">{{ __('translate.Year Of Registration') }}  </label>
+                                                    <input class="crancy__item-input" type="text" name="year_of_registration" id="year_of_registration"
+                                                    value="{{$cars->year_of_reg}}">
+                                                    @error('year_of_registration')
+                                                        <div style="color: red;">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                </div>
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Chassis number') }} * </label>
@@ -159,6 +176,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mg-top-30">   
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Year Of Made') }} </label>
@@ -167,9 +186,7 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mg-top-30">              
+                                                </div>           
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Kilometers') }} </label>
@@ -189,6 +206,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mg-top-30">     
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Engine type') }} </label>
@@ -198,9 +217,7 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mg-top-30">                                                
+                                                </div>                                           
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Transmission') }} </label>
@@ -220,6 +237,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mg-top-30">  
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Video Link') }} </label>
@@ -229,9 +248,7 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mg-top-30">     
+                                                </div>   
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.inside') }} </label>
@@ -469,6 +486,19 @@
                     let slug = inputValue.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
                     $("#slug").val(slug);
                 })
+                var models=@json($models);
+                var cars=@json($cars);
+                var user_comments = models.filter(p => p.category == $("#category").val());
+                $("#model").empty();
+                $("#model").append(
+                        '<option value="">Select Model</option>'
+                    );
+                    for (let index = 0; index < user_comments.length; index++) {
+                    const element = user_comments[index];
+                    $("#model").append(
+                        '<option value='+element.id+' '+ (element.model == cars.model ? 'selected' : '') + '>'+element.model+'</option>'
+                    )
+                    }
             });
         })(jQuery);
 

@@ -59,5 +59,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('footer_blogs', $footer_blogs);
         });
         Paginator::useBootstrapFive();
+        
     }
 }
