@@ -19,7 +19,7 @@
                     <div class="inner-banner-df">
                         <!-- <h1 class="inner-banner-taitel">{{ __('translate.Car Details') }}</h1> -->
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb" style="padding-right:785px; padding-top:30px;">
+                            <ol class="breadcrumb" style="padding-right:985px; padding-top:30px;">
                                 <!-- <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Details') }}</li> -->
                                 <li>JDM Stock</li>
@@ -64,24 +64,24 @@
                                             <div class="inventory-details-slick-img-tag">
                                             <div class="icon-main">
 
-                                                 <a href="javascript:;" class="icon before_auth_wishlist">
+                                                 <!-- <a href="javascript:;" class="icon before_auth_wishlist">
                                                 <span>
                                                 <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z" stroke-width="1.3" stroke-linejoin="round"></path>
                                                 </svg>
 
                                                 </span>
-                                                </a>
+                                                </a> -->
 
 
-                                                 <a href="http://localhost/carbaz/add-to-compare/13" class="icon">
+                                                 <!-- <a href="http://localhost/carbaz/add-to-compare/13" class="icon">
                                                 <span>
                                                 <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </svg>
                                                 </span>
-                                                </a>
+                                                </a> -->
                                                 </div>
                                             </div>
 
@@ -131,18 +131,26 @@
                                                             @endif
                                                                 
                                                             </h2>
-                                                            <span><p  style="display: inline;">Price <h2 style="color: #038ffc; display: inline;" id="price_value">
-                                                                @if(session('front_lang')=='en')
-                                                                ${{$car->start_price_num}}
-                                                                @else
-                                                                {{$car->start_price}}
-                                                                @endif   
-                                                            </h2>&nbsp;&nbsp;&nbsp;   Commission <h3 style="display: inline;" id="commission_value">${{$car->commission_value}}</h3></p></span>
+                                                            <div style="margin-top: 15px; margin-bottom: 15px">
+                                                                <p  style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
+                                                                   <b> @if(session('front_lang')=='en')
+                                                                    ${{$car->start_price_num}}
+                                                                    @else
+                                                                    {{$car->start_price}}
+                                                                    @endif 
+                                                                    </b>  
+                                                                    </p>
+                                                                </p>    
+                                                                
+                                                                <p style="display: inline;" id="commission_value">Commission : <p style="font-size:18px; color: black; display: inline;"><b>${{$car->commission_value}}</b></p></p>
+                                                            
+                                                                <p style="display: inline;">{{__('Delivery Charge :')}} <b><p style="font-size:18px; color: black; display: inline; font-weight:bold" id="delivery_charge"></p></b></p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="dropdown">
+                                                <div class="dropdown" style="padding-right:30px">
                                                     <select class="form-select form-select"
                                                         aria-label=".form-select example" name="location" id="location">
                                                         <option selected value="">
@@ -154,12 +162,12 @@
                                                     </select>
                                                 </div>
 
-                                                <div class="button">
+                                                <div class="button" style="padding-right:30px">
                                                     <button class="btn btn-outline-info btn-lg" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
                                                 </div>
                                                 <br>
-                                                <span><p  style="display: inline; padding-top:40px">{{__('translate.Delivery Charge')}}<h3 style="display: inline;" id="delivery_charge"></h3><p></p></span>
-                                                <span><p  style="display: inline; padding-top:40px">Total Price <h3 style="display: inline;" id="total_price"></h3><p></p></span>
+                                            
+                                                <span><p  style="display: inline; padding-top:40px">Total Price :<p style="font-size:18px; color: black; display: inline; font-weight:bold" id="total_price"></p><p></p></span>
                                             </div>
                                             <div class="auto-sales-text-right">
                                                 <p>

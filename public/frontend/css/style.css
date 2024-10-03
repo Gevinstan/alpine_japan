@@ -888,6 +888,16 @@
     min-height: 120vh !important;
 }
 
+@media screen and (min-width: 1080px)
+{
+
+.banner 
+{
+  background-size: 160rem !important; 
+} 
+
+}
+
 .text-bann {
     padding-bottom: 160px !important;
 }
@@ -1631,7 +1641,7 @@
 #example-search-input {
     padding: 0px;
 }
-.brand-car .brand-car-position-img {
+/* .brand-car .brand-car-position-img {
     position: absolute;
     top: -404px;
     right: -250px;
@@ -1639,7 +1649,7 @@
     background: url(../assets/images/thumb/categories-car.png) no-repeat;
     width: 720px;
     height: 318px;
-}
+} */
 
 .brand-car .taitel .taitel-img {
     position: absolute;
@@ -7259,7 +7269,7 @@ p {
     overflow: hidden;
 }
 
-.feature .feature-position-img {
+/* .feature .feature-position-img {
     position: absolute;
     top: 5px;
     right: 40px;
@@ -7268,7 +7278,7 @@ p {
         cover;
     width: 493px;
     height: 793px;
-}
+} */
 
 .feature .taitel .taitel-img {
     position: absolute;
@@ -7611,7 +7621,7 @@ p {
 .footer {
     padding: 20px 0 0px 0;
     /* background: url(../assets/images/hero/footer-bg.png) no-repeat center/cover; */
-    position: sticky;
+    /* position: sticky; */
     bottom: 0;
     /* overflow-x: hidden; */
     background-color: #0e124b !important;
@@ -8124,7 +8134,7 @@ p {
 }
 
 .header {
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     z-index: 999999;
     padding: 0 0 0 0;
@@ -13475,7 +13485,7 @@ h5.preloader-text::after {
     height: 153px;
 }
 
-.testimonial .testimonial-position-img .testimonial-position-img-right {
+/* .testimonial .testimonial-position-img .testimonial-position-img-right {
     position: absolute;
     bottom: -181px;
     right: -249px;
@@ -13484,7 +13494,7 @@ h5.preloader-text::after {
         center;
     width: 721.37px;
     height: 318.51px;
-}
+} */
 
 .testimonial.two .feature-slick-next {
     border: 1px solid var(--primary-color-2);
@@ -14988,6 +14998,64 @@ input::placeholder {
             border-radius: 10px !important;
             max-width: 560px !important;
         }
+
+
+        /* Extra Css for Buy 3 cars */
+
+        .Easy-test {
+            background-color: #333; /* Background color for visibility */
+        }
+
+        .buy-img {
+            text-align: center; /* Center text for all devices */
+        }
+
+        .row {
+            margin: 0; /* Remove default margin */
+        }
+
+        .col-md-4 {
+            padding: 0 15px; /* Consistent padding */
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .col-md-4 {
+                flex: 0 0 100%; /* Full width on small screens */
+                max-width: 100%; /* Full width on small screens */
+                padding: 10px 0; /* Adjust padding for mobile */
+            }
+            
+            h2 {
+                font-size: 24px; /* Adjust heading size */
+            }
+            
+            h6 {
+                font-size: 12px; /* Adjust subheading size */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .col-md-4 {
+                flex: 0 0 33.3333%; /* 3 columns on medium and larger screens */
+                max-width: 33.3333%; /* 3 columns on medium and larger screens */
+            }
+            
+            h2 {
+                font-size: 32px; /* Adjust heading size */
+            }
+            
+            h6 {
+                font-size: 14px; /* Adjust subheading size */
+            }
+        }
+
+
+
+
+
+
+
 
         /************ NAV-BAR DROPDOWN STYLE START **************/
 

@@ -18,12 +18,12 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 about-pl ">
+                <div class="col-lg-7 about-pl " style="padding-top:100px;">
                     <div class="taitel two">
-                        <span>{{ $about_us->header }}</span>
+                        <span style="padding-top:100px; color: black; font-size:45px">{{ $about_us->header }}</span>
                     </div>
 
-                    <h2 class="about-taitel">{{ $about_us->title }}</h2>
+                    <h2 class="about-taitel" style="padding-top:30px;color: #038ffc;font-size:30px">{{ $about_us->title }}</h2>
 
                     <div class="about_description">
                         {!! clean($about_us->description) !!}

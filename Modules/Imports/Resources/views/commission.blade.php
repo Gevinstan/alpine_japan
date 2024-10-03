@@ -18,7 +18,7 @@
                         <div class="crancy-dsinner">
                             <div class="crancy-table crancy-table--v3 mg-top-30">
                                 @if(count($commissions) > 0)
-                                    <div class="d-flex justify-content-between align-items-start">
+                                    <!-- <div class="d-flex justify-content-between align-items-start">
                                    
                                             <div class="d-flex justify-content-start align-items-center">
                                                 <div class="me-3">
@@ -44,7 +44,56 @@
                                         <div>
                                             <button class="crancy-btn delete_danger_btn" id="delete-model">Delete</button>  
                                         </div>
+                                    </div> -->
+
+                                    <div class="container" style="padding:0px">
+                                        <div class="row">
+                                            <div class="col-12 d-flex justify-content-end align-items-start">
+                                                <div>
+                                                    <button class="crancy-btn delete_danger_btn" id="delete-model">Delete</button>  
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-top:40px">
+                                            <div class="col-md-4">
+                                                <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Commission')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input" type="text" name="commission" id="commission">
+                                                        @error('commission')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <div class="" style="padding-top:10px">
+                                                    <button class="crancy-btn mg-top-25" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-1">
+
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <form style="padding-top:5px" action="{{ route('admin.commission') }}" method="GET" id="importedListForm" novalidate>
+                                                    <div class="">
+                                                        <label class="crancy__item-label">{{ __('translate.Year Of Made') }}</label>
+                                                        <input class="crancy__item-input" type="text" name="year" id="year">
+                                                        
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-md-2" style="padding-top:12px;margin-right:-5px">
+                                                <button  class="crancy-btn mg-top-25" style="margin-left:10px;" type="submit" id="yearBtn">{{ __('translate.Search') }}</button>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
+                                    
+
                                 @endif
                                 <div class="crancy-customer-filter">
                                     <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch d-flex items-center justify-between create_new_btn_box">
