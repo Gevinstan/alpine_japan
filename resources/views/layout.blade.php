@@ -254,10 +254,49 @@
                                                 </ul> -->
                                             </li>
                                         @else
-                                         <li><a style="color:black" href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                                         <li><a class="text-nowrap" href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                                         @endif
 
-                                        <li><a style="color:black" href="">{{ __('translate.JDM Stock') }}</a></li>
+                                        <div class="dropdown ">
+                                            <li><a href="" class="dropbtn text-nowrap">{{ __('JDM Stock') }}</a></li>
+
+                                            <div class="dropdown-content sub-menu">
+                                                <div class="header">
+                                                </div>
+
+                                                <div class="row">
+                                                    <!-- Column 1 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Honda</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Suzuki</a>
+                                                    </div>
+                                                    <!-- Column 2 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Buses</h6>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                    </div>
+                                                    <!-- Column 3 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Trucks</h6>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <li><a class="text-nowrap" href="{{ route('listings') }}">{{ __('Buy Now Cars') }}</a></li>
+
+                                        <li><a class="text-nowrap" href="{{ route('dealers') }}">{{ __('New Car Arrivals') }}</a></li>
+
+                                        
 
                                         <li><a style="color:black" href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
 
