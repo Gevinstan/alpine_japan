@@ -1719,7 +1719,7 @@
     <!-- About Alpine Japan Start -->
             <div class="container-fluid pb-5 pt-5">
                 <div class="row mb-4">
-                    <div class="col-12 text-center text-md-start" style="margin-left: 50px;">
+                    <div class="col-12 text-center text-md-start" style="margin-left: 165px;">
                         <h2 style="display: inline;">About</h2> 
                         <h2 style="display: inline; color: #038ffc;">Alpine Japan</h2>
                     </div>
