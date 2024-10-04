@@ -310,7 +310,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control position-relative" id="outside_form_search" name="search"
                                             placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:340px">
+                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:540px">
                                             <a href="javascript:void(0);" id="outside_form_btn">
                                             <i class="bi bi-search"></i></a></span>
                                     </div>
