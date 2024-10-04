@@ -882,21 +882,22 @@
     /* background-color: #f7f7f7; */
     /* padding-bottom: 120px; */
     background-position: center;
-    background-size: 85rem;
+    /* background-size: 85rem; */
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    min-height: 120vh !important;
+    /* min-height: 120vh !important; */
 }
 
-@media screen and (min-width: 1080px)
+/* @media screen and (min-width: 1080px)
 {
 
 .banner 
 {
-  background-size: 160rem !important; 
+  background-size: 120rem !important; 
 } 
 
-}
+} */
 
 .text-bann {
     padding-bottom: 160px !important;
@@ -1516,7 +1517,7 @@
 .inner-banner {
     position: relative;
     z-index: 1;
-    padding: 130px 0 0px 0;
+    padding: 30px 0 0px 0;
     /* background-color: lightgray; */
 }
 

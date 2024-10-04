@@ -762,7 +762,7 @@
                                         </span>{{ __('About Us') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('join-as-dealer') }}">  <span>
+                                        <a href="{{ route('contact-us') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
