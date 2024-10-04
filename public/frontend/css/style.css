@@ -882,21 +882,22 @@
     /* background-color: #f7f7f7; */
     /* padding-bottom: 120px; */
     background-position: center;
-    background-size: 85rem;
+    /* background-size: 85rem; */
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
-    min-height: 120vh !important;
+    /* min-height: 120vh !important; */
 }
 
-@media screen and (min-width: 1080px)
+/* @media screen and (min-width: 1080px)
 {
 
 .banner 
 {
-  background-size: 160rem !important; 
+  background-size: 120rem !important; 
 } 
 
-}
+} */
 
 .text-bann {
     padding-bottom: 160px !important;
@@ -1516,7 +1517,7 @@
 .inner-banner {
     position: relative;
     z-index: 1;
-    padding: 130px 0 0px 0;
+    padding: 30px 0 0px 0;
     /* background-color: lightgray; */
 }
 
@@ -14939,7 +14940,7 @@ input::placeholder {
         height: 450%;
         left: 0;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
+        z-index: 999;
         padding-top: 5px;
         padding-left: 20px;
         padding-right: 20px;
@@ -15000,61 +15001,26 @@ input::placeholder {
         }
 
 
-        /* Extra Css for Buy 3 cars */
+         /************ NAV-BAR DROPDOWN STYLE START **************/
 
-        .Easy-test {
-            background-color: #333; /* Background color for visibility */
+        .nav-dropdown-header {
+            color: #0d274e !important;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
-        .buy-img {
-            text-align: center; /* Center text for all devices */
+        .nav-dropdown-list .nav-dropdown-item {
+            color: #0d6efd !important;
+            background: linear-gradient(#0d6efd 0 0) no-repeat
+            calc(200% - var(--p,0%)) 100% / 200% var(--p,.08em);
+            transition: .3s var(--t,0s), background-position .3s calc(.3s - var(--t,0s));
         }
 
-        .row {
-            margin: 0; /* Remove default margin */
+        .nav-dropdown-list .nav-dropdown-item:hover {
+            color: #fff !important;
+            background-color: #038ffc !important;
+            --p: 100%;
+            --t: .3s;
         }
 
-        .col-md-4 {
-            padding: 0 15px; /* Consistent padding */
-        }
-
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            .col-md-4 {
-                flex: 0 0 100%; /* Full width on small screens */
-                max-width: 100%; /* Full width on small screens */
-                padding: 10px 0; /* Adjust padding for mobile */
-            }
-            
-            h2 {
-                font-size: 24px; /* Adjust heading size */
-            }
-            
-            h6 {
-                font-size: 12px; /* Adjust subheading size */
-            }
-        }
-
-        @media (min-width: 769px) {
-            .col-md-4 {
-                flex: 0 0 33.3333%; /* 3 columns on medium and larger screens */
-                max-width: 33.3333%; /* 3 columns on medium and larger screens */
-            }
-            
-            h2 {
-                font-size: 32px; /* Adjust heading size */
-            }
-            
-            h6 {
-                font-size: 14px; /* Adjust subheading size */
-            }
-        }
-
-
-
-
-
-
-
-
-
+        /************ NAV-BAR DROPDOWN STYLE END **************/

@@ -245,7 +245,7 @@
                                 <div class="menu">
                                     <ul >
                                         @if ($setting->selected_theme == 'all_theme')
-                                            <li><a href="{{ route('home') }}">{{ __('translate.Home') }}</a>
+                                            <li><a style="color: black !important" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
 
                                                 <!-- <ul class="sub-menu nav-style">
                                                     <li><a href="{{ route('home', ['theme' => 'one']) }}">{{ __('translate.Home-01') }} </a> </li>
@@ -254,18 +254,48 @@
                                                 </ul> -->
                                             </li>
                                         @else
-                                         <li><a style="color:black" href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                                         <li><a style="color: black !important" href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                                         @endif
 
-                                        <li><a style="color:black" href="">{{ __('translate.JDM Stock') }}</a></li>
+                                        <div class="dropdown ">
+                                            <li><a href="" class="dropbtn text-nowrap">{{ __('JDM Stock') }}</a></li>
+                                            <div class="dropdown-content sub-menu">
+                                                <div class="header">
+                                                </div>
+                                                <div class="row">
+                                                    <!-- Column 1 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Honda</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Suzuki</a>
+                                                    </div>
+                                                    <!-- Column 2 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Buses</h6>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                    </div>
+                                                    <!-- Column 3 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Trucks</h6>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <li><a style="color:black" href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
+                                        <li><a style="color: black !important" href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
 
-                                        <li><a style="color:black" href="{{ route('dealers') }}">{{ __('translate.New Car Arrivals') }}</a></li>
+                                        <li><a style="color: black !important" href="{{ route('dealers') }}">{{ __('translate.New Car Arrivals') }}</a></li>
 
-                                        <li><a style="color:black" href="{{ route('blogs') }}">{{ __('translate.Useful Links') }}</a></li>
+                                        <li><a style="color: black !important" href="{{ route('blogs') }}">{{ __('translate.Useful Links') }}</a></li>
 
-                                        <li><a style="color:black" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
+                                        <li><a style="color: black !important" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
 
                                         <!-- <li><a href="javascript:;">{{ __('translate.Pages') }} <i class="fa-solid fa-angle-down"></i> </a>
                                             <ul class="sub-menu">
@@ -744,7 +774,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('terms-conditions') }}">  <span>
+                                        <a href="{{ route('join-as-dealer') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -754,7 +784,7 @@
                                         </span>{{ __('Terms & Conditions') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('privacy-policy') }}">  <span>
+                                        <a href="{{ route('join-as-dealer') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path

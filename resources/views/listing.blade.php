@@ -279,7 +279,7 @@
                                                                 @endif
                                                             @endif
 
-                                                            <span style="font-size:14px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
+                                                            <span style="font-size:10px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -310,7 +310,7 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control position-relative" id="outside_form_search" name="search"
                                             placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:340px">
+                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:540px">
                                             <a href="javascript:void(0);" id="outside_form_btn">
                                             <i class="bi bi-search"></i></a></span>
                                     </div>
@@ -475,7 +475,7 @@
                                         </div>
 
                                         <a  href="{{ route('listing', $car['id']) }}">
-                                            <h3 style="">
+                                            <h3 style="s">
                                             @if(session('front_lang')=='en')
                                                 {{ html_decode($car['model_name_en']) }}
                                             @else
