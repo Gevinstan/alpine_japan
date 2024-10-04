@@ -930,29 +930,7 @@
         </div>
     </div>
 
-<!-- <div class="container img-avt">
-    <div class="row">
-        <div class="col-6 col-md-3 p-2">
-            <img src="{{ asset('japan_home/Poster1.svg') }}" alt="logo">
-        </div>
-
-        <div class="col-6 col-md-4 p-2">
-            <img src="{{ asset('japan_home/Poster2.svg') }}" alt="logo">
-        </div>
-
-        <div class="col-6 col-md-2 p-2">
-            <img src="{{ asset('japan_home/Poster3.svg') }}" alt="logo">
-        </div>
-
-        <div class="col-6 col-md-3 p-2">
-            <img src="{{ asset('japan_home/Poster4.jpg') }}" alt="logo">
-        </div>
-    </div>
-</div> -->
-
-<!-- Image advertisment end -->
-
-    <!--  Feature-part-start -->
+<!--  Feature-part-start -->
     <section class="feature py-120px">
         <div class="container-fluid">
             <div class="row">

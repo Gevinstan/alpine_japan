@@ -57,7 +57,7 @@ class HeavyController extends Controller
         }
         $Heavy->image=$image_name;
         $Heavy->title=$request->title;
-        $Heavy->make=$request->maker;
+        // $Heavy->make=$request->maker;
         $model=ModelsCars::whereId($request->model)->value('model');
         if(!empty($model)){
             $Heavy->model=$model;
@@ -68,7 +68,7 @@ class HeavyController extends Controller
           }
           $brand=Brand::whereId($request->brand)->value('slug');
           if(!empty($brand)){
-            $Heavy->brand=$brand;
+            $Heavy->make=$brand;
           } else {
               $notification= trans('translate.Brand Not Found');
               $notification=array('messege'=>$notification,'alert-type'=>'error');
@@ -149,8 +149,8 @@ class HeavyController extends Controller
           $Heavy->image=$image_name;
         }
         $Heavy->title=$request->title;
-        $Heavy->make=$request->maker;
-        $Heavy->model=$request->model;
+        // $Heavy->make=$request->maker;
+        // $Heavy->model=$request->model;
         $model=ModelsCars::whereId($request->model)->value('model');    
         if(!empty($model)){
             $Heavy->model=$model;
@@ -161,7 +161,7 @@ class HeavyController extends Controller
           }
         $brand=Brand::whereId($request->brand)->value('slug');
         if(!empty($brand)){
-          $Heavy->brand=$brand;
+          $Heavy->make=$brand;
         } else {
             $notification= trans('translate.Brand Not Found');
             $notification=array('messege'=>$notification,'alert-type'=>'error');

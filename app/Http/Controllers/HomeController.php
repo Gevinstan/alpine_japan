@@ -11,6 +11,7 @@ use Modules\Blog\Entities\Blog;
 use Modules\Blog\Entities\BlogCategory;
 use Modules\Blog\Entities\BlogComment;
 use Modules\Car\Entities\Car;
+use Modules\Cars\Entities\Cars;
 use Modules\Car\Entities\CarGallery;
 use Modules\Feature\Entities\Feature;
 use Modules\GeneralSetting\Entities\SeoSetting;
@@ -35,6 +36,10 @@ use Modules\Subscription\Entities\SubscriptionPlan;
 use Modules\Currency\app\Models\MultiCurrency;
 use Modules\Imports\Entities\CarDataJpOp;
 use Modules\DeliveryCharges\Entities\DeliveryCharge;
+use Modules\Models\Entities\ModelsCars;
+use Modules\Heavy\Entities\Heavy;
+use Modules\SmallHeavy\Entities\SmallHeavy;
+
 
 use App\Helpers\MailHelper;
 
@@ -207,6 +212,27 @@ class HomeController extends Controller
                       'mileage_en'=>$cars->mileage_en
                   );    
           }
+            $jdm_legend = \DB::table('blog')
+            ->where('category', 'JDM Legend')
+            ->where('make', '!=', '')
+            ->whereNotNull('make')
+            ->distinct()
+            ->pluck('make');
+
+            $jdm_legend_heavy = \DB::table('heavy')
+            ->where('category', 'JDM Legend')
+            ->where('make', '!=', '')
+            ->whereNotNull('make')
+            ->distinct()
+            ->pluck('make');
+
+
+            $jdm_legend_small_heavy=\DB::table('small_heavy')
+            ->where('category', 'JDM Legend')
+            ->where('make', '!=', '')
+            ->whereNotNull('make')
+            ->distinct()
+            ->pluck('make');
       
             return view('index3', [
                 'seo_setting' => $seo_setting,
@@ -214,6 +240,9 @@ class HomeController extends Controller
                 'brands' => $brands,
                 'cities' => $cities,
                 'new_cars' => $new_cars,
+                'jdm_legend'=>$jdm_legend,
+                'jdm_legend_heavy'=>$jdm_legend_heavy,
+                'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
                 'used_cars' => $used_cars,
                 'featured_cars' => $featured_cars,
                 'dealers' => $dealers,
@@ -248,6 +277,121 @@ class HomeController extends Controller
 
     }
 
+    public function jdm_stock(Request $request,$slug,$type){
+        $jdm_legend = \DB::table('blog')
+        ->where('category', 'JDM Legend')
+        ->where('make', '!=', '')
+        ->whereNotNull('make')
+        ->distinct()
+        ->pluck('make');
+        $seo_setting = SeoSetting::where('id', 10)->first();
+        $brands=\DB::table('blog')
+        ->where('category', 'JDM Legend')
+        ->where('make', $slug)
+        ->distinct()
+        ->select('model')->get();
+
+        // DB::enableQueryLog();
+        if($type == 'car'){
+            $carsQuery = Cars::join('models_cars as mc', 'mc.model', '=', 'blog.model')
+            ->where('blog.category', 'JDM Legend')
+            ->where('blog.make', $slug)
+            ->select('blog.*');
+        } else if($type == 'heavy'){
+            $carsQuery = Heavy::join('models_cars as mc', 'mc.model', '=', 'heavy.model')
+            ->where('heavy.category', 'JDM Legend')
+            ->where('heavy.make', $slug)
+            ->select('heavy.*');
+        } else if($type =='small_heavy') {
+            $carsQuery = SmallHeavy::join('models_cars as mc', 'mc.model', '=', 'small_heavy.model')
+            ->where('small_heavy.category', 'JDM Legend')
+            ->where('small_heavy.make', $slug)
+            ->select('small_heavy.*');
+        }
+
+      
+    
+        // Apply filters based on request parameters
+        if ($request->brand) {
+            $brand_arr = array_filter($request->brand); // Filter out any empty values
+            if ($brand_arr) {
+                if($type== 'car'){
+                  $carsQuery->whereIn('blog.model', $brand_arr); 
+                }  else if($type == 'heavy'){
+                    $carsQuery->whereIn('heavy.model', $brand_arr);
+                } else if($type =='small_heavy'){
+                    $carsQuery->whereIn('small_heavy.model', $brand_arr);
+                }
+            }    
+        }
+
+        if($request->brand_new_cars){
+            $year = date('Y'); 
+            if($type == 'car'){
+             $carsQuery->where('blog.year_of_reg', 'LIKE', $year . '%');    
+            } else if($type == 'heavy'){
+             $carsQuery->where('heavy.year_of_reg', 'LIKE', $year . '%');
+            } else if($type =='small_heavy'){
+                $carsQuery->where('small_heavy.year_of_reg', 'LIKE', $year . '%');
+            }
+        }
+        
+        // Pagination
+        $cars = $carsQuery->paginate(12);
+        // $cars = $carsQuery->get();
+        // dd(DB::getQueryLog());
+            // echo json_encode($cars);die();
+    
+        // Transform cars into an array for the view
+        $cars_array = $cars->map(function ($car) {
+        // $car_image=$this->last_image($car->pictures);
+            return [
+                'model_name' => $car->model,
+                'start_price' => $car->price,
+                'picture' =>$car->image,
+                'id' => $car->id,
+            ];
+        });
+    
+    
+        // Get additional data
+        $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+
+        $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+            ->groupBy('company_en')
+            ->having('count', '>', 1)
+            ->get();
+    
+      
+            $jdm_legend_heavy = \DB::table('heavy')
+            ->where('category', 'JDM Legend')
+            ->where('make', '!=', '')
+            ->whereNotNull('make')
+            ->distinct()
+            ->pluck('make');    
+
+            $jdm_legend_small_heavy=\DB::table('small_heavy')
+            ->where('category', 'JDM Legend')
+            ->where('make', '!=', '')
+            ->whereNotNull('make')
+            ->distinct()
+            ->pluck('make');
+    
+
+        return view('jdm_stock', [
+            'seo_setting' => $seo_setting,
+            'jdm_legend'=>$jdm_legend,
+            'brands' => $brands,
+            'cars_array' => $cars_array,
+            'listing_ads' => $listing_ads,
+            'cars' => $cars,
+            'brand_count' => $brand_count,
+            'slug'=>$slug,
+            'type'=>$type,
+            'jdm_legend_heavy'=>$jdm_legend_heavy,
+            'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
+        ]);
+    }
 
     public function last_image($picture){
         $picture_array = explode("#",$picture);
@@ -611,10 +755,32 @@ class HomeController extends Controller
         ->having('count', '>', 1)
         ->get();
 
-
-    // echo json_encode($scores);die();    
-
     $price_range = $this->getPriceRange();
+
+    $jdm_legend = \DB::table('blog')
+    ->where('category', 'JDM Legend')
+    ->where('make', '!=', '')
+    ->whereNotNull('make')
+    ->distinct()
+    ->pluck('make');
+
+    $jdm_legend_heavy = \DB::table('heavy')
+    ->where('category', 'JDM Legend')
+    ->where('make', '!=', '')
+    ->whereNotNull('make')
+    ->distinct()
+    ->pluck('make'); 
+
+    $jdm_legend_small_heavy=\DB::table('small_heavy')
+    ->where('category', 'JDM Legend')
+    ->where('make', '!=', '')
+    ->whereNotNull('make')
+    ->distinct()
+    ->pluck('make');
+
+    
+
+    
 
   
 
@@ -630,6 +796,9 @@ class HomeController extends Controller
         'price_range' => $price_range,
         'transmission' => $transmission,
         'scores' => $scores,
+        'jdm_legend'=>$jdm_legend,
+        'jdm_legend_heavy'=>$jdm_legend_heavy,
+        'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
     }
 
@@ -745,6 +914,25 @@ class HomeController extends Controller
         $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
 
         $delivery_charges = DeliveryCharge::all();
+        $jdm_legend = \DB::table('blog')
+        ->where('category', 'JDM Legend')
+        ->where('make', '!=', '')
+        ->whereNotNull('make')
+        ->distinct()
+        ->pluck('make');
+
+        $jdm_legend_heavy = \DB::table('heavy')
+        ->where('category', 'JDM Legend')
+        ->where('make', '!=', '')
+        ->whereNotNull('make')
+        ->distinct()
+        ->pluck('make');    
+        $jdm_legend_small_heavy=\DB::table('small_heavy')
+        ->where('category', 'JDM Legend')
+        ->where('make', '!=', '')
+        ->whereNotNull('make')
+        ->distinct()
+        ->pluck('make');
 
 
         return view('listing_detail', [
@@ -757,7 +945,10 @@ class HomeController extends Controller
             'total_dealer_rating' => $total_dealer_rating,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
-            'process_data_en'=>$process_data_en
+            'process_data_en'=>$process_data_en,
+            'jdm_legend'=>$jdm_legend,
+            'jdm_legend_heavy'=>$jdm_legend_heavy,
+            'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
 
     }

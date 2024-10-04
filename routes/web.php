@@ -55,6 +55,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
             Route::get('/blogs', 'blogs')->name('blogs');
             Route::get('/blog/{slug}', 'blog_show')->name('blog');
+            Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
 
             Route::get('/page/{slug}', 'custom_page')->name('custom-page');

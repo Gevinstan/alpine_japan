@@ -34,7 +34,7 @@
                                 <ol class="breadcrumb">
                                     <li>JDM Stock</li>
                                     <li><i class="bi bi-arrow-right-short"></i></li>
-                                    <li>Volvo</li>
+                                    <li>{{$slug}}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -64,41 +64,6 @@
                 <div class="col-lg-3">
                     <form action="" id="search_form">
                         <div class="inventory-main-box">
-                           
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Collapse All Filters
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                            
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Select Location
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                            
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample2">
                                     <div class="accordion-item">
@@ -110,196 +75,40 @@
                                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
                                         
                                             <div class="form-check me-3" style="padding-bottom: 20px">
-                                                    <label class="form-check-label" for="defaultCheck1">
+                                                    <label class="form-check-label" for="brand_new_cars">
                                                         Brand New Cars
                                                     </label>
 
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" id="brand_new_cars" name="brand_new_cars"
+                                                    {{ request('brand_new_cars') ? 'checked' : '' }}>
+                                                  
 
                                             </div>
 
                                             <div class="input-group">
-                                                <input class="form-control border-end-0 border" style="font-size:12px;" type="search" value="Type Car Brand Name" id="example-search-input">
+                                              {{--  <input class="form-control border-end-0 border" style="font-size:12px;" type="search" value="Type Car Brand Name" id="example-search-input"> 
                                                 <span class="input-group-append">
                                                     <button class="btn btn-outline-secondary bg-white border-start-0 accordion border ms-n5" type="button">
                                                         <i class="fa fa-search"></i>
                                                     </button>
-                                                </span>
+                                                </span> --}}
                                             </div>
 
                                             <h6 style="padding-top:30px">Popular</h6>
-                                            @foreach($brand_count as $brand)
+                                            @foreach($brands as $brand)
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                        <input class="form-check-input"  name="brand[]" type="checkbox" value="{{$brand->company_en}}"
-                                                        {{ in_array($brand->company_en, request('brand', [])) ? 'checked' : '' }}>
+                                                        <input class="form-check-input"  name="brand[]" type="checkbox" value="{{$brand->model}}"
+                                                        {{ in_array($brand->model, request('brand', [])) ? 'checked' : '' }}>
                                                         
                                                         <label class="form-check-label">
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
-
-                                                            <!-- @if(session('front_lang')=='en')
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
-                                                            @else
-                                                            {{ $brand->company}} ({{ $brand->count }})
-                                                            @endif -->
+                                                            {{ $brand->model }}
                                                         </label>
                                                     </div>
                                             </div>
                                             @endforeach
-                                            <h6 style="color:#038ffc;">Show More Brands</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample3">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Budget
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
-                                            <div class="accordion-body">
-                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
-
-                                                <div class="range-container">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMax" value="2">
-                                                </div>
-
-                                                <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">$5k $5Lakh</p></span>
-
-                                                <h6 style="padding-top:30px">Price Range</h6>
-
-                                                @foreach($price_range as $key=>$range)
-                                                <div class="d-flex align-items-center">
-                                                        <div class="form-check me-3">
-                                                            <input class="form-check-input" type="checkbox" name="price_range[]" value="{{$key}}" id="defaultCheck1"
-                                                            {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}>
-                                                            <label class="form-check-label" for="defaultCheck1">
-                                                             {{$key}}({{$range}})
-                                                            
-                                                            </label>
-                                                        </div>
-                                                </div>
-
-                                                @endforeach
-
-                                               
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            
-
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample5">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Model Year
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
-                                            <div class="accordion-body">
-
-                                                    <!-- <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">1960 2024</p></span> -->
-
-                                                   <label for="yearRange">Select Year:</label>
-
-                                                    <div class="range-container" style="padding-bottom:20px;">
-                                                    <input type="range" id="yearRange" name="year" min="1900" max="2024" value="2024">
-                                                    <span id="selectedYear">2024</span>
-                                                    <!-- <input type="range" id="sliderValue" name="year" min="1960" max="2024"  step="1" oninput="updateValue(this.value)"> -->
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                         
-
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample7">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseeight" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Transmission
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseeight" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                            @foreach($transmission as $transmission)
-                                            <div class="d-flex align-items-center">
-                                                <!-- Checkbox -->
-                                                  <div class="form-check me-3">
-                                                      <input class="form-check-input" type="checkbox" name="transmission[]" value="{{$transmission->transmission_en}}" id="defaultCheck2"
-                                                      {{ in_array($transmission->transmission_en, request('transmission', [])) ? 'checked' : '' }}>
-
-                                                      <label class="form-check-label" for="defaultCheck1">
-                                                       {{$transmission->transmission_en}}({{$transmission->count}})
-                                                      </label>
-                                                  </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                           
-
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample10">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseeleven" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Score Rating
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseeleven" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                        @foreach($scores as $key=>$score)
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <div class="form-check me-3">
-                                                        <input class="form-check-input" type="checkbox" name="scores_en[]" value="{{ $score->scores_en }}"
-                                                         id="check_{{ $loop->index }}" {{ in_array($score->scores_en, request('scores_en', [])) ? 'checked' : '' }}>
-                                                        <label class="form-check-label" for="check_{{ $loop->index }}">
-                                                            @php
-                                                                $scoreValue = $score->scores_en;
-                                                                $isNumeric = is_numeric($scoreValue);
-                                                            @endphp
-
-                                                            @if ($isNumeric)
-                                                                @php
-                                                                    $starCount = min(floor($scoreValue), 5);
-                                                                    $isHalfStar = ($scoreValue - floor($scoreValue)) >= 0.5;
-                                                                @endphp
-
-                                                                @for ($i = 1; $i <= $starCount; $i++)
-                                                                    <i class="bi bi-star-fill" style="color: #FFA800;"></i>
-                                                                @endfor
-
-                                                                @if ($isHalfStar)
-                                                                    <i class="bi bi-star-half" style="color: #FFA800;"></i>
-                                                                @endif
-                                                            @endif
-
-                                                            <span style="font-size:10px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-
-                                        </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -391,8 +200,14 @@
                                     <div class="col-lg-4">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car['picture']) }}" alt="thumb">
-
+                                            @if($type == 'car')
+                                            <img src="{{ asset('cars/' . $car['picture']) }}" alt="thumb">
+                                            @elseif ($type == 'heavy')
+                                            <img src="{{ asset('Heavy/' . $car['picture']) }}" alt="thumb">
+                                            @else
+                                             <img src="{{ asset('Small-Heavy/' . $car['picture']) }}" alt="thumb">
+                                            @endif
+                                           
                                                 <div class="brand-car-item-img-text">
 
                                                     <div class="icon-main">
@@ -424,14 +239,14 @@
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
                                                     <span> @if(session('front_lang')=='en')
-                                                                {{ $car['model_name_en'] }}
+                                                                {{ $car['model_name'] }}
                                                             @else
                                                             {{ $car['model_name'] }}
                                                             @endif
                                                     </span>
                                                     <p>
                                                     @if(session('front_lang')=='en')
-                                                        {{ $car['start_price_num'] }}
+                                                        {{ $car['start_price'] }}
                                                     @else
                                                         {{ $car['start_price'] }}
                                                     @endif
@@ -441,7 +256,7 @@
                                                 <a href="{{ route('listing', $car['id']) }}">
                                                     <h3>
                                                     @if(session('front_lang')=='en')
-                                                        {{ html_decode($car['model_name_en']) }}
+                                                        {{ html_decode($car['model_name']) }}
                                                     @else
                                                         {{ html_decode($car['model_name']) }}
                                                     @endif
@@ -459,14 +274,6 @@
 
                                                             </span>
                                                         </div>
-
-                                                        <span>
-                                                        @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage']) }}
-                                                        @else
-                                                            {{ html_decode($car['mileage_en']) }}
-                                                        @endif
-                                                        </span>
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
@@ -678,41 +485,17 @@
         });
 
         $("#outside_form_btn").on("click", function(e) {
-            e.preventDefault();   
+            e.preventDefault();     
             form.submit();
         });
 
-        form.on('submit', function(e) {
+
+        $("#brand_new_cars").on('change',function(e){
             e.preventDefault();
-            const currentUrl = new URL(window.location.href);
-            
-            if (yearChanged) {
-                console.log("treee")
-                currentUrl.searchParams.set('year', yearRange.val());
-                // Update the URL
-                window.history.pushState({}, '', currentUrl);
-                // Submit the form
-                this.submit();
-            } else {
-                // Remove the year parameter if it exists
-                if (currentUrl.searchParams.has('year')) {
-                    currentUrl.searchParams.delete('year');
-                    window.history.pushState({}, '', currentUrl);
-                }
-                // Only submit the form if there are other changed parameters
-                if (formHasChanges()) {
-                    this.submit();
-                    console.log(currentUrl)
-
-                }
-            }
-        });
-
-        function formHasChanges() {
-            // Check if any form fields other than the year have changed
-            // This is a placeholder function - you'll need to implement this based on your form structure
-            return true; // Change this to actually check for changes
-        }
+            // if ($(this).is(':checked')) {
+                form.submit();
+            // }
+        })
     });
 })(jQuery);
 </script>   <!------- Range ------->

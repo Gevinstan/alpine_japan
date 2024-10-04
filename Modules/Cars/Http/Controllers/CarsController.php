@@ -57,7 +57,7 @@ class CarsController extends Controller
         }
         $cars->image=$image_name;
         $cars->title=$request->title;
-        $cars->make=$request->maker;
+        // $cars->make=$request->maker;
         $model=ModelsCars::whereId($request->model)->value('model');
         if(!empty($model)){
             $cars->model=$model;
@@ -68,7 +68,7 @@ class CarsController extends Controller
           }
         $brand=Brand::whereId($request->brand)->value('slug');
         if(!empty($brand)){
-          $cars->brand=$brand;
+          $cars->make=$brand;
         } else {
             $notification= trans('translate.Brand Not Found');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
@@ -148,8 +148,8 @@ class CarsController extends Controller
           $model_image->move($org_path, $image_name);
           $cars->image=$image_name;
         } 
-        $cars->title=$request->title;
-        $cars->make=$request->maker;
+        $cars->title=$request->title;   
+        // $cars->make=$request->maker;
         $model=ModelsCars::whereId($request->model)->value('model');    
         if(!empty($model)){
             $cars->model=$model;
@@ -160,7 +160,7 @@ class CarsController extends Controller
           }
         $brand=Brand::whereId($request->brand)->value('slug');
         if(!empty($brand)){
-          $cars->brand=$brand;
+          $cars->make=$brand;
         } else {
             $notification= trans('translate.Brand Not Found');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
