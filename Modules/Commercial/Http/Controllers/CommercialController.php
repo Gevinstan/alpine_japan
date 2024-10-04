@@ -9,6 +9,8 @@ use Modules\Commercial\Entities\Commercial;
 use Modules\Categories\Entities\ProductCategories;
 use File;
 use Yajra\DataTables\Facades\DataTables;
+use Modules\Brand\Entities\Brand;
+use Modules\Models\Entities\ModelsCars;
 
 class CommercialController extends Controller
 {
@@ -58,7 +60,9 @@ class CommercialController extends Controller
     public function create()
     {
         $category=ProductCategories::get();
-        return view('commercial::create',compact('category'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('commercial::create',compact('category','brands','models'));
     }
 
     /**
@@ -83,8 +87,24 @@ class CommercialController extends Controller
         }
         $smallHeavy->image=$image_name;
         $smallHeavy->title=$request->title;
-        $smallHeavy->make=$request->maker;
-        $smallHeavy->model=$request->model;
+        // $smallHeavy->make=$request->maker;
+        $model=ModelsCars::whereId($request->model)->value('model');
+        if(!empty($model)){
+            $smallHeavy->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.commercial.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $smallHeavy->make=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.commercial.index',)->with($notification); 
+        }
+        // $smallHeavy->model=$request->model;
         $smallHeavy->year_of_reg=$request->year_of_registration;
         // $smallHeavy->grade
         $smallHeavy->chassis=$request->chassis_number;
@@ -105,7 +125,7 @@ class CommercialController extends Controller
         $smallHeavy->save();
         $notification= trans('translate.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.small-heavy.index',)->with($notification);
+        return redirect()->route('admin.commercial.index',)->with($notification);
     }
 
     /**
@@ -127,7 +147,9 @@ class CommercialController extends Controller
     {
         $category=ProductCategories::get();
         $commercial=Commercial::find($id);
-        return view('commercial::edit',compact('category','commercial'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('commercial::edit',compact('category','commercial','brands','models'));
     }
 
     /**
@@ -151,8 +173,24 @@ class CommercialController extends Controller
           $smallHeavy->image=$image_name;
         } 
         $smallHeavy->title=$request->title;
-        $smallHeavy->make=$request->maker;
-        $smallHeavy->model=$request->model;
+        // $smallHeavy->make=$request->maker;
+        // $smallHeavy->model=$request->model;
+        $model=ModelsCars::whereId($request->model)->value('model');
+        if(!empty($model)){
+            $smallHeavy->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.commercial.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $smallHeavy->make=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.commercial.index',)->with($notification); 
+        }
         $smallHeavy->year_of_reg=$request->year_of_registration;
         // $smallHeavy->grade
         $smallHeavy->chassis=$request->chassis_number;

@@ -266,24 +266,23 @@
                                                     <!-- Column 1 -->
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Honda</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Suzuki</a>
+                                                        @foreach($jdm_legend as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm, 'car']) }}">{{$jdm}}</a>
+                                                        @endforeach
                                                     </div>
                                                     <!-- Column 2 -->
                                                     <div class="col-md-4 nav-dropdown-list">
-                                                        <h6 class="dropdown-header nav-dropdown-header">Buses</h6>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                        <h6 class="dropdown-header nav-dropdown-header">Heavy</h6>
+                                                        @foreach($jdm_legend_heavy as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm, 'heavy']) }}">{{$jdm}}</a>
+                                                        @endforeach
                                                     </div>
                                                     <!-- Column 3 -->
                                                     <div class="col-md-4 nav-dropdown-list">
-                                                        <h6 class="dropdown-header nav-dropdown-header">Trucks</h6>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                        <h6 class="dropdown-header nav-dropdown-header">Small Heavy</h6>
+                                                        @foreach($jdm_legend_small_heavy as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm, 'small_heavy']) }}">{{$jdm}}</a>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>

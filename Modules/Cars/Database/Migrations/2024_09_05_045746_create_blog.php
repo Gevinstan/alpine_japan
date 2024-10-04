@@ -18,17 +18,19 @@ return new class extends Migration
             $table->string('title',100)->nullable();
             $table->longText('make')->nullable();
             $table->longText('model')->nullable();
+            $table->String('brand')->nullable();
             $table->string('color',100)->nullable();
             $table->string('year_of_reg',100)->nullable();
-            $table->longText('grade',100)->nullable();
-            $table->longText('chassis',100)->nullable();
-            $table->longText('score',100)->nullable();
-            $table->longText('yom',100)->nullable();
-            $table->longText('kms',100)->nullable();
-            $table->longText('hrs',100)->nullable();
-            $table->longText('engine',100)->nullable();
+            $table->longText('grade')->nullable();
+            $table->longText('chassis')->nullable();
+            $table->longText('score')->nullable();
+            $table->longText('yom')->nullable();
+            $table->longText('kms')->nullable();
+            $table->longText('hrs')->nullable();
+            $table->longText('engine')->nullable();
             $table->longText('fuel')->nullable();
             $table->longText('transmission')->nullable();
+            $table->longText('dimensions')->nullable();
             // $table->longText('video_link')->nullable();
         
             $table->longText('status')->nullable();

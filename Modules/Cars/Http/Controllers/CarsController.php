@@ -9,7 +9,8 @@ use Illuminate\Http\Response;
 use Modules\Categories\Entities\ProductCategories;
 use Modules\Cars\Entities\Cars;
 use File;
-
+use Modules\Brand\Entities\Brand;
+use Modules\Models\Entities\ModelsCars;
 class CarsController extends Controller
 {
     /**
@@ -27,7 +28,13 @@ class CarsController extends Controller
     public function create()
     {
         $category=ProductCategories::get();
-        return view('cars::create')->with('category',$category);
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('cars::create')->with([
+            'category' => $category,
+            'brands' => $brands,
+            'models'=>$models,
+        ]);
     }
 
     /**
@@ -50,19 +57,34 @@ class CarsController extends Controller
         }
         $cars->image=$image_name;
         $cars->title=$request->title;
-        $cars->make=$request->maker;
-        $cars->model=$request->model;
+        // $cars->make=$request->maker;
+        $model=ModelsCars::whereId($request->model)->value('model');
+        if(!empty($model)){
+            $cars->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.car.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $cars->make=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.car.index',)->with($notification); 
+        }
         $cars->grade=$request->grade;
         $cars->color=$request->color;
         $cars->int_col=$request->interial_color;
         $cars->year_of_reg=$request->year_of_registration;
         $cars->chassis=$request->chassis_number;
-        $cars->score=$request->score;
+        // $cars->score=$request->score;
         $cars->yom=$request->year_of_made;
         $cars->kms=$request->kilometers;
         $cars->engine=$request->engine_captibility;
         $cars->engine_type=$request->engine_type;
-        $cars->transmission=$request->transmission_type;
+        $cars->transmission=$request->transmission;
         $cars->fuel=$request->fuel;
         $cars->has_video=$request->video_link;
         $cars->has_video=$request->video_link;
@@ -104,7 +126,9 @@ class CarsController extends Controller
     {
         $cars=Cars::find($id);
         $category=ProductCategories::get();
-        return view('cars::edit',compact('cars','category'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('cars::edit',compact('cars','category','brands','models'));
     }
 
     /**
@@ -124,9 +148,24 @@ class CarsController extends Controller
           $model_image->move($org_path, $image_name);
           $cars->image=$image_name;
         } 
-        $cars->title=$request->title;
-        $cars->make=$request->maker;
-        $cars->model=$request->model;
+        $cars->title=$request->title;   
+        // $cars->make=$request->maker;
+        $model=ModelsCars::whereId($request->model)->value('model');    
+        if(!empty($model)){
+            $cars->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.car.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $cars->make=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.car.index',)->with($notification); 
+        }
         $cars->grade=$request->grade;
         $cars->color=$request->color;
         $cars->int_col=$request->interial_color;

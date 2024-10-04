@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use Modules\Categories\Entities\ProductCategories;
 use Modules\Heavy\Entities\Heavy;
 use File;
+use Modules\Brand\Entities\Brand;
+use Modules\Models\Entities\ModelsCars;
 
 class HeavyController extends Controller
 {
@@ -28,7 +30,9 @@ class HeavyController extends Controller
     public function create()
     {
         $category=ProductCategories::get();
-        return view('heavy::create',compact('category','category'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('heavy::create',compact('category','brands','models'));
     }
 
     /**
@@ -53,8 +57,24 @@ class HeavyController extends Controller
         }
         $Heavy->image=$image_name;
         $Heavy->title=$request->title;
-        $Heavy->make=$request->maker;
-        $Heavy->model=$request->model;
+        // $Heavy->make=$request->maker;
+        $model=ModelsCars::whereId($request->model)->value('model');
+        if(!empty($model)){
+            $Heavy->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.heavy.index',)->with($notification); 
+          }
+          $brand=Brand::whereId($request->brand)->value('slug');
+          if(!empty($brand)){
+            $Heavy->make=$brand;
+          } else {
+              $notification= trans('translate.Brand Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.heavy.index',)->with($notification); 
+          }
+     
         $Heavy->year_of_reg=$request->year_of_registration;
         // $Heavy->grade
         $Heavy->chassis=$request->chassis_number;
@@ -103,7 +123,9 @@ class HeavyController extends Controller
     {
         $Heavy=Heavy::find($id);
         $category=ProductCategories::get();
-        return view('heavy::edit',compact('Heavy','category'));
+        $brands=Brand::get();
+        $models=ModelsCars::get();
+        return view('heavy::edit',compact('Heavy','category','brands','models'));
     }
 
     /**
@@ -127,8 +149,24 @@ class HeavyController extends Controller
           $Heavy->image=$image_name;
         }
         $Heavy->title=$request->title;
-        $Heavy->make=$request->maker;
-        $Heavy->model=$request->model;
+        // $Heavy->make=$request->maker;
+        // $Heavy->model=$request->model;
+        $model=ModelsCars::whereId($request->model)->value('model');    
+        if(!empty($model)){
+            $Heavy->model=$model;
+          } else {
+              $notification= trans('translate.Model Not Found');
+              $notification=array('messege'=>$notification,'alert-type'=>'error');
+              return redirect()->route('admin.heavy.index',)->with($notification); 
+          }
+        $brand=Brand::whereId($request->brand)->value('slug');
+        if(!empty($brand)){
+          $Heavy->make=$brand;
+        } else {
+            $notification= trans('translate.Brand Not Found');
+            $notification=array('messege'=>$notification,'alert-type'=>'error');
+            return redirect()->route('admin.heavy.index',)->with($notification); 
+        }
         $Heavy->year_of_reg=$request->year_of_registration;
         // $Heavy->grade
         $Heavy->chassis=$request->chassis_number;

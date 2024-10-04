@@ -23,223 +23,6 @@
                                 <p style="padding-left: 10px">We are commited to helping you find the perfect car with confidence and ease. Start your simplified car buying experience with us today</p>
                             </div>
 
-                            <!----- 0ld Data ----->
-
-                            <!-- <div class="banner-search-bar" style="padding-left: 10px">
-                                <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-home-tab1" data-bs-toggle="pill"
-                                            data-bs-target="#pills-home1" type="button" role="tab"
-                                            aria-controls="pills-home1" aria-selected="true">{{ __('translate.JDM Stock') }}</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab1" data-bs-toggle="pill"
-                                            data-bs-target="#pills-profile1" type="button" role="tab"
-                                            aria-controls="pills-profile1" aria-selected="false">{{ __('translate.Buy Now Cars') }}</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">   
-                                        <button class="nav-link" id="pills-contact-tab1" data-bs-toggle="pill"
-                                            data-bs-target="#pills-contact1" type="button" role="tab"
-                                            aria-controls="pills-contact1" aria-selected="false">{{ __('translate.New Car Arrivals') }}</button>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="pills-tabContent1">
-                                    <div class="tab-pane fade show active" id="pills-home1" role="tabpanel"
-                                        aria-labelledby="pills-home-tab1">
-                                        <div class="banner-sarchber-box">
-                                            <form class="banner-sarchber-box-item" action="{{ route('listings') }}">
-                                        
-                                                <div class="banner-sarchber-box-inner">
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="brands[]">
-                                                        <option selected value="">
-                                                            {{ __('Brand') }} <i class="bi bi-caret-down"></i>
-                                                        </option>
-                                                        @foreach ($brands as $brand)
-                                                        <option value="{{ $brand->id }}"><i class="bi bi-caret-down-fill"></i>{{ $brand->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner">
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="location">
-                                                        <option selected value="">
-                                                            {{ __('Model') }}
-                                                        </option>
-                                                        @foreach ($cities as $city)
-                                                            <option {{ request()->get('location') == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner">
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="sort_by">
-                                                        <option selected>{{ __('translate.Year') }}</option>
-                                                        <option value="asc_to_dsc">{{ __('translate.ASC - DSC') }}</option>
-                                                        <option value="dsc_to_asc">{{ __('translate.DSC - ASC') }}</option>
-                                                        <option value="price_low_high">{{ Session::get('currency_icon') }}{{ __('translate.(Low-High)') }}</option>
-                                                        <option value="price_high_low">{{ Session::get('currency_icon') }}{{ __('translate.(High-Low)') }}</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner two">
-                                                    <button type="submit" class="sarchber-box-btn">
-                                                        <span>
-                                                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M21.9972 18.6491L24.3032 20.9551C25.2285 21.8804 25.2285 23.3807 24.3032 24.306C23.3779 25.2313 21.8776 25.2313 20.9523 24.306L18.6463 22M0.997192 11.2C0.997192 5.5667 5.56388 1 11.1972 1C16.8305 1 21.3972 5.5667 21.3972 11.2C21.3972 16.8333 16.8305 21.4 11.1972 21.4C5.56388 21.4 0.997192 16.8333 0.997192 11.2Z"
-                                                                    stroke-width="1.8" stroke-linecap="round" />
-                                                            </svg>
-                                                        </span>
-
-                                                        <span><p class="text-sarchber">SEARCH</p></span>
-                                                    </button>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-profile1" role="tabpanel"
-                                        aria-labelledby="pills-profile-tab1">
-                                        <div class="banner-sarchber-box">
-                                            <form class="banner-sarchber-box-item" action="{{ route('listings') }}">
-                                                <div class="banner-sarchber-box-inner">
-                                                    <span class="icon">
-                                                        
-                                                    </span>
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="brands[]">
-                                                        <option selected value="">
-                                                            {{ __('translate.Select Brand') }}
-                                                        </option>
-                                                        @foreach ($brands as $brand)
-                                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner">
-                                                    <span class="icon">
-                                                        
-                                                    </span>
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="location">
-                                                        <option selected value="">
-                                                            {{ __('translate.Select City') }}
-                                                        </option>
-                                                        @foreach ($cities as $city)
-                                                            <option {{ request()->get('location') == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner">
-                                                    <span class="icon">
-                                                        
-                                                    </span>
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="sort_by">
-                                                        <option selected>{{ __('translate.Sort by') }}</option>
-                                                        <option value="asc_to_dsc">{{ __('translate.ASC - DSC') }}</option>
-                                                        <option value="dsc_to_asc">{{ __('translate.DSC - ASC') }}</option>
-                                                        <option value="price_low_high">{{ Session::get('currency_icon') }}{{ __('translate.(Low-High)') }}</option>
-                                                        <option value="price_high_low">{{ Session::get('currency_icon') }}{{ __('translate.(High-Low)') }}</option>
-                                                    </select>
-                                                </div>
-
-                                                <input type="hidden" name="condition[]" value="Used">
-
-                                                <div class="banner-sarchber-box-inner two">
-                                                    <button type="submit" class="sarchber-box-btn">
-                                                        <span>
-                                                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M21.9972 18.6491L24.3032 20.9551C25.2285 21.8804 25.2285 23.3807 24.3032 24.306C23.3779 25.2313 21.8776 25.2313 20.9523 24.306L18.6463 22M0.997192 11.2C0.997192 5.5667 5.56388 1 11.1972 1C16.8305 1 21.3972 5.5667 21.3972 11.2C21.3972 16.8333 16.8305 21.4 11.1972 21.4C5.56388 21.4 0.997192 16.8333 0.997192 11.2Z"
-                                                                    stroke-width="1.8" stroke-linecap="round" />
-                                                            </svg>
-                                                        </span>
-
-                                                        <span><p class="text-sarchber">SEARCH</p></span>
-                                                    </button>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-contact1" role="tabpanel">
-                                        <div class="banner-sarchber-box">
-                                            <form class="banner-sarchber-box-item" action="{{ route('listings') }}">
-
-                                                <div class="banner-sarchber-box-inner">
-                                                    <span class="icon">
-                                                        
-                                                    </span>
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="brands[]">
-                                                        <option selected value="">
-                                                            {{ __('translate.Select Brand') }}
-                                                        </option>
-                                                        @foreach ($brands as $brand)
-                                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner">
-                                                    <span class="icon">
-                                                        
-                                                    </span>
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="location">
-                                                        <option selected value="">
-                                                            {{ __('translate.Select City') }}
-                                                        </option>
-                                                        @foreach ($cities as $city)
-                                                            <option {{ request()->get('location') == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
-                                                <div class="banner-sarchber-box-inner"> 
-                                                    <span class="icon">
-                                                        
-                                                    </span>
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="sort_by">
-                                                        <option selected>{{ __('translate.Sort by') }}</option>
-                                                        <option value="asc_to_dsc">{{ __('translate.ASC - DSC') }}</option>
-                                                        <option value="dsc_to_asc">{{ __('translate.DSC - ASC') }}</option>
-                                                        <option value="price_low_high">{{ Session::get('currency_icon') }}{{ __('translate.(Low-High)') }}</option>
-                                                        <option value="price_high_low">{{ Session::get('currency_icon') }}{{ __('translate.(High-Low)') }}</option>
-                                                    </select>
-                                                </div>
-
-                                                <input type="hidden" name="condition[]" value="New">
-
-                                                <div class="banner-sarchber-box-inner two">
-                                                    <button type="submit" class="sarchber-box-btn">
-                                                        <span>
-                                                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M21.9972 18.6491L24.3032 20.9551C25.2285 21.8804 25.2285 23.3807 24.3032 24.306C23.3779 25.2313 21.8776 25.2313 20.9523 24.306L18.6463 22M0.997192 11.2C0.997192 5.5667 5.56388 1 11.1972 1C16.8305 1 21.3972 5.5667 21.3972 11.2C21.3972 16.8333 16.8305 21.4 11.1972 21.4C5.56388 21.4 0.997192 16.8333 0.997192 11.2Z"
-                                                                    stroke-width="1.8" stroke-linecap="round" />
-                                                            </svg>
-                                                        </span>
-
-                                                        <span><p class="text-sarchber">SEARCH</p></span>
-                                                    </button>
-                                                </div>
-
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="container btn-dd">
                                 <div class="car-data-one btn-dc1">
                                     <p class="custom-btn1" style="font-size:18px;font-weight: 400;">JDM Stock</p>
@@ -314,7 +97,6 @@
 
                         <div class="col-lg-5">
                             <div class="banner-slick-main">
-
                                 <div class="banner-slick">
                                     @foreach ($featured_cars->take(3) as $index => $car)
                                         <div class="banner-slick-thumb">
@@ -422,113 +204,6 @@
                     </div>
                 </div>
                 @endforeach
-
-                <!-- <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{  asset('japan_home/benz.svg')  }}" alt="logo">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{  asset('japan_home/bmw.svg')  }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/daihatsu.png') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/honda.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/isuzu.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/jaqur.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/lambor.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/mazda.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/mitsu.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/subaru.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/suzuki.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('japan_home/benz.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div> -->
             </div>
 
         </div>
@@ -867,9 +542,7 @@
                         <a href="{{ route('listings') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
                     </div>
                 </div>
-            </div>
-
-            
+            </div>        
         </div>
     </section>
 <!--  Brand Car-part-end -->
@@ -1231,9 +904,7 @@
                         <a href="{{ route('listings') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
                     </div>
                 </div>
-            </div>
-
-            
+            </div>    
         </div>
     </section>
 <!--  Brand New Cars -part-end -->
@@ -1259,29 +930,7 @@
         </div>
     </div>
 
-<!-- <div class="container img-avt">
-    <div class="row">
-        <div class="col-6 col-md-3 p-2">
-            <img src="{{ asset('japan_home/Poster1.svg') }}" alt="logo">
-        </div>
-
-        <div class="col-6 col-md-4 p-2">
-            <img src="{{ asset('japan_home/Poster2.svg') }}" alt="logo">
-        </div>
-
-        <div class="col-6 col-md-2 p-2">
-            <img src="{{ asset('japan_home/Poster3.svg') }}" alt="logo">
-        </div>
-
-        <div class="col-6 col-md-3 p-2">
-            <img src="{{ asset('japan_home/Poster4.jpg') }}" alt="logo">
-        </div>
-    </div>
-</div> -->
-
-<!-- Image advertisment end -->
-
-    <!--  Feature-part-start -->
+<!--  Feature-part-start -->
     <section class="feature py-120px">
         <div class="container-fluid">
             <div class="row">
@@ -1482,7 +1131,6 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6 ">
                     <div class="taitel">
-
                         <div class="taitel-img">
                             <span>
                                 <!-- <svg width="163" height="5" viewBox="0 0 163 5" fill="none" xmlns="http://www.w3.org/2000/svg">
