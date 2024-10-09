@@ -45,6 +45,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/', 'index')->name('home');
             Route::get('/about-us', 'about_us')->name('about-us');
             Route::get('/contact-us', 'contact_us')->name('contact-us');
+            Route::get('/shipment', 'shipment')->name('shipment');
             Route::get('/terms-conditions', 'terms_conditions')->name('terms-conditions');
             Route::get('/privacy-policy', 'privacy_policy')->name('privacy-policy');
             Route::get('/faq', 'faq')->name('faq');

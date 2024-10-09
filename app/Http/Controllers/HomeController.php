@@ -300,6 +300,14 @@ class HomeController extends Controller
         ]);
     }
 
+
+    public function shipment(){
+         $seo_setting = SeoSetting::where('id', 4)->first();
+        return view('shipment')->with([
+            'seo_setting' => $seo_setting,
+        ]);
+    }
+
     public function terms_conditions(){
         $seo_setting = SeoSetting::where('id', 6)->first();
 

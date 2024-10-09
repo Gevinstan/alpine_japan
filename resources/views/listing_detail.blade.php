@@ -116,23 +116,24 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <p style="margin-bottom: 0px; margin-top: 20px">
-                                                            <b>
-                                                            @if(session('front_lang')=='en')
-                                                                {{$car->company_en}}
-                                                            @else
-                                                                 {{$car->company}}
-                                                            @endif
-                                                            </b></p>
-                                                            <h2>
-                                                            @if(session('front_lang')=='en')
-                                                             {{$car->model_name_en}} 
-                                                            @else
-                                                            {{$car->model_name}}
-                                                            @endif
+                                                                
+                                                                <b>
+                                                                @if(session('front_lang')=='en')
+                                                                    {{$car->company_en}}
+                                                                @else
+                                                                    {{$car->company}}
+                                                                @endif
+                                                                </b></p>
+                                                                <h2>
+                                                                @if(session('front_lang')=='en')
+                                                                {{$car->model_name_en}} 
+                                                                @else
+                                                                {{$car->model_name}}
+                                                                @endif
                                                                 
                                                             </h2>
                                                             <div style="margin-top: 15px; margin-bottom: 15px">
-                                                                <p  style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
+                                                                <p style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
                                                                    <b> @if(session('front_lang')=='en')
                                                                     ${{$car->start_price_num}}
                                                                     @else
