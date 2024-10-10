@@ -56,12 +56,21 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/blogs', 'blogs')->name('blogs');
             Route::get('/blog/{slug}', 'blog_show')->name('blog');
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
-            Route::post('/store-comment', 'store_comment')->name('store-comment');
+            Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
+            Route::post('/store-comment', 'store_comment')->name('store-comment');~
 
             Route::get('/page/{slug}', 'custom_page')->name('custom-page');
 
             Route::get('/listings', 'listings')->name('listings');
+            Route::post('/get-brands', 'get_brands')->name('get-brands');
+            Route::post('/get-model-year', 'get_model_year')->name('get-model-year');
+            Route::get('/jdm-stock-all', 'jdm_stock_all')->name('jdm-stock-all');
+            Route::get('/top-selling', 'top_selling')->name('top-selling');
+            Route::get('/new-arrival', 'new_arrival')->name('new-arrival');
             Route::get('/listing/{slug}', 'listing')->name('listing');
+            Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');
+            Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
+            Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace');
 
             Route::get('/dealers', 'dealers')->name('dealers');
             Route::get('/dealer/{slug}', 'dealer')->name('dealer');

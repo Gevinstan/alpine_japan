@@ -35,34 +35,27 @@
                                 <div class="car-data-three btn-dc1">
                                     <p class="custom-btn1" style="font-size:18px;font-weight: 400; ">New Car Arrivals</p>
                                 </div>
-                            
-                              <div class="btn-group" >
-                                    <div class="btn-group-lg btn-dc4">
-                                            <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad-left" type="button" id="defaultDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Brand
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                                <li><a class="dropdown-item" href="#">Chevrolet</a></li>
-                                                <li><a class="dropdown-item" href="#">Honda</a></li>
-                                                <li><a class="dropdown-item" href="#">BMW</a></li>
-                                                <li><a class="dropdown-item" href="#">Hyundai</a></li>
-                                                <li><a class="dropdown-item" href="#">Mercedes</a></li>
-                                                <li><a class="dropdown-item" href="#">Nissan</a></li>
-                                                <li><a class="dropdown-item" href="#">Renault</a></li>
-                                                <li><a class="dropdown-item" href="#">Alfa Remoe</a></li>
-                                            </ul>
+                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}">
+                              <div class="btn-group">
+                              <div class="btn-group-lg btn-dc4">
+                                        <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad-left" type="button" id="defaultDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Brand
+                                        </button>
+                                        <input type="hidden" name="jdm_brand" id="jdm_brand">
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                        @foreach($jdm_legend as $brand)
+                                            <li><a class="dropdown-item" href="javascript:void(0);" onclick="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</a></li>
+                                        @endforeach
+                                        </ul>
                                     </div>
+                               
 
                                     <div class="btn-group-lg btn-dc5">
                                             <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Model
                                             </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableOutside">
-                                                <li><a class="dropdown-item" href="#">Dhaka</a></li>
-                                                <li><a class="dropdown-item" href="#">Mirpur</a></li>
-                                                <li><a class="dropdown-item" href="#">Dinajpur</a></li>
-                                                <li><a class="dropdown-item" href="#">Rangpur</a></li>
-                                                <li><a class="dropdown-item" href="#">Rajshahi</a></li>
+                                            <input type="hidden" name="jdm_model[]" id="jdm_model">
+                                            <ul class="dropdown-menu model-ul" aria-labelledby="dropdownMenuClickableOutside">
                                             </ul>
                                     </div>
 
@@ -70,15 +63,11 @@
                                         <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" aria-expanded="false">
                                             Year
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
-                                            <li><a class="dropdown-item" href="#">ASC - DSC</a></li>
-                                            <li><a class="dropdown-item" href="#">DSC - ASC</a></li>
-                                            <li><a class="dropdown-item" href="#">$(Low - High)</a></li>
-                                            <li><a class="dropdown-item" href="#">$(High - Low)</a></li>
+                                        <input type="hidden" name="jdm_year" id="jdm_year">
+                                        <ul class="dropdown-menu year-ul" aria-labelledby="dropdownMenuClickableInside">
                                         </ul>
                                     </div>
 
-                                    <form class="btn-group btn-dc7">
                                         <div class="form-group position-relative">
                                             <input type="text" 
                                                 style="background-color: #038ffc; color: white; width: 180px; height: 52px; border: none;" 
@@ -86,7 +75,7 @@
                                                 id="exampleInputEmail1" 
                                                 placeholder="         SEARCH"
                                                 oninput="toggleIconVisibility(this)">
-                                            <i id="searchIcon" class="bi bi-search position-absolute" style="left: 20px; top: 46%; transform: translateY(-50%); color: white;"></i>
+                                            <a id="searchBtn" href="#"><i id="searchIcon" class="bi bi-search position-absolute" style="left: 20px; top: 46%; transform: translateY(-50%); color: white;"></i><a>
                                         </div>
                                     </form>
 
@@ -98,23 +87,19 @@
                         <div class="col-lg-5">
                             <div class="banner-slick-main">
                                 <div class="banner-slick">
-                                    @foreach ($featured_cars->take(3) as $index => $car)
+                                    @foreach (array_slice($top_sells, 0, 3) as $index => $car)
                                         <div class="banner-slick-thumb">
-                                            <img src="{{ asset($car->thumb_image) }}" alt="thumb" >
+                                            <img src="{{ asset($car['picture']) }}" alt="thumb" >
                                             <div class="banner-slick-thumb-overlay">
                                                 <div class="banner-slick-thumb-txt">
-                                                    <p>{{ $car?->brand?->name }}</p>
+                                                    <p>{{ $car['model_name_en'] }}</p>
                                                     <h6>
-                                                        @if ($car->offer_price)
-                                                            {{ currency($car->offer_price) }}
-                                                        @else
-                                                            {{ currency($car->regular_price) }}
-                                                        @endif
+                                                        {{ currency($car['start_price_num']) }}
                                                     </h6>
                                                 </div>
                                                 <div class="banner-slick-thumb-txt-two">
-                                                    <a href="{{ route('listing', $car->slug) }}">
-                                                        <h4>{{ html_decode($car->title) }}</h4>
+                                                    <a href="{{ route('listing', $car['id']) }}">
+                                                        <h4>{{ html_decode($car['model_name_en']) }}</h4>
                                                     </a>
                                                 </div>
                                                 <div class="banner-slick-thumb-overlay-icon-main" >
@@ -127,7 +112,7 @@
 
 
                                                         </span>
-                                                        <h5 class="banner-slick-thumb-overlay-txt" >{{ html_decode($car->mileage) }}</h5>
+                                                        <h5 class="banner-slick-thumb-overlay-txt" >{{ html_decode($car['mileage']) }}</h5>
                                                     </div>
                                                     <div class="banner-slick-thumb-overlay-icon-main-item">
                                                         <span class="banner-slick-thumb-overlay-icon" style="height: 50%">
@@ -137,7 +122,6 @@
                                                                 </svg>
 
                                                         </span>
-                                                        <h5 class="banner-slick-thumb-overlay-txt" >{{ html_decode($car->fuel_type) }}</h5>
                                                     </div>
                                                     <div class="banner-slick-thumb-overlay-icon-main-item">
                                                         <span class="banner-slick-thumb-overlay-icon" style="height: 50%">
@@ -145,7 +129,6 @@
                                                                     <path d="M17.9167 8.23819H17.2833C17.0314 8.23819 16.7897 8.3586 16.6116 8.57293C16.4334 8.78726 16.3333 9.07795 16.3333 9.38106V9.76202H15.7V7.85723C15.7 7.55412 15.5999 7.26343 15.4218 7.0491C15.2436 6.83477 15.002 6.71436 14.75 6.71436H13.8C13.716 6.71436 13.6355 6.67422 13.5761 6.60278C13.5167 6.53134 13.4833 6.43444 13.4833 6.3334V5.57149C13.4833 5.26838 13.3832 4.97769 13.2051 4.76336C13.0269 4.54903 12.7853 4.42862 12.5333 4.42862H11.2667V3.28574H12.85C13.102 3.28574 13.3436 3.16533 13.5218 2.951C13.6999 2.73667 13.8 2.44598 13.8 2.14287C13.8 1.83976 13.6999 1.54907 13.5218 1.33474C13.3436 1.12041 13.102 1 12.85 1H6.51667C6.26471 1 6.02307 1.12041 5.84491 1.33474C5.66676 1.54907 5.56667 1.83976 5.56667 2.14287C5.56667 2.44598 5.66676 2.73667 5.84491 2.951C6.02307 3.16533 6.26471 3.28574 6.51667 3.28574H8.1V4.42862H6.51667C6.26471 4.42862 6.02307 4.54903 5.84491 4.76336C5.66676 4.97769 5.56667 5.26838 5.56667 5.57149C5.56667 5.67252 5.5333 5.76942 5.47392 5.84087C5.41453 5.91231 5.33399 5.95245 5.25 5.95245H4.3C4.04804 5.95245 3.80641 6.07285 3.62825 6.28719C3.45009 6.50152 3.35 6.79221 3.35 7.09532V8.61915H2.4V7.09532C2.4 6.79221 2.29991 6.50152 2.12175 6.28719C1.94359 6.07285 1.70196 5.95245 1.45 5.95245C1.19804 5.95245 0.956408 6.07285 0.778249 6.28719C0.600089 6.50152 0.5 6.79221 0.5 7.09532L0.5 13.1906C0.5 13.4937 0.600089 13.7844 0.778249 13.9988C0.956408 14.2131 1.19804 14.3335 1.45 14.3335C1.70196 14.3335 1.94359 14.2131 2.12175 13.9988C2.29991 13.7844 2.4 13.4937 2.4 13.1906V11.6668H3.35V13.5716C3.35 13.8747 3.45009 14.1654 3.62825 14.3797C3.80641 14.5941 4.04804 14.7145 4.3 14.7145H5.62113C5.70511 14.7145 5.78564 14.7546 5.84502 14.8261L7.37388 16.6653C7.46185 16.7719 7.56651 16.8563 7.68181 16.9138C7.7971 16.9713 7.92073 17.0006 8.04553 17.0002H14.75C15.002 17.0002 15.2436 16.8798 15.4218 16.6655C15.5999 16.4511 15.7 16.1604 15.7 15.8573V14.3335H16.3333V14.7145C16.3333 15.0176 16.4334 15.3083 16.6116 15.5226C16.7897 15.7369 17.0314 15.8573 17.2833 15.8573H17.9167C18.3364 15.8567 18.7389 15.6559 19.0357 15.2988C19.3325 14.9417 19.4995 14.4575 19.5 13.9526V10.143C19.4995 9.63798 19.3325 9.15384 19.0357 8.79676C18.7389 8.43967 18.3364 8.23879 17.9167 8.23819ZM6.2 2.14287C6.2 2.04184 6.23336 1.94494 6.29275 1.87349C6.35214 1.80205 6.43268 1.76191 6.51667 1.76191H12.85C12.934 1.76191 13.0145 1.80205 13.0739 1.87349C13.1333 1.94494 13.1667 2.04184 13.1667 2.14287C13.1667 2.24391 13.1333 2.34081 13.0739 2.41225C13.0145 2.48369 12.934 2.52383 12.85 2.52383H6.51667C6.43268 2.52383 6.35214 2.48369 6.29275 2.41225C6.23336 2.34081 6.2 2.24391 6.2 2.14287ZM8.73333 3.28574H10.6333V4.42862H8.73333V3.28574ZM1.76667 13.1906C1.76667 13.2917 1.7333 13.3886 1.67392 13.46C1.61453 13.5315 1.53399 13.5716 1.45 13.5716C1.36601 13.5716 1.28547 13.5315 1.22608 13.46C1.1667 13.3886 1.13333 13.2917 1.13333 13.1906V7.09532C1.13333 6.99428 1.1667 6.89738 1.22608 6.82594C1.28547 6.7545 1.36601 6.71436 1.45 6.71436C1.53399 6.71436 1.61453 6.7545 1.67392 6.82594C1.7333 6.89738 1.76667 6.99428 1.76667 7.09532V13.1906ZM2.4 10.9049V9.38106H3.35V10.9049H2.4ZM15.0667 15.8573C15.0667 15.9584 15.0333 16.0553 14.9739 16.1267C14.9145 16.1982 14.834 16.2383 14.75 16.2383H8.04553C7.96155 16.2383 7.88102 16.1981 7.82165 16.1267L6.29278 14.2874C6.20478 14.181 6.1001 14.0966 5.98482 14.0391C5.86954 13.9816 5.74593 13.9522 5.62113 13.9526H4.3C4.21601 13.9526 4.13547 13.9124 4.07608 13.841C4.0167 13.7695 3.98333 13.6726 3.98333 13.5716V7.09532C3.98333 6.99428 4.0167 6.89738 4.07608 6.82594C4.13547 6.7545 4.21601 6.71436 4.3 6.71436H5.25C5.50196 6.71436 5.74359 6.59395 5.92175 6.37962C6.09991 6.16529 6.2 5.8746 6.2 5.57149C6.2 5.47045 6.23336 5.37355 6.29275 5.30211C6.35214 5.23067 6.43268 5.19053 6.51667 5.19053H12.5333C12.6173 5.19053 12.6979 5.23067 12.7573 5.30211C12.8166 5.37355 12.85 5.47045 12.85 5.57149V6.3334C12.85 6.63651 12.9501 6.92721 13.1282 7.14154C13.3064 7.35587 13.548 7.47627 13.8 7.47628H14.75C14.834 7.47628 14.9145 7.51641 14.9739 7.58785C15.0333 7.6593 15.0667 7.7562 15.0667 7.85723V15.8573ZM15.7 13.5716V10.5239H16.3333V13.5716H15.7ZM18.8667 13.9526C18.8667 14.2557 18.7666 14.5464 18.5884 14.7607C18.4103 14.975 18.1686 15.0954 17.9167 15.0954H17.2833C17.1993 15.0954 17.1188 15.0553 17.0594 14.9838C17 14.9124 16.9667 14.8155 16.9667 14.7145V9.38106C16.9667 9.28003 17 9.18313 17.0594 9.11168C17.1188 9.04024 17.1993 9.0001 17.2833 9.0001H17.9167C18.1686 9.0001 18.4103 9.12051 18.5884 9.33484C18.7666 9.54917 18.8667 9.83987 18.8667 10.143V13.9526Z" fill="#038ffc" stroke="#038ffc" stroke-width="0.2"/>
                                                                     </svg>
                                                         </span>
-                                                        <h5 class="banner-slick-thumb-overlay-txt" >{{ html_decode($car->engine_size) }}</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -539,7 +522,7 @@
                         </div>
                     </div>
                     <div class="brand-car-btn mt-48px">
-                        <a href="{{ route('listings') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
+                        <a href="{{ route('top-selling') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
                     </div>
                 </div>
             </div>        
@@ -901,7 +884,7 @@
                         </div>
                     </div>
                     <div class="brand-car-btn mt-48px">
-                        <a href="{{ route('listings') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
+                        <a href="{{ route('new-arrival') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
                     </div>
                 </div>
             </div>    
@@ -1436,14 +1419,35 @@
 
     <!-- Quality Compliance Part end -->
      <script>
+
+      
         document.getElementById("heartIcon").addEventListener("click", function() {
             this.classList.toggle("red");
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownButton = document.getElementById('dropdownMenuButton');
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdownButton.textContent = this.textContent;
+                });
+            });
         });
     </script>
 
     <!-- banner page drop down -->
 
     <script>
+
+
+
+
+
+
         function toggleIconVisibility(input) {
             const icon = document.getElementById('searchIcon');
             icon.style.display = input.value ? 'none' : 'block';
@@ -1456,3 +1460,72 @@
 
 </main>
 @endsection
+@push('js_section')
+<script>
+       $(()=>{
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+         });
+function updateButtonText(selectedBrand) { 
+    document.getElementById('defaultDropdown').innerText = selectedBrand; 
+    $("#jdm_brand").val(selectedBrand);
+    $.ajax({
+        url:"get-brands",
+        type:"POST",
+        datatype:"JSON",
+        data:{"brand":selectedBrand},
+        beforeSend:function(response){
+            console.log("loading")
+        },
+        success:function(data){
+            console.log(data.response);
+             var brands=data.response;
+            for (let index = 0; index < brands.length; index++) {
+                const element = brands[index];
+                console.log(element)
+                $(".model-ul").append(`<li><a class="dropdown-item" href="javascript:void(0);" onclick="getModel('${element.model}')">${element.model}</a></li>`);
+            }
+
+        }
+    })
+}
+
+function getModel(selectedModel){
+    document.getElementById('dropdownMenuClickableOutside').innerText = selectedModel; 
+    $("#jdm_model").val(selectedModel);
+
+
+    $.ajax({
+        url:"get-model-year",
+        type:"POST",
+        datatype:"JSON",
+        data:{"brand":document.getElementById('defaultDropdown').innerText,
+            'model':selectedModel},
+        beforeSend:function(response){
+            console.log("loading")
+        },
+        success:function(data){
+            console.log(data.response);
+             var brands=data.response;
+            for (let index = 0; index < brands.length; index++) {
+                const element = brands[index];
+                $(".year-ul").append(`<li><a class="dropdown-item" href="javascript:void(0);" onclick="getModelYear('${element.yom}')">${element.yom}</a></li>`);
+            }
+
+        }
+    })
+}
+
+ function getModelYear(yom){
+    document.getElementById('dropdownMenuClickableInside').innerText = yom; 
+    $("#jdm_year").val(yom)
+}
+
+$("#searchBtn").on('click',function(){
+     $("#jdm_stock_form").submit();
+})
+</script>
+@endpush

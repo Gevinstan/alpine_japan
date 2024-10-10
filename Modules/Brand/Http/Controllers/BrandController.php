@@ -22,7 +22,6 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::with('translate')->latest()->get();
-
         return view('brand::index', compact('brands'));
     }
 
@@ -32,6 +31,9 @@ class BrandController extends Controller
      */
     public function create()
     {
+        $brands = Brand::with('translate')->latest()->get();
+
+        echo json_encode($brands);die();
         return view('brand::create');
     }
 
@@ -56,7 +58,6 @@ class BrandController extends Controller
             $model_image->move($org_path, $image_name);
             $brand->image = $image_name;
         }
-
         $brand->slug = $request->slug;
         $brand->status = $request->status ? 'enable' : 'disable';
         $brand->save();

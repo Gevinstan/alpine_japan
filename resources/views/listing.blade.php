@@ -119,7 +119,7 @@
                                             </div>
 
                                             <div class="input-group">
-                                                <input class="form-control border-end-0 border" style="font-size:12px;" type="search" value="Type Car Brand Name" id="example-search-input">
+                                                <input class="form-control border-end-0 border" style="font-size:12px;"  type="search" id="example-search-input">
                                                 <span class="input-group-append">
                                                     <button class="btn btn-outline-secondary bg-white border-start-0 accordion border ms-n5" type="button">
                                                         <i class="fa fa-search"></i>
@@ -132,7 +132,7 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                        <input class="form-check-input"  name="brand[]" type="checkbox" value="{{$brand->company_en}}"
+                                                        <input class="form-check-input popular-search" name="brand[]" type="checkbox" value="{{$brand->company_en}}"
                                                         {{ in_array($brand->company_en, request('brand', [])) ? 'checked' : '' }}>
                                                         
                                                         <label class="form-check-label">
@@ -163,11 +163,12 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
-
+                                                <input type="hidden" id="priceSearch" name="price_range_scale" value="">
+                                                <button id="searchButton" style="margin-left: 5px; padding: 5px 10px;">Search</button>
+                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$0 $500,000</b></p></span>
                                                 <div class="range-container">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMax" value="2">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMin" value="1">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMax" value="2">
                                                 </div>
 
                                                 <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">$5k $5Lakh</p></span>
@@ -177,7 +178,7 @@
                                                 @foreach($price_range as $key=>$range)
                                                 <div class="d-flex align-items-center">
                                                         <div class="form-check me-3">
-                                                            <input class="form-check-input" type="checkbox" name="price_range[]" value="{{$key}}" id="defaultCheck1"
+                                                            <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" id="defaultCheck1"
                                                             {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}>
                                                             <label class="form-check-label" for="defaultCheck1">
                                                              {{$key}}({{$range}})
@@ -208,16 +209,12 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-
-                                                    <!-- <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">1960 2024</p></span> -->
-
-                                                   <label for="yearRange">Select Year:</label>
-
-                                                    <div class="range-container" style="padding-bottom:20px;">
-                                                    <input type="range" id="yearRange" name="year" min="1900" max="2024" value="2024">
-                                                    <span id="selectedYear">2024</span>
-                                                    <!-- <input type="range" id="sliderValue" name="year" min="1960" max="2024"  step="1" oninput="updateValue(this.value)"> -->
-                                                    </div>
+                                            <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+                                                <div class="range-container">
+                                                    <input type="range" class="form-range" min="1960" max="2024"  id="start">
+                                                    <output name="age_output" id="age_output" for="start" ></output>
+                                                    <input type="hidden" id="start_year" name="year">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +237,7 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                   <div class="form-check me-3">
-                                                      <input class="form-check-input" type="checkbox" name="transmission[]" value="{{$transmission->transmission_en}}" id="defaultCheck2"
+                                                      <input class="form-check-input popular-search" type="checkbox" name="transmission[]" value="{{$transmission->transmission_en}}" id="defaultCheck2"
                                                       {{ in_array($transmission->transmission_en, request('transmission', [])) ? 'checked' : '' }}>
 
                                                       <label class="form-check-label" for="defaultCheck1">
@@ -307,7 +304,7 @@
                         </div>
 
 
-                    </form>
+                    
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
                             <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" alt="img"></a>
@@ -324,7 +321,8 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control position-relative" id="outside_form_search" name="search"
                                             placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:540px">
+                                        <span class="input-group-append position-absolute"
+                                         style="right: 16px;top: 16px;">
                                             <a href="javascript:void(0);" id="outside_form_btn">
                                             <i class="bi bi-search"></i></a></span>
                                     </div>
@@ -629,7 +627,8 @@
                         @endif
                     </div>
 
-                </div>
+                </div>  
+                </form>
             </div>
         </div>
     </section>
@@ -649,29 +648,52 @@
 @push('js_section')
 
 <script>
+
+const startRange = document.getElementById('customRangeMin');
+const endRange = document.getElementById('customRangeMax');
+const priceRangeScale = document.getElementById('priceSearch');
+const valueDisplay = document.querySelector('span p');
+
+// Function to format currency
+const formatCurrency = (value) => {
+    return `$${(value * 100000).toLocaleString()}`;
+};
+
+// Function to update the display
+const updateDisplay = () => {
+    const startValue = formatCurrency(startRange.value);
+    const endValue = formatCurrency(endRange.value);
+    valueDisplay.textContent = `${startValue} ${endValue}`;
+    const startValueNumber = formatNumber(startRange.value * 100000);
+    const endValueNumber = formatNumber(endRange.value * 100000);
+    console.log(startValueNumber);
+    priceRangeScale.value=`${startValueNumber} - ${endValueNumber}`;
+};
+function formatNumber(value) {
+    return Math.round(value);
+}
+
+// Event listener for the start range input
+startRange.addEventListener('input', () => {
+    if (parseFloat(startRange.value) > parseFloat(endRange.value)) {
+        startRange.value = endRange.value;
+    }
+    updateDisplay();
+});
+
+// Event listener for the end range input
+endRange.addEventListener('input', () => {
+    if (parseFloat(endRange.value) < parseFloat(startRange.value)) {
+        endRange.value = startRange.value;
+    }
+    updateDisplay();
+});
+
+
 (function($) {
     "use strict";
     $(document).ready(function () {
-        const yearRange = $('#yearRange');
-        const selectedYear = $('#selectedYear');
         const form = $('#search_form');
-        let initialYear = yearRange.val();
-        let yearChanged = false;
-
-        // Check if there's a year parameter in the URL on page load
-        const urlParams = new URLSearchParams(window.location.search);
-        const urlYear = urlParams.get('year');
-        if (urlYear) {
-            yearRange.val(urlYear);
-            selectedYear.text(urlYear);
-            initialYear = urlYear;
-        }
-
-        yearRange.on('input', function() {
-            selectedYear.text($(this).val());
-            yearChanged = ($(this).val() !== initialYear);
-        });
-
         $("#outside_form_search").on("keyup", function(e) {
             let inputValue = $(this).val();
             $("#inside_form_search").val(inputValue);
@@ -682,55 +704,19 @@
             form.submit();
         });
 
-        form.on('submit', function(e) {
-            e.preventDefault();
-            const currentUrl = new URL(window.location.href);
-            
-            if (yearChanged) {
-                console.log("treee")
-                currentUrl.searchParams.set('year', yearRange.val());
-                // Update the URL
-                window.history.pushState({}, '', currentUrl);
-                // Submit the form
-                this.submit();
-            } else {
-                // Remove the year parameter if it exists
-                if (currentUrl.searchParams.has('year')) {
-                    currentUrl.searchParams.delete('year');
-                    window.history.pushState({}, '', currentUrl);
-                }
-                // Only submit the form if there are other changed parameters
-                if (formHasChanges()) {
-                    this.submit();
-                    console.log(currentUrl)
+        $(".popular-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();
+        })
 
-                }
-            }
-        });
+        $("#start").on('input',function(e){
+            $("#age_output").val(parseInt($(this).val()))
+            $("#start_year").val(parseInt($(this).val()));
+            // form.submit();
+        })
 
-        function formHasChanges() {
-            // Check if any form fields other than the year have changed
-            // This is a placeholder function - you'll need to implement this based on your form structure
-            return true; // Change this to actually check for changes
-        }
+    
     });
 })(jQuery);
 </script>   <!------- Range ------->
-<!-- <script> -->
-        
-<!-- 
-        // Check if there's a year parameter in the URL on page load
-  
-
-    // Set initial value display
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const yearRange = document.getElementById('sliderValue');
-    //     updateValue(yearRange.value);
-    // }); -->
-
-
- 
-<!-- </script> -->
-   
-
 @endpush

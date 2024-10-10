@@ -91,7 +91,7 @@ class ImportsController extends Controller
         //     'commission' => 'required|integer',
         // ]);
 
-        echo json_encode($request->all());die();
+     
 
         CarDataJpOp::where('active_status', 1)->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');

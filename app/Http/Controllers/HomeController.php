@@ -28,6 +28,7 @@ use Modules\Language\Entities\Language;
 use App\Models\User;
 use App\Models\AdsBanner;
 use App\Models\Review;
+use App\Models\Auct_lots_xml_jp;
 use Modules\ContactMessage\Http\Requests\ContactMessageRequest;
 use Modules\ContactMessage\Emails\SendContactMessage;
 use DB;
@@ -56,11 +57,7 @@ class HomeController extends Controller
         return isset($query_params['number']) ? (int)$query_params['number'] : null;
     }
 
-    public function index(Request $request){
-
-
-        // echo json_encode(Session::get('front_lang'));die();
-       
+    public function index(Request $request){       
         Artisan::call('optimize:clear');
         $setting = Setting::select('selected_theme')->first();
         // if($setting->selected_theme == 'all_theme'){
@@ -212,27 +209,29 @@ class HomeController extends Controller
                       'mileage_en'=>$cars->mileage_en
                   );    
           }
-            $jdm_legend = \DB::table('blog')
-            ->where('category', 'JDM Legend')
-            ->where('make', '!=', '')
-            ->whereNotNull('make')
-            ->distinct()
-            ->pluck('make');
+            // $jdm_legend = \DB::table('blog')
+            // ->where('category', 'JDM Legend')
+            // ->where('make', '!=', '')
+            // ->whereNotNull('make')
+            // ->distinct()
+            // ->pluck('make');
 
-            $jdm_legend_heavy = \DB::table('heavy')
-            ->where('category', 'JDM Legend')
-            ->where('make', '!=', '')
-            ->whereNotNull('make')
-            ->distinct()
-            ->pluck('make');
+            $jdm_legend = Brand::where('status', 'enable')->get();
+
+            // $jdm_legend_heavy = \DB::table('heavy')
+            // ->where('category', 'JDM Legend')
+            // ->where('make', '!=', '')
+            // ->whereNotNull('make')
+            // ->distinct()
+            // ->pluck('make');
 
 
-            $jdm_legend_small_heavy=\DB::table('small_heavy')
-            ->where('category', 'JDM Legend')
-            ->where('make', '!=', '')
-            ->whereNotNull('make')
-            ->distinct()
-            ->pluck('make');
+            // $jdm_legend_small_heavy=\DB::table('small_heavy')
+            // ->where('category', 'JDM Legend')
+            // ->where('make', '!=', '')
+            // ->whereNotNull('make')
+            // ->distinct()
+            // ->pluck('make');
       
             return view('index3', [
                 'seo_setting' => $seo_setting,
@@ -241,8 +240,8 @@ class HomeController extends Controller
                 'cities' => $cities,
                 'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_legend,
-                'jdm_legend_heavy'=>$jdm_legend_heavy,
-                'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
+                // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+                // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
                 'used_cars' => $used_cars,
                 'featured_cars' => $featured_cars,
                 'dealers' => $dealers,
@@ -253,6 +252,7 @@ class HomeController extends Controller
                 'home2_ads' => $home2_ads,
                 'home3_ads' => $home3_ads,
                 'top_sells'=>$top_cars,
+                'top_rated'=>$top_sells,
                 'new_arrived_cars'=>$new_arrived_cars
             ]);
         }else{
@@ -278,12 +278,7 @@ class HomeController extends Controller
     }
 
     public function jdm_stock(Request $request,$slug,$type){
-        $jdm_legend = \DB::table('blog')
-        ->where('category', 'JDM Legend')
-        ->where('make', '!=', '')
-        ->whereNotNull('make')
-        ->distinct()
-        ->pluck('make');
+        $jdm_legend = Brand::where('status', 'enable')->get();
         $seo_setting = SeoSetting::where('id', 10)->first();
         $brands=\DB::table('blog')
         ->where('category', 'JDM Legend')
@@ -295,7 +290,7 @@ class HomeController extends Controller
         if($type == 'car'){
             $carsQuery = Cars::join('models_cars as mc', 'mc.model', '=', 'blog.model')
             ->where('blog.category', 'JDM Legend')
-            ->where('blog.make', $slug)
+            ->where(DB::raw('LOWER(blog.make)'), $slug)
             ->select('blog.*');
         } else if($type == 'heavy'){
             $carsQuery = Heavy::join('models_cars as mc', 'mc.model', '=', 'heavy.model')
@@ -309,6 +304,31 @@ class HomeController extends Controller
             ->select('small_heavy.*');
         }
 
+        if($request->search){
+            if($request->search !=""){
+                if($type == 'car'){
+                    $carsQuery->where(function ($query) use ($request) {
+                        $query->where('blog.title', 'LIKE', $request->search . '%')
+                              ->orWhere('blog.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
+                              ->orWhere('blog.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
+                    }); 
+                }  else if($type == 'heavy'){
+                    $carsQuery->where(function ($query) use ($request) {
+                        $query->where('heavy.title', 'LIKE', $request->search . '%')
+                              ->orWhere('heavy.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
+                              ->orWhere('heavy.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
+                    }); 
+                }  else if($type =='small_heavy') {
+                    $carsQuery->where(function ($query) use ($request) {
+                        $query->where('small_heavy.title', 'LIKE', $request->search . '%')
+                              ->orWhere('small_heavy.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
+                              ->orWhere('small_heavy.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
+                    }); 
+                }     
+            }
+        }
+
+      
       
     
         // Apply filters based on request parameters
@@ -363,19 +383,19 @@ class HomeController extends Controller
             ->get();
     
       
-            $jdm_legend_heavy = \DB::table('heavy')
-            ->where('category', 'JDM Legend')
-            ->where('make', '!=', '')
-            ->whereNotNull('make')
-            ->distinct()
-            ->pluck('make');    
+            // $jdm_legend_heavy = \DB::table('heavy')
+            // ->where('category', 'JDM Legend')
+            // ->where('make', '!=', '')
+            // ->whereNotNull('make')
+            // ->distinct()
+            // ->pluck('make');    
 
-            $jdm_legend_small_heavy=\DB::table('small_heavy')
-            ->where('category', 'JDM Legend')
-            ->where('make', '!=', '')
-            ->whereNotNull('make')
-            ->distinct()
-            ->pluck('make');
+            // $jdm_legend_small_heavy=\DB::table('small_heavy')
+            // ->where('category', 'JDM Legend')
+            // ->where('make', '!=', '')
+            // ->whereNotNull('make')
+            // ->distinct()
+            // ->pluck('make');
     
 
         return view('jdm_stock', [
@@ -388,10 +408,43 @@ class HomeController extends Controller
             'brand_count' => $brand_count,
             'slug'=>$slug,
             'type'=>$type,
-            'jdm_legend_heavy'=>$jdm_legend_heavy,
-            'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
+            // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+            // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
     }
+
+
+    public function jdm_listing(Request $request,$slug,$type)
+    {
+        if($type=='car'){
+        $car = Cars::where('id',$slug)->firstOrFail();
+        } else if($type=='heavy'){
+            $car = Heavy::where('id',$slug)->firstOrFail();      
+        } else if($type == 'small_heavy'){
+            $car = SmallHeavy::where('id',$slug)->firstOrFail();
+        }
+        $related_listings = Car::with('dealer', 'brand')->where(function ($query) {
+            $query->where('expired_date', null)
+                ->orWhere('expired_date', '>=', date('Y-m-d'));
+        })->where(['status' => 'enable', 'approved_by_admin' => 'approved'])->where('brand_id', $car->brand_id)->where('id', '!=', $car->id)->get()->take(6);
+
+        $reviews = Review::with('user')->where('car_id', $car->id)->where('status', 'enable')->latest()->get();
+        $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
+
+        $delivery_charges = DeliveryCharge::all();
+        $jdm_legend = Brand::where('status', 'enable')->get();
+
+        return view('jdm-listing', [
+            'car' => $car,
+            'related_listings' => $related_listings,
+            'reviews' => $reviews,
+            'listing_ads' => $listing_ads,
+            'delivery_charges'=>$delivery_charges,
+            'jdm_legend'=>$jdm_legend,
+        ]);
+    }
+
+
 
     public function last_image($picture){
         $picture_array = explode("#",$picture);
@@ -542,6 +595,7 @@ class HomeController extends Controller
             'comment'=>'required',
             'g-recaptcha-response'=>new Captcha()
         ];
+        
         $customMessages = [
             'name.required' => trans('translate.Name is required'),
             'email.required' => trans('translate.Email is required'),
@@ -607,6 +661,17 @@ class HomeController extends Controller
     if ($request->location) {
         $carsQuery->where('city_id', $request->location);
     }
+    if($request->price_range_scale){
+        if($request->price_range_scale !=""){  
+            $parts = explode('-', $request->price_range_scale);
+            $startValue = trim($parts[0]);
+            $endValue = trim($parts[1]);
+            $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                $q->whereBetween('start_price_num', [$startValue, $endValue])
+                ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+            });
+        }
+    }
 
 
     if ($request->brand) {
@@ -623,7 +688,7 @@ class HomeController extends Controller
     }
 
     if($request->year){
-        if($request->year !="1960")
+        if($request->year !="")
         {
             $carsQuery->where('model_year_en', $request->year); 
         }
@@ -689,10 +754,11 @@ class HomeController extends Controller
     }
 
     if ($request->search) {
-        $carsQuery->whereHas('front_translate', function ($query) use ($request) {
-            $query->where('title', 'like', '%' . $request->search . '%')
-                  ->orWhere('description', 'like', '%' . $request->search . '%');
-        });
+        // if(Session::get('front_lang') == '')
+        // $carsQuery->whereHas('front_translate', function ($query) use ($request) {
+            $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+        //         //   ->orWhere('description', 'like', '%' . $request->search . '%');
+        // });
     }
 
     if ($request->sort_by) {
@@ -757,26 +823,21 @@ class HomeController extends Controller
 
     $price_range = $this->getPriceRange();
 
-    $jdm_legend = \DB::table('blog')
-    ->where('category', 'JDM Legend')
-    ->where('make', '!=', '')
-    ->whereNotNull('make')
-    ->distinct()
-    ->pluck('make');
+    $jdm_legend = Brand::where('status', 'enable')->get();
 
-    $jdm_legend_heavy = \DB::table('heavy')
-    ->where('category', 'JDM Legend')
-    ->where('make', '!=', '')
-    ->whereNotNull('make')
-    ->distinct()
-    ->pluck('make'); 
+    // $jdm_legend_heavy = \DB::table('heavy')
+    // ->where('category', 'JDM Legend')
+    // ->where('make', '!=', '')
+    // ->whereNotNull('make')
+    // ->distinct()
+    // ->pluck('make'); 
 
-    $jdm_legend_small_heavy=\DB::table('small_heavy')
-    ->where('category', 'JDM Legend')
-    ->where('make', '!=', '')
-    ->whereNotNull('make')
-    ->distinct()
-    ->pluck('make');
+    // $jdm_legend_small_heavy=\DB::table('small_heavy')
+    // ->where('category', 'JDM Legend')
+    // ->where('make', '!=', '')
+    // ->whereNotNull('make')
+    // ->distinct()
+    // ->pluck('make');
 
     
 
@@ -797,9 +858,619 @@ class HomeController extends Controller
         'transmission' => $transmission,
         'scores' => $scores,
         'jdm_legend'=>$jdm_legend,
-        'jdm_legend_heavy'=>$jdm_legend_heavy,
-        'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
+        // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+        // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
+    }
+    public function top_selling(Request $request){
+
+        $seo_setting = SeoSetting::where('id', 10)->first();
+        $brands = Brand::where('status', 'enable')->get();
+
+
+        DB::enableQueryLog();
+        // Initialize the query for cars
+        $carsQuery = CarDataJpOp::query();
+
+        // Apply filters based on request parameters
+        if ($request->location) {
+            $carsQuery->where('city_id', $request->location);
+        }
+
+
+        if ($request->brand) {
+            $brand_arr = array_filter($request->brand); // Filter out any empty values
+            if ($brand_arr) {
+                $carsQuery->whereIn('company_en', $brand_arr); 
+            }    
+        }
+
+        if($request->price_range_scale){
+            if($request->price_range_scale !=""){  
+                $parts = explode('-', $request->price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                    $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                });
+            }
+        }
+        if ($request->tranmission) {
+            $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
+            if ($transmission_arr) {
+                $carsQuery->whereIn('transmission_en', $transmission_arr); 
+            }    
+        }
+
+        if($request->year){
+            if($request->year !="")
+            {
+                $carsQuery->where('model_year_en', $request->year); 
+            }
+        }
+
+        if($request->price_range){
+
+            $priceRanges = [
+                "Under $5000" => ["start" => 0, "end" => 5000],
+                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+            ];
+
+
+
+            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+
+        
+
+    
+            if (is_null($result['end_price_num'])) {
+                // Count for "Above" range
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+                });
+            } else {
+                // Count for other ranges
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                });
+            }  
+        }
+
+        if ($request->scores_en) {
+            $score_arr = array_filter($request->scores_en); // Filter out any empty values
+            if ($score_arr) {
+                $carsQuery->whereIn('scores_en', $score_arr); 
+            }
+        }
+
+
+
+        if ($request->condition) {
+            $carsQuery->whereIn('condition', $request->condition);
+        }
+
+        if ($request->purpose) {
+            $purpose_arr = array_filter($request->purpose);
+            if ($purpose_arr) {
+                $carsQuery->whereIn('purpose', $purpose_arr);
+            }
+        }
+
+        if ($request->features) {
+            $carsQuery->whereJsonContains('features', $request->features);
+        }
+
+        if ($request->price_filter) {
+            if ($request->price_filter === 'low_to_high') {
+                $carsQuery->orderBy('regular_price', 'asc');
+            } elseif ($request->price_filter === 'high_to_low') {
+                $carsQuery->orderBy('regular_price', 'desc');
+            }
+        }
+
+        if ($request->search) {
+            if($search!=""){
+                // $carsQuery->whereHas('front_translate', function ($query) use ($request) {
+                        $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+            // });
+        }
+            // if(Session::get('front_lang') == '')
+            // $carsQuery->whereHas('front_translate', function ($query) use ($request) {
+            //     $query->where('title', 'like', '%' . $request->search . '%');
+            //         //   ->orWhere('description', 'like', '%' . $request->search . '%');
+            // });
+        }
+
+        if ($request->sort_by) {
+            switch ($request->sort_by) {
+                case 'dsc_to_asc':
+                    $carsQuery->orderBy('title', 'desc');
+                    break;
+                case 'asc_to_dsc':
+                    $carsQuery->orderBy('title', 'asc');
+                    break;
+                case 'price_low_high':
+                    $carsQuery->orderBy('regular_price', 'asc');
+                    break;
+                case 'price_high_low':
+                    $carsQuery->orderBy('regular_price', 'desc');
+                    break;
+            }
+        }
+
+        // $carsQuery->get();
+        // dd(DB::getQueryLog());
+
+        // Pagination
+        $cars = $carsQuery->where('top_sell','1')->paginate(12);
+
+        // Transform cars into an array for the view
+        $cars_array = $cars->map(function ($car) {
+        $car_image=$this->last_image($car->pictures);
+            return [
+                'company_en' => $car->company_en,
+                'company' => $car->company,
+                'model_name' => $car->model_name,
+                'model_name_en' => $car->model_name_en,
+                'start_price' => $car->start_price,
+                'start_price_num' => $car->start_price_num,
+                'end_price' => $car->end_price,
+                'end_price_num' => $car->end_price_num,
+                'picture' =>$car_image[0],
+                'id' => $car->id,
+                'mileage' => $car->mileage,
+                'mileage_en' => $car->mileage_en,
+            ];
+        });
+
+
+        // Get additional data
+        $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+        $cities = City::with('translate')->get();
+        $features = Feature::with('translate')->get();
+
+        $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+            ->groupBy('company_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+            ->groupBy('transmission_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $scores = CarDataJpOp::selectRaw('scores_en, COUNT(*) as count')
+            ->groupBy('scores_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $price_range = $this->getPriceRange();
+
+        $jdm_legend = Brand::where('status', 'enable')->get();
+        return view('top-ratings', [
+            'seo_setting' => $seo_setting,
+            'brands' => $brands,
+            'cities' => $cities,
+            'features' => $features,
+            'cars_array' => $cars_array,
+            'listing_ads' => $listing_ads,
+            'cars' => $cars,
+            'brand_count' => $brand_count,
+            'price_range' => $price_range,
+            'transmission' => $transmission,
+            'scores' => $scores,
+            'jdm_legend'=>$jdm_legend,
+        ]);
+    }
+    public function auctionCar(Request $request){
+
+        $seo_setting = SeoSetting::where('id', 10)->first();
+        $brands = Brand::where('status', 'enable')->get();
+
+
+        DB::enableQueryLog();
+        // Initialize the query for cars
+        $carsQuery = Auct_lots_xml_jp::query();
+
+        // Apply filters based on request parameters
+        if ($request->location) {
+            $carsQuery->where('city_id', $request->location);
+        }
+
+
+        if ($request->brand) {
+            $brand_arr = array_filter($request->brand); // Filter out any empty values
+            if ($brand_arr) {
+                $carsQuery->whereIn('company_en', $brand_arr); 
+            }    
+        }
+        if ($request->tranmission) {
+            $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
+            if ($transmission_arr) {
+                $carsQuery->whereIn('transmission_en', $transmission_arr); 
+            }    
+        }
+
+        if($request->year){
+            if($request->year !="")
+            {
+                $carsQuery->where('model_year_en', $request->year); 
+            }
+        }
+
+        if($request->price_range){
+
+            $priceRanges = [
+                "Under $5000" => ["start" => 0, "end" => 5000],
+                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+            ];
+
+
+
+            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+
+        
+
+    
+            if (is_null($result['end_price_num'])) {
+                // Count for "Above" range
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+                });
+            } else {
+                // Count for other ranges
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                });
+            }  
+        }
+
+        if ($request->scores_en) {
+            $score_arr = array_filter($request->scores_en); // Filter out any empty values
+            if ($score_arr) {
+                $carsQuery->whereIn('scores_en', $score_arr); 
+            }
+        }
+
+
+
+        if ($request->condition) {
+            $carsQuery->whereIn('condition', $request->condition);
+        }
+
+        if ($request->purpose) {
+            $purpose_arr = array_filter($request->purpose);
+            if ($purpose_arr) {
+                $carsQuery->whereIn('purpose', $purpose_arr);
+            }
+        }
+
+        if ($request->features) {
+            $carsQuery->whereJsonContains('features', $request->features);
+        }
+
+
+        if($request->price_range_scale){
+            if($request->price_range_scale !=""){  
+                $parts = explode('-', $request->price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                    $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                });
+            }
+        }
+
+        if ($request->price_filter) {
+            if ($request->price_filter === 'low_to_high') {
+                $carsQuery->orderBy('regular_price', 'asc');
+            } elseif ($request->price_filter === 'high_to_low') {
+                $carsQuery->orderBy('regular_price', 'desc');
+            }
+        }
+
+        if ($request->search) {
+            if($search!=""){
+                $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+            }
+        }
+
+        if ($request->sort_by) {
+            switch ($request->sort_by) {
+                case 'dsc_to_asc':
+                    $carsQuery->orderBy('title', 'desc');
+                    break;
+                case 'asc_to_dsc':
+                    $carsQuery->orderBy('title', 'asc');
+                    break;
+                case 'price_low_high':
+                    $carsQuery->orderBy('regular_price', 'asc');
+                    break;
+                case 'price_high_low':
+                    $carsQuery->orderBy('regular_price', 'desc');
+                    break;
+            }
+        }
+
+        // $carsQuery->get();
+        // dd(DB::getQueryLog());
+
+
+        // Pagination
+        $cars = $carsQuery->paginate(12);
+
+        // Transform cars into an array for the view
+        $cars_array = $cars->map(function ($car) {
+        $car_image=$this->last_image($car->pictures);
+            return [
+                'company_en' => $car->company_en,
+                'company' => $car->company,
+                'model_name' => $car->model_name,
+                'model_name_en' => $car->model_name_en,
+                'start_price' => $car->start_price,
+                'start_price_num' => $car->start_price_num,
+                'end_price' => $car->end_price,
+                'end_price_num' => $car->end_price_num,
+                'picture' =>$car_image[0],
+                'id' => $car->id,
+                'mileage' => $car->mileage,
+                'mileage_en' => $car->mileage_en,
+            ];
+        });
+
+
+        // Get additional data
+        $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+        $cities = City::with('translate')->get();
+        $features = Feature::with('translate')->get();
+
+        $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+            ->groupBy('company_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+            ->groupBy('transmission_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $scores = CarDataJpOp::selectRaw('scores_en, COUNT(*) as count')
+            ->groupBy('scores_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $price_range = $this->getPriceRange();
+
+        $jdm_legend = Brand::where('status', 'enable')->get();
+        return view('auction-car-marketplace', [
+            'seo_setting' => $seo_setting,
+            'brands' => $brands,
+            'cities' => $cities,
+            'features' => $features,
+            'cars_array' => $cars_array,
+            'listing_ads' => $listing_ads,
+            'cars' => $cars,
+            'brand_count' => $brand_count,
+            'price_range' => $price_range,
+            'transmission' => $transmission,
+            'scores' => $scores,
+            'jdm_legend'=>$jdm_legend,
+        ]);
+    }
+    public function new_arrival(Request $request){
+
+        $seo_setting = SeoSetting::where('id', 10)->first();
+        $brands = Brand::where('status', 'enable')->get();
+
+
+        DB::enableQueryLog();
+        // Initialize the query for cars
+        $carsQuery = CarDataJpOp::query();
+
+        // Apply filters based on request parameters
+        if ($request->location) {
+            $carsQuery->where('city_id', $request->location);
+        }
+
+
+        if ($request->brand) {
+            $brand_arr = array_filter($request->brand); // Filter out any empty values
+            if ($brand_arr) {
+                $carsQuery->whereIn('company_en', $brand_arr); 
+            }    
+        }
+
+        if($request->price_range_scale){
+            if($request->price_range_scale !=""){  
+                $parts = explode('-', $request->price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                    $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                });
+            }
+        }
+        if ($request->tranmission) {
+            $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
+            if ($transmission_arr) {
+                $carsQuery->whereIn('transmission_en', $transmission_arr); 
+            }    
+        }
+
+        if($request->year){
+            if($request->year !="")
+            {
+                $carsQuery->where('model_year_en', $request->year); 
+            }
+        }
+
+        if($request->price_range){
+
+            $priceRanges = [
+                "Under $5000" => ["start" => 0, "end" => 5000],
+                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+            ];
+
+
+
+            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+
+        
+
+    
+            if (is_null($result['end_price_num'])) {
+                // Count for "Above" range
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+                });
+            } else {
+                // Count for other ranges
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                });
+            }  
+        }
+
+        if ($request->scores_en) {
+            $score_arr = array_filter($request->scores_en); // Filter out any empty values
+            if ($score_arr) {
+                $carsQuery->whereIn('scores_en', $score_arr); 
+            }
+        }
+
+
+
+        if ($request->condition) {
+            $carsQuery->whereIn('condition', $request->condition);
+        }
+
+        if ($request->purpose) {
+            $purpose_arr = array_filter($request->purpose);
+            if ($purpose_arr) {
+                $carsQuery->whereIn('purpose', $purpose_arr);
+            }
+        }
+
+        if ($request->features) {
+            $carsQuery->whereJsonContains('features', $request->features);
+        }
+
+        if ($request->price_filter) {
+            if ($request->price_filter === 'low_to_high') {
+                $carsQuery->orderBy('regular_price', 'asc');
+            } elseif ($request->price_filter === 'high_to_low') {
+                $carsQuery->orderBy('regular_price', 'desc');
+            }
+        }
+
+        if ($request->search) {
+            if($search!=""){
+                $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+            }
+        }
+
+        if ($request->sort_by) {
+            switch ($request->sort_by) {
+                case 'dsc_to_asc':
+                    $carsQuery->orderBy('title', 'desc');
+                    break;
+                case 'asc_to_dsc':
+                    $carsQuery->orderBy('title', 'asc');
+                    break;
+                case 'price_low_high':
+                    $carsQuery->orderBy('regular_price', 'asc');
+                    break;
+                case 'price_high_low':
+                    $carsQuery->orderBy('regular_price', 'desc');
+                    break;
+            }
+        }
+
+        // $carsQuery->get();
+        // dd(DB::getQueryLog());
+
+        // Pagination
+        $date=date('Y');
+        $cars = $carsQuery->where('model_year_en',$date)->paginate(12);
+
+        // Transform cars into an array for the view
+        $cars_array = $cars->map(function ($car) {
+        $car_image=$this->last_image($car->pictures);
+            return [
+                'company_en' => $car->company_en,
+                'company' => $car->company,
+                'model_name' => $car->model_name,
+                'model_name_en' => $car->model_name_en,
+                'start_price' => $car->start_price,
+                'start_price_num' => $car->start_price_num,
+                'end_price' => $car->end_price,
+                'end_price_num' => $car->end_price_num,
+                'picture' =>$car_image[0],
+                'id' => $car->id,
+                'mileage' => $car->mileage,
+                'mileage_en' => $car->mileage_en,
+            ];
+        });
+
+
+        // Get additional data
+        $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+        $cities = City::with('translate')->get();
+        $features = Feature::with('translate')->get();
+
+        $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+            ->groupBy('company_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+            ->groupBy('transmission_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $scores = CarDataJpOp::selectRaw('scores_en, COUNT(*) as count')
+            ->groupBy('scores_en')
+            ->having('count', '>', 1)
+            ->get();
+
+        $price_range = $this->getPriceRange();
+
+        $jdm_legend = Brand::where('status', 'enable')->get();
+        return view('new-arrival', [
+            'seo_setting' => $seo_setting,
+            'brands' => $brands,
+            'cities' => $cities,
+            'features' => $features,
+            'cars_array' => $cars_array,
+            'listing_ads' => $listing_ads,
+            'cars' => $cars,
+            'brand_count' => $brand_count,
+            'price_range' => $price_range,
+            'transmission' => $transmission,
+            'scores' => $scores,
+            'jdm_legend'=>$jdm_legend,
+        ]);
     }
 
 
@@ -838,6 +1509,44 @@ class HomeController extends Controller
         
     }
 
+    public function getJDMPriceRange()
+{
+    $price_ranges = [
+        'Under $5000' => ['min' => 0, 'max' => 5000],
+        '$5000 - $50000' => ['min' => 5000, 'max' => 50000],
+        '$50000 - $100000' => ['min' => 50000, 'max' => 100000],
+        '$100000 - $200000' => ['min' => 100000, 'max' => 200000],
+        '$200000 - $300000' => ['min' => 200000, 'max' => 300000],
+        'Above $300000' => ['min' => 300000, 'max' => null],
+    ];
+
+    $counts = [];
+
+    foreach ($price_ranges as $label => $range) {
+        // Query for all three tables
+        $blogQuery = \DB::table('blog'); // Assuming this is for 'blog'
+        $heavyQuery = Heavy::query();      // Assuming this is for 'heavy'
+        $smallHeavyQuery = SmallHeavy::query(); // Assuming this is for 'small_heavy'
+
+        if ($range['max'] === null) {
+            // For "Above" price range
+            $blogCount = $blogQuery->where('price', '>', $range['min'])->count();
+            $heavyCount = $heavyQuery->where('price', '>', $range['min'])->count();
+            $smallHeavyCount = $smallHeavyQuery->where('price', '>', $range['min'])->count();
+        } else {
+            // For other price ranges
+            $blogCount = $blogQuery->whereBetween('price', [$range['min'], $range['max']])->count();
+            $heavyCount = $heavyQuery->whereBetween('price', [$range['min'], $range['max']])->count();
+            $smallHeavyCount = $smallHeavyQuery->whereBetween('price', [$range['min'], $range['max']])->count();
+        }
+
+        // Sum the counts from all three tables
+        $counts[$label] = $blogCount + $heavyCount + $smallHeavyCount;
+    }
+
+    return $counts;
+}
+
 
     private function parseCustomFormat($string)
     {
@@ -869,88 +1578,478 @@ class HomeController extends Controller
     }
 
     public function listing($slug){
-     
-        // $car = Car::with('dealer', 'brand')->where(function ($query) {
-        //     $query->where('expired_date', null)
-        //         ->orWhere('expired_date', '>=', date('Y-m-d'));
-        // })->where(['status' => 'enable', 'approved_by_admin' => 'approved'])->where('slug', $slug)->firstOrFail();
-
-
-        // $car = CarDataJpOp::where('id',$slug)->firstOrFail();
-        $car = CarDataJpOp::where('id','951283456')->firstOrFail();
+        $car = CarDataJpOp::where('id',$slug)->firstOrFail();
         $process_data_en = $this->parseCustomFormat($car->parsed_data_en);
-        // $displacement = $process_data_en['displacement'];
-        // echo $displacement;
-
-        // die();
-
-        // $car->total_view +=1;
-        // $car->save();
-
-        $galleries = CarGallery::where('car_id', $car->id)->get();
-
-
         $images=$this->last_image($car->pictures);
-      
-
-        // $feature_json_array = array();
-        // if($car->features != 'null'){
-        //     $feature_json_array = json_decode($car->features);
-        // }
-
-        // $car_features = Feature::whereIn('id', $feature_json_array)->get();
-
         $related_listings = Car::with('dealer', 'brand')->where(function ($query) {
             $query->where('expired_date', null)
                 ->orWhere('expired_date', '>=', date('Y-m-d'));
         })->where(['status' => 'enable', 'approved_by_admin' => 'approved'])->where('brand_id', $car->brand_id)->where('id', '!=', $car->id)->get()->take(6);
 
-        $dealer = User::where(['status' => 'enable' , 'is_banned' => 'no', 'is_dealer' => 1])->where('email_verified_at', '!=', null)->orderBy('id','desc')->select('id','name','username','designation','image','status','is_banned','is_dealer', 'address', 'email', 'phone', 'created_at')->where('id', $car->agent_id)->first();
-
         $reviews = Review::with('user')->where('car_id', $car->id)->where('status', 'enable')->latest()->get();
-
-        $total_dealer_rating = Review::where('agent_id', $car->agent_id)->where('status', 'enable')->count();
-
         $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
 
         $delivery_charges = DeliveryCharge::all();
-        $jdm_legend = \DB::table('blog')
-        ->where('category', 'JDM Legend')
-        ->where('make', '!=', '')
-        ->whereNotNull('make')
-        ->distinct()
-        ->pluck('make');
+        $jdm_legend = Brand::where('status', 'enable')->get();
 
-        $jdm_legend_heavy = \DB::table('heavy')
-        ->where('category', 'JDM Legend')
-        ->where('make', '!=', '')
-        ->whereNotNull('make')
-        ->distinct()
-        ->pluck('make');    
-        $jdm_legend_small_heavy=\DB::table('small_heavy')
-        ->where('category', 'JDM Legend')
-        ->where('make', '!=', '')
-        ->whereNotNull('make')
-        ->distinct()
-        ->pluck('make');
+        // $jdm_legend_heavy = \DB::table('heavy')
+        // ->where('category', 'JDM Legend')
+        // ->where('make', '!=', '')
+        // ->whereNotNull('make')
+        // ->distinct()
+        // ->pluck('make');    
+        // $jdm_legend_small_heavy=\DB::table('small_heavy')
+        // ->where('category', 'JDM Legend')
+        // ->where('make', '!=', '')
+        // ->whereNotNull('make')
+        // ->distinct()
+        // ->pluck('make');
 
 
         return view('listing_detail', [
             'car' => $car,
             'galleries' => $images,
-            // 'car_features' => $car_features,
             'related_listings' => $related_listings,
-            'dealer' => $dealer,
             'reviews' => $reviews,
-            'total_dealer_rating' => $total_dealer_rating,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
             'process_data_en'=>$process_data_en,
             'jdm_legend'=>$jdm_legend,
-            'jdm_legend_heavy'=>$jdm_legend_heavy,
-            'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
+            // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+            // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
 
+    }
+    
+    public function get_brands(Request $request){
+        // $blogModels = Blog::where(DB::raw('LOWER(make)'), $request->brand)
+        // ->select('model');
+
+        $blogModels=\DB::table('blog')
+        ->where(DB::raw('LOWER(make)'), $request->brand)
+        ->select('model');
+
+        $heavyModels = Heavy::where(DB::raw('LOWER(make)'), $request->brand)
+            ->select('model');
+
+        $smallHeavyModels = SmallHeavy::where(DB::raw('LOWER(make)'), $request->brand)
+            ->select('model');
+
+            // Combine all using union
+            $models = $blogModels
+                ->union($heavyModels)
+                ->union($smallHeavyModels)
+                ->distinct()
+                ->get();
+            return response()->json(['success'=>true,'response'=>$models]);
+    }    
+
+    public function get_model_year(Request $request){
+        $blogModels=\DB::table('blog')
+        ->where(DB::raw('LOWER(make)'), $request->brand)
+        ->where(DB::raw('LOWER(model)'), $request->model)
+        ->select('yom');
+
+        $heavyModels = Heavy::where(DB::raw('LOWER(make)'), $request->brand)
+        ->where(DB::raw('LOWER(model)'), $request->model)
+        ->select('yom');
+
+        $smallHeavyModels = SmallHeavy::where(DB::raw('LOWER(make)'), $request->brand)
+        ->where(DB::raw('LOWER(model)'), $request->model)
+        ->select('yom');
+
+            // Combine all using union
+        $year = $blogModels
+            ->union($heavyModels)
+            ->union($smallHeavyModels)
+            ->distinct()
+            ->get();
+
+        return response()->json(['success'=>true,'response'=>$year]);
+    }
+
+
+    public function jdm_stock_all(Request $request)
+    {
+        $seo_setting = SeoSetting::where('id', 10)->first();
+        $brands = Brand::where('status', 'enable')->get();
+
+        $jdmBrand = $request->input('jdm_brand');
+        $jdmModel = $request->input('jdm_model');
+        $jdmYear = $request->input('jdm_year');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        $price_range_scale=$request->input('price_range_scale');
+        $transmission=$request->input('transmission');
+        $search=$request->input('search');
+        // Initialize the query for cars
+        $carsQuery = CarDataJpOp::query();
+     
+        $blogCars = Cars::when($jdmBrand, function ($query, $jdmBrand) {
+                return $query->where('make', $jdmBrand);
+            })
+            ->when($jdmModel, function ($query, $jdmModel) {
+                $brand_arr = array_filter($jdmModel);
+                if ($brand_arr) {
+                    return $query->whereIn('model', $brand_arr);
+                }  
+            })
+            ->when($search, function ($query, $search) {
+                return $query->where('model', 'like', '%' . $search . '%');
+            })
+            ->when($jdmModel, function ($query, $jdmModel) {
+                $brand_arr = array_filter($jdmModel);
+                if ($brand_arr) {
+                    return $query->whereIn('model', $brand_arr);
+                }  
+            })
+            ->when($jdmYear, function ($query, $jdmYear) {
+                $yom_arr = array_filter($jdmYear);
+                if ($yom_arr) {
+                    return $query->whereIn('yom', $yom_arr);
+                } 
+            })
+            ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                if($price_range_scale !=""){  
+                    $parts = explode('-', $price_range_scale);
+                    $startValue = trim($parts[0]);
+                    $endValue = trim($parts[1]);
+                    $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                        return $q->whereBetween('price', [$startValue, $endValue]);
+                    });
+                }
+            })
+            ->when($transmission, function ($query, $transmission) {
+                $transmission_arr = array_filter($transmission);
+                if ($transmission_arr) {
+                    return $query->whereIn('transmission', $transmission_arr);
+                } 
+            })
+            ->select('model','price','image','id','make');
+      
+            // Query for Blog table
+        $heavyCars = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
+            return $query->where('make', $jdmBrand);
+        })
+        ->when($jdmModel, function ($query, $jdmModel) {
+            $brand_arr = array_filter($jdmModel);
+            if ($brand_arr) {
+                return $query->whereIn('model', $brand_arr);
+            }  
+        })
+        ->when($jdmYear, function ($query, $jdmYear) {
+            $yom_arr = array_filter($jdmYear);
+            if ($yom_arr) {
+                return $query->whereIn('yom', $yom_arr);
+            } 
+        })
+        ->when($transmission, function ($query, $transmission) {
+            $transmission_arr = array_filter($transmission);
+            if ($transmission_arr) {
+                return $query->whereIn('transmission', $transmission_arr);
+            } 
+        })
+        ->when($price_range_scale, function ($query) use ($price_range_scale) {
+            if($price_range_scale !=""){  
+                $parts = explode('-', $price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                    return $q->whereBetween('price', [$startValue, $endValue]);
+                });
+            }
+        })
+        ->when($search, function ($query, $search) {
+            return $query->where('model', 'like', '%' . $search . '%');
+        })
+        ->select('model','price','image','id','make');
+
+        // Query for Heavy table
+        $smallHeavyCars = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
+            return $query->where('make', $jdmBrand);
+        })
+        ->when($jdmModel, function ($query, $jdmModel) {
+            $brand_arr = array_filter($jdmModel);
+            if ($brand_arr) {
+                return $query->whereIn('model', $brand_arr);
+            }  
+        })
+        ->when($jdmYear, function ($query, $jdmYear) {
+            $yom_arr = array_filter($jdmYear);
+            if ($yom_arr) {
+                return $query->whereIn('yom', $yom_arr);
+            }  
+        })
+        ->when($price_range_scale, function ($query) use ($price_range_scale) {
+            if($price_range_scale !=""){  
+                $parts = explode('-', $price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                    return $q->whereBetween('price', [$startValue, $endValue]);
+                });
+            }
+        })
+        ->when($transmission, function ($query, $transmission) {
+            $transmission_arr = array_filter($transmission);
+            if ($transmission_arr) {
+                return $query->whereIn('transmission', $transmission_arr);
+            } 
+        })
+        ->when($search, function ($query, $search) {
+            return $query->where('model', 'like', '%' . $search . '%');
+        })
+        ->select('model','price','image','id','make');
+
+
+
+
+
+        // Apply filters based on request parameters
+        if ($request->location) {
+            $carsQuery->where('city_id', $request->location);
+        }
+        if($request->price_range_scale){
+            if($request->price_range_scale !=""){  
+                $parts = explode('-', $request->price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                    $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                });
+            }
+        }
+
+
+        if ($request->brand) {
+            $brand_arr = array_filter($request->brand); // Filter out any empty values
+            if ($brand_arr) {
+                $carsQuery->whereIn('company_en', $brand_arr); 
+            }    
+        }
+        if ($request->transmission) {
+            $transmission_arr = array_filter($request->transmission); // Filter out any empty values
+            if ($transmission_arr) {
+                $carsQuery->whereIn('transmission', $transmission_arr); 
+            }    
+        }
+
+        if($request->year){
+            if($request->year !="")
+            {
+                $carsQuery->where('model_year_en', $request->year); 
+            }
+        }
+
+        if($request->price_range){
+            $priceRanges = [
+                "Under $5000" => ["start" => 0, "end" => 5000],
+                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+            ];
+
+            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+        
+
+    
+            if ($result['start_price_num'] === null) {
+                // Count for "Above" range
+                $carsQuery = $carsQuery->where('start_price_num', '>', $result['start_price_num'])
+                            ->orWhere('end_price_num', '>', $result['start_price_num']);
+            } else {
+                // Count for other ranges
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                });
+            }  
+        }
+
+        if ($request->scores_en) {
+            $score_arr = array_filter($request->scores_en); // Filter out any empty values
+            if ($score_arr) {
+                $carsQuery->whereIn('scores_en', $score_arr); 
+            }
+        }
+
+        if ($request->search) {
+            $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->sort_by) {
+            switch ($request->sort_by) {
+                case 'dsc_to_asc':
+                    $carsQuery->orderBy('title', 'desc');
+                    break;
+                case 'asc_to_dsc':
+                    $carsQuery->orderBy('title', 'asc');
+                    break;
+                case 'price_low_high':
+                    $carsQuery->orderBy('regular_price', 'asc');
+                    break;
+                case 'price_high_low':
+                    $carsQuery->orderBy('regular_price', 'desc');
+                    break;
+            }
+        }
+
+    $cars = $blogCars
+    ->union($heavyCars)
+    ->union($smallHeavyCars)
+    ->orderBy('model')
+    ->distinct()
+    ->paginate(12);
+    
+    // Pagination
+    // $cars = $carsQuery->paginate(12);
+
+    // Transform cars into an array for the view
+    $cars_array = $cars->map(function ($car) {
+    // $car_image=$this->last_image($car->pictures);
+        return [
+            'company_en' => $car->make,
+            'model_name_en' => $car->model,
+            'start_price_num' => $car->price,
+            'picture' =>$car->image,
+            'id' => $car->id,
+        ];
+    });
+
+ 
+
+
+    // Get additional data
+    $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+    $cities = City::with('translate')->get();
+
+    $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+        ->groupBy('company_en')
+        ->having('count', '>', 1)
+        ->get();
+
+        $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+            ->groupBy('transmission_en')
+            ->having('count', '>', 1)
+            ->get();
+
+    // $price_range = $this->getPriceRange();
+    $price_range = $this->getJDMPriceRange();
+    $jdm_legend = Brand::where('status', 'enable')->get();
+
+
+    $models = \DB::select(
+        'SELECT model, SUM(model_count) as total_count FROM (
+            (SELECT model, COUNT(*) as model_count FROM blog WHERE model IS NOT NULL AND model != "" GROUP BY model)
+            UNION ALL
+            (SELECT model, COUNT(*) as model_count FROM heavy WHERE model IS NOT NULL AND model != "" GROUP BY model)
+            UNION ALL
+            (SELECT model, COUNT(*) as model_count FROM small_heavy WHERE model IS NOT NULL AND model != "" GROUP BY model)
+        ) as combined_models
+        GROUP BY model
+        HAVING total_count > 0'
+    );
+
+    $transmissions = \DB::select(
+        'SELECT transmission, SUM(model_count) as total_count FROM (
+            (SELECT transmission, COUNT(*) as model_count FROM blog WHERE transmission IS NOT NULL AND transmission != "" GROUP BY transmission)
+            UNION ALL
+            (SELECT transmission, COUNT(*) as model_count FROM heavy WHERE transmission IS NOT NULL AND transmission != "" GROUP BY transmission)
+            UNION ALL
+            (SELECT transmission, COUNT(*) as model_count FROM small_heavy WHERE transmission IS NOT NULL AND transmission != "" GROUP BY transmission)
+        ) as combined_models
+        GROUP BY transmission
+        HAVING total_count > 0'
+    );
+
+
+    return view('jdm_stock_all', [
+        'seo_setting' => $seo_setting,
+        'brands' => $brands,
+        'cities' => $cities,
+        'cars_array' => $cars_array,
+        'listing_ads' => $listing_ads,
+        'cars' => $cars,
+        'brand_count' => $models,
+        'price_range' => $price_range,
+        'transmission' => $transmissions,
+        'jdm_legend'=>$jdm_legend,
+    ]);
+    }
+
+
+    public function auction_listing($slug){
+        $car = Auct_lots_xml_jp::where('id',$slug)->firstOrFail();
+        $process_data_en = $this->parseCustomFormat($car->parsed_data_en);
+        $images=$this->last_image($car->pictures);
+        $related_listings = Car::with('dealer', 'brand')->where(function ($query) {
+            $query->where('expired_date', null)
+                ->orWhere('expired_date', '>=', date('Y-m-d'));
+        })->where(['status' => 'enable', 'approved_by_admin' => 'approved'])->where('brand_id', $car->brand_id)->where('id', '!=', $car->id)->get()->take(6);
+
+        $reviews = Review::with('user')->where('car_id', $car->id)->where('status', 'enable')->latest()->get();
+        $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
+
+        $delivery_charges = DeliveryCharge::all();
+        $jdm_legend = Brand::where('status', 'enable')->get();
+
+        // $jdm_legend_heavy = \DB::table('heavy')
+        // ->where('category', 'JDM Legend')
+        // ->where('make', '!=', '')
+        // ->whereNotNull('make')
+        // ->distinct()
+        // ->pluck('make');    
+        // $jdm_legend_small_heavy=\DB::table('small_heavy')
+        // ->where('category', 'JDM Legend')
+        // ->where('make', '!=', '')
+        // ->whereNotNull('make')
+        // ->distinct()
+        // ->pluck('make');
+
+
+        return view('auction-listing', [
+            'car' => $car,
+            'galleries' => $images,
+            'related_listings' => $related_listings,
+            'reviews' => $reviews,
+            'listing_ads' => $listing_ads,
+            'delivery_charges'=>$delivery_charges,
+            'process_data_en'=>$process_data_en,
+            'jdm_legend'=>$jdm_legend,
+            // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+            // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
+        ]);
+
+    }
+
+
+    public function jdm_stock_all_listing($slug){
+        $seo_setting = SeoSetting::where('id', 11)->first();
+        $blogCar =  DB::table('blog')->where('id', $slug)->first();
+        $heavyCar = Heavy::where('id', $slug)->first();
+        $smallHeavyCar = SmallHeavy::where('id', $slug)->first();
+        
+        // Check which one exists
+        $car = $blogCar ?? $heavyCar ?? $smallHeavyCar;
+
+        // echo json_encode($car->seo_title);die();
+        
+        $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
+    
+
+        $delivery_charges = DeliveryCharge::all();
+        $jdm_legend = Brand::where('status', 'enable')->get();
+    
+        return view('jdm-stock-all-listing', [
+            'car' => $car,
+            'listing_ads' => $listing_ads,
+            'delivery_charges'=>$delivery_charges,
+            'jdm_legend'=>$jdm_legend,
+        ]);
+    
     }
 
     public function dealers(Request $request){

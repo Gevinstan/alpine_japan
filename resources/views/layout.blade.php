@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="{{ asset('japan_home/japan-logo.png') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('title')
 
@@ -267,21 +268,21 @@
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
                                                         @foreach($jdm_legend as $jdm)
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm, 'car']) }}">{{$jdm}}</a>
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm->slug, 'car']) }}">{{$jdm->name}}</a>
                                                         @endforeach
                                                     </div>
                                                     <!-- Column 2 -->
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Heavy</h6>
-                                                        @foreach($jdm_legend_heavy as $jdm)
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm, 'heavy']) }}">{{$jdm}}</a>
+                                                        @foreach($jdm_legend as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm->slug, 'heavy']) }}">{{$jdm->name}}</a>
                                                         @endforeach
                                                     </div>
                                                     <!-- Column 3 -->
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Small Heavy</h6>
-                                                        @foreach($jdm_legend_small_heavy as $jdm)
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm, 'small_heavy']) }}">{{$jdm}}</a>
+                                                        @foreach($jdm_legend as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm->slug, 'small_heavy']) }}">{{$jdm->name}}</a>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -816,7 +817,7 @@
                                 <ul>
 
                                     <li>
-                                        <a href="{{ route('user.dashboard') }}"> <span>
+                                        <a href="{{ route('auction-car-marketplace') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -826,7 +827,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('user.car.index') }}"> <span>
+                                        <a href="{{ route('listings') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path

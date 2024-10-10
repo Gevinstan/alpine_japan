@@ -506,7 +506,7 @@
 
          topSellButtons.forEach(function(topSellButton) {
                 topSellButton.addEventListener('change', function() {
-                    alert("one");
+              
 
         // Determine if the checkbox is checked
         var check = this.checked ? 1 : 0;

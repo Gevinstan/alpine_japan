@@ -58,21 +58,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="inventory-details-slick-for">
-                                
-                                @foreach ($galleries as $gallery)
                                     <div class="inventory-details-slick-img">
-                                        <img src="{{ asset($gallery) }}" alt="img">
+                                        <img src="{{ asset($car->image) }}" alt="img">
                                     </div>
-                                @endforeach
-                            </div>
-
-
-                            <div class="inventory-details-slick-nav">
-                                @foreach ($galleries as $gallery)
-                                    <div class="inventory-details-slick-img">
-                                        <img src="{{ asset($gallery) }}" alt="img">
-                                    </div>
-                                @endforeach
                             </div>
                         </div>
 
@@ -108,11 +96,8 @@
                                                             </h2>
                                                             <div style="margin-top: 15px; margin-bottom: 15px">
                                                                 <p  style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
-                                                                   <b> @if(session('front_lang')=='en')
-                                                                    ${{$car->start_price_num}}
-                                                                    @else
-                                                                    {{$car->start_price}}
-                                                                    @endif 
+                                                                   <b>
+                                                                    ${{$car->price}}
                                                                     </b>  
                                                                     </p>
                                                                 </p>    
@@ -253,7 +238,7 @@
                                                         {{ __('translate.Engine Size') }}
                                                     </span>
         
-                                                    {{ html_decode(isset($process_data_en['displacement']) ? $process_data_en['displacement'] : '') }}
+                                                    {{ html_decode(isset($car->engine) ? $car->engine : '') }}
                                                   
                                                 </li>
 
@@ -296,11 +281,8 @@
 
                                                         {{ __('translate.Interior Color') }}
                                                     </span>
-                                                    {{ html_decode($car->interior_color) }}
+                                                    {{ html_decode(isset($car->int_col) ? $car->int_col : '') }}
                                                 </li>
-
-
-
                                                 <li>
                                                     <span>
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -334,7 +316,7 @@
                                                         </svg>
                                                         {{ __('translate.Year') }}
                                                     </span>
-                                                    {{ html_decode($car->model_year_en) }}
+                                                    {{ html_decode(isset($car->yom) ? $car->yom : '') }}
                                                 </li>
                                                 <li>
                                                     <span>
@@ -451,7 +433,7 @@
 
                                                         {{ __('translate.Fuel Type') }}
                                                     </span>
-                                                    {{ html_decode($car->fuel_type) }}
+                                                    {{ html_decode(isset($car->fuel) ? $car->fuel : '') }}
                                                 </li>
 
 
@@ -518,7 +500,7 @@
                                                         </svg>
                                                         {{ __('translate.Transmission') }}
                                                     </span>
-                                                    {{ html_decode($car->transmission) }}
+                                                    {{ html_decode(isset($car->transmission) ? $car->transmission : '') }}
                                                 </li>
                                                 <li>
                                                     <span>

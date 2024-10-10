@@ -1,8 +1,8 @@
 @extends('layout')
 @section('title')
-    <title>{{ html_decode($car->seo_title) }}</title>
-    <meta name="title" content="{{ html_decode($car->seo_title) }}">
-    <meta name="description" content="{{ html_decode($car->seo_description) }}">
+    <title>{{ html_decode(isset($car->seo_title) ?  $car->seo_title : '') }}</title>
+    <meta name="title" content="{{ html_decode(isset($car->seo_title) ?  $car->seo_title : '') }}">
+    <meta name="description" content="{{ html_decode(isset($car->seo_description) ?  $car->seo_description : '') }}">
 @endsection
 
 @section('body-content')
@@ -26,17 +26,17 @@
                                 <li><i class="bi bi-arrow-right-short"></i></li>
                                 <li>
                                 @if(session('front_lang')=='en')
-                                    {{$car->company_en}}
+                                    {{$car->make}}
                                 @else
-                                    {{$car->company}}
+                                    {{$car->make}}
                                 @endif
                                 </li>
                                 <li><i class="bi bi-arrow-right-short"></i></li>
                                 <li>
                                 @if(session('front_lang')=='en')
-                                 {{$car->model_name_en}} 
+                                 {{$car->model}} 
                                 @else
-                                 {{$car->model_name}}
+                                 {{$car->model}}
                                 @endif   
                                 </li>
                             </ol>
@@ -58,21 +58,9 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="inventory-details-slick-for">
-                                
-                                @foreach ($galleries as $gallery)
                                     <div class="inventory-details-slick-img">
-                                        <img src="{{ asset($gallery) }}" alt="img">
+                                        <img src="{{ asset($car->image) }}" alt="img">
                                     </div>
-                                @endforeach
-                            </div>
-
-
-                            <div class="inventory-details-slick-nav">
-                                @foreach ($galleries as $gallery)
-                                    <div class="inventory-details-slick-img">
-                                        <img src="{{ asset($gallery) }}" alt="img">
-                                    </div>
-                                @endforeach
                             </div>
                         </div>
 
@@ -93,31 +81,28 @@
                                                             <p style="margin-bottom: 0px; margin-top: 20px">
                                                             <b>
                                                             @if(session('front_lang')=='en')
-                                                                {{$car->company_en}}
+                                                                {{$car->make}}
                                                             @else
-                                                                 {{$car->company}}
+                                                                 {{$car->make}}
                                                             @endif
                                                             </b></p>
                                                             <h2>
                                                             @if(session('front_lang')=='en')
-                                                             {{$car->model_name_en}} 
+                                                             {{$car->model}} 
                                                             @else
-                                                            {{$car->model_name}}
+                                                            {{$car->model}}
                                                             @endif
                                                                 
                                                             </h2>
                                                             <div style="margin-top: 15px; margin-bottom: 15px">
                                                                 <p  style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
-                                                                   <b> @if(session('front_lang')=='en')
-                                                                    ${{$car->start_price_num}}
-                                                                    @else
-                                                                    {{$car->start_price}}
-                                                                    @endif 
+                                                                   <b>
+                                                                    ${{$car->price}}
                                                                     </b>  
                                                                     </p>
                                                                 </p>    
                                                                 
-                                                                <p style="display: inline;" id="commission_value">Commission : <p style="font-size:18px; color: black; display: inline;"><b>${{$car->commission_value}}</b></p></p>
+                                                                <p style="display: inline;" id="commission_value">Commission : <p style="font-size:18px; color: black; display: inline;"><b>${{isset($car->commission_value) ? $car->commission_value : '' }}</b></p></p>
                                                             
                                                                 <p style="display: inline;">{{__('Delivery Charge :')}} <b><p style="font-size:18px; color: black; display: inline; font-weight:bold" id="delivery_charge"></p></b></p>
                                                             </div>
@@ -240,7 +225,7 @@
 
                                                         {{ __('translate.Body Type') }}
                                                     </span>
-                                                    {{ html_decode($car->body_type) }}
+                                                    {{ html_decode(isset($car->body_type) ? $car->body_type : '') }}
                                                 </li>
                                                 <li>
                                                     <span>
@@ -253,7 +238,7 @@
                                                         {{ __('translate.Engine Size') }}
                                                     </span>
         
-                                                    {{ html_decode(isset($process_data_en['displacement']) ? $process_data_en['displacement'] : '') }}
+                                                    {{ html_decode(isset($car->engine) ? $car->engine : '') }}
                                                   
                                                 </li>
 
@@ -279,7 +264,7 @@
 
                                                         {{ __('translate.Drive') }}
                                                     </span>
-                                                    {{ html_decode($car->drive) }}
+                                                    {{ html_decode(isset($car->drive) ? $car->drive : '' ) }}
                                                 </li>
 
                                                 <li>
@@ -296,11 +281,8 @@
 
                                                         {{ __('translate.Interior Color') }}
                                                     </span>
-                                                    {{ html_decode($car->interior_color) }}
+                                                    {{ html_decode(isset($car->int_col) ? $car->int_col : '') }}
                                                 </li>
-
-
-
                                                 <li>
                                                     <span>
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -334,7 +316,7 @@
                                                         </svg>
                                                         {{ __('translate.Year') }}
                                                     </span>
-                                                    {{ html_decode($car->model_year_en) }}
+                                                    {{ html_decode(isset($car->yom) ? $car->yom : '') }}
                                                 </li>
                                                 <li>
                                                     <span>
@@ -345,11 +327,11 @@
                                                         </svg>
                                                         {{ __('translate.Condition') }}
                                                     </span>
-                                                    @if($car->condition == 'Used')
+                                                   {{-- @if($car->condition == 'Used')
                                                         {{ __('translate.Used') }}
                                                     @else
                                                         {{ __('translate.New') }}
-                                                    @endif
+                                                    @endif --}}
 
                                                 </li>
                                             </ul>
@@ -367,7 +349,7 @@
                                                         </svg>
                                                         {{ __('translate.Mileage') }}
                                                     </span>
-                                                    {{ html_decode($car->mileage_en) }}
+                                                    {{ html_decode(isset($car->mileage_en) ? $car->mileage_en : '' ) }}
                                                 </li>
                                                 <li>
                                                     <span>
@@ -411,7 +393,7 @@
 
                                                         {{ __('translate.No. of Owners') }}
                                                     </span>
-                                                    {{ html_decode($car->number_of_owner) }}
+                                                    {{ html_decode(isset($car->number_of_owner) ? $car->number_of_owner : '' ) }}
                                                 </li>
 
                                                 <li>
@@ -430,7 +412,7 @@
 
                                                         {{ __('translate.Exterior Color') }}
                                                     </span>
-                                                    {{ html_decode($car->exterior_color) }}
+                                                    {{ html_decode(isset($car->exterior_color) ? $car->exterior_color : '' ) }}
                                                 </li>
 
                                                 <li>
@@ -451,7 +433,7 @@
 
                                                         {{ __('translate.Fuel Type') }}
                                                     </span>
-                                                    {{ html_decode($car->fuel_type) }}
+                                                    {{ html_decode(isset($car->fuel) ? $car->fuel : '') }}
                                                 </li>
 
 
@@ -518,7 +500,7 @@
                                                         </svg>
                                                         {{ __('translate.Transmission') }}
                                                     </span>
-                                                    {{ html_decode($car->transmission) }}
+                                                    {{ html_decode(isset($car->transmission) ? $car->transmission : '') }}
                                                 </li>
                                                 <li>
                                                     <span>
@@ -531,7 +513,7 @@
                                                         </svg>
                                                         {{ __('translate.Seller Type') }}
                                                     </span>
-                                                    {{ html_decode($car->seller_type) }}
+                                                    {{ html_decode(isset($car->seller_type) ? $car->seller_type  : '') }}
                                                 </li>
                                             </ul>
                                         </div>
@@ -621,7 +603,7 @@
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
                                 aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
-                                    {!! clean(html_decode($car->description)) !!}
+                                    {!! clean(html_decode(isset($car->description) ? $car->description : '' )) !!}
                                 </div>
                             </div>
                         </div>
@@ -644,33 +626,12 @@
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aperiam amet voluptate iure 
                                         laudantium molestias quo voluptatum facilis, architecto aspernatur nihil ratione rem eum 
                                         quas reiciendis sequi suscipit similique saepe.</p>
-
-                                    <!-- <span class="inventory-details-vedio">
-                                        <img src="{{ asset($car->video_image) }}" alt="img" >
-                                        <span class="overlay">
-                                            <a class="my-video-links" data-autoplay="true" data-vbtype="video"
-                                                href="https://youtu.be/{{ $car->video_id }}">
-                                    
-                                                <div class="d-flex justify-content-center">
-                                                    <span>
-                                                        <svg width="160" height="80" viewBox="0 0 80 80" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                d="M40 76.0001C59.8822 76.0001 76.0001 59.8827 76.0001 40C76.0001 20.1178 59.8827 3.99992 40 3.99992C20.1178 3.99992 3.99992 20.1178 3.99992 40C3.99992 59.8822 20.1178 76.0001 40 76.0001ZM40 80C62.0911 80 80 62.0911 80 40C80 17.9084 62.0911 0 40 0C17.9084 0 0 17.9084 0 40C0 62.0911 17.9084 80 40 80Z" />
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                d="M50.3927 40.0003L31.9984 27.7375V52.2634L50.3927 40.0003ZM54.1089 37.6706C55.7716 38.7791 55.7716 41.2219 54.1089 42.3303L32.3513 56.8357C30.4906 58.0763 27.998 56.742 27.998 54.5057V25.4953C27.998 23.259 30.4906 21.9251 32.3513 23.1657L54.1089 37.6706Z" />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </span>
-                                    </span> -->
                                     <span class="inventory-details-vedio w-100 position-relative">
-                                    <img src="{{ asset($car->video_image) }}" alt="img" class="img-fluid w-100 h100">
+                                    <img src="{{ asset(isset($car->video_image) ? $car->video_image : '' ) }}" alt="img" class="img-fluid w-100 h100">
                                     <span class="overlay position-absolute w-100 h-100" style="top: 0; left: 0;">
                                         <a class="my-video-links d-flex align-items-center justify-content-center w-100 h-100" 
                                         data-autoplay="true" data-vbtype="video"
-                                        href="https://youtu.be/{{ $car->video_id }}">
+                                        href="https://youtu.be/{{ isset($car->video_id) ? $car->video_id : '' }}">
                                             <svg width="160" height="80" viewBox="0 0 80 80" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -689,7 +650,7 @@
                     <!------- Image ------->
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-details-thumb" data-aos="fade-up" data-aos-delay="50">
-                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/image_poster.svg') }}" alt="img"></a>
+                            <a href="{{ isset($listing_ads->link) ? $listing_ads->link : '' }}" target="_blank"> <img src="{{ asset('japan_home/image_poster.svg') }}" alt="img"></a>
                         </div>
                     @endif
                 </div>
