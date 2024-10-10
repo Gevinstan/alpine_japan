@@ -634,7 +634,7 @@
                         <div class="text">
                             <h5>{{ __('REVIEWED ON') }}:</h5>
                             <img src="{{ asset('japan_home/google.svg') }}" alt="logo" style="margin-right:1px; height:35px">
-                                      <div style="color: yellow">
+                                      <div class="five_star">
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>

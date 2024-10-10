@@ -7668,7 +7668,7 @@ p {
     justify-content: space-between;
     gap: 10px;
     border-radius: 8px;
-    margin-left: -97px;
+    /* margin-left: -97px; */
     color: var(--white-color);
 }
 
@@ -15382,11 +15382,7 @@ input::placeholder {
 
     }
 
-
-
-
-
-/* Media query for screens smaller than 480px */
+/* doubt - Media query for screens smaller than 480px */
 @media (max-width: 480px) {
     .car-buy {
         width: 60%; /* Full width on very small screens */
@@ -15394,9 +15390,46 @@ input::placeholder {
     }
 }
 
+/***** Footer Responsive Work *****/
 
+@media screen and (max-width: 768px) {
+
+.footer .newsletter-txt {
+    font-size: 40px;
+}
+
+.row.footer {
+    padding: 30px 0 0px 0 !important;
+}
+
+.footer-logo {
+    margin-right: 585px;
+}
+}
+
+@media screen and  (max-width: 425px) {
+
+    .footer .newsletter-txt {
+        font-size: 20px !important;
+        line-height: 40px;
+    }
+
+    .footer-logo {
+        margin-right: 253px !important;
+    }
+
+    
+}
+
+.five_star .bi:hover {
+    color: #FFC200;
+}
+.five_star .bi {
+    font-size: 18px;
+    color: #FFC200;
+}
         
-
+    
 
 
 
