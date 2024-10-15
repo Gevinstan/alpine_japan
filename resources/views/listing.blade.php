@@ -9,12 +9,11 @@
 <main>
     <!-- banner-part-start  -->
 
-        <section class="inner-banner">
+        <!-- <section class="inner-banner">
             <div class="inner-banner-img">
                 <div class="container-fluid">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="inner-banner-df">
-                            <!-- <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1> -->
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li>JDM Stock</li>
@@ -37,7 +36,18 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
+
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <div class="container-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <ol class="breadcrumb breadcrumb-nav">
+                        <li class="breadcrumb-item"><a href="#">JDM Stock</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Volvo</li>
+                    </ol>
+                </div>
+            </div>
+        </nav>
     
     <!-- banner-part-end -->
 
@@ -148,14 +158,20 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+                                                <div class="range-container-txt1">
+                                                    <div><p><b>$1,00,000</b></div>
+                                                    <div><p><b>$3,00,000</b></p></p></div>
+                                                </div>
 
                                                 <div class="range-container">
                                                     <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
                                                     <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMax" value="2">
                                                 </div>
 
-                                                <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">$5k $5Lakh</p></span>
+                                                <div class="range-container-txt2">
+                                                    <div><p><b>$5k</b></div>
+                                                    <div><p><b>$5Lakhs</b></p></p></div>
+                                                </div>
 
                                                 <h6 style="padding-top:30px">Price Range</h6>
 
@@ -181,8 +197,6 @@
                                 </div>
                             </div>
 
-                            
-
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample5">
                                     <div class="accordion-item">
@@ -197,12 +211,16 @@
                                                     <!-- <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">1960 2024</p></span> -->
 
                                                     <span>1960</span>
-                                                    <span id="currentYear">1992</span>
-                                                    <span id="previewYear" style="display: none;"></span>
-                                                    <span style="margin-left:102px;">2024</span>
+                                                    <!-- <span id="currentYear">1992</span> -->
+                                                    <!-- <span id="previewYear" style="display: none;"></span>
+                                                    <span style="margin-left:150px;">2024</span> -->
                                                     
                                                     <div class="range-container" style="padding-bottom:20px;">
-                                                    <input type="range" name="year" class="form-range" min="0" max="64" step="1" id="yearSlider" value="32">
+                                                        <!-- Fixed first value slider -->
+                                                        <input type="range" name="minYear" class="form-range" min="0" max="64" step="1" id="minYearSlider" value="0">
+
+                                                        <!-- Fixed last value slider -->    
+                                                        <input type="range" name="maxYear" class="form-range" min="0" max="64" step="1" id="maxYearSlider" value="64">
                                                     </div>
                                             </div>
                                         </div>
@@ -210,8 +228,6 @@
                                 </div>
                             </div>
                         
-                         
-
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample7">
                                     <div class="accordion-item">
@@ -240,8 +256,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                           
 
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample10">
@@ -290,6 +304,7 @@
                                     </div>
                                 </div>
                             </div>
+                                
                         </div>
 
 
@@ -307,18 +322,15 @@
                             <div class="inventory-sarch-ber-item">
                                 <div class="inventory-sarch-ber">
 
-                                    <div class="input-group">
-                                        <input type="text" class="form-control position-relative" id="outside_form_search" name="search"
-                                            placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:540px">
-                                            <a href="javascript:void(0);" id="outside_form_btn">
-                                            <i class="bi bi-search"></i></a></span>
+                                    <div class="input-group position-relative">
+                                        <input type="text" class="form-control " id="outside_form_search" name="search" placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">       
+                                        <span class="input-group-append position-absolute" style="Padding-top:14px;"> <a href="javascript:void(0);" id="outside_form_btn"> <i class="bi bi-search"></i></a> </span>       
                                     </div>
                                             
                                     <!-- <button id="outside_form_btn" type="button" class="thm-btn-two">{{ __('translate.Search Now') }}</button> -->
                                 </div>
 
-                                <div class="inventory-sarch-ber-text" style="padding-left:100px">
+                                <div class="inventory-sarch-ber-text" style="">
                                     <p style="display:inline; color:black; font-weight:bold">{{ __('Sort By:') }}</p>
                                     <div class="dropdown" style="display:inline; ">
                                         <a class="btn btn-white dropdown-toggle" style="padding-bottom:10px; color:#038ffc !important" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -534,7 +546,7 @@
                                         </div>
 
                                         <div class="brand-car-btm-txt-btm">
-                                            <p class="brand-car-btm-txt" style="word-spacing:70px; padding-bottom:17px;"><span><i class="bi bi-geo-alt-fill" style="font-family: var(--DMSans) !important; font-size:16px !important; color:black">Hyogo,Japan 2024-02-02</i> </span></p>
+                                            <p class="btm-txt-btm" style="padding-bottom:17px;"><span><i class="bi bi-geo-alt-fill" style="font-family: var(--DMSans) !important; color:black">Hyogo,Japan 2024-02-02</i> </span></p>
                                         </div>
                                     </div>
 
@@ -903,5 +915,22 @@ $(document).ready(function() {
     });
 </script>
    
-
+<script>
+function updateRange() {
+    const minYear = parseInt(document.getElementById('minYearSlider').value);
+    const maxYear = parseInt(document.getElementById('maxYearSlider').value);
+    
+    const yearSlider = document.getElementById('yearSlider');
+    
+    yearSlider.min = minYear;
+    yearSlider.max = maxYear;
+    
+    // Optionally, you can adjust the value of yearSlider to stay within new limits
+    if (yearSlider.value < minYear) {
+        yearSlider.value = minYear;
+    } else if (yearSlider.value > maxYear) {
+        yearSlider.value = maxYear;
+    }
+}
+</script>
 @endpush

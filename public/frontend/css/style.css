@@ -612,44 +612,17 @@
 
 .footer-logo {
     background-color: var(--white-color) !important;
-    margin-left: 8px;
-    margin-right: 276px;
-    padding-left: 32px;
-    padding-right: 80px;
-    padding-right: 78px !important;
-    padding-top: 8px;
+    width: 150px;
     border-radius: 50px;
-    position: relative;
+    /* position: relative; */
     z-index: 1;
     border-left: 3px solid var(--primary-color-2);
     border-right: 3px solid var(--primary-color-2);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 80px; 
 }
-
-/* Create the double border using a pseudo-element */
-/* .footer-logo::before {
-    content: "";
-    position: absolute;
-    top: -8px; 
-    left: -8px; 
-    right: -8px; 
-    bottom: -8px;
-    border: 3px solid blue;
-    border-radius: 50px;
-    z-index: -1;
-} */
-
-/* Inner border */
-/* .footer-logo::after {
-    content: "";
-    position: absolute;
-    top: -16px; 
-    left: -16px; 
-    right: -16px; 
-    bottom: -16px; 
-    border: 3px solid blue; 
-    border-radius: 50px;
-    z-index: -2;
-} */
 
 .form-control {
     border-radius: 4px;
@@ -9333,6 +9306,17 @@ a:link {
     z-index: 1;
 }
 
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .inventory {
+        padding: 0px 0 !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .inventory {
+        padding: 0px 0 !important;
+    }
+}
 .inventory .brand-car-two .brand-car-item {
     border: 1px solid #ededed;
     background-color: #fff;
@@ -14544,13 +14528,39 @@ p {
 
 .range-container {
     position: relative;
-    width: 300px; /* Adjust based on your requirement */
+    width: 100%; 
+}
+
+.range-container-txt1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.range-container-txt1 p{
+    color: #038ffc; 
+    word-spacing:90px; 
+    font-size:12px;
+    
+}
+
+.range-container-txt2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    padding-top: 20px;
+}
+
+.range-container-txt2 p{ 
+    word-spacing:90px; 
+    font-size:12px;
 }
 
 input[type="range"] {
     position: absolute;
     pointer-events: none;
-    width: 73%;
+    width: 100%;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -15403,7 +15413,7 @@ input::placeholder {
 }
 
 .footer-logo {
-    margin-right: 585px;
+    /* margin-right: 585px !important; */
 }
 }
 
@@ -15415,11 +15425,11 @@ input::placeholder {
     }
 
     .footer-logo {
-        margin-right: 253px !important;
-    }
-
-    
+        /* margin-right: 253px !important; */
+    }   
 }
+
+
 
 .five_star .bi:hover {
     color: #FFC200;
@@ -15428,8 +15438,223 @@ input::placeholder {
     font-size: 18px;
     color: #FFC200;
 }
-        
+
+/* Responsive in listing page */
+
+@media screen and (max-width: 776px) { 
+
+   .input-group-append .bi-search::before {
+
+    padding-left : 400px !important;
+
+ }
+
+}
+
+@media screen and (max-width: 998px) { 
+
+    .input-group-append .bi-search::before {
+
+    padding-left : 240px !important;
+
+ }
+
+}
+
+.input-group-append .bi-search::before {
+    padding-left:350px;
+}
+
+@media screen and (max-width: 1024px) { 
+
+    .input-group-append .bi-search::before {
+    padding-left:260px !important;
+ }
+
+}
+
+@media screen and (max-width: 1240px) { 
+
+    .input-group-append .bi-search::before {
+    padding-left:252px !important;
+ }
+
+}
+
+@media screen and (max-width: 1680px) { 
+
+    .input-group-append .bi-search::before {
+
+    padding-left:300px;
+
+ }
+
+}
+
+.inventory-sarch-ber-text {
+    padding-left: 0px;
+}
+
+
+.mobile-header .p-left .logo a p {
+    padding-left: 210px !important;
+}
+
+.breadcrumb-nav {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-items: flex-end; */
+}
+@media screen and (max-width: 1024px)  {
     
+}
+
+@media screen and (max-width: 768px)  {
+
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    right:20px;
+}
+
+.inventory-sarch-ber-text {
+    padding-left: 0px;
+}
+
+.inventory {
+        padding: 0px 0 !important;
+        margin-top: -150px;
+}
+
+.brand-car-btm-txt {
+    word-spacing: 500px !important;
+}
+
+.breadcrumb-nav {
+    padding-top: 30px;
+    padding-bottom: 160px;
+
+}
+
+}
+
+@media screen and (max-width: 425px) {
+
+    .inventory {
+        padding: 0px 0 !important;
+        margin-top: -110px;
+}
+
+    .mobile-header .p-left .logo a p {
+        padding-left: 95px !important;
+        font-size: 20px !important;
+}
+
+    .brand-car-btm-txt {
+        word-spacing: 100px !important;
+}
+
+}
+
+
+
+@media (min-width: 1920px)  {
+   
+.btm-txt-btm {
+        word-spacing:30px !important;
+        
+    }
+
+}
+
+@media (min-width: 1440px)  {
+   
+.btm-txt-btm .bi {
+        word-spacing: 160px !important;
+        font-size: 14px !important;
+        
+    }
+
+}
+
+@media (min-width: 1024px)  {
+   
+.btm-txt-btm .bi {
+        word-spacing: 73px !important;
+        font-size: 14px !important;
+        
+    }
+
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+   
+.btm-txt-btm .bi {
+        word-spacing:20px !important;
+        font-size: 14px !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  
+.btm-txt-btm {
+        word-spacing:480px !important;
+    }
+
+}
+
+@media screen and (max-width: 425px)and (max-width: 768px) {
+
+.btm-txt-btm .bi {
+    word-spacing:112px !important;
+}
+
+}
+
+/* Top Navbar Responsive Fix */
+
+    .icon-circle {
+        background-color: white;
+        padding: 3px;
+        border-radius: 50%;
+    }
+
+    .header-right-social-media-btn {
+        margin-left: -150px;
+    }
+
+    .header-right-item-btn-main {
+        margin-left: -15px; /* Adjust this as necessary */
+    }
+
+    .text-white {
+        color: white;
+        font-size: 14px;
+    }
+
+
+@media screen and (max-width: 1114px) and (max-width: 1170px){
+    .header-right-phone-num-btn .text-white {
+        font-size: 11px !important;
+    }
+
+    .header-right-social-media-btn .text-white{
+        font-size: 11px !important;
+    }  
+}
+
+@media screen and (max-width: 504px) {
+    .mobile-header .p-left .logo a p {
+
+    padding-left: 124px !important;
+}
+}
+
+
+
+
+
 
 
 

@@ -299,7 +299,7 @@
                                             </ul>
                                     </div>
 
-                                    <!-- <div class="btn-group-lg btn-dc6">
+                                    <div class="btn-group-lg btn-dc6">
                                         <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" aria-expanded="false">
                                             Year
                                         </button>
@@ -309,15 +309,15 @@
                                             <li><a class="dropdown-item" href="#">$(Low - High)</a></li>
                                             <li><a class="dropdown-item" href="#">$(High - Low)</a></li>
                                         </ul>
-                                    </div> -->
+                                    </div>
 
-                                    <select class="btn-group-lg btn-dc6" name="cars" id="cars">
+                                    <!-- <select class="btn-group-lg btn-dc6" name="cars" id="cars">
                                         <option value="volvo">Year</option>
                                         <option value="saab">ASC - DSC</option>
                                         <option value="opel">DSC - ASC</option>
                                         <option value="audi">$(Low - High)</option>
                                         <option value="audi">$(High - Low)</option>
-                                    </select>
+                                    </select> -->
 
                                     <form class="btn-group btn-dc7">
                                         <div class="form-group position-relative">
