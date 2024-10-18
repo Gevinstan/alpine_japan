@@ -9,40 +9,13 @@
 <main>
     <!-- banner-part-start  -->
 
-        <!-- <section class="inner-banner">
-            <div class="inner-banner-img">
-                <div class="container-fluid">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="inner-banner-df">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li>JDM Stock</li>
-                                    <li><i class="bi bi-arrow-right-short"></i></li>
-                                    <li>Volvo</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="container-fluid">
-                <div class="row" style=" padding-top: 20px;padding-bottom: 14px">
-                    <div class="col-lg-12">
-                        <span>
-                            <h6>JDM Stock <i class="bi bi-arrow-right-short"></i> Volvo</h6>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section> -->
+    <section style="background-color: #f8f9fa;">
 
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <ol class="breadcrumb breadcrumb-nav">
-                        <li class="breadcrumb-item"><a href="#">JDM Stock</a></li>
+                        <li class="breadcrumb-item" ><a href="#">JDM Stock</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Volvo</li>
                     </ol>
                 </div>
@@ -805,7 +778,7 @@
 
     <!-- pagination Starts -->
 
-  
+    </section>
 
     <!-- pagination ends -->
                    

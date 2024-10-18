@@ -22,6 +22,7 @@ use Modules\GeneralSetting\Entities\EmailTemplate;
 use Modules\Page\Entities\TermAndCondition;
 use Modules\Page\Entities\PrivacyPolicy;
 use Modules\Page\Entities\Faq;
+use Modules\Page\Entities\howtobuy;
 use Modules\City\Entities\City;
 use Modules\Language\Entities\Language;
 use App\Models\User;
@@ -308,6 +309,10 @@ class HomeController extends Controller
         ]);
     }
 
+
+
+    
+
     public function terms_conditions(){
         $seo_setting = SeoSetting::where('id', 6)->first();
 
@@ -341,6 +346,41 @@ class HomeController extends Controller
             'seo_setting' => $seo_setting,
             'faqs' => $faqs,
             'homepage' => $homepage,
+        ]);
+    }
+
+    public function howtobuy(){
+        $seo_setting = SeoSetting::where('id', 5)->first();
+
+        $faqs = Faq::latest()->get();
+
+        $homepage = HomePage::first();
+
+        return view('howtobuy')->with([
+            'seo_setting' => $seo_setting,
+            'faqs' => $faqs,
+            'homepage' => $homepage,
+        ]);
+    }
+
+
+    public function vkytest(){
+         $seo_setting = SeoSetting::where('id', 3)->first();
+
+        $about_us = AboutUs::first();
+
+        $brands = Brand::where('status', 'enable')->get();
+
+        $homepage = HomePage::first();
+
+        $testimonials = Testimonial::where('status', 'active')->orderBy('id','desc')->get();
+
+        return view('about_us')->with([
+            'seo_setting' => $seo_setting,
+            'about_us' => $about_us,
+            'brands' => $brands,
+            'homepage' => $homepage,
+            'testimonials' => $testimonials,
         ]);
     }
 

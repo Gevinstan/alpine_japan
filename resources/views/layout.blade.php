@@ -820,7 +820,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('user.reviews') }}"> <span>
+                                        <a href="{{ route('howtobuy') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -929,23 +929,23 @@
         <div class="copyright">
             <div class="container">
                 <div class="row">
-                    <!-- Left Side: Alpine Japan -->
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-center text-md-start">
-                        <div class="copyright-text">
-                            <p><i class="bi bi-c-circle"></i> Alpine Japan 2024 | All Rights Reserved</p>
+                    
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="copyright-text text-start text-md-start"> 
+                            <p class=""><i class="bi bi-c-circle"></i> Alpine Japan 2024 | All Rights Reserved</p>
                         </div>
                     </div>
 
-                    <!-- Right Side: Developed by and Social Icons -->
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-center text-md-end">
-                        <div class="copyright-text">
-                            <p>Developed by Gevinst 
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="copyright-text text-end "> 
+                            <p class="">Developed by Gevinst 
                                 <span class="ms-3"><i class="bi bi-instagram"></i></span>
                                 <span class="ms-2"><i class="bi bi-facebook"></i></span>
                                 <span class="ms-2"><i class="bi bi-youtube"></i></span>
                             </p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
