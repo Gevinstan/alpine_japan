@@ -3,6 +3,7 @@
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
     <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
+    
 @endsection
 
 @section('body-content')
@@ -14,13 +15,15 @@
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <ol class="breadcrumb breadcrumb-nav">
+                    <ol class="breadcrumb breadcrumb-nav mb-0">
                         <li class="breadcrumb-item" ><a href="#">JDM Stock</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Volvo</li>
                     </ol>
                 </div>
             </div>
         </nav>
+
+    </section>
     
     <!-- banner-part-end -->
 
@@ -136,11 +139,25 @@
                                                     <div><p><b>$3,00,000</b></p></p></div>
                                                 </div>
 
-                                                <div class="range-container">
+                                                <!-- <div class="range-container" >
                                                     <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMax" value="2">
+                                                    <input type="range" class="form-range"  min="0" max="5" step="0.5" id="customRangeMax" value="2">
+                                                </div> -->
+
+
+                                                <div id="slider-outer-div ms-2" >
+                                                    <div id="slider-max-label" class="slider-label"></div>
+                                                    <div id="slider-min-label" class="slider-label"></div>
+                                                    <div id="slider-div">
+                                                    <div>
+                                                        <input id="ex2" type="text" data-slider-min="50"
+                                                        data-slider-max="2000" data-slider-value="[50,300]"
+                                                        data-slider-tooltip="hide" />
+                                                    </div>
+                                                    </div>
                                                 </div>
 
+                                            
                                                 <div class="range-container-txt2">
                                                     <div><p><b>$5k</b></div>
                                                     <div><p><b>$5Lakhs</b></p></p></div>
@@ -188,7 +205,7 @@
                                                     <!-- <span id="previewYear" style="display: none;"></span>
                                                     <span style="margin-left:150px;">2024</span> -->
                                                     
-                                                    <div class="range-container" style="padding-bottom:20px;">
+                                                    <div class="range-container mt-3" style="padding-bottom:20px;">
                                                         <!-- Fixed first value slider -->
                                                         <input type="range" name="minYear" class="form-range" min="0" max="64" step="1" id="minYearSlider" value="0">
 
@@ -781,7 +798,29 @@
     </section>
 
     <!-- pagination ends -->
-                   
+            <script>
+  const setLabel = (lbl, val) => {
+  const label = $(`#slider-${lbl}-label`);
+  label.text(val);
+  const slider = $(`#slider-div .${lbl}-slider-handle`);
+  const rect = slider[0].getBoundingClientRect();
+  label.offset({
+    top: rect.top - 30,
+    left: rect.left
+  });
+}
+
+const setLabels = (values) => {
+  setLabel("min", values[0]);
+  setLabel("max", values[1]);
+}
+
+
+$('#ex2').slider().on('slide', function(ev) {
+  setLabels(ev.value);
+});
+setLabels($('#ex2').attr("data-value").split(",")); 
+</script>       
 </main>
 @endsection
 
@@ -906,4 +945,33 @@ function updateRange() {
     }
 }
 </script>
+
+<script>
+  const setLabel = (lbl, val) => {
+  const label = $(`#slider-${lbl}-label`);
+  label.text(val);
+  const slider = $(`#slider-div .${lbl}-slider-handle`);
+  const rect = slider[0].getBoundingClientRect();
+  label.offset({
+    top: rect.top - 30,
+    left: rect.left
+  });
+}
+
+const setLabels = (values) => {
+  setLabel("min", values[0]);
+  setLabel("max", values[1]);
+}
+
+
+$('#ex2').slider().on('slide', function(ev) {
+  setLabels(ev.value);
+});
+setLabels($('#ex2').attr("data-value").split(",")); 
+</script>
+
 @endpush
+
+
+
+

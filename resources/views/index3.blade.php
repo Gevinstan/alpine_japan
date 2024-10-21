@@ -955,8 +955,12 @@
                                         data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car->thumb_image) }}" alt="thumb">
-                                                <!-- <img src="{{ asset('japan_home/img_check.jpg') }}" alt="logo" class="" style=""> -->
+                                                <!-- <img src="{{ asset($car->thumb_image) }}" alt="thumb"> -->
+
+                                                <div class="w-100 brand-new-car">
+                                                    <img src="{{ asset('japan_home/img_check.jpg') }}" alt="logo" class="" style="height:100%; width: 100%">
+                                                </div>
+                                                
 
                                                 <div class="brand-car-item-img-text">
                                                     <div class="text-df">
@@ -1028,6 +1032,10 @@
 
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
+                                                    <span>
+                                                        <h6 class="text-truncate" style="font-size: 14px; width:53px">sumito-sumi-60-Earth drilling-bore piling machine 4G</h6>
+                                                    </span>
+
                                                     <span>{{ $car?->brand?->name }}</span>
                                                     <p style="font-size:20px">
                                                         @if ($car->offer_price)
@@ -1038,9 +1046,14 @@
                                                     </p>
                                                 </div>
 
-                                                <a href="{{ route('listing', $car->slug) }}">
+                                                <!-- <a href="{{ route('listing', $car->slug) }}">
                                                     <h3 style="font-size:17px">{{ html_decode($car->title) }}</h3>
+                                                </a> -->
+
+                                                <a href="{{ route('listing', $car->slug) }}" data-bs-toggle="tooltip" title="sumito-sumi-60-Earth drilling-bore piling machine 4G">
+                                                    <h3 class="text-truncate" style="font-size: 17px;">sumito-sumi-60-Earth drilling-bore piling machine 4G</h3>
                                                 </a>
+
 
                                                 <div class="brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
@@ -1738,6 +1751,17 @@
     document.getElementById('defaultDropdown').innerText = selectedBrand;
     }
     </script>
+
+    <script>
+    // Initialize Bootstrap tooltips
+    document.addEventListener('DOMContentLoaded', function () {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+
     
 
 
