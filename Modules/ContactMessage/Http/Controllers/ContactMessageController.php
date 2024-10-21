@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\ContactMessage\Entities\ContactMessage;
 use Modules\GeneralSetting\Entities\Setting;
+use App\Models\VehicleEnquiry;
 
 class ContactMessageController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:admin');
+    }
+    public function VehicleEnquiry(Request $request){
+        $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
+        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry'));
     }
 
     public function contact_message(){

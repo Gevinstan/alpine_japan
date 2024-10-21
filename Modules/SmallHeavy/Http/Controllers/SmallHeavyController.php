@@ -21,6 +21,7 @@ class SmallHeavyController extends Controller
     public function index()
     {
         $smallHeavies = SmallHeavy::all();
+        // echo json_encode($smallHeavies);die();
         return view('smallheavy::index',compact('smallHeavies'));
     }
 
@@ -131,6 +132,23 @@ class SmallHeavyController extends Controller
         $brands=Brand::get();
         $models=ModelsCars::get();
         return view('smallheavy::edit',compact('category','smallHeavy','brands','models'));
+    }
+
+    public function smallHeavyComission(Request $request){
+        SmallHeavy::where('is_active', 1)
+        ->whereIn('id',$request->selectedIds)
+        ->update(['commision_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function smallHeavyNewArrivals(Request $request){
+        SmallHeavy::where('is_active', 1)
+        ->where('id',$request->selectedIds)
+        ->update(['new_arrival' => $request->check]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
 
     /**

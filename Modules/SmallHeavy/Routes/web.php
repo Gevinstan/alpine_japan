@@ -14,6 +14,8 @@ use Modules\SmallHeavy\Http\Controllers\SmallHeavyController;
 Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO','auth:admin']],function (){
 
     Route::resource('small-heavy', SmallHeavyController::class);
+    Route::post('store-small-heavy-comission', [SmallHeavyController::class,'smallHeavyComission'])->name('store-small-heavy-comission');
+    Route::post('smallheavy-new-arrivals', [SmallHeavyController::class,'smallHeavyNewArrivals'])->name('smallheavy-new-arrivals');
     
 });
 Route::post('delete-small-heavy', [SmallHeavyController::class,'deleteSmallHeavy'])->name('delete-small-heavy');

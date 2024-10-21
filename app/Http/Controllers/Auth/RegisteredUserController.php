@@ -20,6 +20,11 @@ use App\Http\Requests\RegisterRequest;
 use Mail;
 use Str;
 use Session;
+use Modules\Brand\Entities\Brand;
+use Modules\Cars\Entities\Cars;
+use Modules\Heavy\Entities\Heavy;
+use Modules\SmallHeavy\Entities\SmallHeavy;
+use DB;
 
 use Modules\GeneralSetting\Entities\SocialLoginInfo;
 
@@ -30,9 +35,37 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
         $social_login = SocialLoginInfo::first();
 
-        return view('auth.register', ['social_login' => $social_login]);
+        return view('auth.register', ['social_login' => $social_login,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand]);
     }
 
     /**

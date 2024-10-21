@@ -55,6 +55,9 @@
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Category') }}
                                                 </th>
+                                                <th class="crancy-table__column-2 crancy-table__h2 sorting">
+                                                    {{ __('translate.New Arrival') }}
+                                                </th>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Title') }}
@@ -92,6 +95,11 @@
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
+                                                    <input type="checkbox" class="form-control top-sell-checkbox-class" data-id="{{$commerical->id}}"
+                                                     {{$commerical->new_arrival =='1' ? 'checked' : ''}} >
+                                                    </td>
+
+                                                    <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ $commerical->title }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
@@ -108,14 +116,10 @@
                                                         @endif
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <div style="
-                                                        display: flex;
-                                                        align-items: center;
-                                                        justify-content: space-between;
-                                                        gap: 10px;">
-                                                    <a href="{{ route('admin.commercial.edit', ['commercial' => $commerical->id] ) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
-                                                        <a onclick="itemDeleteConfrimation({{ $commerical->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
-                                                        </div>
+                                                 
+                                                    <a href="{{ route('admin.commercial.edit', ['commercial' => $commerical->id] ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>
+                                                        <a onclick="itemDeleteConfrimation({{ $commerical->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('translate.Delete') }}"><i class="fas fa-trash"></i> </a>
+                                                       
                                                     </td>
                                                 </tr>
                                             @endforeach 
@@ -188,6 +192,7 @@
             const masterCheckbox = document.querySelector('#masterCheckbox');
             const rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
             const deleteButton = document.querySelector('#delete-model');
+            const topSellButtons = document.querySelectorAll('.top-sell-checkbox-class');
 
             // Add event listener to the master checkbox
             masterCheckbox.addEventListener('change', function() {
@@ -243,6 +248,28 @@
         }
     });
 
+
+    topSellButtons.forEach(function(topSellButton) {
+                topSellButton.addEventListener('change', function() {
+                // Determine if the checkbox is checked
+                var check = this.checked ? 1 : 0;
+
+                // Use jQuery to get the data-id
+                var selectedId = $(this).data('id');
+
+                $.ajax({
+                    url: "admin.commercial_new_arrivals",
+                    type: "POST",
+                    data: { selectedIds: selectedId, check: check },
+                    beforeSend: function(data) {
+                        console.log("loading");
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
 });
 
         

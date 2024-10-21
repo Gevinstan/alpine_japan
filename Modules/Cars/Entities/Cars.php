@@ -47,5 +47,7 @@ class Cars extends Model
         'has_video',
         'inside',
         'outside',
+        'commission_value',
+        'new_arrival'
       ];
 }

@@ -98,6 +98,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="BrandAccordian">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-brandAccordian" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Brand
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-brandAccordian" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        @foreach($brands as $brand)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                    <div class="form-check me-3">
+                                                    <input class="form-check-input brand-search" name="brand" type="radio" value="{{$brand->slug}}"
+                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label">
+                                                            {{ $brand->name }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="ModelAccordian">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-ModelAccordian" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Model
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-ModelAccordian" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        @foreach($models as $brand)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                    <div class="form-check me-3 model-div">
+                                                    <input class="form-check-input brand-search" name="model" type="radio" value="{{$brand->model_name_en}}"
+                                                        {{ in_array(trim($brand->model_name_en), (array)request('model', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label">
+                                                            {{ $brand->model_name_en }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            @endforeach 
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample2">
@@ -114,21 +168,22 @@
                                                         Brand New Cars
                                                     </label>
 
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" id="brand_new_cars" name="brand_new_cars"
+                                                    {{ request('brand_new_cars') ? 'checked' : '' }}>
 
                                             </div>
 
                                             <div class="input-group">
                                                 <input class="form-control border-end-0 border" style="font-size:12px;" name="search" type="search" id="example-search-input">
                                                 <span class="input-group-append">
-                                                    <button class="btn btn-outline-secondary bg-white border-start-0 accordion border ms-n5" type="button">
+                                                    <button class="tm-btn btn btn-outline-secondary bg-white border-start-0 accordion border ms-n5" type="button">
                                                         <i class="fa fa-search"></i>
                                                     </button>
                                                 </span>
                                             </div>
 
                                             <h6 style="padding-top:30px">Popular</h6>
-                                            @foreach($brand_count as $brand)
+                                           {{-- @foreach($brand_count as $brand)
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
@@ -145,8 +200,8 @@
                                                             @endif -->
                                                         </label>
                                                     </div>
-                                            </div>
-                                            @endforeach
+                                            </div> 
+                                            @endforeach --}}
                                             <h6 style="color:#038ffc;">Show More Brands</h6>
                                         </div>
                                     </div>
@@ -164,7 +219,7 @@
                                         <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
                                                 <input type="hidden" id="priceSearch" name="price_range_scale" value="">
-                                                <button id="searchButton" style="margin-left: 5px; padding: 5px 10px;">Search</button>`
+                                                <button id="searchButton" class="thm-btn budget-search-btn">Search</button>`
                                                 <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
 
                                                 <div class="range-container">
@@ -210,10 +265,10 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                            <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
-                                                <div class="range-container">
-                                                    <input type="range" class="form-range" min="1960" max="2024"  id="start">
-                                                    <output name="age_output" id="age_output" for="start" ></output>
+                                            <!-- <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span> -->
+                                                <div class="range-container mb-3">
+                                                    <input type="range" style="padding-top:30px;" class="form-range" min="1960" max="2024"  id="start">
+                                                    <output name="age_output" style="margin-bottom:12px" id="age_output" for="start" ></output>
                                                     <input type="hidden" id="start_year" name="year">
                                                 </div>
                                             </div>
@@ -397,7 +452,7 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
+                                                           
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -407,7 +462,7 @@
                                                             </svg>
 
                                                                 </span>
-                                                            </a>
+                                                         
 
                                                         @endif
 
@@ -732,6 +787,16 @@ endRange.addEventListener('input', () => {
             $("#start_year").val(parseInt($(this).val()));
             // form.submit();
         })
+
+        $("#brand_new_cars").on('change',function(e){
+            e.preventDefault();
+            form.submit();
+        })
+        $(".brand-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();
+           
+        }) 
 
         // form.on('submit', function(e) {
             // alert($("#age_output").val())

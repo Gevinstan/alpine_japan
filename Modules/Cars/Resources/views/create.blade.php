@@ -17,7 +17,7 @@
                     <div class="crancy-body">
                         <!-- Dashboard Inner -->
                         <div class="crancy-dsinner">
-                            <form action="{{ route('admin.car.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.cars.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">

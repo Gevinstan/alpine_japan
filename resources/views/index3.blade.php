@@ -43,7 +43,7 @@
                                         </button>
                                         <input type="hidden" name="jdm_brand" id="jdm_brand">
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                        @foreach($jdm_legend as $brand)
+                                        @foreach($jdm_core_brand as $brand)
                                             <li><a class="dropdown-item" href="javascript:void(0);" onclick="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</a></li>
                                         @endforeach
                                         </ul>
@@ -54,7 +54,7 @@
                                             <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Model
                                             </button>
-                                            <input type="hidden" name="jdm_model[]" id="jdm_model">
+                                            <input type="hidden" name="jdm_model" id="jdm_model">
                                             <ul class="dropdown-menu model-ul" aria-labelledby="dropdownMenuClickableOutside">
                                             </ul>
                                     </div>
@@ -69,13 +69,13 @@
                                     </div>
 
                                         <div class="form-group position-relative">
-                                            <input type="text" 
-                                                style="background-color: #038ffc; color: white; width: 180px; height: 52px; border: none;" 
-                                                class="form-control btn-rad-right" 
-                                                id="exampleInputEmail1" 
-                                                placeholder="         SEARCH"
+                                            <input type="button" 
+                                                style="background-color: #038ffc; color: white; width: 150px; height: 52px; border: none;" 
+                                                class="form-control btn-rad-right btn" 
+                                                id="searchBtn" 
+                                                value="SEARCH"
                                                 oninput="toggleIconVisibility(this)">
-                                            <a id="searchBtn" href="#"><i id="searchIcon" class="bi bi-search position-absolute" style="left: 20px; top: 46%; transform: translateY(-50%); color: white;"></i><a>
+                                            <i id="searchIcon" class="bi bi-search position-absolute" style="right: 18px; top: 28px; transform: translateY(-50%); color: white;"></i>
                                         </div>
                                     </form>
 
@@ -259,7 +259,6 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                         xmlns="http://www.w3.org/2000/svg">
@@ -284,17 +283,17 @@
                                                 <div class="brand-car-inner-item">
                                                     <span>
                                                     @if(session('front_lang')=='en')
-                                                        {{ $car['model_name_en'] }}
+                                                        {{ $car['company_en'] }}
                                                     @else
-                                                       {{ $car['model_name'] }}
+                                                       {{ $car['company'] }}
                                                     @endif
                                                         
                                                     </span>
                                                     <p style="font-size:20px">
                                                     @if(session('front_lang')=='en')
-                                                        {{ $car['start_price_num'] }}
+                                                        {{ currency($car['start_price_num']) }}
                                                     @else
-                                                       {{ $car['start_price'] }}
+                                                       {{ currency($car['start_price']) }}
                                                     @endif
                                                     </p>
                                                 </div>
@@ -558,20 +557,7 @@
                             <h2 style="display: inline; color: #038ffc;">Cars</h2>
                 </div>
 
-                <div class="col-lg-6 col-sm-6  col-md-6">
-                    <ul class="nav nav-pills " id="pills-tab23" role="tablist">
-                        <!-- <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                aria-selected="true">{{ __('translate.New Car') }}</button>
-                        </li> -->
-                        <!-- <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-profile" type="button" role="tab"
-                                aria-controls="pills-profile" aria-selected="false">{{ __('translate.Used Car') }}</button>
-                        </li> -->
-                    </ul>
-                </div>
+               
             </div>
 
             <div class="row mt-60px">
@@ -605,22 +591,6 @@
 
                                                     <div class="icon-main">
                                                         @guest('web')
-
-                                                        <!-- <span style="position: relative; display: inline-block;">
-                                                            <i style="color: #FFA800; font-size: 28px;" class="bi bi-star-fill"></i>
-                                                            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 12px; color: white;"><b>4</b></span>
-                                                        </span> -->
-                                                            <!-- <a  href="javascript:;" class="icon before_auth_wishlist">
-                                                                <span>
-                                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                            stroke-width="1.3" stroke-linejoin="round"></path>
-                                                                    </svg>
-
-                                                                </span>
-                                                            </a> -->
                                                         @else
                                                             <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
                                                                 <span>
@@ -635,28 +605,7 @@
                                                             </a>
 
                                                         @endif
-
-                                                        
-                                                        <!-- <a href="{{ route('add-to-compare', $car->id) }}" class="icon"> -->
-
-                                                        <!-- <span style="position: relative; display: inline-block; padding-top: 220px">
-                                                            <i style="color: red; font-size: 24px;" class="bi bi-heart-fill"></i>
-                                                        </span> -->
-                                                            <!-- <span>
-                                                                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1"
-                                                                        stroke-width="1.3" stroke-linecap="round"
-                                                                        stroke-linejoin="round"></path>
-                                                                    <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19"
-                                                                        stroke-width="1.3" stroke-linecap="round"
-                                                                        stroke-linejoin="round"></path>
-                                                                </svg>
-                                                            </span> -->
-                                                        <!-- </a> -->
                                                     </div>
-
-
                                                 </div>
                                             </div>
 
@@ -975,7 +924,6 @@
                                                     @guest('web')
             
                                                     @else
-                                                        <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
                                                             <span>
                                                                 <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -998,16 +946,16 @@
                                             <div class="brand-car-inner-item">
                                                 <span>
                                                     @if(session('front_lang')=='en')
-                                                        {{ $car['model_name_en'] }}
+                                                        {{ $car['company_en'] }}
                                                     @else
-                                                        {{ $car['model_name'] }}
+                                                        {{ $car['company'] }}
                                                     @endif
                                                 </span>
                                                 <p>
                                                 @if(session('front_lang')=='en')
-                                                    {{ $car['start_price_num'] }}
+                                                    {{ currency($car['start_price_num']) }}
                                                 @else
-                                                    {{ $car['start_price'] }}
+                                                    {{ currency($car['start_price']) }}
                                                 @endif
                                                 </p>
                                             </div>
@@ -1087,7 +1035,7 @@
                 @if ($home3_ads->status == 'enable')
                     <div class="col-lg-4">
                         <div class=" feature-thumb">
-                            <a href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/big_sale.svg') }}" alt="logo" class="img-fluid" style="padding-bottom: 80px"></a>
+                            <a href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset($home3_ads->image) }}" alt="logo" class="img-fluid" style="padding-bottom: 80px"></a>
                         </div>
                     </div>
                 @endif
@@ -1101,7 +1049,7 @@
         </div>
 
         <div class="brand-car-btn mt-48px">
-            <a href="{{ route('listings') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
+            <a href="{{ route('new-arrival') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
         </div>
     </section>
 
@@ -1236,7 +1184,7 @@
                                         </div>
 
                                         <div class="testimonial-slick-top-txt">
-                                            <h4>John Abraham</h4>
+                                            <h4>{{$testimonial->name}}</h4>
                                             <p style="display: inline;">Hyogo, Japan - Jun  07, 2024 |</p> 
                                             <p style="display: inline; color: #43C640;"> Verified Buyer</p> 
                                         </div>

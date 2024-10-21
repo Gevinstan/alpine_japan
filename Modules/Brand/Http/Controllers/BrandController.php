@@ -33,7 +33,7 @@ class BrandController extends Controller
     {
         $brands = Brand::with('translate')->latest()->get();
 
-        echo json_encode($brands);die();
+    
         return view('brand::create');
     }
 

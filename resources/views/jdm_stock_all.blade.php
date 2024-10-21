@@ -98,6 +98,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="BrandAccordian">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-brandAccordian" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Brand
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-brandAccordian" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        @foreach($brands as $brand)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                    <div class="form-check me-3">
+                                                    <input class="form-check-input brand-search" name="brand" type="radio" value="{{$brand->slug}}"
+                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label">
+                                                            {{ $brand->name }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="ModelAccordian">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-ModelAccordian" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Model
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-ModelAccordian" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        @foreach($models as $brand)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                    <div class="form-check me-3 model-div">
+                                                    <input class="form-check-input brand-search" name="jdm_model" type="radio" value="{{$brand->model}}"
+                                                        {{ in_array(trim($brand->model), (array)request('jdm_model', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label">
+                                                            {{ $brand->model }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            @endforeach  
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample2">
@@ -114,33 +168,27 @@
                                                         Brand New Cars
                                                     </label>
 
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" id="brand_new_cars" name="brand_new_cars"
+                                                    {{ request('brand_new_cars') ? 'checked' : '' }}>
+
 
                                             </div>
 
-                                            <div class="input-group">
-                                                <input class="form-control border-end-0 border" style="font-size:12px;"  type="search" id="example-search-input">
-                                                <span class="input-group-append">
-                                                    <button class="btn btn-outline-secondary bg-white border-start-0 accordion border ms-n5" type="button">
-                                                        <i class="fa fa-search"></i>
-                                                    </button>
-                                                </span>
-                                            </div>
+                                      
 
                                             <h6 style="padding-top:30px">Popular</h6>
-                                            @foreach($brand_count as $brand)
+                                          {{--  @foreach($brand_count as $brand)
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
                                                         <input class="form-check-input popular-search" name="jdm_model[]" type="checkbox" value="{{$brand->model}}"
-                                                        {{ in_array($brand->model, request('jdm_model', [])) ? 'checked' : '' }}>
-                                                        
+                                                        {{ in_array(trim($brand->model),request('jdm_model', [])) ? 'checked' : '' }}>            
                                                         <label class="form-check-label">
                                                             {{ $brand->model }} ({{ $brand->total_count }})
                                                         </label>
                                                     </div>
                                             </div>
-                                            @endforeach
+                                            @endforeach --}}
                                             <h6 style="color:#038ffc;">Show More Brands</h6>
                                         </div>
                                     </div>
@@ -331,9 +379,16 @@
                             @if(count($cars_array) > 0)  
                                 @foreach ($cars_array as $index => $car)
                                     <div class="col-lg-4">
-                                        <div class="brand-car-item">
+                                        <div class="brand-car-item" style="height: 480px;">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car['picture']) }}" alt="thumb">
+                                            @if(file_exists(public_path('cars/' . $car['picture'])))
+                                                <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb" style="heigh:none;">
+                                            @elseif(file_exists(public_path('Heavy/' . $car['picture'])))
+                                                <img src="{{ asset('Heavy/' . $car['id'] . '/' . $car['picture']) }}" alt="thumb">
+                                            @else 
+                                                <img src="{{ asset('Small-Heavy/' . $car['id'] . '/' . $car['picture']) }}" alt="thumb">
+                                            @endif
+
 
                                                 <div class="brand-car-item-img-text">
 
@@ -365,28 +420,17 @@
 
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
-                                                    <span> @if(session('front_lang')=='en')
-                                                                {{ $car['model_name_en'] }}
-                                                            @else
-                                                            {{ $car['model_name'] }}
-                                                            @endif
+                                                    <span> 
+                                                            {{ $car['company_en'] }}
                                                     </span>
-                                                    <p>
-                                                    @if(session('front_lang')=='en')
+                                                    <p> 
                                                         {{ $car['start_price_num'] }}
-                                                    @else
-                                                        {{ $car['start_price'] }}
-                                                    @endif
                                                     </p>
                                                 </div>
 
                                                 <a href="{{ route('jdm-stock-all-listing', $car['id']) }}">
                                                     <h3>
-                                                    @if(session('front_lang')=='en')
                                                         {{ html_decode($car['model_name_en']) }}
-                                                    @else
-                                                        {{ html_decode($car['model_name']) }}
-                                                    @endif
                                                     </h3>
                                                 </a>
 
@@ -652,11 +696,21 @@ endRange.addEventListener('input', () => {
             e.preventDefault();   
             form.submit();
         })
+        $(".brand-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();
+           
+        }) 
 
         $("#start").on('input',function(e){
             $("#age_output").val(parseInt($(this).val()))
             $("#start_year").val(parseInt($(this).val()));
             // form.submit();
+        })
+
+        $("#brand_new_cars").on('change',function(e){
+            e.preventDefault();
+            form.submit();
         })
 
     

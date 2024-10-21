@@ -92,8 +92,8 @@
                                                     <img src="{{ asset('Model/' . $models->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <a href="{{ route('admin.models.edit', ['model' => $models->id] ) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
-                                                        <a onclick="itemDeleteConfrimation({{ $models->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
+                                                    <a href="{{ route('admin.models.edit', ['model' => $models->id] ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>
+                                                        <a onclick="itemDeleteConfrimation({{ $models->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('translate.Delete') }}" ><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach  

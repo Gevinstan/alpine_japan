@@ -28,6 +28,7 @@ use Modules\Language\Entities\Language;
 use App\Models\User;
 use App\Models\AdsBanner;
 use App\Models\Review;
+use App\Models\VehicleEnquiry;
 use App\Models\Auct_lots_xml_jp;
 use Modules\ContactMessage\Http\Requests\ContactMessageRequest;
 use Modules\ContactMessage\Emails\SendContactMessage;
@@ -216,30 +217,41 @@ class HomeController extends Controller
             // ->distinct()
             // ->pluck('make');
 
-            $jdm_legend = Brand::where('status', 'enable')->get();
+            $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-            // $jdm_legend_heavy = \DB::table('heavy')
-            // ->where('category', 'JDM Legend')
-            // ->where('make', '!=', '')
-            // ->whereNotNull('make')
-            // ->distinct()
-            // ->pluck('make');
+            $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                         ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
 
 
-            // $jdm_legend_small_heavy=\DB::table('small_heavy')
-            // ->where('category', 'JDM Legend')
-            // ->where('make', '!=', '')
-            // ->whereNotNull('make')
-            // ->distinct()
-            // ->pluck('make');
-      
+            $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+            $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+
+            $jdm_brand['car']=$jdm_legend;
+            $jdm_brand['heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+        
             return view('index3', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
                 'brands' => $brands,
                 'cities' => $cities,
                 'new_cars' => $new_cars,
-                'jdm_legend'=>$jdm_legend,
+                'jdm_legend'=>$jdm_brand,
+                'jdm_core_brand'=>$jdm_core_brand,
                 // 'jdm_legend_heavy'=>$jdm_legend_heavy,
                 // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
                 'used_cars' => $used_cars,
@@ -256,7 +268,6 @@ class HomeController extends Controller
                 'new_arrived_cars'=>$new_arrived_cars
             ]);
         }else{
-         
             return view('index', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
@@ -289,17 +300,17 @@ class HomeController extends Controller
         // DB::enableQueryLog();
         if($type == 'car'){
             $carsQuery = Cars::join('models_cars as mc', 'mc.model', '=', 'blog.model')
-            ->where('blog.category', 'JDM Legend')
             ->where(DB::raw('LOWER(blog.make)'), $slug)
             ->select('blog.*');
+            
         } else if($type == 'heavy'){
             $carsQuery = Heavy::join('models_cars as mc', 'mc.model', '=', 'heavy.model')
-            ->where('heavy.category', 'JDM Legend')
+            // ->where('heavy.category', 'JDM Legend')
             ->where('heavy.make', $slug)
             ->select('heavy.*');
         } else if($type =='small_heavy') {
             $carsQuery = SmallHeavy::join('models_cars as mc', 'mc.model', '=', 'small_heavy.model')
-            ->where('small_heavy.category', 'JDM Legend')
+            // ->where('small_heavy.category', 'JDM Legend')
             ->where('small_heavy.make', $slug)
             ->select('small_heavy.*');
         }
@@ -370,8 +381,11 @@ class HomeController extends Controller
                 'start_price' => $car->price,
                 'picture' =>$car->image,
                 'id' => $car->id,
+                'make'=>$car->make
             ];
         });
+
+     
     
     
         // Get additional data
@@ -383,24 +397,38 @@ class HomeController extends Controller
             ->get();
     
       
-            // $jdm_legend_heavy = \DB::table('heavy')
-            // ->where('category', 'JDM Legend')
-            // ->where('make', '!=', '')
-            // ->whereNotNull('make')
-            // ->distinct()
-            // ->pluck('make');    
+            $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-            // $jdm_legend_small_heavy=\DB::table('small_heavy')
-            // ->where('category', 'JDM Legend')
-            // ->where('make', '!=', '')
-            // ->whereNotNull('make')
-            // ->distinct()
-            // ->pluck('make');
+            $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                         ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+
+            $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+            $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+            $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+            $jdm_brand['car']=$jdm_legend;
+            $jdm_brand['heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
     
 
         return view('jdm_stock', [
             'seo_setting' => $seo_setting,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
             'brands' => $brands,
             'cars_array' => $cars_array,
             'listing_ads' => $listing_ads,
@@ -432,7 +460,30 @@ class HomeController extends Controller
         $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
 
         $delivery_charges = DeliveryCharge::all();
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
 
         return view('jdm-listing', [
             'car' => $car,
@@ -440,7 +491,9 @@ class HomeController extends Controller
             'reviews' => $reviews,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
+            'type'=>$type
         ]);
     }
 
@@ -466,6 +519,32 @@ class HomeController extends Controller
 
     public function about_us(){
 
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
         $seo_setting = SeoSetting::where('id', 3)->first();
 
         $about_us = AboutUs::first();
@@ -482,6 +561,8 @@ class HomeController extends Controller
             'brands' => $brands,
             'homepage' => $homepage,
             'testimonials' => $testimonials,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -490,10 +571,38 @@ class HomeController extends Controller
         $seo_setting = SeoSetting::where('id', 4)->first();
 
         $contact_us = ContactUs::first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
 
         return view('contact_us')->with([
             'seo_setting' => $seo_setting,
             'contact_us' => $contact_us,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -525,11 +634,40 @@ class HomeController extends Controller
         $faqs = Faq::latest()->get();
 
         $homepage = HomePage::first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+        
 
         return view('faq')->with([
             'seo_setting' => $seo_setting,
             'faqs' => $faqs,
             'homepage' => $homepage,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -559,12 +697,42 @@ class HomeController extends Controller
         $popular_blogs = Blog::where('is_popular', 'yes')->where('status', 1)->orderBy('id','desc')->get();
 
         $categories = BlogCategory::where('status', 1)->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+     
 
         return view('blog')->with([
             'seo_setting' => $seo_setting,
             'blogs' => $blogs,
             'popular_blogs' => $popular_blogs,
             'categories' => $categories,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -578,12 +746,41 @@ class HomeController extends Controller
         $popular_blogs = Blog::where('is_popular', 'yes')->where('status', 1)->orderBy('id','desc')->get();
 
         $categories = BlogCategory::where('status', 1)->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
 
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+        
         return view('blog_detail')->with([
             'blog' => $blog,
             'blog_comments' => $blog_comments,
             'popular_blogs' => $popular_blogs,
             'categories' => $categories,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -651,7 +848,8 @@ class HomeController extends Controller
     public function listings(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
-    $brands = Brand::where('status', 'enable')->get();
+        $brands = Brand::where('status', 'enable')->get();
+        $models=[];
 
 
     // Initialize the query for cars
@@ -673,12 +871,27 @@ class HomeController extends Controller
         }
     }
 
+    if($request->brand_new_cars){
+        $year = date('Y'); 
+         $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
+    }
+
 
     if ($request->brand) {
-        $brand_arr = array_filter($request->brand); // Filter out any empty values
-        if ($brand_arr) {
-            $carsQuery->whereIn('company_en', $brand_arr); 
-        }    
+        // $brand_arr = array_filter($request->brand); // Filter out any empty values
+        // if ($brand_arr) {
+            // $carsQuery->whereIn('company_en', $brand_arr); 
+            $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
+            $models = \DB::table('auct_lots_xml_jp_op')
+            ->where(DB::raw('LOWER(company_en)'), $request->brand)
+            ->groupBy('model_name_en') 
+            ->select('model_name_en')
+            ->get();
+        // }    
+    }
+
+    if($request->model){
+        $carsQuery->where('model_name_en', $request->model); 
     }
     if ($request->tranmission) {
         $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
@@ -797,6 +1010,7 @@ class HomeController extends Controller
             'id' => $car->id,
             'mileage' => $car->mileage,
             'mileage_en' => $car->mileage_en,
+            
         ];
     });
 
@@ -823,32 +1037,36 @@ class HomeController extends Controller
 
     $price_range = $this->getPriceRange();
 
-    $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
 
-    // $jdm_legend_heavy = \DB::table('heavy')
-    // ->where('category', 'JDM Legend')
-    // ->where('make', '!=', '')
-    // ->whereNotNull('make')
-    // ->distinct()
-    // ->pluck('make'); 
 
-    // $jdm_legend_small_heavy=\DB::table('small_heavy')
-    // ->where('category', 'JDM Legend')
-    // ->where('make', '!=', '')
-    // ->whereNotNull('make')
-    // ->distinct()
-    // ->pluck('make');
+    $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
 
-    
+    $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+    $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-    
+    $jdm_brand['car']=$jdm_legend;
+    $jdm_brand['heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
-  
 
     return view('listing', [
         'seo_setting' => $seo_setting,
         'brands' => $brands,
         'cities' => $cities,
+        'jdm_core_brand'=>$jdm_core_brand,
         'features' => $features,
         'cars_array' => $cars_array,
         'listing_ads' => $listing_ads,
@@ -857,15 +1075,26 @@ class HomeController extends Controller
         'price_range' => $price_range,
         'transmission' => $transmission,
         'scores' => $scores,
-        'jdm_legend'=>$jdm_legend,
+        'jdm_legend'=>$jdm_brand,
+        'models'=>$models
         // 'jdm_legend_heavy'=>$jdm_legend_heavy,
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
+    }
+
+    public function getBrandModels(Request $request){
+        $models = \DB::table('auct_lots_xml_jp_op')
+            ->where(DB::raw('LOWER(company_en)'), $request->brand)
+            ->groupBy('model_name_en') 
+            ->select('model_name_en')
+            ->get();
+        return response()->json(['status'=>true,'message'=>$models]);    
     }
     public function top_selling(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
         $brands = Brand::where('status', 'enable')->get();
+        $models=[];
 
 
         DB::enableQueryLog();
@@ -877,13 +1106,13 @@ class HomeController extends Controller
             $carsQuery->where('city_id', $request->location);
         }
 
-
-        if ($request->brand) {
-            $brand_arr = array_filter($request->brand); // Filter out any empty values
-            if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
-            }    
+        if($request->brand_new_cars){
+            $year = date('Y'); 
+             $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
         }
+
+
+      
 
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
@@ -976,7 +1205,7 @@ class HomeController extends Controller
         }
 
         if ($request->search) {
-            if($search!=""){
+            if($request->search!=""){
                 // $carsQuery->whereHas('front_translate', function ($query) use ($request) {
                         $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
             // });
@@ -987,6 +1216,21 @@ class HomeController extends Controller
             //         //   ->orWhere('description', 'like', '%' . $request->search . '%');
             // });
         }
+        
+        if ($request->brand) {
+           
+            $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
+            $models = \DB::table('auct_lots_xml_jp_op')
+            ->where(DB::raw('LOWER(company_en)'), $request->brand)
+            ->groupBy('model_name_en') 
+            ->select('model_name_en')
+            ->get();
+       
+    }
+
+    if($request->model){
+        $carsQuery->where('model_name_en', $request->model); 
+    }
 
         if ($request->sort_by) {
             switch ($request->sort_by) {
@@ -1053,7 +1297,30 @@ class HomeController extends Controller
 
         $price_range = $this->getPriceRange();
 
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+    $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+    $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+    $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+    $jdm_brand['car']=$jdm_legend;
+    $jdm_brand['heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
         return view('top-ratings', [
             'seo_setting' => $seo_setting,
             'brands' => $brands,
@@ -1066,13 +1333,16 @@ class HomeController extends Controller
             'price_range' => $price_range,
             'transmission' => $transmission,
             'scores' => $scores,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'>$jdm_core_brand,
+            'models'=>$models
         ]);
     }
     public function auctionCar(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
         $brands = Brand::where('status', 'enable')->get();
+        $models=[];
 
 
         DB::enableQueryLog();
@@ -1084,6 +1354,27 @@ class HomeController extends Controller
             $carsQuery->where('city_id', $request->location);
         }
 
+        if ($request->brand) {
+            // $brand_arr = array_filter($request->brand); // Filter out any empty values
+            // if ($brand_arr) {
+                // $carsQuery->whereIn('company_en', $brand_arr); 
+                $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
+                $models = \DB::table('auct_lots_xml_jp_op')
+                ->where(DB::raw('LOWER(company_en)'), $request->brand)
+                ->groupBy('model_name_en') 
+                ->select('model_name_en')
+                ->get();
+            // }    
+        }
+    
+        if($request->model){
+            $carsQuery->where('model_name_en', $request->model); 
+        }
+
+        if($request->brand_new_cars){
+            $year = date('Y'); 
+             $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
+        }
 
         if ($request->brand) {
             $brand_arr = array_filter($request->brand); // Filter out any empty values
@@ -1184,7 +1475,7 @@ class HomeController extends Controller
         }
 
         if ($request->search) {
-            if($search!=""){
+            if($request->search!=""){
                 $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
             }
         }
@@ -1255,7 +1546,30 @@ class HomeController extends Controller
 
         $price_range = $this->getPriceRange();
 
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+    $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+    $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+    $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+    $jdm_brand['car']=$jdm_legend;
+    $jdm_brand['heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
         return view('auction-car-marketplace', [
             'seo_setting' => $seo_setting,
             'brands' => $brands,
@@ -1268,16 +1582,18 @@ class HomeController extends Controller
             'price_range' => $price_range,
             'transmission' => $transmission,
             'scores' => $scores,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
+            'models'=>$models
         ]);
     }
     public function new_arrival(Request $request){
+        $models=[];
+
 
         $seo_setting = SeoSetting::where('id', 10)->first();
         $brands = Brand::where('status', 'enable')->get();
 
-
-        DB::enableQueryLog();
         // Initialize the query for cars
         $carsQuery = CarDataJpOp::query();
 
@@ -1288,10 +1604,18 @@ class HomeController extends Controller
 
 
         if ($request->brand) {
-            $brand_arr = array_filter($request->brand); // Filter out any empty values
-            if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
-            }    
+           
+                $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
+                $models = \DB::table('auct_lots_xml_jp_op')
+                ->where(DB::raw('LOWER(company_en)'), $request->brand)
+                ->groupBy('model_name_en') 
+                ->select('model_name_en')
+                ->get();
+           
+        }
+    
+        if($request->model){
+            $carsQuery->where('model_name_en', $request->model); 
         }
 
         if($request->price_range_scale){
@@ -1310,6 +1634,11 @@ class HomeController extends Controller
             if ($transmission_arr) {
                 $carsQuery->whereIn('transmission_en', $transmission_arr); 
             }    
+        }
+
+        if($request->brand_new_cars){
+            $year = date('Y'); 
+             $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
         }
 
         if($request->year){
@@ -1385,7 +1714,7 @@ class HomeController extends Controller
         }
 
         if ($request->search) {
-            if($search!=""){
+            if($request->search!=""){
                 $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
             }
         }
@@ -1412,7 +1741,7 @@ class HomeController extends Controller
 
         // Pagination
         $date=date('Y');
-        $cars = $carsQuery->where('model_year_en',$date)->paginate(12);
+        $cars = $carsQuery->where('new_arrival','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -1456,7 +1785,30 @@ class HomeController extends Controller
 
         $price_range = $this->getPriceRange();
 
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+    $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+    $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+    $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+    $jdm_brand['car']=$jdm_legend;
+    $jdm_brand['heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
         return view('new-arrival', [
             'seo_setting' => $seo_setting,
             'brands' => $brands,
@@ -1469,7 +1821,9 @@ class HomeController extends Controller
             'price_range' => $price_range,
             'transmission' => $transmission,
             'scores' => $scores,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
+            'models'=>$models
         ]);
     }
 
@@ -1590,20 +1944,32 @@ class HomeController extends Controller
         $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
 
         $delivery_charges = DeliveryCharge::all();
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-        // $jdm_legend_heavy = \DB::table('heavy')
-        // ->where('category', 'JDM Legend')
-        // ->where('make', '!=', '')
-        // ->whereNotNull('make')
-        // ->distinct()
-        // ->pluck('make');    
-        // $jdm_legend_small_heavy=\DB::table('small_heavy')
-        // ->where('category', 'JDM Legend')
-        // ->where('make', '!=', '')
-        // ->whereNotNull('make')
-        // ->distinct()
-        // ->pluck('make');
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
 
 
         return view('listing_detail', [
@@ -1614,7 +1980,8 @@ class HomeController extends Controller
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
             'process_data_en'=>$process_data_en,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -1682,130 +2049,142 @@ class HomeController extends Controller
         $price_range_scale=$request->input('price_range_scale');
         $transmission=$request->input('transmission');
         $search=$request->input('search');
+        $brand_new_cars=$request->input('brand_new_cars');
+        $models=[];
         // Initialize the query for cars
-        $carsQuery = CarDataJpOp::query();
-     
-        $blogCars = Cars::when($jdmBrand, function ($query, $jdmBrand) {
-                return $query->where('make', $jdmBrand);
-            })
-            ->when($jdmModel, function ($query, $jdmModel) {
-                $brand_arr = array_filter($jdmModel);
-                if ($brand_arr) {
-                    return $query->whereIn('model', $brand_arr);
-                }  
-            })
-            ->when($search, function ($query, $search) {
-                return $query->where('model', 'like', '%' . $search . '%');
-            })
-            ->when($jdmModel, function ($query, $jdmModel) {
-                $brand_arr = array_filter($jdmModel);
-                if ($brand_arr) {
-                    return $query->whereIn('model', $brand_arr);
-                }  
-            })
-            ->when($jdmYear, function ($query, $jdmYear) {
-                $yom_arr = array_filter($jdmYear);
-                if ($yom_arr) {
-                    return $query->whereIn('yom', $yom_arr);
-                } 
-            })
-            ->when($price_range_scale, function ($query) use ($price_range_scale) {
-                if($price_range_scale !=""){  
-                    $parts = explode('-', $price_range_scale);
-                    $startValue = trim($parts[0]);
-                    $endValue = trim($parts[1]);
-                    $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                        return $q->whereBetween('price', [$startValue, $endValue]);
-                    });
-                }
-            })
-            ->when($transmission, function ($query, $transmission) {
-                $transmission_arr = array_filter($transmission);
-                if ($transmission_arr) {
-                    return $query->whereIn('transmission', $transmission_arr);
-                } 
-            })
-            ->select('model','price','image','id','make');
+        // $carsQuery = CarDataJpOp::query();
       
             // Query for Blog table
-        $heavyCars = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
-            return $query->where('make', $jdmBrand);
-        })
-        ->when($jdmModel, function ($query, $jdmModel) {
-            $brand_arr = array_filter($jdmModel);
-            if ($brand_arr) {
-                return $query->whereIn('model', $brand_arr);
-            }  
-        })
-        ->when($jdmYear, function ($query, $jdmYear) {
-            $yom_arr = array_filter($jdmYear);
-            if ($yom_arr) {
-                return $query->whereIn('yom', $yom_arr);
-            } 
-        })
-        ->when($transmission, function ($query, $transmission) {
-            $transmission_arr = array_filter($transmission);
-            if ($transmission_arr) {
-                return $query->whereIn('transmission', $transmission_arr);
-            } 
-        })
-        ->when($price_range_scale, function ($query) use ($price_range_scale) {
-            if($price_range_scale !=""){  
-                $parts = explode('-', $price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
-                $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                    return $q->whereBetween('price', [$startValue, $endValue]);
-                });
-            }
-        })
-        ->when($search, function ($query, $search) {
-            return $query->where('model', 'like', '%' . $search . '%');
-        })
-        ->select('model','price','image','id','make');
+            $blogCars = Cars::when($jdmBrand, function ($query, $jdmBrand) {
+                $carMakes=Cars::where('make',$jdBrand)->distinct()
+                ->pluck('model');
+                    return $query->where('make', $jdmBrand);
+                })
+                ->when($jdmModel, function ($query, $jdmModel) {
+                    // $brand_arr = array_filter($jdmModel);
+                    // if ($brand_arr) {
+                        return $query->where('model', $jdmModel);
+                    // }  
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('model', 'like', '%' . $search . '%');
+                })
+                ->when($jdmYear, function ($query, $jdmYear) {
+                    // $yom_arr = array_filter($jdmYear);
+                    if ($jdmYear) {
+                        return $query->where('yom', $jdmYear);
+                    } 
+                })
+                ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    if($price_range_scale !=""){  
+                        $parts = explode('-', $price_range_scale);
+                        $startValue = trim($parts[0]);
+                        $endValue = trim($parts[1]);
+                        $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                            return $q->whereBetween('price', [$startValue, $endValue]);
+                        });
+                    }
+                })
+                ->when($transmission, function ($query, $transmission) {
+                    $transmission_arr = array_filter($transmission);
+                    if ($transmission_arr) {
+                        return $query->whereIn('transmission', $transmission_arr);
+                    } 
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->select('model','price','image','id','make','title');
+      
+            // Query for Heavy table
+            $heavyCars = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
+                return $query->where('make', $jdmBrand);
+                })
+                ->when($jdmModel, function ($query, $jdmModel) {
+                    // $brand_arr = array_filter($jdmModel);
+                    // if ($brand_arr) {
+                        return $query->where('model', $jdmModel);
+                    // }  
+                })
+                ->when($jdmYear, function ($query, $jdmYear) {
+                    // $yom_arr = array_filter($jdmYear);
+                    if ($jdmYear) {
+                        return $query->where('yom', $jdmYear);
+                    } 
+                })
+                ->when($transmission, function ($query, $transmission) {
+                    $transmission_arr = array_filter($transmission);
+                    if ($transmission_arr) {
+                        return $query->whereIn('transmission', $transmission_arr);
+                    } 
+                })
+                ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    if($price_range_scale !=""){  
+                        $parts = explode('-', $price_range_scale);
+                        $startValue = trim($parts[0]);
+                        $endValue = trim($parts[1]);
+                        $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                            return $q->whereBetween('price', [$startValue, $endValue]);
+                        });
+                    }
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('model', 'like', '%' . $search . '%');
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->select('model','price','image','id','make','title');
 
-        // Query for Heavy table
-        $smallHeavyCars = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
-            return $query->where('make', $jdmBrand);
-        })
-        ->when($jdmModel, function ($query, $jdmModel) {
-            $brand_arr = array_filter($jdmModel);
-            if ($brand_arr) {
-                return $query->whereIn('model', $brand_arr);
-            }  
-        })
-        ->when($jdmYear, function ($query, $jdmYear) {
-            $yom_arr = array_filter($jdmYear);
-            if ($yom_arr) {
-                return $query->whereIn('yom', $yom_arr);
-            }  
-        })
-        ->when($price_range_scale, function ($query) use ($price_range_scale) {
-            if($price_range_scale !=""){  
-                $parts = explode('-', $price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
-                $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                    return $q->whereBetween('price', [$startValue, $endValue]);
-                });
-            }
-        })
-        ->when($transmission, function ($query, $transmission) {
-            $transmission_arr = array_filter($transmission);
-            if ($transmission_arr) {
-                return $query->whereIn('transmission', $transmission_arr);
-            } 
-        })
-        ->when($search, function ($query, $search) {
-            return $query->where('model', 'like', '%' . $search . '%');
-        })
-        ->select('model','price','image','id','make');
+            // Query for Small Heavy table
+            $smallHeavyCars = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
+                return $query->where('make', $jdmBrand);
+                })
+                ->when($jdmModel, function ($query, $jdmModel) {
+                    // $brand_arr = array_filter($jdmModel);
+                    // if ($brand_arr) {
+                        return $query->where('model', $jdmModel);
+                    // }  
+                })
+                ->when($jdmYear, function ($query, $jdmYear) {
+                    // $yom_arr = array_filter($jdmYear);
+                    if ($jdmYear) {
+                        return $query->where('yom', $jdmYear);
+                    }  
+                })
+                ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    if($price_range_scale !=""){  
+                        $parts = explode('-', $price_range_scale);
+                        $startValue = trim($parts[0]);
+                        $endValue = trim($parts[1]);
+                        $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                            return $q->whereBetween('price', [$startValue, $endValue]);
+                        });
+                    }
+                })
+                ->when($transmission, function ($query, $transmission) {
+                    $transmission_arr = array_filter($transmission);
+                    if ($transmission_arr) {
+                        return $query->whereIn('transmission', $transmission_arr);
+                    } 
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('model', 'like', '%' . $search . '%');
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->select('model','price','image','id','make','title');
 
 
 
 
 
-        // Apply filters based on request parameters
+       
+                // Apply filters based on request parameters
         if ($request->location) {
             $carsQuery->where('city_id', $request->location);
         }
@@ -1822,12 +2201,7 @@ class HomeController extends Controller
         }
 
 
-        if ($request->brand) {
-            $brand_arr = array_filter($request->brand); // Filter out any empty values
-            if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
-            }    
-        }
+  
         if ($request->transmission) {
             $transmission_arr = array_filter($request->transmission); // Filter out any empty values
             if ($transmission_arr) {
@@ -1903,6 +2277,40 @@ class HomeController extends Controller
     ->orderBy('model')
     ->distinct()
     ->paginate(12);
+
+
+    if($request->brand){
+        
+                $carsMakes = Cars::when($jdmBrand, function ($query, $jdmBrand) {
+                    return $query->where('make', $jdmBrand);
+                })
+                ->distinct()
+                ->pluck('model');
+
+        // Fetch distinct makes from Heavy table
+        $heavyMakes = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
+                    return $query->where('make', $jdmBrand);
+                })
+                ->distinct()
+                ->pluck('model');
+
+        // Fetch distinct makes from Small Heavy table
+        $smallHeavyMakes = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
+                        return $query->where('make', $jdmBrand);
+                    })
+                    ->distinct()
+                    ->pluck('model');
+
+                    $models = $carsMakes->merge($heavyMakes)
+                    ->merge($smallHeavyMakes)
+                    ->unique()
+                    ->values();                   
+
+    }
+ 
+
+
+
     
     // Pagination
     // $cars = $carsQuery->paginate(12);
@@ -1912,12 +2320,15 @@ class HomeController extends Controller
     // $car_image=$this->last_image($car->pictures);
         return [
             'company_en' => $car->make,
-            'model_name_en' => $car->model,
+            'model_name_en' => $car->title,
             'start_price_num' => $car->price,
             'picture' =>$car->image,
             'id' => $car->id,
         ];
     });
+
+
+
 
  
 
@@ -1964,7 +2375,36 @@ class HomeController extends Controller
         GROUP BY transmission
         HAVING total_count > 0'
     );
+    $jdm_core_brand = Brand::where('status', 'enable')->get();
 
+    $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                 ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+    $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+    $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+
+
+    $jdm_brand['car']=$jdm_legend;
+    $jdm_brand['heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+    
 
     return view('jdm_stock_all', [
         'seo_setting' => $seo_setting,
@@ -1976,7 +2416,10 @@ class HomeController extends Controller
         'brand_count' => $models,
         'price_range' => $price_range,
         'transmission' => $transmissions,
-        'jdm_legend'=>$jdm_legend,
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand,
+        'models'=>$models
+
     ]);
     }
 
@@ -1994,20 +2437,34 @@ class HomeController extends Controller
         $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
 
         $delivery_charges = DeliveryCharge::all();
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-        // $jdm_legend_heavy = \DB::table('heavy')
-        // ->where('category', 'JDM Legend')
-        // ->where('make', '!=', '')
-        // ->whereNotNull('make')
-        // ->distinct()
-        // ->pluck('make');    
-        // $jdm_legend_small_heavy=\DB::table('small_heavy')
-        // ->where('category', 'JDM Legend')
-        // ->where('make', '!=', '')
-        // ->whereNotNull('make')
-        // ->distinct()
-        // ->pluck('make');
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                    ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
 
 
         return view('auction-listing', [
@@ -2018,7 +2475,8 @@ class HomeController extends Controller
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
             'process_data_en'=>$process_data_en,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -2035,19 +2493,50 @@ class HomeController extends Controller
         // Check which one exists
         $car = $blogCar ?? $heavyCar ?? $smallHeavyCar;
 
+
+ 
+
         // echo json_encode($car->seo_title);die();
         
         $listing_ads = AdsBanner::where('position_key', 'listing_detail_page_banner')->first();
     
 
         $delivery_charges = DeliveryCharge::all();
-        $jdm_legend = Brand::where('status', 'enable')->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                    ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
     
         return view('jdm-stock-all-listing', [
             'car' => $car,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
-            'jdm_legend'=>$jdm_legend,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     
     }
@@ -2129,7 +2618,9 @@ class HomeController extends Controller
     public function send_message_to_company(ContactMessageRequest $request){
         // MailHelper::setMailConfig();
 
+        // echo json_encode($request->all());die();
         $template = EmailTemplate::find(2);
+
         $message = $template->description;
         $subject = $template->subject;
         $message = str_replace('{{user_name}}',$request->name,$message);
@@ -2138,8 +2629,23 @@ class HomeController extends Controller
         $message = str_replace('{{message_subject}}',$request->subject,$message);
         $message = str_replace('{{message}}',$request->message,$message);
 
+
+      
+
         // Mail::to(env('MAIL_FROM_ADDRESS'))->send(new SendContactMessage($message,$subject, $request->email, $request->name));
         Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name));
+        $Enquiry=new VehicleEnquiry();
+        $Enquiry->name=$request->name;
+        $Enquiry->email=$request->email;
+        $Enquiry->phone=$request->phone;
+        $Enquiry->subject=$request->subject;
+        $Enquiry->make=$request->vehicle_brand;
+        $Enquiry->model=$request->vehicle_model;
+        $Enquiry->commission=$request->commission;
+        $Enquiry->delivery_charge=$request->delivery_charge;
+        $Enquiry->total_car_price=$request->total_car_price;
+        $Enquiry->message=$request->message;
+        $Enquiry->save();
 
         $notification= trans('translate.Your message has send successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');

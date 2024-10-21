@@ -123,6 +123,9 @@
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Top Sell') }}
                                                 </th>
+                                                <th class="crancy-table__column-2 crancy-table__h2 sorting">
+                                                    {{ __('translate.New Arrival') }}
+                                                </th>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Date and time') }}
@@ -265,6 +268,10 @@
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                     <input type="checkbox" class="form-control top-sell-checkbox-class" data-id="{{$commission->id}}"
                                                      {{$commission->top_sell =='1' ? 'checked' : ''}} >
+                                                    </td>
+                                                    <td class="crancy-table__column-2 crancy-table__data-2">
+                                                    <input type="checkbox" class="form-control new-arrival-checkbox-class" data-id="{{$commission->id}}"
+                                                     {{$commission->new_arrival =='1' ? 'checked' : ''}} >
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ $commission->datetime }}</h4>
@@ -494,6 +501,7 @@
          const deleteButton = document.querySelector('#delete-model');
          // const topSellButton = document.querySelector('#top-sell-change');
          const topSellButtons = document.querySelectorAll('.top-sell-checkbox-class');
+         const newArrivalButtons = document.querySelectorAll('.new-arrival-checkbox-class');
 
          // Add event listener to the master checkbox
          masterCheckbox.addEventListener('change', function() {
@@ -506,26 +514,45 @@
 
          topSellButtons.forEach(function(topSellButton) {
                 topSellButton.addEventListener('change', function() {
-              
+                // Determine if the checkbox is checked
+                var check = this.checked ? 1 : 0;
 
-        // Determine if the checkbox is checked
-        var check = this.checked ? 1 : 0;
+                // Use jQuery to get the data-id
+                var selectedId = $(this).data('id');
 
-        // Use jQuery to get the data-id
-        var selectedId = $(this).data('id');
+                $.ajax({
+                    url: "{{ route('admin.change_top_sell') }}",
+                    type: "POST",
+                    data: { selectedIds: selectedId, check: check },
+                    beforeSend: function(data) {
+                        console.log("loading");
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+});
+newArrivalButtons.forEach(function(topSellButton) {
+                topSellButton.addEventListener('change', function() {
+                // Determine if the checkbox is checked
+                var check = this.checked ? 1 : 0;
 
-        $.ajax({
-            url: "{{ route('admin.change_top_sell') }}",
-            type: "POST",
-            data: { selectedIds: selectedId, check: check },
-            beforeSend: function(data) {
-                console.log("loading");
-            },
-            success: function(response) {
-                console.log(response);
-            }
-        });
-    });
+                // Use jQuery to get the data-id
+                var selectedId = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ route('admin.change_new_arrivals') }}",
+                    type: "POST",
+                    data: { selectedIds: selectedId, check: check },
+                    beforeSend: function(data) {
+                        console.log("loading");
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
 });
 
 

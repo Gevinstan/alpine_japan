@@ -71,7 +71,7 @@
                                                         <h4 class="crancy-table__product-title">{{ $delivery_charge->rate }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <a href="{{ route('admin.delivery-charges.edit', $delivery_charge->id ) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
+                                                    <a href="{{ route('admin.delivery-charges.edit', $delivery_charge->id ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach 

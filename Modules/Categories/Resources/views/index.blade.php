@@ -100,8 +100,8 @@
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <a href="{{ route('admin.categories.edit', ['category' => $categories->id] ) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
-                                                        <a onclick="itemDeleteConfrimation({{ $categories->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
+                                                    <a href="{{ route('admin.categories.edit', ['category' => $categories->id] ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>
+                                                        <a onclick="itemDeleteConfrimation({{ $categories->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('translate.Delete') }}"><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach 

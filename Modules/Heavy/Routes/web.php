@@ -13,6 +13,9 @@ use Modules\Heavy\Http\Controllers\HeavyController;
 
 Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO','auth:admin']],function (){
     Route::resource('heavy', HeavyController::class);
+    Route::post('store-heavy-comission', [HeavyController::class,'storeHeavyComission'])->name('store-heavy-comission');
+    Route::post('new-arrival-cars', [HeavyController::class,'newArrivalCars'])->name('new-arrival-cars');
+    
 });
 Route::post('delete-heavy', [HeavyController::class,'deleteHeavy'])->name('delete-heavy');
-
+    

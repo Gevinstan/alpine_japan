@@ -35,6 +35,23 @@ class HeavyController extends Controller
         return view('heavy::create',compact('category','brands','models'));
     }
 
+    public function storeHeavyComission(Request $request){
+        Heavy::where('is_active', 1)
+        ->whereIn('id',$request->selectedIds)
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function newArrivalCars(Request $request){
+        Heavy::where('is_active', 1)
+        ->where('id',$request->selectedIds)
+        ->update(['new_arrival' => $request->check]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+
     /**
      * Store a newly created resource in storage.
      * @param Request $request

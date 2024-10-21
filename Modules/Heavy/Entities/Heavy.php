@@ -38,6 +38,8 @@ class Heavy extends Model
         'hooks',
         'boom',
         'jib',
-        'outrigger'
+        'outrigger',
+        'commision_value',
+        'new_arrival'
       ];
 }

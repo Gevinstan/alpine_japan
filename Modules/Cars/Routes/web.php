@@ -15,6 +15,8 @@ use Modules\Cars\Http\Controllers\CarsController;
 */
 
 Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO','auth:admin']],function (){
-    Route::resource('car', CarsController::class);
+    Route::resource('cars', CarsController::class);
+    Route::post('store-car-comission', [CarsController::class,'storeCarComission'])->name('store-car-comission');
+    Route::post('blog-new-arrival-cars', [CarsController::class,'newArrivalCars'])->name('blog-new-arrival-cars');
 });
 Route::post('delete-car', [CarsController::class,'deleteCar'])->name('delete-car');

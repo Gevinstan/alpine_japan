@@ -14,8 +14,13 @@ use App\Models\User;
 use App\Models\Wishlist;
 use App\Models\Review;
 use App\Rules\Captcha;
-use Hash, Image, File, Str;
+use Hash, Image, File, Str, Session;
 use Modules\Car\Entities\Car;
+use Modules\Cars\Entities\Cars;
+use Modules\Heavy\Entities\Heavy;
+use Modules\SmallHeavy\Entities\SmallHeavy;
+use Modules\Brand\Entities\Brand;
+use DB;
 
 class ProfileController extends Controller
 {
@@ -27,6 +32,33 @@ class ProfileController extends Controller
 
     public function dashboard(Request $request)
     {
+
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
         $user = Auth::guard('web')->user();
 
         $cars = Car::where('agent_id', $user->id)->get()->take(10);
@@ -37,15 +69,50 @@ class ProfileController extends Controller
 
         $total_wishlist = Wishlist::where('user_id', $user->id)->count();
 
-        return view('profile.dashboard', ['user' => $user, 'cars' => $cars, 'total_car' => $total_car, 'total_featured_car' => $total_featured_car, 'total_wishlist' => $total_wishlist]);
+        return view('profile.dashboard', ['user' => $user, 
+        'cars' => $cars, 
+        'total_car' => $total_car, 
+        'total_featured_car' => $total_featured_car, 
+        'total_wishlist' => $total_wishlist,
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand]);
     }
 
     public function edit(Request $request)
     {
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+        
         $user = Auth::guard('web')->user();
 
         return view('profile.edit', [
             'user' => $user,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -92,7 +159,35 @@ class ProfileController extends Controller
 
     public function change_password(Request $request)
     {
-        return view('profile.change_password');
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+        return view('profile.change_password', [
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand]);
     }
 
     public function update_password(Request $request)
@@ -163,22 +258,79 @@ class ProfileController extends Controller
     }
 
     public function orders(){
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
 
         $user = Auth::guard('web')->user();
 
         $histories = SubscriptionHistory::where('user_id', $user->id)->latest()->get();
 
-        return view('profile.orders', ['histories' => $histories, 'user' => $user]);
+        return view('profile.orders', ['histories' => $histories, 'user' => $user,
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand]);
     }
 
 
     public function reviews(){
 
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
         $user = Auth::guard('web')->user();
 
         $reviews = Review::with('car.dealer')->latest()->where('user_id', $user->id)->get();
 
-        return view('profile.reviews', ['reviews' => $reviews]);
+        return view('profile.reviews', ['reviews' => $reviews,
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand]);
     }
 
     public function store_review(Request $request){
@@ -246,6 +398,33 @@ class ProfileController extends Controller
 
     public function wishlists(){
 
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
         $user = Auth::guard('web')->user();
         $wishlists = Wishlist::where(['user_id' => $user->id])->get();
         $wishlist_arr = array();
@@ -259,7 +438,10 @@ class ProfileController extends Controller
         })->where(['status' => 'enable', 'approved_by_admin' => 'approved'])->whereIn('id', $wishlist_arr)->get();
 
 
-        return view('profile.wishlists', ['cars' => $cars]);
+        return view('profile.wishlists', ['cars' => $cars,
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand
+        ]);
 
     }
 

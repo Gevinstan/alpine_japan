@@ -181,14 +181,14 @@
                                 <div class="get-in-touch-form-inner">
                                     
                                     <input type="text" class="form-control" id="exampleFormControlInput2"
-                                        placeholder="{{ __('Email*') }}" name="phone" value="{{ old('phone') }}">
+                                        placeholder="{{ __('Phone Number*') }}" name="phone" value="{{ old('phone') }}">
                                 </div>
                             </div>
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
                                     
                                     <input type="email" class="form-control" id="exampleFormControlInput4"
-                                        placeholder="{{ __('Phone Number*') }}" value="{{ old('email') }}" name="email">
+                                        placeholder="{{ __('Email*') }}" value="{{ old('email') }}" name="email">
                                 </div>
                                 <div class="get-in-touch-form-inner">
                                     

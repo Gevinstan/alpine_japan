@@ -17,6 +17,8 @@ use Modules\Service\Entities\Service;
 use Modules\Blog\Entities\Blog;
 use File;
 use Carbon\Carbon;
+use Modules\Imports\Entities\CarDataJpOp;
+use App\Models\VehicleEnquiry;
 
 class DashboardController extends Controller
 {
@@ -58,16 +60,22 @@ class DashboardController extends Controller
         // $total_car = Car::count();
         // $awaiting_car = Car::where('approved_by_admin', 'pending')->count();
         // $featured_car = Car::where('is_featured', 'enable')->count();;
-        // $total_user = User::where('status', 'enable')->count();
+        $new_cars=CarDataJpOp::where('new_arrival','1')->count();
+        $total_user = User::where('status', 'enable')->count();
+        $enquiry=VehicleEnquiry::count();
+        $enquiry_list=CarDataJpOp::where('new_arrival','1')->paginate(10);
 
         // $recent_cars = Car::with('translate','dealer')->get()->take(10);
 
         return view('admin.dashboard', 
-        ['data' => $data, 'lable' => $lable
+        ['data' => $data, 'lable' => $lable,
         //  'awaiting_car' => $awaiting_car, 
         //  'featured_car' => $featured_car, 
         //  'total_car' => $total_car, 
-        //  'total_user' => $total_user, 
+         'total_user' => $total_user, 
+         'new_arrival'=>$new_cars,
+         'enquiry'=>$enquiry,
+         'enquiry_list'=>$enquiry_list
         //  'recent_cars' => $recent_cars
          ]
         );

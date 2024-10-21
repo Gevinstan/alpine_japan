@@ -132,8 +132,9 @@
 
                                     <div class="input-group">
                                     <input type="text" class="form-control position-relative" id="outside_form_search" name="search"
-                                    placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                        <span class="input-group-append position-absolute" style="Padding-top:14px;padding-left:340px">
+                                            placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
+                                        <span class="input-group-append position-absolute"
+                                         style="right: 16px;top: 16px;">
                                             <a href="javascript:void(0);" id="outside_form_btn">
                                             <i class="bi bi-search"></i></a></span>
                                     </div>
@@ -203,7 +204,7 @@
                                             @if($type == 'car')
                                             <img src="{{ asset('cars/' . $car['picture']) }}" alt="thumb">
                                             @elseif ($type == 'heavy')
-                                            <img src="{{ asset('Heavy/' . $car['picture']) }}" alt="thumb">
+                                            <img src="{{ asset('heavy_photos/'.$car['id'].'/'.$car['picture']) }}" alt="thumb">
                                             @else
                                              <img src="{{ asset('Small-Heavy/' . $car['picture']) }}" alt="thumb">
                                             @endif
@@ -213,7 +214,7 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
+                                                          
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -223,7 +224,7 @@
                                                             </svg>
 
                                                                 </span>
-                                                            </a>
+                                                        
 
                                                         @endif
 
@@ -239,9 +240,9 @@
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
                                                     <span> @if(session('front_lang')=='en')
-                                                                {{ $car['model_name'] }}
+                                                                {{ $car['make'] }}
                                                             @else
-                                                            {{ $car['model_name'] }}
+                                                            {{ $car['make'] }}
                                                             @endif
                                                     </span>
                                                     <p>

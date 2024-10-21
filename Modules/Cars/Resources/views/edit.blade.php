@@ -25,7 +25,7 @@
                     <div class="crancy-body">
                         <!-- Dashboard Inner -->
                         <div class="crancy-dsinner">
-                            <form action="{{ route('admin.car.update',$cars->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.cars.update',$cars->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 

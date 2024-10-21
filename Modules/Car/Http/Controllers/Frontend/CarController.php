@@ -17,10 +17,15 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\Wishlist;
 use Modules\Subscription\Entities\SubscriptionHistory;
+use Modules\Models\Entities\ModelsCars;
+use Modules\Heavy\Entities\Heavy;
+use Modules\SmallHeavy\Entities\SmallHeavy;
+use Modules\Cars\Entities\Cars;
+
 
 use Modules\Car\Http\Requests\CarRequest;
 
-use Auth, Image, File, Str;
+use Auth, Image, File, Str,DB,Session;
 
 class CarController extends Controller
 {
@@ -30,6 +35,7 @@ class CarController extends Controller
      */
     public function index()
     {
+       
         $user = Auth::guard('web')->user();
 
         $cars = Car::where('agent_id', $user->id)->paginate(15);
@@ -39,7 +45,37 @@ class CarController extends Controller
 
     public function select_car_purpose()
     {
-        return view('car::frontend.select_car_purpose');
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+        return view('car::frontend.select_car_purpose',[
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
+        ]);
     }
 
 

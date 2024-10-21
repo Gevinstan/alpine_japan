@@ -25,14 +25,14 @@
                                     <div class="crancy-ecom-card crancy-ecom-card__v2">
                                         <div class="crancy-ecom-card__heading">
                                             <div class="crancy-ecom-card__icon">
-                                                <h4 class="crancy-ecom-card__title">{{ __('translate.Awaiting Car') }} </h4>
+                                                <h4 class="crancy-ecom-card__title">{{ __('translate.Total Enquries') }} </h4>
                                             </div>
 
                                         </div>
                                         <div class="crancy-ecom-card__content">
                                             <div class="crancy-ecom-card__camount">
                                                 <div class="crancy-ecom-card__camount__inside">
-                                                   {{-- <h3 class="crancy-ecom-card__amount">{{ $awaiting_car }}</h3>--}}
+                                                  <h3 class="crancy-ecom-card__amount">{{ $enquiry }}</h3>
 
                                                 </div>
 
@@ -48,37 +48,14 @@
                                     <div class="crancy-ecom-card crancy-ecom-card__v2">
                                         <div class="crancy-ecom-card__heading">
                                             <div class="crancy-ecom-card__icon">
-                                                <h4 class="crancy-ecom-card__title">{{ __('translate.Featured Car') }} </h4>
+                                               <h4 class="crancy-ecom-card__title">{{ __('translate.New Arrival') }} </h4>
                                             </div>
 
                                         </div>
                                         <div class="crancy-ecom-card__content">
                                             <div class="crancy-ecom-card__camount">
                                                 <div class="crancy-ecom-card__camount__inside">
-                                                  {{--  <h3 class="crancy-ecom-card__amount">{{ $featured_car }}</h3>--}}
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- End Progress Card -->
-                                </div>
-
-                                <div class="col-lg-3 col-12 mg-top-30">
-                                    <!-- Progress Card -->
-                                    <div class="crancy-ecom-card crancy-ecom-card__v2">
-                                        <div class="crancy-ecom-card__heading">
-                                            <div class="crancy-ecom-card__icon">
-                                               <h4 class="crancy-ecom-card__title">{{ __('translate.Total Car') }} </h4>
-                                            </div>
-
-                                        </div>
-                                        <div class="crancy-ecom-card__content">
-                                            <div class="crancy-ecom-card__camount">
-                                                <div class="crancy-ecom-card__camount__inside">
-                                                {{--  <h3 class="crancy-ecom-card__amount">{{ $total_car }}</h3>--}}
+                                                  <h3 class="crancy-ecom-card__amount">{{ $new_arrival }}</h3>
 
                                                 </div>
 
@@ -101,7 +78,7 @@
                                         <div class="crancy-ecom-card__content">
                                             <div class="crancy-ecom-card__camount">
                                                 <div class="crancy-ecom-card__camount__inside">
-                                                {{--   <h3 class="crancy-ecom-card__amount">{{ $total_user }}</h3> --}}
+                                                  <h3 class="crancy-ecom-card__amount">{{ $total_user }}</h3> 
 
                                                 </div>
 
@@ -126,13 +103,6 @@
                                     <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch d-flex items-center justify-between create_new_btn_box">
                                         <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box">
                                             <h4 class="crancy-product-card__title">{{ __('translate.Recent Cars') }}</h4>
-
-                                            <a href="" class="crancy-btn "><span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                                    <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                    <path d="M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                </svg>
-                                                </span> {{ __('translate.Create New') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -145,10 +115,6 @@
                                         <thead class="crancy-table__head">
                                             <tr>
 
-                                                <th class="crancy-table__column-2 crancy-table__h2 sorting">
-                                                    {{ __('translate.Serial') }}
-                                                </th>
-
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
                                                     {{ __('translate.Title') }}
                                                 </th>
@@ -156,24 +122,18 @@
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
                                                     {{ __('translate.Brand') }}
                                                 </th>
+                                                <th class="crancy-table__column-2 crancy-table__h2 sorting">
+                                                    {{ __('translate.Maker') }}
+                                                </th>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting" >
                                                     {{ __('translate.Price') }}
                                                 </th>
-
-                                                <th class="crancy-table__column-2 crancy-table__h2 sorting" >
-                                                    {{ __('translate.Dealer') }}
-                                                </th>
-
-                                                <th class="crancy-table__column-3 crancy-table__h3 sorting" >
-                                                    {{ __('translate.Action') }}
-                                                </th>
-
                                             </tr>
                                         </thead>
                                         <!-- crancy Table Body -->
                                         <tbody class="crancy-table__body">
-                                        {{-- @foreach ($recent_cars as $index => $car)
+                                        @foreach ($enquiry_list as $index => $car)
                                                 <tr class="odd">
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
@@ -181,58 +141,23 @@
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title">{{ html_decode($car->translate->title) }}</h4>
+                                                        <h4 class="crancy-table__product-title">{{ html_decode($car->company_en) }}</h4>
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title"></h4>
+                                                        <h4 class="crancy-table__product-title">{{ html_decode($car->company_en) }}</h4>
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">
-                                                        @if ($car->offer_price)
-                                                                {{ currency($car->offer_price) }}
-                                                            @else
-                                                                {{ currency($car->regular_price) }}
-                                                            @endif
+                                                      
+                                                                {{ currency($car->start_price_num) }}
+                                                          
 
                                                         </h4>
                                                     </td>
-
-                                                    <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title"><a href="{{ route('admin.user-show', $car->agent_id) }}">{{ html_decode($car?->dealer?->name) }}</a></h4>
-                                                    </td>
-
-
-
-                                                    <td class="crancy-table__column-2 crancy-table__data-2">
-
-                                                        <div class="dropdown">
-                                                            <button class="crancy-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                {{ __('translate.Action') }}
-                                                            </button>
-                                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-
-                                                                <li>
-                                                                    <a href="{{ route('admin.car.edit', ['car' => $car->id, 'lang_code' => admin_lang()] ) }}" class=" dropdown-item"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
-
-                                                                </li>
-
-                                                                <li>
-                                                                    <a onclick="itemDeleteConfrimation({{ $car->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="dropdown-item"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
-                                                                </li>
-
-
-                                                                <li>
-                                                                    <a href="{{ route('admin.car-gallery', $car->id) }}" class=" dropdown-item"><i class="fas fa-images"></i> {{ __('translate.Gallery') }}</a>
-
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
-                                                    </td>
                                                 </tr>
-                                            @endforeach --}}
+                                            @endforeach 
 
                                         </tbody>
                                         <!-- End crancy Table Body -->

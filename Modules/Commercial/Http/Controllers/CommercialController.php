@@ -11,6 +11,7 @@ use File;
 use Yajra\DataTables\Facades\DataTables;
 use Modules\Brand\Entities\Brand;
 use Modules\Models\Entities\ModelsCars;
+use DB;
 
 class CommercialController extends Controller
 {
@@ -239,5 +240,15 @@ class CommercialController extends Controller
         Commercial::whereIn('id', $ids)->delete();
     
         return response()->json(['success' => true, 'message' => 'Records deleted successfully.']);  
+    }
+    public function newArrivalCars(Request $request){
+        // DB::enableQueryLog();
+        Commercial::where('is_active', 1)
+        ->where('id',$request->selectedIds)
+        ->update(['new_arrival' => $request->check]);
+        // dd(DB::getQueryLog());
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
 }

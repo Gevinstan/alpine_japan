@@ -98,6 +98,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="BrandAccordian">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-brandAccordian" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Brand
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-brandAccordian" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        @foreach($brands as $brand)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                    <div class="form-check me-3">
+                                                    <input class="form-check-input brand-search" name="brand" type="radio" value="{{$brand->slug}}"
+                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label">
+                                                            {{ $brand->name }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="ModelAccordian">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-ModelAccordian" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Model
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-ModelAccordian" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                        @foreach($models as $brand)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                    <div class="form-check me-3 model-div">
+                                                    <input class="form-check-input brand-search" name="model" type="radio" value="{{$brand->model_name_en}}"
+                                                        {{ in_array(trim($brand->model_name_en), (array)request('model', [])) ? 'checked' : '' }}>
+                                                        <label class="form-check-label">
+                                                            {{ $brand->model_name_en }}
+                                                        </label>
+                                                    </div>
+                                            </div>
+                                            @endforeach 
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample2">
@@ -114,7 +168,8 @@
                                                         Brand New Cars
                                                     </label>
 
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                                    <input class="form-check-input" type="checkbox" id="brand_new_cars" name="brand_new_cars"
+                                                    {{ request('brand_new_cars') ? 'checked' : '' }}>
 
                                             </div>
 
@@ -128,7 +183,7 @@
                                             </div>
 
                                             <h6 style="padding-top:30px">Popular</h6>
-                                            @foreach($brand_count as $brand)
+                                           {{-- @foreach($brand_count as $brand)
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
@@ -138,15 +193,11 @@
                                                         <label class="form-check-label">
                                                             {{ $brand->company_en }} ({{ $brand->count }})
 
-                                                            <!-- @if(session('front_lang')=='en')
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
-                                                            @else
-                                                            {{ $brand->company}} ({{ $brand->count }})
-                                                            @endif -->
+                                                          
                                                         </label>
                                                     </div>
                                             </div>
-                                            @endforeach
+                                            @endforeach --}}
                                             <h6 style="color:#038ffc;">Show More Brands</h6>
                                         </div>
                                     </div>
@@ -397,7 +448,7 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
+                                                           
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -407,7 +458,7 @@
                                                             </svg>
 
                                                                 </span>
-                                                            </a>
+                                                           
 
                                                         @endif
 
@@ -732,6 +783,16 @@ endRange.addEventListener('input', () => {
             $("#start_year").val(parseInt($(this).val()));
             // form.submit();
         })
+
+        $("#brand_new_cars").on('change',function(e){
+            e.preventDefault();
+            form.submit();
+        })
+        $(".brand-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();
+           
+        }) 
 
         // form.on('submit', function(e) {
             // alert($("#age_output").val())

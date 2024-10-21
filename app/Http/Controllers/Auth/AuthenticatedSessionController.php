@@ -12,6 +12,11 @@ use Illuminate\View\View;
 use App\Models\User;
 use Hash, Session, Str, Config;
 use Socialite;
+use Modules\Cars\Entities\Cars;
+use Modules\Heavy\Entities\Heavy;
+use Modules\SmallHeavy\Entities\SmallHeavy;
+use Modules\Brand\Entities\Brand;
+use DB;
 
 use Modules\GeneralSetting\Entities\SocialLoginInfo;
 
@@ -24,8 +29,35 @@ class AuthenticatedSessionController extends Controller
     public function create(): View
     {
         $social_login = SocialLoginInfo::first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-        return view('auth.login', ['social_login' => $social_login]);
+            $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                         ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+
+            $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+            $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+
+            $jdm_brand['car']=$jdm_legend;
+            $jdm_brand['heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+        return view('auth.login', ['social_login' => $social_login,
+                    'jdm_legend'=>$jdm_brand,
+                    'jdm_core_brand'=>$jdm_core_brand]);
     }
 
     /**
@@ -40,6 +72,7 @@ class AuthenticatedSessionController extends Controller
         ];
 
         $user = User::where('email',$request->email)->first();
+
 
         if($user){
             if($user->status == 'enable'){

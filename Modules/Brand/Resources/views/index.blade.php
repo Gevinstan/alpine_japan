@@ -92,9 +92,9 @@
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <a href="{{ route('admin.brand.edit', ['brand' => $brand->id, 'lang_code' => admin_lang()] ) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
+                                                        <a href="{{ route('admin.brand.edit', ['brand' => $brand->id, 'lang_code' => admin_lang()] ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>
 
-                                                        <a onclick="itemDeleteConfrimation({{ $brand->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
+                                                        <a onclick="itemDeleteConfrimation({{ $brand->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{__('translate.Delete')}}"><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

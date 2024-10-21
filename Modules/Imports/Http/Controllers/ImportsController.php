@@ -90,14 +90,23 @@ class ImportsController extends Controller
         // $request->validate([
         //     'commission' => 'required|integer',
         // ]);
-
-     
-
-        CarDataJpOp::where('active_status', 1)->update(['commission_value' => $request->commission]);
+        CarDataJpOp::where('active_status', 1)
+        ->whereIn('id',$request->selectedIds)
+        ->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
         // return redirect()->route('admin.commission')->with($notification);
+    }
+    public function NewArrival(Request $request){
+    //    DB::enableQueryLog();
+        CarDataJpOp::where('active_status', 1)
+        ->where('id',$request->selectedIds)
+        ->update(['new_arrival' => $request->check]);
+        // dd(DB::getQueryLog());
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
 
     public function bulkDelete(Request $request){

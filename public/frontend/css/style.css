@@ -8984,7 +8984,7 @@ a:link {
 .inner-header .menu-bg .nav-main .nav-left .menu ul {
     display: flex;
     align-items: center;
-    gap: 94px;
+    gap: 64px;
     position: relative;
     padding-left: 0px;
     margin-left: -98px;
@@ -15024,3 +15024,8 @@ input::placeholder {
         }
 
         /************ NAV-BAR DROPDOWN STYLE END **************/
+
+        .budget-search-btn {
+            width: 100px !important;
+            height: 40px !important;
+        }

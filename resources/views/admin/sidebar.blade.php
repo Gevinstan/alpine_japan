@@ -13,86 +13,52 @@
                 <span class="menu-bar__name">{{ __('translate.Dashboard') }}</span></span></a>
             </li>
 
-            <li class="{{ Route::is('admin.car.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.car.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Car') }}</span></span></a>
-            </li>
-            <li class="{{ Route::is('admin.heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.heavy.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Heavy') }}</span></span></a>
-            </li>
-            <li class="{{ Route::is('admin.commercial.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.commercial.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Commercial') }}</span></span></a>
-            </li>
-            <li class="{{ Route::is('admin.small-heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.small-heavy.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Small heavy') }}</span></span></a>
-            </li>
-            <li class="{{ Route::is('admin.models.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.models.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Models') }}</span></span></a>
-            </li>
-            <li class="{{ Route::is('admin.categories.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.categories.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Categories') }}</span></span></a>
-            </li>
-
-            <li class="{{ Route::is('admin.general-setting') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.general-setting') }}"><span class="menu-bar__text">
+            <li class="{{ Route::is('admin.terms-and-conditions') || Route::is('admin.privacy-policy') || Route::is('admin.faq.*') || Route::is('admin.custom-page.*') || Route::is('admin.contact-us') || Route::is('admin.about-us') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__pages"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.7155 16.134L21.0758 15.7423L21.7155 16.134ZM20.6548 17.866L21.2945 18.2577V18.2577L20.6548 17.866ZM2.28455 7.86602L1.64493 7.47436L1.64493 7.47436L2.28455 7.86602ZM3.34516 6.13397L3.98477 6.52563H3.98477L3.34516 6.13397ZM6.2428 5.40192L6.60138 4.74319L6.60138 4.74319L6.2428 5.40192ZM3.06097 10.5981L2.70238 11.2568H2.70238L3.06097 10.5981ZM17.7572 18.5981L17.3986 19.2568H17.3986L17.7572 18.5981ZM20.939 13.4019L20.5805 14.0606L20.939 13.4019ZM3.34515 17.866L2.70554 18.2577H2.70554L3.34515 17.866ZM2.28454 16.134L2.92415 15.7423L2.92415 15.7423L2.28454 16.134ZM20.6548 6.13398L21.2945 5.74232V5.74232L20.6548 6.13398ZM21.7155 7.86603L21.0758 8.25769V8.25769L21.7155 7.86603ZM20.939 10.5981L21.2976 11.2568H21.2976L20.939 10.5981ZM17.7572 5.40193L18.1158 6.06066V6.06066L17.7572 5.40193ZM3.06096 13.4019L3.41955 14.0607H3.41955L3.06096 13.4019ZM6.24279 18.5981L5.88422 17.9394L5.88421 17.9394L6.24279 18.5981ZM17.6445 5.46331L17.2859 4.80458V4.80458L17.6445 5.46331ZM6.35556 5.4633L5.99697 6.12202H5.99697L6.35556 5.4633ZM17.6445 18.5367L18.003 17.878L18.003 17.878L17.6445 18.5367ZM6.35556 18.5367L6.71413 19.1954L6.71414 19.1954L6.35556 18.5367ZM10.9394 2.75H13.0606V1.25H10.9394V2.75ZM13.0606 21.25H10.9394V22.75H13.0606V21.25ZM10.9394 21.25C10.1399 21.25 9.56817 20.6494 9.56817 20H8.06817C8.06817 21.5598 9.39585 22.75 10.9394 22.75V21.25ZM14.4318 20C14.4318 20.6494 13.8601 21.25 13.0606 21.25V22.75C14.6042 22.75 15.9318 21.5598 15.9318 20H14.4318ZM13.0606 2.75C13.8601 2.75 14.4318 3.35061 14.4318 4H15.9318C15.9318 2.44025 14.6041 1.25 13.0606 1.25V2.75ZM10.9394 1.25C9.39585 1.25 8.06817 2.44025 8.06817 4H9.56817C9.56817 3.35061 10.1399 2.75 10.9394 2.75V1.25ZM21.0758 15.7423L20.0152 17.4744L21.2945 18.2577L22.3551 16.5256L21.0758 15.7423ZM2.92416 8.25768L3.98477 6.52563L2.70554 5.74231L1.64493 7.47436L2.92416 8.25768ZM3.98477 6.52563C4.35198 5.92594 5.20337 5.69002 5.88421 6.06064L6.60138 4.74319C5.25309 4.00924 3.50985 4.42882 2.70554 5.74231L3.98477 6.52563ZM3.41955 9.93934C2.7621 9.58146 2.57418 8.82922 2.92416 8.25768L1.64493 7.47436C0.823397 8.81599 1.3307 10.5101 2.70238 11.2568L3.41955 9.93934ZM20.0152 17.4744C19.648 18.074 18.7966 18.31 18.1158 17.9393L17.3986 19.2568C18.7469 19.9907 20.4902 19.5712 21.2945 18.2577L20.0152 17.4744ZM22.3551 16.5256C23.1766 15.184 22.6693 13.4899 21.2976 12.7432L20.5805 14.0606C21.2379 14.4185 21.4258 15.1708 21.0758 15.7423L22.3551 16.5256ZM3.98476 17.4744L2.92415 15.7423L1.64493 16.5256L2.70554 18.2577L3.98476 17.4744ZM20.0152 6.52564L21.0758 8.25769L22.3551 7.47437L21.2945 5.74232L20.0152 6.52564ZM21.0758 8.25769C21.4258 8.82923 21.2379 9.58147 20.5805 9.93936L21.2976 11.2568C22.6693 10.5101 23.1766 8.816 22.3551 7.47437L21.0758 8.25769ZM18.1158 6.06066C18.7966 5.69004 19.648 5.92596 20.0152 6.52564L21.2945 5.74232C20.4902 4.42884 18.7469 4.00926 17.3986 4.74321L18.1158 6.06066ZM2.92415 15.7423C2.57417 15.1708 2.7621 14.4185 3.41955 14.0607L2.70238 12.7432C1.3307 13.4899 0.823395 15.184 1.64493 16.5256L2.92415 15.7423ZM2.70554 18.2577C3.50985 19.5712 5.25309 19.9908 6.60138 19.2568L5.88421 17.9394C5.20337 18.31 4.35198 18.0741 3.98476 17.4744L2.70554 18.2577ZM18.003 6.12203L18.1158 6.06066L17.3986 4.74321L17.2859 4.80458L18.003 6.12203ZM5.88421 6.06064L5.99697 6.12202L6.71414 4.80457L6.60138 4.74319L5.88421 6.06064ZM18.1158 17.9393L18.003 17.878L17.2859 19.1954L17.3986 19.2568L18.1158 17.9393ZM5.99698 17.878L5.88422 17.9394L6.60137 19.2568L6.71413 19.1954L5.99698 17.878ZM2.70238 11.2568C3.2912 11.5773 3.29121 12.4227 2.70238 12.7432L3.41955 14.0607C5.05215 13.1719 5.05215 10.8281 3.41955 9.93934L2.70238 11.2568ZM6.71414 19.1954C7.32456 18.8631 8.06817 19.305 8.06817 20H9.56817C9.56817 18.167 7.60692 17.0016 5.99697 17.878L6.71414 19.1954ZM15.9318 20C15.9318 19.305 16.6755 18.8631 17.2859 19.1954L18.003 17.878C16.3931 17.0016 14.4318 18.167 14.4318 20H15.9318ZM21.2976 12.7432C20.7088 12.4227 20.7088 11.5773 21.2976 11.2568L20.5805 9.93936C18.9479 10.8281 18.9479 13.1719 20.5805 14.0606L21.2976 12.7432ZM5.99697 6.12202C7.60692 6.99841 9.56817 5.83303 9.56817 4H8.06817C8.06817 4.695 7.32456 5.13686 6.71414 4.80457L5.99697 6.12202ZM17.2859 4.80458C16.6755 5.13687 15.9318 4.69501 15.9318 4H14.4318C14.4318 5.83303 16.3931 6.99842 18.003 6.12203L17.2859 4.80458ZM14.5833 12C14.5833 13.4267 13.4267 14.5833 12 14.5833V16.0833C14.2552 16.0833 16.0833 14.2552 16.0833 12H14.5833ZM12 14.5833C10.5733 14.5833 9.41668 13.4267 9.41668 12H7.91668C7.91668 14.2552 9.74485 16.0833 12 16.0833V14.5833ZM9.41668 12C9.41668 10.5733 10.5733 9.41667 12 9.41667V7.91667C9.74485 7.91667 7.91668 9.74484 7.91668 12H9.41668ZM12 9.41667C13.4267 9.41667 14.5833 10.5733 14.5833 12H16.0833C16.0833 9.74484 14.2552 7.91667 12 7.91667V9.41667Z" fill="#fff"></path>
+                        <path d="M2 15V6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V15M2 15C2 17.2091 3.79086 19 6 19H18C20.2091 19 22 17.2091 22 15M2 15H22M12 19V22M12 22H9M12 22H15M7 7H12M7 11H17" stroke="#fff" stroke-width="1.5" stroke-linecap="round"></path>
                     </svg>
                 </span>
-                <span class="menu-bar__name">{{ __('translate.Setting') }}</span></span></a>
-            </li>
-            
-            <li class="{{ Route::is('admin.delivery-charges.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.delivery-charges.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Delivery Charge') }}</span></span></a>
-            </li>
-
-            <li class="{{ Route::is('admin.import.*') || Route::is('admin.commission') ? 'active' : ''}}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__car_list"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 10H16M8 14H16M6 22H18C20.2091 22 22 20.2091 22 18V6C22 3.79086 20.2091 2 18 2H6C3.79086 2 2 3.79086 2 6V18C2 20.2091 3.79086 22 6 22Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-
-                </span>
-                <span class="menu-bar__name">{{ __('translate.Imports') }}</span></span> <span class="crancy__toggle"></span></a></span>
+                <span class="menu-bar__name">{{ __('translate.Manage Vehicles') }}</span></span> <span class="crancy__toggle"></span></a></span>
                 <!-- Dropdown Menu -->
-                <div class="collapse crancy__dropdown {{ Route::is('admin.import*') || Route::is('admin.commission') ? 'show' : '' }}" id="menu-item__car_list"  data-bs-parent="#CrancyMenu">
+                <div class="collapse crancy__dropdown {{ Route::is('admin.terms-and-conditions') || Route::is('admin.privacy-policy') || Route::is('admin.faq.*') || Route::is('admin.custom-page.*') || Route::is('admin.contact-us') || Route::is('admin.about-us') ? 'show' : '' }}" id="menu-item__pages"  data-bs-parent="#CrancyMenu">
                     <ul class="menu-bar__one-dropdown">
-                        <li><a href="{{ route('admin.import.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Imports') }}</span></span></a></li>
-                        <li><a href="{{ route('admin.commission') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Imported List') }}</span></span></a></li>
+
+                        <li class="{{ Route::is('admin.cars.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.cars.index') }}"><span class="menu-bar__text">
+                            <span class="crancy-menu-icon crancy-svg-icon__v1">
+                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                                </svg>
+                            </span>
+                            <span class="menu-bar__name">{{ __('translate.Car') }}</span></span></a>
+                        </li>
+
+                        <li class="{{ Route::is('admin.heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.heavy.index') }}"><span class="menu-bar__text">
+                            <span class="crancy-menu-icon crancy-svg-icon__v1">
+                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                                </svg>
+                            </span>
+                             <span class="menu-bar__name">{{ __('translate.Heavy') }}</span></span></a>
+                        </li>
+
+                        <li class="{{ Route::is('admin.commercial.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.commercial.index') }}"><span class="menu-bar__text">
+                            <span class="crancy-menu-icon crancy-svg-icon__v1">
+                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                                </svg>
+                            </span>
+                            <span class="menu-bar__name">{{ __('translate.Commercial') }}</span></span></a>
+                        </li>
+
+                        <li class="{{ Route::is('admin.small-heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.small-heavy.index') }}"><span class="menu-bar__text">
+                            <span class="crancy-menu-icon crancy-svg-icon__v1">
+                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                                </svg>
+                            </span>
+                            <span class="menu-bar__name">{{ __('translate.Small heavy') }}</span></span></a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -123,7 +89,49 @@
                     </ul>
                 </div>
             </li>
+            <li class="{{ Route::is('admin.blog.*') || Route::is('admin.blog-category.*') || Route::is('admin.blog-comments') || Route::is('admin.show-comment') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__blog"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 10.0002H17M7 14.0002H17M7 18.0002H12M7 6.00019L10.5858 2.4144C11.3668 1.63335 12.6332 1.63335 13.4142 2.4144L17 6.00019M6 22.0002H18C20.2091 22.0002 22 20.2093 22 18.0002V10.0002C22 7.79105 20.2091 6.00019 18 6.00019H6C3.79086 6.00019 2 7.79105 2 10.0002V18.0002C2 20.2093 3.79086 22.0002 6 22.0002Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Manage Blog') }}</span></span> <span class="crancy__toggle"></span></a></span>
+                <!-- Dropdown Menu -->
+                <div class="collapse crancy__dropdown {{ Route::is('admin.blog.*') || Route::is('admin.blog-category.*') || Route::is('admin.blog-comments') || Route::is('admin.show-comment') ? 'show' : '' }}" id="menu-item__blog"  data-bs-parent="#CrancyMenu">
+                    <ul class="menu-bar__one-dropdown">
 
+                        <li><a href="{{ route('admin.blog-category.create') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Create Categroy') }}</span></span></a></li>
+
+                        <li><a href="{{ route('admin.blog-category.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Categroy List') }}</span></span></a></li>
+
+                        <li><a href="{{ route('admin.blog.create') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Create Blog') }}</span></span></a></li>
+
+                        <li><a href="{{ route('admin.blog.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Blog List') }}</span></span></a></li>
+
+                        <li><a href="{{ route('admin.blog-comments') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Comment List') }}</span></span></a></li>
+
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="{{ Route::is('admin.home1-intro') || Route::is('admin.home2-intro') || Route::is('admin.home3-intro') || Route::is('admin.video-section') || Route::is('admin.join-as-dealer') || Route::is('admin.mobile-app') || Route::is('admin.working-step') || Route::is('admin.counter') || Route::is('admin.call-us') || Route::is('admin.testimonial.*') || Route::is('admin.loan-calculator') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__for_section"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10H16M8 14H16M6 22H18C20.2091 22 22 20.2091 22 18V6C22 3.79086 20.2091 2 18 2H6C3.79086 2 2 3.79086 2 6V18C2 20.2091 3.79086 22 6 22Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Manage Section') }}</span></span> <span class="crancy__toggle"></span></a></span>
+                <!-- Dropdown Menu -->
+                <div class="collapse crancy__dropdown {{ Route::is('admin.home1-intro') || Route::is('admin.home2-intro') || Route::is('admin.home3-intro') || Route::is('admin.video-section') || Route::is('admin.join-as-dealer') || Route::is('admin.mobile-app') || Route::is('admin.working-step') || Route::is('admin.counter') || Route::is('admin.call-us') || Route::is('admin.testimonial.*') || Route::is('admin.loan-calculator') ? 'show' : '' }}" id="menu-item__for_section"  data-bs-parent="#CrancyMenu">
+                    <ul class="menu-bar__one-dropdown">
+                        <li><a href="{{ route('admin.call-us', ['lang_code' => admin_lang()]) }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Call Us') }}</span></span></a></li>
+                        <li><a href="{{ route('admin.testimonial.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Testimonial') }}</span></span></a></li>
+                    </ul>
+                </div>
+            </li>             
+         
             <li class="{{ Route::is('admin.language.*') || Route::is('admin.theme-language') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__languages"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,14 +175,18 @@
                     </ul>
                 </div>
             </li>
+            <li class="{{ Route::is('admin.ads-banner') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.ads-banner') }}">
+                <span class="menu-bar__text">
+                    <span class="crancy-menu-icon crancy-svg-icon__v1">
+                        <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.1601 13.928L15.3071 17.6466C15.7213 18.364 15.4755 19.2814 14.758 19.6956C14.0406 20.1099 13.1232 19.864 12.709 19.1466L10.0555 14.5505M18.4543 2.82986L18.8203 1.46384M20.4543 6.29398L21.8203 6.66M7.09809 15.16L17.7168 12.7285C19.0285 12.4282 19.6753 10.9443 19.0025 9.77899L14.7104 2.34488C14.0376 1.17955 12.4291 0.997752 11.5132 1.98351L4.09809 9.96386L7.09809 15.16ZM4.34812 10.3968L6.84812 14.727C7.26233 15.4444 7.01652 16.3618 6.29908 16.776C5.58164 17.1902 4.66425 16.9444 4.25004 16.227L1.75004 11.8968C1.33583 11.1794 1.58164 10.262 2.29908 9.84781C3.01652 9.4336 3.9339 9.67941 4.34812 10.3968Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
 
-            <li class="{{ Route::is('admin.brand.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.brand.index') }}"><span class="menu-bar__text">
-                <span class="crancy-menu-icon crancy-svg-icon__v1">
-                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                    </svg>
+                    </span>
+                    <span class="menu-bar__name">{{ __('translate.Ads Banner') }}</span>
                 </span>
-                <span class="menu-bar__name">{{ __('translate.Brand') }}</span></span></a>
+
+                </a>
             </li>
             <li class="{{ Route::is('admin.seo-setup') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.seo-setup') }}"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
@@ -185,6 +197,96 @@
                 </span>
                 <span class="menu-bar__name">{{ __('translate.SEO Setup') }}</span></span></a>
             </li>
+         
+            <li class="{{ Route::is('admin.categories.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.categories.index') }}"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Categories') }}</span></span></a>
+            </li>
+          
+            <li class="{{ Route::is('admin.models.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.models.index') }}"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Models') }}</span></span></a>
+            </li>
+            <li class="{{ Route::is('admin.brand.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.brand.index') }}"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Brand') }}</span></span></a>
+            </li>
+          
+
+       
+            <li class="{{ Route::is('admin.delivery-charges.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.delivery-charges.index') }}"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
+                        <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Delivery Charge') }}</span></span></a>
+            </li>
+
+            <li class="{{ Route::is('admin.import.*') || Route::is('admin.commission') ? 'active' : ''}}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__car_list"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10H16M8 14H16M6 22H18C20.2091 22 22 20.2091 22 18V6C22 3.79086 20.2091 2 18 2H6C3.79086 2 2 3.79086 2 6V18C2 20.2091 3.79086 22 6 22Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Imports') }}</span></span> <span class="crancy__toggle"></span></a></span>
+                <!-- Dropdown Menu -->
+                <div class="collapse crancy__dropdown {{ Route::is('admin.import*') || Route::is('admin.commission') ? 'show' : '' }}" id="menu-item__car_list"  data-bs-parent="#CrancyMenu">
+                    <ul class="menu-bar__one-dropdown">
+                        <li><a href="{{ route('admin.import.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Imports') }}</span></span></a></li>
+                        <li><a href="{{ route('admin.commission') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Imported List') }}</span></span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="{{ Route::is('admin.contact-message') || Route::is('admin.show-message') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.contact-message') }}">
+                <span class="menu-bar__text">
+                    <span class="crancy-menu-icon crancy-svg-icon__v1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M6 21H18C20.2091 21 22 19.2091 22 17V7C22 4.79086 20.2091 3 18 3H6C3.79086 3 2 4.79086 2 7V17C2 19.2091 3.79086 21 6 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+
+                    </span>
+                    <span class="menu-bar__name">{{ __('translate.Contact Message') }}</span>   
+                </span>
+
+                </a>
+            </li>
+            <li class="{{ Route::is('admin.vehicle-enquiry') || Route::is('admin.vehicle-enquiry') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.vehicle-enquiry') }}">
+                <span class="menu-bar__text">
+                    <span class="crancy-menu-icon crancy-svg-icon__v1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M6 21H18C20.2091 21 22 19.2091 22 17V7C22 4.79086 20.2091 3 18 3H6C3.79086 3 2 4.79086 2 7V17C2 19.2091 3.79086 21 6 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+
+                    </span>
+                    <span class="menu-bar__name">{{ __('translate.Vehicle Enquiry') }}</span>   
+                </span>
+
+                </a>
+            </li>
+            <li class="{{ Route::is('admin.general-setting') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.general-setting') }}"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.7155 16.134L21.0758 15.7423L21.7155 16.134ZM20.6548 17.866L21.2945 18.2577V18.2577L20.6548 17.866ZM2.28455 7.86602L1.64493 7.47436L1.64493 7.47436L2.28455 7.86602ZM3.34516 6.13397L3.98477 6.52563H3.98477L3.34516 6.13397ZM6.2428 5.40192L6.60138 4.74319L6.60138 4.74319L6.2428 5.40192ZM3.06097 10.5981L2.70238 11.2568H2.70238L3.06097 10.5981ZM17.7572 18.5981L17.3986 19.2568H17.3986L17.7572 18.5981ZM20.939 13.4019L20.5805 14.0606L20.939 13.4019ZM3.34515 17.866L2.70554 18.2577H2.70554L3.34515 17.866ZM2.28454 16.134L2.92415 15.7423L2.92415 15.7423L2.28454 16.134ZM20.6548 6.13398L21.2945 5.74232V5.74232L20.6548 6.13398ZM21.7155 7.86603L21.0758 8.25769V8.25769L21.7155 7.86603ZM20.939 10.5981L21.2976 11.2568H21.2976L20.939 10.5981ZM17.7572 5.40193L18.1158 6.06066V6.06066L17.7572 5.40193ZM3.06096 13.4019L3.41955 14.0607H3.41955L3.06096 13.4019ZM6.24279 18.5981L5.88422 17.9394L5.88421 17.9394L6.24279 18.5981ZM17.6445 5.46331L17.2859 4.80458V4.80458L17.6445 5.46331ZM6.35556 5.4633L5.99697 6.12202H5.99697L6.35556 5.4633ZM17.6445 18.5367L18.003 17.878L18.003 17.878L17.6445 18.5367ZM6.35556 18.5367L6.71413 19.1954L6.71414 19.1954L6.35556 18.5367ZM10.9394 2.75H13.0606V1.25H10.9394V2.75ZM13.0606 21.25H10.9394V22.75H13.0606V21.25ZM10.9394 21.25C10.1399 21.25 9.56817 20.6494 9.56817 20H8.06817C8.06817 21.5598 9.39585 22.75 10.9394 22.75V21.25ZM14.4318 20C14.4318 20.6494 13.8601 21.25 13.0606 21.25V22.75C14.6042 22.75 15.9318 21.5598 15.9318 20H14.4318ZM13.0606 2.75C13.8601 2.75 14.4318 3.35061 14.4318 4H15.9318C15.9318 2.44025 14.6041 1.25 13.0606 1.25V2.75ZM10.9394 1.25C9.39585 1.25 8.06817 2.44025 8.06817 4H9.56817C9.56817 3.35061 10.1399 2.75 10.9394 2.75V1.25ZM21.0758 15.7423L20.0152 17.4744L21.2945 18.2577L22.3551 16.5256L21.0758 15.7423ZM2.92416 8.25768L3.98477 6.52563L2.70554 5.74231L1.64493 7.47436L2.92416 8.25768ZM3.98477 6.52563C4.35198 5.92594 5.20337 5.69002 5.88421 6.06064L6.60138 4.74319C5.25309 4.00924 3.50985 4.42882 2.70554 5.74231L3.98477 6.52563ZM3.41955 9.93934C2.7621 9.58146 2.57418 8.82922 2.92416 8.25768L1.64493 7.47436C0.823397 8.81599 1.3307 10.5101 2.70238 11.2568L3.41955 9.93934ZM20.0152 17.4744C19.648 18.074 18.7966 18.31 18.1158 17.9393L17.3986 19.2568C18.7469 19.9907 20.4902 19.5712 21.2945 18.2577L20.0152 17.4744ZM22.3551 16.5256C23.1766 15.184 22.6693 13.4899 21.2976 12.7432L20.5805 14.0606C21.2379 14.4185 21.4258 15.1708 21.0758 15.7423L22.3551 16.5256ZM3.98476 17.4744L2.92415 15.7423L1.64493 16.5256L2.70554 18.2577L3.98476 17.4744ZM20.0152 6.52564L21.0758 8.25769L22.3551 7.47437L21.2945 5.74232L20.0152 6.52564ZM21.0758 8.25769C21.4258 8.82923 21.2379 9.58147 20.5805 9.93936L21.2976 11.2568C22.6693 10.5101 23.1766 8.816 22.3551 7.47437L21.0758 8.25769ZM18.1158 6.06066C18.7966 5.69004 19.648 5.92596 20.0152 6.52564L21.2945 5.74232C20.4902 4.42884 18.7469 4.00926 17.3986 4.74321L18.1158 6.06066ZM2.92415 15.7423C2.57417 15.1708 2.7621 14.4185 3.41955 14.0607L2.70238 12.7432C1.3307 13.4899 0.823395 15.184 1.64493 16.5256L2.92415 15.7423ZM2.70554 18.2577C3.50985 19.5712 5.25309 19.9908 6.60138 19.2568L5.88421 17.9394C5.20337 18.31 4.35198 18.0741 3.98476 17.4744L2.70554 18.2577ZM18.003 6.12203L18.1158 6.06066L17.3986 4.74321L17.2859 4.80458L18.003 6.12203ZM5.88421 6.06064L5.99697 6.12202L6.71414 4.80457L6.60138 4.74319L5.88421 6.06064ZM18.1158 17.9393L18.003 17.878L17.2859 19.1954L17.3986 19.2568L18.1158 17.9393ZM5.99698 17.878L5.88422 17.9394L6.60137 19.2568L6.71413 19.1954L5.99698 17.878ZM2.70238 11.2568C3.2912 11.5773 3.29121 12.4227 2.70238 12.7432L3.41955 14.0607C5.05215 13.1719 5.05215 10.8281 3.41955 9.93934L2.70238 11.2568ZM6.71414 19.1954C7.32456 18.8631 8.06817 19.305 8.06817 20H9.56817C9.56817 18.167 7.60692 17.0016 5.99697 17.878L6.71414 19.1954ZM15.9318 20C15.9318 19.305 16.6755 18.8631 17.2859 19.1954L18.003 17.878C16.3931 17.0016 14.4318 18.167 14.4318 20H15.9318ZM21.2976 12.7432C20.7088 12.4227 20.7088 11.5773 21.2976 11.2568L20.5805 9.93936C18.9479 10.8281 18.9479 13.1719 20.5805 14.0606L21.2976 12.7432ZM5.99697 6.12202C7.60692 6.99841 9.56817 5.83303 9.56817 4H8.06817C8.06817 4.695 7.32456 5.13686 6.71414 4.80457L5.99697 6.12202ZM17.2859 4.80458C16.6755 5.13687 15.9318 4.69501 15.9318 4H14.4318C14.4318 5.83303 16.3931 6.99842 18.003 6.12203L17.2859 4.80458ZM14.5833 12C14.5833 13.4267 13.4267 14.5833 12 14.5833V16.0833C14.2552 16.0833 16.0833 14.2552 16.0833 12H14.5833ZM12 14.5833C10.5733 14.5833 9.41668 13.4267 9.41668 12H7.91668C7.91668 14.2552 9.74485 16.0833 12 16.0833V14.5833ZM9.41668 12C9.41668 10.5733 10.5733 9.41667 12 9.41667V7.91667C9.74485 7.91667 7.91668 9.74484 7.91668 12H9.41668ZM12 9.41667C13.4267 9.41667 14.5833 10.5733 14.5833 12H16.0833C16.0833 9.74484 14.2552 7.91667 12 7.91667V9.41667Z" fill="#fff"></path>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Setting') }}</span></span></a>
+            </li>
+            
+         
 
           
         </ul>

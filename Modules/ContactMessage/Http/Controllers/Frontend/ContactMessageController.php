@@ -23,6 +23,8 @@ class ContactMessageController extends Controller
         $this->middleware('HtmlSpecialchars');
     }
 
+
+  
     public function store_contact_message(ContactMessageRequest $request){
 
         $setting = Setting::first();

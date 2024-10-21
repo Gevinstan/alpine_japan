@@ -22,9 +22,15 @@
                                 <div class="crancy-customer-filter">
                                     <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch d-flex items-center justify-between create_new_btn_box">
                                         <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box  d-flex  justify-between">
-                                            <h4 class="crancy-product-card__title">{{ __('translate.Car Stock List') }}</h4>
-                                            <div class="d-flex gap-3">
-                                            <a href="{{ route('admin.car.create') }}" class="crancy-btn text-nowrap"><span>
+                                            <h4 class="crancy-product-card__title text-nowrap">{{ __('translate.Car Stock List') }}</h4>
+                                            <div class="align-items-center d-flex gap-2 justify-content-end">
+                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input w-25" type="text" name="commission" id="commission">
+                                                        @error('commission')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>   
+                                            <a href="{{ route('admin.cars.create') }}" class="crancy-btn text-nowrap"><span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                     <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                                                     <path d="M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -55,6 +61,9 @@
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Category') }}
                                                 </th>
+                                                <th class="crancy-table__column-2 crancy-table__h2 sorting">
+                                                    {{ __('translate.New Arrival') }}
+                                                </th>
 
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Title') }}
@@ -62,6 +71,9 @@
 
                                                 <th class="crancy-table__column-3 crancy-table__h3 sorting">
                                                     {{ __('translate.Year of Manuf.') }}
+                                                </th>
+                                                <th class="crancy-table__column-3 crancy-table__h3 sorting">
+                                                    {{ __('translate.Comission') }}
                                                 </th>
                                                 <th class="crancy-table__column-3 crancy-table__h3 sorting">
                                                     {{ __('translate.Image') }}
@@ -86,16 +98,22 @@
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ ++$index }}</h4>
                                                     </td>
-
+                                                   
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ $car->category }}</h4>
                                                     </td>
-
+                                                    <td class="crancy-table__column-2 crancy-table__data-2">
+                                                    <input type="checkbox" class="form-control top-sell-checkbox-class" data-id="{{$car->id}}"
+                                                     {{$car->new_arrival =='1' ? 'checked' : ''}} >
+                                                    </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ $car->title }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ $car->yom }}</h4>
+                                                    </td>
+                                                    <td class="crancy-table__column-2 crancy-table__data-2">
+                                                        <h4 class="crancy-table__product-title">{{ $car->commission_value }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                     <img src="{{ asset('cars/' . $car->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
@@ -108,14 +126,9 @@
                                                         @endif
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <div style="
-                                                        display: flex;
-                                                        align-items: center;
-                                                        justify-content: space-between;
-                                                        gap: 10px;">
-                                                    <a href="{{ route('admin.car.edit', ['car' => $car->id] ) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
-                                                        <a onclick="itemDeleteConfrimation({{ $car->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
-                                                    </div>
+                                                   
+                                                    <a href="{{ route('admin.cars.edit', ['car' => $car->id] ) }}" title="Edit" style="color:grey;"><i class="fas fa-edit"></i></a>
+                                                        <a onclick="itemDeleteConfrimation({{ $car->id }})" title="Delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach 
@@ -177,7 +190,7 @@
 
         "use strict"
         function itemDeleteConfrimation(id){
-            var deleteUrl = "{{ route('admin.car.destroy', ':id') }}";
+            var deleteUrl = "{{ route('admin.cars.destroy', ':id') }}";
             deleteUrl = deleteUrl.replace(':id', id);
             document.getElementById("item_delect_confirmation").setAttribute("action", deleteUrl);
         }
@@ -188,6 +201,7 @@
             const masterCheckbox = document.querySelector('#masterCheckbox');
             const rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
             const deleteButton = document.querySelector('#delete-model');
+            const topSellButtons = document.querySelectorAll('.top-sell-checkbox-class');
 
             // Add event listener to the master checkbox
             masterCheckbox.addEventListener('change', function() {
@@ -197,52 +211,97 @@
                 });
             });
 
-           // Handle delete button click
-          deleteButton.addEventListener('click', function() {
-        // Gather selected IDs
-        const selectedIds = Array.from(rowCheckboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.getAttribute('data-id'));
+            // Handle delete button click
+            deleteButton.addEventListener('click', function() {
+                // Gather selected IDs
+                const selectedIds = Array.from(rowCheckboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.getAttribute('data-id'));
 
-        if (selectedIds.length > 0) {
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected records?')) {
-
-
-                //Send AJAX request to delete records
-                fetch('/delete-car', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ ids: selectedIds })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle response
-                    if (data.success) {
-                        // Remove deleted rows from the table
-                        rowCheckboxes.forEach(checkbox => {
-                            if (checkbox.checked) {
-                                checkbox.closest('tr').remove();
-                            }
-                            $("#masterCheckbox").prop('checked',false);
-                        });
-                        alert('Selected records deleted successfully.');
+                if (selectedIds.length > 0) {
+                    // Confirm deletion
+                    if (confirm('Are you sure you want to delete the selected records?')) {
+                        //Send AJAX request to delete records
+                        fetch('/delete-car', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({ ids: selectedIds })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Handle response
+                                if (data.success) {
+                                    // Remove deleted rows from the table
+                                    rowCheckboxes.forEach(checkbox => {
+                                        if (checkbox.checked) {
+                                            checkbox.closest('tr').remove();
+                                        }
+                                        $("#masterCheckbox").prop('checked',false);
+                                    });
+                                    alert('Selected records deleted successfully.');
+                                } else {
+                                    alert('Error deleting records.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        }
                     } else {
-                        alert('Error deleting records.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        } else {
-            alert('No records selected.');
-        }
-    });
+                        alert('No records selected.');
+                }
+            });
 
+
+            $("#comissionBtn").on('click', function() {
+                    var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+                    const selectedIds = Array.from(rowCheckboxes)
+                        .filter(checkbox => checkbox.checked)
+                        .map(checkbox => checkbox.getAttribute('data-id'));  
+                            
+                    $.ajax({
+                        url: "{{route('admin.store-car-comission')}}",
+                        type: "POST", // Use POST for this AJAX call
+                        data: {
+                            selectedIds: selectedIds,
+                            commission: $("#commission").val(),
+                            _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                        },
+                        success: function(response) {
+                            if(response.success == true) {
+                                toastr.success("Success", response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                            toastr.error("Error", "An error occurred while processing your request.");
+                        }
+                    });
+            });
+
+            topSellButtons.forEach(function(topSellButton) {
+                topSellButton.addEventListener('change', function() {
+                // Determine if the checkbox is checked
+                var check = this.checked ? 1 : 0;
+
+                // Use jQuery to get the data-id
+                var selectedId = $(this).data('id');
+                $.ajax({
+                    url: "{{ route('admin.blog-new-arrival-cars') }}",
+                    type: "POST",
+                    data: { selectedIds: selectedId, check: check },
+                    beforeSend: function(data) {
+                        console.log("loading");
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
 });
 
         
