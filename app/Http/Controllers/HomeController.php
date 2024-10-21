@@ -2617,8 +2617,6 @@ class HomeController extends Controller
 
     public function send_message_to_company(ContactMessageRequest $request){
         // MailHelper::setMailConfig();
-
-        // echo json_encode($request->all());die();
         $template = EmailTemplate::find(2);
 
         $message = $template->description;
