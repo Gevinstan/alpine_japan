@@ -68,18 +68,6 @@
                                         </ul>
                                     </div>
 
-<<<<<<< HEAD
-=======
-                                    <!-- <select class="btn-group-lg btn-dc6" name="cars" id="cars">
-                                        <option value="volvo">Year</option>
-                                        <option value="saab">ASC - DSC</option>
-                                        <option value="opel">DSC - ASC</option>
-                                        <option value="audi">$(Low - High)</option>
-                                        <option value="audi">$(High - Low)</option>
-                                    </select> -->
-
-                                    <form class="btn-group btn-dc7">
->>>>>>> 4e206de3c681d771bcf9d7b3eb393aaef162c5e9
                                         <div class="form-group position-relative">
                                             <input type="button" 
                                                 style="background-color: #038ffc; color: white; width: 150px; height: 52px; border: none;" 
