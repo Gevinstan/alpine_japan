@@ -13,6 +13,11 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
+                    <div class="mb-2">
+                        <h2 style="display: inline;">About</h2> 
+                        <h2 style="display: inline; color: #038ffc;">Us</h2>
+                    </div>
+
                     <div class="about-img">
                         <img src="{{ asset($about_us->about_image) }}" alt="img">
                     </div>
@@ -162,7 +167,7 @@
 
 
     <!--  help-part-start -->
-    <section class="help help-inner  ">
+    <!-- <section class="help help-inner  ">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -216,7 +221,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--  help-part-end -->
 
     <!--   Testimonial-part-start -->

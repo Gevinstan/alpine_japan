@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
+  
+
     <link rel="icon" href="{{ asset('japan_home/japan-logo.png') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -28,6 +34,9 @@
     <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
+    
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
@@ -74,7 +83,7 @@
     @else
     <header class="header header-two inner-header">
     @endif
-        <div class="container-fluid header-border ">
+        <!-- <div class="container-fluid header-border ">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-p-0">       
                 </div>
@@ -82,6 +91,11 @@
                 <div class="col-lg-8 col-p-0">
                     <div class="header-right-item">
                         <div class="header-right-item-btn-main" style="margin-left:-47px">
+                            <div class="header-right-item-btn" style="margin-right:150px">
+                                    <div class="dropdown">
+                                        <a class=" btn-secondary dropdown-toggle" href="#" role="button"
+                                            id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            
 
                         <div class="header-right-item-btn" style="margin-right:150px">
                                 <div class="dropdown">
@@ -92,15 +106,11 @@
                                         </span>
                                         
 
-                                        <span class="btn-arrow">
-                                            {{ Session::get('front_lang_name') }}
-                                            <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
-                                            </svg>
-                                        </span>
-                                    </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            @foreach ($language_list as $language_dropdown_item)
+                                                <li><a style="color:black" class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
+                                            @endforeach
+                                        </ul>
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         @foreach ($language_list as $language_dropdown_item)
@@ -130,8 +140,59 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
+        <div class="container-fluid header-border">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-6 col-12 mb-3">
+                    <!-- Optional Content for Left Column -->
+                </div>
+
+                <div class="col-lg-8 col-md-6 col-12">
+                    <div class="header-right-item d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="header-right-item-btn-main d-flex align-items-center" style="margin-left: -15px;">
+                            <div class="header-right-item-btn me-3">
+                                <div class="dropdown">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="btn-arrow">
+                                            {{ Session::get('front_lang_name') }}
+                                            <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
+                                            </svg>
+                                        </span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        @foreach ($language_list as $language_dropdown_item)
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="header-right-phone-num-btn me-3 ms-5">
+                                <span class="icon-circle"><i class="bi bi-envelope"></i></span>
+                                <span class="text-white">sales@alpinejapan.com</span>
+                            </div>
+
+                            <div class="header-right-phone-num-btn me-3">
+                                <span class="icon-circle"><i class="bi bi-phone"></i></span>
+                                <span class="text-white">+81 78 242 1568, +81 78 330 1021</span>
+                            </div>
+                        </div>
+
+                        <div class="header-right-social-media-btn d-flex">
+                            <span class="icon-circle me-2"><i class="bi bi-instagram"></i></span>
+                            <span class="icon-circle me-2"><i class="bi bi-facebook"></i></span>
+                            <span class="icon-circle"><i class="bi bi-youtube"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <nav class="menu-bg ">
             <div class="container-fluid">
@@ -514,7 +575,7 @@
                         <div class="text">
                             <h5>{{ __('REVIEWED ON') }}:</h5>
                             <img src="{{ asset('japan_home/google.svg') }}" alt="logo" style="margin-right:1px; height:35px">
-                                      <div style="color: yellow">
+                                      <div class="five_star">
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
                                         <i class="bi bi-star-fill"></i>
@@ -695,9 +756,13 @@
                             </div>
                             <div class="footer-item-text-link">
                                 <ul>
-                               @if(Auth::guard('web')->check())
+                            
                                     <li>
-                                        <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                    @if(Auth::guard('web')->check())
+                                    <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                    @else
+                                    <a href="#" onclick="auct_logout()"><span>
+                                    @endif
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -705,8 +770,9 @@
                                                         stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg></span> {{ __('Auction Car Marketplace') }}
                                         </a>
+                                      
                                     </li>
-                                @endif    
+                            
                                     <li>
                                         <a href="{{ route('listings') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
@@ -728,7 +794,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('user.reviews') }}"> <span>
+                                        <a href="{{ route('shipment') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -739,7 +805,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('user.reviews') }}"> <span>
+                                        <a href="{{ route('howtobuy') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -791,7 +857,7 @@
                                                     </svg>
 
                                             </span>
-                                            {{ $setting->phone }}
+                                             +81 78 242 1568, +81 78 330 1021
                                         </a>
                                     </li>
 
@@ -804,7 +870,7 @@
 
 
                                             </span>
-                                            {{ $setting->email }}
+                                            sales@alpinejapan.com
                                         </a>
                                     </li>
 
@@ -816,7 +882,7 @@
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.75C5.47857 1.75 2.25 4.48059 2.25 8.11111C2.25 9.82498 3.34675 12.1327 4.85679 14.0668C5.59932 15.0178 6.409 15.8353 7.171 16.4074C7.95947 16.9993 8.59247 17.25 9 17.25C9.42269 17.25 10.0624 17.0094 10.8465 16.4554C11.6072 15.9179 12.4148 15.1481 13.1547 14.2468C14.6599 12.4136 15.75 10.2065 15.75 8.5C15.75 4.45503 12.4938 1.75 9 1.75ZM0.75 8.11111C0.75 3.51941 4.78944 0.25 9 0.25C13.2382 0.25 17.25 3.54497 17.25 8.5C17.25 10.7209 15.9026 13.2638 14.314 15.1987C13.5071 16.1815 12.6038 17.0504 11.7121 17.6804C10.8438 18.294 9.88982 18.75 9 18.75C8.09503 18.75 7.13428 18.2555 6.27041 17.6069C5.38006 16.9385 4.4788 16.0201 3.67446 14.9899C2.09075 12.9614 0.75 10.3246 0.75 8.11111ZM9 5.75C7.75736 5.75 6.75 6.75736 6.75 8C6.75 9.24264 7.75736 10.25 9 10.25C10.2426 10.25 11.25 9.24264 11.25 8C11.25 6.75736 10.2426 5.75 9 5.75ZM5.25 8C5.25 5.92893 6.92893 4.25 9 4.25C11.0711 4.25 12.75 5.92893 12.75 8C12.75 10.0711 11.0711 11.75 9 11.75C6.92893 11.75 5.25 10.0711 5.25 8ZM2.25 21C2.25 20.5858 2.58579 20.25 3 20.25H15C15.4142 20.25 15.75 20.5858 15.75 21C15.75 21.4142 15.4142 21.75 15 21.75H3C2.58579 21.75 2.25 21.4142 2.25 21Z"/>
                                                     </svg>
                                             </span>
-                                            {{ $setting->address }}
+                                            Takai Bldg. 301, Kano-cho 4 - 8 - 17, Chuo-ku, Kobe 650-0001
                                         </a>
                                     </li>
                                 </ul>
@@ -855,16 +921,16 @@
                         </div>
                     </div>
 
-                    <!-- Right Side: Developed by and Social Icons -->
-                    <div class="col-lg-6 col-md-6 col-sm-12 text-center text-md-end">
-                        <div class="copyright-text">
-                            <p>Developed by Gevinst 
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="copyright-text text-end "> 
+                            <p class="">Developed by Gevinst 
                                 <span class="ms-3"><i class="bi bi-instagram"></i></span>
                                 <span class="ms-2"><i class="bi bi-facebook"></i></span>
                                 <span class="ms-2"><i class="bi bi-youtube"></i></span>
                             </p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -981,6 +1047,7 @@
     <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
 
     <script>
         @if(Session::has('messege'))
@@ -1037,6 +1104,24 @@
             $('.cookie_consent_modal').removeClass('d-none');
         }
 
+
+        function auct_logout(){
+            Swal.fire({
+                title: "{{__('Login or Register to access this page ?')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{__('Yes, Ok')}}",
+                cancelButtonText: "{{__('Cancel')}}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href="user/select-car-purpose"
+                    // $("#remove_car_"+id).submit();
+                }
+
+            })
+        }
     </script>
 
 </body>

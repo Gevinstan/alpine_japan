@@ -104,8 +104,9 @@
                                                 </svg>
                                             </span>
 
-                                            {{ $contact_us->address }}
+                                            <!-- {{ $contact_us->address }} -->
                                         </a>
+                                        <h6><b>Takai Bldg. 301, Kano-cho 4 - 8 - 17, Chuo-ku, Kobe 650-0001</b></h6>
                                     </div>
                                 </div>
 

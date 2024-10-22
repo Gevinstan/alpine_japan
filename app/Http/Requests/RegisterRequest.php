@@ -26,6 +26,8 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'country_code'=>['required','string'],
+            'phone'=>['required'],
             'password' => ['required', 'confirmed', 'min:4', 'max:100'],
             'g-recaptcha-response'=>new Captcha()
         ];

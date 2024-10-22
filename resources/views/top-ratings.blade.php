@@ -32,9 +32,7 @@
                             <!-- <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1> -->
                             <nav aria-label="breadcrumb">   
                                 <ol class="breadcrumb">
-                                    <li>JDM Stock</li>
-                                    <li><i class="bi bi-arrow-right-short"></i></li>
-                                    <li>Volvo</li>
+                                    <li>{{__('translate.Top Sell')}}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -47,7 +45,7 @@
                 <div class="row" style=" padding-top: 20px;padding-bottom: 14px">
                     <div class="col-lg-12">
                         <span>
-                            <h6>JDM Stock <i class="bi bi-arrow-right-short"></i> Volvo</h6>
+                            <h6>{{__('translate.Top Sell')}}</h6>
                         </span>
                     </div>
                 </div>
@@ -153,7 +151,7 @@
                                 </div>
                             </div>
                             
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                            {{--   <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample2">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">
@@ -183,7 +181,7 @@
                                             </div>
 
                                             <h6 style="padding-top:30px">Popular</h6>
-                                           {{-- @foreach($brand_count as $brand)
+                                          @foreach($brand_count as $brand)
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
@@ -201,12 +199,12 @@
                                                         </label>
                                                     </div>
                                             </div> 
-                                            @endforeach --}}
+                                            @endforeach 
                                             <h6 style="color:#038ffc;">Show More Brands</h6>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample3">

@@ -26,7 +26,6 @@ class ContactMessageController extends Controller
 
   
     public function store_contact_message(ContactMessageRequest $request){
-
         $setting = Setting::first();
 
         $contact_message = new ContactMessage();
@@ -50,7 +49,8 @@ class ContactMessageController extends Controller
             $message = str_replace('{{message_subject}}',$request->subject,$message);
             $message = str_replace('{{message}}',$request->message,$message);
 
-            Mail::to($setting->contact_message_mail)->send(new SendContactMessage($message,$subject, $request->email, $request->name));
+            // Mail::to($setting->contact_message_mail)->send(new SendContactMessage($message,$subject, $request->email, $request->name));
+            Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name));
 
         }
 

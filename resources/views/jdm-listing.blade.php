@@ -168,6 +168,13 @@
                                                     <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
                                                         placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
                                                 </div>
+                                                <input type="hidden" name="car_id" value="{{$car->id}}">
+                                                <input type="hidden" name="commission" value="" id="hidden_commission">
+                                                <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
+                                                <input type="hidden" name="total_car_price" value="" id="hidden_total">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="url_link" value="{{$url_link}}">
 
                                                 @if($google_recaptcha->status==1)
                                                     <div class="auto-sales-form-item">
@@ -823,6 +830,9 @@
 
                 // Display the total price
                 $("#total_price").text('$'+total_price);
+                $("#hidden_commission").val(comission_price_num)
+                $("#hidden_delivery_charge").val(delivery_charge_num)
+                $("#hidden_total").val(total_price)
             }
           } else {
             toastr.error('Select Location','Failed')

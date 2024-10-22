@@ -60,7 +60,7 @@
                     {{ __('translate.Dashboard') }}
                 </a>
             </li>
-            <li>
+            {{--<li>
                 <a href="{{ route('user.reviews') }}" class="{{ Route::is('user.reviews') ? 'active' : '' }}">
                     <span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -71,7 +71,7 @@
                     </span>
                     {{ __('translate.Reviews') }}
                 </a>
-            </li>
+            </li> --}}
 
 
             <li>

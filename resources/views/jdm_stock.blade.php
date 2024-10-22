@@ -99,7 +99,7 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                        <input class="form-check-input"  name="brand[]" type="checkbox" value="{{$brand->model}}"
+                                                        <input class="form-check-input brand-search"  name="brand[]" type="checkbox" value="{{$brand->model}}"
                                                         {{ in_array($brand->model, request('brand', [])) ? 'checked' : '' }}>
                                                         
                                                         <label class="form-check-label">
@@ -490,6 +490,11 @@
             e.preventDefault();     
             form.submit();
         });
+        $(".brand-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();
+           
+        }) 
 
 
         $("#brand_new_cars").on('change',function(e){
