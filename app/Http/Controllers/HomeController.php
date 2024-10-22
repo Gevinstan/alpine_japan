@@ -2054,9 +2054,10 @@ class HomeController extends Controller
         // Initialize the query for cars
         // $carsQuery = CarDataJpOp::query();
       
+           DB::enableQueryLog();
             // Query for Blog table
             $blogCars = Cars::when($jdmBrand, function ($query, $jdmBrand) {
-                $carMakes=Cars::where('make',$jdBrand)->distinct()
+                $carMakes=Cars::where('make',$jdmBrand)->distinct()
                 ->pluck('model');
                     return $query->where('make', $jdmBrand);
                 })
@@ -2179,15 +2180,6 @@ class HomeController extends Controller
                 })
                 ->select('model','price','image','id','make','title');
 
-
-
-
-
-       
-                // Apply filters based on request parameters
-        if ($request->location) {
-            $carsQuery->where('city_id', $request->location);
-        }
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
                 $parts = explode('-', $request->price_range_scale);
@@ -2254,32 +2246,19 @@ class HomeController extends Controller
             $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
         }
 
-        if ($request->sort_by) {
-            switch ($request->sort_by) {
-                case 'dsc_to_asc':
-                    $carsQuery->orderBy('title', 'desc');
-                    break;
-                case 'asc_to_dsc':
-                    $carsQuery->orderBy('title', 'asc');
-                    break;
-                case 'price_low_high':
-                    $carsQuery->orderBy('regular_price', 'asc');
-                    break;
-                case 'price_high_low':
-                    $carsQuery->orderBy('regular_price', 'desc');
-                    break;
-            }
-        }
+       
 
-    $cars = $blogCars
-    ->union($heavyCars)
-    ->union($smallHeavyCars)
-    ->orderBy('model')
-    ->distinct()
-    ->paginate(12);
+        $cars = $blogCars
+        ->union($heavyCars)
+        ->union($smallHeavyCars)
+        ->orderBy('model')
+        ->distinct()
+        ->paginate(12); 
+
+        // dd(DB::getQueryLog());
 
 
-    if($request->brand){
+    if($request->jdm_brand){
         
                 $carsMakes = Cars::when($jdmBrand, function ($query, $jdmBrand) {
                     return $query->where('make', $jdmBrand);
@@ -2287,25 +2266,24 @@ class HomeController extends Controller
                 ->distinct()
                 ->pluck('model');
 
-        // Fetch distinct makes from Heavy table
-        $heavyMakes = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
-                    return $query->where('make', $jdmBrand);
-                })
-                ->distinct()
-                ->pluck('model');
+                // Fetch distinct makes from Heavy table
+                $heavyMakes = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
+                            return $query->where('make', $jdmBrand);
+                        })
+                        ->distinct()
+                        ->pluck('model');
 
-        // Fetch distinct makes from Small Heavy table
-        $smallHeavyMakes = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
-                        return $query->where('make', $jdmBrand);
-                    })
-                    ->distinct()
-                    ->pluck('model');
+                // Fetch distinct makes from Small Heavy table
+                $smallHeavyMakes = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
+                                return $query->where('make', $jdmBrand);
+                            })
+                            ->distinct()
+                            ->pluck('model');
 
-                    $models = $carsMakes->merge($heavyMakes)
-                    ->merge($smallHeavyMakes)
-                    ->unique()
-                    ->values();                   
-
+                            $models = $carsMakes->merge($heavyMakes)
+                            ->merge($smallHeavyMakes)
+                            ->unique()
+                            ->values();                   
     }
  
 

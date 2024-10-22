@@ -112,8 +112,8 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                    <input class="form-check-input brand-search" name="brand" type="radio" value="{{$brand->slug}}"
-                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
+                                                    <input class="form-check-input brand-search" name="jdm_brand" type="radio" value="{{$brand->slug}}"
+                                                        {{ in_array(trim($brand->slug), (array)request('jdm_brand', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
                                                             {{ $brand->name }}
                                                         </label>
@@ -395,7 +395,7 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
+                                                          
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
