@@ -41,6 +41,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
     Route::group(['middleware' => ['HtmlSpecialchars', 'MaintenanceChecker']], function () {
 
         Route::controller(HomeController::class)->group(function () {
+            Route::post('auct_login', 'auct_login')
+            ->name('auct_login');
 
             Route::get('/', 'index')->name('home');
             Route::get('/about-us', 'about_us')->name('about-us');
@@ -71,7 +73,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/listing/{slug}', 'listing')->name('listing');
             Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');
             Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
-            Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace');
+            Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
+            ->middleware('auth:web');;
 
             Route::get('/dealers', 'dealers')->name('dealers');
             Route::get('/dealer/{slug}', 'dealer')->name('dealer');
@@ -108,6 +111,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
         Route::get('/pay-via-paypal/{id}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
         Route::get('/paypal-success-payment',[PaypalController::class, 'paypal_success_payment'])->name('paypal-success-payment');
         Route::get('/paypal-faild-payment',[PaypalController::class, 'paypal_faild_payment'])->name('paypal-faild-payment');
+  
 
         Route::group(['as'=> 'user.', 'prefix' => 'user', 'middleware' => ['auth:web']],function (){
 
@@ -169,6 +173,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
         Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                     ->name('logout');
+        
 
         Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
 

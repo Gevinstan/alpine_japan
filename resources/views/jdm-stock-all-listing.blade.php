@@ -168,6 +168,12 @@
                                                     <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
                                                         placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
                                                 </div>
+                                                <input type="hidden" name="car_id" value="{{$car->id}}">
+                                                <input type="hidden" name="commission" value="" id="hidden_commission">
+                                                <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
+                                                <input type="hidden" name="total_car_price" value="" id="hidden_total">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
 
                                                 @if($google_recaptcha->status==1)
                                                     <div class="auto-sales-form-item">

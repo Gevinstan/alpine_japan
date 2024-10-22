@@ -36,10 +36,10 @@
 
                     <!-- Dashboard  -->
                     <div class="row gy-5">
-                        <div class=" col-lg-4 col-md-6">
+                    {{--<div class=" col-lg-4 col-md-6">
                             <div class="dashboard-item">
                                 <div class="dashboard-inner">
-                                    <div class="dashboard-inner-text">
+                                   <div class="dashboard-inner-text">
                                         <h5>{{ __('translate.Total Cars') }}</h5>
                                         <h3 class="counter">{{ $total_car }}</h3>
 
@@ -91,8 +91,9 @@
 
                                 </div>
                             </div>
-                        </div>
-                        <div class="  col-lg-4 col-md-6">
+                        </div>--}}
+                        
+                       {{--<div class="  col-lg-4 col-md-6">
                             <div class="dashboard-item two">
                                 <div class="dashboard-inner">
                                     <div class="dashboard-inner-text">
@@ -146,7 +147,10 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div>--}}
+
+
+
                         <div class=" col-lg-4 col-md-6">
                             <div class="dashboard-item three">
                                 <div class="dashboard-inner">
@@ -213,112 +217,7 @@
                     <div class="row">
                         <div class="col-lg-12">
 
-                            <h5 class="dashbord-taitle">{{ __('translate.Recently Added Cars') }}</h5>
-
-                            <div class="dashbord-tabel">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>{{ __('translate.Title') }}</th>
-                                            <th>{{ __('translate.Brand') }}</th>
-                                            <th>{{ __('translate.Price') }}</th>
-                                            <th>{{ __('translate.Featured') }}</th>
-                                            <th>{{ __('translate.Status') }}</th>
-                                            <th>{{ __('translate.Actions') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        @foreach ($cars as $index => $car)
-                                                <tr>
-
-                                                    <td>
-                                                        {{ html_decode($car->title) }}
-                                                    </td>
-
-                                                    <td>{{ $car?->brand?->name }}</td>
-                                                    <td>
-                                                        @if ($car->offer_price)
-                                                            {{ currency($car->offer_price) }}
-                                                        @else
-                                                            {{ currency($car->regular_price) }}
-                                                        @endif
-
-                                                    </td>
-                                                    <td>
-                                                        @if ($car->is_featured == 'enable')
-                                                            <button class="no yes">
-                                                                {{ __('translate.Yes') }}
-                                                            </button>
-                                                        @else
-                                                            <button class="no">
-                                                                {{ __('translate.No') }}
-                                                            </button>
-                                                        @endif
-
-                                                    </td>
-                                                    <td>
-
-                                                        @if ($car->approved_by_admin == 'approved')
-                                                            <button class="no yes">
-                                                                {{ __('translate.Active') }}
-                                                            </button>
-                                                        @else
-                                                            <button class="no">
-                                                                {{ __('translate.Awaiting') }}
-                                                            </button>
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <div class="actions-btn-item">
-                                                            <a href="{{ route('listing', $car->slug) }}" class="actions-btn">
-                                                                <span>
-                                                                    <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M7.79633 0.679688C5.12346 0.679688 2.69957 2.14204 0.910975 4.51729C0.765026 4.71188 0.765026 4.98375 0.910975 5.17835C2.69957 7.55646 5.12346 9.01881 7.79633 9.01881C10.4692 9.01881 12.8931 7.55646 14.6817 5.18121C14.8276 4.98661 14.8276 4.71475 14.6817 4.52015C12.8931 2.14204 10.4692 0.679688 7.79633 0.679688ZM7.98807 7.7854C6.21379 7.897 4.74857 6.43465 4.86018 4.65751C4.95176 3.1923 6.13938 2.00467 7.60459 1.9131C9.37887 1.80149 10.8441 3.26384 10.7325 5.04098C10.638 6.50334 9.45042 7.69096 7.98807 7.7854ZM7.89935 6.42893C6.94353 6.48903 6.15369 5.70205 6.21665 4.74623C6.2653 3.95638 6.90633 3.31822 7.69617 3.2667C8.65199 3.20661 9.44183 3.99359 9.37887 4.94941C9.32736 5.74211 8.68633 6.38028 7.89935 6.42893Z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </a>
-
-                                                            <a href="{{ route('user.car.edit', ['car' => $car->id, 'lang_code' => admin_lang()] ) }}" class="actions-btn edit ">
-                                                                <span>
-                                                                    <i class="fa-solid fa-pen-to-square"></i>
-
-                                                                </span>
-                                                            </a>
-
-                                                            <a href="{{ route('user.car-gallery', $car->id) }}" class="actions-btn edit gallery ">
-                                                                <span>
-                                                                <i class="fa-solid fa-image"></i>
-
-                                                                </span>
-                                                            </a>
-
-
-
-
-                                                            <button type="button" class="actions-btn delet" onclick="deleteCar({{ $car->id }})">
-                                                                <span>
-                                                                    <i class="fa-solid fa-trash-can"></i>
-
-                                                                </span>
-                                                            </button>
-
-                                                            <form action="{{ route('user.car.destroy', $car->id) }}" id="remove_car_{{ $car->id }}" class="d-none" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-
-                                                            </form>
-                                                        </div>
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-
-                                    </tbody>
-
-                                </table>
-
-                            </div>
+                          
                         </div>
                     </div>
 

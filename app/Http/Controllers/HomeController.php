@@ -292,7 +292,6 @@ class HomeController extends Controller
         $jdm_legend = Brand::where('status', 'enable')->get();
         $seo_setting = SeoSetting::where('id', 10)->first();
         $brands=\DB::table('blog')
-        ->where('category', 'JDM Legend')
         ->where('make', $slug)
         ->distinct()
         ->select('model')->get();
@@ -493,7 +492,8 @@ class HomeController extends Controller
             'delivery_charges'=>$delivery_charges,
             'jdm_legend'=>$jdm_brand,
             'jdm_core_brand'=>$jdm_core_brand,
-            'type'=>$type
+            'type'=>$type,
+            'url_link'=>url()->full() 
         ]);
     }
 
@@ -1101,6 +1101,7 @@ class HomeController extends Controller
         // Initialize the query for cars
         $carsQuery = CarDataJpOp::query();
 
+      
         // Apply filters based on request parameters
         if ($request->location) {
             $carsQuery->where('city_id', $request->location);
@@ -1110,6 +1111,8 @@ class HomeController extends Controller
             $year = date('Y'); 
              $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
         }
+
+
 
 
       
@@ -1219,13 +1222,16 @@ class HomeController extends Controller
         
         if ($request->brand) {
            
+            // DB::enableQueryLog();
             $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
             $models = \DB::table('auct_lots_xml_jp_op')
             ->where(DB::raw('LOWER(company_en)'), $request->brand)
+            ->where('top_sell','1')
             ->groupBy('model_name_en') 
             ->select('model_name_en')
             ->get();
-       
+
+            // echo json_encode($models);die();
     }
 
     if($request->model){
@@ -1249,8 +1255,7 @@ class HomeController extends Controller
             }
         }
 
-        // $carsQuery->get();
-        // dd(DB::getQueryLog());
+    
 
         // Pagination
         $cars = $carsQuery->where('top_sell','1')->paginate(12);
@@ -1608,6 +1613,7 @@ class HomeController extends Controller
                 $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp_op')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
+                ->where('new_arrival','1')
                 ->groupBy('model_name_en') 
                 ->select('model_name_en')
                 ->get();
@@ -1981,7 +1987,8 @@ class HomeController extends Controller
             'delivery_charges'=>$delivery_charges,
             'process_data_en'=>$process_data_en,
             'jdm_legend'=>$jdm_brand,
-            'jdm_core_brand'=>$jdm_core_brand
+            'jdm_core_brand'=>$jdm_core_brand,
+            'url_link'=>url()->full()
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -2476,7 +2483,8 @@ class HomeController extends Controller
             'delivery_charges'=>$delivery_charges,
             'process_data_en'=>$process_data_en,
             'jdm_legend'=>$jdm_brand,
-            'jdm_core_brand'=>$jdm_core_brand
+            'jdm_core_brand'=>$jdm_core_brand,
+            'url_link'=>url()->full()
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -2536,7 +2544,8 @@ class HomeController extends Controller
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
             'jdm_legend'=>$jdm_brand,
-            'jdm_core_brand'=>$jdm_core_brand
+            'jdm_core_brand'=>$jdm_core_brand,
+            'url_link'=>url()->full()
         ]);
     
     }
@@ -2626,12 +2635,15 @@ class HomeController extends Controller
         $message = str_replace('{{user_phone}}',$request->phone,$message);
         $message = str_replace('{{message_subject}}',$request->subject,$message);
         $message = str_replace('{{message}}',$request->message,$message);
+        $message = str_replace('{{message_url}}',$request->url_link,$message);
 
 
       
 
         // Mail::to(env('MAIL_FROM_ADDRESS'))->send(new SendContactMessage($message,$subject, $request->email, $request->name));
         Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name));
+
+   
         $Enquiry=new VehicleEnquiry();
         $Enquiry->name=$request->name;
         $Enquiry->email=$request->email;
@@ -2643,11 +2655,20 @@ class HomeController extends Controller
         $Enquiry->delivery_charge=$request->delivery_charge;
         $Enquiry->total_car_price=$request->total_car_price;
         $Enquiry->message=$request->message;
+        $Enquiry->url_link=$request->url_link;
         $Enquiry->save();
 
         $notification= trans('translate.Your message has send successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
+    }
+
+
+    public function auct_login(Request $request) {
+        // $notification= trans('translate.Logout Successfully');
+        // $notification=array('messege'=>$notification,'alert-type'=>'success');
+        // return redirect()->route('profile.auct-login')->with($notification);
+        return view('profile.auct-login');
     }
 
     public function pricing_plan(){

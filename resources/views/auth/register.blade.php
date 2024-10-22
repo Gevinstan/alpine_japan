@@ -39,7 +39,7 @@
                     <div class="login-head">
                         <h3>{{ __('translate.Sign Up') }}</h3>
 
-                        <span>{{ __('translate.Welcome to CARBAZ') }}</span>
+                        <span>{{ __('translate.Welcome to ALPINE') }}</span>
                     </div>
 
 
@@ -52,6 +52,32 @@
                                     <span>*</span> </label>
                                 <input type="text" class="form-control" id="exampleFormControlInput1"
                                     placeholder="{{ __('translate.Name') }}" name="name" value="{{ old('name') }}">
+                            </div>
+                        </div>
+                        <div class="login-form-item">
+                            <div class="login-form-inner">
+                                <label for="exampleFormControlInput1" class="form-label">{{ __('translate.Country Code') }}
+                                    <span>*</span> </label>
+                                    <select name="country_code" id="country_code"  class="form-control">
+                                        <option value="">Select Code</option>
+                                        @foreach($countries as $brand)
+                                            <option value="{{$brand->phonecode}}">{{$brand->name}}</option>
+                                        @endforeach  
+                                    </select>
+                                    @error('country_code')
+                                        <div style="color: red;">{{ $message }}</div>
+                                    @enderror   
+                            </div>
+                        </div>
+                        <div class="login-form-item">
+                            <div class="login-form-inner">
+                                <label for="exampleFormControlInput1" class="form-label">{{ __('translate.Phone') }}
+                                    <span>*</span> </label>
+                                    <input type="number" class="form-control" id="exampleFormControlInput1"
+                                    placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
+                                    @error('phone')
+                                        <div style="color: red;">{{ $message }}</div>
+                                    @enderror 
                             </div>
                         </div>
 

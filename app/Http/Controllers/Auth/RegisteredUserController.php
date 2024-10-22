@@ -35,6 +35,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+       $countries=countries();
+       
         $jdm_core_brand = Brand::where('status', 'enable')->get();
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
@@ -65,6 +67,7 @@ class RegisteredUserController extends Controller
 
         return view('auth.register', ['social_login' => $social_login,
             'jdm_legend'=>$jdm_brand,
+            'countries'=>$countries,
             'jdm_core_brand'=>$jdm_core_brand]);
     }
 
@@ -75,7 +78,6 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -84,6 +86,8 @@ class RegisteredUserController extends Controller
             'is_banned' => 'no',
             'password' => Hash::make($request->password),
             'verification_token' => Str::random(100),
+            'country_code' => $request->country_code,
+            'phone' => $request->phone
         ]);
 
         MailHelper::setMailConfig();

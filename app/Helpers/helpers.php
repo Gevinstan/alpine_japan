@@ -28,6 +28,22 @@ function calculate_percentage($regular_price, $offer_price){
 }
 
 
+
+
+    // @codingStandardsIgnoreLine
+    function countries()
+    {
+        if (!cache()->has('countries')) {
+            cache(['countries' => \App\Models\Country::all()]);
+        }
+
+        return cache('countries');
+    }
+
+
+
+
+
 function currency($price){
     // currency information will be loaded by Session value
 

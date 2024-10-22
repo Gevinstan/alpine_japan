@@ -695,9 +695,13 @@
                             </div>
                             <div class="footer-item-text-link">
                                 <ul>
-                               @if(Auth::guard('web')->check())
+                            
                                     <li>
-                                        <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                    @if(Auth::guard('web')->check())
+                                    <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                    @else
+                                    <a href="#" onclick="auct_logout()"><span>
+                                    @endif
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -705,8 +709,9 @@
                                                         stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg></span> {{ __('Auction Car Marketplace') }}
                                         </a>
+                                      
                                     </li>
-                                @endif    
+                            
                                     <li>
                                         <a href="{{ route('listings') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
@@ -981,6 +986,7 @@
     <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
 
     <script>
         @if(Session::has('messege'))
@@ -1037,6 +1043,24 @@
             $('.cookie_consent_modal').removeClass('d-none');
         }
 
+
+        function auct_logout(){
+            Swal.fire({
+                title: "{{__('Login or Register to access this page ?')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{__('Yes, Ok')}}",
+                cancelButtonText: "{{__('Cancel')}}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href="user/select-car-purpose"
+                    // $("#remove_car_"+id).submit();
+                }
+
+            })
+        }
     </script>
 
 </body>
