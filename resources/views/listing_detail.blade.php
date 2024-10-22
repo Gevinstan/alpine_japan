@@ -12,38 +12,29 @@
 <section style="">
     <!-- banner-part-start  -->
 
-    <section class="inner-banner" style="">
-        <div class="inner-banner-img" ></div>
+    <section>
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <div class="container-fluid">
-                <div class="col-lg-12 col-md-12 col-sm-12 ">
-                    <div class="inner-banner-df">
-                        <!-- <h1 class="inner-banner-taitel">{{ __('translate.Car Details') }}</h1> -->
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb" style="padding-right:985px; padding-top:30px;">
-                                <!-- <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Details') }}</li> -->
-                                <li>JDM Stock</li>
-                                <li><i class="bi bi-arrow-right-short"></i></li>
-                                <li>
-                                @if(session('front_lang')=='en')
+                <div class="col-lg-12 col-md-12 col-sm-12 listing-detail">
+                    <ol class="breadcrumb breadcrumb-nav mb-0 ms-3">
+                        <li class="breadcrumb-item" ><a href="#">
+                            @if(session('front_lang')=='en')
                                     {{$car->company_en}}
                                 @else
                                     {{$car->company}}
                                 @endif
-                                </li>
-                                <li><i class="bi bi-arrow-right-short"></i></li>
-                                <li>
-                                @if(session('front_lang')=='en')
+                        </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            @if(session('front_lang')=='en')
                                  {{$car->model_name_en}} 
                                 @else
                                  {{$car->model_name}}
                                 @endif   
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+                        </li>
+                    </ol>
                 </div>
             </div>
+        </nav>
     </section>
     <!-- banner-part-end -->
 
@@ -91,23 +82,24 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <p style="margin-bottom: 0px; margin-top: 20px">
-                                                            <b>
-                                                            @if(session('front_lang')=='en')
-                                                                {{$car->company_en}}
-                                                            @else
-                                                                 {{$car->company}}
-                                                            @endif
-                                                            </b></p>
-                                                            <h2>
-                                                            @if(session('front_lang')=='en')
-                                                             {{$car->model_name_en}} 
-                                                            @else
-                                                            {{$car->model_name}}
-                                                            @endif
+                                                                
+                                                                <b>
+                                                                @if(session('front_lang')=='en')
+                                                                    {{$car->company_en}}
+                                                                @else
+                                                                    {{$car->company}}
+                                                                @endif
+                                                                </b></p>
+                                                                <h2>
+                                                                @if(session('front_lang')=='en')
+                                                                {{$car->model_name_en}} 
+                                                                @else
+                                                                {{$car->model_name}}
+                                                                @endif
                                                                 
                                                             </h2>
                                                             <div style="margin-top: 15px; margin-bottom: 15px">
-                                                                <p  style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
+                                                                <p style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
                                                                    <b> @if(session('front_lang')=='en')
                                                                     ${{$car->start_price_num}}
                                                                     @else

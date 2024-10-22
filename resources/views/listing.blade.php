@@ -3,6 +3,7 @@
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
     <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
+    
 @endsection
 
 @section('body-content')
@@ -24,35 +25,20 @@
 <main>
     <!-- banner-part-start  -->
 
-        <section class="inner-banner">
-            <div class="inner-banner-img">
-                <div class="container-fluid">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="inner-banner-df">
-                            <!-- <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1> -->
-                            <nav aria-label="breadcrumb">   
-                                <ol class="breadcrumb">
-                                    <li>JDM Stock</li>
-                                    <li><i class="bi bi-arrow-right-short"></i></li>
-                                    <li>Volvo</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
+    <section style="background-color: #f8f9fa;">
+
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <div class="container-fluid">
-                <div class="row" style=" padding-top: 20px;padding-bottom: 14px">
-                    <div class="col-lg-12">
-                        <span>
-                            <h6>JDM Stock <i class="bi bi-arrow-right-short"></i> Volvo</h6>
-                        </span>
-                    </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <ol class="breadcrumb breadcrumb-nav mb-0">
+                        <li class="breadcrumb-item" ><a href="#">JDM Stock</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Volvo</li>
+                    </ol>
                 </div>
             </div>
-        </section>
+        </nav>
+
+    </section>
     
     <!-- banner-part-end -->
 
@@ -216,7 +202,29 @@
                                                     <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMax" value="2">
                                                 </div>
 
-                                                <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">$5k $5Lakh</p></span>
+                                                <!-- <div class="range-container" >
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
+                                                    <input type="range" class="form-range"  min="0" max="5" step="0.5" id="customRangeMax" value="2">
+                                                </div> -->
+
+
+                                                <div id="slider-outer-div ms-2" >
+                                                    <div id="slider-max-label" class="slider-label"></div>
+                                                    <div id="slider-min-label" class="slider-label"></div>
+                                                    <div id="slider-div">
+                                                    <div>
+                                                        <input id="ex2" type="text" data-slider-min="50"
+                                                        data-slider-max="2000" data-slider-value="[50,300]"
+                                                        data-slider-tooltip="hide" />
+                                                    </div>
+                                                    </div>
+                                                </div>
+
+                                            
+                                                <div class="range-container-txt2">
+                                                    <div><p><b>$5k</b></div>
+                                                    <div><p><b>$5Lakhs</b></p></p></div>
+                                                </div>
 
                                                 <h6 style="padding-top:30px">Price Range</h6>
 
@@ -242,8 +250,6 @@
                                 </div>
                             </div>
 
-                            
-
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample5">
                                     <div class="accordion-item">
@@ -266,8 +272,6 @@
                                 </div>
                             </div>
                         
-                         
-
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample7">
                                     <div class="accordion-item">
@@ -296,8 +300,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                           
 
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample10">
@@ -346,6 +348,7 @@
                                     </div>
                                 </div>
                             </div>
+                                
                         </div>
 
 
@@ -375,7 +378,7 @@
                                     <!-- <button id="outside_form_btn" type="button" class="thm-btn-two">{{ __('translate.Search Now') }}</button> -->
                                 </div>
 
-                                <div class="inventory-sarch-ber-text" style="padding-left:100px">
+                                <div class="inventory-sarch-ber-text" style="">
                                     <p style="display:inline; color:black; font-weight:bold">{{ __('Sort By:') }}</p>
                                     <div class="dropdown" style="display:inline; ">
                                         <a class="btn btn-white dropdown-toggle" style="padding-bottom:10px; color:#038ffc !important" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -682,10 +685,32 @@
 
     <!-- pagination Starts -->
 
-  
+    </section>
 
     <!-- pagination ends -->
-                   
+            <script>
+  const setLabel = (lbl, val) => {
+  const label = $(`#slider-${lbl}-label`);
+  label.text(val);
+  const slider = $(`#slider-div .${lbl}-slider-handle`);
+  const rect = slider[0].getBoundingClientRect();
+  label.offset({
+    top: rect.top - 30,
+    left: rect.left
+  });
+}
+
+const setLabels = (values) => {
+  setLabel("min", values[0]);
+  setLabel("max", values[1]);
+}
+
+
+$('#ex2').slider().on('slide', function(ev) {
+  setLabels(ev.value);
+});
+setLabels($('#ex2').attr("data-value").split(",")); 
+</script>       
 </main>
 @endsection
 
@@ -785,3 +810,7 @@ endRange.addEventListener('input', () => {
 })(jQuery);
 </script>   <!------- Range ------->
 @endpush
+
+
+
+
