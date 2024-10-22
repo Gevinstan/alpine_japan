@@ -50,40 +50,6 @@
                 <div class="col-lg-3">
                     <form action="" id="search_form">
                         <div class="inventory-main-box">
-                           
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Collapse All Filters
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                            
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Select Location
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
-                                        <div class="accordion-body">
-                                            
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="BrandAccordian">
                                     <div class="accordion-item">
@@ -139,50 +105,7 @@
                                 </div>
                             </div>
                             
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
-                                <div class="accordion" id="accordionPanelsStayOpenExample2">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                                            Brand & Model
-                                        </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
-                                        
-                                            <div class="form-check me-3" style="padding-bottom: 20px">
-                                                    <label class="form-check-label" for="brand_new_cars">
-                                                        Brand New Cars
-                                                    </label>    
-
-                                                    <input class="form-check-input" type="checkbox" id="brand_new_cars" name="brand_new_cars"
-                                                    {{ request('brand_new_cars') ? 'checked' : '' }}>
-
-                                            </div>
-                                            <h6 style="padding-top:30px">Popular</h6>
-                                           {{-- @foreach($brand_count as $brand)
-                                            <div class="d-flex align-items-center">
-                                                <!-- Checkbox -->
-                                                    <div class="form-check me-3">
-                                                        <input class="form-check-input popular-search" name="brand[]" type="checkbox" value="{{$brand->company_en}}"
-                                                        {{ in_array($brand->company_en, request('brand', [])) ? 'checked' : '' }}>
-                                                        
-                                                        <label class="form-check-label">
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
-
-                                                            <!-- @if(session('front_lang')=='en')
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
-                                                            @else
-                                                            {{ $brand->company}} ({{ $brand->count }})
-                                                            @endif -->
-                                                        </label>
-                                                    </div>
-                                            </div>
-                                            @endforeach --}}
-                                            <h6 style="color:#038ffc;">Show More Brands</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        
 
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample3">

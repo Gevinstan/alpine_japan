@@ -896,7 +896,14 @@ class HomeController extends Controller
     public function listings(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
-        $brands = Brand::where('status', 'enable')->get();
+        // $brands = Brand::where('status', 'enable')->get();
+
+        $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as name')
+        ->distinct('b.slug')->get();
+        
         $models=[];
 
 
@@ -1141,7 +1148,13 @@ class HomeController extends Controller
     public function top_selling(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
-        $brands = Brand::where('status', 'enable')->get();
+        // $brands = Brand::where('status', 'enable')->get();
+        $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as name')
+        ->where('auct_lots_xml_jp_op.top_sell',1)
+        ->distinct('b.slug')->get();
         $models=[];
 
 
@@ -1394,7 +1407,12 @@ class HomeController extends Controller
     public function auctionCar(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
-        $brands = Brand::where('status', 'enable')->get();
+        // $brands = Brand::where('status', 'enable')->get();
+        $brands = Auct_lots_xml_jp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as name')
+        ->distinct('b.slug')->get();
         $models=[];
 
 
@@ -1429,12 +1447,12 @@ class HomeController extends Controller
              $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
         }
 
-        if ($request->brand) {
-            $brand_arr = array_filter($request->brand); // Filter out any empty values
-            if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
-            }    
-        }
+        // if ($request->brand) {
+        //     $brand_arr = array_filter($request->brand); // Filter out any empty values
+        //     if ($brand_arr) {
+        //         $carsQuery->whereIn('company_en', $brand_arr); 
+        //     }    
+        // }
         if ($request->tranmission) {
             $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
             if ($transmission_arr) {
@@ -1582,10 +1600,12 @@ class HomeController extends Controller
         $cities = City::with('translate')->get();
         $features = Feature::with('translate')->get();
 
-        $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
-            ->groupBy('company_en')
-            ->having('count', '>', 1)
-            ->get();
+        // $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+        //     ->groupBy('company_en')
+        //     ->having('count', '>', 1)
+        //     ->get();
+
+        // echo json_encode($brand_count);die();    
 
         $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
             ->groupBy('transmission_en')
@@ -1623,6 +1643,8 @@ class HomeController extends Controller
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
+    // echo json_encode($brands);die();
+
         return view('auction-car-marketplace', [
             'seo_setting' => $seo_setting,
             'brands' => $brands,
@@ -1631,7 +1653,7 @@ class HomeController extends Controller
             'cars_array' => $cars_array,
             'listing_ads' => $listing_ads,
             'cars' => $cars,
-            'brand_count' => $brand_count,
+            // 'brand_count' => $brand_count,
             'price_range' => $price_range,
             'transmission' => $transmission,
             'scores' => $scores,
@@ -1645,7 +1667,13 @@ class HomeController extends Controller
 
 
         $seo_setting = SeoSetting::where('id', 10)->first();
-        $brands = Brand::where('status', 'enable')->get();
+        // $brands = Brand::where('status', 'enable')->get();
+        $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as name')
+        ->where('auct_lots_xml_jp_op.new_arrival',1)    
+        ->distinct('b.slug')->get();
 
         // Initialize the query for cars
         $carsQuery = CarDataJpOp::query();
@@ -2332,6 +2360,9 @@ class HomeController extends Controller
     ->orderBy('model')
     ->distinct()
     ->paginate(12);
+
+
+
 
 
     if($request->brand){

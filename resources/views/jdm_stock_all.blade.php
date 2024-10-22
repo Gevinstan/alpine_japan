@@ -395,7 +395,7 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
+                                                            
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
