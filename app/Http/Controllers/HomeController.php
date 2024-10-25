@@ -245,7 +245,7 @@ class HomeController extends Controller
             $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
         
-            return view('index3', [
+            return view('index4', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
                 'brands' => $brands,
@@ -1117,7 +1117,7 @@ class HomeController extends Controller
     $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
 
-    return view('listing', [
+    return view('listing1', [
         'seo_setting' => $seo_setting,
         'brands' => $brands,
         'cities' => $cities,
@@ -2054,7 +2054,7 @@ class HomeController extends Controller
 
 
 
-        return view('listing_detail', [
+        return view('listing_detail1', [
             'car' => $car,
             'galleries' => $images,
             'related_listings' => $related_listings,

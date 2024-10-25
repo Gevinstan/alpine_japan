@@ -1128,41 +1128,7 @@
     <!--   Testimonial-part-end -->
 
     <!-- Buy in 3 Easy Steps start -->
-            <!-- <section class="Easy-test" style="margin-top: 100px">
-                <img src="{{ asset('japan_home/buy.jpg') }}" alt="logo" class="d-block mx-auto img-fluid">
-
-                
-                    <div class="container buy-img" >
-                        <div class="row">
-                            <div class="centered-1">
-                                <h2 style="color: white; padding-bottom: 20px"><b>Buy in 3 Easy Steps</b></h2>
-                                <h6 style="font-size:14px; color: white">Adding smiles to your miles. Car buying mode simpler</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 bottom-left" style="padding-left: 20px; padding-right: 20px">
-                                    <h5 style="color: white">Find the perfect car</h5>
-                                    <h6 style="font-size:14px; color: white">Seamlessly browse thousands of MRL Certified cars.
-                                        Seamlessly browse thousands of MRL Certified car</h6>                                        
-                            </div>
-
-                            <div class="col-md-4 centered" style="padding-left: 20px; padding-right: 20px">
-                                    <h5 style="color: white">Send Enquiry to Alpine Japan</h5>
-                                    <h6 style="font-size:14px; color: white">Seamlessly browse thousands of MRL Certified cars.
-                                        Seamlessly browse thousands of MRL Certified cars </h6>       
-                            </div>
-
-                            <div class="col-md-4 bottom-right" style="padding-left: 20px; padding-right: 20px">
-                                    <h5 style="color: white">Buy it your way</h5>
-                                    <h6 style="font-size:14px; color: white">Seamlessly browse thousands of MRL Certified cars.
-                                        Seamlessly browse thousands of MRL Certified cars </h6>        
-                            </div>
-                        </div>
-                    </div> 
-            </section> -->
-
-                <div class="container main-box mt-5">
+                <!-- <div class="container main-box mt-5">
                 
                         <div class="row">
                             <div class="col-md-12 mt-3">
@@ -1209,15 +1175,50 @@
                                 </div>  
                             </div> 
                         </div>
-                </div> 
+                </div>  -->
+        <section class="buy-section steps-section py-5 gap-5">
+            <div class="buy-container">
+                <div class="pb-5">
+                    <h1 class="pb-2">Buy in 3 Easy Steps</h1>
+                    <p class="text-center disc buy-text-white d-flex justify-content-center">Adding smiles to your miles. Car buying made simpler</p>
+                </div>
 
-
-                     
+                <div class="row d-flex justify-content-center px-5 gap-5">
+                    <div class="col-md-3">
+                        <div class="step-circle">
+                            <div class="inner-card">
+                                <img src="{{asset('frontend/japan_home/car_search.png')}}" alt="search"/>
+                            </div>
+                        </div>
+                        <h5 class="step-title buy-text-white">Find the perfect car</h5>
+                        <p class="step-description buy-text-white">Seamlessly browse thousands of MRL Certified cars</p>
+                    </div>
+                    <div class="col-md-3 my-sm-4 my-md-0">
+                        <div class="step-circle">
+                            <div class="inner-card">
+                                <img src="{{asset('frontend/japan_home/file (1).png')}}" alt="search"/>
+                            </div>
+                        </div>
+                        <h5 class="step-title buy-text-white">Send Enquiry to Alpine Japan</h5>
+                        <p class="step-description buy-text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="step-circle">
+                            <div class="inner-card">
+                                <img src="{{asset('frontend/japan_home/dollar.png')}}" alt="search"/>
+                            </div>
+                        </div>
+                        <h5 class="step-title buy-text-white">Buy it your way</h5>
+                        <p class="step-description buy-text-white">You can pay in full or have it financed, the choice is yours</p>
+                    </div>
+                </div>
+            </div>
+        </section>    
 
     <!-- Buy in 3 Easy Steps end -->
 
     <!-- About Alpine Japan Start -->
-            <div class="container-fluid pb-5 pt-5">
+            <!-- <div class="container-fluid pb-5 pt-5">
                 <div class="row mb-4">
                     <div class="col-12 text-center text-md-start" style="margin-left: 165px;">
                         <h2 style="display: inline;">About</h2> 
@@ -1254,13 +1255,33 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+
+        <section class="about-section">
+            <div class="container text-sm-center text-md-start">
+                <h2 class="pb-2">About <span class="highlight-text">Alpine Japan</span></h2>
+                <div class="row align-items-center mt-3">
+                <div class="col-md-4 col-12">
+                    <img src="{{asset('frontend/japan_home/about.svg')}}" class="img-fluid rounded" alt="Alpine Japan Car">
+                </div>
+                <div class="col-md-8 col-12 d-md-block d-sm-flex flex-sm-column mt-md-0 mt-sm-2 justify-content-sm-center align-items-sm-center">
+                    <p class="fw-bolder text-black">
+                    Alpine Japan, founded in 2009, provides a unique range of vehicles from passenger cars to heavy equipment and cranes. Japanese vehicles are known to stand out for their quality, reliability and ease of use. Our company is committed to making the unique experience of owning Japanese vehicles available to as many people as possible in different countries and continents.
+                    </p>
+                    <p class="py-3">
+                    We specialize in exporting JDM vehicles to markets in the United States, Canada, Australia and the United Kingdom. To Malaysia, we supply minivans and new cars, and to the Middle East we supply classic cars. In the African continent market, we provide conventional cars that are becoming an integral part of everyday life.
+                    </p>
+                    <a href="#" class="thm-btn">Read More</a>
+                </div>
+                </div>
             </div>
+        </section>
 
 
     <!-- About Alpine Japan End -->
 
     <!-- Quality Compliance Part Start -->
-            <div class="container-fluid pb-5">
+            <!-- <div class="container-fluid pb-5">
                 <div class="row justify-content-center">
                     <div class="col-md-8 text-center ">
                         <div style="margin-left:50px">
@@ -1285,7 +1306,52 @@
                         <img src="{{ asset('japan_home/qc3.svg') }}" alt="logo" class="d-block mx-auto">
                     </div>
                 </div>
+            </div> -->
+
+        <section class="quality-compliance py-5">
+            <div class="container text-center flex-column px-5">
+                <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
+                <p class="section-subtitle">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
+
+                <div class="row justify-content-center px-4">
+                    <!-- First Company -->
+                    <div class="col-md-4 col-12 mb-4">
+                        <div class="compliance-item mb-3">
+                            <img src="{{ asset('frontend/japan_home/qc_2.svg') }}" alt="QISJ Logo" class="compliance-logo">
+                            <div class="compliance-icon"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <div class="compliance-content">
+                            <h4 class="compliance-title">Quality Inspection Services CO.,LTD</h4>
+                            <p class="compliance-text">Kenya, Tanzania</p>
+                        </div>
+                    </div>
+
+                    <!-- Second Company -->
+                    <div class="col-md-4 col-12 mb-4">
+                        <div class="compliance-item mb-3">
+                            <img src="{{ asset('frontend/japan_home/qc_3.svg') }}" alt="Bureau Veritas Logo" class="compliance-logo">
+                            <div class="compliance-icon"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <div class="compliance-content">
+                            <h4 class="compliance-title">Bureau Veritas Japan CO.,LTD.</h4>
+                            <p class="compliance-text">Sri Lanka, Mauritius</p>
+                        </div>
+                    </div>
+
+                    <!-- Third Company -->
+                    <div class="col-md-4 col-12 mb-4">
+                        <div class="compliance-item mb-3">
+                            <img src="{{ asset('frontend/japan_home/qc_1.svg') }}" alt="JAAI Logo" class="compliance-logo">
+                            <div class="compliance-icon"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <div class="compliance-content">
+                            <h4 class="compliance-title">East Africa Automobile Service</h4>
+                            <p class="compliance-text">Tanzania, Uganda</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
     <!-- Quality Compliance Part end -->
      <script>
