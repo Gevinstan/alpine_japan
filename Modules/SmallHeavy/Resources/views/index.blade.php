@@ -42,9 +42,9 @@
                                 </div>
 
                                 <!-- crancy Table -->
-                                <div id="crancy-table__main_wrapper" class=" dt-bootstrap5 no-footer">
+                                <div id="crancy-table__main_wrapper" class=" no-footer">
 
-                                    <table class="crancy-table__main crancy-table__main-v3 no-footer" id="dataTable">
+                                    <table class="crancy-table__main-v3 no-footer" id="dataTable">
                                         <!-- crancy Table Head -->
                                         <thead class="crancy-table__head">
                                             <tr>
