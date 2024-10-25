@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
   
 
     <link rel="icon" href="{{ asset('japan_home/japan-logo.png') }}">
@@ -17,6 +14,8 @@
 
     <!-- fontawesome csn link  -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/fontawesome/css/all.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
+
     <!--bootstrap.min.css  -->
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
     <!-- venobox.min.css  -->
@@ -34,7 +33,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
     
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -169,21 +167,49 @@
                                 </div>
                             </div>
 
-                            <div class="header-right-phone-num-btn me-3 ms-5">
-                                <span class="icon-circle"><i class="bi bi-envelope"></i></span>
+                            <div class="header-right-phone-num-btn">
+                                <span class="story">
+                                    <div class="stories">
+                                        <div class="sm-icon4">
+                                            <a href="#"><img src="{{ asset('japan_home/mail-id.svg') }}" alt="logo"></a>
+                                        </div> 
+                                    </div>
+                                </span>
                                 <span class="text-white">sales@alpinejapan.com</span>
                             </div>
 
-                            <div class="header-right-phone-num-btn me-3">
-                                <span class="icon-circle"><i class="bi bi-phone"></i></span>
+                            <div class="header-right-phone-num-btn">
+                                <span class="story">
+                                    <div class="stories">
+                                        <div class="sm-icon5">
+                                            <a href="#"><img src="{{ asset('japan_home/phone.svg') }}" alt="logo"></a>
+                                        </div> 
+                                    </div>
+                                </span>
                                 <span class="text-white">+81 78 242 1568, +81 78 330 1021</span>
                             </div>
                         </div>
 
                         <div class="header-right-social-media-btn d-flex">
-                            <span class="icon-circle me-2"><i class="bi bi-instagram"></i></span>
-                            <span class="icon-circle me-2"><i class="bi bi-facebook"></i></span>
-                            <span class="icon-circle"><i class="bi bi-youtube"></i></span>
+                            <div class="story">
+                                <div class="stories">
+                                    <div class="sm-icon1">
+                                        <a href="#"><img src="{{ asset('japan_home/instagram.svg') }}" alt="logo"></a>
+                                    </div> 
+                                </div>
+
+                                <div class="stories">
+                                    <div class="sm-icon2">
+                                        <a href="#"><img src="{{ asset('japan_home/facebook.svg') }}" alt="logo"></a>
+                                    </div>
+                                </div>
+
+                                <div class="stories">
+                                    <div class="sm-icon3">
+                                        <a href="#"><img src="{{ asset('japan_home/youtube.svg') }}" alt="logo"></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1055,6 +1081,8 @@
 
     <!-- jquery  -->
     <script src="{{ asset('global/jquery-3.7.1.min.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
+
 
     <!-- bootstrap.bundle.min.js -->
     <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>

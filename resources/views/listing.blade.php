@@ -15,7 +15,7 @@
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <ol class="breadcrumb breadcrumb-nav mb-0">
+                    <ol class="breadcrumb list-breadcrumb breadcrumb-nav mb-0">
                         <li class="breadcrumb-item" ><a href="#">JDM Stock</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Volvo</li>
                     </ol>
@@ -36,7 +36,7 @@
                     <form action="" id="search_form">
                         <div class="inventory-main-box">
                            
-                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                            <!-- <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header">
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
                                 <div class="accordion" id="accordionPanelsStayOpenExample2">
@@ -103,10 +103,10 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                        <input class="form-check-input"  name="brand[]" type="checkbox" value="{{$brand->company_en}}"
+                                                        <input class="form-check-input popular_cars"  name="brand[]" type="checkbox" value="{{$brand->company_en}}"
                                                         {{ in_array($brand->company_en, request('brand', [])) ? 'checked' : '' }}>
                                                         
-                                                        <label class="form-check-label">
+                                                        <label class="form-check-label popular_cars">
                                                             {{ $brand->company_en }} ({{ $brand->count }})
 
                                                             <!-- @if(session('front_lang')=='en')
@@ -118,7 +118,7 @@
                                                     </div>
                                             </div>
                                             @endforeach
-                                            <h6 style="color:#038ffc;">Show More Brands</h6>
+                                            <h6 style="color:#038ffc; padding-top:10px">Show More Brands</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -145,15 +145,13 @@
                                                 </div> -->
 
 
-                                                <div id="slider-outer-div ms-2" >
-                                                    <div id="slider-max-label" class="slider-label"></div>
-                                                    <div id="slider-min-label" class="slider-label"></div>
+                                                <div id="slider-outer-div" class="ms-2">
                                                     <div id="slider-div">
-                                                    <div>
-                                                        <input id="ex2" type="text" data-slider-min="50"
-                                                        data-slider-max="2000" data-slider-value="[50,300]"
-                                                        data-slider-tooltip="hide" />
-                                                    </div>
+                                                        <div>
+                                                            <input id="ex2" type="text" data-slider-min="50"
+                                                            data-slider-max="2000" data-slider-value="[50,300]"sli
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -197,21 +195,21 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
+                                              <h6 class="acc-text">1920</h6> 
 
-                                                    <!-- <span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">1960 2024</p></span> -->
-
-                                                    <span>1960</span>
-                                                    <!-- <span id="currentYear">1992</span> -->
-                                                    <!-- <span id="previewYear" style="display: none;"></span>
-                                                    <span style="margin-left:150px;">2024</span> -->
-                                                    
-                                                    <div class="range-container mt-3" style="padding-bottom:20px;">
-                                                        <!-- Fixed first value slider -->
-                                                        <input type="range" name="minYear" class="form-range" min="0" max="64" step="1" id="minYearSlider" value="0">
-
-                                                        <!-- Fixed last value slider -->    
-                                                        <input type="range" name="maxYear" class="form-range" min="0" max="64" step="1" id="maxYearSlider" value="64">
+                                                <div id="slider-outer-div" class="ms-2">
+                                                    <div id="slider-div">
+                                                        <div>
+                                                            <input id="ex3" type="text" data-slider-min="50"
+                                                            data-slider-max="2000" data-slider-value="[50,300]"sli
+                                                            />
+                                                        </div>
                                                     </div>
+                                                </div>
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -283,7 +281,7 @@
                                                                 @endif
                                                             @endif
 
-                                                            <span style="font-size:10px" class="ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
+                                                            <span style="" class="sc_val ms-1">{{ $scoreValue }} ({{ $score->count }})</span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -321,7 +319,7 @@
                                 </div>
 
                                 <div class="inventory-sarch-ber-text" style="">
-                                    <p style="display:inline; color:black; font-weight:bold">{{ __('Sort By:') }}</p>
+                                    <p style="display:inline;">{{ __('Sort By:') }}</p>
                                     <div class="dropdown" style="display:inline; ">
                                         <a class="btn btn-white dropdown-toggle" style="padding-bottom:10px; color:#038ffc !important" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                             Recently Added
@@ -536,7 +534,7 @@
                                         </div>
 
                                         <div class="brand-car-btm-txt-btm">
-                                            <p class="btm-txt-btm" style="padding-bottom:17px;"><span><i class="bi bi-geo-alt-fill" style="font-family: var(--DMSans) !important; color:black">Hyogo,Japan 2024-02-02</i> </span></p>
+                                            <p class="btm-txt-btm" style="padding-bottom:17px;"><span><i class="bi bi-geo-alt-fill" style="">Hyogo,Japan 2024-02-02</i> </span></p>
                                         </div>
                                     </div>
 
@@ -798,7 +796,7 @@
     </section>
 
     <!-- pagination ends -->
-            <script>
+<!-- <script>
   const setLabel = (lbl, val) => {
   const label = $(`#slider-${lbl}-label`);
   label.text(val);
@@ -820,7 +818,7 @@ $('#ex2').slider().on('slide', function(ev) {
   setLabels(ev.value);
 });
 setLabels($('#ex2').attr("data-value").split(",")); 
-</script>       
+</script>        -->
 </main>
 @endsection
 
@@ -905,70 +903,68 @@ $(document).ready(function() {
 
 
 
-   const rangeMin = document.getElementById('customRangeMin');
-   const rangeMax = document.getElementById('customRangeMax');
-   const minValueSpan = document.getElementById('min-value');
-   const maxValueSpan = document.getElementById('max-value');
-
-    // Ensure the min range never exceeds the max range
-    rangeMin.addEventListener('input', function() {
-    if (parseFloat(rangeMin.value) > parseFloat(rangeMax.value)) {
-        rangeMin.value = rangeMax.value;
-    }
-    minValueSpan.textContent = rangeMin.value;
-    });
-
-    // Ensure the max range never goes below the min range
-    rangeMax.addEventListener('input', function() {
-    if (parseFloat(rangeMax.value) < parseFloat(rangeMin.value)) {
-        rangeMax.value = rangeMin.value;
-    }
-    maxValueSpan.textContent = rangeMax.value;
-    });
+  
 </script>
    
-<script>
-function updateRange() {
-    const minYear = parseInt(document.getElementById('minYearSlider').value);
-    const maxYear = parseInt(document.getElementById('maxYearSlider').value);
-    
-    const yearSlider = document.getElementById('yearSlider');
-    
-    yearSlider.min = minYear;
-    yearSlider.max = maxYear;
-    
-    // Optionally, you can adjust the value of yearSlider to stay within new limits
-    if (yearSlider.value < minYear) {
-        yearSlider.value = minYear;
-    } else if (yearSlider.value > maxYear) {
-        yearSlider.value = maxYear;
-    }
-}
+
 </script>
 
-<script>
-  const setLabel = (lbl, val) => {
-  const label = $(`#slider-${lbl}-label`);
-  label.text(val);
-  const slider = $(`#slider-div .${lbl}-slider-handle`);
-  const rect = slider[0].getBoundingClientRect();
-  label.offset({
-    top: rect.top - 30,
-    left: rect.left
-  });
-}
+    <!-- <script>
+        const setLabel = (lbl, val) => {
+        const label = $(`#slider-${lbl}-label`);
+        label.text(val);
+        const slider = $(`#slider-div .${lbl}-slider-handle`);
+        const rect = slider[0].getBoundingClientRect();
+        label.offset({
+            top: rect.top - 30,
+            left: rect.left
+        });
+        }
 
-const setLabels = (values) => {
-  setLabel("min", values[0]);
-  setLabel("max", values[1]);
-}
+        const setLabels = (values) => {
+        setLabel("min", values[0]);
+        setLabel("max", values[1]);
+        }
 
 
-$('#ex2').slider().on('slide', function(ev) {
-  setLabels(ev.value);
-});
-setLabels($('#ex2').attr("data-value").split(",")); 
-</script>
+        $('#ex2').slider().on('slide', function(ev) {
+        setLabels(ev.value);
+        });
+        setLabels($('#ex2').attr("data-value").split(",")); 
+    </script>
+
+    <script>
+            const setLabel1 = (lbl, val) => {
+            const label = $(`#slider-${lbl}-label1`);
+            label.text(val);
+            const slider = $(`#slider-div1 .${lbl}-slider-handle`);
+            const rect = slider[0].getBoundingClientRect();
+            label.offset({
+                top: rect.top - 30,
+                left: rect.left,
+            });
+        };
+
+        const setLabels1 = (values) => {
+            setLabel1("min", values[0]);
+            setLabel1("max", values[1]);
+        }
+            
+        $("#ex3").slider().on("slide", function (ev) {
+            setLabels1(ev.value);
+        });
+        setLabels1($("#ex3").attr("data-value").split(","));
+    </script> -->
+
+    <script>
+     var $j = jQuery.noConflict();
+        $j(document).ready(function() {
+            $j('#ex2').slider();
+            $j('#ex3').slider();
+        });
+       
+    </script>
+    
 
 @endpush
 

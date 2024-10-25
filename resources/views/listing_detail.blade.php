@@ -17,14 +17,14 @@
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 listing-detail">
                     <ol class="breadcrumb breadcrumb-nav mb-0 ms-3">
-                        <li class="breadcrumb-item" ><a href="#">
+                        <li class="breadcrumb-item list-name" ><a href="#">
                             @if(session('front_lang')=='en')
                                     {{$car->company_en}}
                                 @else
                                     {{$car->company}}
                                 @endif
                         </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
+                        <li class="breadcrumb-item active list-name" aria-current="page">
                             @if(session('front_lang')=='en')
                                  {{$car->model_name_en}} 
                                 @else
@@ -123,8 +123,8 @@
                                                                 @endif
                                                                 
                                                             </h2>
-                                                            <div style="margin-top: 15px; margin-bottom: 15px">
-                                                                <p style="display: inline;">Price :<p style="font-size:18px; color: black; display: inline;" id="price_value">
+                                                            <div class="list-detail-price" style="">
+                                                                <p class="d-inline">Price :<p class="fs-5 price_color d-inline" id="price_value">
                                                                    <b> @if(session('front_lang')=='en')
                                                                     ${{$car->start_price_num}}
                                                                     @else
@@ -135,31 +135,72 @@
                                                                 </p>    
                                                                 
                                                                 <p style="display: inline;" id="commission_value">Commission : <p style="font-size:18px; color: black; display: inline;"><b>${{$car->commission_value}}</b></p></p>
-                                                            
-                                                                <p style="display: inline;">{{__('Delivery Charge :')}} <b><p style="font-size:18px; color: black; display: inline; font-weight:bold" id="delivery_charge"></p></b></p>
+                                                          
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="dropdown" style="padding-right:30px">
-                                                    <select class="form-select form-select"
-                                                        aria-label=".form-select example" name="location" id="location">
-                                                        <option selected value="">
-                                                            {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
-                                                        </option>
-                                                        @foreach ($delivery_charges as $charges)
-                                                        <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
-                                                        @endforeach
-                                                    </select>
+
+                                            <!-- <div class="container">
+                                                <div class="row d-flex justify-content-between align-items-center">
+                                                    <div class="col-md-6">
+                                                        <div class="dropdown" style="">
+                                                            <select class="form-select form-select list-detail-location mt-4" aria-label=".form-select example" name="location" id="location">
+                                                                <option class="list-detail-location-option" selected value=""> {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                                                </option>
+                                                                @foreach ($delivery_charges as $charges)
+                                                                <option class="list-detail-location-option" value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="del_charge_card bg-info rounded-3 d-flex align-items-center justify-content-center ">
+                                                            <p class="py-4">
+                                                                Delivery Charge
+                                                            </p>    
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </div> -->
+
+                                            <div class="container-fluid ps-0">
+                                                <div class="row d-flex align-items-center justify-content-around">
+                                                    <div class="col-md-6">
+                                                        <div class="dropdown ps-0">
+                                                            <select class="form-select form-select list-detail-location px-2" aria-label=".form-select example" name="location" id="location">
+                                                                <option class="list-detail-location-option" selected value="">
+                                                                    {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                                                </option>
+                                                                @foreach ($delivery_charges as $charges)
+                                                                <option class="list-detail-location-option" value="{{ $charges->id }}">
+                                                                    <i class="bi bi-caret-down-fill"></i>{{ $charges->country_name }}
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 pe-0">
+                                                        <div class=" bg-white rounded-3 d-flex align-items-center justify-content-center">
+                                                            <p class=" del_charge_card py-4 mb-0 px-2"> 
+                                                                Delivery Charge
+                                                            </p>    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+ 
 
                                                 <div class="button" style="padding-right:30px">
-                                                    <button class="btn btn-outline-info btn-lg" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                                                </div>
+                                    <button class="btn custom-blue-btn btn-lg" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
+                                </div>
                                                 <br>
-                                            
-                                                <span><p  style="display: inline; padding-top:40px">Total Price :<p style="font-size:18px; color: black; display: inline; font-weight:bold" id="total_price"></p><p></p></span>
+                                                <span><p class="delivery_charge" style="display: inline;">{{__('Delivery Charge :')}} <b><p style="font-size:18px; color: black; display: inline; font-weight:bold" id="delivery_charge"></p></b></p></span>
+                                                <span><p class="total_price" style="display: inline; padding-top:40px">Total Price :<p style="display: inline;" id="total_price"></p><p></p></span>
                                             </div>
                                             <div class="auto-sales-text-right">
                                                 <p>
@@ -180,27 +221,43 @@
                                             <div class="auto-sales-form">
 
                                                 <div class="auto-sales-form-item">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput3"
-                                                        placeholder="{{ __('translate.Name') }} *" name="name" value="{{ old('name') }}">
-                                                </div>
-                                                <div class="auto-sales-form-item">
-                                                    <input type="email" class="form-control" id="exampleFormControlInput4"
-                                                        placeholder="{{ __('translate.Email') }} *" name="email" value="{{ old('email') }}">
-                                                </div>
-
-                                                <div class="auto-sales-form-item">
-                                                    <input type="text" class="form-control" id="exampleFormControlInput5"
-                                                        placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput3"
+                                                            placeholder="" name="name" value="{{ old('name') }}">
+                                                        <span class="placeholder-text">Name <span class="required">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="auto-sales-form-item">
-                                                    <input type="text" class="form-control" id="exampleFormControlInpu6"
-                                                        placeholder="{{ __('translate.Subject') }} *" value="{{ old('subject') }}" name="subject">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="email" class="form-control" id="exampleFormControlInput4"
+                                                            placeholder="" name="email" value="{{ old('email') }}">
+                                                        <span class="placeholder-text">Email <span class="required">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 <div class="auto-sales-form-item">
-                                                    <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
-                                                        placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput5"
+                                                            placeholder="" name="phone" value="{{ old('phone') }}">
+                                                        <span class="placeholder-text">Phone <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
+                                                            placeholder="" value="{{ old('subject') }}" name="subject">
+                                                        <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
+                                                            placeholder="" name="message">{{ old('message') }}</textarea>
+                                                        <span class="placeholder-text">Message <span class="required">*</span></span>
+                                                    </div>
                                                 </div>
 
                                                 @if($google_recaptcha->status==1)
@@ -209,7 +266,7 @@
                                                     </div>
                                                 @endif
 
-                                                <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
+                                                <button type="submit" class="thm-btn-two">INQUIERY NOW</button>
                                             </div>
                                         </form>
 
@@ -337,7 +394,7 @@
                     data-aos-delay="150">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button car_spec" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsetwo">
                                     {{ __('Car Specifications') }}
@@ -350,7 +407,7 @@
                                         <div class="col-lg-6 ">
                                             <ul class="key-information" >
                                                 <li>
-                                                    <span>
+                                                    <span class="spec_type">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -365,7 +422,7 @@
 
                                                         {{ __('translate.Body Type') }}
                                                     </span>
-                                                    {{ html_decode($car->body_type) }}
+                                                    <span class="spec_name">{{ html_decode($car->body_type) }}</span>
                                                 </li>
                                                 <li>
                                                     <span>
@@ -672,7 +729,7 @@
                     data-aos-delay="200">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingthree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true" aria-controls="panelsStayOpen-collapsethree">
+                                <button class="accordion-button assess_head" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true" aria-controls="panelsStayOpen-collapsethree">
                                     {{ __('Assessories') }}
                                 </button>
                             </h2>
@@ -736,7 +793,7 @@
                     <div class="accordion" id="accordionPanelsStayOpenExample" data-aos="fade-up"
                     data-aos-delay="100">
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <h2 class="accordion-header desc_overview" id="panelsStayOpen-headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapseOne">

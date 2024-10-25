@@ -83,22 +83,22 @@
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                          <input type="checkbox" name="" id="" data-id="{{$car->id}}" class="form-control td-checkbox-class">
                                                     </td>
-                                                    <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title">{{ ++$index }}</h4>
+                                                    <td class="#038ffc crancy-table__data-2 " >
+                                                        <h4 class="crancy-table__product-title" style="font-size:0.8em !important;">{{ ++$index }}</h4>
+                                                    </td>
+
+                                                    <td class="crancy-table__column-2 crancy-table__data-2 fs-14">
+                                                        <h4 class="crancy-table__product-title" style="font-size:0.8em !important;">{{ $car->category }}</h4>
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title">{{ $car->category }}</h4>
-                                                    </td>
-
-                                                    <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title">{{ $car->title }}</h4>
+                                                        <h4 class="crancy-table__product-title" style="font-size:0.8em !important;">{{ $car->title }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title">{{ $car->yom }}</h4>
+                                                        <h4 class="crancy-table__product-title" style="font-size:0.8em !important;">{{ $car->yom }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <img src="{{ asset('cars/' . $car->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
+                                                    <img src="{{ asset('cars/' . $car->image) }}" style="font-size:0.8em !important;"  width="100" height="100" alt="Product Image" class="common-image">
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         @if ($car->is_active == '1')
