@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*  Admin panel Controller  */
 
@@ -19,6 +20,8 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use Illuminate\Support\Facades\Session;
+
 
 /* Admin panel Controller  */
 
@@ -65,6 +68,9 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
+            Route::post('/auct-sess-creation',function(Request $request){
+                return Session::put('auct_id',$request->key);
+            })->name('auct-sess-creation');
 
             Route::get('/page/{slug}', 'custom_page')->name('custom-page');
 

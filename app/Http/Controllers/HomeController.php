@@ -1671,7 +1671,7 @@ class HomeController extends Controller
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
-    // echo json_encode($brands);die();
+    // echo json_encode($models);die();
 
         return view('auction-car-marketplace', [
             'seo_setting' => $seo_setting,
