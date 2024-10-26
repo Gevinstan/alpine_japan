@@ -7600,8 +7600,8 @@ p {
 .footer {
     padding: 20px 0 0px 0;
     /* background: url(../assets/images/hero/footer-bg.png) no-repeat center/cover; */
-    /* position: sticky; */
-    bottom: 0;
+    /* position: fixed; */
+    /* bottom: 0; */
     /* overflow-x: hidden; */
     background-color: #0e124b !important;
 }
@@ -8310,7 +8310,7 @@ a:link {
 
 .header .menu-bg {
     background-color: var(--white-color);
-    padding: 10px 0;
+    padding: 4px 0 !important;
     margin-top: 0px;
 }
 
@@ -15968,27 +15968,26 @@ a:link {
 
 /***** range slider2 in listing page *****/
 
-        #slider-div {
-            display: flex;
-            flex-direction: row;
-            margin-top: 30px;
-        }
-        #slider-div > div {
-            margin: 8px;
-        }
-        .slider-label {
-            position: absolute;
-            background-color: #eee;
-            padding: 4px;
-            font-size: 0.75rem;
-        }
-
+#slider-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+#slider-div > div {
+    margin: 8px;
+}
+.slider-label {
+    position: absolute;
+    background-color: #eee;
+    padding: 4px;
+    font-size: 0.75rem;
+}
 
 /**********  Car Buy section Start  *********/
 
 .buy-section {
     background-color: var(--primary-color-1);
-    background-image: url('../japan_home/buy-bg.png');
+    background-image: url("../japan_home/buy-bg.png");
     color: var(--white-color) !important;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -16060,9 +16059,9 @@ a:link {
         border-left: 20px solid white;
     }
 }
-  
-  /* Inner Card Styling */
-  .inner-card {
+
+/* Inner Card Styling */
+.inner-card {
     width: 125px;
     height: 125px;
     background-color: #f8f9fa;
@@ -16071,16 +16070,15 @@ a:link {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); /* Inner shadow */
-  }
-  
-  /* Responsive Layout */
-  @media (max-width: 767px) {
+}
+
+/* Responsive Layout */
+@media (max-width: 767px) {
     .inner-card {
-      width: 100px;
-      height: 100px;
+        width: 100px;
+        height: 100px;
     }
-  }
-  
+}
 
 /**********  Car Buy section End  *********/
 
@@ -16102,7 +16100,7 @@ a:link {
 
 .about-section p {
     color: #6c757d;
-    font-size: .925rem;
+    font-size: 0.925rem;
     line-height: 22px !important;
 }
 
@@ -16216,3 +16214,6 @@ a:link {
 }
 
 /********* Quality section End **********/
+
+
+

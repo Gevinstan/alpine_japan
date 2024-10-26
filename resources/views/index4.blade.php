@@ -374,8 +374,7 @@
                                         </select>
                                     </div>
                                 </li>
-                                <li class="nav-item">
-                                    
+                                <li class="nav-item"> 
                                     <div class="custom-select-wrapper">
                                         <select class="aj-dropdown">
                                         <option selected>Model</option>
