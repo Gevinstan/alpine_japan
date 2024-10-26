@@ -700,7 +700,6 @@ endRange.addEventListener('input', () => {
             e.preventDefault();   
             $(".model-search").val("")
             form.submit();
-           
         }) 
         $(".model-search").on('change',function(e){
             e.preventDefault();   
