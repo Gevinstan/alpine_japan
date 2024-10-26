@@ -265,7 +265,7 @@
 
                                         <li><a style="color: black !important" href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
 
-                                        <li><a style="color: black !important" href="{{ route('dealers') }}">{{ __('translate.New Car Arrivals') }}</a></li>
+                                        <li><a style="color: black !important" href="{{ route('new-arrival') }}">{{ __('translate.New Car Arrivals') }}</a></li>
 
                                         <li><a style="color: black !important" href="{{ route('blogs') }}">{{ __('translate.Useful Links') }}</a></li>
 
