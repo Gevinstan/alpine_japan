@@ -699,7 +699,6 @@ endRange.addEventListener('input', () => {
         $(".brand-search").on('change',function(e){
             e.preventDefault();   
             form.submit();
-           
         }) 
 
         $("#start").on('input',function(e){
