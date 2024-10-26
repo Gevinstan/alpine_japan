@@ -51,13 +51,14 @@
                         <div class="col-md-8">
                             <div class="inventory-details-slick-for">
                                     <div class="inventory-details-slick-img">
-                                        @if(file_exists(public_path('cars/' . $car->image)))
+                                    <img src="{{ asset('Cars/' . $car->image) }}" alt="thumb">
+                                       {{-- @if(file_exists(public_path('cars/' . $car->image)))
                                                 <img src="{{ asset('Cars/' . $car->image) }}" alt="thumb">
                                             @elseif(file_exists(public_path('Heavy/' .$car->image)))
                                                 <img src="{{ asset('Heavy/' . $car->id . '/' . $car->image) }}" alt="thumb">
                                             @else 
                                                 <img src="{{ asset('Small-Heavy/' . $car->id . '/' . $car->image) }}" alt="thumb">
-                                            @endif
+                                            @endif --}}
                                     </div>
                             </div>
                         </div>

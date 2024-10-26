@@ -51,13 +51,14 @@
                         <div class="col-md-8">
                             <div class="inventory-details-slick-for">
                                     <div class="inventory-details-slick-img">
-                                        @if(file_exists(public_path('cars/' . $car->image)))
+                                    <img src="{{ asset('Cars/' . $car->image) }}" alt="thumb">
+                                       {{-- @if(file_exists(public_path('cars/' . $car->image)))
                                             <img src="{{ asset('Cars/' . $car->image) }}" alt="thumb">
                                         @elseif(file_exists(public_path('Heavy/' .$car->image)))
                                             <img src="{{ asset('Heavy/' . $car->id . '/' . $car->image) }}" alt="thumb">
                                         @else 
                                             <img src="{{ asset('Small-Heavy/' . $car->id . '/' . $car->image) }}" alt="thumb">
-                                        @endif
+                                        @endif --}}
                                     </div>
                             </div>
                         </div>
@@ -172,8 +173,8 @@
                                                 <input type="hidden" name="commission" value="" id="hidden_commission">
                                                 <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
                                                 <input type="hidden" name="total_car_price" value="" id="hidden_total">
-                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
-                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->make}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model}}">
 
                                                 @if($google_recaptcha->status==1)
                                                     <div class="auto-sales-form-item">
