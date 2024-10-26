@@ -2122,7 +2122,7 @@ class HomeController extends Controller
     public function jdm_stock_all(Request $request)
     {
         $seo_setting = SeoSetting::where('id', 10)->first();
-        $brands = Brand::where('status', 'enable')->get();
+        // $brands = Brand::where('status', 'enable')->get();
 
         $jdmBrand = $request->input('jdm_brand');
         $jdmModel = $request->input('jdm_model');
@@ -2140,9 +2140,7 @@ class HomeController extends Controller
            DB::enableQueryLog();
             // Query for Blog table
             $blogCars = Cars::when($jdmBrand, function ($query, $jdmBrand) {
-                $carMakes=Cars::where('make',$jdmBrand)->distinct()
-                ->pluck('model');
-                    return $query->where('make', $jdmBrand);
+                    return $query->where(DB::raw('LOWER(make)'), $jdmBrand);
                 })
                 ->when($jdmModel, function ($query, $jdmModel) {
                     // $brand_arr = array_filter($jdmModel);
@@ -2155,7 +2153,7 @@ class HomeController extends Controller
                 })
                 ->when($jdmYear, function ($query, $jdmYear) {
                     // $yom_arr = array_filter($jdmYear);
-                    if ($jdmYear) {
+                    if ($jdmYear!="") {
                         return $query->where('yom', $jdmYear);
                     } 
                 })
@@ -2179,10 +2177,13 @@ class HomeController extends Controller
                     return $query->where('yom', $brand_new_cars);
                 })
                 ->select('model','price','image','id','make','title');
+
+
+
       
             // Query for Heavy table
             $heavyCars = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
-                return $query->where('make', $jdmBrand);
+                return $query->where(DB::raw('LOWER(make)'), $jdmBrand);
                 })
                 ->when($jdmModel, function ($query, $jdmModel) {
                     // $brand_arr = array_filter($jdmModel);
@@ -2192,7 +2193,7 @@ class HomeController extends Controller
                 })
                 ->when($jdmYear, function ($query, $jdmYear) {
                     // $yom_arr = array_filter($jdmYear);
-                    if ($jdmYear) {
+                    if ($jdmYear!="") {
                         return $query->where('yom', $jdmYear);
                     } 
                 })
@@ -2225,7 +2226,7 @@ class HomeController extends Controller
 
             // Query for Small Heavy table
             $smallHeavyCars = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
-                return $query->where('make', $jdmBrand);
+                return $query->where(DB::raw('LOWER(make)'), $jdmBrand);
                 })
                 ->when($jdmModel, function ($query, $jdmModel) {
                     // $brand_arr = array_filter($jdmModel);
@@ -2235,7 +2236,7 @@ class HomeController extends Controller
                 })
                 ->when($jdmYear, function ($query, $jdmYear) {
                     // $yom_arr = array_filter($jdmYear);
-                    if ($jdmYear) {
+                    if ($jdmYear!="") {
                         return $query->where('yom', $jdmYear);
                     }  
                 })
@@ -2368,6 +2369,7 @@ class HomeController extends Controller
                             ->unique()
                             ->values();                   
     }
+
  
 
 
@@ -2412,18 +2414,21 @@ class HomeController extends Controller
     $price_range = $this->getJDMPriceRange();
     $jdm_legend = Brand::where('status', 'enable')->get();
 
+ 
 
-    $models = \DB::select(
-        'SELECT model, SUM(model_count) as total_count FROM (
-            (SELECT model, COUNT(*) as model_count FROM blog WHERE model IS NOT NULL AND model != "" GROUP BY model)
-            UNION ALL
-            (SELECT model, COUNT(*) as model_count FROM heavy WHERE model IS NOT NULL AND model != "" GROUP BY model)
-            UNION ALL
-            (SELECT model, COUNT(*) as model_count FROM small_heavy WHERE model IS NOT NULL AND model != "" GROUP BY model)
-        ) as combined_models
-        GROUP BY model
-        HAVING total_count > 0'
-    );
+    // $models = \DB::select(
+    //     'SELECT model, SUM(model_count) as total_count FROM (
+    //         (SELECT model, COUNT(*) as model_count FROM blog WHERE model IS NOT NULL AND model != "" GROUP BY model)
+    //         UNION ALL
+    //         (SELECT model, COUNT(*) as model_count FROM heavy WHERE model IS NOT NULL AND model != "" GROUP BY model)
+    //         UNION ALL
+    //         (SELECT model, COUNT(*) as model_count FROM small_heavy WHERE model IS NOT NULL AND model != "" GROUP BY model)
+    //     ) as combined_models
+    //     GROUP BY model
+    //     HAVING total_count > 0'
+    // );
+
+    // echo json_encode($models);die();
 
     $transmissions = \DB::select(
         'SELECT transmission, SUM(model_count) as total_count FROM (
@@ -2445,17 +2450,28 @@ class HomeController extends Controller
     ->distinct('b.slug')->get();
 
 
+
     $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
     ->join('brand_translations as bt','bt.brand_id','=','b.id')
     ->where('bt.lang_code',Session::get('front_lang'))
     ->select('b.slug','bt.name as brand_name')
     ->distinct('b.slug')->get();
 
+
     $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
     ->join('brand_translations as bt','bt.brand_id','=','b.id')
     ->where('bt.lang_code',Session::get('front_lang'))
     ->select('b.slug','bt.name as brand_name')
     ->distinct('b.slug')->get();
+    $brands = $jdm_legend
+    ->concat($jdm_legend_heavy)
+    ->concat($jdm_legend_small_heavy)
+    ->unique('slug')
+    ->values();
+
+
+   
+
 
 
 
@@ -2463,6 +2479,10 @@ class HomeController extends Controller
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+
+
 
 
     

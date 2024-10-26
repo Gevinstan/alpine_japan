@@ -115,7 +115,7 @@
                                                     <input class="form-check-input brand-search" name="jdm_brand" type="radio" value="{{$brand->slug}}"
                                                         {{ in_array(trim($brand->slug), (array)request('jdm_brand', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
-                                                            {{ $brand->name }}
+                                                            {{ $brand->brand_name }}
                                                         </label>
                                                     </div>
                                             </div>
@@ -139,10 +139,10 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3 model-div">
-                                                    <input class="form-check-input model-search" name="jdm_model" type="radio" value="{{$brand->model}}"
-                                                        {{ in_array(trim($brand->model), (array)request('jdm_model', [])) ? 'checked' : '' }}>
+                                                    <input class="form-check-input model-search" name="jdm_model" type="radio" value="{{$brand}}"
+                                                        {{ in_array(trim($brand), (array)request('jdm_model', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
-                                                            {{ $brand->model }}
+                                                            {{ $brand}}
                                                         </label>
                                                     </div>
                                             </div>
@@ -255,7 +255,7 @@
                                                 <div class="range-container">
                                                     <input type="range" class="form-range" min="1960" max="2024"  id="start">
                                                     <output name="age_output" id="age_output" for="start" ></output>
-                                                    <input type="hidden" id="start_year" name="jdm_year[]">
+                                                    <input type="hidden" id="start_year" name="jdm_year">
                                                 </div>
                                             </div>
                                         </div>
@@ -425,7 +425,7 @@
                                                             {{ $car['company_en'] }}
                                                     </span>
                                                     <p> 
-                                                        {{ $car['start_price_num'] }}
+                                                        {{ '$'.$car['start_price_num'] }}
                                                     </p>
                                                 </div>
 
