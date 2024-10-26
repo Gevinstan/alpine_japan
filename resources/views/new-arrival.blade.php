@@ -105,7 +105,7 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3 model-div">
-                                                    <input class="form-check-input brand-search" name="model" type="radio" value="{{$brand->model_name_en}}"
+                                                    <input class="form-check-input model-search" name="model" type="radio" value="{{$brand->model_name_en}}"
                                                         {{ in_array(trim($brand->model_name_en), (array)request('model', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
                                                             {{ $brand->model_name_en }}
@@ -707,8 +707,13 @@ endRange.addEventListener('input', () => {
         })
         $(".brand-search").on('change',function(e){
             e.preventDefault();   
+            $(".model-search").val("")
             form.submit();
            
+        }) 
+        $(".model-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();    
         }) 
 
         // form.on('submit', function(e) {
