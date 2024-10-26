@@ -381,13 +381,14 @@
                                     <div class="col-lg-4">
                                         <div class="brand-car-item" style="height: 480px;">
                                             <div class="brand-car-item-img">
-                                            @if(file_exists(public_path('cars/' . $car['picture'])))
+                                            <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb" style="heigh:none;">
+                                           {{-- @if(file_exists(public_path('cars/' . $car['picture'])))
                                                 <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb" style="heigh:none;">
                                             @elseif(file_exists(public_path('Heavy/' . $car['picture'])))
                                                 <img src="{{ asset('Heavy/' . $car['id'] . '/' . $car['picture']) }}" alt="thumb">
                                             @else 
                                                 <img src="{{ asset('Small-Heavy/' . $car['id'] . '/' . $car['picture']) }}" alt="thumb">
-                                            @endif
+                                            @endif --}}
 
 
                                                 <div class="brand-car-item-img-text">
