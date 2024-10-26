@@ -150,7 +150,6 @@
 
                         <li><a href="{{ route('admin.language.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Languages') }}</span></span></a></li>
 
-                        <li><a href="{{ route('admin.theme-language', ['lang_code' => 'en']) }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Theme Languages') }}</span></span></a></li>
 
                     </ul>
                 </div>
@@ -171,7 +170,6 @@
 
                         <li><a href="{{ route('admin.user-list') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.User List') }}</span></span></a></li>
 
-                        <li><a href="{{ route('admin.pending-user') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Pending User') }}</span></span></a></li>
                     </ul>
                 </div>
             </li>

@@ -42,9 +42,9 @@
                                 </div>
 
                                 <!-- crancy Table -->
-                                <div id="crancy-table__main_wrapper" class=" dt-bootstrap5 no-footer">
+                                <div id="crancy-table__main_wrapper" class=" no-footer">
 
-                                    <table class="crancy-table__main crancy-table__main-v3 no-footer" id="dataTable">
+                                    <table class="crancy-table__main-v3 no-footer" id="dataTable">
                                         <!-- crancy Table Head -->
                                         <thead class="crancy-table__head">
                                             <tr>
@@ -117,7 +117,7 @@
                                                         <h4 class="crancy-table__product-title">{{$smallheavy->commision_value}}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <img src="{{ asset('Small-heavy/' . $smallheavy->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
+                                                    <img src="{{ asset('Small-Heavy/'.$commercial->id.'/' . $smallheavy->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
                                                     </td>
                                                     <td  class="crancy-table__column-2 crancy-table__data-2">
                                                         @if ($smallheavy->is_active == '1')
