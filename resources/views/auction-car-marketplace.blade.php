@@ -183,22 +183,16 @@
 
                                             <h6 style="padding-top:30px">Popular</h6>
                                             @foreach($brands as $brand)
-                                            <div class="d-flex align-items-center">
+                                            {{-- <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                        <input class="form-check-input popular-search" name="brand[]" type="checkbox" value="{{$brand->slug}}"
-                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
+                                                    <input class="form-check-input brand-search"  name="brand" type="radio" value="{{$brand->slug}}"
+                                                    {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
                                                             {{ $brand->name }}
-
-                                                            <!-- @if(session('front_lang')=='en')
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
-                                                            @else
-                                                            {{ $brand->company}} ({{ $brand->count }})
-                                                            @endif -->
                                                         </label>
                                                     </div>
-                                            </div>
+                                            </div> --}}
                                             @endforeach
                                             <h6 style="color:#038ffc;">Show More Brands</h6>
                                         </div>
