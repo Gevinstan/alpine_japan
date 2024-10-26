@@ -1081,6 +1081,13 @@
     @stack('js_section')
 
     <script>
+         $(()=>{
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+         });
         (function($) {
             "use strict"
             $(document).ready(function () {
@@ -1116,7 +1123,14 @@
                 cancelButtonText: "{{__('Cancel')}}",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href="user/select-car-purpose"
+                    $.ajax({
+                        url:"{{route('auct-sess-creation')}}",
+                        type:'POST',
+                        data:{'key':'acut_sess'},
+                        success:function(data){
+                            window.location.href="user/dashboard"
+                        }    
+                    })
                     // $("#remove_car_"+id).submit();
                 }
 

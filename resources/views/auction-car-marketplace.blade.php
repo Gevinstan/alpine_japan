@@ -182,15 +182,14 @@
                                             </div>
 
                                             <h6 style="padding-top:30px">Popular</h6>
-                                            @foreach($brand_count as $brand)
+                                            @foreach($brands as $brand)
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                        <input class="form-check-input popular-search" name="brand[]" type="checkbox" value="{{$brand->company_en}}"
-                                                        {{ in_array($brand->company_en, request('brand', [])) ? 'checked' : '' }}>
-                                                        
+                                                        <input class="form-check-input popular-search" name="brand[]" type="checkbox" value="{{$brand->slug}}"
+                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
-                                                            {{ $brand->company_en }} ({{ $brand->count }})
+                                                            {{ $brand->name }}
 
                                                             <!-- @if(session('front_lang')=='en')
                                                             {{ $brand->company_en }} ({{ $brand->count }})

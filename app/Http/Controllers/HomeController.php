@@ -617,31 +617,25 @@ class HomeController extends Controller
                       ->where('bt.lang_code',Session::get('front_lang'))
          ->select('b.slug','bt.name as brand_name')
          ->distinct('b.slug')->get();
-     
-     
-     
+
          $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
          ->join('brand_translations as bt','bt.brand_id','=','b.id')
          ->where('bt.lang_code',Session::get('front_lang'))
          ->select('b.slug','bt.name as brand_name')
          ->distinct('b.slug')->get();
-     
-     
+
          $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
          ->join('brand_translations as bt','bt.brand_id','=','b.id')
          ->where('bt.lang_code',Session::get('front_lang'))
          ->select('b.slug','bt.name as brand_name')
          ->distinct('b.slug')->get();
-         $brands = $jdm_legend
-         ->concat($jdm_legend_heavy)
-         ->concat($jdm_legend_small_heavy)
-         ->unique('slug')
-         ->values();
-     
+
+ 
+ 
          $jdm_brand['car']=$jdm_legend;
          $jdm_brand['heavy']=$jdm_legend_heavy;
          $jdm_brand['small_heavy']=$jdm_legend_heavy;
-     
+ 
         return view('shipment')->with([
             'seo_setting' => $seo_setting,
             'jdm_legend'=>$jdm_brand,
@@ -1677,7 +1671,7 @@ class HomeController extends Controller
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
-    // echo json_encode($brands);die();
+    // echo json_encode($models);die();
 
         return view('auction-car-marketplace', [
             'seo_setting' => $seo_setting,
