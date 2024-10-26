@@ -201,7 +201,7 @@
                                     <div class="col-lg-4">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                            <img src="{{ asset('cars/' . $car['picture']) }}" alt="thumb">
+                                            <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
                                            {{-- @if($type == 'car')
                                             <img src="{{ asset('cars/' . $car['picture']) }}" alt="thumb">
                                             @elseif ($type == 'heavy')
@@ -248,9 +248,9 @@
                                                     </span>
                                                     <p>
                                                        @if(session('front_lang')=='en')
-                                                        {{ $car['start_price'] }}
+                                                        {{ '$'.$car['start_price'] }}
                                                     @else
-                                                        {{ $car['start_price'] }}
+                                                        {{ '$'.$car['start_price'] }}
                                                     @endif
                                                     </p>
                                                 </div>
