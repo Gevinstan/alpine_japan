@@ -60,6 +60,203 @@ class HomeController extends Controller
     }
 
 
+    // public function index(Request $request){       
+    //     $setting = Setting::select('selected_theme')->first();
+    //     Session::put('selected_theme', 'theme_three');
+    //     $seo_setting = SeoSetting::where('id', 1)->first();
+
+    //     $homepage = HomePage::with('front_translate')->first();
+
+    //     $brands = Brand::where('status', 'enable')->get();
+
+    //     $top_sells=CarDataJpOp::where('top_sell','1')->get()->take(10);
+    //     $used_cars = Car::with('dealer', 'brand')->where(function ($query) {
+    //         $query->where('expired_date', null)
+    //             ->orWhere('expired_date', '>=', date('Y-m-d'));
+    //     })->where(['condition' => 'Used', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
+
+    //     $new_cars = Car::with('dealer', 'brand')->where(function ($query) {
+    //         $query->where('expired_date', null)
+    //             ->orWhere('expired_date', '>=', date('Y-m-d'));
+    //     })->where(['condition' => 'New', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
+
+    //     $featured_cars = Car::with('dealer', 'brand')->where(function ($query) {
+    //         $query->where('expired_date', null)
+    //             ->orWhere('expired_date', '>=', date('Y-m-d'));
+    //     })->where(['is_featured' => 'enable', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(6);
+
+    //     $testimonials = Testimonial::where('status', 'active')->orderBy('id','desc')->get();
+
+    //     $blogs = Blog::where('status', 1)->orderBy('id','desc')->get()->take(4);
+
+    //     $dealers = User::where(['status' => 'enable' , 'is_banned' => 'no', 'is_dealer' => 1])->where('email_verified_at', '!=', null)->orderBy('id','desc')->select('id','name','username','designation','image','status','is_banned','is_dealer', 'address', 'email', 'phone')->paginate(12);
+
+    //     $subscription_plans = SubscriptionPlan::orderBy('serial', 'asc')->where('status', 'active')->get();
+
+    //     $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
+    //     $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
+    //     $home3_ads = AdsBanner::where('position_key', 'home3_featured_sidebar')->first();
+
+    //     $brands = Brand::where('status', 'enable')->get();
+
+    //     $cities = City::with('translate')->get();
+
+    //     $selected_theme = Session::get('selected_theme');
+
+    //     if ($selected_theme == 'theme_one'){
+        
+    //         return view('index', [
+    //             'seo_setting' => $seo_setting,
+    //             'homepage' => $homepage,
+    //             'brands' => $brands,
+    //             'cities' => $cities,
+    //             'new_cars' => $new_cars,
+    //             'used_cars' => $used_cars,
+    //             'featured_cars' => $featured_cars,
+    //             'dealers' => $dealers,
+    //             'testimonials' => $testimonials,
+    //             'blogs' => $blogs,
+    //             'subscription_plans' => $subscription_plans,
+    //             'home1_ads' => $home1_ads,
+    //             'home2_ads' => $home2_ads,
+    //             'home3_ads' => $home3_ads,
+
+    //         ]);
+    //     }elseif($selected_theme == 'theme_two'){
+          
+    //         return view('index2', [
+    //             'seo_setting' => $seo_setting,
+    //             'homepage' => $homepage,
+    //             'brands' => $brands,
+    //             'cities' => $cities,
+    //             'new_cars' => $new_cars,
+    //             'used_cars' => $used_cars,
+    //             'featured_cars' => $featured_cars,
+    //             'dealers' => $dealers,
+    //             'testimonials' => $testimonials,
+    //             'blogs' => $blogs,
+    //             'subscription_plans' => $subscription_plans,
+    //             'home1_ads' => $home1_ads,
+    //             'home2_ads' => $home2_ads,
+    //             'home3_ads' => $home3_ads,
+    //         ]);
+    //     }elseif($selected_theme == 'theme_three'){
+    //         foreach($top_sells as $cars){
+    //               $last_image=$this->last_image($cars->pictures);
+    //                 $top_cars[]=array(
+    //                     'company_en'=>$cars->company_en,
+    //                     'company'=>$cars->company,
+    //                     'model_name'=>$cars->model_name,
+    //                     'model_name_en'=>$cars->model_name_en,
+    //                     'start_price'=>$cars->start_price,
+    //                     'start_price_num'=>$cars->start_price_num,
+    //                     'end_price'=>$cars->end_price,
+    //                     'end_price_num'=>$cars->end_price_num,
+    //                     'picture'=>$last_image[0],
+    //                     'id'=>$cars->id,
+    //                     'mileage'=>$cars->mileage,
+    //                     'mileage_en'=>$cars->mileage_en,
+    //                 );
+    //             // }
+           
+    //         }
+    //         $current_year=Date('Y');
+    //         $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->get()->take(5);
+    
+    //         foreach($new_arrivals as $cars){
+    //             $last_image=$this->last_image($cars->pictures);
+    //               $new_arrived_cars[]=array(
+    //                   'company_en'=>$cars->company_en,
+    //                   'company'=>$cars->company,
+    //                   'model_name'=>$cars->model_name,
+    //                   'model_name_en'=>$cars->model_name_en,
+    //                   'start_price'=>$cars->start_price,
+    //                   'start_price_num'=>$cars->start_price_num,
+    //                   'end_price'=>$cars->end_price,
+    //                   'end_price_num'=>$cars->end_price_num,
+    //                   'picture'=>$last_image[0],
+    //                   'id'=>$cars->id,
+    //                   'mileage'=>$cars->mileage,
+    //                   'mileage_en'=>$cars->mileage_en
+    //               );    
+    //       }
+    //         // $jdm_legend = \DB::table('blog')
+    //         // ->where('category', 'JDM Legend')
+    //         // ->where('make', '!=', '')
+    //         // ->whereNotNull('make')
+    //         // ->distinct()
+    //         // ->pluck('make');
+
+    //         $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+    //         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+    //                      ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    //                      ->where('bt.lang_code',Session::get('front_lang'))
+    //         ->select('b.slug','bt.name as brand_name')
+    //         ->distinct('b.slug')->get();
+
+
+    //         $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    //         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    //         ->where('bt.lang_code',Session::get('front_lang'))
+    //         ->select('b.slug','bt.name as brand_name')
+    //         ->distinct('b.slug')->get();
+
+    //         $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    //         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    //         ->where('bt.lang_code',Session::get('front_lang'))
+    //         ->select('b.slug','bt.name as brand_name')
+    //         ->distinct('b.slug')->get();
+
+
+    //         $jdm_brand['car']=$jdm_legend;
+    //         $jdm_brand['heavy']=$jdm_legend_heavy;
+    //         $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+        
+    //         return view('index3', [
+    //             'seo_setting' => $seo_setting,
+    //             'homepage' => $homepage,
+    //             'brands' => $brands,
+    //             'cities' => $cities,
+    //             'new_cars' => $new_cars,
+    //             'jdm_legend'=>$jdm_brand,
+    //             'jdm_core_brand'=>$jdm_core_brand,
+    //             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+    //             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
+    //             'used_cars' => $used_cars,
+    //             'featured_cars' => $featured_cars,
+    //             'dealers' => $dealers,
+    //             'testimonials' => $testimonials,
+    //             'blogs' => $blogs,
+    //             'subscription_plans' => $subscription_plans,
+    //             'home1_ads' => $home1_ads,
+    //             'home2_ads' => $home2_ads,
+    //             'home3_ads' => $home3_ads,
+    //             'top_sells'=>$top_cars,
+    //             'top_rated'=>$top_sells,
+    //             'new_arrived_cars'=>$new_arrived_cars
+    //         ]);
+    //     }else{
+    //         return view('index', [
+    //             'seo_setting' => $seo_setting,
+    //             'homepage' => $homepage,
+    //             'brands' => $brands,
+    //             'cities' => $cities,
+    //             'new_cars' => $new_cars,
+    //             'used_cars' => $used_cars,
+    //             'featured_cars' => $featured_cars,
+    //             'dealers' => $dealers,
+    //             'testimonials' => $testimonials,
+    //             'blogs' => $blogs,
+    //             'subscription_plans' => $subscription_plans,
+    //             'home1_ads' => $home1_ads,
+    //             'home2_ads' => $home2_ads,
+    //             'home3_ads' => $home3_ads,
+    //         ]);
+    //     }
+
+    // }
     public function index(Request $request){       
         $setting = Setting::select('selected_theme')->first();
         Session::put('selected_theme', 'theme_three');
@@ -67,118 +264,7 @@ class HomeController extends Controller
 
         $homepage = HomePage::with('front_translate')->first();
 
-        // $brands = Brand::where('status', 'enable')->get();
-
-        // $top_sells=CarDataJpOp::where('top_sell','1')->get()->take(10);
-        // $used_cars = Car::with('dealer', 'brand')->where(function ($query) {
-        //     $query->where('expired_date', null)
-        //         ->orWhere('expired_date', '>=', date('Y-m-d'));
-        // })->where(['condition' => 'Used', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
-
-       
-        // $testimonials = Testimonial::where('status', 'active')->orderBy('id','desc')->get();
-
-        // $blogs = Blog::where('status', 1)->orderBy('id','desc')->get()->take(4);
-
-        // $dealers = User::where(['status' => 'enable' , 'is_banned' => 'no', 'is_dealer' => 1])->where('email_verified_at', '!=', null)->orderBy('id','desc')->select('id','name','username','designation','image','status','is_banned','is_dealer', 'address', 'email', 'phone')->paginate(12);
-
-        // $subscription_plans = SubscriptionPlan::orderBy('serial', 'asc')->where('status', 'active')->get();
-
-        // $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
-        // $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
-        // $home3_ads = AdsBanner::where('position_key', 'home3_featured_sidebar')->first();
-
-        // $brands = Brand::where('status', 'enable')->get();
-
-        // $cities = City::with('translate')->get();
-
-        $selected_theme = Session::get('selected_theme');
-
-        // if ($selected_theme == 'theme_one'){
         
-        //     return view('index', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-
-        //     ]);
-        // }elseif($selected_theme == 'theme_two'){
-          
-        //     return view('index2', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-        //     ]);
-        // }
-        // elseif($selected_theme == 'theme_three'){
-        //     foreach($top_sells as $cars){
-        //           $last_image=$this->last_image($cars->pictures);
-        //             $top_cars[]=array(
-        //                 'company_en'=>$cars->company_en,
-        //                 'company'=>$cars->company,
-        //                 'model_name'=>$cars->model_name,
-        //                 'model_name_en'=>$cars->model_name_en,
-        //                 'start_price'=>$cars->start_price,
-        //                 'start_price_num'=>$cars->start_price_num,
-        //                 'end_price'=>$cars->end_price,
-        //                 'end_price_num'=>$cars->end_price_num,
-        //                 'picture'=>$last_image[0],
-        //                 'id'=>$cars->id,
-        //                 'mileage'=>$cars->mileage,
-        //                 'mileage_en'=>$cars->mileage_en,
-        //             );
-        //         // }
-           
-        //     }
-        //     $current_year=Date('Y');
-        //     $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->get()->take(5);
-    
-        //     foreach($new_arrivals as $cars){
-        //         $last_image=$this->last_image($cars->pictures);
-        //           $new_arrived_cars[]=array(
-        //               'company_en'=>$cars->company_en,
-        //               'company'=>$cars->company,
-        //               'model_name'=>$cars->model_name,
-        //               'model_name_en'=>$cars->model_name_en,
-        //               'start_price'=>$cars->start_price,
-        //               'start_price_num'=>$cars->start_price_num,
-        //               'end_price'=>$cars->end_price,
-        //               'end_price_num'=>$cars->end_price_num,
-        //               'picture'=>$last_image[0],
-        //               'id'=>$cars->id,
-        //               'mileage'=>$cars->mileage,
-        //               'mileage_en'=>$cars->mileage_en
-        //           );    
-        //   }
-            // $jdm_legend = \DB::table('blog')
-            // ->where('category', 'JDM Legend')
-            // ->where('make', '!=', '')
-            // ->whereNotNull('make')
-            // ->distinct()
-            // ->pluck('make');
-
             $jdm_core_brand = Brand::where('status', 'enable')->get();
 
             $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
@@ -205,51 +291,34 @@ class HomeController extends Controller
             $jdm_brand['heavy']=$jdm_legend_heavy;
             $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
+
+
+            echo json_encode($jdm_brand);die();
         
-            return view('index3', [
+            return view('index4', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
-                // 'brands' => $brands,
-                // 'cities' => $cities,
-                // 'new_cars' => $new_cars,
+                'brands' => $brands,
+                'cities' => $cities,
+                'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_brand,
                 'jdm_core_brand'=>$jdm_core_brand,
-                'jdm_legend_heavy'=>$jdm_legend_heavy,
-                'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
-                // 'used_cars' => $used_cars,
-                // 'featured_cars' => $featured_cars,
-                // 'dealers' => $dealers,
-                // 'testimonials' => $testimonials,
-                // 'blogs' => $blogs,
-                // 'subscription_plans' => $subscription_plans,
-                // 'home1_ads' => $home1_ads,
-                // 'home2_ads' => $home2_ads,
-                // 'home3_ads' => $home3_ads,
-                // 'top_sells'=>$top_cars,
-                // 'top_rated'=>$top_sells,
-                // 'new_arrived_cars'=>$new_arrived_cars
+                // 'jdm_legend_heavy'=>$jdm_legend_heavy,
+                // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
+                'used_cars' => $used_cars,
+                'featured_cars' => $featured_cars,
+                'dealers' => $dealers,
+                'testimonials' => $testimonials,
+                'blogs' => $blogs,
+                'subscription_plans' => $subscription_plans,
+                'home1_ads' => $home1_ads,
+                'home2_ads' => $home2_ads,
+                'home3_ads' => $home3_ads,
+                'top_sells'=>$top_cars,
+                'top_rated'=>$top_sells,
+                'new_arrived_cars'=>$new_arrived_cars
             ]);
-        // }
-        // else{
-        //     return view('index', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-        //     ]);
-        // }
         
-
     }
 
     public function jdm_stock(Request $request,$slug,$type){
