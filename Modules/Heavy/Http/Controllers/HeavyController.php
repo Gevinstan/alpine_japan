@@ -66,7 +66,7 @@ class HeavyController extends Controller
           $org_filename = $model_image->getClientOriginalName();
           $org_extension = $model_image->getClientOriginalExtension();
           $image_name = 'heavy-'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$org_extension;
-          $org_path = public_path() . '/Heavy';
+          $org_path = public_path() . '/Cars';
           File::isDirectory($org_path) or File::makeDirectory($org_path, 0777, true, true);
           $model_image->move($org_path, $image_name);
         } else {

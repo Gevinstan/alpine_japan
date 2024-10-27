@@ -106,7 +106,7 @@
                                                         <h4 class="crancy-table__product-title">{{ $commerical->yom }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <img src="{{ asset('Small-heavy/' . $commerical->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
+                                                    <img src="{{ asset('Cars/' . $commerical->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         @if ($commerical->is_active == '1')
