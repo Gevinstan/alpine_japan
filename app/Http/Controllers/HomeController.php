@@ -293,7 +293,7 @@ class HomeController extends Controller
             $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
 
-            echo json_encode($homepage->home3_intro_short_title);die();
+      
         
             return view('index4', [
                 'seo_setting' => $seo_setting,

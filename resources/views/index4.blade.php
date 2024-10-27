@@ -11,7 +11,87 @@
 
 @section('body-content')
 <main>
-   
+<section class="banner" style="background-image: url({{  asset('japan_home/Cover1.jpg') }});"> 
+            <div class="container-fluid">
+                    <div class="row align-items-center text-bann">
+                        <div class="col-lg-12 col-xl-7" style="margin-bottom: 100px;">
+                            <div class="banner-taitel" >
+                                <span style="padding-left: 10px">{{ $homepage->home3_intro_short_title }}</span>
+                                <h1 style="padding-left: 10px">Simplifying Your Car</h1> 
+                                <h1 style="color: #038ffc; padding-left: 10px">Buying Experience</h1>
+                                <p style="padding-left: 10px">We are commited to helping you find the perfect car with confidence and ease. Start your simplified car buying experience with us today</p>
+                            </div>
+
+                            <div class="container btn-dd">
+                                <div class="car-data-one btn-dc1">
+                                    <p class="custom-btn1" style="font-size:18px;font-weight: 400;">JDM Stock</p>
+                                </div>
+
+                                <div class="car-data-two btn-dc1">
+                                    <p class="custom-btn1" style="font-size:18px;font-weight: 400;">Buy Now Cars</p>
+                                </div>
+
+                                <div class="car-data-three btn-dc1">
+                                    <p class="custom-btn1" style="font-size:18px;font-weight: 400; ">New Car Arrivals</p>
+                                </div>
+                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}">
+                              <div class="btn-group">
+                              <div class="btn-group-lg btn-dc4">
+                                        <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad-left" type="button" id="defaultDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Brand
+                                        </button>
+                                        <input type="hidden" name="jdm_brand" id="jdm_brand">
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                     
+                                        </ul>
+                                    </div>
+                               
+
+                                    <div class="btn-group-lg btn-dc5">
+                                            <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Model
+                                            </button>
+                                            <input type="hidden" name="jdm_model" id="jdm_model">
+                                            <ul class="dropdown-menu model-ul" aria-labelledby="dropdownMenuClickableOutside">
+                                            </ul>
+                                    </div>
+
+                                    <div class="btn-group-lg btn-dc6">
+                                        <button class="btn btn-light custom-btn1 dropdown-toggle btn-rad" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Year
+                                        </button>
+                                        <input type="hidden" name="jdm_year" id="jdm_year">
+                                        <ul class="dropdown-menu year-ul" aria-labelledby="dropdownMenuClickableInside">
+                                        </ul>
+                                    </div>
+
+                                        <div class="form-group position-relative">
+                                            <input type="button" 
+                                                style="background-color: #038ffc; color: white; width: 150px; height: 52px; border: none;" 
+                                                class="form-control btn-rad-right btn" 
+                                                id="searchBtn" 
+                                                value="SEARCH"
+                                                oninput="toggleIconVisibility(this)">
+                                            <i id="searchIcon" class="bi bi-search position-absolute" style="right: 18px; top: 28px; transform: translateY(-50%); color: white;"></i>
+                                        </div>
+                                    </form>
+
+                              </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-5">
+                            <div class="banner-slick-main">
+                                <div class="banner-slick">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+            </div> 
+    </section>
 
 
     <!-- Buy in 3 Easy Steps end -->
