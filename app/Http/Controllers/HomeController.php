@@ -60,62 +60,15 @@ class HomeController extends Controller
     }
 
     public function index(Request $request){       
-        Artisan::call('optimize:clear');
-        ini_set('max_execution_time', 300);
         $setting = Setting::select('selected_theme')->first();
-        // if($setting->selected_theme == 'all_theme'){
-        //     if($request->has('theme')){
-        //         $theme = $request->theme;
-        //         if($theme == 'one'){
-        //             Session::put('selected_theme', 'theme_one');
-        //         }elseif($theme == 'two'){
-        //             Session::put('selected_theme', 'theme_two');
-        //         }elseif($theme == 'three'){
-        //             Session::put('selected_theme', 'theme_three');
-        //         }else{
-        //             if(!Session::has('selected_theme')){
-        //                 Session::put('selected_theme', 'theme_one');
-        //             }
-        //         }
-        //     }else{
-        //         Session::put('selected_theme', 'theme_one');
-        //     }
-        // }else{
-        //     if($setting->selected_theme == 'theme_one'){
-        //         Session::put('selected_theme', 'theme_one');
-        //     }elseif($setting->selected_theme == 'theme_two'){
-        //         Session::put('selected_theme', 'theme_two');
-        //     }elseif($setting->selected_theme == 'theme_three'){
-        //         Session::put('selected_theme', 'theme_three');
-        //     }
-        // }
           Session::put('selected_theme', 'theme_three');
+            $seo_setting = SeoSetting::where('id', 1)->first();
 
-        $seo_setting = SeoSetting::where('id', 1)->first();
+            $homepage = HomePage::with('front_translate')->first();
 
-        $homepage = HomePage::with('front_translate')->first();
+            $brands = Brand::where('status', 'enable')->get();
 
-        $brands = Brand::where('status', 'enable')->get();
-
-        $top_sells=CarDataJpOp::where('top_sell','1')->get()->take(10);
-
-       
- 
-
-        $used_cars = Car::with('dealer', 'brand')->where(function ($query) {
-            $query->where('expired_date', null)
-                ->orWhere('expired_date', '>=', date('Y-m-d'));
-        })->where(['condition' => 'Used', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
-
-        $new_cars = Car::with('dealer', 'brand')->where(function ($query) {
-            $query->where('expired_date', null)
-                ->orWhere('expired_date', '>=', date('Y-m-d'));
-        })->where(['condition' => 'New', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
-
-        $featured_cars = Car::with('dealer', 'brand')->where(function ($query) {
-            $query->where('expired_date', null)
-                ->orWhere('expired_date', '>=', date('Y-m-d'));
-        })->where(['is_featured' => 'enable', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(6);
+            $top_sells=CarDataJpOp::where('top_sell','1')->get()->take(10);
 
         $testimonials = Testimonial::where('status', 'active')->orderBy('id','desc')->get();
 
@@ -251,14 +204,14 @@ class HomeController extends Controller
                 'homepage' => $homepage,
                 'brands' => $brands,
                 'cities' => $cities,
-                'new_cars' => $new_cars,
+                // 'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_brand,
                 'jdm_core_brand'=>$jdm_core_brand,
                 // 'jdm_legend_heavy'=>$jdm_legend_heavy,
                 // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
-                'used_cars' => $used_cars,
-                'featured_cars' => $featured_cars,
-                'dealers' => $dealers,
+                // 'used_cars' => $used_cars,
+                // 'featured_cars' => $featured_cars,
+                // 'dealers' => $dealers,
                 'testimonials' => $testimonials,
                 'blogs' => $blogs,
                 'subscription_plans' => $subscription_plans,
