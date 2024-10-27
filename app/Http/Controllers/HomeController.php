@@ -286,6 +286,7 @@ class HomeController extends Controller
             ->where('bt.lang_code',Session::get('front_lang'))
             ->select('b.slug','bt.name as brand_name')
             ->distinct('b.slug')->get();
+            $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->get()->take(5);
 
 
             $jdm_brand['car']=$jdm_legend;
@@ -318,7 +319,7 @@ class HomeController extends Controller
                 'homepage' => $homepage,
                 'brands' => $jdm_core_brand,
                 // 'cities' => $cities,
-                // 'new_cars' => $new_cars,
+                'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_brand,
                 'jdm_core_brand'=>$jdm_core_brand,
                 // 'jdm_legend_heavy'=>$jdm_legend_heavy,
@@ -334,7 +335,7 @@ class HomeController extends Controller
                 // 'home3_ads' => $home3_ads,
                 'top_sells'=>$top_cars,
                 // 'top_rated'=>$top_sells,
-                // 'new_arrived_cars'=>$new_arrived_cars
+                'new_arrived_cars'=>$new_arrived_cars
             ]);
         
     }
