@@ -531,13 +531,7 @@
                     
                 </div>
 
-                @if ($home3_ads->status == 'enable')
-                    <div class="col-lg-4">
-                        <div class=" feature-thumb">
-                            <a href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset($home3_ads->image) }}" alt="logo" class="img-fluid" style="padding-bottom: 80px"></a>
-                        </div>
-                    </div>
-                @endif
+                
             </div>
 
             <div class="row">
