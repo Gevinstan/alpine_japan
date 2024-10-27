@@ -463,6 +463,7 @@
   'Working Days' => 'Working Days',
   'thursday' => 'thursday',
   'Upload a Picture' => 'Upload a Picture',
+  'Upload File'=>'Upload File',
   'Upload Your Image' => 'Upload Your Image',
   'Choose a image PNG, JPEG, JPG' => 'Choose a image PNG, JPEG, JPG',
   'Note' => 'Note',
