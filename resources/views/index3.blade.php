@@ -901,13 +901,7 @@
                     
                 </div>
 
-                @if ($home3_ads->status == 'enable')
-                    <div class="col-lg-4">
-                        <div class=" feature-thumb">
-                            <a href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset($home3_ads->image) }}" alt="logo" class="img-fluid" style="padding-bottom: 80px"></a>
-                        </div>
-                    </div>
-                @endif
+            
             </div>
 
             <div class="row">
@@ -1125,43 +1119,7 @@
             </div>
         </div>
     </section>
-    <!--   Testimonial-part-end -->
-
-    <!-- Buy in 3 Easy Steps start -->
-            <!-- <section class="Easy-test" style="margin-top: 100px">
-                <img src="{{ asset('japan_home/buy.jpg') }}" alt="logo" class="d-block mx-auto img-fluid">
-
-                
-                    <div class="container buy-img" >
-                        <div class="row">
-                            <div class="centered-1">
-                                <h2 style="color: white; padding-bottom: 20px"><b>Buy in 3 Easy Steps</b></h2>
-                                <h6 style="font-size:14px; color: white">Adding smiles to your miles. Car buying mode simpler</h6>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 bottom-left" style="padding-left: 20px; padding-right: 20px">
-                                    <h5 style="color: white">Find the perfect car</h5>
-                                    <h6 style="font-size:14px; color: white">Seamlessly browse thousands of MRL Certified cars.
-                                        Seamlessly browse thousands of MRL Certified car</h6>                                        
-                            </div>
-
-                            <div class="col-md-4 centered" style="padding-left: 20px; padding-right: 20px">
-                                    <h5 style="color: white">Send Enquiry to Alpine Japan</h5>
-                                    <h6 style="font-size:14px; color: white">Seamlessly browse thousands of MRL Certified cars.
-                                        Seamlessly browse thousands of MRL Certified cars </h6>       
-                            </div>
-
-                            <div class="col-md-4 bottom-right" style="padding-left: 20px; padding-right: 20px">
-                                    <h5 style="color: white">Buy it your way</h5>
-                                    <h6 style="font-size:14px; color: white">Seamlessly browse thousands of MRL Certified cars.
-                                        Seamlessly browse thousands of MRL Certified cars </h6>        
-                            </div>
-                        </div>
-                    </div> 
-            </section> -->
-
+    
                 <div class="container main-box mt-5">
                 
                         <div class="row">
