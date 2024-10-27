@@ -89,7 +89,7 @@
                                                         <h4 class="crancy-table__product-title">{{ $models->model }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <img src="{{ asset('Model/' . $models->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
+                                                    <img src="{{ asset('Cars/' . $models->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                     <a href="{{ route('admin.models.edit', ['model' => $models->id] ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>

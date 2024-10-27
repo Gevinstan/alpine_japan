@@ -34,7 +34,7 @@
                                             <div class="row mg-top-30">
                                                 <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Image') }} * </label>
+                                                        <label class="crancy__item-label">{{ __('translate.Upload File') }} * </label>
                                                         <div class="crancy-product-card__upload crancy-product-card__upload--border">
                                                         <input type="file" class="btn-check" name="sql_file" id="input-img1" autocomplete="off" onchange="previewImage(event)">
                                                         <label class="crancy-image-video-upload__label" for="input-img1">
