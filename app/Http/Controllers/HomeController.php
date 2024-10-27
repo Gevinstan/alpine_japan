@@ -337,7 +337,7 @@ class HomeController extends Controller
                 'homepage' => $homepage,
                 'brands' => $jdm_core_brand,
                 // 'cities' => $cities,
-                'new_cars' => $new_cars,
+                // 'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_brand,
                 'jdm_core_brand'=>$jdm_core_brand,
                 // 'jdm_legend_heavy'=>$jdm_legend_heavy,
