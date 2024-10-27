@@ -314,8 +314,8 @@ class HomeController extends Controller
                 // 'home1_ads' => $home1_ads,
                 // 'home2_ads' => $home2_ads,
                 // 'home3_ads' => $home3_ads,
-                // 'top_sells'=>$top_cars,
-                'top_rated'=>$top_sells,
+                'top_sells'=>$top_cars,
+                // 'top_rated'=>$top_sells,
                 // 'new_arrived_cars'=>$new_arrived_cars
             ]);
         
