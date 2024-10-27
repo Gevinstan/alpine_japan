@@ -292,31 +292,29 @@ class HomeController extends Controller
             $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
 
-
-            echo json_encode($jdm_brand);die();
         
             return view('index4', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
-                'brands' => $brands,
-                'cities' => $cities,
-                'new_cars' => $new_cars,
+                // 'brands' => $brands,
+                // 'cities' => $cities,
+                // 'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_brand,
                 'jdm_core_brand'=>$jdm_core_brand,
                 // 'jdm_legend_heavy'=>$jdm_legend_heavy,
                 // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy,
-                'used_cars' => $used_cars,
-                'featured_cars' => $featured_cars,
-                'dealers' => $dealers,
-                'testimonials' => $testimonials,
-                'blogs' => $blogs,
-                'subscription_plans' => $subscription_plans,
-                'home1_ads' => $home1_ads,
-                'home2_ads' => $home2_ads,
-                'home3_ads' => $home3_ads,
-                'top_sells'=>$top_cars,
-                'top_rated'=>$top_sells,
-                'new_arrived_cars'=>$new_arrived_cars
+                // 'used_cars' => $used_cars,
+                // 'featured_cars' => $featured_cars,
+                // 'dealers' => $dealers,
+                // 'testimonials' => $testimonials,
+                // 'blogs' => $blogs,
+                // 'subscription_plans' => $subscription_plans,
+                // 'home1_ads' => $home1_ads,
+                // 'home2_ads' => $home2_ads,
+                // 'home3_ads' => $home3_ads,
+                // 'top_sells'=>$top_cars,
+                // 'top_rated'=>$top_sells,
+                // 'new_arrived_cars'=>$new_arrived_cars
             ]);
         
     }
