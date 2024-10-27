@@ -286,7 +286,25 @@ class HomeController extends Controller
             ->where('bt.lang_code',Session::get('front_lang'))
             ->select('b.slug','bt.name as brand_name')
             ->distinct('b.slug')->get();
+            $current_year=Date('Y');
             $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->get()->take(5);
+            foreach($new_arrivals as $cars){
+                $last_image=$this->last_image($cars->pictures);
+                    $new_arrived_cars[]=array(
+                        'company_en'=>$cars->company_en,
+                        'company'=>$cars->company,
+                        'model_name'=>$cars->model_name,
+                        'model_name_en'=>$cars->model_name_en,
+                        'start_price'=>$cars->start_price,
+                        'start_price_num'=>$cars->start_price_num,
+                        'end_price'=>$cars->end_price,
+                        'end_price_num'=>$cars->end_price_num,
+                        'picture'=>$last_image[0],
+                        'id'=>$cars->id,
+                        'mileage'=>$cars->mileage,
+                        'mileage_en'=>$cars->mileage_en
+                    );    
+            }
 
 
             $jdm_brand['car']=$jdm_legend;
