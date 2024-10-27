@@ -225,8 +225,6 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
-
-
                             <div class="row g-5">
                                 @foreach ($top_sells as $car)
                                     <div class=" col-xl-3 col-lg-5  col-sm-6 col-md-6 " style="flex: 0 0 20%;" data-aos="fade-up"
