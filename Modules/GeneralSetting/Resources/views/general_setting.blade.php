@@ -120,17 +120,7 @@
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <div class="col-12">
-                                                                                        <div class="crancy__item-form--group  mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Select Theme')}}</label>
-                                                                                            <select class="form-select crancy__item-input" name="selected_theme">
-                                                                                                <option {{ $general_setting->selected_theme == 'all_theme' ? 'selected' : '' }} value="all_theme">{{__('All Theme')}}</option>
-                                                                                                <option {{ $general_setting->selected_theme == 'theme_one' ? 'selected' : '' }} value="theme_one">{{__('Theme One')}}</option>
-                                                                                                <option {{ $general_setting->selected_theme == 'theme_two' ? 'selected' : '' }} value="theme_two">{{__('Theme Two')}}</option>
-                                                                                                <option {{ $general_setting->selected_theme == 'theme_three' ? 'selected' : '' }} value="theme_three">{{__('Theme Three')}}</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
+                                                                               
 
 
                                                                                     <div class="col-12">
@@ -754,52 +744,6 @@
                                                     </form>
                                                 </div>
 
-                                                <div class="tab-pane fade" id="id4" role="tabpanel">
-                                                    <form action="{{ route('admin.update-tawk-chat') }}" method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="crancy-ptabs__separate">
-                                                                    <div class="crancy-ptabs__form-main">
-                                                                        <div class="crancy__item-group">
-                                                                            <h3 class="crancy__item-group__title">{{ __('translate.Tawk Chat') }}</h3>
-                                                                            <div class="crancy__item-form--group">
-                                                                                <div class="row">
-
-                                                                                    <div class="col-12">
-                                                                                        <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Visibility Status')}} </label>
-                                                                                            <div class="crancy-ptabs__notify-switch  crancy-ptabs__notify-switch--two">
-                                                                                                <label class="crancy__item-switch">
-                                                                                                <input name="status" {{ $tawk_chat_setting->status == 1 ? 'checked' : '' }} type="checkbox" >
-                                                                                                <span class="crancy__item-switch--slide crancy__item-switch--round"></span>
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-12">
-                                                                                        <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Tawk Chat Link')}} </label>
-                                                                                            <input class="crancy__item-input" type="text" name="chat_link" value="{{ $tawk_chat_setting->chat_link }}">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class=" mg-top-40">
-                                                                            <button class="crancy-btn" type="submit">{{ __('translate.Update') }}</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
 
                                                 <div class="tab-pane fade" id="id5" role="tabpanel">
                                                     <form action="{{ route('admin.update-google-analytic') }}" method="POST" enctype="multipart/form-data">
