@@ -263,6 +263,7 @@ class HomeController extends Controller
         $seo_setting = SeoSetting::where('id', 1)->first();
 
         $homepage = HomePage::with('front_translate')->first();
+        $top_sells=CarDataJpOp::where('top_sell','1')->get()->take(10);
 
         
             $jdm_core_brand = Brand::where('status', 'enable')->get();
@@ -313,7 +314,7 @@ class HomeController extends Controller
                 // 'home2_ads' => $home2_ads,
                 // 'home3_ads' => $home3_ads,
                 // 'top_sells'=>$top_cars,
-                // 'top_rated'=>$top_sells,
+                'top_rated'=>$top_sells,
                 // 'new_arrived_cars'=>$new_arrived_cars
             ]);
         
