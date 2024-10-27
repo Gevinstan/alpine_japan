@@ -61,6 +61,7 @@ class HomeController extends Controller
 
     public function index(Request $request){       
         Artisan::call('optimize:clear');
+        ini_set('max_execution_time', 300);
         $setting = Setting::select('selected_theme')->first();
         // if($setting->selected_theme == 'all_theme'){
         //     if($request->has('theme')){
