@@ -42,7 +42,9 @@
                                         </button>
                                         <input type="hidden" name="jdm_brand" id="jdm_brand">
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                     
+                                        @foreach($jdm_core_brand as $brand)
+                                            <li><a class="dropdown-item" href="javascript:void(0);" onclick="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</a></li>
+                                        @endforeach
                                         </ul>
                                     </div>
                                
