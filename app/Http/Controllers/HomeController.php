@@ -316,7 +316,7 @@ class HomeController extends Controller
             return view('index4', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
-                // 'brands' => $brands,
+                'brands' => $jdm_core_brand,
                 // 'cities' => $cities,
                 // 'new_cars' => $new_cars,
                 'jdm_legend'=>$jdm_brand,

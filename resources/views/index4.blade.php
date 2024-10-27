@@ -11,7 +11,7 @@
 
 @section('body-content')
 <main>
-<section class="banner" style="background-image: url({{  asset('japan_home/Cover1.jpg') }});"> 
+    <section class="banner" style="background-image: url({{  asset('japan_home/Cover1.jpg') }});"> 
             <div class="container-fluid">
                     <div class="row align-items-center text-bann">
                         <div class="col-lg-12 col-xl-7" style="margin-bottom: 100px;">
@@ -141,6 +141,48 @@
 
                     </div>
             </div> 
+    </section>
+
+
+    <section class="categories  pb-120px">
+        <div class="container-fluid">
+            <div class="row align-items-end">
+                <div class="col-lg-8 col-sm-8 col-md-12  ">
+                    <div class="taitel">
+                        <div class="taitel-img">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 style="display: inline;">Popular</h2> 
+                        <h2 style="display: inline; color: #038ffc;">Brands</h2>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row g-3  mt-30px ">
+                @foreach ($brands->take(6) as $index => $brand)
+                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
+                    <div class="categories-logo">
+                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
+                            <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+
+        <div class="container ">
+            <div class="col-lg-4">
+                    <div class="categories-three-view-btn" style="margin-top: 40px; margin-right: -300px">
+                    <a href="{{ route('listings') }}" class="thm-btn">{{ __('translate.View All') }}</a>
+                    </div>
+            </div>
+        </div>
     </section>
 
 
