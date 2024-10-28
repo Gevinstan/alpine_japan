@@ -26,18 +26,18 @@ class SmallHeavyRequest extends FormRequest
                 'category'=>'required',
                 'title'=>'required',
                 'maker'=>'required',
-                'year_of_registration'=>'required',
+                // 'year_of_registration'=>'required',
                 'model'=>'required',
-                'chassis_number'=>'required',
-                'year_of_made'=>'required',
-                'kilometers'=>'required',
-                'engine_type'=>'required',
-                'fuel'=>'required',
-                'price_dollar'=>'required',
-                'sell_points'=>'required',
-                'remarks'=>'required',
-                'active'=>'required',
-                'boom'=>'required'   
+                // 'chassis_number'=>'required',
+                // 'year_of_made'=>'required',
+                // 'kilometers'=>'required',
+                // 'engine_type'=>'required',
+                // 'fuel'=>'required',
+                // 'price_dollar'=>'required',
+                // 'sell_points'=>'required',
+                // 'remarks'=>'required',
+                // 'active'=>'required',
+                // 'boom'=>'required'   
             ];
         }
 
