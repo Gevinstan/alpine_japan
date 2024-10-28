@@ -125,10 +125,7 @@
                                                     <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMax" value="2">
                                                 </div>
 
-                                                <!-- <div class="range-container" >
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range"  min="0" max="5" step="0.5" id="customRangeMax" value="2">
-                                                </div> -->
+                                    
 
 
                                                 <div id="slider-outer-div ms-2" >
@@ -305,14 +302,15 @@
                                     <p style="display:inline; color:black; font-weight:bold">{{ __('Sort By:') }}</p>
                                     <div class="dropdown" style="display:inline; ">
                                         <a class="btn btn-white dropdown-toggle" style="padding-bottom:10px; color:#038ffc !important" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Recently Added
+                                            Sort By
                                         </a>
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Something else here</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
+                                        <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
@@ -652,6 +650,27 @@ const formatCurrency = (value) => {
     return `$${(value * 100000).toLocaleString()}`;
 };
 
+
+function updateButtonText(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+        $('#search_form').submit();
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+function setSortByParam(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+
 // Function to update the display
 const updateDisplay = () => {
     const startValue = formatCurrency(startRange.value);
@@ -659,7 +678,6 @@ const updateDisplay = () => {
     valueDisplay.textContent = `${startValue} ${endValue}`;
     const startValueNumber = formatNumber(startRange.value * 100000);
     const endValueNumber = formatNumber(endRange.value * 100000);
-    console.log(startValueNumber);
     priceRangeScale.value=`${startValueNumber} - ${endValueNumber}`;
 };
 function formatNumber(value) {
@@ -693,6 +711,22 @@ endRange.addEventListener('input', () => {
          });
          });
     $(document).ready(function () {
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const sortBy = urlParams.get('sort_by'); // Will get 'price_low_high'
+
+        if(sortBy === 'price_low_high') {
+            setSortByParam('price_low_high','Low to High')
+        }
+        if(sortBy === 'price_high_low') {
+            setSortByParam('price_high_low','High to Low')
+        }
+        if(sortBy === 'recent') {
+            setSortByParam('recent','Recently Added')
+        }
+
+     
         const form = $('#search_form');
         $("#outside_form_search").on("keyup", function(e) {
             let inputValue = $(this).val();
@@ -718,7 +752,13 @@ endRange.addEventListener('input', () => {
             e.preventDefault();   
             form.submit();    
         })
+        $(".sort-filter").on('change',function(e){
+            e.preventDefault();   
+            alert("one")
+            // form.submit();    
+        })
 
+         
     
 
       
@@ -736,6 +776,8 @@ endRange.addEventListener('input', () => {
     
     });
 })(jQuery);
+
+
 </script>   <!------- Range ------->
 @endpush
 

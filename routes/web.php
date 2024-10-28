@@ -54,7 +54,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/terms-conditions', 'terms_conditions')->name('terms-conditions');
             Route::get('/privacy-policy', 'privacy_policy')->name('privacy-policy');
             Route::get('/faq', 'faq')->name('faq');
-            Route::get('/vkytest', 'vkytest')->name('vkytest');
+            Route::get('/brand-listing', 'vkytest')->name('brand-listing');
             Route::get('/howtobuy', 'howtobuy')->name('howtobuy');
 
 
@@ -128,7 +128,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
             Route::controller(ProfileController::class)->group(function () {
 
-                Route::get('/dashboard', 'dashboard')->name('dashboard');
+                Route::get('/dashboard', 'dashboard')->name('dashboard');   
 
                 Route::get('/edit-profile', 'edit')->name('edit-profile');
                 Route::put('/update-profile', 'update')->name('update-profile');
