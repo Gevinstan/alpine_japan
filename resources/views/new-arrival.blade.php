@@ -306,11 +306,12 @@
                                             Recently Added
                                         </a>
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Something else here</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
+                                        <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
@@ -627,6 +628,26 @@ const formatCurrency = (value) => {
     return `$${(value * 100000).toLocaleString()}`;
 };
 
+function updateButtonText(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+        $('#search_form').submit();
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+function setSortByParam(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+
 // Function to update the display
 const updateDisplay = () => {
     const startValue = formatCurrency(startRange.value);
@@ -660,6 +681,20 @@ endRange.addEventListener('input', () => {
 (function($) {
     "use strict";
     $(document).ready(function () {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const sortBy = urlParams.get('sort_by'); // Will get 'price_low_high'
+
+        if(sortBy === 'price_low_high') {
+            setSortByParam('price_low_high','Low to High')
+        }
+        if(sortBy === 'price_high_low') {
+            setSortByParam('price_high_low','High to Low')
+        }
+        if(sortBy === 'recent') {
+            setSortByParam('recent','Recently Added')
+        }
+
         // const yearRange = $('#yearRange');
         // const selectedYear = $('#selectedYear');
         const form = $('#search_form');

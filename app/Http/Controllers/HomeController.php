@@ -408,6 +408,41 @@ class HomeController extends Controller
             }
         }
 
+        if($request->price_range_scale){
+            if($request->price_range_scale !=""){  
+                $parts = explode('-', $request->price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                if($type== 'car'){
+                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                        $q->whereBetween('blog.price', [$startValue, $endValue]);
+                    });
+                  }  else if($type == 'heavy'){
+                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                        $q->whereBetween('heavy.price', [$startValue, $endValue]);
+                    });
+                  } else if($type =='small_heavy'){
+                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                        $q->whereBetween('small_heavy.price', [$startValue, $endValue]);
+                    }); 
+                  }
+             
+            }
+        }
+        if($request->year){
+            if($request->year !="")
+            {
+                if($type== 'car'){
+                    $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
+                  }  else if($type == 'heavy'){
+                    $carsQuery->where('heavy.yom', 'like', '%' . $request->year . '%'); 
+                  } else if($type =='small_heavy'){
+                    $carsQuery->where('small_heavy.yom', 'like', '%' . $request->year . '%'); 
+                  }
+            }
+        }
+        
+
       
       
     
@@ -435,13 +470,75 @@ class HomeController extends Controller
                 $carsQuery->where('small_heavy.year_of_reg', 'LIKE', $year . '%');
             }
         }
+
+        if ($request->sort_by) {
+            switch ($request->sort_by) {
+                case 'price_low_high':
+                    if($type == 'car'){
+                        $carsQuery->orderBy('blog.price', 'asc');    
+                       } else if($type == 'heavy'){
+                        $carsQuery->orderBy('heavy.price', 'asc');
+                       } else if($type =='small_heavy'){
+                           $carsQuery->orderBy('small_heavy.price', 'asc');
+                       }
+                    break;
+                case 'price_high_low':
+                   if($type == 'car'){
+                        $carsQuery->orderBy('blog.price', 'desc');    
+                       } else if($type == 'heavy'){
+                        $carsQuery->orderBy('heavy.price', 'desc');
+                       } else if($type =='small_heavy'){
+                           $carsQuery->orderBy('small_heavy.price', 'desc');
+                       }
+                    break;
+                case 'recent':  
+                    if($type == 'car'){   
+                        $recentCarIds = $carsQuery->orderBy('blog.id', 'desc')
+                        ->limit(100)
+                        ->pluck('id');
+                        $carsQuery = $carsQuery->whereIn('blog.id', $recentCarIds);
+                       } else if($type == 'heavy'){
+                            $recentCarIds = $carsQuery->orderBy('heavy.id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                            $carsQuery = $carsQuery->whereIn('heavy.id', $recentCarIds);
+                       } else if($type =='small_heavy'){
+                            $recentCarIds = $carsQuery->orderBy('small_heavy.id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                            $carsQuery = $carsQuery->whereIn('small_heavy.id', $recentCarIds);
+                       }
+                    break;
+            }
+        }
+
+        if($request->price_range){
+            $priceRanges = [
+                "Under $5000" => ["start" => 0, "end" => 5000],
+                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+            ];
+    
+            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+          
+    
+      
+            if ($result['start_price_num'] === null) {
+                $carsQuery = $carsQuery->whereBetween('price', [$result['start_price_num'], $result['end_price_num']]);
+
+            } else {
+                // Count for other ranges
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->whereBetween('price', [$result['start_price_num'], $result['end_price_num']]);
+                });
+            }  
+        }
         
         // Pagination
         $cars = $carsQuery->paginate(12);
-        // $cars = $carsQuery->get();
-        // dd(DB::getQueryLog());
-            // echo json_encode($cars);die();
-    
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
         // $car_image=$this->last_image($car->pictures);
@@ -491,6 +588,15 @@ class HomeController extends Controller
             $jdm_brand['car']=$jdm_legend;
             $jdm_brand['heavy']=$jdm_legend_heavy;
             $jdm_brand['small_heavy']=$jdm_legend_heavy;
+            $price_range = $this->getPriceRange();
+            $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+            ->groupBy('transmission_en')
+            ->having('count', '>', 1)
+            ->get();
+            $scores = CarDataJpOp::selectRaw('scores_en, COUNT(*) as count')
+            ->groupBy('scores_en')
+            ->having('count', '>', 1)
+            ->get();
 
     
 
@@ -505,6 +611,9 @@ class HomeController extends Controller
             'brand_count' => $brand_count,
             'slug'=>$slug,
             'type'=>$type,
+            'price_range' => $price_range,
+            'transmission'=>$transmission,
+            'scores'=>$scores
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -797,7 +906,7 @@ class HomeController extends Controller
 
 
     public function vkytest(){
-         $seo_setting = SeoSetting::where('id', 3)->first();
+        $seo_setting = SeoSetting::where('id', 3)->first();
 
         $about_us = AboutUs::first();
 
@@ -806,13 +915,41 @@ class HomeController extends Controller
         $homepage = HomePage::first();
 
         $testimonials = Testimonial::where('status', 'active')->orderBy('id','desc')->get();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
 
-        return view('about_us')->with([
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+        return view('brand-listing')->with([
             'seo_setting' => $seo_setting,
             'about_us' => $about_us,
             'brands' => $brands,
             'homepage' => $homepage,
             'testimonials' => $testimonials,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -993,6 +1130,7 @@ class HomeController extends Controller
     public function listings(Request $request){
 
         $seo_setting = SeoSetting::where('id', 10)->first();
+
         // $brands = Brand::where('status', 'enable')->get();
 
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
@@ -1003,7 +1141,7 @@ class HomeController extends Controller
         
         $models=[];
 
-
+    DB::enableQueryLog();
     // Initialize the query for cars
     $carsQuery = CarDataJpOp::query();
 
@@ -1011,6 +1149,7 @@ class HomeController extends Controller
     if ($request->location) {
         $carsQuery->where('city_id', $request->location);
     }
+
     if($request->price_range_scale){
         if($request->price_range_scale !=""){  
             $parts = explode('-', $request->price_range_scale);
@@ -1094,22 +1233,6 @@ class HomeController extends Controller
     }
 
 
-
-    if ($request->condition) {
-        $carsQuery->whereIn('condition', $request->condition);
-    }
-
-    if ($request->purpose) {
-        $purpose_arr = array_filter($request->purpose);
-        if ($purpose_arr) {
-            $carsQuery->whereIn('purpose', $purpose_arr);
-        }
-    }
-
-    if ($request->features) {
-        $carsQuery->whereJsonContains('features', $request->features);
-    }
-
     if ($request->price_filter) {
         if ($request->price_filter === 'low_to_high') {
             $carsQuery->orderBy('regular_price', 'asc');
@@ -1128,23 +1251,28 @@ class HomeController extends Controller
 
     if ($request->sort_by) {
         switch ($request->sort_by) {
-            case 'dsc_to_asc':
-                $carsQuery->orderBy('title', 'desc');
-                break;
-            case 'asc_to_dsc':
-                $carsQuery->orderBy('title', 'asc');
-                break;
             case 'price_low_high':
-                $carsQuery->orderBy('regular_price', 'asc');
+                $carsQuery->orderBy('start_price_num', 'asc');
                 break;
             case 'price_high_low':
-                $carsQuery->orderBy('regular_price', 'desc');
+                $carsQuery->orderBy('start_price_num', 'desc');
+                break;
+            case 'recent':
+                $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                ->limit(100)
+                ->pluck('id');
+            
+            // Then reset the query and use these IDs
+            $carsQuery = $carsQuery->whereIn('id', $recentCarIds);
                 break;
         }
     }
 
+    // $carsQuery->get();
+
     // Pagination
     $cars = $carsQuery->paginate(12);
+
 
     // Transform cars into an array for the view
     $cars_array = $cars->map(function ($car) {
@@ -1255,7 +1383,7 @@ class HomeController extends Controller
         $models=[];
 
 
-        DB::enableQueryLog();
+ 
         // Initialize the query for cars
         $carsQuery = CarDataJpOp::query();
 
@@ -1396,22 +1524,24 @@ class HomeController extends Controller
         $carsQuery->where('model_name_en', $request->model); 
     }
 
-        if ($request->sort_by) {
-            switch ($request->sort_by) {
-                case 'dsc_to_asc':
-                    $carsQuery->orderBy('title', 'desc');
-                    break;
-                case 'asc_to_dsc':
-                    $carsQuery->orderBy('title', 'asc');
-                    break;
-                case 'price_low_high':
-                    $carsQuery->orderBy('regular_price', 'asc');
-                    break;
-                case 'price_high_low':
-                    $carsQuery->orderBy('regular_price', 'desc');
-                    break;
-            }
+    if ($request->sort_by) {
+        switch ($request->sort_by) {
+            case 'price_low_high':
+                $carsQuery->orderBy('start_price_num', 'asc');
+                break;
+            case 'price_high_low':
+                $carsQuery->orderBy('start_price_num', 'desc');
+                break;
+            case 'recent':  
+                $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                ->limit(100)
+                ->pluck('id');
+            
+            // Then reset the query and use these IDs
+            $carsQuery = $carsQuery->whereIn('id', $recentCarIds);
+                break;
         }
+    }
 
     
 
@@ -1650,24 +1780,24 @@ class HomeController extends Controller
 
         if ($request->sort_by) {
             switch ($request->sort_by) {
-                case 'dsc_to_asc':
-                    $carsQuery->orderBy('title', 'desc');
-                    break;
-                case 'asc_to_dsc':
-                    $carsQuery->orderBy('title', 'asc');
-                    break;
                 case 'price_low_high':
-                    $carsQuery->orderBy('regular_price', 'asc');
+                    $carsQuery->orderBy('start_price_num', 'asc');
                     break;
                 case 'price_high_low':
-                    $carsQuery->orderBy('regular_price', 'desc');
+                    $carsQuery->orderBy('start_price_num', 'desc');
+                    break;
+                case 'recent':
+                    $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                    ->limit(100)
+                    ->pluck('id');
+                
+                // Then reset the query and use these IDs
+                $carsQuery = $carsQuery->whereIn('id', $recentCarIds);
                     break;
             }
         }
 
-        // $carsQuery->get();
-        // dd(DB::getQueryLog());
-
+       
 
         // Pagination
         $cars = $carsQuery->paginate(12);
@@ -1900,17 +2030,19 @@ class HomeController extends Controller
 
         if ($request->sort_by) {
             switch ($request->sort_by) {
-                case 'dsc_to_asc':
-                    $carsQuery->orderBy('title', 'desc');
-                    break;
-                case 'asc_to_dsc':
-                    $carsQuery->orderBy('title', 'asc');
-                    break;
                 case 'price_low_high':
-                    $carsQuery->orderBy('regular_price', 'asc');
+                    $carsQuery->orderBy('start_price_num', 'asc');
                     break;
                 case 'price_high_low':
-                    $carsQuery->orderBy('regular_price', 'desc');
+                    $carsQuery->orderBy('start_price_num', 'desc');
+                    break;
+                case 'recent':  
+                    $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                    ->limit(100)
+                    ->pluck('id');
+                
+                // Then reset the query and use these IDs
+                $carsQuery = $carsQuery->whereIn('id', $recentCarIds);
                     break;
             }
         }
@@ -2230,6 +2362,7 @@ class HomeController extends Controller
         $transmission=$request->input('transmission');
         $search=$request->input('search');
         $brand_new_cars=$request->input('brand_new_cars');
+        $sort_by=$request->input('sort_by');
         $models=[];
         // Initialize the query for cars
         // $carsQuery = CarDataJpOp::query();
@@ -2272,6 +2405,24 @@ class HomeController extends Controller
                 })
                 ->when($brand_new_cars, function ($query, $brand_new_cars) {
                     return $query->where('yom', $brand_new_cars);
+                })
+                ->when($sort_by, function ($query, $sort_by) {
+                    switch ($sort_by) {
+                        case 'price_low_high':
+                           return  $query->orderBy('price', 'asc');
+                            break;
+                        case 'price_high_low':
+                            return  $query->orderBy('price', 'desc');
+                            break;
+                        case 'recent':
+                            $recentCarIds = $query->orderBy('id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                        
+                        // Then reset the query and use these IDs
+                        return $query = $query->whereIn('id', $recentCarIds);
+                        break;
+                    }
                 })
                 ->select('model','price','image','id','make','title');
 
@@ -2319,6 +2470,24 @@ class HomeController extends Controller
                 ->when($brand_new_cars, function ($query, $brand_new_cars) {
                     return $query->where('yom', $brand_new_cars);
                 })
+                ->when($sort_by, function ($query, $sort_by) {
+                    switch ($sort_by) {
+                        case 'price_low_high':
+                           return  $query->orderBy('price', 'asc');
+                            break;
+                        case 'price_high_low':
+                            return  $query->orderBy('price', 'desc');
+                            break;
+                        case 'recent':
+                            $recentCarIds = $query->orderBy('id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                        
+                        // Then reset the query and use these IDs
+                        return $query = $query->whereIn('id', $recentCarIds);
+                        break;
+                    }
+                })
                 ->select('model','price','image','id','make','title');
 
             // Query for Small Heavy table
@@ -2355,9 +2524,27 @@ class HomeController extends Controller
                 })
                 ->when($search, function ($query, $search) {
                     return $query->where('model', 'like', '%' . $search . '%');
-                })
+                })  
                 ->when($brand_new_cars, function ($query, $brand_new_cars) {
                     return $query->where('yom', $brand_new_cars);
+                })
+                ->when($sort_by, function ($query, $sort_by) {
+                    switch ($sort_by) {
+                        case 'price_low_high':
+                           return  $query->orderBy('price', 'asc');
+                            break;
+                        case 'price_high_low':
+                            return  $query->orderBy('price', 'desc');
+                            break;
+                        case 'recent':
+                            $recentCarIds = $query->orderBy('id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                        
+                        // Then reset the query and use these IDs
+                        return $query = $query->whereIn('id', $recentCarIds);
+                        break;
+                    }
                 })
                 ->select('model','price','image','id','make','title');
 

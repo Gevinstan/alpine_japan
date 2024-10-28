@@ -10,7 +10,11 @@
 @endsection
 
 @section('body-content')
-<main>
+<main style=" position :relative;">
+<!-- <button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  <span class="sr-only">Loading...</span>
+</button> -->
     <!-- banner-part-start  -->
     <section class="banner" style="background-image: url({{  asset('japan_home/Cover1.jpg') }});"> 
             <div class="container-fluid">
@@ -94,7 +98,7 @@
                                                 <div class="banner-slick-thumb-txt">
                                                     <p>{{ $car['model_name_en'] }}</p>
                                                     <h6>
-                                                        {{ currency($car['start_price_num']) }}
+                                                        {{'$'.$car['start_price_num'] }}
                                                     </h6>
                                                 </div>
                                                 <div class="banner-slick-thumb-txt-two">
@@ -181,7 +185,7 @@
                 @foreach ($brands->take(6) as $index => $brand)
                 <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                     <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
+                        <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                             <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                         </a>
                     </div>
@@ -291,9 +295,9 @@
                                                     </span>
                                                     <p style="font-size:20px">
                                                     @if(session('front_lang')=='en')
-                                                        {{ currency($car['start_price_num']) }}
+                                                        {{'$'.$car['start_price_num'] }}
                                                     @else
-                                                       {{ currency($car['start_price']) }}
+                                                       {{'$'.$car['start_price'] }}
                                                     @endif
                                                     </p>
                                                 </div>
@@ -822,9 +826,9 @@
                                                 </span>
                                                 <p>
                                                 @if(session('front_lang')=='en')
-                                                    {{ currency($car['start_price_num']) }}
+                                                    {{ '$'.$car['start_price_num']}}
                                                 @else
-                                                    {{ currency($car['start_price']) }}
+                                                    {{ '$'.$car['start_price'] }}
                                                 @endif
                                                 </p>
                                             </div>
@@ -1171,84 +1175,14 @@
 
 
                      
-
-    <!-- Buy in 3 Easy Steps end -->
-
-    <!-- About Alpine Japan Start -->
-            <div class="container-fluid pb-5 pt-5">
-                <div class="row mb-4">
-                    <div class="col-12 text-center text-md-start" style="margin-left: 165px;">
-                        <h2 style="display: inline;">About</h2> 
-                        <h2 style="display: inline; color: #038ffc;">Alpine Japan</h2>
-                    </div>
-                </div>
-
-                <div class="row align-items-center">
-                    <div class="col-md-5 mb-4">
-                        <img src="{{ asset('japan_home/Aj_img.svg') }}" alt="logo" class="d-block mx-auto img-fluid">
-                    </div>
-
-                    <div class="col-md-7">
-                        <div class="row mb-4">
-                            <p style="font-size: 14px; text-align: justify; color: black;">
-                                Alpine Japan, founded in 2009, provides a unique range of vehicles from passenger cars to heavy equipment and cranes. 
-                                Japanese vehicles are known to stand out for their quality, reliability, and ease of use. Our company is committed to 
-                                making the unique experience of owning Japanese vehicles available to as many people as possible in different countries and continents.
-                            </p>
-                        </div>
-
-                        <div class="row mb-4">
-                            <p style="font-size: 14px; text-align: justify;">
-                                We specialize in exporting JDM vehicles to markets in the United States, Canada, Australia, and the United Kingdom. To Malaysia, 
-                                we supply minivans and new cars, and to the Middle East we supply classic cars. In the African continent market, we provide 
-                                conventional cars that are becoming an integral part of everyday life.
-                            </p>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <button type="button" class="btn btn-primary btn-block btn-sm">READ MORE</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-    <!-- About Alpine Japan End -->
-
-    <!-- Quality Compliance Part Start -->
-            <div class="container-fluid pb-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-8 text-center ">
-                        <div style="margin-left:50px">
-                            <h2 style="display: inline;">Quality</h2> 
-                            <h2 style="display: inline; color: #038ffc;">Compliance</h2>
-                        </div>
-                        <p style="font-size: 14px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus excepturi consequuntur voluptate id reprehenderit optio voluptas quidem, asperiores molestiae fugiat fuga velit, 
-                            cupiditate placeat reiciendis corrupti perspiciatis distinctio ut aspernatur.</p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="{{ asset('japan_home/qc1.svg') }}" alt="logo" class="d-block mx-auto">
-                    </div>
-
-                    <div class="col-md-4">
-                        <img src="{{ asset('japan_home/qc2.svg') }}" alt="logo" class="d-block mx-auto">
-                    </div>
-
-                    <div class="col-md-4">
-                        <img src="{{ asset('japan_home/qc3.svg') }}" alt="logo" class="d-block mx-auto">
-                    </div>
-                </div>
-            </div>
-
-    <!-- Quality Compliance Part end -->
+<!-- <div class="spinner-grow text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div> -->
      <script>
-
-      
+    //   $(document).ready(function(){
+    //      $(".spinner-grow").hide();
+    //   })
+       
         document.getElementById("heartIcon").addEventListener("click", function() {
             this.classList.toggle("red");
         });
