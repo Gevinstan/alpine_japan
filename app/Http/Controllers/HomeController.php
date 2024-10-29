@@ -370,17 +370,20 @@ class HomeController extends Controller
         if($type == 'car'){
             $carsQuery = Cars::join('models_cars as mc', 'mc.model', '=', 'blog.model')
             ->where(DB::raw('LOWER(blog.make)'), $slug)
+            ->where('is_active','1')
             ->select('blog.*');
             
         } else if($type == 'heavy'){
             $carsQuery = Heavy::join('models_cars as mc', 'mc.model', '=', 'heavy.model')
             // ->where('heavy.category', 'JDM Legend')
             ->where('heavy.make', $slug)
+            ->where('is_active','1')
             ->select('heavy.*');
         } else if($type =='small_heavy') {
             $carsQuery = SmallHeavy::join('models_cars as mc', 'mc.model', '=', 'small_heavy.model')
             // ->where('small_heavy.category', 'JDM Legend')
             ->where('small_heavy.make', $slug)
+            ->where('is_active','1')
             ->select('small_heavy.*');
         }
 
