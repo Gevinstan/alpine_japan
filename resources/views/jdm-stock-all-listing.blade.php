@@ -175,6 +175,8 @@
                                                 <input type="hidden" name="total_car_price" value="" id="hidden_total">
                                                 <input type="hidden" name="vehicle_brand" value="{{$car->make}}">
                                                 <input type="hidden" name="vehicle_model" value="{{$car->model}}">
+                                                <input type="hidden" name="url_link" value="{{$car->url_link}}">
+
 
                                                 @if($google_recaptcha->status==1)
                                                     <div class="auto-sales-form-item">
