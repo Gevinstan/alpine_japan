@@ -164,9 +164,9 @@
                     <div class="col-lg-12 col-p-0">
                         <div class="nav-main">
                             <div class="nav-left">
-                                <div class="logo">
+                                <div class="logo mb-3" >
                                     <a href="{{ route('home') }}">
-                                        <img src="{{asset('japan_home/japan-logo.png')}}" alt="logo">
+                                        <img src="{{asset('japan_home/japan-logo.png')}}" alt="logo" width="60" height="60" >
                                     </a>
                                 </div>
 
