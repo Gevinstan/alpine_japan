@@ -1129,7 +1129,7 @@ class HomeController extends Controller
 
     public function listings(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
 
         // $brands = Brand::where('status', 'enable')->get();
 
@@ -1372,7 +1372,7 @@ class HomeController extends Controller
     }
     public function top_selling(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -1893,7 +1893,7 @@ class HomeController extends Controller
         $models=[];
 
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -2910,7 +2910,7 @@ class HomeController extends Controller
 
     public function dealers(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 11)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
 
         $dealers = User::where(['status' => 'enable' , 'is_banned' => 'no', 'is_dealer' => 1])->where('email_verified_at', '!=', null)->orderBy('id','desc')->select('id','name','username','designation','image','status','is_banned','is_dealer', 'address', 'email', 'phone');
 
