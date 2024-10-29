@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @keyframes slideDown {
     from {
         transform: translateY(-100%);
@@ -9268,8 +9269,8 @@ p {
 
 .inventory-main-box .accordion-button::after {
     width: 13px;
-    height: 7.41px;
-    background-image: url(../assets/images/icon/arrow-2.png);
+    height: 10px;
+    background-image: url(../assets/images/icon/down-arrow.png);
     background-size: cover;
     transform: rotate(-180deg);
 }
@@ -14676,15 +14677,191 @@ p {
 
   /********* Listing Page style Start **********/
 
-  .listing-breadcrumb {
-    padding-top: 40px !important;
-  }
-
-  @media (min-width: 992px) and (max-width: 1199.98px) {
-
+ /********* breadcrumb Start ***********/
+ .listing-breadcrumb {
+    padding: 145px 0 0 0 !important;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    content: var(--bs-breadcrumb-divider, ">") !important;
+}
+  @media (min-width: 768px) and (max-width: 991.98px) {
     .listing-breadcrumb {
-        padding-top: 70px !important;
-      }
+        padding: 20px 0 0 0 !important;
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    
+    .listing-breadcrumb {
+        padding: 150px 0 0 0 !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .listing-breadcrumb {
+        padding: 10px 0 70px 0 !important;
+    }
+  }
+  /********* breadcrumb End ***********/
+
+  /********* Search section style Start ***********/
+  .search-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+  .sort-text {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .sort-dropdown button {
+    color: var(--primary-color-2);
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+  }
+  .sort-dropdown button{
+    border: none;
+  }
+  .sort-dropdown button:hover,
+  .sort-dropdown button:active,
+  .sort-dropdown button:focus-visible,
+  .sort-dropdown button:focus {
+    color: var(--primary-color-2);
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+    border: none;
+    box-shadow: none;
+  }
+  .search-clear-btn,
+  .search-clear-btn:hover {
+    color: #FF6363;
+    background-color: #FF6363 10% !important;
+    border: 1.5px solid #FF6363;
+  }
+  .filter-text {
+    color:#131650;
+    background-color: #045EAC1A;
+    border: 1px solid #045EAD !important;
+    font-size: .75rem;
+    line-height: 18px !important;
+  }
+  /********* Search section style End ***********/
+  
+  /********* input range slider  style Start ***********/
+    .slider-container {
+        display: flex;
+        align-items: center;
+        margin: 20px;
+    }
+    .slider-label {
+        margin-right: 20px;
+    }
+    .slider-input {
+        width: 100%;
+        height: 2px;    
+    }
+    .slider-value {
+        margin-right: 20px;
+    }
+    .clear-button {
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #FF6363;
+    }
+    .go-button {
+        background-color: var(--primary-color-1); /* Blue color */
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+  /********* input range slider  style End ***********/
+  .inventory-main-box {
+    border: 1px solid #24272C1A;
+  }
+  .bg-light-grey {
+    background-color: #f5f5f5 !important;
+  }
+  /********* Listing page End ***********/
+
+  /********* Listing Detail page Start ***********/
+  .form-section{
+    background: #F2F2F2 !important;
+    border: 1px solid #FFFFFF !important;
+  }
+  .car-listing-details p {
+    font-size: .975rem;
+    line-height: 22px;
+  }
+  .car-listing-details .brand-text{
+    color: #25282D;
+  }
+  .car-listing-details h3{
+    color: #0D274E;
+    font-size: 1.5rem;
+    line-height: 22px;
+  }
+  .car-listing-details .amount-text {
+    color: #868B96;
+  }
+  .car-listing-details .price-text {
+    color: #038FFC;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .car-listing-details .commission-text {
+    color: #0D274E;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .cal-btn {
+    color: #038FFC;
+    border: 1.5px solid #038FFC;
+    border-radius: 6px;
+    background-color: var(--white-color);
+    font-size: .75rem;
+    font-weight: 500;
+    padding: 10px;
+  }
+  .total-price span {
+    font-size: 2rem;
+    font-weight: 500;
+    bottom: 2px;
+    left: 85px;
+  }
+  .charge-btn {
+    border: 1px solid #24272C1A;
+    color: #24272C40;
+  }
+  .location-dropdown button{
+    background-color: var(--white-color);
+    color: #24272C80;
+    border: 1px solid #24272C1A;
+  }
+  .location-dropdown button:hover,
+  .location-dropdown button:focus,
+  .location-dropdown button:focus-visible {
+    border: none;
+    background: var(--white-color);
+    color: #24272C80;
+    box-shadow: none;
+    border: 1px solid #24272C1A;
+  }
+  .accessories-text {
+    border: 1px solid #038FFC;
+    color: #0E274F;
+    font-size: .75rem;
+    background: #038FFC26;
+    font-weight: 500;
+  }
+  .accessories-hide-text {
+    border: 1px solid #E9E9E9;
+    color:  #86888C;
+    font-size: .75rem;
+    background: #F5F6F680;
+    font-weight: 500;
   }
 
   /********* Listing Page style End **********/
