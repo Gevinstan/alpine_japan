@@ -666,6 +666,8 @@ class HomeController extends Controller
         $jdm_brand['small_heavy']=$jdm_legend_heavy;
         $jdm_core_brand = Brand::where('status', 'enable')->get();
 
+
+
         return view('jdm-listing', [
             'car' => $car,
             'related_listings' => $related_listings,
@@ -3002,7 +3004,7 @@ class HomeController extends Controller
       
 
         // Mail::to(env('MAIL_FROM_ADDRESS'))->send(new SendContactMessage($message,$subject, $request->email, $request->name));
-        Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name));
+        Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name,$request->url_link));
 
    
         $Enquiry=new VehicleEnquiry();

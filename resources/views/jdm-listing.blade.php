@@ -173,8 +173,8 @@
                                                 <input type="hidden" name="commission" value="" id="hidden_commission">
                                                 <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
                                                 <input type="hidden" name="total_car_price" value="" id="hidden_total">
-                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
-                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->make}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model}}">
                                                 <input type="hidden" name="url_link" value="{{$url_link}}">
 
                                                 @if($google_recaptcha->status==1)
