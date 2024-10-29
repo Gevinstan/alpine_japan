@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\ContactMessage\Entities\ContactMessage;
 use Modules\GeneralSetting\Entities\Setting;
 use App\Models\VehicleEnquiry;
+use DB;
 
 class ContactMessageController extends Controller
 {
@@ -16,12 +17,34 @@ class ContactMessageController extends Controller
         $this->middleware('auth:admin');
     }
     public function VehicleEnquiry(Request $request){
-        $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
-        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry'));
+
+        $filters = [
+            'start_year' => null,
+            'end_year' => null
+        ];
+
+        $query = VehicleEnquiry::query();
+
+        // Filter by start year
+        if ($request->has('start_year') && $request->start_year != '') {
+            $filters['start_year'] = $request->start_year;
+            $query->where('created_at', '>=', $request->start_year);
+        }
+
+        // Filter by end year
+        if ($request->has('end_year') && $request->end_year != '') {
+            $filters['end_year'] = $request->end_year;
+            $query->where('created_at', '<=', $request->end_year);
+        }
+
+        $vehicle_enquiry = $query->orderBy('id','desc')->get();
+   
+
+        // $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
+        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry','filters'));
     }
 
     public function contact_message(){
-
         $contact_messages = ContactMessage::orderBy('id','desc')->latest()->get();
         return view('contactmessage::contact_message', compact('contact_messages'));
     }

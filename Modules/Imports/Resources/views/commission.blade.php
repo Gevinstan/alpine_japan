@@ -468,26 +468,16 @@
             var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
             const selectedIds = Array.from(rowCheckboxes)
                 .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.getAttribute('data-id'));              
+                .map(checkbox => checkbox.getAttribute('data-id')); 
+                
+            if($("#masterCheckbox").is(':checked')){
+                updateAllCommission();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedComission(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }    
             
-            $.ajax({
-                url: "{{route('admin.commission.store')}}",
-                type: "POST", // Use POST for this AJAX call
-                data: {
-                    selectedIds: selectedIds,
-                    commission: $("#commission").val(),
-                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-                },
-                success: function(response) {
-                    if(response.success == true) {
-                        toastr.success("Success", response.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                    toastr.error("Error", "An error occurred while processing your request.");
-                }
-            });
         });
     });
 
@@ -605,6 +595,74 @@ newArrivalButtons.forEach(function(topSellButton) {
              }
          });
 
+         $('.td-checkbox-class').on('change',function(){
+                if ($("#masterCheckbox").is(':checked')) {
+                    $("#masterCheckbox").prop('checked',false);
+                    rowCheckboxes.forEach(function(checkbox) {
+                            checkbox.checked = false; // Uncheck each row checkbox
+                    });
+
+                }   
+            })
+
      });
+
+
+     function updateAllCommission(){
+    swal({
+            title: "Are you sure?",
+            text: "This will Change All commission value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{route('admin.store-all-comission')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        commission: $("#commission").val(),
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+   
+}
+
+function updateSelectedComission(selectedIds){
+     $.ajax({
+            url: "{{route('admin.store-car-comission')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#commission").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+}
+
 </script>
 @endpush

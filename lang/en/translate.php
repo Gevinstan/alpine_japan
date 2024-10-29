@@ -178,6 +178,8 @@
   'Terms and Conditions' => 'Terms and Conditions',
   'Privacy Policy' => 'Privacy Policy',
   'FAQ' => 'FAQ',
+  'Start Date'=>'Start Date',
+  'End Date'=>'End Date',
   'Custom Page' => 'Custom Page',
   'Manage Section' => 'Manage Section',
   'Home-1 Intro' => 'Home-1 Intro',

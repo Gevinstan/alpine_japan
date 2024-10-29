@@ -12,6 +12,7 @@
     <!-- crancy Dashboard -->
     <section class="crancy-adashboard crancy-show">
         <div class="container container__bscreen">
+            
             <div class="row">
                 <div class="col-12">
                     <div class="crancy-body">
@@ -26,14 +27,33 @@
                                         </div>
                                     </div>
                                 </div>
+                                <form  action="{{ route('admin.vehicle-enquiry') }}" method="GET" id="" novalidate>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="">
+                                                <label class="crancy__item-label">{{ __('translate.Start Date') }}</label>
+                                                <input class="crancy__item-input" type="date" name="start_year" id="start_year" value="{{ $filters['start_year'] ?? '' }}">     
+                                            </div>
+                                            <div class="">
+                                                <label class="crancy__item-label">{{ __('translate.End Date') }}</label>
+                                                <input class="crancy__item-input" type="date" name="end_year" id="end_year"  value="{{ $filters['end_year'] ?? '' }}">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button  class="crancy-btn mg-top-25" style="margin-left:10px;" type="submit" id="yearBtn">{{ __('translate.Search') }}</button>
+                                            </div>
+                                    </div>
+                                </form>    
+
+                           
+
+            
 
                                 <!-- crancy Table -->
                                 <div id="crancy-table__main_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
-                                    <table class="crancy-table__main crancy-table__main-v3 dataTable no-footer" id="dataTable">
+                                    <table class="crancy-table__main-v3 no-footer" id="dataTable">
                                         <!-- crancy Table Head -->
                                         <thead class="crancy-table__head">
-                                            <tr>
+                                            <tr>    
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Name') }}
                                                 </th>

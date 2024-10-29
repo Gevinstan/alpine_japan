@@ -25,38 +25,18 @@
                     <ul class="menu-bar__one-dropdown">
 
                         <li class="{{ Route::is('admin.cars.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.cars.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                             <span class="menu-bar__name">{{ __('translate.Car') }}</span></span></a>
                         </li>
 
                         <li class="{{ Route::is('admin.heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.heavy.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                              <span class="menu-bar__name">{{ __('translate.Heavy') }}</span></span></a>
                         </li>
 
                         <li class="{{ Route::is('admin.commercial.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.commercial.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                             <span class="menu-bar__name">{{ __('translate.Commercial') }}</span></span></a>
                         </li>
 
                         <li class="{{ Route::is('admin.small-heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.small-heavy.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                             <span class="menu-bar__name">{{ __('translate.Small heavy') }}</span></span></a>
                         </li>
                     </ul>
