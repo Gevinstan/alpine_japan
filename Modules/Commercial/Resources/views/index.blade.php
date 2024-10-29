@@ -5,7 +5,7 @@
 
 @section('body-header')
     <h3 class="crancy-header__title m-0">{{ __('translate.Commercial Stock List') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Commercial') }} >> {{ __('translate.Commercial Stock List') }}</p>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Commercial') }} >> {{ __('translate.Commercial Stock List') }}</p></a>
 @endsection
 
 @section('body-content')
@@ -23,7 +23,13 @@
                                     <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch d-flex items-center justify-between create_new_btn_box">
                                         <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box  d-flex  justify-between">
                                             <h4 class="crancy-product-card__title">{{ __('translate.Commercial Stock List') }}</h4>
-                                            <div class="d-flex gap-3">
+                                            <div class="align-items-center d-flex gap-2 justify-content-end">
+                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input w-25" type="text" name="commission" id="commission">
+                                                        @error('commission')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
                                             <a href="{{ route('admin.commercial.create') }}" class="crancy-btn text-nowrap"><span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                     <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -67,6 +73,9 @@
                                                     {{ __('translate.Year of Manuf.') }}
                                                 </th>
                                                 <th class="crancy-table__column-3 crancy-table__h3 sorting">
+                                                    {{ __('translate.Comission') }}
+                                                </th>
+                                                <th class="crancy-table__column-3 crancy-table__h3 sorting">
                                                     {{ __('translate.Image') }}
                                                 </th>
                                                 <th class="crancy-table__column-3 crancy-table__h3 sorting">
@@ -103,7 +112,10 @@
                                                         <h4 class="crancy-table__product-title">{{ $commerical->title }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <h4 class="crancy-table__product-title">{{ $commerical->yom }}</h4>
+                                                        <h4 class="crancy-table__product-title">{{ $commerical->yom }}</h4>     
+                                                    </td>
+                                                    <td class="crancy-table__column-2 crancy-table__data-2">
+                                                        <h4 class="crancy-table__product-title">{{ $commerical->commission_value }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                     <img src="{{ asset('Cars/' . $commerical->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
@@ -248,6 +260,21 @@
         }
     });
 
+        $("#comissionBtn").on('click', function() {
+            var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+            const selectedIds = Array.from(rowCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id'));  
+
+            if($("#masterCheckbox").is(':checked')){
+                updateAllCommission();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedComission(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }
+        });
+
 
     topSellButtons.forEach(function(topSellButton) {
                 topSellButton.addEventListener('change', function() {
@@ -270,53 +297,73 @@
                 });
             });
         });
+        $('.td-checkbox-class').on('change',function(){
+                if ($("#masterCheckbox").is(':checked')) {
+                    $("#masterCheckbox").prop('checked',false);
+                    rowCheckboxes.forEach(function(checkbox) {
+                            checkbox.checked = false; // Uncheck each row checkbox
+                    });
+
+                }   
+            })
 });
 
         
-// function initializedTable(){
-//    let attendanceTable = $('#commerical_datatable').DataTable({  
-//         lengthChange: true,
-//         ordering: true,
-//         dom: '<"d-flex customname  justify-content-between"fB><"clearfix">rtip',
-//         lengthMenu: [[10, 50, 100, 250, 500, -1], [10, 50, 100, 250, 500, "All"]],
-//         processing: true,
-//         serverSide: true,
-//         bDestroy: true,
-//         scrollX: true,
-//         scrollY: '70vh',
-//         scrollCollapse: true,
-//         fixedHeader: true,
-//         responsive: true,
-//         autoWidth: false,
-//         ajax: {
-//             url: "{{ route('fetch_commercials') }}",
-//             type: 'GET',
-//             dataType: "json",
-//             data: function(d) {
-//                     // Add additional data to the request
-//                     // d.class_id = $("#classFilter").val();
-//                     // d.section_id = $("#sections").val();
-//                     // d.student_id = $('#students').val();
-//                 },
-//             dataSrc: function ( receivedData ) {
-//               $(".default-option").removeClass('default-option');
-//             // tickets_info=receivedData.data;
-//             return receivedData.data;
-//           }, 
-//         },
-//         columns: [  
-//             {data: 'checkbox', width: '5%'},
-//             {data: 'DT_RowIndex', width: '5%'},
-//             {data: 'category', width: '15%'},
-//             {data: 'title', width: '25%'},
-//             {data: 'yom', width: '10%'},
-//             {data: 'image', width: '10%'}, 
-//             {data: 'Status', width: '10%'}, 
-//             {data: 'Action', width: '20%'}
-//         ]
-//     });
-// }
+function updateAllCommission(){
+    swal({
+            title: "Are you sure?",
+            text: "This will Change All commission value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{route('admin.store-all-comission-comission')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        commission: $("#commission").val(),
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+   
+}
 
+function updateSelectedComission(selectedIds){
+     $.ajax({
+            url: "{{route('admin.store-commercial-comission')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#commission").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+}
 
     </script>
 @endpush

@@ -15,6 +15,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO
 
     Route::resource('small-heavy', SmallHeavyController::class);
     Route::post('store-small-heavy-comission', [SmallHeavyController::class,'smallHeavyComission'])->name('store-small-heavy-comission');
+    Route::post('store-small-heavy-all-comission', [SmallHeavyController::class,'smallHeavyAllComission'])->name('store-small-heavy-all-comission');
     Route::post('smallheavy-new-arrivals', [SmallHeavyController::class,'smallHeavyNewArrivals'])->name('smallheavy-new-arrivals');
     
 });

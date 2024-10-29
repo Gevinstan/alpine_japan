@@ -119,6 +119,13 @@ class CarsController extends Controller
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
+    public function storeAllCarComission(Request $request){
+        Cars::where('is_active', 1)
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
     public function newArrivalCars(Request $request){
         $test=Cars::where('is_active', 1)
         ->where('id',$request->selectedIds)

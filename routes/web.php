@@ -200,6 +200,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/', [DashboardController::class, 'dashboard']);
             Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
+
             Route::controller(AdminProfileController::class)->group(function () {
                 Route::get('edit-profile', 'edit_profile')->name('edit-profile');
                 Route::put('profile-update', 'profile_update')->name('profile-update');
