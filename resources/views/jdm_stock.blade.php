@@ -695,7 +695,7 @@ function setSortByParam(selectedBrand,selectedText) {
         })
 
         form.on('submit',function(){
-            document.getElementById("pageLoader").style.display = "block";
+            document.getElementById("pageLoader").style.display = "flex";
         })
     });
 })(jQuery);
