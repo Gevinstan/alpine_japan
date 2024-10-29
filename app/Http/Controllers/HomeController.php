@@ -301,17 +301,20 @@ class HomeController extends Controller
         if($type == 'car'){
             $carsQuery = Cars::join('models_cars as mc', 'mc.model', '=', 'blog.model')
             ->where(DB::raw('LOWER(blog.make)'), $slug)
+            ->where('is_active','1')
             ->select('blog.*');
             
         } else if($type == 'heavy'){
             $carsQuery = Heavy::join('models_cars as mc', 'mc.model', '=', 'heavy.model')
             // ->where('heavy.category', 'JDM Legend')
             ->where('heavy.make', $slug)
+            ->where('is_active','1')
             ->select('heavy.*');
         } else if($type =='small_heavy') {
             $carsQuery = SmallHeavy::join('models_cars as mc', 'mc.model', '=', 'small_heavy.model')
             // ->where('small_heavy.category', 'JDM Legend')
             ->where('small_heavy.make', $slug)
+            ->where('is_active','1')
             ->select('small_heavy.*');
         }
 
@@ -1060,7 +1063,7 @@ class HomeController extends Controller
 
     public function listings(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
 
         // $brands = Brand::where('status', 'enable')->get();
 
@@ -1202,7 +1205,7 @@ class HomeController extends Controller
     // $carsQuery->get();
 
     // Pagination
-    $cars = $carsQuery->paginate(12);
+    $cars = $carsQuery->where('active_status','1')->paginate(12);
 
 
     // Transform cars into an array for the view
@@ -1303,7 +1306,7 @@ class HomeController extends Controller
     }
     public function top_selling(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -1477,7 +1480,7 @@ class HomeController extends Controller
     
 
         // Pagination
-        $cars = $carsQuery->where('top_sell','1')->paginate(12);
+        $cars = $carsQuery->where('top_sell','1')->where('active_status','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -1564,7 +1567,7 @@ class HomeController extends Controller
     }
     public function auctionCar(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = Auct_lots_xml_jp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -1731,7 +1734,7 @@ class HomeController extends Controller
        
 
         // Pagination
-        $cars = $carsQuery->paginate(12);
+        $cars = $carsQuery->where('active_status','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -1824,7 +1827,7 @@ class HomeController extends Controller
         $models=[];
 
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -1983,7 +1986,7 @@ class HomeController extends Controller
 
         // Pagination
         $date=date('Y');
-        $cars = $carsQuery->where('new_arrival','1')->paginate(12);
+        $cars = $carsQuery->where('new_arrival','1')->where('active_status','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -2281,7 +2284,7 @@ class HomeController extends Controller
 
     public function jdm_stock_all(Request $request)
     {
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
 
         $jdmBrand = $request->input('jdm_brand');
@@ -2355,6 +2358,7 @@ class HomeController extends Controller
                         break;
                     }
                 })
+                ->where('is_active','1')
                 ->select('model','price','image','id','make','title');
 
 
@@ -2419,6 +2423,7 @@ class HomeController extends Controller
                         break;
                     }
                 })
+                ->where('is_active','1')
                 ->select('model','price','image','id','make','title');
 
             // Query for Small Heavy table
@@ -2477,6 +2482,7 @@ class HomeController extends Controller
                         break;
                     }
                 })
+                ->where('is_active','1')
                 ->select('model','price','image','id','make','title');
 
         if($request->price_range_scale){
@@ -2782,7 +2788,7 @@ class HomeController extends Controller
 
 
     public function jdm_stock_all_listing($slug){
-        $seo_setting = SeoSetting::where('id', 11)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         $blogCar =  DB::table('blog')->where('id', $slug)->first();
         $heavyCar = Heavy::where('id', $slug)->first();
         $smallHeavyCar = SmallHeavy::where('id', $slug)->first();
@@ -2841,7 +2847,7 @@ class HomeController extends Controller
 
     public function dealers(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 11)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
 
         $dealers = User::where(['status' => 'enable' , 'is_banned' => 'no', 'is_dealer' => 1])->where('email_verified_at', '!=', null)->orderBy('id','desc')->select('id','name','username','designation','image','status','is_banned','is_dealer', 'address', 'email', 'phone');
 
@@ -2930,7 +2936,7 @@ class HomeController extends Controller
       
 
         // Mail::to(env('MAIL_FROM_ADDRESS'))->send(new SendContactMessage($message,$subject, $request->email, $request->name));
-        Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name));
+        Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name,$request->url_link));
 
    
         $Enquiry=new VehicleEnquiry();
