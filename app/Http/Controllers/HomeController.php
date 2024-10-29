@@ -1800,7 +1800,7 @@ class HomeController extends Controller
             }
         }
 
-       s
+       
 
         // Pagination
         $cars = $carsQuery->where('active_status','1')->paginate(12);
