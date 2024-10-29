@@ -2351,6 +2351,7 @@ class HomeController extends Controller
     public function jdm_stock_all(Request $request)
     {
         $seo_setting = SeoSetting::where('id', 10)->first();
+        echo json_encode($seo_setting);die();
         // $brands = Brand::where('status', 'enable')->get();
 
         $jdmBrand = $request->input('jdm_brand');
