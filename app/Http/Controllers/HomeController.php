@@ -2350,8 +2350,7 @@ class HomeController extends Controller
 
     public function jdm_stock_all(Request $request)
     {
-        $seo_setting = SeoSetting::where('id', 10)->first();
-        echo json_encode($seo_setting);die();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
 
         $jdmBrand = $request->input('jdm_brand');
@@ -2852,7 +2851,7 @@ class HomeController extends Controller
 
 
     public function jdm_stock_all_listing($slug){
-        $seo_setting = SeoSetting::where('id', 11)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         $blogCar =  DB::table('blog')->where('id', $slug)->first();
         $heavyCar = Heavy::where('id', $slug)->first();
         $smallHeavyCar = SmallHeavy::where('id', $slug)->first();
