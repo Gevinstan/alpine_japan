@@ -136,8 +136,14 @@ class SmallHeavyController extends Controller
 
     public function smallHeavyComission(Request $request){
         SmallHeavy::where('is_active', 1)
-        ->whereIn('id',$request->selectedIds)
-        ->update(['commision_value' => $request->commission]);
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function smallHeavyAllComission(Request $request){
+        SmallHeavy::where('is_active', 1)
+        ->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);

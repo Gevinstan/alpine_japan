@@ -5,7 +5,7 @@
 
 @section('body-header') 
     <h3 class="crancy-header__title m-0">{{ __('translate.Edit Commercial') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Commercial') }} >> {{ __('translate.Edit Commercial') }}</p>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Commercial') }} >> {{ __('translate.Edit Commercial') }}</p></a>
     <style>
          .file_image{
           width: 30px ! important;

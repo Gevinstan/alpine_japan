@@ -37,7 +37,13 @@ class HeavyController extends Controller
 
     public function storeHeavyComission(Request $request){
         Heavy::where('is_active', 1)
-        ->whereIn('id',$request->selectedIds)
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function storeAllHeavyComission(Request $request){
+        Heavy::where('is_active', 1)
         ->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
