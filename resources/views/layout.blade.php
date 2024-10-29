@@ -1128,7 +1128,7 @@
                         type:'POST',
                         data:{'key':'acut_sess'},
                         success:function(data){
-                            window.location.href="user/dashboard"
+                            window.location.href = "{{ url('/user/dashboard') }}";
                         }    
                     })
                     // $("#remove_car_"+id).submit();
