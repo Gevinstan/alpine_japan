@@ -1633,7 +1633,7 @@ class HomeController extends Controller
     }
     public function auctionCar(Request $request){
 
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = Auct_lots_xml_jp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
