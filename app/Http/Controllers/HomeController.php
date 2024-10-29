@@ -1274,7 +1274,7 @@ class HomeController extends Controller
     // $carsQuery->get();
 
     // Pagination
-    $cars = $carsQuery->paginate(12);
+    $cars = $carsQuery->where('active_status','1')->paginate(12);
 
 
     // Transform cars into an array for the view
@@ -1549,7 +1549,7 @@ class HomeController extends Controller
     
 
         // Pagination
-        $cars = $carsQuery->where('top_sell','1')->paginate(12);
+        $cars = $carsQuery->where('top_sell','1')->where('active_status','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -1800,10 +1800,10 @@ class HomeController extends Controller
             }
         }
 
-       
+       s
 
         // Pagination
-        $cars = $carsQuery->paginate(12);
+        $cars = $carsQuery->where('active_status','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -2055,7 +2055,7 @@ class HomeController extends Controller
 
         // Pagination
         $date=date('Y');
-        $cars = $carsQuery->where('new_arrival','1')->paginate(12);
+        $cars = $carsQuery->where('new_arrival','1')->where('active_status','1')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
