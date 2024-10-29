@@ -360,7 +360,7 @@ class HomeController extends Controller
 
     public function jdm_stock(Request $request,$slug,$type){
         $jdm_legend = Brand::where('status', 'enable')->get();
-        $seo_setting = SeoSetting::where('id', 10)->first();
+        $seo_setting = SeoSetting::where('id', 1)->first();
         $brands=\DB::table('blog')
         ->where('make', $slug)
         ->distinct()
