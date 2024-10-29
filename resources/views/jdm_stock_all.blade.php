@@ -42,7 +42,7 @@
                 </div>
             </div>
         </section>
-        <section>
+      {{-- <section>
             <div class="container-fluid">
                 <div class="row" style=" padding-top: 20px;padding-bottom: 14px">
                     <div class="col-lg-12">
@@ -52,13 +52,13 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-}} 
     
     <!-- banner-part-end -->
 
     <!-- Inventory-part-start -->
 
-    <section class="inventory feature-two">
+    {{--<section class="inventory feature-two">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
@@ -621,7 +621,7 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Inventory-part-end -->
 
