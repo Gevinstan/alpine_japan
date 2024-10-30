@@ -23,7 +23,7 @@
                                 <div class="crancy-customer-filter">
                                     <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch">
                                         <div class="crancy-header__form crancy-header__form--customer">
-                                            <h4 class="crancy-product-card__title">{{ __('translate.Vehicle Enquiry') }}</h4>
+                                            <h4 class="crancy-product-card__title">{{ __('translate.Vehicle En`quiry') }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -32,6 +32,21 @@
                                         <div class="">
                                             <label class="crancy__item-label">{{ __('translate.Start Date') }}</label>
                                             <input class="crancy__item-input" type="date" name="start_year" id="start_year" value="{{ $filters['start_year'] ?? '' }}">     
+                                        </div>
+                                        <div class="">
+                                            <label class="crancy__item-label">{{ __('translate.Make') }}</label>
+                                                <select name="make" id="make" class="crancy__item-input">
+                                                    <option value="">Choose Brand</option>
+                                                    @foreach($brands as $brand)
+                                                      <option value="{{$brand->slug}}" {{ ($filters['make'] ?? '') == $brand->slug ? 'selected' : '' }}>{{$brand->brand_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                        <div class="">  
+                                            <label class="crancy__item-label">{{ __('translate.Model') }}</label>
+                                            <select name="model" id="model" class="crancy__item-input"  data-selected="{{ $filters['model'] ?? '' }}">
+                                                <option value="">Choose Model</option>
+                                            </select>
                                         </div>
                                         <div class="">
                                             <label class="crancy__item-label">{{ __('translate.End Date') }}</label>
@@ -47,7 +62,7 @@
                                 <!-- crancy Table -->
                                 <div id="crancy-table__main_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
 
-                                    <table class="crancy-table__main-v3 no-footer">
+                                    <table class="crancy-table__main-v3 no-footer" id="dataTable">
                                         <!-- crancy Table Head -->
                                         <thead class="crancy-table__head">
                                             <tr>    
@@ -67,6 +82,9 @@
                                                 </th>
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Model') }}
+                                                </th>
+                                                <th class="crancy-table__column-2 crancy-table__h2 sorting">
+                                                    {{ __('translate.Url') }}
                                                 </th>
                                                 <th class="crancy-table__column-2 crancy-table__h2 sorting">
                                                     {{ __('translate.Commission') }}
@@ -104,6 +122,9 @@
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         <h4 class="crancy-table__product-title">{{ html_decode(isset($vehicle->model) ? $vehicle->model : '--') }}</h4>
+                                                    </td>
+                                                    <td class="crancy-table__column-2 crancy-table__data-2">
+                                                        <h4 class="crancy-table__product-title">{{ html_decode(isset($vehicle->url_link) ? $vehicle->url_link : '--') }}</h4>
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
@@ -171,9 +192,49 @@
 
 @push('js_section')
     <script>
+         $(()=>{
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+
+        if($("#make").val()!=""){
+            append_model_val($("#make").val());
+        }
+        
+         });
         "use strict"
         function itemDeleteConfrimation(id){
             $("#item_delect_confirmation").attr("action",'{{ url("admin/delete-contact-message/") }}'+"/"+id)
+        }
+        $('#make').on('change',function(){
+            append_model_val($(this).val());
+        })
+
+        function append_model_val(brand){
+            $.ajax({
+                url:"{{route('admin.get-enquiry-brands')}}",
+                type:"POST",
+                datatype:"JSON",
+                data:{"brand":brand},
+                beforeSend:function(response){
+                    console.log("loading")
+                },
+                success:function(data){
+                    const selectedModel = "{{ $filters['model'] ?? '' }}";
+                    var brands=data.message;
+                    for (let index = 0; index < brands.length; index++) {
+                        const element = brands[index];
+                        $("#model").append(`
+                            <option value="${element.model}" ${selectedModel == element.model ? 'selected' : ''}>
+                                ${element.model}
+                            </option>
+                        `);
+                    }
+
+                }   
+            })
         }
     </script>
 @endpush

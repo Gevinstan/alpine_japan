@@ -267,7 +267,18 @@
 
                                         <li><a style="color: black !important" href="{{ route('new-arrival') }}">{{ __('translate.New Car Arrivals') }}</a></li>
 
-                                        <li><a style="color: black !important" href="{{ route('blogs') }}">{{ __('translate.Useful Links') }}</a></li>
+                                        
+                                        <li>
+                                        @if(Auth::guard('web')->check())
+                                            <a style="color: black !important" href="{{ route('auction-car-marketplace') }}">
+                                            {{ __('translate.Live Auction') }}
+                                            </a>
+                                        @else 
+                                            <a style="color: black !important" href="#" onclick="auct_logout()">
+                                            {{ __('translate.Live Auction') }}
+                                            </a>
+                                        @endif     
+                                    </li>
 
                                         <li><a style="color: black !important" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
 
@@ -827,6 +838,7 @@
                                     </li>
 
                                     <li>
+                                        
                                         <a href="{{ route('user.reviews') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">

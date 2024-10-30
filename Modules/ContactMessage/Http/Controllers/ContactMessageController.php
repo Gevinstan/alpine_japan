@@ -10,6 +10,9 @@ use Modules\GeneralSetting\Entities\Setting;
 use App\Models\VehicleEnquiry;
 use DB;
 use Carbon\Carbon;
+use Modules\Cars\Entities\Cars;
+use Session;
+use Modules\Brand\Entities\Brand;
 
 class ContactMessageController extends Controller
 {
@@ -17,12 +20,31 @@ class ContactMessageController extends Controller
     {
         $this->middleware('auth:admin');
     }
+
+
+    public function getEnquiryBrands(Request $request){
+       $models=VehicleEnquiry::where(DB::raw('LOWER(make)'),$request->brand)
+       ->select('model')
+       ->distinct()
+       ->get();
+       return response()->json(['status'=>true,'message'=>$models]);
+    }
     public function VehicleEnquiry(Request $request){
         $filters = [
             'start_year' => null,
-            'end_year' => null
+            'end_year' => null,
+            'make'=>null,
+            'model'=>null
         ];
-        
+
+        $brands = VehicleEnquiry::join('brands as b', DB::raw('LOWER(vehicle_enquiries.make)'), '=', 'b.slug')
+                         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                         ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+            
+        DB::enableQueryLog();
         $query = VehicleEnquiry::query();
         
         // Filter by start date
@@ -38,6 +60,16 @@ class ContactMessageController extends Controller
             $query->whereDate('created_at', '<=', $endDate);
         }
         
+        if ($request->filled('make')) {
+            $filters['make'] = $request->make;
+            $query->where( DB::raw('LOWER(make)'),$request->make);
+        }
+        
+        if ($request->filled('model')) {
+            $filters['model'] = $request->model;
+            $query->where('model',$request->model);
+        }
+        
         // Fetch results
         $vehicle_enquiry = $query->orderBy('id', 'desc')->get();
 
@@ -46,7 +78,8 @@ class ContactMessageController extends Controller
    
 
         // $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
-        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry','filters'));
+        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry','filters','brands'));
+
     }
 
     public function contact_message(){
