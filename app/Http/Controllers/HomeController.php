@@ -96,7 +96,7 @@ class HomeController extends Controller
 
         $brands = Brand::where('status', 'enable')->get();
 
-        $top_sells=CarDataJpOp::where('top_sell','1')->get()->take(10);
+        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(10);
 
        
  
@@ -126,7 +126,7 @@ class HomeController extends Controller
 
         $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
         $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
-        $home3_ads = AdsBanner::where('position_key', 'home3_featured_sidebar')->first();
+        $home3_ads = AdsBanner::where('position_key', 'home_new_arrivals')->first();
         $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
 
         $brands = Brand::where('status', 'enable')->get();
@@ -193,7 +193,8 @@ class HomeController extends Controller
            
             }
             $current_year=Date('Y');
-            $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->get()->take(5);
+            $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->
+            orderBy('id','desc')->get()->take(5);
     
             foreach($new_arrivals as $cars){
                 $last_image=$this->last_image($cars->pictures);
@@ -1212,7 +1213,9 @@ class HomeController extends Controller
     // $carsQuery->get();
 
     // Pagination
-    $cars = $carsQuery->where('active_status','1')->paginate(12);
+    $cars = $carsQuery->where('active_status','1')
+    ->orderBy('id','desc')
+    ->paginate(12);
 
 
     // Transform cars into an array for the view
@@ -1993,7 +1996,10 @@ class HomeController extends Controller
 
         // Pagination
         $date=date('Y');
-        $cars = $carsQuery->where('new_arrival','1')->where('active_status','1')->paginate(12);
+        $cars = $carsQuery->where('new_arrival','1')
+        ->where('active_status','1')
+        ->orderBy('id','desc')
+        ->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
