@@ -1812,7 +1812,7 @@ class HomeController extends Controller
        
 
         // Pagination
-        $cars = $carsQuery->where('active_status','1')->paginate(12);
+        $cars = $carsQuery->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
