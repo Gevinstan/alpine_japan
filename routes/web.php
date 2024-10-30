@@ -54,7 +54,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/terms-conditions', 'terms_conditions')->name('terms-conditions');
             Route::get('/privacy-policy', 'privacy_policy')->name('privacy-policy');
             Route::get('/faq', 'faq')->name('faq');
-            Route::get('/brand-listing', 'vkytest')->name('brand-listing');
+            Route::get('/brand-listing', 'BrandListig')->name('brand-listing');
             Route::get('/howtobuy', 'howtobuy')->name('howtobuy');
 
 

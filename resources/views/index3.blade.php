@@ -198,7 +198,7 @@
         <div class="container ">
             <div class="col-lg-4">
                     <div class="categories-three-view-btn" style="margin-top: 40px; margin-right: -300px">
-                    <a href="{{ route('listings') }}" class="thm-btn">{{ __('translate.View All') }}</a>
+                    <a href="{{ route('brand-listing') }}" class="thm-btn">{{ __('translate.View All') }}</a>
                     </div>
             </div>
         </div>

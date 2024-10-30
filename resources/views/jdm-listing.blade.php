@@ -101,7 +101,10 @@
                                                                     </p>
                                                                 </p>    
                                                                 
-                                                                <p style="display: inline;">Commission : <p style="font-size:18px; color: black; display: inline;" id="commission_value"><b>${{$car->commission_value}}</b></p></p>
+
+                                                                <p style="display: inline;">Commission : <p style="font-size:18px; color: black; display: inline;"  id="commission_value">
+                                                                    <b>${{$car->commission_value}}</b></p></p>
+
                                                             
                                                                 <p style="display: inline;">{{__('Delivery Charge :')}} <b><p style="font-size:18px; color: black; display: inline; font-weight:bold" id="delivery_charge"></p></b></p>
                                                             </div>

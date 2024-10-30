@@ -910,7 +910,7 @@ class HomeController extends Controller
     }
 
 
-    public function vkytest(){
+    public function BrandListig(){
         $seo_setting = SeoSetting::where('id', 3)->first();
 
         $about_us = AboutUs::first();
@@ -2429,6 +2429,7 @@ class HomeController extends Controller
                         break;
                     }
                 })
+                ->where('is_active','1')
                 ->select('model','price','image','id','make','title');
 
 
@@ -2493,6 +2494,7 @@ class HomeController extends Controller
                         break;
                     }
                 })
+                ->where('is_active','1')
                 ->select('model','price','image','id','make','title');
 
             // Query for Small Heavy table
@@ -2551,6 +2553,7 @@ class HomeController extends Controller
                         break;
                     }
                 })
+                ->where('is_active','1')
                 ->select('model','price','image','id','make','title');
 
         if($request->price_range_scale){
