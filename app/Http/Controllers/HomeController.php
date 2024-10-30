@@ -96,6 +96,7 @@ class HomeController extends Controller
         $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
         $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
         $home3_ads = AdsBanner::where('position_key', 'home3_featured_sidebar')->first();
+        $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
 
         $brands = Brand::where('status', 'enable')->get();
 
@@ -213,6 +214,8 @@ class HomeController extends Controller
             $jdm_brand['heavy']=$jdm_legend_heavy;
             $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
+            // echo json_encode($jdm_car_listings);die();
+
         
             return view('index3', [
                 'seo_setting' => $seo_setting,
@@ -235,7 +238,8 @@ class HomeController extends Controller
                 'home3_ads' => $home3_ads,
                 'top_sells'=>$top_cars,
                 'top_rated'=>$top_sells,
-                'new_arrived_cars'=>$new_arrived_cars
+                'new_arrived_cars'=>$new_arrived_cars,
+                'jdm_car_listings'=>$jdm_car_listings
             ]);
         }else{
             return view('index', [
@@ -357,6 +361,9 @@ class HomeController extends Controller
     //         ]);
         
     // }
+
+
+
 
     public function jdm_stock(Request $request,$slug,$type){
         $jdm_legend = Brand::where('status', 'enable')->get();
