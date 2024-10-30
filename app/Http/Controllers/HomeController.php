@@ -839,7 +839,7 @@ class HomeController extends Controller
     }
 
 
-    public function vkytest(){
+    public function BrandListig(){
         $seo_setting = SeoSetting::where('id', 3)->first();
 
         $about_us = AboutUs::first();

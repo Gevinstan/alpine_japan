@@ -8,6 +8,8 @@ use Illuminate\Routing\Controller;
 use Modules\ContactMessage\Entities\ContactMessage;
 use Modules\GeneralSetting\Entities\Setting;
 use App\Models\VehicleEnquiry;
+use DB;
+use Carbon\Carbon;
 
 class ContactMessageController extends Controller
 {
@@ -16,8 +18,37 @@ class ContactMessageController extends Controller
         $this->middleware('auth:admin');
     }
     public function VehicleEnquiry(Request $request){
-        $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
-        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry'));
+        $filters = [
+            'start_year' => null,
+            'end_year' => null
+        ];
+        
+        DB::enableQueryLog();
+        $query = VehicleEnquiry::query();
+        
+        // Filter by start date
+        if ($request->filled('start_year')) {
+            $filters['start_year'] = $request->start_year;
+            $startDate = Carbon::parse($request->start_year)->startOfDay();
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+
+        if ($request->filled('end_year')) {
+            $filters['end_year'] = $request->end_year;
+            $endDate = Carbon::parse($request->end_year)->endOfDay();
+            $query->whereDate('created_at', '<=', $endDate);
+        }
+        
+        // Fetch results
+        $vehicle_enquiry = $query->orderBy('id', 'desc')->get();
+
+        // echo json_encode($filters);die();
+
+   
+
+        // $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
+        return view('contactmessage::vehicle_enquiry', compact('vehicle_enquiry','filters'));
+
     }
 
     public function contact_message(){
