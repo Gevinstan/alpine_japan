@@ -117,18 +117,20 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                                <input type="hidden" id="priceSearch" name="price_range_scale" value="">
-                                                <button id="searchButton" style="margin-left: 5px; padding: 5px 10px;">Search</button>
-                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$0 $500,000</b></p></span>
+                                            <input type="hidden" id="priceSearch" name="price_range_scale" value="">
+                                                <button id="searchButton" class="thm-btn budget-search-btn">Search</button>`
+                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+
                                                 <div class="range-container">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMax" value="2">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMax" value="2">
                                                 </div>
 
+                                                {{--<span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">$5k $5Lakh</p></span>--}}
                                     
 
 
-                                                <div id="slider-outer-div ms-2" >
+                                                {{--<div id="slider-outer-div ms-2" >
                                                     <div id="slider-max-label" class="slider-label"></div>
                                                     <div id="slider-min-label" class="slider-label"></div>
                                                     <div id="slider-div">
@@ -144,7 +146,7 @@
                                                 <div class="range-container-txt2">
                                                     <div><p><b>$5k</b></div>
                                                     <div><p><b>$5Lakhs</b></p></p></div>
-                                                </div>
+                                                </div> --}}
 
                                                 <h6 style="padding-top:30px">Price Range</h6>
 
@@ -180,7 +182,7 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                            <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+                                           {{--<span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>--}}
                                                 <div class="range-container">
                                                     <input type="range" class="form-range" min="1960" max="2024"  id="start">
                                                     <output name="age_output" id="age_output" for="start" ></output>
