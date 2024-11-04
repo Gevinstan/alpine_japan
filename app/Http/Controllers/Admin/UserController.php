@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Wishlist;
+use  App\Models\VehicleEnquiry;
 
 use Modules\GeneralSetting\Entities\EmailTemplate;
 use App\Helpers\MailHelper;
@@ -24,7 +25,6 @@ class UserController extends Controller
     }
 
     public function user_list(){
-
         $users = User::where('status', 'enable')->latest()->get();
 
         $title = trans('translate.User List');
@@ -45,25 +45,13 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $total_listing = Car::where('agent_id', $user->id)->count();
-
-        $active_listing = Car::with('dealer', 'brand')->where(function ($query) {
-            $query->where('expired_date', null)
-                ->orWhere('expired_date', '>=', date('Y-m-d'));
-        })->where(['status' => 'enable', 'approved_by_admin' => 'approved', 'agent_id' => $id])->count();
-
-        $total_purchase = SubscriptionHistory::whereDate('user_id', $id)->sum('plan_price');
-
-        $total_review = Review::where('agent_id',$id)->count();
-
+    
         $cars = Car::with('translate','brand')->where('agent_id', $user->id)->latest()->get();
+
+
 
         return view('admin.user.user_show', [
             'user' => $user,
-            'total_listing' => $total_listing,
-            'total_purchase' => $total_purchase,
-            'total_review' => $total_review,
-            'active_listing' => $active_listing,
             'cars' => $cars,
         ]);
     }

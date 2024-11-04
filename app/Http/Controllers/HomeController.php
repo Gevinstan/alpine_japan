@@ -2954,6 +2954,7 @@ class HomeController extends Controller
    
         $Enquiry=new VehicleEnquiry();
         $Enquiry->name=$request->name;
+        $Enquiry->user_id=Auth::user()->id;
         $Enquiry->email=$request->email;
         $Enquiry->phone=$request->phone;
         $Enquiry->subject=$request->subject;

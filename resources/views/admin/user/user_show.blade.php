@@ -13,93 +13,6 @@
     <!-- crancy Dashboard -->
     <section class="crancy-adashboard crancy-show">
         <div class="container container__bscreen">
-            <div class="row row__bscreen">
-                <div class="col-xxl-3 col-md-6 col-12 mg-top-30">
-                    <!-- Progress Card -->
-                    <div class="crancy-ecom-card">
-                        <div class="crancy-ecom-card__heading">
-                            <div class="crancy-ecom-card__icon">
-
-                                <h4 class="crancy-ecom-card__title">{{ __('translate.Active Car') }} </h4>
-                            </div>
-
-                        </div>
-                        <div class="crancy-ecom-card__content">
-                            <div class="crancy-ecom-card__camount">
-                                <h3 class="crancy-ecom-card__amount">{{ $active_listing }}</h3>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- End Progress Card -->
-                </div>
-
-                <div class="col-xxl-3 col-md-6 col-12 mg-top-30">
-                    <!-- Progress Card -->
-                    <div class="crancy-ecom-card">
-                        <div class="crancy-ecom-card__heading">
-                            <div class="crancy-ecom-card__icon">
-
-                                <h4 class="crancy-ecom-card__title">{{ __('translate.Total Car') }} </h4>
-                            </div>
-
-                        </div>
-                        <div class="crancy-ecom-card__content">
-                            <div class="crancy-ecom-card__camount">
-                                <h3 class="crancy-ecom-card__amount">{{ $total_listing }}</h3>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- End Progress Card -->
-                </div>
-
-
-                <div class="col-xxl-3 col-md-6 col-12 mg-top-30">
-                    <!-- Progress Card -->
-                    <div class="crancy-ecom-card">
-                        <div class="crancy-ecom-card__heading">
-                            <div class="crancy-ecom-card__icon">
-
-                                <h4 class="crancy-ecom-card__title">{{ __('translate.Subscription Purchase') }}</h4>
-                            </div>
-
-                        </div>
-                        <div class="crancy-ecom-card__content">
-                            <div class="crancy-ecom-card__camount">
-                                <h3 class="crancy-ecom-card__amount">{{ currency($total_purchase) }}</h3>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- End Progress Card -->
-                </div>
-                <div class="col-xxl-3 col-md-6 col-12 mg-top-30">
-                    <!-- Progress Card -->
-                    <div class="crancy-ecom-card">
-                        <div class="crancy-ecom-card__heading">
-                            <div class="crancy-ecom-card__icon">
-
-                                <h4 class="crancy-ecom-card__title">{{ __('translate.Total Review') }}</h4>
-                            </div>
-
-                        </div>
-                        <div class="crancy-ecom-card__content">
-                            <div class="crancy-ecom-card__camount">
-                                <h3 class="crancy-ecom-card__amount">{{ $total_review }}</h3>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- End Progress Card -->
-                </div>
-
-            </div>
-
             <div class="row mg-top-30 row__bscreen">
                 <div class=" col-xxl-3 col-xl-4 col-lg-4">
                     <div class="overview-profile">
@@ -192,11 +105,7 @@
 
 
                                 <button data-bs-toggle="modal" data-bs-target="#editModal" class="crancy-btn crancy-full-width mg-top-20 user_edit_btn"> <i class="fas fa-edit    "></i> {{ __('translate.Edit Profile') }}</button>
-
-
-
                                 <a onclick="itemDeleteConfrimation({{ $user->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn crancy-full-width mg-top-20 user_delete_btn"> <i class="fas fa-trash    "></i> {{ __('translate.Delete User') }}</a>
-
                             </div>
                         </div>
                     </div>
@@ -215,13 +124,6 @@
                                                 <div class="crancy-customer-filter__single crancy-customer-filter__single--csearch d-flex items-center justify-between create_new_btn_box">
                                                     <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box">
                                                         <h4 class="crancy-product-card__title">{{ __('translate.All Car') }}</h4>
-
-                                                        <a href="{{ route('admin.select-car-purpose') }}" class="crancy-btn "><span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                                            <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                            <path d="M1 8H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                                        </svg>
-                                                        </span> {{ __('translate.Create New') }}</a>
                                                     </div>
                                                 </div>
                                             </div>
