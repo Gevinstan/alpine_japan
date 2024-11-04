@@ -177,7 +177,7 @@
                                         <li><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
 
                                         <div class="dropdown ">
-                                            <li><a href="" class="dropbtn text-nowrap">{{ __('JDM Stock') }}</a></li>
+                                            <li><a href="" class="dropbtn text-nowrap">{{ __('translate.JDM Stock') }}</a></li>
 
                                             <div class="dropdown-content sub-menu">
                                                 <div class="header">
@@ -209,9 +209,9 @@
                                             </div>
                                         </div>
 
-                                        <li><a href="{{ route('listings') }}">Buy Now Cars</a></li>
+                                        <li><a href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
 
-                                        <li><a href="{{ route('new-arrival') }}">New Car Arrivals</a></li>
+                                        <li><a href="{{ route('new-arrival') }}">{{ __('translate.New Car Arrivals') }}</a></li>
 
                                         <li>
                                         @if(Auth::guard('web')->check())
@@ -579,7 +579,7 @@
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg></span> {{__('Auction Car Marketplace') }}
+                                                </svg></span> {{__('translate.Auction Car Marketplace') }}
                                         </a>
                                     </li>
                                     <li>
