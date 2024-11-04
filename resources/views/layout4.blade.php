@@ -177,7 +177,7 @@
                                         <li><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
 
                                         <div class="dropdown ">
-                                            <li><a href="" class="dropbtn text-nowrap">{{ __('JDM Stock') }}</a></li>
+                                            <li><a href="" class="dropbtn text-nowrap">{{ __('translate.JDM Stock') }}</a></li>
 
                                             <div class="dropdown-content sub-menu">
                                                 <div class="header">
@@ -209,9 +209,9 @@
                                             </div>
                                         </div>
 
-                                        <li><a href="{{ route('listings') }}">Buy Now Cars</a></li>
+                                        <li><a href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
 
-                                        <li><a href="{{ route('new-arrival') }}">New Car Arrivals</a></li>
+                                        <li><a href="{{ route('new-arrival') }}">{{ __('translate.New Car Arrivals') }}</a></li>
 
                                         <li>
                                         @if(Auth::guard('web')->check())
@@ -579,7 +579,7 @@
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg></span> {{__('Auction Car Marketplace') }}
+                                                </svg></span> {{__('translate.Auction Car Marketplace') }}
                                         </a>
                                     </li>
                                     <li>
@@ -716,12 +716,12 @@
                 <div class="row ">
                     <div class="col-lg-6 col-sm-6 col-md-6">
                         <div class="copyright-text">
-                            <p class="text-white heading-fs-14">Â© Alpine Japan 2024 | All Rights Reserved</p>
+                            <p class="text-white heading-fs-14">{{ $setting->copyright }}</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6  col-md-6">
                         <div class="copyright-item gap-0">
-                            <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">Developed by Gevinst</a>
+                            <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">{{ $setting->developed_by}}</a>
                             <a href="{{ route('terms-conditions') }}">
                                 <img src="{{asset('japan_home/insta.png')}}" />
                                 <img src="{{asset('japan_home/facebook.png')}}" />
@@ -846,6 +846,7 @@
     <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
 
     <script>
         @if(Session::has('messege'))
@@ -900,6 +901,30 @@
 
         if (localStorage.getItem('car-listo-cookie') != '1') {
             $('.cookie_consent_modal').removeClass('d-none');
+        }
+        function auct_logout(){
+            Swal.fire({
+                title: "{{__('Login or Register to access this page ?')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{__('Yes, Ok')}}",
+                cancelButtonText: "{{__('Cancel')}}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:"{{route('auct-sess-creation')}}",
+                        type:'POST',
+                        data:{'key':'acut_sess'},
+                        success:function(data){
+                            window.location.href = "{{ url('/user/dashboard') }}";
+                        }    
+                    })
+                    // $("#remove_car_"+id).submit();
+                }
+
+            })
         }
 
     </script>
