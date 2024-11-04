@@ -49,6 +49,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
             Route::get('/', 'index')->name('home');
             Route::get('home_page_responsive', 'home_page_responsive')->name('home_page_responsive');
+            Route::get('car_listing', 'car_listing')->name('car_listing');
+            Route::get('car_listing_details/{slug}', 'car_listing_details')->name('car_listing_details');
             Route::get('/about-us', 'about_us')->name('about-us');
             Route::get('/contact-us', 'contact_us')->name('contact-us');
             Route::get('/shipment', 'shipment')->name('shipment');
