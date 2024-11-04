@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" href="{{ asset($setting->favicon) }}">
 
@@ -186,24 +187,23 @@
                                                     <!-- Column 1 -->
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Honda</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Suzuki</a>
+                                                        @foreach($jdm_legend['car'] as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
+                                                        @endforeach
                                                     </div>
                                                     <!-- Column 2 -->
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Buses</h6>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                        @foreach($jdm_legend['heavy'] as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                        @endforeach
                                                     </div>
                                                     <!-- Column 3 -->
                                                     <div class="col-md-4 nav-dropdown-list">
                                                         <h6 class="dropdown-header nav-dropdown-header">Trucks</h6>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
+                                                        @foreach($jdm_legend['small_heavy'] as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
@@ -741,7 +741,7 @@
                 <div class="row ">
                     <div class="col-lg-6 col-sm-6 col-md-6">
                         <div class="copyright-text">
-                            <p class="text-white heading-fs-14">© Alpine Japan 2024 | All Rights Reserved</p>
+                            <p class="text-white heading-fs-14">Â© Alpine Japan 2024 | All Rights Reserved</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6  col-md-6">

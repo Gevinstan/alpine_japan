@@ -17,7 +17,7 @@
                         <span>{{ $homepage->home3_intro_short_title }}</span>
                         <h1 class="banner-h1">Simplifying Your Car </br>
                         <span class="banner-h1">Buying Experience</span></h1>
-                        <p>We’re committed to helping you find the perfect car with confidence and ease. 
+                        <p>Weâ€™re committed to helping you find the perfect car with confidence and ease. 
                         Start your simplified car buying experience with us today!</p>
                     </div>
                     <div class="banner-search-bar">
@@ -35,41 +35,37 @@
                             </ul>
                         </div>
                         <div>
-                            <ul class="nav nav-tabs custom-tabs mb-3 rounded-0">
-                                <li class="nav-item">
-                                    <div class="custom-select-wrapper">
-                                        <select class="aj-dropdown">
-                                        <option selected>Brand</option>
-                                        <option value="1">Toyota</option>
-                                        <option value="2">Honda</option>
-                                        <option value="3">Nissan</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li class="nav-item"> 
-                                    <div class="custom-select-wrapper">
-                                        <select class="aj-dropdown">
-                                        <option selected>Model</option>
-                                        <option value="1">Toyota</option>
-                                        <option value="2">Honda</option>
-                                        <option value="3">Nissan</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <div class="custom-select-wrapper">
-                                        <select class="aj-dropdown">
-                                        <option selected>Year</option>
-                                        <option value="1">Toyota</option>
-                                        <option value="2">Honda</option>
-                                        <option value="3">Nissan</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn banner-serch">search</button>
-                                </li>
-                            </ul>
+                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}">
+                                <ul class="nav nav-tabs custom-tabs mb-3 rounded-0">
+                                    <li class="nav-item">
+                                        <div class="custom-select-wrapper">
+                                            <select class="aj-dropdown" id="jdm_brand" name="jdm_brand">
+                                            <option selected>Brand</option>
+                                            @foreach($jdm_core_brand as $brand)
+                                            <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</option>
+                                            @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item"> 
+                                        <div class="custom-select-wrapper">
+                                            <select class="aj-dropdown" name="jdm_model" id="jdm_model">
+                                            <option selected>Model</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="custom-select-wrapper">
+                                            <select class="aj-dropdown" class="jdm_year" id="jdm_year">
+                                            <option selected>Year</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn banner-serch" type="submit">search</button>
+                                    </li>
+                                </ul>
+                            </form>    
                         </div>
                     </div>
                 </div>
@@ -163,122 +159,15 @@
 
 
             <div class="row g-3  mt-4 ">
-                <!-- @foreach ($brands->take(6) as $index => $brand)
+                @foreach ($brands->take(6) as $index => $brand)
                 <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                     <div class="categories-logo">
                         <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset($brand->image) }}" alt="logo">
+                         <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                         </a>
                     </div>
                 </div>
-                @endforeach -->
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{  asset('frontend/japan_home/benz.svg')  }}" alt="logo">
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{  asset('frontend/japan_home/bmw.svg')  }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/daihatsu.png') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/honda.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/isuzu.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/jaqur.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/lambor.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/mazda.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/mitsu.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/subaru.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/suzuki.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
-
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
-                    <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
-                            <img src="{{ asset('frontend/japan_home/benz.svg') }}" alt="logo">
-                        </a>
-                        
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="d-flex align-items-center justify-content-center pt-5">
@@ -315,71 +204,22 @@
 
 
                                 <div class="row g-5">
-                                    @foreach ($new_cars as $car)
+                                    @foreach ($top_sells as $car)
                                         <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
-                                                    <img src="{{ asset($car->thumb_image) }}" alt="thumb">
+                                                 <img src="{{ asset($car['picture']) }}" alt="thumb">
 
                                                     <div class="brand-car-item-img-text justify-content-end">
-
-                                                        <!-- <div class="text-df">
-                                                            @if ($car->offer_price)
-                                                                <p class="text">{{ calculate_percentage($car->regular_price, $car->offer_price) }}% {{ __('translate.Off') }}</p>
-                                                            @endif
-
-                                                            @if ($car->condition == 'New')
-                                                                <p class="text text-two ">{{ __('translate.New') }}</p>
-                                                            @else
-                                                                <p class="text text-two ">{{ __('translate.Used') }}</p>
-                                                            @endif
-                                                        </div> -->
-
                                                         <div class="icon-main">
                                                             @guest('web')
-                                                                <!-- <a  href="javascript:;" class="icon before_auth_wishlist bg-no-color">
-                                                                    <span>
-                                                                        <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                                stroke-width="1.3" stroke-linejoin="round"></path>
-                                                                        </svg>
-                                                                        <img src="{{ asset('frontend/japan_home/Star.png') }}"  alt="star"/>
-
-                                                                    </span>
-
-                                                                </a> -->
                                                             @else
-                                                                <!-- <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
-                                                                    <span>
-                                                                        <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                                stroke-width="1.3" stroke-linejoin="round"></path>
-                                                                        </svg>
-
-                                                                    </span>
-                                                                </a> -->
-
+                                                                
                                                             @endif
 
 
-                                                            <!-- <a href="{{ route('add-to-compare', $car->id) }}" class="icon">
-                                                                <span>
-                                                                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1"
-                                                                            stroke-width="1.3" stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                        <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19"
-                                                                            stroke-width="1.3" stroke-linecap="round"
-                                                                            stroke-linejoin="round"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </a> -->
+                                                           
                                                         </div>
 
 
@@ -388,18 +228,30 @@
 
                                                 <div class="brand-car-inner">
                                                     <div class="brand-car-inner-item">
-                                                        <span class="fw-bolder">Volvo</span>
-                                                        <p>
-                                                            @if ($car->offer_price)
-                                                                {{ currency($car->offer_price) }}
+                                                        <span class="fw-bolder">
+                                                            @if(session('front_lang')=='en')
+                                                            {{ $car['company_en'] }}
                                                             @else
-                                                                {{ currency($car->regular_price) }}
+                                                            {{ $car['company'] }}
+                                                            @endif
+                                                        </span>
+                                                        <p>
+                                                            @if(session('front_lang')=='en')
+                                                            {{'$'.$car['start_price_num'] }}
+                                                            @else
+                                                            {{'$'.$car['start_price'] }}
                                                             @endif
                                                         </p>
                                                     </div>
 
-                                                    <a href="{{ route('listing', $car->slug) }}">
-                                                        <h3>{{ html_decode($car->title) }}</h3>
+                                                    <a href="{{ route('listing', $car['id']) }}">
+                                                        <h3>
+                                                            @if(session('front_lang')=='en')
+                                                            {{ html_decode($car['model_name_en']) }}
+                                                            @else
+                                                                {{ html_decode($car['model_name']) }}
+                                                            @endif
+                                                        </h3>
                                                     </a>
 
                                                     <div class="brand-car-inner-item-main">
@@ -415,7 +267,11 @@
                                                             </div>
 
                                                             <span>
-                                                                {{ html_decode($car->mileage) }}
+                                                                @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['mileage']) }}
+                                                                @else
+                                                                {{ html_decode($car['mileage_en']) }}
+                                                                @endif
                                                             </span>
                                                         </div>
                                                         <div class="brand-car-inner-item-two">
@@ -430,7 +286,7 @@
                                                             </div>
 
                                                             <span>
-                                                                {{ html_decode($car->fuel_type) }}
+                                                              
                                                             </span>
                                                         </div>
                                                         <div class="brand-car-inner-item-two">
@@ -444,14 +300,12 @@
                                                             </div>
 
                                                             <span>
-                                                                {{ html_decode($car->engine_size) }}
+                                                                
                                                             </span>
                                                         </div>
                                                     </div>
 
                                                     <div class="brand-car-btm-txt-btm">
-                                                        <!-- <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
-                                                        </h6> -->
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill"></i>
                                                             <span class="brand-location">Hyogo, Japan</span>
@@ -715,88 +569,40 @@
                     </div>
 
                     <div class="row mt-56px  feature-slick">
-                        @foreach ($featured_cars as $index => $car)
+                        @foreach ($new_arrived_cars as $index => $car)
                             <div class="col-lg-4">
                                 <div class="brand-car-item">
                                     <div class="brand-car-item-img">
-                                        <img src="{{ asset($car->thumb_image) }}" alt="thumb">
+                                    <img src="{{ asset($car['picture']) }}" alt="thumb">
 
-                                        <!-- <div class="brand-car-item-img-text">
-
-                                            <div class="text-df">
-                                                @if ($car->offer_price)
-                                                    <p class="text">{{ calculate_percentage($car->regular_price, $car->offer_price) }}% {{ __('translate.Off') }}</p>
-                                                @endif
-
-                                                @if ($car->condition == 'New')
-                                                    <p class="text text-two ">{{ __('translate.New') }}</p>
-                                                @else
-                                                    <p class="text text-two ">{{ __('translate.Used') }}</p>
-                                                @endif
-                                            </div>
-
-                                            <div class="icon-main">
-                                                @guest('web')
-                                                    <a  href="javascript:;" class="icon before_auth_wishlist">
-                                                        <span>
-                                                            <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                            stroke-width="1.3" stroke-linejoin="round"></path>
-                                                    </svg>
-
-                                                        </span>
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
-                                                        <span>
-                                                            <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                            stroke-width="1.3" stroke-linejoin="round"></path>
-                                                    </svg>
-
-                                                        </span>
-                                                    </a>
-
-                                                @endif
-
-
-                                                <a href="{{ route('add-to-compare', $car->id) }}" class="icon">
-                                                    <span>
-                                                        <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1"
-                                                                stroke-width="1.3" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                            <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19"
-                                                                stroke-width="1.3" stroke-linecap="round"
-                                                                stroke-linejoin="round"></path>
-                                                        </svg>
-                                                    </span>
-                                                </a>
-                                            </div>
-
-
-                                        </div> -->
                                     </div>
 
                                     <div class="brand-car-inner">
                                         <div class="brand-car-inner-item">
-                                            <span class="fw-bolder">Volvo</span>
+                                            <span class="fw-bolder">
+                                            @if(session('front_lang')=='en')
+                                                {{ $car['company_en'] }}
+                                            @else
+                                                {{ $car['company'] }}
+                                            @endif
+                                            </span>
                                             <p>
-                                                @if ($car->offer_price)
-                                                    {{ currency($car->offer_price) }}
-                                                @else
-                                                    {{ currency($car->regular_price) }}
-                                                @endif
+                                            @if(session('front_lang')=='en')
+                                                {{ '$'.$car['start_price_num']}}
+                                            @else
+                                                {{ '$'.$car['start_price'] }}
+                                            @endif
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('listing', $car->slug) }}">
-                                            <h3>{{ html_decode($car->title) }}</h3>
+                                        <a href="#">
+                                            <h3>
+                                            @if(session('front_lang')=='en')
+                                                    {{ html_decode($car['model_name_en']) }}
+                                                @else
+                                                    {{ html_decode($car['model_name']) }}
+                                                @endif
+                                            </h3>
                                         </a>
 
                                         <div class="brand-car-inner-item-main">
@@ -812,7 +618,11 @@
                                                 </div>
 
                                                 <span>
-                                                    {{ html_decode($car->mileage) }}
+                                                @if(session('front_lang')=='en')
+                                                {{ html_decode($car['mileage']) }}
+                                                @else
+                                                    {{ html_decode($car['mileage_en']) }}
+                                                @endif
                                                 </span>
                                             </div>
                                             <div class="brand-car-inner-item-two">
@@ -827,7 +637,7 @@
                                                 </div>
 
                                                 <span>
-                                                    {{ html_decode($car->fuel_type) }}
+                                                    
                                                 </span>
                                             </div>
                                             <div class="brand-car-inner-item-two">
@@ -841,14 +651,13 @@
                                                 </div>
 
                                                 <span>
-                                                    {{ html_decode($car->engine_size) }}
+                                                  
                                                 </span>
                                             </div>
                                         </div>
 
                                         <div class="brand-car-btm-txt-btm">
-                                            <!-- <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
-                                            </h6> -->
+                                          
                                             <p>
                                                 <i class="bi bi-geo-alt-fill"></i>
                                                 <span class="brand-location">Hyogo, Japan</span>
@@ -870,7 +679,7 @@
                 @if ($home3_ads->status == 'enable')
                     <div class="col-lg-3">
                         <div class="feature-thumb">
-                            <a class="w-100" href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('frontend/japan_home/big_sale.svg') }}" alt="img"></a>
+                            <a class="w-100" href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset($home3_ads->image) }}" alt="img"></a>
                         </div>
                     </div>
                 @endif
@@ -1352,3 +1161,99 @@
 
 </main>
 @endsection
+@push('js_section')
+<script>
+       $(()=>{
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+         });
+
+
+function getModel(selectedModel){
+    document.getElementById('dropdownMenuClickableOutside').innerText = selectedModel; 
+    $("#jdm_model").val(selectedModel);
+
+
+    $.ajax({
+        url:"get-model-year",
+        type:"POST",
+        datatype:"JSON",
+        data:{"brand":document.getElementById('defaultDropdown').innerText,
+            'model':selectedModel},
+        beforeSend:function(response){
+            console.log("loading")
+        },
+        success:function(data){
+            console.log(data.response);
+             var brands=data.response;
+            for (let index = 0; index < brands.length; index++) {
+                const element = brands[index];
+                $(".year-ul").append(`<li><a class="dropdown-item" href="javascript:void(0);" onclick="getModelYear('${element.yom}')">${element.yom}</a></li>`);
+            }
+
+        }
+    })
+}
+
+$(()=>{
+    $("#jdm_brand").on('change',function(){
+        $("#jdm_brand").val();
+        $.ajax({
+            url:"get-brands",
+            type:"POST",
+            datatype:"JSON",
+            data:{"brand":$("#jdm_brand").val()},
+            beforeSend:function(response){
+                console.log("loading")
+            },
+            success:function(data){
+                console.log(data.response);
+                var brands=data.response;
+                for (let index = 0; index < brands.length; index++) {
+                    const element = brands[index];
+                    $("#jdm_model").append(
+                        `<option value='${element.model}'>${element.model}</option>`);
+                    }
+
+            }
+        })  
+    })
+
+    $("#jdm_model").on('change',function(){
+        alert("ne")
+        $.ajax({
+        url:"get-model-year",
+        type:"POST",
+        datatype:"JSON",
+        data:{"brand": $("#jdm_brand").val(),
+            'model':$("#jdm_model").val()},
+        beforeSend:function(response){
+            console.log("loading")
+        },
+        success:function(data){
+             var brands=data.response;
+            for (let index = 0; index < brands.length; index++) {
+                const element = brands[index];
+                $("#jdm_year").append(`
+                <option  value=${element.yom}>${element.yom}</option>`);
+            }
+
+        }
+    })
+    })
+})
+
+ function getModelYear(yom){
+    document.getElementById('dropdownMenuClickableInside').innerText = yom; 
+    $("#jdm_year").val(yom)
+}
+
+$("#searchBtn").on('click',function(){
+     $("#jdm_stock_form").submit();
+})
+</script>
+@endpush
+
