@@ -846,6 +846,7 @@
     <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
 
     <script>
         @if(Session::has('messege'))
@@ -900,6 +901,30 @@
 
         if (localStorage.getItem('car-listo-cookie') != '1') {
             $('.cookie_consent_modal').removeClass('d-none');
+        }
+        function auct_logout(){
+            Swal.fire({
+                title: "{{__('Login or Register to access this page ?')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{__('Yes, Ok')}}",
+                cancelButtonText: "{{__('Cancel')}}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:"{{route('auct-sess-creation')}}",
+                        type:'POST',
+                        data:{'key':'acut_sess'},
+                        success:function(data){
+                            window.location.href = "{{ url('/user/dashboard') }}";
+                        }    
+                    })
+                    // $("#remove_car_"+id).submit();
+                }
+
+            })
         }
 
     </script>
