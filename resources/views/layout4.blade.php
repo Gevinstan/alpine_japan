@@ -716,12 +716,12 @@
                 <div class="row ">
                     <div class="col-lg-6 col-sm-6 col-md-6">
                         <div class="copyright-text">
-                            <p class="text-white heading-fs-14">Â© Alpine Japan 2024 | All Rights Reserved</p>
+                            <p class="text-white heading-fs-14">{{ $setting->copyright }}</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6  col-md-6">
                         <div class="copyright-item gap-0">
-                            <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">Developed by Gevinst</a>
+                            <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">{{ $setting->developed_by}}</a>
                             <a href="{{ route('terms-conditions') }}">
                                 <img src="{{asset('japan_home/insta.png')}}" />
                                 <img src="{{asset('japan_home/facebook.png')}}" />
