@@ -56,7 +56,7 @@
                                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
-                                                <span class="select-Brand-box">
+                                                <span class="select-Brand-box border-0 px-2">
                                                     @if (request()->has('brands'))
                                                         @php
                                                             $brand_arr = request()->get('brands');
@@ -73,13 +73,105 @@
                                                         @endforeach
                                                     @else
                                                         @foreach ($brands as $brand)
-                                                            <span class="form-check">
+                                                            <!-- <span class="form-check">
                                                                 <input name="brands[]" class="form-check-input" type="checkbox"
                                                                     id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
                                                                 <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
                                                                     {{ $brand->name }}
-                                                                </label>
+                                                                </label> -->
+                                                                <div class="accordion" id="accordionExample">
+                                                                <div class="accordion-item">
+                                                            <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
+                                                                <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                        id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                    <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                        {{ $brand->name }}
+                                                                    </label>
+                                                                </div>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <span class="select-Brand-box p-0 px-2 border-0">
+                                                                                    @if (request()->has('brands'))
+                                                                                        @php
+                                                                                            $brand_arr = request()->get('brands');
+                                                                                        @endphp
+
+                                                                                        @foreach ($brands as $brand)
+                                                                                        <span class="form-check">
+                                                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                {{ $brand->name }}
+                                                                                            </label>
+                                                                                        </span>
+                                                                                        @endforeach
+                                                                                    @else
+                                                                                        @foreach ($brands as $brand)
+                                                                                            <span class="form-check">
+                                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                    {{ $brand->name }}
+                                                                                                </label>
+                                                                                            </span>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                <!-- <div class="accordion" id="accordionExample">
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="headingOne">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                    {{ $brand->name }}
+                                                                                </label>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse show pt-3" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <span class="select-Brand-box">
+                                                                                    @if (request()->has('brands'))
+                                                                                        @php
+                                                                                            $brand_arr = request()->get('brands');
+                                                                                        @endphp
+
+                                                                                        @foreach ($brands as $brand)
+                                                                                        <span class="form-check">
+                                                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                {{ $brand->name }}
+                                                                                            </label>
+                                                                                        </span>
+                                                                                        @endforeach
+                                                                                    @else
+                                                                                        @foreach ($brands as $brand)
+                                                                                            <span class="form-check">
+                                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                    {{ $brand->name }}
+                                                                                                </label>
+                                                                                            </span>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
                                                             </span>
+                                                        </div>
+                                                        </div> 
                                                         @endforeach
                                                     @endif
 

@@ -14800,6 +14800,10 @@ p {
   .bg-light-grey {
     background-color: #f5f5f5 !important;
   }
+
+  .list-dropdown .accordion-button::after {
+    margin-top: 22px !important;
+  }
   /********* Listing page End ***********/
 
   /********* Listing Detail page Start ***********/
