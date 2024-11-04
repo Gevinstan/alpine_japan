@@ -226,6 +226,7 @@
                                         </li>
 
                                         <li><a href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
+                                        <li><a href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a></li>
 
                                     </ul>
                                 </div>
@@ -401,19 +402,7 @@
 
 
 
-    @if ($tawk_chat->status == 1)
-        <script type="text/javascript">
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='{{ $tawk_chat->chat_link }}';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-            })();
-        </script>
-    @endif
+
 
 
     <!-- footer prart start  -->
@@ -495,7 +484,7 @@
                     <div class="row footer-ml">
                         <div class="col-xl-4 col-lg-4 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
                             <div class="footer-item-text">
-                                <h3>{{ __('translate.Popular links') }}</h3>
+                                <h3>{{ __('translate.Why Alpine') }}</h3>
                             </div>
                             <div class="footer-item-text-link">
                                 <ul>
@@ -507,7 +496,27 @@
                                                     d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                        </span>{{ __('translate.About Us') }}</a>
+                                        </span>{{ __('translate.Blogs') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('contact-us') }}">  <span>
+                                            <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>{{ __('translate.Careers') }}</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('about-us') }}">  <span>
+                                            <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>{{ __('translate.About us') }}</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('contact-us') }}">  <span>
@@ -520,14 +529,14 @@
                                         </span>{{ __('translate.Contact Us') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('blogs') }}">  <span>
+                                        <a href="{{ route('join-as-dealer') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                        </span>{{ __('translate.Our Blogs') }}</a>
+                                        </span>{{ __('translate.Terms and Conditions') }}</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('join-as-dealer') }}">  <span>
@@ -537,39 +546,50 @@
                                                     d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                     stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-                                        </span>{{ __('translate.Join as Dealer') }}</a>
+                                        </span>{{ __('translate.Privacy & Policy') }}</a>
                                     </li>
-
-
+                                    <li>
+                                        <a href="{{ route('faq') }}">  <span>
+                                            <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
+                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>{{ __('translate.FAQ') }}</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-sm-6 col-md-5 footer-res-mt " data-aos="fade-up"
                             data-aos-delay="300">
                             <div class="footer-item-text">
-                                <h3>{{ __('translate.My Profile') }}</h3>
+                                <h3>{{ __('translate.Quick Links') }}</h3>
                             </div>
                             <div class="footer-item-text-link">
                                 <ul>
-
                                     <li>
-                                        <a href="{{ route('user.dashboard') }}"> <span>
+                                        @if(Auth::guard('web')->check())
+                                        <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                        @else
+                                        <a href="#" onclick="auct_logout()"><span>
+                                        @endif
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg></span> {{ __('translate.Dashboard') }}
+                                                </svg></span> {{__('Auction Car Marketplace') }}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('user.car.index') }}"> <span>
+                                        <a href="{{ route('listings') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg></span> {{ __('translate.Manage Car') }}
+                                                </svg></span> {{ __('translate.Fixed Car Price Marketplace') }}
                                             </a>
                                         </li>
                                     <li>
@@ -579,7 +599,27 @@
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg></span> {{ __('translate.Edit Profile') }}
+                                                </svg></span> {{ __('translate.New Arrivals') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('shipment') }}"> <span>
+                                        <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg></span> {{ __('translate.Shipment') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('howtobuy') }}"> <span>
+                                        <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg></span> {{ __('translate.How To Buy') }}
                                         </a>
                                     </li>
                                     <li>
@@ -589,7 +629,17 @@
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg></span> {{ __('translate.Review List') }}
+                                                </svg></span> {{ __('translate.Our Stocks') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('user.reviews') }}"> <span>
+                                        <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
+                                                        stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg></span> {{ __('translate.Useful Links') }}
                                         </a>
                                     </li>
 
@@ -649,12 +699,6 @@
                                 <div class="footer-item-text">
                                     <h3>We Accept Credit Card</h3>
                                 </div>
-                                <!-- <ul>
-                                    <li><img src="{{ asset($setting->home2_logo2) }}" alt="logo"></li>
-                                    <li><img src="{{ asset($setting->home2_logo2) }}" alt="logo"></li>
-                                    <li><img src="{{ asset($setting->home2_logo2) }}" alt="logo"></li>
-                                    <li><img src="{{ asset($setting->home2_logo2) }}" alt="logo"></li>
-                                </ul> -->
                                 <div class="footer-item-text-link">
                                     <img class="w-100" src="{{ asset('japan_home/group.svg') }}" alt="cards">
                                 </div>
