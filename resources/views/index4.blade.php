@@ -9,7 +9,7 @@
 <main>
     <!-- banner-part-start  -->
 
-    <section class="banner mb-5" >
+    <section class="banner mb-5"  style="background-image: url({{  asset('japan_home/Cover1.jpg') }});">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 col-xl-7">
@@ -162,7 +162,7 @@
                 @foreach ($brands->take(6) as $index => $brand)
                 <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                     <div class="categories-logo">
-                        <a href="{{ route('listings', ['brands[]' => $brand->id]) }}" class="categories-logo-thumb">
+                        <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                          <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                         </a>
                     </div>
@@ -595,7 +595,7 @@
                                             </p>
                                         </div>
 
-                                        <a href="#">
+                                        <a href="{{ route('listing', $car['id']) }}">
                                             <h3>
                                             @if(session('front_lang')=='en')
                                                     {{ html_decode($car['model_name_en']) }}
@@ -689,6 +689,10 @@
                 <div class="col-lg-12">
                     <div class="feature-position-img"></div>
                 </div>
+            </div>
+
+            <div class="brand-car-btn mt-48px">
+                <a href="{{ route('new-arrival') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
     </section>
