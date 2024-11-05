@@ -5,7 +5,7 @@
 
 @section('body-header')
     <h3 class="crancy-header__title m-0">{{ __('translate.Contact Message') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Contact Message') }}</p>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Contact Message') }}</p></a>
 @endsection
 
 @section('body-content')

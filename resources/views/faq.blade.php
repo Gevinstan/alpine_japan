@@ -5,6 +5,7 @@
     <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
 @endsection
 
+
 @section('body-content')
 <main>
     <!-- banner-part-start  -->

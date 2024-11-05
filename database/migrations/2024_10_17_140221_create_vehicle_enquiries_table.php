@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('vehicle_enquiries', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->references('id')->on('users');
             $table->string('name');
             $table->string('email');
             $table->unsignedBigInteger('phone');

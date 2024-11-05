@@ -80,7 +80,7 @@ class CommercialController extends Controller
           $org_filename = $model_image->getClientOriginalName();
           $org_extension = $model_image->getClientOriginalExtension();
           $image_name = 'small-heavy-'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$org_extension;
-          $org_path = public_path() . '/Small-Heavy';
+          $org_path = public_path() . '/Cars';
           File::isDirectory($org_path) or File::makeDirectory($org_path, 0777, true, true);
           $model_image->move($org_path, $image_name);
         } else {
@@ -240,6 +240,20 @@ class CommercialController extends Controller
         Commercial::whereIn('id', $ids)->delete();
     
         return response()->json(['success' => true, 'message' => 'Records deleted successfully.']);  
+    }
+    public function storeCommercialComission(Request $request){
+        Commercial::where('is_active', 1)
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function storeAllComissionComission(Request $request){
+        Commercial::where('is_active', 1)
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
     public function newArrivalCars(Request $request){
         // DB::enableQueryLog();

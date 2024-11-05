@@ -37,7 +37,13 @@ class HeavyController extends Controller
 
     public function storeHeavyComission(Request $request){
         Heavy::where('is_active', 1)
-        ->whereIn('id',$request->selectedIds)
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function storeAllHeavyComission(Request $request){
+        Heavy::where('is_active', 1)
         ->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
@@ -66,7 +72,7 @@ class HeavyController extends Controller
           $org_filename = $model_image->getClientOriginalName();
           $org_extension = $model_image->getClientOriginalExtension();
           $image_name = 'heavy-'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$org_extension;
-          $org_path = public_path() . '/Heavy';
+          $org_path = public_path() . '/Cars';
           File::isDirectory($org_path) or File::makeDirectory($org_path, 0777, true, true);
           $model_image->move($org_path, $image_name);
         } else {

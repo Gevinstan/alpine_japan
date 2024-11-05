@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*  Admin panel Controller  */
 
@@ -19,6 +20,8 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use Illuminate\Support\Facades\Session;
+
 
 /* Admin panel Controller  */
 
@@ -45,13 +48,16 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             ->name('auct_login');
 
             Route::get('/', 'index')->name('home');
+            Route::get('home_page_responsive', 'home_page_responsive')->name('home_page_responsive');
+            Route::get('car_listing', 'car_listing')->name('car_listing');
+            Route::get('car_listing_details/{slug}', 'car_listing_details')->name('car_listing_details');
             Route::get('/about-us', 'about_us')->name('about-us');
             Route::get('/contact-us', 'contact_us')->name('contact-us');
             Route::get('/shipment', 'shipment')->name('shipment');
             Route::get('/terms-conditions', 'terms_conditions')->name('terms-conditions');
             Route::get('/privacy-policy', 'privacy_policy')->name('privacy-policy');
             Route::get('/faq', 'faq')->name('faq');
-            Route::get('/vkytest', 'vkytest')->name('vkytest');
+            Route::get('/brand-listing', 'BrandListig')->name('brand-listing');
             Route::get('/howtobuy', 'howtobuy')->name('howtobuy');
 
 
@@ -65,6 +71,9 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
+            Route::post('/auct-sess-creation',function(Request $request){
+                return Session::put('auct_id',$request->key);
+            })->name('auct-sess-creation');
 
             Route::get('/page/{slug}', 'custom_page')->name('custom-page');
 
@@ -122,7 +131,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
             Route::controller(ProfileController::class)->group(function () {
 
-                Route::get('/dashboard', 'dashboard')->name('dashboard');
+                Route::get('/dashboard', 'dashboard')->name('dashboard');   
 
                 Route::get('/edit-profile', 'edit')->name('edit-profile');
                 Route::put('/update-profile', 'update')->name('update-profile');
@@ -193,6 +202,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
         Route::group(['middleware' => ['auth:admin']], function () {
             Route::get('/', [DashboardController::class, 'dashboard']);
             Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+
 
             Route::controller(AdminProfileController::class)->group(function () {
                 Route::get('edit-profile', 'edit_profile')->name('edit-profile');

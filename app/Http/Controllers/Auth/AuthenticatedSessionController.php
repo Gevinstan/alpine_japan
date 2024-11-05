@@ -89,9 +89,12 @@ class AuthenticatedSessionController extends Controller
 
                             $notification= trans('translate.Login Successfully');
                             $notification=array('messege'=>$notification,'alert-type'=>'success');
-
-                            // return redirect()->route('user.dashboard')->with($notification);
-                            return redirect()->route('auction-car-marketplace')->with($notification);
+                        
+                            if(Session::get('auct_id')!=""){
+                                return redirect()->route('auction-car-marketplace')->with($notification);
+                            } else {
+                                return redirect()->route('user.dashboard')->with($notification);
+                            }
                         }
                     }else{
                         $notification= trans('translate.Invalid Password');

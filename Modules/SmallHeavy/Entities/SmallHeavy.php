@@ -39,7 +39,7 @@ class SmallHeavy extends Model
         'boom',
         'jib',
         'outrigger',
-        'commision_value',
+        'commission_value',
         'new_arrival'
       ];
 }

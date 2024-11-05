@@ -56,7 +56,7 @@ class SmallHeavyController extends Controller
           $org_filename = $model_image->getClientOriginalName();
           $org_extension = $model_image->getClientOriginalExtension();
           $image_name = 'small-heavy-'.date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$org_extension;
-          $org_path = public_path() . '/Small-Heavy';
+          $org_path = public_path() . '/Cars';
           File::isDirectory($org_path) or File::makeDirectory($org_path, 0777, true, true);
           $model_image->move($org_path, $image_name);
         } else {
@@ -136,8 +136,14 @@ class SmallHeavyController extends Controller
 
     public function smallHeavyComission(Request $request){
         SmallHeavy::where('is_active', 1)
-        ->whereIn('id',$request->selectedIds)
-        ->update(['commision_value' => $request->commission]);
+        ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function smallHeavyAllComission(Request $request){
+        SmallHeavy::where('is_active', 1)
+        ->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);

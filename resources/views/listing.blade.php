@@ -91,7 +91,7 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3 model-div">
-                                                    <input class="form-check-input brand-search" name="model" type="radio" value="{{$brand->model_name_en}}"
+                                                    <input class="form-check-input model-search" name="model" type="radio" value="{{$brand->model_name_en}}"
                                                         {{ in_array(trim($brand->model_name_en), (array)request('model', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
                                                             {{ $brand->model_name_en }}
@@ -117,21 +117,20 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                                <input type="hidden" id="priceSearch" name="price_range_scale" value="">
-                                                <button id="searchButton" style="margin-left: 5px; padding: 5px 10px;">Search</button>
-                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$0 $500,000</b></p></span>
+                                            <input type="hidden" id="priceSearch" name="price_range_scale" value="">
+                                                <button id="searchButton" class="thm-btn budget-search-btn">Search</button>`
+                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+
                                                 <div class="range-container">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMax" value="2">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMax" value="2">
                                                 </div>
 
-                                                <!-- <div class="range-container" >
-                                                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRangeMin" value="1">
-                                                    <input type="range" class="form-range"  min="0" max="5" step="0.5" id="customRangeMax" value="2">
-                                                </div> -->
+                                                {{--<span><p style="padding-left:10px; font-size:12px; word-spacing: 145px;padding-top:10px">$5k $5Lakh</p></span>--}}
+                                    
 
 
-                                                <div id="slider-outer-div ms-2" >
+                                                {{--<div id="slider-outer-div ms-2" >
                                                     <div id="slider-max-label" class="slider-label"></div>
                                                     <div id="slider-min-label" class="slider-label"></div>
                                                     <div id="slider-div">
@@ -147,7 +146,7 @@
                                                 <div class="range-container-txt2">
                                                     <div><p><b>$5k</b></div>
                                                     <div><p><b>$5Lakhs</b></p></p></div>
-                                                </div>
+                                                </div> --}}
 
                                                 <h6 style="padding-top:30px">Price Range</h6>
 
@@ -183,7 +182,7 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                            <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+                                           {{--<span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>--}}
                                                 <div class="range-container">
                                                     <input type="range" class="form-range" min="1960" max="2024"  id="start">
                                                     <output name="age_output" id="age_output" for="start" ></output>
@@ -305,14 +304,15 @@
                                     <p style="display:inline; color:black; font-weight:bold">{{ __('Sort By:') }}</p>
                                     <div class="dropdown" style="display:inline; ">
                                         <a class="btn btn-white dropdown-toggle" style="padding-bottom:10px; color:#038ffc !important" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Recently Added
+                                            Sort By
                                         </a>
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Something else here</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
+                                        <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
@@ -652,6 +652,27 @@ const formatCurrency = (value) => {
     return `$${(value * 100000).toLocaleString()}`;
 };
 
+
+function updateButtonText(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+        $('#search_form').submit();
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+function setSortByParam(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+
 // Function to update the display
 const updateDisplay = () => {
     const startValue = formatCurrency(startRange.value);
@@ -659,7 +680,6 @@ const updateDisplay = () => {
     valueDisplay.textContent = `${startValue} ${endValue}`;
     const startValueNumber = formatNumber(startRange.value * 100000);
     const endValueNumber = formatNumber(endRange.value * 100000);
-    console.log(startValueNumber);
     priceRangeScale.value=`${startValueNumber} - ${endValueNumber}`;
 };
 function formatNumber(value) {
@@ -693,6 +713,22 @@ endRange.addEventListener('input', () => {
          });
          });
     $(document).ready(function () {
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const sortBy = urlParams.get('sort_by'); // Will get 'price_low_high'
+
+        if(sortBy === 'price_low_high') {
+            setSortByParam('price_low_high','Low to High')
+        }
+        if(sortBy === 'price_high_low') {
+            setSortByParam('price_high_low','High to Low')
+        }
+        if(sortBy === 'recent') {
+            setSortByParam('recent','Recently Added')
+        }
+
+     
         const form = $('#search_form');
         $("#outside_form_search").on("keyup", function(e) {
             let inputValue = $(this).val();
@@ -710,10 +746,21 @@ endRange.addEventListener('input', () => {
         })
         $(".brand-search").on('change',function(e){
             e.preventDefault();   
+            $(".model-search").val("")
             form.submit();
            
         }) 
+        $(".model-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();    
+        })
+        $(".sort-filter").on('change',function(e){
+            e.preventDefault();   
+            alert("one")
+            // form.submit();    
+        })
 
+         
     
 
       
@@ -731,6 +778,8 @@ endRange.addEventListener('input', () => {
     
     });
 })(jQuery);
+
+
 </script>   <!------- Range ------->
 @endpush
 
