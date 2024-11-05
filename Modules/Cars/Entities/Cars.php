@@ -49,6 +49,8 @@ class Cars extends Model
         'inside',
         'outside',
         'commission_value',
-        'new_arrival'
+        'new_arrival',
+        'deleted_at'
       ];
+      protected $dates=['deleted_at'];
 }
