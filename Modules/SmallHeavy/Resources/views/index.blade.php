@@ -213,50 +213,56 @@
             });
 
            // Handle delete button click
-          deleteButton.addEventListener('click', function() {
-        // Gather selected IDs
+    //       deleteButton.addEventListener('click', function() {
+    //     // Gather selected IDs
+    //     const selectedIds = Array.from(rowCheckboxes)
+    //         .filter(checkbox => checkbox.checked)
+    //         .map(checkbox => checkbox.getAttribute('data-id'));
+
+    //     if (selectedIds.length > 0) {
+    //         // Confirm deletion
+    //         if (confirm('Are you sure you want to delete the selected records?')) {
+
+
+    //             //Send AJAX request to delete records
+    //             fetch('/delete-small-heavy', {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    //                 },
+    //                 body: JSON.stringify({ ids: selectedIds })
+    //             })
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 // Handle response
+    //                 if (data.success) {
+    //                     // Remove deleted rows from the table
+    //                     rowCheckboxes.forEach(checkbox => {
+    //                         if (checkbox.checked) {
+    //                             checkbox.closest('tr').remove();
+    //                         }
+    //                         $("#masterCheckbox").prop('checked',false);
+    //                     });
+    //                     alert('Selected records deleted successfully.');
+    //                 } else {
+    //                     alert('Error deleting records.');
+    //                 }
+    //             })
+    //             .catch(error => {
+    //                 console.error('Error:', error);
+    //             });
+    //         }
+    //     } else {
+    //         alert('No records selected.');
+    //     }
+    // });
+    $("#delete-model").on('click',function(){
         const selectedIds = Array.from(rowCheckboxes)
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.getAttribute('data-id'));
-
-        if (selectedIds.length > 0) {
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete the selected records?')) {
-
-
-                //Send AJAX request to delete records
-                fetch('/delete-small-heavy', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ ids: selectedIds })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle response
-                    if (data.success) {
-                        // Remove deleted rows from the table
-                        rowCheckboxes.forEach(checkbox => {
-                            if (checkbox.checked) {
-                                checkbox.closest('tr').remove();
-                            }
-                            $("#masterCheckbox").prop('checked',false);
-                        });
-                        alert('Selected records deleted successfully.');
-                    } else {
-                        alert('Error deleting records.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        } else {
-            alert('No records selected.');
-        }
-    });
+        DeleteUser(selectedIds);
+    })
 
     $("#comissionBtn").on('click', function() {
             var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
@@ -363,6 +369,39 @@ function updateSelectedComission(selectedIds){
                 toastr.error("Error", "An error occurred while processing your request.");
             }
         });
+}
+function DeleteUser(selectedIds){
+    swal({
+            title: "Are you sure?",
+            text: "Want to delete this Small Heavy Vehicle!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{route('delete-small-heav')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        ids: selectedIds,
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+   
 }
 
     </script>
