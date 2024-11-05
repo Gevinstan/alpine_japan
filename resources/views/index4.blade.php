@@ -1216,7 +1216,7 @@
                 <div class="col-lg-4">
                     <div class="feature-thumb">
                         <a href="{{ $home3_ads->link }}" target="_blank">
-                            <img src="{{ asset('japan_home/big_sale.svg') }}" alt="img" class="img-fluid" style="height:100%; width: 100%">
+                            <img src="{{ asset('japan_home/big_sale.svg') }}" alt="img" class="img-fluid">
                         </a>
                     </div>
                 </div>

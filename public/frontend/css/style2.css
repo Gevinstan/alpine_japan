@@ -7233,6 +7233,8 @@ p {
     padding-left: 5px;
 }
 
+
+
 .feature-slick-prev,
 .trending-slick-prve {
     width: 50px;
@@ -9261,8 +9263,8 @@ p {
 
 .inventory-main-box .accordion-button::after {
     width: 13px;
-    height: 10px;
-    background-image: url(../assets/images/icon/down-arrow.png);
+    height: 7.41px;
+    background-image: url(../assets/images/icon/arrow-2.png);
     background-size: cover;
     transform: rotate(-180deg);
 }
@@ -11570,8 +11572,8 @@ p {
 
 .formbold-main-wrapper .thm-btn span svg {
     fill: currentColor;
-    color: var(--white-color);
-}
+    color: var(--white-color);       
+}                                   
 
 .formbold-form-wrapper {
     max-width: 550px;
@@ -14330,7 +14332,7 @@ p {
 }
 
 .car-poster {
-    justify-content: space-around;
+    justify-content: space-around; 
     max-width: 315vw;
     max-height: 325vh;
 }
@@ -14895,7 +14897,7 @@ ul {
 }
 
 .brand-car-btm-txt-btm {
-    background-color: #f7f7f7;
+    background-color: #F7F7F7;
 }
 
 /* Card Responsive issue fixed */
@@ -14914,7 +14916,7 @@ ul {
 }
 
 .car-name {
-    font-size: 14px;
+    font-size: 14px; 
     width: 53px;
 }
 
@@ -14925,3 +14927,8 @@ ul {
 .spez_text {
     font-size: 0.75rem !important;
 }
+
+
+
+
+
