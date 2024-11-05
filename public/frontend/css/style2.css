@@ -9261,8 +9261,8 @@ p {
 
 .inventory-main-box .accordion-button::after {
     width: 13px;
-    height: 10px;
-    background-image: url(../assets/images/icon/down-arrow.png);
+    height: 7.41px;
+    background-image: url(../assets/images/icon/arrow-2.png);
     background-size: cover;
     transform: rotate(-180deg);
 }

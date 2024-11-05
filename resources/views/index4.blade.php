@@ -6,12 +6,12 @@
 @endsection
 
 @section('body-content')
-<main>
+<main class="w-100 main_wid">
     <!-- banner-part-start  -->
 
     <section class="banner mb-5"  style="background-image: url({{  asset('japan_home/Cover1.jpg') }});">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center px-5 pb-5">
                 <div class="col-lg-12 col-xl-7">
                     <div class="banner-taitel">
                         <span>{{ $homepage->home3_intro_short_title }}</span>
@@ -267,6 +267,7 @@
                                                                 @endif
                                                             </span>
                                                         </div>
+                                                        <p>.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -298,7 +299,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="brand-car-btm-txt-btm">
+                                                    <div class="brand-car-btm-txt-btm px-2 pb-3">
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill"></i>
                                                             <span class="brand-location">Hyogo, Japan</span>
@@ -403,10 +404,10 @@
                                                 </div>
 
                                                 <a href="{{ route('listing', $car->slug) }}">
-                                                    <h3>{{ html_decode($car->title) }}</h3>
+                                                    <h3 class="px-2">{{ html_decode($car->title) }}</h3>
                                                 </a>
 
-                                                <div class="brand-car-inner-item-main">
+                                                <div class="brand-car-inner-item-main px-2">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -453,7 +454,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-btm-txt-btm">
+                                                <div class="brand-car-btm-txt-btm px-2 pb-3">
                                                     <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
                                                     </h6>
                                                 </div>
@@ -632,7 +633,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-btm-txt-btm" >
+                                                <div class="brand-car-btm-txt-btm px-2 pb-3">
                                                     <h6 style="font-size:12px; word-spacing: 6px" class="brand-car-btm-txt"><span><i class="bi bi-geo-alt-fill"></i> Hyogo, Japan&nbsp; &nbsp; &nbsp;     2024-02-02</span></h6>
                                                 </div>
                                             </div>
@@ -753,7 +754,7 @@
                                     </div>
 
                                     <div class="brand-car-inner">
-                                        <div class="brand-car-inner-item">
+                                        <div class="brand-car-inner-item px-2">
                                             <span class="fw-bolder">
                                             @if(session('front_lang')=='en')
                                                 {{ $car['company_en'] }}
@@ -770,8 +771,8 @@
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('listing', $car['id']) }}">
-                                            <h3>
+                                        <a href="{{ route('listing', $car['id']) }}" data-bs-toggle="tooltip" title="sumito-sumi-60-Earth drilling-bore piling machine 4G">
+                                            <h3 class="text-truncate px-2 car-fullname" >
                                             @if(session('front_lang')=='en')
                                                     {{ html_decode($car['model_name_en']) }}
                                                 @else
@@ -779,8 +780,9 @@
                                                 @endif
                                             </h3>
                                         </a>
+                                        
 
-                                        <div class="brand-car-inner-item-main">
+                                        <div class="brand-car-inner-item-main px-1">
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -792,7 +794,7 @@
                                                     </span>
                                                 </div>
 
-                                                <span>
+                                                <span class="fw-light spez_text">
                                                 @if(session('front_lang')=='en')
                                                 {{ html_decode($car['mileage']) }}
                                                 @else
@@ -800,6 +802,7 @@
                                                 @endif
                                                 </span>
                                             </div>
+                                            <p>.</p>
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -831,7 +834,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="brand-car-btm-txt-btm">
+                                        <div class="brand-car-btm-txt-btm px-2 pb-3">
                                           
                                             <p>
                                                 <i class="bi bi-geo-alt-fill"></i>
@@ -852,7 +855,7 @@
                 </div>
 
                 @if ($home3_ads->status == 'enable')
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="feature-thumb">
                             <a class="w-100" href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset($home3_ads->image) }}" alt="img"></a>
                         </div>
@@ -866,7 +869,7 @@
                 </div>
             </div>
 
-            <div class="brand-car-btn mt-48px">
+            <div class="d-flex align-items-center justify-content-center pt-5">
                 <a href="{{ route('new-arrival') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
