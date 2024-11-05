@@ -579,7 +579,6 @@
                                                     <img src="{{ asset('japan_home/img_check.jpg') }}" alt="logo" class="" style="height:100%; width: 100%">
                                                 </div>
                                                 
-
                                                 <div class="brand-car-item-img-text">
                                                     <div class="text-df">
                                                         @if ($car->offer_price)

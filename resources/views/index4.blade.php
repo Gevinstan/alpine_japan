@@ -6,12 +6,12 @@
 @endsection
 
 @section('body-content')
-<main>
+<main class="w-100 main_wid">
     <!-- banner-part-start  -->
 
     <section class="banner mb-5" >
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center px-5 pb-5">
                 <div class="col-lg-12 col-xl-7">
                     <div class="banner-taitel">
                         <span>{{ $homepage->home3_intro_short_title }}</span>
@@ -395,7 +395,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="btn banner-serch">search</button>
+                                    <button class="btn banner-serch"><i class="bi bi-search"></i>   SEARCH</button>
                                 </li>
                             </ul>
                         </div>
@@ -715,7 +715,7 @@
                                                 </div>
 
                                                 <div class="brand-car-inner">
-                                                    <div class="brand-car-inner-item">
+                                                    <div class="brand-car-inner-item px-2">
                                                         <span class="fw-bolder">Volvo</span>
                                                         <p>
                                                             @if ($car->offer_price)
@@ -727,10 +727,10 @@
                                                     </div>
 
                                                     <a href="{{ route('listing', $car->slug) }}">
-                                                        <h3>{{ html_decode($car->title) }}</h3>
+                                                        <h3 class="px-2">{{ html_decode($car->title) }}</h3>
                                                     </a>
 
-                                                    <div class="brand-car-inner-item-main">
+                                                    <div class="brand-car-inner-item-main px-3">
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -746,6 +746,7 @@
                                                                 {{ html_decode($car->mileage) }}
                                                             </span>
                                                         </div>
+                                                        <p>.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -761,6 +762,7 @@
                                                                 {{ html_decode($car->fuel_type) }}
                                                             </span>
                                                         </div>
+                                                        <p>.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -777,12 +779,11 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="brand-car-btm-txt-btm">
+                                                    <div class="brand-car-btm-txt-btm bg-muted px-2 pb-3">
                                                         <!-- <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
                                                         </h6> -->
                                                         <p>
-                                                            <i class="bi bi-geo-alt-fill"></i>
-                                                            <span class="brand-location">Hyogo, Japan</span>
+                                                            <span class="brand-location"><i class=" fs-3 bi bi-geo-alt-fill"></i>Hyogo, Japan</span>
                                                         </p>
                                                         <div class="d-flex flex-column">
                                                             <span class="brand-date fw-light">2024-05-24</span>
@@ -872,7 +873,7 @@
                                             </div>
 
                                             <div class="brand-car-inner">
-                                                <div class="brand-car-inner-item">
+                                                <div class="brand-car-inner-item px-2">
                                                     <span>{{ $car?->brand?->name }}</span>
                                                     <p>
                                                         @if ($car->offer_price)
@@ -884,10 +885,10 @@
                                                 </div>
 
                                                 <a href="{{ route('listing', $car->slug) }}">
-                                                    <h3>{{ html_decode($car->title) }}</h3>
+                                                    <h3 class="px-2">{{ html_decode($car->title) }}</h3>
                                                 </a>
 
-                                                <div class="brand-car-inner-item-main">
+                                                <div class="brand-car-inner-item-main px-2">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -934,7 +935,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-btm-txt-btm">
+                                                <div class="brand-car-btm-txt-btm px-2 pb-3">
                                                     <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
                                                     </h6>
                                                 </div>
@@ -947,8 +948,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="brand-car-btn mt-48px">
+                        <!-- <div class="brand-car-btn mt-48px">
                             <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
+                        </div> -->
+
+                        <div class="d-flex align-items-center justify-content-center pt-5">
+                            <div class="categories-three-view-btn">
+                                <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -958,7 +965,7 @@
 
 
     <!--  Car-Poster-part-start -->
-    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5">
+    <section class="car-poster d-flex flex-wrap justify-content-center gap-3 mb-5">
         <div class="col-md-auto">
             <a href="#">
                 <img src="{{ asset('japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -1011,7 +1018,7 @@
     <section class="feature py-5 my-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-8">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
                         <h2 class="section-heading">New<span class="highlight"> Arrivals<span></h2>
@@ -1047,8 +1054,10 @@
                             <div class="col-lg-4">
                                 <div class="brand-car-item">
                                     <div class="brand-car-item-img">
-                                        <img src="{{ asset($car->thumb_image) }}" alt="thumb">
-
+                                        
+                                        <div class=" brand-new-car">
+                                            <img src="{{ asset($car->thumb_image) }}" alt="thumb" style="height:100%; width: 100%">
+                                        </div>
                                         <!-- <div class="brand-car-item-img-text">
 
                                             <div class="text-df">
@@ -1112,8 +1121,10 @@
                                     </div>
 
                                     <div class="brand-car-inner">
-                                        <div class="brand-car-inner-item">
-                                            <span class="fw-bolder">Volvo</span>
+                                        <div class="brand-car-inner-item px-2">
+                                            <span>
+                                                <h6 class="text-truncate car-name" style="">sumito-sumi-60-Earth drilling-bore piling machine 4G</h6>
+                                            </span>
                                             <p>
                                                 @if ($car->offer_price)
                                                     {{ currency($car->offer_price) }}
@@ -1123,11 +1134,15 @@
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('listing', $car->slug) }}">
-                                            <h3>{{ html_decode($car->title) }}</h3>
+                                        <!-- <a href="{{ route('listing', $car->slug) }}">
+                                            <h3 class="px-2">{{ html_decode($car->title) }}</h3>
+                                        </a> -->
+
+                                        <a href="{{ route('listing', $car->slug) }}" data-bs-toggle="tooltip" title="sumito-sumi-60-Earth drilling-bore piling machine 4G">
+                                            <h3 class="text-truncate px-2 car-fullname" >sumito-sumi-60-Earth drilling-bore piling machine 4G</h3>
                                         </a>
 
-                                        <div class="brand-car-inner-item-main">
+                                        <div class="brand-car-inner-item-main px-1">
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -1139,10 +1154,11 @@
                                                     </span>
                                                 </div>
 
-                                                <span>
+                                                <span class="fw-light spez_text">
                                                     {{ html_decode($car->mileage) }}
                                                 </span>
                                             </div>
+                                            <p>.</p>
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -1154,10 +1170,11 @@
                                                     </span>
                                                 </div>
 
-                                                <span>
+                                                <span class="fw-light spez_text">
                                                     {{ html_decode($car->fuel_type) }}
                                                 </span>
                                             </div>
+                                            <p>.</p>
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -1168,13 +1185,13 @@
                                                     </span>
                                                 </div>
 
-                                                <span>
+                                                <span class="fw-light spez_text">
                                                     {{ html_decode($car->engine_size) }}
                                                 </span>
                                             </div>
                                         </div>
 
-                                        <div class="brand-car-btm-txt-btm">
+                                        <div class="brand-car-btm-txt-btm px-2 pb-3">
                                             <!-- <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
                                             </h6> -->
                                             <p>
@@ -1196,11 +1213,15 @@
                 </div>
 
                 @if ($home3_ads->status == 'enable')
-                    <div class="col-lg-3">
-                        <div class="feature-thumb">
-                            <a class="w-100" href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('frontend/japan_home/big_sale.svg') }}" alt="img"></a>
-                        </div>
+                <div class="col-lg-4">
+                    <div class="feature-thumb">
+                        <a href="{{ $home3_ads->link }}" target="_blank">
+                            <img src="{{ asset('japan_home/big_sale.svg') }}" alt="img" class="img-fluid" style="height:100%; width: 100%">
+                        </a>
                     </div>
+                </div>
+
+                
                 @endif
             </div>
 
@@ -1209,6 +1230,12 @@
                     <div class="feature-position-img"></div>
                 </div>
             </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center pt-5">
+                <div class="categories-three-view-btn">
+                    <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
+                </div>
         </div>
     </section>
     <!--  Feature-part-end -->
@@ -1219,6 +1246,7 @@
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
+
                 <div class="col-lg-6 col-sm-6 video-content">
                     <p>Watch The Video</p>
                     <h2 class="vedio-taitel video-Text py-4">JDM Car From Japan To US, Canada, Australia Completely Legal</h2>

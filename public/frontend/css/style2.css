@@ -1,7 +1,5 @@
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @keyframes slideDown {
     from {
@@ -697,7 +695,7 @@
     background-color: var(--primary-color-1);
     transition: all 0.5s;
     z-index: -1;
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 .thm-btn:hover::after {
@@ -1687,9 +1685,9 @@
     color: var(--white-color);
 }
 
-.brand-car-item .brand-car-inner {
+/* .brand-car-item .brand-car-inner {
     padding: 25px 20px 20px 20px;
-}
+} */
 
 .brand-car-item .brand-car-inner .brand-car-inner-item {
     display: flex;
@@ -3073,12 +3071,12 @@ p {
 }
 
 .categories .categories-logo {
-    border: 1px solid #e0f4eb;
-    border-radius: 7px;
+    border: 1px solid #f6fdfa;
+    border-radius: 10px;
     position: relative;
     z-index: 1;
     text-align: center;
-    background-color: #f6fdfa;
+    background-color: #ffffff;
 }
 
 .categories .categories-logo .categories-logo-thumb {
@@ -7235,10 +7233,7 @@ p {
     padding-left: 5px;
 }
 
-.feature .feature-thumb img {
-    width: 342px;
-    height: 600px;
-}
+
 
 .feature-slick-prev,
 .trending-slick-prve {
@@ -7491,7 +7486,7 @@ p {
 
 .footer {
     padding: 55px 0 0px 0;
-    background: #0E124B;
+    background: #0e124b;
     /* position: sticky; */
     bottom: 0;
     overflow-x: hidden;
@@ -7509,7 +7504,7 @@ p {
 }
 
 .footer .footer-bb {
-    border-bottom: 1px solid #484EA7;
+    border-bottom: 1px solid #484ea7;
     padding-bottom: 56px;
 }
 
@@ -7529,7 +7524,7 @@ p {
 
 .footer .newsletter-sarch-box {
     width: 400px;
-    background-color: #2E326C;
+    background-color: #2e326c;
     padding: 8px;
     display: flex;
     align-items: center;
@@ -8295,7 +8290,7 @@ p {
 .header .menu-bg .nav-main .nav-btn {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 8px;
 }
 
 .header .menu-bg .nav-main .nav-btn .user {
@@ -13804,12 +13799,19 @@ p {
 }
 
 .header-container {
-    max-width: 1780px !important;
+    max-width: 1680px !important;
 }
 
 .container {
-    max-width: 1440px;
+    max-width: 100%;
 }
+
+/* .header-border {
+   max-width: 1950px !important;  
+   margin-left: 0px !important;
+   width: 1920px !important;
+   padding-right: 100px;
+} */
 
 .g-5,
 .gy-5 {
@@ -14250,7 +14252,10 @@ p {
 .brand-car .highlight,
 .feature .highlight,
 .testimonial .highlight {
-    color: #038ffc;
+    font-size: 2rem;
+    font-family: "Poppins";
+    color: #005bac;
+    font-weight: 500;
 }
 
 /************ NAV-BAR DROPDOWN STYLE START **************/
@@ -14296,16 +14301,15 @@ p {
 } */
 
 .nav-tabs .nav-link {
-    color: black; 
-    border-top: 2px solid transparent; 
-    transition: color 0.3s, border-top 0.3s; 
+    color: black;
+    border-top: 2px solid transparent;
+    transition: color 0.3s, border-top 0.3s;
 }
 
 .nav-tabs .nav-link:hover {
-    color: var(--primary-color-1) !important; 
-    border-top: 2px solid var(--primary-color-1); 
+    color: var(--primary-color-1) !important;
+    border-top: 2px solid var(--primary-color-1);
 }
-
 
 .banner .banner-search-bar .banner-sarchber-box {
     border: 1px solid #038ffc !important;
@@ -14320,12 +14324,17 @@ p {
 }
 
 .section-heading {
-    font-size: clamp(1.75rem, 1.6364rem + 0.4848vw, 2rem) !important;
+    /* font-size: clamp(1.75rem, 1.6364rem + 0.4848vw, 2rem) !important; */
+    font-size: 2rem;
+    font-family: "Poppins";
+    font-weight: bold;
     padding: 0 !important;
 }
 
 .car-poster {
-    justify-content: space-around; /* Adjusts the spacing between images */
+    justify-content: space-around; 
+    max-width: 315vw;
+    max-height: 325vh;
 }
 
 .poster-img {
@@ -14349,7 +14358,7 @@ p {
 
 .buy-section {
     background-color: var(--primary-color-1);
-    background-image: url('../../japan_home/buy-bg.png');
+    background-image: url("../../japan_home/buy-bg.jpg");
     color: var(--white-color) !important;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -14378,7 +14387,7 @@ p {
     margin: 0 auto 20px;
     position: relative;
 }
-.step-circle::before {
+/* .step-circle::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -14387,7 +14396,7 @@ p {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
     border-left: 30px solid white;
-}
+} */
 .step-circle:last-child::before {
     display: none;
 }
@@ -14421,9 +14430,9 @@ p {
         border-left: 20px solid white;
     }
 }
-  
-  /* Inner Card Styling */
-  .inner-card {
+
+/* Inner Card Styling */
+.inner-card {
     width: 125px;
     height: 125px;
     background-color: #f8f9fa;
@@ -14432,16 +14441,15 @@ p {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); /* Inner shadow */
-  }
-  
-  /* Responsive Layout */
-  @media (max-width: 767px) {
+}
+
+/* Responsive Layout */
+@media (max-width: 767px) {
     .inner-card {
-      width: 100px;
-      height: 100px;
+        width: 100px;
+        height: 100px;
     }
-  }
-  
+}
 
 /**********  Car Buy section End  *********/
 
@@ -14458,12 +14466,15 @@ p {
 }
 
 .about-section .highlight-text {
-    color: #038ffc;
+    font-size: 2rem;
+    font-family: "Poppins";
+    color: #005bac;
+    font-weight: 500;
 }
 
 .about-section p {
     color: #6c757d;
-    font-size: .925rem;
+    font-size: 0.925rem;
     line-height: 22px !important;
 }
 
@@ -14494,7 +14505,10 @@ p {
 }
 
 .section-title .highlight {
-    color: var(--primary-color-1);
+    font-size: 2rem;
+    font-family: "Poppins";
+    color: #005bac;
+    font-weight: 500;
 }
 
 .section-subtitle {
@@ -14517,6 +14531,7 @@ p {
     justify-content: flex-end; /* This aligns content to the bottom */
     align-items: center;
     transition: transform 0.3s ease;
+    object-fit: cover;
 }
 
 .compliance-item:hover {
@@ -14549,7 +14564,7 @@ p {
     right: 10px;
     width: 30px;
     height: 30px;
-    background-color: #2a73ff;
+    background-color: #038ffc;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -14579,17 +14594,17 @@ p {
 /********* Quality section End **********/
 
 .aj-dropdown {
-    width: 170px;         
-    padding: 10px;          
-    border: 1px solid #ced4da;  
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
-    background-color: white; 
-    font-size: .875rem;        
-    color: #333; 
-  }
-  
-  /* Change arrow icon styling */
-  .aj-dropdown::after {
+    width: 170px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    font-size: 0.875rem;
+    color: #333;
+}
+
+/* Change arrow icon styling */
+.aj-dropdown::after {
     content: "";
     position: absolute;
     right: 16px;
@@ -14598,69 +14613,100 @@ p {
     border: 5px solid transparent;
     border-top-color: #333; /* Dark arrow */
     pointer-events: none;
-  }
-  
-  /* Dropdown focus/hover effect */
-  .aj-dropdown:focus {
+}
+
+/* Dropdown focus/hover effect */
+.aj-dropdown:focus {
     outline: none;
-    border-color: #007bff;  /* Change border color on focus */
+    border-color: #007bff; /* Change border color on focus */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
-  }  
+}
 
-  .custom-tabs li {
+.custom-tabs li {
     width: 170px;
-  }
+}
 
-  .bg-no-color {
+.bg-no-color {
     background-color: transparent !important;
-  }
+}
 
-  .brand-location {
-    font-size: .875rem;
+.brand-location {
+    font-size: 0.875rem;
     color: var(--headline-color);
-  }
+}
 
-  .brand-date{
-    font-size: .75rem;
-  }
+.bi-geo-alt-fill::before {
+    font-size: 0.95rem;
+}
 
-  .custom-tabs li a {
+.brand-date {
+    font-size: 0.75rem;
+}
+
+.custom-tabs li a {
     height: 44px;
-    font-size: .875rem !important;
+    font-size: 0.875rem !important;
     text-align: center;
     align-content: space-evenly;
-  }
+}
 
-  .banner-serch {
+.banner-serch {
     height: 100%;
     width: 100%;
     background-color: var(--primary-color-1);
     color: var(--white-color);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-  }
+}
 
-  .custom-tabs {
+.custom-tabs {
     border: none !important;
-  }
+}
 
-  .heading-section li:nth-child(2){
+.heading-section li:nth-child(2) {
     border-left: 1px solid gray;
     border-right: 1px solid gray;
-  }
+}
 
-  .email-input {
+/* for dropdown */
+
+.custom-tabs li:nth-child(1) {
+    border-top: 1px solid gray !important;
+}
+
+.custom-tabs li:nth-child(2) {
+    border-top: 1px solid gray !important;
+}
+
+.custom-tabs li:nth-child(3) {
+    border-top: 1px solid gray !important;
+}
+
+.custom-tabs li:nth-child(2) {
+    border-left: 1px solid gray !important;
+}
+
+.custom-tabs li:nth-child(3) {
+    border-left: 1px solid gray !important;
+}
+
+.email-input {
     padding: 10px 15px !important;
-    background-color: #2E326C !important;
+    background-color: #2e326c !important;
     color: var(--white-color) !important;
-  }
+}
 
-  .email-btn {
+.email-input::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+.email-btn {
     height: 40px !important;
     font-size: 14px !important;
-  }
+}
 
-  .footer-logo a {
+.footer-logo a {
     width: 140px;
     background: #ffff;
     display: flex;
@@ -14668,42 +14714,221 @@ p {
     border-radius: 32px;
     border-right: 3px solid var(--primary-color-1);
     border-left: 3px solid var(--primary-color-1);
-  }
+}
 
-  /********* header section style start **********/
+/********* header section style start **********/
 
-  .header-dropdown, .header-dropdown:hover {
+.header-dropdown,
+.header-dropdown:hover {
     background-color: transparent;
     border-color: transparent;
-  }
+}
 
-  .header-dropdown::after {
-    vertical-align: .15em;
-  }
+.header-dropdown::after {
+    vertical-align: 0.15em;
+}
+.main_wid {
+    overflow-x: hidden !important;
+}
 
-  .header-border {
-    background-color: #0F1350;
-  }
+.header-border {
+    background-color: #0f1350;
+}
 
-  .heading-fs-14 {
-    font-size: .875rem !important;
-  }
-  /********* header section style end **********/
+.heading-fs-14 {
+    font-size: 0.875rem !important;
+}
+/********* header section style end **********/
 
+/********* Listing Page style Start **********/
 
-
-  /********* Listing Page style Start **********/
-
-  .listing-breadcrumb {
+.listing-breadcrumb {
     padding-top: 40px !important;
-  }
+}
 
-  @media (min-width: 992px) and (max-width: 1199.98px) {
-
+@media (min-width: 992px) and (max-width: 1199.98px) {
     .listing-breadcrumb {
         padding-top: 70px !important;
-      }
-  }
+    }
+}
 
-  /********* Listing Page style End **********/
+/********* Listing Page style End **********/
+
+/* Home Page Top Navbar Responsive issue */
+
+.nav-dropdown-list {
+    margin-bottom: 1rem;
+}
+
+.nav-link {
+    color: black;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    text-decoration-color: #038ffc;
+    text-underline-offset: 3px;
+    border-bottom: 3px solid #038ffc;
+}
+
+.dropdown-item {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    text-decoration: underline;
+    text-decoration-color: #038ffc;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+    .nav-btn .menu ul li a {
+        font-size: 0.75em !important;
+    }
+}
+
+.dropdown {
+    position: relative;
+}
+
+.nav-btn .menu ul li a {
+    font-size: 14px;
+    font-weight: var(--regular);
+    line-height: 28px;
+    font-family: "Poppins", serif;
+    color: var(--headline-color);
+    transition: var(--transition-all);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 3px solid transparent;
+    padding-bottom: 5px;
+}
+
+.nav-btn .menu ul li a:hover {
+    border-bottom: 3px solid #038ffc;
+    color: #038ffc;
+}
+@media (min-width: 1440px) {
+    .nav-btn .menu ul li a {
+        padding-right: 0.9em;
+    }
+}
+
+@media (min-width: 1920px) {
+    .nav-btn .menu ul li a {
+        padding-right: 3.5em;
+    }
+}
+.text-nowrap {
+    white-space: nowrap !important;
+}
+
+body {
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+}
+
+.dropdown-menu .row > * {
+    flex-shrink: 0;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.nav-dropdown-header {
+    color: #0d274e !important;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.dropdown-header {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.nav-dropdown-list h6 {
+    font-size: 16px;
+    font-weight: var(--regular);
+    line-height: 28px;
+    color: var(--headline-color);
+    font-family: var(--DMSans);
+}
+
+.dropdown-menu.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    /* display: flex;
+    flex-direction: column; */
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+}
+
+.dropdown_bg {
+    min-width: 22rem;
+}
+
+.brand-car-btm-txt-btm {
+    background-color: #F7F7F7;
+}
+
+/* Card Responsive issue fixed */
+
+.brand-new-car {
+    height: 14rem !important;
+    width: 28rem !important;
+}
+
+.text-truncate {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.car-name {
+    font-size: 14px; 
+    width: 53px;
+}
+
+.car-fullname {
+    font-size: 17px;
+}
+
+.spez_text {
+    font-size: 0.75rem !important;
+}
+
+
+
+
 
