@@ -5,7 +5,7 @@
 
 @section('body-header')
     <h3 class="crancy-header__title m-0">{{ __('translate.Setting') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Setting') }}</p>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Dashboard') }} >> {{ __('translate.Setting') }}</p></a>
 @endsection
 
 @section('body-content')
@@ -51,14 +51,6 @@
                                                 </span>
                                                 <h4 class="crancy-psidebar__title">{{ __('translate.Google reCaptcha') }} </h4>
                                             </a>
-                                            <a class="list-group-item" data-bs-toggle="list" href="#id4" role="tab" aria-selected="false"><span class="crancy-psidebar__icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M14.5 8.25C14.0858 8.25 13.75 8.58579 13.75 9C13.75 9.41421 14.0858 9.75 14.5 9.75V8.25ZM17.2764 9.55279L16.6056 9.8882V9.8882L17.2764 9.55279ZM17.3292 11.3354C17.5144 11.7059 17.9649 11.8561 18.3354 11.6708C18.7059 11.4856 18.8561 11.0351 18.6708 10.6646L17.3292 11.3354ZM17.1272 9.91119L17.5384 9.28396L16.284 8.46158L15.8728 9.08881L17.1272 9.91119ZM13.7644 13.6729L13.1372 13.2617V13.2617L13.7644 13.6729ZM12.0726 13.6424L11.431 14.0308L12.0726 13.6424ZM10.1644 10.4901L9.52284 10.8784H9.52284L10.1644 10.4901ZM8.43044 10.5302L7.77155 10.1719L8.43044 10.5302ZM5.34111 14.6417C5.14324 15.0056 5.27783 15.461 5.64173 15.6589C6.00562 15.8568 6.46103 15.7222 6.65889 15.3583L5.34111 14.6417ZM6 2.75H18V1.25H6V2.75ZM21.25 6V18H22.75V6H21.25ZM18 21.25H6V22.75H18V21.25ZM2.75 18V6H1.25V18H2.75ZM6 21.25C4.20507 21.25 2.75 19.7949 2.75 18H1.25C1.25 20.6234 3.37665 22.75 6 22.75V21.25ZM21.25 18C21.25 19.7949 19.7949 21.25 18 21.25V22.75C20.6234 22.75 22.75 20.6234 22.75 18H21.25ZM18 2.75C19.7949 2.75 21.25 4.20507 21.25 6H22.75C22.75 3.37665 20.6234 1.25 18 1.25V2.75ZM6 1.25C3.37665 1.25 1.25 3.37665 1.25 6H2.75C2.75 4.20507 4.20507 2.75 6 2.75V1.25ZM14.5 9.75H16.382V8.25H14.5V9.75ZM16.6056 9.8882L17.3292 11.3354L18.6708 10.6646L17.9472 9.21738L16.6056 9.8882ZM16.382 9.75C16.4767 9.75 16.5632 9.8035 16.6056 9.8882L17.9472 9.21738C17.6508 8.6245 17.0448 8.25 16.382 8.25V9.75ZM15.8728 9.08881L13.1372 13.2617L14.3917 14.084L17.1272 9.91119L15.8728 9.08881ZM12.7142 13.2541L10.8061 10.1017L9.52284 10.8784L11.431 14.0308L12.7142 13.2541ZM7.77155 10.1719L5.34111 14.6417L6.65889 15.3583L9.08934 10.8885L7.77155 10.1719ZM10.8061 10.1017C10.1065 8.946 8.41688 8.98511 7.77155 10.1719L9.08934 10.8885C9.18153 10.7189 9.4229 10.7133 9.52284 10.8784L10.8061 10.1017ZM13.1372 13.2617C13.0363 13.4155 12.8095 13.4114 12.7142 13.2541L11.431 14.0308C12.0978 15.1323 13.6857 15.1609 14.3917 14.084L13.1372 13.2617Z" fill="#32343A"/>
-                                                    </svg>
-
-                                                </span>
-                                                <h4 class="crancy-psidebar__title">{{ __('translate.Tawk Chat') }} </h4>
-                                            </a>
                                             <a class="list-group-item" data-bs-toggle="list" href="#id5" role="tab" aria-selected="false"><span class="crancy-psidebar__icon crancy-psidebar__icon--fill">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M19 2H21C21.5523 2 22 2.44772 22 3V5M21 3C13.0585 9.39136 8.94212 11.1129 2 12M18 10V20C18 21.1046 18.8954 22 20 22C21.1046 22 22 21.1046 22 20V10C22 8.89543 21.1046 8 20 8C18.8954 8 18 8.89543 18 10ZM2 18L2 20C2 21.1046 2.89543 22 4 22C5.10457 22 6 21.1046 6 20L6 18C6 16.8954 5.10457 16 4 16C2.89543 16 2 16.8954 2 18ZM10 14V20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20V14C14 12.8954 13.1046 12 12 12C10.8954 12 10 12.8954 10 14Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -76,20 +68,6 @@
                                                 </span>
                                                 <h4 class="crancy-psidebar__title">{{ __('translate.Facebook Pixel') }}</h4>
                                             </a>
-
-
-                                            <a class="list-group-item" data-bs-toggle="list" href="#id7" role="tab" aria-selected="false"><span class="crancy-psidebar__icon">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M18 2H6C3.79086 2 2 3.79086 2 6V18C2 20.2091 3.79086 22 6 22H10.5V15H7V12H10.5V10C10.5 7.79086 12.2909 6 14.5 6H17V9H14.5C13.9477 9 13.5 9.44772 13.5 10V12H17V15H13.5V22H18C20.2091 22 22 20.2091 22 18V6C22 3.79086 20.2091 2 18 2Z"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
-
-                                                </span>
-                                                <h4 class="crancy-psidebar__title">{{ __('translate.Database Clear') }}</h4>
-                                            </a>
-
-
-
-
                                         </div>
 
                                     </div>
@@ -120,17 +98,7 @@
                                                                                         </div>
                                                                                     </div>
 
-                                                                                    <div class="col-12">
-                                                                                        <div class="crancy__item-form--group  mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Select Theme')}}</label>
-                                                                                            <select class="form-select crancy__item-input" name="selected_theme">
-                                                                                                <option {{ $general_setting->selected_theme == 'all_theme' ? 'selected' : '' }} value="all_theme">{{__('All Theme')}}</option>
-                                                                                                <option {{ $general_setting->selected_theme == 'theme_one' ? 'selected' : '' }} value="theme_one">{{__('Theme One')}}</option>
-                                                                                                <option {{ $general_setting->selected_theme == 'theme_two' ? 'selected' : '' }} value="theme_two">{{__('Theme Two')}}</option>
-                                                                                                <option {{ $general_setting->selected_theme == 'theme_three' ? 'selected' : '' }} value="theme_three">{{__('Theme Three')}}</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
+                                                                               
 
 
                                                                                     <div class="col-12">
@@ -754,52 +722,6 @@
                                                     </form>
                                                 </div>
 
-                                                <div class="tab-pane fade" id="id4" role="tabpanel">
-                                                    <form action="{{ route('admin.update-tawk-chat') }}" method="POST" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="crancy-ptabs__separate">
-                                                                    <div class="crancy-ptabs__form-main">
-                                                                        <div class="crancy__item-group">
-                                                                            <h3 class="crancy__item-group__title">{{ __('translate.Tawk Chat') }}</h3>
-                                                                            <div class="crancy__item-form--group">
-                                                                                <div class="row">
-
-                                                                                    <div class="col-12">
-                                                                                        <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Visibility Status')}} </label>
-                                                                                            <div class="crancy-ptabs__notify-switch  crancy-ptabs__notify-switch--two">
-                                                                                                <label class="crancy__item-switch">
-                                                                                                <input name="status" {{ $tawk_chat_setting->status == 1 ? 'checked' : '' }} type="checkbox" >
-                                                                                                <span class="crancy__item-switch--slide crancy__item-switch--round"></span>
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-12">
-                                                                                        <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Tawk Chat Link')}} </label>
-                                                                                            <input class="crancy__item-input" type="text" name="chat_link" value="{{ $tawk_chat_setting->chat_link }}">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class=" mg-top-40">
-                                                                            <button class="crancy-btn" type="submit">{{ __('translate.Update') }}</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
 
                                                 <div class="tab-pane fade" id="id5" role="tabpanel">
                                                     <form action="{{ route('admin.update-google-analytic') }}" method="POST" enctype="multipart/form-data">
@@ -890,43 +812,6 @@
                                                         </div>
                                                     </form>
                                                 </div>
-
-                                                <div class="tab-pane fade" id="id7" role="tabpanel">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="crancy-ptabs__separate">
-                                                                <div class="crancy-ptabs__form-main">
-                                                                    <div class="crancy__item-group">
-                                                                        <h3 class="crancy__item-group__title">{{ __('translate.Database Clear') }}</h3>
-                                                                        <div class="crancy__item-form--group">
-                                                                            <div class="row">
-
-                                                                                <div class="col-12">
-                                                                                    <div class="alert alert-warning alert-has-icon">
-                                                                                        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
-                                                                                        <div class="alert-body">
-                                                                                            <div class="alert-title">{{ __('translate.Warning') }}</div>
-                                                                                            <p>{{ __('translate.If you want to use the software from scratch, you can click here to reset the database. You do not need to remove the existing data one by one.') }}</p>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class=" mg-top-40">
-                                                                        <button data-bs-toggle="modal" data-bs-target="#dbCleawrModal" class="crancy-btn" type="button">{{ __('translate.Clear Now') }}</button>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
                                             </div>
                                         </div>
 

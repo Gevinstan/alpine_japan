@@ -42,7 +42,7 @@
                 </div>
             </div>
         </section>
-        <section>
+      <section>
             <div class="container-fluid">
                 <div class="row" style=" padding-top: 20px;padding-bottom: 14px">
                     <div class="col-lg-12">
@@ -112,10 +112,10 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3">
-                                                    <input class="form-check-input brand-search" name="brand" type="radio" value="{{$brand->slug}}"
-                                                        {{ in_array(trim($brand->slug), (array)request('brand', [])) ? 'checked' : '' }}>
+                                                    <input class="form-check-input brand-search" name="jdm_brand" type="radio" value="{{$brand->slug}}"
+                                                        {{ in_array(trim($brand->slug), (array)request('jdm_brand', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
-                                                            {{ $brand->name }}
+                                                            {{ $brand->brand_name }}
                                                         </label>
                                                     </div>
                                             </div>
@@ -139,10 +139,10 @@
                                             <div class="d-flex align-items-center">
                                                 <!-- Checkbox -->
                                                     <div class="form-check me-3 model-div">
-                                                    <input class="form-check-input brand-search" name="jdm_model" type="radio" value="{{$brand->model}}"
-                                                        {{ in_array(trim($brand->model), (array)request('jdm_model', [])) ? 'checked' : '' }}>
+                                                    <input class="form-check-input model-search" name="jdm_model" type="radio" value="{{$brand}}"
+                                                        {{ in_array(trim($brand), (array)request('jdm_model', [])) ? 'checked' : '' }}>
                                                         <label class="form-check-label">
-                                                            {{ $brand->model }}
+                                                            {{ $brand}}
                                                         </label>
                                                     </div>
                                             </div>
@@ -255,7 +255,7 @@
                                                 <div class="range-container">
                                                     <input type="range" class="form-range" min="1960" max="2024"  id="start">
                                                     <output name="age_output" id="age_output" for="start" ></output>
-                                                    <input type="hidden" id="start_year" name="jdm_year[]">
+                                                    <input type="hidden" id="start_year" name="jdm_year">
                                                 </div>
                                             </div>
                                         </div>
@@ -329,11 +329,12 @@
                                             Recently Added
                                         </a>
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Something else here</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
+                                        <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
@@ -381,13 +382,14 @@
                                     <div class="col-lg-4">
                                         <div class="brand-car-item" style="height: 480px;">
                                             <div class="brand-car-item-img">
-                                            @if(file_exists(public_path('cars/' . $car['picture'])))
+                                            <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb" style="heigh:none;">
+                                           {{-- @if(file_exists(public_path('cars/' . $car['picture'])))
                                                 <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb" style="heigh:none;">
                                             @elseif(file_exists(public_path('Heavy/' . $car['picture'])))
                                                 <img src="{{ asset('Heavy/' . $car['id'] . '/' . $car['picture']) }}" alt="thumb">
                                             @else 
                                                 <img src="{{ asset('Small-Heavy/' . $car['id'] . '/' . $car['picture']) }}" alt="thumb">
-                                            @endif
+                                            @endif --}}
 
 
                                                 <div class="brand-car-item-img-text">
@@ -395,7 +397,7 @@
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            
+                                                          
                                                                 <span>
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
@@ -424,7 +426,7 @@
                                                             {{ $car['company_en'] }}
                                                     </span>
                                                     <p> 
-                                                        {{ $car['start_price_num'] }}
+                                                        {{ '$'.$car['start_price_num'] }}
                                                     </p>
                                                 </div>
 
@@ -619,7 +621,7 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section> 
 
     <!-- Inventory-part-end -->
 
@@ -636,6 +638,26 @@
 @push('js_section')
 
 <script>
+
+function updateButtonText(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+        $('#search_form').submit();
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+function setSortByParam(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
 
 const startRange = document.getElementById('customRangeMin');
 const endRange = document.getElementById('customRangeMax');
@@ -681,6 +703,23 @@ endRange.addEventListener('input', () => {
 (function($) {
     "use strict";
     $(document).ready(function () {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlYear = urlParams.get('year');
+        const sortBy = urlParams.get('sort_by'); 
+
+
+        
+        if(sortBy === 'price_low_high') {
+            setSortByParam('price_low_high','Low to High')
+        }
+        if(sortBy === 'price_high_low') {
+            setSortByParam('price_high_low','High to Low')
+        }
+        if(sortBy === 'recent') {
+            setSortByParam('recent','Recently Added')
+        }
+        
         const form = $('#search_form');
         $("#outside_form_search").on("keyup", function(e) {
             let inputValue = $(this).val();
@@ -698,9 +737,13 @@ endRange.addEventListener('input', () => {
         })
         $(".brand-search").on('change',function(e){
             e.preventDefault();   
+            $(".model-search").val("")
             form.submit();
-           
         }) 
+        $(".model-search").on('change',function(e){
+            e.preventDefault();   
+            form.submit();    
+        })
 
         $("#start").on('input',function(e){
             $("#age_output").val(parseInt($(this).val()))

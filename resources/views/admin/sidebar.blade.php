@@ -13,7 +13,7 @@
                 <span class="menu-bar__name">{{ __('translate.Dashboard') }}</span></span></a>
             </li>
 
-            <li class="{{ Route::is('admin.terms-and-conditions') || Route::is('admin.privacy-policy') || Route::is('admin.faq.*') || Route::is('admin.custom-page.*') || Route::is('admin.contact-us') || Route::is('admin.about-us') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__pages"><span class="menu-bar__text">
+            <li class="{{ Route::is('admin.terms-and-conditions') || Route::is('admin.privacy-policy') || Route::is('admin.faq.*') || Route::is('admin.custom-page.*') || Route::is('admin.contact-us') || Route::is('admin.about-us') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__vehicles"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M2 15V6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V15M2 15C2 17.2091 3.79086 19 6 19H18C20.2091 19 22 17.2091 22 15M2 15H22M12 19V22M12 22H9M12 22H15M7 7H12M7 11H17" stroke="#fff" stroke-width="1.5" stroke-linecap="round"></path>
@@ -21,42 +21,22 @@
                 </span>
                 <span class="menu-bar__name">{{ __('translate.Manage Vehicles') }}</span></span> <span class="crancy__toggle"></span></a></span>
                 <!-- Dropdown Menu -->
-                <div class="collapse crancy__dropdown {{ Route::is('admin.terms-and-conditions') || Route::is('admin.privacy-policy') || Route::is('admin.faq.*') || Route::is('admin.custom-page.*') || Route::is('admin.contact-us') || Route::is('admin.about-us') ? 'show' : '' }}" id="menu-item__pages"  data-bs-parent="#CrancyMenu">
+                <div class="collapse crancy__dropdown {{ Route::is('admin.terms-and-conditions') || Route::is('admin.privacy-policy') || Route::is('admin.faq.*') || Route::is('admin.custom-page.*') || Route::is('admin.contact-us') || Route::is('admin.about-us') ? 'show' : '' }}" id="menu-item__vehicles"  data-bs-parent="#CrancyMenu">
                     <ul class="menu-bar__one-dropdown">
 
                         <li class="{{ Route::is('admin.cars.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.cars.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                             <span class="menu-bar__name">{{ __('translate.Car') }}</span></span></a>
                         </li>
 
                         <li class="{{ Route::is('admin.heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.heavy.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                              <span class="menu-bar__name">{{ __('translate.Heavy') }}</span></span></a>
                         </li>
 
                         <li class="{{ Route::is('admin.commercial.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.commercial.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                             <span class="menu-bar__name">{{ __('translate.Commercial') }}</span></span></a>
                         </li>
 
                         <li class="{{ Route::is('admin.small-heavy.index') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.small-heavy.index') }}"><span class="menu-bar__text">
-                            <span class="crancy-menu-icon crancy-svg-icon__v1">
-                                <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none">
-                                    <path d="M14 21V17C14 14.7909 12.2091 13 10 13C7.79086 13 6 14.7909 6 17V21M19 9.15033V16.9668C19 19.1943 17.2091 21 15 21H5C2.79086 21 1 19.1943 1 16.9668V9.15033C1 7.93937 1.53964 6.7925 2.46986 6.02652L7.46986 1.90935C8.9423 0.696886 11.0577 0.696883 12.5301 1.90935L17.5301 6.02652C18.4604 6.7925 19 7.93937 19 9.15033Z" stroke-width="1.5"></path>
-                                </svg>
-                            </span>
                             <span class="menu-bar__name">{{ __('translate.Small heavy') }}</span></span></a>
                         </li>
                     </ul>
@@ -150,7 +130,6 @@
 
                         <li><a href="{{ route('admin.language.index') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Languages') }}</span></span></a></li>
 
-                        <li><a href="{{ route('admin.theme-language', ['lang_code' => 'en']) }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Theme Languages') }}</span></span></a></li>
 
                     </ul>
                 </div>
@@ -171,7 +150,6 @@
 
                         <li><a href="{{ route('admin.user-list') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.User List') }}</span></span></a></li>
 
-                        <li><a href="{{ route('admin.pending-user') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Pending User') }}</span></span></a></li>
                     </ul>
                 </div>
             </li>

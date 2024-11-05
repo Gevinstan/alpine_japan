@@ -20,8 +20,28 @@
     .page-item .page-link {
         color: #0a58ca !important;
     }
+    #pageLoader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #pageLoader.hidden {
+      display: none;
+    }
 </style>
 <main>
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
     <!-- banner-part-start  -->
 
         <section class="inner-banner">
@@ -113,6 +133,100 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="accordionPanelsStayOpenExample3">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Budget
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
+                                            <div class="accordion-body">
+                                                <input type="hidden" id="priceSearch" name="price_range_scale" value="">
+                                                <button id="searchButton" style="margin-left: 5px; padding: 5px 10px;">Search</button>
+                                                <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$0 $500,000</b></p></span>
+                                                <div class="range-container">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMin" value="1">
+                                                    <input type="range" class="form-range" min="0" max="5" step="0.1" id="customRangeMax" value="2">
+                                                </div>
+                                                <div class="range-container-txt2">
+                                                    <div><p><b>$5k</b></div>
+                                                    <div><p><b>$5Lakhs</b></p></p></div>
+                                                </div>
+
+                                                <h6 style="padding-top:30px">Price Range</h6>
+
+                                                @foreach($price_range as $key=>$range)
+                                                <div class="d-flex align-items-center">
+                                                        <div class="form-check me-3">
+                                                            <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
+                                                            {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}>
+                                                            <label class="form-check-label" >
+                                                             {{$key}}({{$range}})
+                                                            
+                                                            </label>
+                                                        </div>
+                                                </div>
+
+                                                @endforeach
+
+                                               
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="accordionPanelsStayOpenExample5">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Model Year
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
+                                            <div class="accordion-body">
+                                            <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
+                                                <div class="range-container">
+                                                    <input type="range" class="form-range" min="1960" max="2024"  id="start">
+                                                    <output name="age_output" id="age_output" for="start" ></output>
+                                                    <input type="hidden" id="start_year" name="year">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="padding-bottom: 10px;padding-left:10px; padding-right:10px; margin-bottom:15px;">
+                                <div class="accordion" id="accordionPanelsStayOpenExample7">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseeight" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            Transmission
+                                        </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseeight" class="accordion-collapse collapse show">
+                                        <div class="accordion-body">
+                                            @foreach($transmission as $transmission)
+                                            <div class="d-flex align-items-center">
+                                                <!-- Checkbox -->
+                                                  <div class="form-check me-3">
+                                                      <input class="form-check-input popular-search" type="checkbox" name="transmission[]" value="{{$transmission->transmission_en}}" id="defaultCheck2"
+                                                      {{ in_array($transmission->transmission_en, request('transmission', [])) ? 'checked' : '' }}>
+
+                                                      <label class="form-check-label" for="defaultCheck2">
+                                                       {{$transmission->transmission_en}}({{$transmission->count}})
+                                                      </label>
+                                                  </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -146,14 +260,15 @@
                                     <p style="display:inline; color:black; font-weight:bold">{{ __('Sort By:') }}</p>
                                     <div class="dropdown" style="display:inline; ">
                                         <a class="btn btn-white dropdown-toggle" style="padding-bottom:10px; color:#038ffc !important" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Recently Added
+                                           Sort By
                                         </a>
 
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a style="color:#038ffc !important" class="dropdown-item" href="#">Something else here</a></li>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
+                                        <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
@@ -201,13 +316,14 @@
                                     <div class="col-lg-4">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                            @if($type == 'car')
+                                            <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
+                                           {{-- @if($type == 'car')
                                             <img src="{{ asset('cars/' . $car['picture']) }}" alt="thumb">
                                             @elseif ($type == 'heavy')
-                                            <img src="{{ asset('heavy_photos/'.$car['id'].'/'.$car['picture']) }}" alt="thumb">
+                                            <img src="{{ asset('heavy_photos/'.$car['picture']) }}" alt="thumb">
                                             @else
                                              <img src="{{ asset('Small-Heavy/' . $car['picture']) }}" alt="thumb">
-                                            @endif
+                                            @endif --}}
                                            
                                                 <div class="brand-car-item-img-text">
 
@@ -247,9 +363,9 @@
                                                     </span>
                                                     <p>
                                                        @if(session('front_lang')=='en')
-                                                        {{ $car['start_price'] }}
+                                                        {{ '$'.$car['start_price'] }}
                                                     @else
-                                                        {{ $car['start_price'] }}
+                                                        {{ '$'.$car['start_price'] }}
                                                     @endif
                                                     </p>
                                                 </div>
@@ -458,9 +574,65 @@
 @push('js_section')
 
 <script>
+    const startRange = document.getElementById('customRangeMin');
+    const endRange = document.getElementById('customRangeMax');
+    const priceRangeScale = document.getElementById('priceSearch');
+    const valueDisplay = document.querySelector('span p');
+        // Function to update the display
+    const updateDisplay = () => {
+        const startValue = formatCurrency(startRange.value);
+        const endValue = formatCurrency(endRange.value);
+        valueDisplay.textContent = `${startValue} ${endValue}`;
+        const startValueNumber = formatNumber(startRange.value * 100000);
+        const endValueNumber = formatNumber(endRange.value * 100000);
+        priceRangeScale.value=`${startValueNumber} - ${endValueNumber}`;
+    };
+
+    function formatNumber(value) {
+        return Math.round(value);
+    }
+
+    // Event listener for the start range input
+    startRange.addEventListener('input', () => {
+        if (parseFloat(startRange.value) > parseFloat(endRange.value)) {
+            startRange.value = endRange.value;
+        }
+        updateDisplay();
+    });
+
+    // Event listener for the end range input
+    endRange.addEventListener('input', () => {
+        if (parseFloat(endRange.value) < parseFloat(startRange.value)) {
+            endRange.value = startRange.value;
+        }
+        updateDisplay();
+    });
+
+
+    function updateButtonText(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+        $('#search_form').submit();
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
+function setSortByParam(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
 (function($) {
     "use strict";
     $(document).ready(function () {
+
+       
         const yearRange = $('#yearRange');
         const selectedYear = $('#selectedYear');
         const form = $('#search_form');
@@ -470,6 +642,20 @@
         // Check if there's a year parameter in the URL on page load
         const urlParams = new URLSearchParams(window.location.search);
         const urlYear = urlParams.get('year');
+        const sortBy = urlParams.get('sort_by'); 
+
+
+        
+        if(sortBy === 'price_low_high') {
+            setSortByParam('price_low_high','Low to High')
+        }
+        if(sortBy === 'price_high_low') {
+            setSortByParam('price_high_low','High to Low')
+        }
+        if(sortBy === 'recent') {
+            setSortByParam('recent','Recently Added')
+        }
+
         if (urlYear) {
             yearRange.val(urlYear);
             selectedYear.text(urlYear);
@@ -496,15 +682,30 @@
            
         }) 
 
+        $("#start").on('input',function(e){
+            $("#age_output").val(parseInt($(this).val()))
+            $("#start_year").val(parseInt($(this).val()));
+            // form.submit();
+        })
+
 
         $("#brand_new_cars").on('change',function(e){
             e.preventDefault();
-            // if ($(this).is(':checked')) {
                 form.submit();
-            // }
+        })
+
+        form.on('submit',function(){
+            document.getElementById("pageLoader").style.display = "flex";
         })
     });
 })(jQuery);
+
+
+window.addEventListener("load", function() {
+      document.getElementById("pageLoader").classList.add("hidden");
+    });
+
+
 </script>   <!------- Range ------->
 <!-- <script> -->
         

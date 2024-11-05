@@ -20,7 +20,8 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO
     Route::get('companies',[ImportsController::class,'companies'])->name('companies');
     Route::post('store-company',[ImportsController::class,'storeCompany'])->name('store-company');
     Route::get('imported-list',[ImportsController::class,'commission'])->name('commission');
-    Route::post('imported/store',[ImportsController::class,'commissionStore'])->name('commission.store');
+    Route::post('store-car-comission',[ImportsController::class,'commissionStore'])->name('store-car-comission');
+    Route::post('store-all-comission',[ImportsController::class,'storeAllComission'])->name('store-all-comission');
     Route::post('import/bulk-delete',[ImportsController::class,'bulkDelete'])->name('import.bulk-delete');
     Route::post('change_top_sell',[ImportsController::class,'TopSale'])->name('change_top_sell');
     Route::post('change_new_arrivals',[ImportsController::class,'NewArrival'])->name('change_new_arrivals');

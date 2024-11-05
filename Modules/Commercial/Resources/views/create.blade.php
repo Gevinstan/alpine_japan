@@ -5,7 +5,7 @@
 
 @section('body-header') 
     <h3 class="crancy-header__title m-0">{{ __('translate.Create Commercial') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Commercial') }} >> {{ __('translate.Create Commercial') }}</p>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Commercial') }} >> {{ __('translate.Create Commercial') }}</p></a>
 @endsection
 
 @section('body-content')
@@ -114,7 +114,7 @@
                                                 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Chassis number') }} * </label>
+                                                        <label class="crancy__item-label">{{ __('translate.Chassis number') }}  </label>
                                                         <input class="crancy__item-input" type="text" name="chassis_number" id="chassis_number">
                                                         @error('chassis_number')
                                                             <div style="color: red;">{{ $message }}</div>
@@ -174,7 +174,7 @@
                                                 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Fuel') }} * </label>
+                                                        <label class="crancy__item-label">{{ __('translate.Fuel') }}  </label>
                                                         <input class="crancy__item-input" type="text" name="fuel" id="fuel">
                                                         @error('fuel')
                                                             <div style="color: red;">{{ $message }}</div>
@@ -210,7 +210,7 @@
                                                 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Price($)') }} * </label>
+                                                        <label class="crancy__item-label">{{ __('translate.Price($)') }} </label>
                                                         <input class="crancy__item-input" type="text" name="price_dollar" id="price_dollar">
                                                         @error('price_dollar')
                                                             <div style="color: red;">{{ $message }}</div>
@@ -240,7 +240,7 @@
                                                
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Remarks') }} * </label>
+                                                        <label class="crancy__item-label">{{ __('translate.Remarks') }}  </label>
                                                         <textarea name="remarks" id="remarks" class='crancy__item-input'></textarea>
                                                         @error('remarks')
                                                             <div style="color: red;">{{ $message }}</div>
@@ -249,7 +249,7 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Sell Points') }} * </label>
+                                                        <label class="crancy__item-label">{{ __('translate.Sell Points') }}  </label>
                                                         <textarea name="sell_points" id="sell_points" class='crancy__item-input'></textarea>
                                                         @error('sell_points')
                                                             <div style="color: red;">{{ $message }}</div>

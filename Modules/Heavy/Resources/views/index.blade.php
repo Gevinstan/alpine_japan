@@ -5,7 +5,7 @@
 
 @section('body-header')
     <h3 class="crancy-header__title m-0">{{ __('translate.Heavy Stock List') }}</h3>
-    <p class="crancy-header__text">{{ __('translate.Heavy') }} >> {{ __('translate.Heavy Stock List') }}</p>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Heavy') }} >> {{ __('translate.Heavy Stock List') }}</p></a>
 @endsection
 
 @section('body-content')
@@ -43,9 +43,9 @@
                                 </div>
 
                                 <!-- crancy Table -->
-                                <div id="crancy-table__main_wrapper" class=" dt-bootstrap5 no-footer">
+                                <div id="crancy-table__main_wrapper" class="no-footer">
 
-                                    <table class="crancy-table__main crancy-table__main-v3 no-footer" id="dataTable">
+                                    <table class="crancy-table__main-v3 no-footer" id="dataTable">
                                         <!-- crancy Table Head -->
                                         <thead class="crancy-table__head">
                                             <tr>
@@ -118,7 +118,7 @@
                                                         <h4 class="crancy-table__product-title">{{ $commerical->commission_value }}</h4>
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                    <img src="{{ asset('heavy/' . $commerical->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
+                                                    <img src="{{ asset('Cars/'. $commerical->image) }}"  width="100" height="100" alt="Product Image" class="common-image">
                                                     </td>
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                         @if ($commerical->is_active == '1')
@@ -263,25 +263,13 @@
             const selectedIds = Array.from(rowCheckboxes)
                 .filter(checkbox => checkbox.checked)
                 .map(checkbox => checkbox.getAttribute('data-id'));  
-                    
-            $.ajax({
-                url: "{{route('admin.store-heavy-comission')}}",
-                type: "POST", // Use POST for this AJAX call
-                data: {
-                    selectedIds: selectedIds,
-                    commission: $("#commission").val(),
-                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-                },
-                success: function(response) {
-                    if(response.success == true) {
-                        toastr.success("Success", response.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                    toastr.error("Error", "An error occurred while processing your request.");
+                if($("#masterCheckbox").is(':checked')){
+                    updateAllCommission();
+                } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                    updateSelectedComission(selectedIds);
+                } else {
+                    toastr.error("Error", "Please check the Checkbox.");
                 }
-            });
         });
 
 
@@ -307,10 +295,73 @@
             });
         });
 
+        $('.td-checkbox-class').on('change',function(){
+                if ($("#masterCheckbox").is(':checked')) {
+                    $("#masterCheckbox").prop('checked',false);
+                    rowCheckboxes.forEach(function(checkbox) {
+                            checkbox.checked = false; // Uncheck each row checkbox
+                    });
+
+                }   
+            })
 });
 
         
+function updateAllCommission(){
+    swal({
+            title: "Are you sure?",
+            text: "This will Change All commission value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{route('admin.store-all-heavy-comission')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        commission: $("#commission").val(),
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+   
+}
 
+function updateSelectedComission(selectedIds){
+     $.ajax({
+            url: "{{route('admin.store-heavy-comission')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#commission").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+}
 
     </script>
 @endpush

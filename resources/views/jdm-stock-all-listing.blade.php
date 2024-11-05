@@ -51,13 +51,14 @@
                         <div class="col-md-8">
                             <div class="inventory-details-slick-for">
                                     <div class="inventory-details-slick-img">
-                                        @if(file_exists(public_path('cars/' . $car->image)))
+                                    <img src="{{ asset('Cars/' . $car->image) }}" alt="thumb">
+                                       {{-- @if(file_exists(public_path('cars/' . $car->image)))
                                             <img src="{{ asset('Cars/' . $car->image) }}" alt="thumb">
                                         @elseif(file_exists(public_path('Heavy/' .$car->image)))
                                             <img src="{{ asset('Heavy/' . $car->id . '/' . $car->image) }}" alt="thumb">
                                         @else 
                                             <img src="{{ asset('Small-Heavy/' . $car->id . '/' . $car->image) }}" alt="thumb">
-                                        @endif
+                                        @endif --}}
                                     </div>
                             </div>
                         </div>
@@ -172,8 +173,10 @@
                                                 <input type="hidden" name="commission" value="" id="hidden_commission">
                                                 <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
                                                 <input type="hidden" name="total_car_price" value="" id="hidden_total">
-                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
-                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->make}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model}}">
+                                                <input type="hidden" name="url_link" value="{{$car->url_link}}">
+
 
                                                 @if($google_recaptcha->status==1)
                                                     <div class="auto-sales-form-item">
@@ -528,129 +531,9 @@
                     </div>
 
 
-                <!---------- Assessories  ----------->
-                    <div class="accordion aos-init aos-animate" id="accordionPanelsStayOpenExample2" data-aos="fade-up"
-                    data-aos-delay="200">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingthree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true" aria-controls="panelsStayOpen-collapsethree">
-                                    {{ __('Assessories') }}
-                                </button>
-                            </h2>
-
-                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingthree">
-                                <div class="accordion-body">
-                                    <div class="feature-list">
-                                        <ul>
-                                            <li>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                            </li>
-
-                                            <li>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                            </li>
-
-                                            <li>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">ABS equipped</button>
-                                               
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                            </li>
-
-                                            <li>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                                <button type="button" class="btn btn-light">ABS equipped</button>
-                                                <button type="button" class="btn btn-light">Corner sensor equipped</button>
-                                            </li>
-
-                                            <li>
-                                
-                                                <button type="button" style="background-color: #038ffc;"     class="btn btn-light">ABS equipped</button>
-                                                <button type="button" style="background-color: #038ffc;" class="btn btn-light">Corner sensor equipped</button>
-                                            </li>
-                                            
-                                         
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 
-                <!-- Description Overview  -->
-                    <div class="accordion" id="accordionPanelsStayOpenExample" data-aos="fade-up"
-                    data-aos-delay="100">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapseOne">
-                                    {{ __('translate.Description Overview') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                                    {!! clean(html_decode(isset($car->description) ? $car->description : '' )) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 
-                <!-- Video -->
-                    <div class="accordion" id="accordionPanelsStayOpenExample3" data-aos="fade-up"
-                    data-aos-delay="250">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingfour">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapsefour">
-                                    {{ __('translate.Video') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show"
-                                aria-labelledby="panelsStayOpen-headingfour">
-                                <div class="accordion-body">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aperiam amet voluptate iure 
-                                        laudantium molestias quo voluptatum facilis, architecto aspernatur nihil ratione rem eum 
-                                        quas reiciendis sequi suscipit similique saepe.</p>
-                                    <span class="inventory-details-vedio w-100 position-relative">
-                                    <img src="{{ asset(isset($car->video_image) ? $car->video_image : '' ) }}" alt="img" class="img-fluid w-100 h100">
-                                    <span class="overlay position-absolute w-100 h-100" style="top: 0; left: 0;">
-                                        <a class="my-video-links d-flex align-items-center justify-content-center w-100 h-100" 
-                                        data-autoplay="true" data-vbtype="video"
-                                        href="https://youtu.be/{{ isset($car->video_id) ? $car->video_id : '' }}">
-                                            <svg width="160" height="80" viewBox="0 0 80 80" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M40 76.0001C59.8822 76.0001 76.0001 59.8827 76.0001 40C76.0001 20.1178 59.8827 3.99992 40 3.99992C20.1178 3.99992 3.99992 20.1178 3.99992 40C3.99992 59.8822 20.1178 76.0001 40 76.0001ZM40 80C62.0911 80 80 62.0911 80 40C80 17.9084 62.0911 0 40 0C17.9084 0 0 17.9084 0 40C0 62.0911 17.9084 80 40 80Z"/>
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M50.3927 40.0003L31.9984 27.7375V52.2634L50.3927 40.0003ZM54.1089 37.6706C55.7716 38.7791 55.7716 41.2219 54.1089 42.3303L32.3513 56.8357C30.4906 58.0763 27.998 56.742 27.998 54.5057V25.4953C27.998 23.259 30.4906 21.9251 32.3513 23.1657L54.1089 37.6706Z"/>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </span>
-                                </div>    
-                            </div>
-                        </div>
-                    </div>
-
+               
                     <!------- Image ------->
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-details-thumb" data-aos="fade-up" data-aos-delay="50">
