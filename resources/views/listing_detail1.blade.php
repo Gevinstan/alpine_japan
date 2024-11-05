@@ -7,153 +7,219 @@
 
 @section('body-content')
 
-<main>
-    <!-- banner-part-start  -->
-
-    <section class="inner-banner">
-    <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-        <div class="container">
-        <div class="col-lg-12">
-            <div class="inner-banner-df">
-                <h1 class="inner-banner-taitel">{{ __('translate.Car Details') }}</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Details') }}</li>
-                    </ol>
-                </nav>
-            </div>
-            </div>
-        </div>
-    </section>
-    <!-- banner-part-end -->
-
-
+<main class="bg-light-grey">
 
     <!-- Inventory Details-part-start -->
 
 
-    <section class="inventory-details py-120px">
+    <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">
         <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                </ol>
+            </nav>
             <div class="row">
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
-                        <div class="col-lg-9 col-sm-6 col-md-12">
-                            <div class="inventory-details-top-taitel">
-                                <h5>{{ __('translate.Brand') }} : {{ $car?->brand?->name }}</h5>
-                                <span></span>
-                                <h5>{{ __('translate.Views') }} : {{ $car->total_view }}</h5>
-                            </div>
-
-
-                            <h2 class="inventory-details-taitel">{{ html_decode($car->title) }}</h2>
-
-
-                        </div>
-
-                        <div class="col-lg-3  col-sm-6 col-md-12">
-
-
-                            <div class="inventory-details-right-btn two">
-                                <a href="javascript:;" class="price-btn">
-                                    @if ($car->offer_price)
-                                        {{ currency($car->offer_price) }}
-                                    @else
-                                        {{ currency($car->regular_price) }}
-                                    @endif
-                                </a>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-
-
-
-
-                        <div class="inventory-details-slick-for">
-
-
-
-                            @foreach ($galleries as $gallery)
+                        <div class="inventory-details-slick-for m-0">
+                            {{--@foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
-
-                                        <div class="inventory-details-slick-img-tag">
+                                    <div class="inventory-details-slick-img-tag">
                                         <div class="icon-main">
-
                                             <a href="javascript:;" class="icon before_auth_wishlist">
-                                            <span>
-                                            <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z" stroke-width="1.3" stroke-linejoin="round"></path>
-                                            </svg>
-
-                                            </span>
+                                                <span>
+                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z" stroke-width="1.3" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
                                             </a>
 
 
                                             <a href="http://localhost/carbaz/add-to-compare/13" class="icon">
-                                            <span>
-                                            <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                            </span>
+                                                <span>
+                                                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                        <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </span>
                                             </a>
-                                            </div>
                                         </div>
-
-
+                                    </div>
                                     <img src="{{ asset($gallery->image) }}" alt="img">
                                 </div>
-                            @endforeach
+                            @endforeach--}}
                         </div>
-
 
                         <div class="inventory-details-slick-nav">
                             @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
-                                    <img src="{{ asset($gallery->image) }}" alt="img">
                                 </div>
                             @endforeach
                         </div>
                     </div>
 
 
-                    @if ($listing_ads->status == 'enable')
+                    {{-- @if ($listing_ads->status == 'enable')
                         <div class="inventory-details-thumb" data-aos="fade-up" data-aos-delay="50">
                             <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
                         </div>
-                    @endif
+                    @endif --}}
 
 
-                    <!-- Description Overview  -->
-                    <div class="accordion" id="accordionPanelsStayOpenExample" data-aos="fade-up"
-                    data-aos-delay="100">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapseOne">
-                                    {{ __('translate.Description Overview') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                                    {!! clean(html_decode($car->description)) !!}
+                  
+                    {{-- @if ($reviews->count() > 0)
+                        <!-- Write Your Review -->
+                        <div class="accordion aos-init aos-animate" id="accordionPanelsStayOpenExample5" data-aos="fade-up"
+                        data-aos-delay="350">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingsix">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="false" aria-controls="panelsStayOpen-collapsesix">
+                                        {{ __('translate.Car Reviews') }}
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingsix">
+                                    <div class="accordion-body">
+
+                                        @foreach ($reviews as $review)
+                                            <div class="reviews">
+                                                <div class="reviews-item">
+
+                                                    <ul class="icon">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($review->rating < $i)
+                                                            <li><span><i class="fa-regular fa-star"></i></span></li>
+                                                            @else
+                                                            <li><span><i class="fa-solid fa-star"></i></span></li>
+                                                            @endif
+                                                        @endfor
+                                                    </ul>
+
+                                                    <div class="text">
+                                                        <h6>{{ $review->created_at->format('M d Y') }}</h6>
+                                                    </div>
+                                                </div>
+
+                                                <p>
+                                                    {{ html_decode($review->comment) }}
+                                                </p>
+
+                                                <div class="reviews-inner">
+                                                    <div class="reviews-inner-item">
+                                                        <div class="reviews-inner-img">
+                                                            <img src="{{ asset($review?->user?->image) }}" alt="img">
+                                                        </div>
+
+                                                        <div class="reviews-inner-text">
+                                                            <h3>{{ html_decode($review?->user?->name) }}</h3>
+                                                            <p>{{ html_decode($review?->user?->designation) }}</p>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+                                        @endforeach
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    @endif --}}
+
+                
+
+
+                </div>
+
+                <div class="col-lg-4 col-md-5">
+                    <div class="p-sticky">
+                    <div class="auto-sales-item form-section">
+                        <div class="d-flex flex-column gap-2 car-listing-details">
+                            <p class="brand-text fw-bolder">Volvo</p>
+                            <h3>2019 volvo Camry Hybrid</h3>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="amount-text">Price <span class="price-text"> $29200</span></p>
+                                <p class="amount-text">Commission <span class="commission-text"> $1500</span></p>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="dropdown location-dropdown w-100">
+                                    <button class="d-flex justify-content-between align-items-center btn w-100 btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Location
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>
+                                <div class="w-100">
+                                    <button class="btn w-100 bg-white charge-btn" type="button">
+                                        Delivery Charge
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                            <button class="w-100 cal-btn">CALCULATE TOTAL PRICE</button>
+                            <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+
+                        </div>
+                            
+
+
+
+                            <form method="POST" action="">
+                                @csrf
+                                <div class="auto-sales-form">
+
+                                    <div class="auto-sales-form-item">
+                                        <input type="text" class="form-control" id="exampleFormControlInput3"
+                                            placeholder="{{ __('translate.Name') }} *" name="name" value="{{ old('name') }}">
+                                    </div>
+                                    <div class="auto-sales-form-item">
+                                        <input type="email" class="form-control" id="exampleFormControlInput4"
+                                            placeholder="{{ __('translate.Email') }} *" name="email" value="{{ old('email') }}">
+                                    </div>
+
+                                    <div class="auto-sales-form-item">
+                                        <input type="text" class="form-control" id="exampleFormControlInput5"
+                                            placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
+                                    </div>
+
+                                    <div class="auto-sales-form-item">
+                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
+                                            placeholder="{{ __('translate.Subject') }} *" value="{{ old('subject') }}" name="subject">
+                                    </div>
+
+                                    <div class="auto-sales-form-item">
+                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
+                                            placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
+                                    </div>
+
+                                    @if($google_recaptcha->status==1)
+                                        <div class="auto-sales-form-item">
+                                            <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
+                                        </div>
+                                    @endif
+
+                                    <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+
                     </div>
-
-
-
-
-                    <!-- Description Overview  -->
-                    <div class="accordion" id="accordionPanelsStayOpenExample1" data-aos="fade-up"
-                    data-aos-delay="150">
+                </div>
+            </div>
+            <div class="row">
+                <!-- Car Specifications Start  -->
+                <div class="col-sm-12">
+                    <div class="accordion" id="accordionPanelsStayOpenExample1" data-aos="fade-up" data-aos-delay="150">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -482,42 +548,58 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- Car Specifications End  -->
 
-
-
-                    <div class="accordion aos-init aos-animate" id="accordionPanelsStayOpenExample2" data-aos="fade-up"
-                    data-aos-delay="200">
+                <!-- Accessories Start -->
+                <div class="col-sm-12">
+                    <div class="accordion" id="accordionPanelsStayOpenExample4" data-aos="fade-up" data-aos-delay="300">
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingthree">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true" aria-controls="panelsStayOpen-collapsethree">
-                                    {{ __('translate.Features') }}
+                            <h2 class="accordion-header" id="panelsStayOpen-headingfive">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapsefive">
+                                    Accessories
                                 </button>
                             </h2>
-
-                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingthree">
+                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
                                 <div class="accordion-body">
-                                    <div class="feature-list">
-                                        <ul>
-                                            @foreach ($car_features as $index => $car_feature)
-                                                <li>
-                                                    <span>
-                                                        <i class="fa-solid fa-check"></i>
-                                                    </span>
-                                                    {{ $car_feature->name }}
-                                                </li>
-                                            @endforeach
-                                        </ul>
+                                    <div class="py-2 d-flex gap-3 flex-wrap">
+                                        <span class="accessories-text px-3 h-100">ABS equipped</span>
+                                        <span class="accessories-hide-text px-3">ABS equipped</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- Accessories End -->
 
+                <!-- Description Overview Start -->
+                <div class="col-sm-12">
+                    <div class="accordion" id="accordionPanelsStayOpenExample" data-aos="fade-up" data-aos-delay="100">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseOne">
+                                    {{ __('translate.Description Overview') }}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body">
+                                    {!! clean(html_decode($car->description)) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Description Overview End -->
 
-
-                    <!-- Video -->
-                    <div class="accordion" id="accordionPanelsStayOpenExample3" data-aos="fade-up"
-                    data-aos-delay="250">
+                <!-- Video Section Start -->
+                <div class="col-sm-12">
+                    <div class="accordion" id="accordionPanelsStayOpenExample3" data-aos="fade-up" data-aos-delay="250">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingfour">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -533,7 +615,7 @@
 
 
 
-                                    <span class="inventory-details-vedio">
+                                    <span class="inventory-details-vedio w-100">
                                         <img src="{{ asset($car->video_image) }}" alt="img">
 
                                         <span class="overlay">
@@ -555,598 +637,182 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-                    <!-- Locations -->
-                    <div class="accordion" id="accordionPanelsStayOpenExample4" data-aos="fade-up"
-                    data-aos-delay="300">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingfive">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapsefive">
-                                    {{ __('translate.Locations') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
-                                aria-labelledby="panelsStayOpen-headingfive">
-                                <div class="accordion-body">
-                                    <ul class="locations">
-                                        <li>
-                                            <a href="javascript:;">
-                                                <span>
-                                                    <svg width="18" height="22" viewBox="0 0 18 22" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M2.55 20.25C2.13579 20.25 1.8 20.5858 1.8 21C1.8 21.4142 2.13579 21.75 2.55 21.75V20.25ZM14.95 21.75C15.3642 21.75 15.7 21.4142 15.7 21C15.7 20.5858 15.3642 20.25 14.95 20.25V21.75ZM15.75 8.5C15.75 10.1981 14.6274 12.4022 13.0703 14.2376C12.3055 15.139 11.4701 15.9098 10.6819 16.4488C9.87165 17.0029 9.2019 17.25 8.75 17.25V18.75C9.65435 18.75 10.6315 18.3005 11.5286 17.687C12.4479 17.0584 13.3804 16.1906 14.2141 15.208C15.8538 13.2752 17.25 10.7292 17.25 8.5H15.75ZM8.75 17.25C8.31285 17.25 7.64989 16.992 6.83557 16.4004C6.0463 15.8269 5.20886 15.0085 4.44153 14.0574C2.8796 12.1213 1.75 9.81691 1.75 8.11111H0.25C0.25 10.3327 1.63915 12.9727 3.27409 14.9992C4.1052 16.0294 5.03573 16.9468 5.95389 17.6139C6.84698 18.2628 7.8309 18.75 8.75 18.75V17.25ZM1.75 8.11111C1.75 4.5023 5.07541 1.75 8.75 1.75V0.25C4.43487 0.25 0.25 3.4977 0.25 8.11111H1.75ZM8.75 1.75C12.3966 1.75 15.75 4.47727 15.75 8.5H17.25C17.25 3.52273 13.0931 0.25 8.75 0.25V1.75ZM11.1 8C11.1 9.21965 10.0712 10.25 8.75 10.25V11.75C10.8529 11.75 12.6 10.0941 12.6 8H11.1ZM8.75 10.25C7.42876 10.25 6.4 9.21965 6.4 8H4.9C4.9 10.0941 6.64707 11.75 8.75 11.75V10.25ZM6.4 8C6.4 6.78035 7.42876 5.75 8.75 5.75V4.25C6.64707 4.25 4.9 5.90594 4.9 8H6.4ZM8.75 5.75C10.0712 5.75 11.1 6.78035 11.1 8H12.6C12.6 5.90594 10.8529 4.25 8.75 4.25V5.75ZM2.55 21.75H14.95V20.25H2.55V21.75Z" />
-                                                    </svg>
-                                                </span>
-                                                {{ html_decode($car->address) }}
-                                            </a>
-
-
-
-                                            <iframe src="{{ html_decode($car->google_map) }}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-                                        </li>
-
-
-                                    </ul>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    @if ($reviews->count() > 0)
-                        <!-- Write Your Review -->
-                        <div class="accordion aos-init aos-animate" id="accordionPanelsStayOpenExample5" data-aos="fade-up"
-                        data-aos-delay="350">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingsix">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="false" aria-controls="panelsStayOpen-collapsesix">
-                                        {{ __('translate.Car Reviews') }}
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingsix">
-                                    <div class="accordion-body">
-
-                                        @foreach ($reviews as $review)
-                                            <div class="reviews">
-                                                <div class="reviews-item">
-
-                                                    <ul class="icon">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($review->rating < $i)
-                                                            <li><span><i class="fa-regular fa-star"></i></span></li>
-                                                            @else
-                                                            <li><span><i class="fa-solid fa-star"></i></span></li>
-                                                            @endif
-                                                        @endfor
-                                                    </ul>
-
-                                                    <div class="text">
-                                                        <h6>{{ $review->created_at->format('M d Y') }}</h6>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    {{ html_decode($review->comment) }}
-                                                </p>
-
-                                                <div class="reviews-inner">
-                                                    <div class="reviews-inner-item">
-                                                        <div class="reviews-inner-img">
-                                                            <img src="{{ asset($review?->user?->image) }}" alt="img">
-                                                        </div>
-
-                                                        <div class="reviews-inner-text">
-                                                            <h3>{{ html_decode($review?->user?->name) }}</h3>
-                                                            <p>{{ html_decode($review?->user?->designation) }}</p>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-
-
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <div class="accordion aos-init aos-animate" id="accordionPanelsStayOpenExample6" data-aos="fade-up"
-                    data-aos-delay="400">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingseven">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseseven" aria-expanded="true" aria-controls="panelsStayOpen-collapseseven">
-                                    {{ __('translate.Write Your Review') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseseven" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingseven">
-                                <div class="accordion-body">
-
-                                    <div class="write-your-review-item">
-                                        <div class="write-your-review-stars">
-                                            <ul class="icon">
-                                                <li><i onclick="carReview(1)" data-rating="1" class="car_rat fa-solid fa-star"></i></li>
-                                                <li><i onclick="carReview(2)" data-rating="2" class="car_rat fa-solid fa-star"></i></li>
-                                                <li><i onclick="carReview(3)" data-rating="3" class="car_rat fa-solid fa-star"></i></li>
-                                                <li><i onclick="carReview(4)" data-rating="4" class="car_rat fa-solid fa-star"></i></li>
-                                                <li><i onclick="carReview(5)" data-rating="5" class="car_rat fa-solid fa-star"></i></li>
-
-                                            </ul>
-                                            <span>(5.0)</span>
-                                        </div>
-
-                                        <form method="POST" action="{{ route('user.store-review') }}">
-
-                                            @csrf
-
-                                            <input type="hidden" name="agent_id" value="{{ $car->agent_id }}">
-                                            <input type="hidden" name="car_id" value="{{ $car->id }}">
-                                            <input type="hidden" id="car_rating" name="rating" value="5">
-
-                                            <div class="form-item">
-                                                <div class="form-inner">
-                                                    <label class="form-label">{{ __('translate.Review') }} <span>*</span> </label>
-                                                    <textarea name="comment" class="form-control" id="review" rows="5" placeholder="{{ __('translate.Write here') }}"></textarea>
-                                                </div>
-
-                                            </div>
-
-                                            @if($google_recaptcha->status==1)
-                                                <div class="form-item">
-                                                    <div class="form-inner">
-                                                        <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
-                                                    </div>
-
-                                                </div>
-                                            @endif
-
-                                            <button type="submit" class="thm-btn-two">{{ __('translate.Submit Review') }}</button>
-
-                                        </form>
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
                 </div>
+                <!-- Video Section End -->
 
-                <div class="col-lg-4 col-md-5">
-                    <div class="p-sticky">
-                    <div class="auto-sales-item">
-
-                        <div class="auto-sales-item-inner">
-
-                        <div class="auto-sales-logo">
-                                <a href="{{ route('dealer', $dealer->username) }}"><img src="{{ asset($dealer->image) }}" alt="logo"></a>
-                            </div>
-
-                            <div class="auto-sales-text-item">
-                                <div class="auto-sales-text-left">
-                                    <h3>{{ html_decode($dealer->name) }}
-                                        @php
-                                            $kyc = Modules\Kyc\Entities\KycInformation::where('user_id',$dealer->id)->where('status',1)->first();
-                                        @endphp
-                                        @if($kyc)
-                                            <span  class="varified-badge">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.007 2.10377C8.60544 1.65006 7.08181 2.28116 6.41156 3.59306L5.60578 5.17023C5.51004 5.35763 5.35763 5.51004 5.17023 5.60578L3.59306 6.41156C2.28116 7.08181 1.65006 8.60544 2.10377 10.007L2.64923 11.692C2.71404 11.8922 2.71404 12.1078 2.64923 12.308L2.10377 13.993C1.65006 15.3946 2.28116 16.9182 3.59306 17.5885L5.17023 18.3942C5.35763 18.49 5.51004 18.6424 5.60578 18.8298L6.41156 20.407C7.08181 21.7189 8.60544 22.35 10.007 21.8963L11.692 21.3508C11.8922 21.286 12.1078 21.286 12.308 21.3508L13.993 21.8963C15.3946 22.35 16.9182 21.7189 17.5885 20.407L18.3942 18.8298C18.49 18.6424 18.6424 18.49 18.8298 18.3942L20.407 17.5885C21.7189 16.9182 22.35 15.3946 21.8963 13.993L21.3508 12.308C21.286 12.1078 21.286 11.8922 21.3508 11.692L21.8963 10.007C22.35 8.60544 21.7189 7.08181 20.407 6.41156L18.8298 5.60578C18.6424 5.51004 18.49 5.35763 18.3942 5.17023L17.5885 3.59306C16.9182 2.28116 15.3946 1.65006 13.993 2.10377L12.308 2.64923C12.1078 2.71403 11.8922 2.71404 11.692 2.64923L10.007 2.10377ZM6.75977 11.7573L8.17399 10.343L11.0024 13.1715L16.6593 7.51465L18.0735 8.92886L11.0024 15.9999L6.75977 11.7573Z">
-
-                                                </path>
-                                                </svg>
-                                            </span>
-                                        @endif
-                                    </h3>
-                                    <p>{{ __('translate.Member Since') }} {{ $dealer->created_at->format('F Y') }} </p>
-                                </div>
-                                <div class="auto-sales-text-right">
-                                    <h6>{{ __('translate.Total Cars') }} {{ $dealer->total_car }}</h6>
-                                    <p>
-                                        <span>
-                                            <svg width="53" height="11" viewBox="0 0 53 11" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M5.3 0L6.48992 3.80041H10.3406L7.22534 6.14919L8.41526 9.94959L5.3 7.60081L2.18474 9.94959L3.37466 6.14919L0.2594 3.80041H4.11007L5.3 0Z" />
-                                                <path
-                                                    d="M15.8996 0L17.0895 3.80041H20.9402L17.8249 6.14919L19.0149 9.94959L15.8996 7.60081L12.7843 9.94959L13.9743 6.14919L10.859 3.80041H14.7097L15.8996 0Z" />
-                                                <path
-                                                    d="M26.4992 0L27.6891 3.80041H31.5398L28.4246 6.14919L29.6145 9.94959L26.4992 7.60081L23.384 9.94959L24.5739 6.14919L21.4586 3.80041H25.3093L26.4992 0Z" />
-                                                <path
-                                                    d="M37.1008 0L38.2907 3.80041H42.1414L39.0261 6.14919L40.216 9.94959L37.1008 7.60081L33.9855 9.94959L35.1754 6.14919L32.0602 3.80041H35.9109L37.1008 0Z" />
-                                                <path
-                                                    d="M47.7004 0L48.8903 3.80041H52.741L49.6257 6.14919L50.8157 9.94959L47.7004 7.60081L44.5851 9.94959L45.7751 6.14919L42.6598 3.80041H46.5105L47.7004 0Z" />
-                                            </svg>
-                                        </span>
-                                        ({{ $total_dealer_rating }})
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="auto-sales-contact">
-                                <ul>
-                                    <li>
-                                        <a href="tel:{{ html_decode($dealer->phone) }}">
-                                            <span>
-                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M13 14L12.8529 14.7354C13.1846 14.8018 13.5196 14.6379 13.6708 14.3354L13 14ZM6 7L5.66459 6.32918C5.36208 6.48043 5.19824 6.81544 5.26456 7.14709L6 7ZM6.35402 6.82299L6.68943 7.49381L6.68943 7.49381L6.35402 6.82299ZM7.31654 4.29136L8.0129 4.01281L7.31654 4.29136ZM6.50289 2.25722L5.80653 2.53576L6.50289 2.25722ZM17.7428 13.4971L17.4642 14.1935L17.7428 13.4971ZM15.7086 12.6835L15.9872 11.9871H15.9872L15.7086 12.6835ZM13.177 13.646L13.8478 13.9814V13.9814L13.177 13.646ZM14.25 9C14.25 9.41421 14.5858 9.75 15 9.75C15.4142 9.75 15.75 9.41421 15.75 9H14.25ZM14.6955 7.46927L15.3884 7.18225L14.6955 7.46927ZM12.5307 5.30448L12.8177 4.61157L12.5307 5.30448ZM11 4.25C10.5858 4.25 10.25 4.58579 10.25 5C10.25 5.41421 10.5858 5.75 11 5.75V4.25ZM18.25 9C18.25 9.41421 18.5858 9.75 19 9.75C19.4142 9.75 19.75 9.41421 19.75 9H18.25ZM18.391 5.93853L19.0839 5.65152L18.391 5.93853ZM14.0615 1.60896L14.3485 0.916054V0.916054L14.0615 1.60896ZM11 0.25C10.5858 0.25 10.25 0.585786 10.25 1C10.25 1.41421 10.5858 1.75 11 1.75V0.25ZM18.25 15.3541V17H19.75V15.3541H18.25ZM3 1.75H4.64593V0.25H3V1.75ZM13 14C13.1471 13.2646 13.1473 13.2646 13.1475 13.2646C13.1476 13.2647 13.1477 13.2647 13.1479 13.2647C13.1481 13.2648 13.1483 13.2648 13.1484 13.2648C13.1487 13.2649 13.1488 13.2649 13.1488 13.2649C13.1488 13.2649 13.1482 13.2648 13.147 13.2645C13.1447 13.264 13.14 13.2631 13.1331 13.2615C13.1193 13.2585 13.0967 13.2533 13.0659 13.2459C13.0044 13.2309 12.9104 13.2066 12.7898 13.1711C12.5482 13.1 12.2016 12.9847 11.7954 12.8106C10.9796 12.461 9.94391 11.8833 9.03033 10.9697L7.96967 12.0303C9.05609 13.1167 10.2704 13.789 11.2046 14.1894C11.6734 14.3903 12.0768 14.525 12.3665 14.6101C12.5115 14.6528 12.6285 14.6832 12.7114 14.7034C12.7529 14.7135 12.7859 14.721 12.8097 14.7263C12.8217 14.7289 12.8313 14.7309 12.8385 14.7325C12.8421 14.7332 12.8451 14.7339 12.8475 14.7343C12.8487 14.7346 12.8498 14.7348 12.8507 14.735C12.8511 14.7351 12.8515 14.7352 12.8519 14.7352C12.8521 14.7353 12.8523 14.7353 12.8524 14.7353C12.8527 14.7354 12.8529 14.7354 13 14ZM9.03033 10.9697C8.11675 10.0561 7.53901 9.02042 7.18936 8.20456C7.01527 7.79836 6.89996 7.45184 6.8289 7.21025C6.79342 7.08962 6.76912 6.99565 6.75414 6.93406C6.74666 6.90329 6.74151 6.88065 6.73847 6.86687C6.73695 6.85999 6.73595 6.85532 6.73546 6.85296C6.73521 6.85178 6.73509 6.85118 6.73508 6.85117C6.73508 6.85116 6.73511 6.8513 6.73517 6.85159C6.7352 6.85174 6.73524 6.85192 6.73528 6.85214C6.7353 6.85225 6.73534 6.85244 6.73535 6.8525C6.73539 6.8527 6.73544 6.85291 6 7C5.26456 7.14709 5.26461 7.14732 5.26466 7.14756C5.26468 7.14765 5.26473 7.1479 5.26477 7.14809C5.26484 7.14846 5.26492 7.14887 5.26501 7.14932C5.2652 7.15022 5.26541 7.15127 5.26566 7.15247C5.26615 7.15488 5.26677 7.15789 5.26753 7.1615C5.26905 7.16873 5.27111 7.17834 5.27374 7.19026C5.279 7.21408 5.28655 7.2471 5.29664 7.28859C5.31682 7.37154 5.34721 7.48851 5.38985 7.6335C5.47504 7.92316 5.60973 8.32664 5.81064 8.79544C6.21099 9.72958 6.88325 10.9439 7.96967 12.0303L9.03033 10.9697ZM6.33541 7.67082L6.68943 7.49381L6.01861 6.15217L5.66459 6.32918L6.33541 7.67082ZM8.0129 4.01281L7.19925 1.97868L5.80653 2.53576L6.62018 4.5699L8.0129 4.01281ZM18.0213 12.8008L15.9872 11.9871L15.4301 13.3798L17.4642 14.1935L18.0213 12.8008ZM12.5062 13.3106L12.3292 13.6646L13.6708 14.3354L13.8478 13.9814L12.5062 13.3106ZM15.9872 11.9871C14.6592 11.4559 13.1458 12.0313 12.5062 13.3106L13.8478 13.9814C14.1386 13.3999 14.8265 13.1384 15.4301 13.3798L15.9872 11.9871ZM6.68943 7.49381C7.96868 6.85419 8.54408 5.34076 8.0129 4.01281L6.62018 4.5699C6.86163 5.17351 6.60008 5.86143 6.01861 6.15217L6.68943 7.49381ZM4.64593 1.75C5.15706 1.75 5.6167 2.06119 5.80653 2.53576L7.19925 1.97868C6.78162 0.934616 5.77042 0.25 4.64593 0.25V1.75ZM19.75 15.3541C19.75 14.2296 19.0654 13.2184 18.0213 12.8008L17.4642 14.1935C17.9388 14.3833 18.25 14.8429 18.25 15.3541H19.75ZM17 18.25C8.57766 18.25 1.75 11.4223 1.75 3H0.25C0.25 12.2508 7.74923 19.75 17 19.75V18.25ZM17 19.75C18.5188 19.75 19.75 18.5188 19.75 17H18.25C18.25 17.6904 17.6904 18.25 17 18.25V19.75ZM1.75 3C1.75 2.30964 2.30964 1.75 3 1.75V0.25C1.48122 0.25 0.25 1.48122 0.25 3H1.75ZM15.75 9C15.75 8.37622 15.6271 7.75855 15.3884 7.18225L14.0026 7.75628C14.1659 8.15059 14.25 8.5732 14.25 9H15.75ZM15.3884 7.18225C15.1497 6.60596 14.7998 6.08232 14.3588 5.64124L13.2981 6.7019C13.5999 7.00369 13.8393 7.36197 14.0026 7.75628L15.3884 7.18225ZM14.3588 5.64124C13.9177 5.20016 13.394 4.85028 12.8177 4.61157L12.2437 5.99739C12.638 6.16072 12.9963 6.40011 13.2981 6.7019L14.3588 5.64124ZM12.8177 4.61157C12.2415 4.37286 11.6238 4.25 11 4.25V5.75C11.4268 5.75 11.8494 5.83406 12.2437 5.99739L12.8177 4.61157ZM19.75 9C19.75 7.85093 19.5237 6.71312 19.0839 5.65152L17.6981 6.22554C18.0625 7.10516 18.25 8.04792 18.25 9H19.75ZM19.0839 5.65152C18.6442 4.58992 17.9997 3.62533 17.1872 2.81282L16.1265 3.87348C16.7997 4.5467 17.3338 5.34593 17.6981 6.22554L19.0839 5.65152ZM17.1872 2.81282C16.3747 2.0003 15.4101 1.35578 14.3485 0.916054L13.7745 2.30187C14.6541 2.66622 15.4533 3.20025 16.1265 3.87348L17.1872 2.81282ZM14.3485 0.916054C13.2869 0.476325 12.1491 0.25 11 0.25V1.75C11.9521 1.75 12.8948 1.93753 13.7745 2.30187L14.3485 0.916054Z" />
-                                                </svg>
-                                            </span>
-
-                                            {{ html_decode($dealer->phone) }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="mailto:{{ html_decode($dealer->email) }}">
-
-                                            <span>
-                                                <svg class="stroke-color" width="24" height="24" viewBox="0 0 24 24"
-                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M2 12V7C2 4.79086 3.79086 3 6 3H18C20.2091 3 22 4.79086 22 7V17C22 19.2091 20.2091 21 18 21H8M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M2 15H8M2 18H8"
-                                                        stroke-width="1.5" stroke-linecap="round" />
-                                                </svg>
-
-                                            </span>
-
-                                            {{ html_decode($dealer->email) }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-
-                                            <span>
-                                                <svg width="18" height="22" viewBox="0 0 18 22" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M3 20.25C2.58579 20.25 2.25 20.5858 2.25 21C2.25 21.4142 2.58579 21.75 3 21.75V20.25ZM15 21.75C15.4142 21.75 15.75 21.4142 15.75 21C15.75 20.5858 15.4142 20.25 15 20.25V21.75ZM15.75 8.5C15.75 10.2065 14.6599 12.4136 13.1547 14.2468C12.4148 15.1481 11.6072 15.9179 10.8465 16.4554C10.0624 17.0094 9.42269 17.25 9 17.25V18.75C9.88982 18.75 10.8438 18.294 11.7121 17.6804C12.6038 17.0504 13.5071 16.1815 14.314 15.1987C15.9026 13.2638 17.25 10.7209 17.25 8.5H15.75ZM9 17.25C8.59247 17.25 7.95947 16.9993 7.171 16.4074C6.409 15.8353 5.59932 15.0178 4.85679 14.0668C3.34675 12.1327 2.25 9.82498 2.25 8.11111H0.75C0.75 10.3246 2.09075 12.9614 3.67446 14.9899C4.4788 16.0201 5.38006 16.9385 6.27041 17.6069C7.13428 18.2555 8.09503 18.75 9 18.75V17.25ZM2.25 8.11111C2.25 4.48059 5.47857 1.75 9 1.75V0.25C4.78944 0.25 0.75 3.51941 0.75 8.11111H2.25ZM9 1.75C12.4938 1.75 15.75 4.45503 15.75 8.5H17.25C17.25 3.54497 13.2382 0.25 9 0.25V1.75ZM11.25 8C11.25 9.24264 10.2426 10.25 9 10.25V11.75C11.0711 11.75 12.75 10.0711 12.75 8H11.25ZM9 10.25C7.75736 10.25 6.75 9.24264 6.75 8H5.25C5.25 10.0711 6.92893 11.75 9 11.75V10.25ZM6.75 8C6.75 6.75736 7.75736 5.75 9 5.75V4.25C6.92893 4.25 5.25 5.92893 5.25 8H6.75ZM9 5.75C10.2426 5.75 11.25 6.75736 11.25 8H12.75C12.75 5.92893 11.0711 4.25 9 4.25V5.75ZM3 21.75H15V20.25H3V21.75Z" />
-                                                </svg>
-
-                                            </span>
-                                            {{ html_decode($dealer->address) }}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-
-
-                            <form method="POST" action="{{ route('send-message-to-dealer', $dealer->id) }}">
-                                @csrf
-                                <div class="auto-sales-form">
-
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInput3"
-                                            placeholder="{{ __('translate.Name') }} *" name="name" value="{{ old('name') }}">
-                                    </div>
-                                    <div class="auto-sales-form-item">
-                                        <input type="email" class="form-control" id="exampleFormControlInput4"
-                                            placeholder="{{ __('translate.Email') }} *" name="email" value="{{ old('email') }}">
-                                    </div>
-
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInput5"
-                                            placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
-                                    </div>
-
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
-                                            placeholder="{{ __('translate.Subject') }} *" value="{{ old('subject') }}" name="subject">
-                                    </div>
-
-                                    <div class="auto-sales-form-item">
-                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
-                                            placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
-                                    </div>
-
-                                    @if($google_recaptcha->status==1)
-                                        <div class="auto-sales-form-item">
-                                            <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
-                                        </div>
-                                    @endif
-
-                                    <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
-                                </div>
-                            </form>
-
-
-
-                        </div>
-
-                        <div class="auto-lone-item">
-                            <h3 class="auto-lone-head">{{ __('translate.Auto Loan Calculator') }}</h3>
-                            <p class="sub-taitel">
-                                {{ __('translate.You can calculate monthly loan amount using this calculator') }}</p>
-
-                            <form>
-
-                                <div class="auto-lone-form">
-                                    <div class="auto-lone-form-item">
-                                        <label for="loan_amount" class="form-label">{{ __('translate.Loan Amount') }}
-                                            <span>*</span></label>
-                                        <input type="text" class="form-control" id="loan_amount"
-                                            placeholder="{{ __('translate.Amount') }}">
-
-                                        <div class="icon">
-                                            <span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="12" cy="12" r="10" stroke="#405FF2" stroke-width="1.5"/>
-                                            <path d="M14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round"/>
-                                            <path d="M12 12C13.1046 12 14 12.8954 14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round"/>
-                                            <path d="M12 6.5V8" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M12 16V17.5" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="auto-lone-form-item">
-                                        <label for="interest_rate" class="form-label">{{ __('translate.Interest Rate') }}
-                                            <span>*</span></label>
-                                        <input type="text" class="form-control" id="interest_rate"
-                                            placeholder="{{ __('translate.Rate') }}">
-
-                                        <div class="icon">
-                                            <span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <circle cx="2" cy="2" r="2" transform="matrix(1 0 0 -1 14 18)" stroke="#405FF2" stroke-width="1.5"/>
-                                            <circle cx="2" cy="2" r="2" transform="matrix(1 0 0 -1 6 10)" stroke="#405FF2" stroke-width="1.5"/>
-                                            <path d="M19 5L4 20" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="auto-lone-form-item">
-                                        <label for="total_year" class="form-label">{{ __('translate.Loan Tern in Year') }}
-                                            <span>*</span></label>
-                                        <input type="text" class="form-control" id="total_year"
-                                            placeholder="{{ __('translate.Year') }}">
-
-                                        <div class="icon">
-                                            <span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 7.5C3 5.29086 4.79086 3.5 7 3.5H17C19.2091 3.5 21 5.29086 21 7.5V18C21 20.2091 19.2091 22 17 22H7C4.79086 22 3 20.2091 3 18V7.5Z" stroke="#405FF2" stroke-width="1.5"/>
-                                            <path d="M3 9H21" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round"/>
-                                            <path d="M8 2L8 5" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <path d="M16 2V5" stroke="#405FF2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                            <circle cx="12" cy="15" r="1" fill="#405FF2"/>
-                                            <circle cx="16" cy="15" r="1" fill="#405FF2"/>
-                                            <circle cx="8" cy="15" r="1" fill="#405FF2"/>
-                                            </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="auto-lone-form-btn">
-                                        <button id="calculate_btn" type="button" class="thm-btn-two">{{ __('translate.Loan Calculate') }}</button>
-                                        <button type="button" class="reset-now-btn" id="reset_btn">
-                                            <span>
-                                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M13 6.50442C13.0022 7.95669 12.5159 9.36769 11.6189 10.5114C10.7219 11.6551 9.46612 12.4653 8.05275 12.8122C6.63938 13.1592 5.15021 13.0227 3.82379 12.4248C2.49738 11.8268 1.41048 10.802 0.737207 9.51444C0.063938 8.22687 -0.156736 6.75109 0.110535 5.32351C0.377807 3.89593 1.11756 2.59917 2.21128 1.64095C3.305 0.68273 4.68941 0.118515 6.14271 0.0386867C7.59602 -0.0411418 9.03413 0.368036 10.2267 1.20067L10.1472 0.970075C10.0859 0.783733 10.1013 0.580728 10.19 0.405719C10.2788 0.23071 10.4335 0.0980331 10.6203 0.0368748C10.807 -0.0242835 11.0105 -0.00891303 11.1859 0.079605C11.3613 0.168123 11.4943 0.322538 11.5555 0.508879L12.2778 2.67073C12.3136 2.7791 12.3231 2.89441 12.3055 3.00716C12.2879 3.11992 12.2438 3.22689 12.1767 3.31929C12.1067 3.41752 12.0133 3.4967 11.9048 3.54957C11.7962 3.60245 11.6762 3.62733 11.5555 3.62195H9.38888C9.19734 3.62195 9.01364 3.54602 8.8782 3.41088C8.74275 3.27574 8.66666 3.09245 8.66666 2.90133C8.66927 2.7488 8.72033 2.60103 8.81248 2.47931C8.90463 2.35758 9.03311 2.26817 9.17944 2.22395C8.22939 1.63148 7.109 1.37068 5.99427 1.4825C4.87954 1.59433 3.83361 2.07244 3.02077 2.84176C2.20793 3.61107 1.67423 4.62799 1.5035 5.73279C1.33276 6.8376 1.53466 7.9677 2.07749 8.94558C2.62032 9.92347 3.47332 10.6937 4.50252 11.1354C5.53171 11.5771 6.67879 11.6651 7.76359 11.3857C8.84838 11.1063 9.80943 10.4753 10.4958 9.59179C11.1821 8.70826 11.5549 7.62228 11.5555 6.50442C11.5555 6.3133 11.6316 6.13 11.7671 5.99486C11.9025 5.85972 12.0862 5.7838 12.2778 5.7838C12.4693 5.7838 12.653 5.85972 12.7885 5.99486C12.9239 6.13 13 6.3133 13 6.50442Z" />
-                                                </svg>
-                                            </span>
-                                            {{ __('translate.Reset Now') }}
-                                        </button>
-                                    </div>
-
-
-                                    <p class="auto-lone-amount">{{ __('translate.Monthly Payment') }}: <span id="monthly_payment">{{ currency(0.00) }}</span></p>
-
-                                </div>
-
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </section>
-
-
-
     <!-- Inventory Details-part-end -->
 
 
 
     <!-- Cars Listing-part-start -->
-    @if ($related_listings->count() > 0)
-        <section class="cars-listing feature-two">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="row feature-taitel align-items-end">
-                            <div class="col-lg-6 col-sm-6 col-md-6">
-                                <div class="taitel two" >
-                                    <div class="taitel-img">
-                                        <span>
-                                        <svg width="100" height="8" viewBox="0 0 100 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1 6.5C14.3957 2.77999 52.7496 -2.53808 99 6.38995" stroke="#405FF2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-
-                                        </span>
+        @if ($related_listings->count() > 0)
+            <section class="cars-listing feature-two mt-3 bg-light-grey">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h2 class="section-heading">Popular <span class="highlight"> Brands<span></h2>
+                                    <div class="categories-three-view-btn">
+                                        <a href="#" class="thm-btn">SEE ALL</a>
                                     </div>
-                                    <span>{{ __('translate.Cars Listing') }}</span>
                                 </div>
-
-                                <h2 >{{ __('translate.Related Car Listings') }}</h2>
                             </div>
 
+                            <div class="row mt-56px  ">
 
-                        </div>
+                                @foreach ($related_listings as $related_car)
+                                    <div class="col-lg-3">
+                                        <div class="brand-car-item">
+                                            <div class="brand-car-item-img">
+                                                <img src="{{ asset($related_car->thumb_image) }}" alt="thumb">
 
-                        <div class="row mt-56px  ">
+                                                <div class="brand-car-item-img-text">
 
-                            @foreach ($related_listings as $related_car)
-                                <div class="col-lg-3">
-                                    <div class="brand-car-item">
-                                        <div class="brand-car-item-img">
-                                            <img src="{{ asset($related_car->thumb_image) }}" alt="thumb">
+                                                    <div class="text-df">
+                                                        @if ($related_car->offer_price)
+                                                            <p class="text">{{ calculate_percentage($related_car->regular_price, $related_car->offer_price) }}% {{ __('translate.Off') }}</p>
+                                                        @endif
 
-                                            <div class="brand-car-item-img-text">
+                                                        @if ($related_car->condition == 'New')
+                                                            <p class="text text-two ">{{ __('translate.New') }}</p>
+                                                        @else
+                                                            <p class="text text-two ">{{ __('translate.Used') }}</p>
+                                                        @endif
+                                                    </div>
 
-                                                <div class="text-df">
-                                                    @if ($related_car->offer_price)
-                                                        <p class="text">{{ calculate_percentage($related_car->regular_price, $related_car->offer_price) }}% {{ __('translate.Off') }}</p>
-                                                    @endif
+                                                    <div class="icon-main">
 
-                                                    @if ($related_car->condition == 'New')
-                                                        <p class="text text-two ">{{ __('translate.New') }}</p>
-                                                    @else
-                                                        <p class="text text-two ">{{ __('translate.Used') }}</p>
-                                                    @endif
-                                                </div>
+                                                        @guest('web')
+                                                            <a  href="javascript:;" class="icon before_auth_wishlist">
+                                                                <span>
+                                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
+                                                                        stroke-width="1.3" stroke-linejoin="round"></path>
+                                                                </svg>
 
-                                                <div class="icon-main">
+                                                                </span>
+                                                            </a>
+                                                        @else
+                                                            <a href="{{ route('user.add-to-wishlist', $related_car->id) }}" class="icon">
+                                                                <span>
+                                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path
+                                                                        d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
+                                                                        stroke-width="1.3" stroke-linejoin="round"></path>
+                                                                </svg>
 
-                                                    @guest('web')
-                                                        <a  href="javascript:;" class="icon before_auth_wishlist">
+                                                                </span>
+                                                            </a>
+
+                                                        @endif
+
+
+                                                        <a href="{{ route('add-to-compare', $related_car->id) }}" class="icon">
                                                             <span>
-                                                                <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                    stroke-width="1.3" stroke-linejoin="round"></path>
-                                                            </svg>
-
+                                                                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1"
+                                                                        stroke-width="1.3" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></path>
+                                                                    <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19"
+                                                                        stroke-width="1.3" stroke-linecap="round"
+                                                                        stroke-linejoin="round"></path>
+                                                                </svg>
                                                             </span>
                                                         </a>
-                                                    @else
-                                                        <a href="{{ route('user.add-to-wishlist', $related_car->id) }}" class="icon">
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                            <div class="brand-car-inner">
+                                                <div class="brand-car-inner-item">
+                                                    <span>{{ $related_car?->brand?->name }}</span>
+                                                    <p>
+                                                        @if ($related_car->offer_price)
+                                                            {{ currency($related_car->offer_price) }}
+                                                        @else
+                                                            {{ currency($related_car->regular_price) }}
+                                                        @endif
+                                                    </p>
+                                                </div>
+
+                                                <a href="{{ route('listing', $related_car->slug) }}">
+                                                    <h3>{{ html_decode($related_car->title) }}</h3>
+                                                </a>
+
+                                                <div class="brand-car-inner-item-main">
+                                                    <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-thumb">
                                                             <span>
-                                                                <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                    stroke-width="1.3" stroke-linejoin="round"></path>
-                                                            </svg>
+                                                                <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    </svg>
 
                                                             </span>
-                                                        </a>
+                                                        </div>
 
-                                                    @endif
-
-
-                                                    <a href="{{ route('add-to-compare', $related_car->id) }}" class="icon">
                                                         <span>
-                                                            <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1"
-                                                                    stroke-width="1.3" stroke-linecap="round"
-                                                                    stroke-linejoin="round"></path>
-                                                                <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19"
-                                                                    stroke-width="1.3" stroke-linecap="round"
-                                                                    stroke-linejoin="round"></path>
-                                                            </svg>
+                                                            {{ html_decode($related_car->mileage) }}
                                                         </span>
-                                                    </a>
+                                                    </div>
+                                                    <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-thumb">
+                                                            <span>
+                                                                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M15.8901 3.09765L14.3901 1.76431C14.2436 1.63409 14.0063 1.63409 13.8598 1.76431C13.7133 1.89453 13.7133 2.10547 13.8598 2.23565L15.0947 3.33331L13.8598 4.43096C13.7895 4.49346 13.75 4.57809 13.75 4.66665V5.66665C13.75 6.40202 14.4227 6.99999 15.25 6.99999V12.6666C15.25 12.8505 15.0819 13 14.875 13C14.6681 13 14.5 12.8506 14.5 12.6666V12C14.5 11.4485 13.9953 11 13.375 11H13V2.33334C13 1.59797 12.3273 1 11.5 1H4.00001C3.17275 1 2.50001 1.59797 2.50001 2.33334V14.3333C1.67275 14.3333 1 14.9313 1 15.6667V16.6667C1 16.8509 1.16773 17 1.37501 17H14.125C14.3323 17 14.5 16.8509 14.5 16.6667V15.6667C14.5 14.9313 13.8273 14.3333 13 14.3333V11.6667H13.375C13.5819 11.6667 13.75 11.8161 13.75 12V12.6667C13.75 13.2181 14.2546 13.6667 14.875 13.6667C15.4954 13.6667 16 13.2181 16 12.6667V3.33334C16 3.24478 15.9604 3.16015 15.8901 3.09765ZM3.25003 2.33334C3.25003 1.96584 3.58658 1.66669 4.00001 1.66669H11.5C11.9134 1.66669 12.25 1.96584 12.25 2.33334V14.3333H3.24999L3.25003 2.33334ZM13.75 15.6666V16.3333H1.75002V15.6666C1.75002 15.2991 2.08657 15 2.50001 15H13C13.4134 15 13.75 15.2991 13.75 15.6666ZM15.25 6.33333C14.8365 6.33333 14.5 6.03418 14.5 5.66668V4.80468L15.25 4.13803V6.33333Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    <path d="M11.041 2.52344H4.29103C4.08375 2.52344 3.91602 2.66929 3.91602 2.84954V6.76876C3.91602 6.94901 4.08375 7.09487 4.29103 7.09487H11.041C11.2483 7.09487 11.416 6.94901 11.416 6.76876V2.84951C11.416 2.66929 11.2483 2.52344 11.041 2.52344ZM10.666 6.44265H4.666V3.17562H10.666V6.44265Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    </svg>
+
+                                                            </span>
+                                                        </div>
+
+                                                        <span>
+                                                            {{ html_decode($related_car->fuel_type) }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-thumb">
+                                                            <span>
+                                                                <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M17.9167 8.23819H17.2833C17.0314 8.23819 16.7897 8.3586 16.6116 8.57293C16.4334 8.78726 16.3333 9.07795 16.3333 9.38106V9.76202H15.7V7.85723C15.7 7.55412 15.5999 7.26343 15.4218 7.0491C15.2436 6.83477 15.002 6.71436 14.75 6.71436H13.8C13.716 6.71436 13.6355 6.67422 13.5761 6.60278C13.5167 6.53134 13.4833 6.43444 13.4833 6.3334V5.57149C13.4833 5.26838 13.3832 4.97769 13.2051 4.76336C13.0269 4.54903 12.7853 4.42862 12.5333 4.42862H11.2667V3.28574H12.85C13.102 3.28574 13.3436 3.16533 13.5218 2.951C13.6999 2.73667 13.8 2.44598 13.8 2.14287C13.8 1.83976 13.6999 1.54907 13.5218 1.33474C13.3436 1.12041 13.102 1 12.85 1H6.51667C6.26471 1 6.02307 1.12041 5.84491 1.33474C5.66676 1.54907 5.56667 1.83976 5.56667 2.14287C5.56667 2.44598 5.66676 2.73667 5.84491 2.951C6.02307 3.16533 6.26471 3.28574 6.51667 3.28574H8.1V4.42862H6.51667C6.26471 4.42862 6.02307 4.54903 5.84491 4.76336C5.66676 4.97769 5.56667 5.26838 5.56667 5.57149C5.56667 5.67252 5.5333 5.76942 5.47392 5.84087C5.41453 5.91231 5.33399 5.95245 5.25 5.95245H4.3C4.04804 5.95245 3.80641 6.07285 3.62825 6.28719C3.45009 6.50152 3.35 6.79221 3.35 7.09532V8.61915H2.4V7.09532C2.4 6.79221 2.29991 6.50152 2.12175 6.28719C1.94359 6.07285 1.70196 5.95245 1.45 5.95245C1.19804 5.95245 0.956408 6.07285 0.778249 6.28719C0.600089 6.50152 0.5 6.79221 0.5 7.09532L0.5 13.1906C0.5 13.4937 0.600089 13.7844 0.778249 13.9988C0.956408 14.2131 1.19804 14.3335 1.45 14.3335C1.70196 14.3335 1.94359 14.2131 2.12175 13.9988C2.29991 13.7844 2.4 13.4937 2.4 13.1906V11.6668H3.35V13.5716C3.35 13.8747 3.45009 14.1654 3.62825 14.3797C3.80641 14.5941 4.04804 14.7145 4.3 14.7145H5.62113C5.70511 14.7145 5.78564 14.7546 5.84502 14.8261L7.37388 16.6653C7.46185 16.7719 7.56651 16.8563 7.68181 16.9138C7.7971 16.9713 7.92073 17.0006 8.04553 17.0002H14.75C15.002 17.0002 15.2436 16.8798 15.4218 16.6655C15.5999 16.4511 15.7 16.1604 15.7 15.8573V14.3335H16.3333V14.7145C16.3333 15.0176 16.4334 15.3083 16.6116 15.5226C16.7897 15.7369 17.0314 15.8573 17.2833 15.8573H17.9167C18.3364 15.8567 18.7389 15.6559 19.0357 15.2988C19.3325 14.9417 19.4995 14.4575 19.5 13.9526V10.143C19.4995 9.63798 19.3325 9.15384 19.0357 8.79676C18.7389 8.43967 18.3364 8.23879 17.9167 8.23819ZM6.2 2.14287C6.2 2.04184 6.23336 1.94494 6.29275 1.87349C6.35214 1.80205 6.43268 1.76191 6.51667 1.76191H12.85C12.934 1.76191 13.0145 1.80205 13.0739 1.87349C13.1333 1.94494 13.1667 2.04184 13.1667 2.14287C13.1667 2.24391 13.1333 2.34081 13.0739 2.41225C13.0145 2.48369 12.934 2.52383 12.85 2.52383H6.51667C6.43268 2.52383 6.35214 2.48369 6.29275 2.41225C6.23336 2.34081 6.2 2.24391 6.2 2.14287ZM8.73333 3.28574H10.6333V4.42862H8.73333V3.28574ZM1.76667 13.1906C1.76667 13.2917 1.7333 13.3886 1.67392 13.46C1.61453 13.5315 1.53399 13.5716 1.45 13.5716C1.36601 13.5716 1.28547 13.5315 1.22608 13.46C1.1667 13.3886 1.13333 13.2917 1.13333 13.1906V7.09532C1.13333 6.99428 1.1667 6.89738 1.22608 6.82594C1.28547 6.7545 1.36601 6.71436 1.45 6.71436C1.53399 6.71436 1.61453 6.7545 1.67392 6.82594C1.7333 6.89738 1.76667 6.99428 1.76667 7.09532V13.1906ZM2.4 10.9049V9.38106H3.35V10.9049H2.4ZM15.0667 15.8573C15.0667 15.9584 15.0333 16.0553 14.9739 16.1267C14.9145 16.1982 14.834 16.2383 14.75 16.2383H8.04553C7.96155 16.2383 7.88102 16.1981 7.82165 16.1267L6.29278 14.2874C6.20478 14.181 6.1001 14.0966 5.98482 14.0391C5.86954 13.9816 5.74593 13.9522 5.62113 13.9526H4.3C4.21601 13.9526 4.13547 13.9124 4.07608 13.841C4.0167 13.7695 3.98333 13.6726 3.98333 13.5716V7.09532C3.98333 6.99428 4.0167 6.89738 4.07608 6.82594C4.13547 6.7545 4.21601 6.71436 4.3 6.71436H5.25C5.50196 6.71436 5.74359 6.59395 5.92175 6.37962C6.09991 6.16529 6.2 5.8746 6.2 5.57149C6.2 5.47045 6.23336 5.37355 6.29275 5.30211C6.35214 5.23067 6.43268 5.19053 6.51667 5.19053H12.5333C12.6173 5.19053 12.6979 5.23067 12.7573 5.30211C12.8166 5.37355 12.85 5.47045 12.85 5.57149V6.3334C12.85 6.63651 12.9501 6.92721 13.1282 7.14154C13.3064 7.35587 13.548 7.47627 13.8 7.47628H14.75C14.834 7.47628 14.9145 7.51641 14.9739 7.58785C15.0333 7.6593 15.0667 7.7562 15.0667 7.85723V15.8573ZM15.7 13.5716V10.5239H16.3333V13.5716H15.7ZM18.8667 13.9526C18.8667 14.2557 18.7666 14.5464 18.5884 14.7607C18.4103 14.975 18.1686 15.0954 17.9167 15.0954H17.2833C17.1993 15.0954 17.1188 15.0553 17.0594 14.9838C17 14.9124 16.9667 14.8155 16.9667 14.7145V9.38106C16.9667 9.28003 17 9.18313 17.0594 9.11168C17.1188 9.04024 17.1993 9.0001 17.2833 9.0001H17.9167C18.1686 9.0001 18.4103 9.12051 18.5884 9.33484C18.7666 9.54917 18.8667 9.83987 18.8667 10.143V13.9526Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    </svg>
+
+                                                            </span>
+                                                        </div>
+
+                                                        <span>
+                                                            {{ html_decode($related_car->engine_size) }}
+                                                        </span>
+                                                    </div>
                                                 </div>
 
-
+                                                <div class="brand-car-btm-txt-btm">
+                                                    <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($related_car?->dealer?->name) }}
+                                                    </h6>
+                                                </div>
                                             </div>
+
                                         </div>
-
-                                        <div class="brand-car-inner">
-                                            <div class="brand-car-inner-item">
-                                                <span>{{ $related_car?->brand?->name }}</span>
-                                                <p>
-                                                    @if ($related_car->offer_price)
-                                                        {{ currency($related_car->offer_price) }}
-                                                    @else
-                                                        {{ currency($related_car->regular_price) }}
-                                                    @endif
-                                                </p>
-                                            </div>
-
-                                            <a href="{{ route('listing', $related_car->slug) }}">
-                                                <h3>{{ html_decode($related_car->title) }}</h3>
-                                            </a>
-
-                                            <div class="brand-car-inner-item-main">
-                                                <div class="brand-car-inner-item-two">
-                                                    <div class="brand-car-inner-item-thumb">
-                                                        <span>
-                                                            <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                </svg>
-
-                                                        </span>
-                                                    </div>
-
-                                                    <span>
-                                                        {{ html_decode($related_car->mileage) }}
-                                                    </span>
-                                                </div>
-                                                <div class="brand-car-inner-item-two">
-                                                    <div class="brand-car-inner-item-thumb">
-                                                        <span>
-                                                            <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M15.8901 3.09765L14.3901 1.76431C14.2436 1.63409 14.0063 1.63409 13.8598 1.76431C13.7133 1.89453 13.7133 2.10547 13.8598 2.23565L15.0947 3.33331L13.8598 4.43096C13.7895 4.49346 13.75 4.57809 13.75 4.66665V5.66665C13.75 6.40202 14.4227 6.99999 15.25 6.99999V12.6666C15.25 12.8505 15.0819 13 14.875 13C14.6681 13 14.5 12.8506 14.5 12.6666V12C14.5 11.4485 13.9953 11 13.375 11H13V2.33334C13 1.59797 12.3273 1 11.5 1H4.00001C3.17275 1 2.50001 1.59797 2.50001 2.33334V14.3333C1.67275 14.3333 1 14.9313 1 15.6667V16.6667C1 16.8509 1.16773 17 1.37501 17H14.125C14.3323 17 14.5 16.8509 14.5 16.6667V15.6667C14.5 14.9313 13.8273 14.3333 13 14.3333V11.6667H13.375C13.5819 11.6667 13.75 11.8161 13.75 12V12.6667C13.75 13.2181 14.2546 13.6667 14.875 13.6667C15.4954 13.6667 16 13.2181 16 12.6667V3.33334C16 3.24478 15.9604 3.16015 15.8901 3.09765ZM3.25003 2.33334C3.25003 1.96584 3.58658 1.66669 4.00001 1.66669H11.5C11.9134 1.66669 12.25 1.96584 12.25 2.33334V14.3333H3.24999L3.25003 2.33334ZM13.75 15.6666V16.3333H1.75002V15.6666C1.75002 15.2991 2.08657 15 2.50001 15H13C13.4134 15 13.75 15.2991 13.75 15.6666ZM15.25 6.33333C14.8365 6.33333 14.5 6.03418 14.5 5.66668V4.80468L15.25 4.13803V6.33333Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                <path d="M11.041 2.52344H4.29103C4.08375 2.52344 3.91602 2.66929 3.91602 2.84954V6.76876C3.91602 6.94901 4.08375 7.09487 4.29103 7.09487H11.041C11.2483 7.09487 11.416 6.94901 11.416 6.76876V2.84951C11.416 2.66929 11.2483 2.52344 11.041 2.52344ZM10.666 6.44265H4.666V3.17562H10.666V6.44265Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                </svg>
-
-                                                        </span>
-                                                    </div>
-
-                                                    <span>
-                                                        {{ html_decode($related_car->fuel_type) }}
-                                                    </span>
-                                                </div>
-                                                <div class="brand-car-inner-item-two">
-                                                    <div class="brand-car-inner-item-thumb">
-                                                        <span>
-                                                            <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M17.9167 8.23819H17.2833C17.0314 8.23819 16.7897 8.3586 16.6116 8.57293C16.4334 8.78726 16.3333 9.07795 16.3333 9.38106V9.76202H15.7V7.85723C15.7 7.55412 15.5999 7.26343 15.4218 7.0491C15.2436 6.83477 15.002 6.71436 14.75 6.71436H13.8C13.716 6.71436 13.6355 6.67422 13.5761 6.60278C13.5167 6.53134 13.4833 6.43444 13.4833 6.3334V5.57149C13.4833 5.26838 13.3832 4.97769 13.2051 4.76336C13.0269 4.54903 12.7853 4.42862 12.5333 4.42862H11.2667V3.28574H12.85C13.102 3.28574 13.3436 3.16533 13.5218 2.951C13.6999 2.73667 13.8 2.44598 13.8 2.14287C13.8 1.83976 13.6999 1.54907 13.5218 1.33474C13.3436 1.12041 13.102 1 12.85 1H6.51667C6.26471 1 6.02307 1.12041 5.84491 1.33474C5.66676 1.54907 5.56667 1.83976 5.56667 2.14287C5.56667 2.44598 5.66676 2.73667 5.84491 2.951C6.02307 3.16533 6.26471 3.28574 6.51667 3.28574H8.1V4.42862H6.51667C6.26471 4.42862 6.02307 4.54903 5.84491 4.76336C5.66676 4.97769 5.56667 5.26838 5.56667 5.57149C5.56667 5.67252 5.5333 5.76942 5.47392 5.84087C5.41453 5.91231 5.33399 5.95245 5.25 5.95245H4.3C4.04804 5.95245 3.80641 6.07285 3.62825 6.28719C3.45009 6.50152 3.35 6.79221 3.35 7.09532V8.61915H2.4V7.09532C2.4 6.79221 2.29991 6.50152 2.12175 6.28719C1.94359 6.07285 1.70196 5.95245 1.45 5.95245C1.19804 5.95245 0.956408 6.07285 0.778249 6.28719C0.600089 6.50152 0.5 6.79221 0.5 7.09532L0.5 13.1906C0.5 13.4937 0.600089 13.7844 0.778249 13.9988C0.956408 14.2131 1.19804 14.3335 1.45 14.3335C1.70196 14.3335 1.94359 14.2131 2.12175 13.9988C2.29991 13.7844 2.4 13.4937 2.4 13.1906V11.6668H3.35V13.5716C3.35 13.8747 3.45009 14.1654 3.62825 14.3797C3.80641 14.5941 4.04804 14.7145 4.3 14.7145H5.62113C5.70511 14.7145 5.78564 14.7546 5.84502 14.8261L7.37388 16.6653C7.46185 16.7719 7.56651 16.8563 7.68181 16.9138C7.7971 16.9713 7.92073 17.0006 8.04553 17.0002H14.75C15.002 17.0002 15.2436 16.8798 15.4218 16.6655C15.5999 16.4511 15.7 16.1604 15.7 15.8573V14.3335H16.3333V14.7145C16.3333 15.0176 16.4334 15.3083 16.6116 15.5226C16.7897 15.7369 17.0314 15.8573 17.2833 15.8573H17.9167C18.3364 15.8567 18.7389 15.6559 19.0357 15.2988C19.3325 14.9417 19.4995 14.4575 19.5 13.9526V10.143C19.4995 9.63798 19.3325 9.15384 19.0357 8.79676C18.7389 8.43967 18.3364 8.23879 17.9167 8.23819ZM6.2 2.14287C6.2 2.04184 6.23336 1.94494 6.29275 1.87349C6.35214 1.80205 6.43268 1.76191 6.51667 1.76191H12.85C12.934 1.76191 13.0145 1.80205 13.0739 1.87349C13.1333 1.94494 13.1667 2.04184 13.1667 2.14287C13.1667 2.24391 13.1333 2.34081 13.0739 2.41225C13.0145 2.48369 12.934 2.52383 12.85 2.52383H6.51667C6.43268 2.52383 6.35214 2.48369 6.29275 2.41225C6.23336 2.34081 6.2 2.24391 6.2 2.14287ZM8.73333 3.28574H10.6333V4.42862H8.73333V3.28574ZM1.76667 13.1906C1.76667 13.2917 1.7333 13.3886 1.67392 13.46C1.61453 13.5315 1.53399 13.5716 1.45 13.5716C1.36601 13.5716 1.28547 13.5315 1.22608 13.46C1.1667 13.3886 1.13333 13.2917 1.13333 13.1906V7.09532C1.13333 6.99428 1.1667 6.89738 1.22608 6.82594C1.28547 6.7545 1.36601 6.71436 1.45 6.71436C1.53399 6.71436 1.61453 6.7545 1.67392 6.82594C1.7333 6.89738 1.76667 6.99428 1.76667 7.09532V13.1906ZM2.4 10.9049V9.38106H3.35V10.9049H2.4ZM15.0667 15.8573C15.0667 15.9584 15.0333 16.0553 14.9739 16.1267C14.9145 16.1982 14.834 16.2383 14.75 16.2383H8.04553C7.96155 16.2383 7.88102 16.1981 7.82165 16.1267L6.29278 14.2874C6.20478 14.181 6.1001 14.0966 5.98482 14.0391C5.86954 13.9816 5.74593 13.9522 5.62113 13.9526H4.3C4.21601 13.9526 4.13547 13.9124 4.07608 13.841C4.0167 13.7695 3.98333 13.6726 3.98333 13.5716V7.09532C3.98333 6.99428 4.0167 6.89738 4.07608 6.82594C4.13547 6.7545 4.21601 6.71436 4.3 6.71436H5.25C5.50196 6.71436 5.74359 6.59395 5.92175 6.37962C6.09991 6.16529 6.2 5.8746 6.2 5.57149C6.2 5.47045 6.23336 5.37355 6.29275 5.30211C6.35214 5.23067 6.43268 5.19053 6.51667 5.19053H12.5333C12.6173 5.19053 12.6979 5.23067 12.7573 5.30211C12.8166 5.37355 12.85 5.47045 12.85 5.57149V6.3334C12.85 6.63651 12.9501 6.92721 13.1282 7.14154C13.3064 7.35587 13.548 7.47627 13.8 7.47628H14.75C14.834 7.47628 14.9145 7.51641 14.9739 7.58785C15.0333 7.6593 15.0667 7.7562 15.0667 7.85723V15.8573ZM15.7 13.5716V10.5239H16.3333V13.5716H15.7ZM18.8667 13.9526C18.8667 14.2557 18.7666 14.5464 18.5884 14.7607C18.4103 14.975 18.1686 15.0954 17.9167 15.0954H17.2833C17.1993 15.0954 17.1188 15.0553 17.0594 14.9838C17 14.9124 16.9667 14.8155 16.9667 14.7145V9.38106C16.9667 9.28003 17 9.18313 17.0594 9.11168C17.1188 9.04024 17.1993 9.0001 17.2833 9.0001H17.9167C18.1686 9.0001 18.4103 9.12051 18.5884 9.33484C18.7666 9.54917 18.8667 9.83987 18.8667 10.143V13.9526Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                </svg>
-
-                                                        </span>
-                                                    </div>
-
-                                                    <span>
-                                                        {{ html_decode($related_car->engine_size) }}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <div class="brand-car-btm-txt-btm">
-                                                <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($related_car?->dealer?->name) }}
-                                                </h6>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    @endif
+            </section>
+        @endif
 
     <!--Cars Listing-part-end -->
 

@@ -2057,7 +2057,6 @@ class HomeController extends Controller
         return view('listing_detail1', [
             'car' => $car,
             'galleries' => $images,
-            'related_listings' => $related_listings,
             'reviews' => $reviews,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,

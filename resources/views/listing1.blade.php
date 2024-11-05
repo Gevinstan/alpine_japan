@@ -9,28 +9,28 @@
 <main>
     <!-- banner-part-start  -->
 
-        <!-- <section class="inner-banner">
-            <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-            <div class="container">
-                <div class="col-lg-12">
-                    <div class="inner-banner-df">
-                        <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
-                            </ol>
-                        </nav>
-                    </div>
+    <!-- <section class="inner-banner">
+        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="inner-banner-df">
+                    <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-        </section> -->
+        </div>
+    </section> -->
     <!-- banner-part-end -->
 
     <!-- Inventory-part-start -->
 
-    <section class="inventory feature-two">
-        <div class="container listing-breadcrumb">
+    <section class="inventory feature-two listing-breadcrumb">
+        <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
@@ -40,91 +40,237 @@
             <div class="row">
                 <div class="col-lg-3">
                     <form action="" id="search_form">
-                        <div class="inventory-main-box">
-                            <div class="inventory-taitel">
-                                <h5>{{ __('translate.Location') }}</h5>
-                            </div>
+                        
+                        <!-- Select Your Brand Start-->
+                            <div class="inventory-main-box">
+                                <!-- Select Your Brand  -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseOne">
+                                                Brand
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
+                                            aria-labelledby="panelsStayOpen-headingOne">
+                                            <div class="accordion-body">
+                                                <span class="select-Brand-box border-0 px-2">
+                                                    @if (request()->has('brands'))
+                                                        @php
+                                                            $brand_arr = request()->get('brands');
+                                                        @endphp
 
-                            <div class="location-box">
-
-                                <select class="form-control select2" name="location">
-                                    <option value="">{{ __('translate.Select Location') }}</option>
-                                    @foreach ($cities as $city)
-                                        <option {{ request()->get('location') == $city->id ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
-                                    @endforeach
-                                </select>
-
-                                <button type="button" class="icon">
-                                    <span>
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    </span>
-                                </button>
-                            </div>
-
-                            <!-- Select Your Brand  -->
-                            <div class="accordion" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapseOne">
-                                            {{ __('translate.Select Brand') }}
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingOne">
-                                        <div class="accordion-body">
-                                            <span class="select-Brand-box">
-                                                @if (request()->has('brands'))
-                                                    @php
-                                                        $brand_arr = request()->get('brands');
-                                                    @endphp
-
-                                                    @foreach ($brands as $brand)
-                                                    <span class="form-check">
-                                                        <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
-                                                            id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                        <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                            {{ $brand->name }}
-                                                        </label>
-                                                    </span>
-                                                    @endforeach
-                                                @else
-                                                    @foreach ($brands as $brand)
+                                                        @foreach ($brands as $brand)
                                                         <span class="form-check">
-                                                            <input name="brands[]" class="form-check-input" type="checkbox"
+                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
                                                                 id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
                                                             <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
                                                                 {{ $brand->name }}
                                                             </label>
                                                         </span>
-                                                    @endforeach
-                                                @endif
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($brands as $brand)
+                                                            <!-- <span class="form-check">
+                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                    {{ $brand->name }}
+                                                                </label> -->
+                                                                <div class="accordion" id="accordionExample">
+                                                                <div class="accordion-item">
+                                                            <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
+                                                                <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                        id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                    <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                        {{ $brand->name }}
+                                                                    </label>
+                                                                </div>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <span class="select-Brand-box p-0 px-2 border-0">
+                                                                                    @if (request()->has('brands'))
+                                                                                        @php
+                                                                                            $brand_arr = request()->get('brands');
+                                                                                        @endphp
 
-                                            </span>
+                                                                                        @foreach ($brands as $brand)
+                                                                                        <span class="form-check">
+                                                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                {{ $brand->name }}
+                                                                                            </label>
+                                                                                        </span>
+                                                                                        @endforeach
+                                                                                    @else
+                                                                                        @foreach ($brands as $brand)
+                                                                                            <span class="form-check">
+                                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                    {{ $brand->name }}
+                                                                                                </label>
+                                                                                            </span>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                <!-- <div class="accordion" id="accordionExample">
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header" id="headingOne">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                    {{ $brand->name }}
+                                                                                </label>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse show pt-3" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body">
+                                                                                <span class="select-Brand-box">
+                                                                                    @if (request()->has('brands'))
+                                                                                        @php
+                                                                                            $brand_arr = request()->get('brands');
+                                                                                        @endphp
+
+                                                                                        @foreach ($brands as $brand)
+                                                                                        <span class="form-check">
+                                                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                {{ $brand->name }}
+                                                                                            </label>
+                                                                                        </span>
+                                                                                        @endforeach
+                                                                                    @else
+                                                                                        @foreach ($brands as $brand)
+                                                                                            <span class="form-check">
+                                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                                                    {{ $brand->name }}
+                                                                                                </label>
+                                                                                            </span>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                            </span>
+                                                        </div>
+                                                        </div> 
+                                                        @endforeach
+                                                    @endif
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        <!-- Select Your Brand End-->
+
+
+                        <!-- Select Your Model Start -->
+                            <div class="inventory-main-box my-3">
+                                <!-- Select Your Model  -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapseOne">
+                                                Model
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
+                                            aria-labelledby="panelsStayOpen-headingOne">
+                                            <div class="accordion-body">
+                                                <span class="select-Brand-box">
+                                                    @if (request()->has('brands'))
+                                                        @php
+                                                            $brand_arr = request()->get('brands');
+                                                        @endphp
+
+                                                        @foreach ($brands as $brand)
+                                                        <span class="form-check">
+                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
+                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                {{ $brand->name }}
+                                                            </label>
+                                                        </span>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($brands as $brand)
+                                                            <span class="form-check">
+                                                                <input name="brands[]" class="form-check-input" type="checkbox"
+                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
+                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                    {{ $brand->name }}
+                                                                </label>
+                                                            </span>
+                                                        @endforeach
+                                                    @endif
+
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                        <!-- Select Your Model End -->
 
 
-                            <!-- Condition  -->
+                        <!-- Select Your Budget Start -->
+                        <div class="inventory-main-box">
+
+                            <!-- Select Your Budget  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample1">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                             aria-controls="panelsStayOpen-collapsetwo">
-                                            {{ __('translate.Condition') }}
+                                            Budget
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show"
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
-                                            <span class="select-Brand-box two four">
+                                            <span class="select-Brand-box two four p-0 border-0">
 
-                                                @if (request()->has('condition'))
+                                            <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                <div class="d-flex justify-content-between align-items-center flex-column mt-32px">
+                                                    <input type="range" min="1960" max="2024" value="1960" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <span class="slider-label m-0">1960</span>
+                                                        <span class="slider-value m-0" id="modelYearValue">1960</span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-content-between flex-column gap-4">
+                                                    <button class="clear-button">Clear</button>
+                                                    <button class="go-button">Go</button>
+                                                </div>
+                                                <!-- <button class="clear-button">Clear</button>
+                                                <button class="go-button">Go</button> -->
+                                            </div>
+
+                                                <!-- @if (request()->has('condition'))
                                                     @php
                                                         $condition_arr = request()->get('condition');
                                                     @endphp
@@ -159,7 +305,7 @@
                                                             {{ __('translate.Used') }}
                                                         </label>
                                                     </span>
-                                                @endif
+                                                @endif -->
 
                                             </span>
                                         </div>
@@ -168,18 +314,70 @@
 
                             </div>
 
+                            <!-- Transmission -->
+                            <!-- <div class="accordion" id="accordionPanelsStayOpenExample4">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingfive">
+                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                            aria-controls="panelsStayOpen-collapsefive">
+                                            {{ __('translate.Features') }}
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                        aria-labelledby="panelsStayOpen-headingfive">
+                                        <div class="accordion-body">
+                                            <span class="select-Brand-box">
+                                                @if (request()->has('features'))
+                                                    @php
+                                                        $features_arr = request()->get('features');
+                                                    @endphp
 
-                            <!-- Offer  -->
+                                                    @foreach ($features as $index => $feature)
+                                                        <span class="form-check">
+                                                            <input {{ in_array($feature->id, $features_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
+                                                                id="feature{{ $index }}">
+                                                            <label class="form-check-label" for="feature{{ $index }}">
+                                                                {{ $feature->name }}
+                                                            </label>
+                                                        </span>
+                                                    @endforeach
+
+                                                @else
+                                                    @foreach ($features as $index => $feature)
+                                                        <span class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
+                                                                id="feature{{ $index }}">
+                                                            <label class="form-check-label" for="feature{{ $index }}">
+                                                                {{ $feature->name }}
+                                                            </label>
+                                                        </span>
+                                                    @endforeach
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div> -->
+
+                        </div>
+                        <!-- Select Your Budget End -->
+
+
+                        <!-- Select Your Model Year Start -->
+                        <div class="inventory-main-box my-3">
+                            <!-- Model Year  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample3">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingfour">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="true"
                                             aria-controls="panelsStayOpen-collapsefour">
-                                            {{ __('translate.Purpose') }}
+                                            Model Year
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show"
+                                    <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show pt-3"
                                         aria-labelledby="panelsStayOpen-headingfour">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four">
@@ -228,61 +426,8 @@
                                 </div>
 
                             </div>
-
-                            <!-- Transmission -->
-                            <div class="accordion" id="accordionPanelsStayOpenExample4">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingfive">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapsefive">
-                                            {{ __('translate.Features') }}
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingfive">
-                                        <div class="accordion-body">
-                                            <span class="select-Brand-box">
-                                                @if (request()->has('features'))
-                                                    @php
-                                                        $features_arr = request()->get('features');
-                                                    @endphp
-
-                                                    @foreach ($features as $index => $feature)
-                                                        <span class="form-check">
-                                                            <input {{ in_array($feature->id, $features_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
-                                                                id="feature{{ $index }}">
-                                                            <label class="form-check-label" for="feature{{ $index }}">
-                                                                {{ $feature->name }}
-                                                            </label>
-                                                        </span>
-                                                    @endforeach
-
-                                                @else
-                                                    @foreach ($features as $index => $feature)
-                                                        <span class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
-                                                                id="feature{{ $index }}">
-                                                            <label class="form-check-label" for="feature{{ $index }}">
-                                                                {{ $feature->name }}
-                                                            </label>
-                                                        </span>
-                                                    @endforeach
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <input type="hidden" value="{{ request()->get('search') }}" name="search" id="inside_form_search">
-
-                            <div class="search-here-btn"  >
-                                <button type="submit" class="thm-btn-two">{{ __('translate.Search Here') }}</button>
-                            </div>
-
                         </div>
+                        <!-- Select Your Model Year End -->
 
 
                     </form>
@@ -297,17 +442,29 @@
                 </div>
 
                 <div class="col-lg-9">
-                    <div class="inventory-ber">
+                    <div class="inventory-ber mb-3">
                         <div class="inventory-ber-left">
-                            <div class="inventory-sarch-ber-item">
+                            <div class="inventory-sarch-ber-item flex-row">
                                 <div class="inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                    <button id="outside_form_btn" type="button" class="thm-btn-two">{{ __('translate.Search Now') }}</button>
+                                    <!-- <button id="outside_form_btn" type="button" class="thm-btn-two">{{ __('translate.Search Now') }}</button> -->
+                                     <span class=" search-btn"><img src="{{asset('japan_home/search.png')}}"  alt="search"/></span>
                                 </div>
 
-                                <div class="inventory-sarch-ber-text">
-                                    <p>{{ __('translate.Switch tab for list or grid view layout') }}</p>
+                                <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
+                                    <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
+                                     <p class="sort-text pl-2">Sort By:</p>
+                                     <div class="dropdown sort-dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Dropdown
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                            <li><button class="dropdown-item" type="button">Action</button></li>
+                                            <li><button class="dropdown-item" type="button">Another action</button></li>
+                                            <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                             </div>
@@ -342,29 +499,70 @@
                         </div>
                     </div>
 
+                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-5">
+                        <div class="d-flex align-items-center flex-wrap gap-3">
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                            <p class="position-relative filter-text px-3 py-1"> New alerts
+                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
+                                </span>
+                            </p>
+                        </div>
+                        <div>
+                            <button class="btn search-clear-btn">clear</button>
+                        </div>
+                    </div>
 
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                             aria-labelledby="pills-home-tab">
                             <div class="row g-5">
-                                @forelse ($cars as $index => $car)
+                            @if(count($cars_array) > 0)  
+                                 @foreach ($cars_array as $index => $car)
                                     <div class="col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car->thumb_image) }}" alt="thumb">
+                                                <img src="{{asset($car['picture']) }}" alt="thumb">
 
                                                 <div class="brand-car-item-img-text">
 
                                                     <div class="text-df">
-                                                        @if ($car->offer_price)
-                                                            <p class="text">{{ calculate_percentage($car->regular_price, $car->offer_price) }}% {{ __('translate.Off') }}</p>
+                                                        @if(session('front_lang')=='en')
+                                                            {{ $car['start_price_num'] }}
+                                                        @else
+                                                            {{ $car['start_price'] }}
                                                         @endif
 
-                                                        @if ($car->condition == 'New')
-                                                            <p class="text text-two ">{{ __('translate.New') }}</p>
-                                                        @else
-                                                            <p class="text text-two ">{{ __('translate.Used') }}</p>
-                                                        @endif
+                                                       
                                                     </div>
 
                                                     <div class="icon-main">
@@ -382,22 +580,9 @@
                                                                 </span>
                                                             </a>
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
-                                                                <span>
-                                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                            xmlns="http://www.w3.org/2000/svg">
-                                                                            <path
-                                                                                d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                                stroke-width="1.3" stroke-linejoin="round"></path>
-                                                                        </svg>
-
-                                                                </span>
-                                                            </a>
-
                                                         @endif
 
 
-                                                        <a href="{{ route('add-to-compare', $car->id) }}" class="icon">
                                                             <span>
                                                                 <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg">
@@ -418,19 +603,27 @@
 
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
-                                                    <span>{{ $car?->brand?->name }}</span>
+                                                    <span>@if(session('front_lang')=='en')
+                                                                {{ $car['company_en'] }}
+                                                            @else
+                                                            {{ $car['company'] }}
+                                                            @endif</span>
                                                     <p>
-                                                        @if ($car->offer_price)
-                                                            {{ currency($car->offer_price) }}
-                                                        @else
-                                                            {{ currency($car->regular_price) }}
-                                                        @endif
+                                                    @if(session('front_lang')=='en')
+                                                        {{ $car['start_price_num'] }}
+                                                    @else
+                                                        {{ $car['start_price'] }}
+                                                    @endif
                                                     </p>
                                                 </div>
-                                                    <h3>{{ html_decode($car->title) }}</h3>
 
-                                               {{-- <a href="{{ route('listing', $car->slug) }}">
-                                                </a> --}}
+                                            <a href="{{ route('listing', $car['id']) }}">
+                                                    <h3> @if(session('front_lang')=='en')
+                                                        {{ html_decode($car['model_name_en']) }}
+                                                    @else
+                                                        {{ html_decode($car['model_name']) }}
+                                                    @endif</h3>
+                                                </a>
 
                                                 <div class="brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
@@ -445,7 +638,11 @@
                                                         </div>
 
                                                         <span>
-                                                            {{ html_decode($car->mileage) }}
+                                                        @if(session('front_lang')=='en')
+                                                            {{ html_decode($car['mileage']) }}
+                                                        @else
+                                                            {{ html_decode($car['mileage_en']) }}
+                                                        @endif
                                                         </span>
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
@@ -460,7 +657,7 @@
                                                         </div>
 
                                                         <span>
-                                                            {{ html_decode($car->fuel_type) }}
+                                                           
                                                         </span>
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
@@ -474,21 +671,21 @@
                                                         </div>
 
                                                         <span>
-                                                            {{ html_decode($car->engine_size) }}
+                                                           
                                                         </span>
                                                     </div>
                                                 </div>
 
                                                 <div class="brand-car-btm-txt-btm">
-                                                    <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
+                                                    <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>
                                                     </h6>
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
-
-                                @empty
+                                    @endforeach
+                                @else
                                     <div class="col-12">
                                         <div class="not-found-box">
                                             <div class="not-found-thumb-main">
@@ -600,7 +797,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforelse
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
@@ -669,10 +866,8 @@
 
 
                                                 </div>
-                                                <h3>{{ html_decode($car->title) }}</h3>
 
-                                               {{-- <a href="{{ route('listing', $car->slug) }}">
-                                                </a> --}}
+                                           
 
                                                 <div class="brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
