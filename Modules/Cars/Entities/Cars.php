@@ -4,10 +4,11 @@ namespace Modules\Cars\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cars extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $table="blog";
     protected $fillable=[
         'id',

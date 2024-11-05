@@ -18,7 +18,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Cars::all();
+        $cars = Cars::orderBy('id','desc')->get();
         return view('cars::index',compact('cars'));
     }
 
@@ -241,6 +241,7 @@ class CarsController extends Controller
     }
     public function deleteCar(Request $request){
         $ids = $request->input('ids', []);
+       
     
         // Validate input
         if (empty($ids)) {
