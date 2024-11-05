@@ -380,7 +380,7 @@ function DeleteUser(selectedIds){
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('delete-small-heav')}}",
+                    url: "{{route('delete-small-heavy')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
                         ids: selectedIds,
