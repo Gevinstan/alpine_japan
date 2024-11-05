@@ -108,9 +108,11 @@
 
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <a href="{{ route('admin.show-comment', $blog_comment->id) }}" class="crancy-btn"><i class="fas fa-eye"></i> {{ __('translate.Show') }}</a>
+                                                        {{-- <!-- <a href="{{ route('admin.show-comment', $blog_comment->id) }}" class="crancy-btn"><i class="fas fa-eye"></i> {{ __('translate.Show') }}</a>
 
-                                                        <a onclick="itemDeleteConfrimation({{ $blog_comment->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
+                                                        <a onclick="itemDeleteConfrimation({{ $blog_comment->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a> --> --}}
+                                                        <a href="{{ route('admin.show-comment', $blog_comment->id) }}" style="color:grey;"><i class="fas fa-edit"></i></a>
+                                                        <a onclick="itemDeleteConfrimation({{ $blog_comment->id }})" title="Delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -189,6 +189,10 @@
           }
       });
     //   initializedTable();
+
+    
+     //   add dynamic class for data table
+     $("#dataTable").parent().addClass("overflow-auto");
      })
 
         "use strict"
