@@ -1686,9 +1686,9 @@
     color: var(--white-color);
 }
 
-.brand-car-item .brand-car-inner {
+/* .brand-car-item .brand-car-inner {
     padding: 25px 20px 20px 20px;
-}
+} */
 
 .brand-car-item .brand-car-inner .brand-car-inner-item {
     display: flex;
@@ -9305,8 +9305,8 @@ p {
     border-radius: 4px;
     border: 1px solid #ededed;
     padding: 0 20px 20px 20px;
-    height: 285px;
-    overflow-y: scroll;
+    /* height: 285px;
+    overflow-y: scroll; */
     display: inline-block;
     width: 100%;
 }
@@ -14616,11 +14616,19 @@ p {
 
   .brand-location {
     font-size: .875rem;
-    color: var(--headline-color);
+    font-family: "Poppins", serif;
+    font-weight: normal!important;
+    font-style: normal;
+    color: #25282D !important; 
+
   }
 
   .brand-date{
     font-size: .75rem;
+    font-family: "Poppins", serif;
+    font-weight: normal!important;
+    font-style: normal;
+    color: #9EA3AD;
   }
 
   .custom-tabs li a {
@@ -14697,6 +14705,11 @@ p {
  .listing-breadcrumb {
     padding: 145px 0 0 0 !important;
 }
+
+.breadcrumb-list .breadcrumb-link a,
+.breadcrumb-list .breadcrumb-link{
+    color: #8B9298 !important;
+}
 .breadcrumb-item+.breadcrumb-item::before {
     content: var(--bs-breadcrumb-divider, ">") !important;
 }
@@ -14758,6 +14771,7 @@ p {
     border: 1px solid #045EAD !important;
     font-size: .75rem;
     line-height: 18px !important;
+    border-radius: 6px;
   }
   /********* Search section style End ***********/
   
@@ -14800,6 +14814,26 @@ p {
   .bg-light-grey {
     background-color: #f5f5f5 !important;
   }
+
+  .brand-body {
+    height: 285px;
+    overflow-y: scroll;
+}
+
+.slider-handle {
+    background-color: #038FFC !important;
+}
+
+.slider-handle.round {
+    background: #038FFC !important;
+}
+.slider-selection {
+    background-image: linear-gradient(to bottom, #038FFC, #038FFC) !important;
+}
+
+.slider-horizontal {
+    width: 100% !important;
+}
   /********* Listing page End ***********/
 
   /********* Listing Detail page Start ***********/
@@ -14881,4 +14915,90 @@ p {
   }
 
   /********* Listing Page style End **********/
+
+/********** Listing page card work **********/
+
+.brand-new-car {
+    height: 14rem !important;
+    width: 28rem !important;
+}
+
+.card_image {
+    height:100%; 
+    width: 100%;
+}
+
+.car-name {
+  font-family: "Poppins", serif;
+  font-weight: var(--semiBold)!important;
+  font-style: normal;
+  font-size: 1.2rem; 
+  color: #25282D !important;
+}
+
+.listcar_price {
+  font-family: "Poppins", serif;
+  font-weight: var(--bold)!important;
+  font-style: normal;
+  font-size: 1.3rem; 
+  color:  #038FFC;
+}
+
+.car-fullname {
+  font-family: "Poppins", serif;
+  font-weight: var(--semiBold)!important;
+  font-style: normal;
+  font-size: 1.4rem; 
+  color: #25282D !important; 
+}
+
+.text-truncate {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.brand-car-btm-txt-btm {
+    background-color: #f7f7f7 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

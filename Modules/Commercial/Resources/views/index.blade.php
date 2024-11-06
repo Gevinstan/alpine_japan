@@ -130,7 +130,7 @@
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
                                                  
                                                     <a href="{{ route('admin.commercial.edit', ['commercial' => $commerical->id] ) }}" title="{{ __('translate.Edit') }}" style="color:grey;"><i class="fas fa-edit"></i></a>
-                                                        <a onclick="itemDeleteConfrimation({{ $commerical->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('translate.Delete') }}"><i class="fas fa-trash"></i> </a>
+                                                    <a onclick="itemDeleteConfrimation({{ $commerical->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" title="{{ __('translate.Delete') }}"><i class="fas fa-trash"></i> </a>
                                                        
                                                     </td>
                                                 </tr>

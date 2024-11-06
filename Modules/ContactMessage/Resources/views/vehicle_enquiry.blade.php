@@ -199,6 +199,9 @@
             }
          });
 
+         //   add dynamic class for data table
+        $("#dataTable").parent().addClass("overflow-auto");
+
         if($("#make").val()!=""){
             append_model_val($("#make").val());
         }

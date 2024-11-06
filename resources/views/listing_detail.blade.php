@@ -293,7 +293,7 @@
 
                                                         {{ __('translate.Chassis number') }}
                                                     </span>
-                                                    {{ html_decode($car->chassis) }}
+                                                    {{ html_decode($car->chassis) }}  
                                                 </li>
 
                                                 <li>
