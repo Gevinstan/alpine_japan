@@ -14814,6 +14814,26 @@ p {
   .bg-light-grey {
     background-color: #f5f5f5 !important;
   }
+
+  .brand-body {
+    height: 285px;
+    overflow-y: scroll;
+}
+
+.slider-handle {
+    background-color: #038FFC !important;
+}
+
+.slider-handle.round {
+    background: #038FFC !important;
+}
+.slider-selection {
+    background-image: linear-gradient(to bottom, #038FFC, #038FFC) !important;
+}
+
+.slider-horizontal {
+    width: 100% !important;
+}
   /********* Listing page End ***********/
 
   /********* Listing Detail page Start ***********/

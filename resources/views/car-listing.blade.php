@@ -42,7 +42,7 @@
                     <form action="" id="search_form">
                         
                         <!-- Select Your Brand Start-->
-                            <div class="inventory-main-box">
+                            <div class="inventory-main-box mb-3">
                                 <!-- Select Your Brand  -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item">
@@ -71,7 +71,7 @@
                                                                     </div>
                                                                     <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
-                                                                            <span class="select-Brand-box p-0 px-2 border-0">
+                                                                            <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         <!-- Select Your Brand End-->
-                        <!-- Select Your Budget Start -->
+                        <!-- Select Your Year Start -->
                         <div class="inventory-main-box">
 
                             <!-- Select Your Budget  -->
@@ -227,7 +227,7 @@
                             </div> -->
 
                         </div>
-                        <!-- Select Your Budget End -->
+                        <!-- Select Your Year End -->
 
 
                         <!-- Select Your Model Year Start -->
@@ -293,6 +293,50 @@
                             </div>
                         </div>
                         <!-- Select Your Model Year End -->
+
+                        <!-- Select Your Budget Start -->
+                            <div class="inventory-main-box">
+                                <!-- Budget -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample4">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingfive">
+                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapsefive">
+                                                Budget
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                            aria-labelledby="panelsStayOpen-headingfive">
+                                            <div class="accordion-body mt-3 row">
+                                                <div class="d-flex flex-column align-content-between col-sm-9">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span class="slider-label m-0">1960</span>
+                                                        <span class="slider-value m-0" id="modelYearValue">1960</span> 
+                                                    </div>
+
+                                                    <div id="slider-outer-div" class="ms-2">
+                                                        <div id="slider-div">
+                                                            <div>
+                                                                <input id="ex2" type="text" data-slider-min="50"
+                                                                data-slider-max="2000" data-slider-value="[50,300]"sli
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
+                                                    <button class="clear-button">Clear</button>
+                                                    <button class="go-button">Go</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        <!-- Select Your Budget End -->
 
 
                     </form>
@@ -1063,7 +1107,11 @@
        
     });
 
-
+    var $j = jQuery.noConflict();
+        $j(document).ready(function() {
+            $j('#ex2').slider();
+            $j('#ex3').slider();
+        });
 
     </script>
 @endpush
