@@ -119,12 +119,12 @@
 
                                             <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                 <div class="d-flex justify-content-between align-items-center flex-column mt-32px">
-                                                    <input type="range" min="1960" max="2024" value="1960" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
                                                     <input type="hidden" id="start_year" name="year">
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="slider-label m-0">1960</span>
+                                                        <span class="slider-label m-0">{{$minYear}}</span>
                                                          <output name="age_output" id="age_output" for="start" ></output>
-                                                        <span class="slider-value m-0" id="modelYearValue">1960</span>  
+                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-content-between flex-column gap-4">
@@ -295,15 +295,12 @@
                         <!-- Select Your Model Year End -->
 
 
-                    </form>
+                    
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
                             <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
                         </div>
                     @endif
-
-
-
                 </div>
 
                 <div class="col-lg-9">
@@ -313,8 +310,9 @@
                                 <div class="inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                    <!-- <button id="outside_form_btn" type="button" class="thm-btn-two">{{ __('translate.Search Now') }}</button> -->
-                                     <span class=" search-btn"><img src="{{asset('japan_home/search.png')}}"  alt="search"/></span>
+                                     <span class="search-btn" style="cursor: pointer;">
+                                       <a href="javascript:void(0);" id="outside_form_btn">
+                                            <i class="bi bi-search"></i></a></span></span>
                                 </div>
 
                                 <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
@@ -324,11 +322,12 @@
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                             Dropdown
                                         </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                            <li><button class="dropdown-item" type="button">Action</button></li>
-                                            <li><button class="dropdown-item" type="button">Another action</button></li>
-                                            <li><button class="dropdown-item" type="button">Something else here</button></li>
+                                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
+                                        <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
@@ -394,7 +393,7 @@
                             @endif
                             @if(request('year'))
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ request('year') }}
+                                <span class="position-relative model-item" data-brand="{{ request('year') }}">{{ request('year') }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
                                                 <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
@@ -908,6 +907,7 @@
 
 
                 </div>
+             </form>    
             </div>
         </div>
     </section>
@@ -945,18 +945,16 @@
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
+                $("#outside_form_search").on("click", function(e) {
+                    e.preventDefault();   
+                    form.submit();
+                });
 
-                $(".clear-url").on('click',function(){
+                $(".clear-url").on('click',function(e){
+                    e.preventDefault();
                     const urlObject = new URL(window.location.href);
-        
-                        // Get origin (protocol + hostname + port)
-                        const origin = urlObject.origin;
-                        
-                        // Get pathname without query parameters
-                        const pathname = urlObject.pathname;
-                        console.log(origin + pathname)
-                        
-                        window.location.href = origin + pathname.toString();
+                    const baseUrl = urlObject.origin + urlObject.pathname;    
+                    window.location.replace(baseUrl);
                         // Combine origin and pathname
                 })
             });
@@ -1062,6 +1060,17 @@
         //year slider work
        
     });
+
+    function updateButtonText(selectedBrand,selectedText) {
+    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+    if (dropdownButton) {
+        dropdownButton.innerText = selectedText;
+        $("#sort_by_field").val(selectedBrand);
+        $('#search_form').submit();
+    } else {
+        console.error('Dropdown button not found');
+    }
+}
 
 
 

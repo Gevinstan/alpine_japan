@@ -1621,6 +1621,17 @@ class HomeController extends Controller
     $models=[];
 
     DB::enableQueryLog();
+
+    $yearRange = CarDataJpOp::where('active_status', '1')
+    ->selectRaw('MIN(model_year_en) as min_year, MAX(model_year_en) as max_year')
+    ->first();
+
+    // Get min and max years
+    $minYear = $yearRange->min_year;
+    $maxYear = $yearRange->max_year;
+
+
+
     // Initialize the query for cars
     $carsQuery = CarDataJpOp::query();
 
@@ -1648,20 +1659,23 @@ class HomeController extends Controller
 
 
     if ($request->brand) {
-        // $brand_arr = array_filter($request->brand); // Filter out any empty values
-        // if ($brand_arr) {
-            // $carsQuery->whereIn('company_en', $brand_arr); 
-            $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
+        $brand_arr = array_filter($request->brand); // Filter out any empty values
+        if ($brand_arr) {
+            $carsQuery->whereIn('company_en', $brand_arr); 
+            // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
             $models = \DB::table('auct_lots_xml_jp_op')
-            ->where(DB::raw('LOWER(company_en)'), $request->brand)
+            ->whereIn(DB::raw('LOWER(company_en)'), $request->brand)
             ->groupBy('model_name_en') 
             ->select('model_name_en')
             ->get();
-        // }    
+        }    
     }
 
     if($request->model){
-        $carsQuery->where('model_name_en', $request->model); 
+        $model_arr = array_filter($request->model); // Filter out any empty values
+        if ($model_arr) {
+            $carsQuery->whereIn('model_name_en', $model_arr); 
+        }
     }
     if ($request->tranmission) {
         $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
@@ -1748,6 +1762,7 @@ class HomeController extends Controller
     }
 
     // $carsQuery->get();
+    
 
     // Pagination
     $cars = $carsQuery->where('active_status','1')
@@ -1838,7 +1853,9 @@ class HomeController extends Controller
         'scores' => $scores,
         'jdm_legend'=>$jdm_brand,
         'models'=>$models,
-        'brand_arr'=>$brand_arr
+        'brand_arr'=>$brand_arr,
+        'minYear'=>$minYear,
+        'maxYear'=>$maxYear
         // 'jdm_legend_heavy'=>$jdm_legend_heavy,
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
