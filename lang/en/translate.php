@@ -24,6 +24,7 @@
   'Year Of Registration'=>'Year Of Registration',
   'Kilometers'=>'Kilometers',
   'Hours work engine'=>'Hours work engine',
+  'Engine Capability'=>'Engine Capability',
   'Engine type'=>'Engine type',
   'Transmission type'=>'Transmission type',
   'Fuel'=>'Fuel',

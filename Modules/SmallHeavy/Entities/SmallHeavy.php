@@ -4,10 +4,11 @@ namespace Modules\SmallHeavy\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SmallHeavy extends Model
 {
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     protected $table="small_heavy";
     protected $fillable=[
         'id',
@@ -40,6 +41,8 @@ class SmallHeavy extends Model
         'jib',
         'outrigger',
         'commission_value',
-        'new_arrival'
+        'new_arrival',
+        'deleted_at'
       ];
+      protected $dates=['deleted_at'];
 }
