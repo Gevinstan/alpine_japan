@@ -29,12 +29,12 @@
 
     <!-- Inventory-part-start -->
 
-    <section class="inventory feature-two listing-breadcrumb">
+    <section class="inventory feature-two listing-breadcrumb bg-light-grey">
         <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
+            <nav aria-label="breadcrumb" class="pt-3">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">

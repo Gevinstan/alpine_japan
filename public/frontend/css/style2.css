@@ -14697,6 +14697,11 @@ p {
  .listing-breadcrumb {
     padding: 145px 0 0 0 !important;
 }
+
+.breadcrumb-list .breadcrumb-link a,
+.breadcrumb-list .breadcrumb-link{
+    color: #8B9298 !important;
+}
 .breadcrumb-item+.breadcrumb-item::before {
     content: var(--bs-breadcrumb-divider, ">") !important;
 }
@@ -14758,6 +14763,7 @@ p {
     border: 1px solid #045EAD !important;
     font-size: .75rem;
     line-height: 18px !important;
+    border-radius: 6px;
   }
   /********* Search section style End ***********/
   
