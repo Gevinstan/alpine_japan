@@ -9,6 +9,9 @@
     <link rel="icon" href="{{ asset($setting->favicon) }}">
 
     @yield('title')
+    
+    <!--- CDN for Bootstrap Icons --->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- fontawesome csn link  -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/fontawesome/css/all.css') }}">

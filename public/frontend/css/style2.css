@@ -1686,9 +1686,9 @@
     color: var(--white-color);
 }
 
-.brand-car-item .brand-car-inner {
+/* .brand-car-item .brand-car-inner {
     padding: 25px 20px 20px 20px;
-}
+} */
 
 .brand-car-item .brand-car-inner .brand-car-inner-item {
     display: flex;
@@ -14616,11 +14616,19 @@ p {
 
   .brand-location {
     font-size: .875rem;
-    color: var(--headline-color);
+    font-family: "Poppins", serif;
+    font-weight: normal!important;
+    font-style: normal;
+    color: #25282D !important; 
+
   }
 
   .brand-date{
     font-size: .75rem;
+    font-family: "Poppins", serif;
+    font-weight: normal!important;
+    font-style: normal;
+    color: #9EA3AD;
   }
 
   .custom-tabs li a {
@@ -14881,4 +14889,90 @@ p {
   }
 
   /********* Listing Page style End **********/
+
+/********** Listing page card work **********/
+
+.brand-new-car {
+    height: 14rem !important;
+    width: 28rem !important;
+}
+
+.card_image {
+    height:100%; 
+    width: 100%;
+}
+
+.car-name {
+  font-family: "Poppins", serif;
+  font-weight: var(--semiBold)!important;
+  font-style: normal;
+  font-size: 1.2rem; 
+  color: #25282D !important;
+}
+
+.listcar_price {
+  font-family: "Poppins", serif;
+  font-weight: var(--bold)!important;
+  font-style: normal;
+  font-size: 1.3rem; 
+  color:  #038FFC;
+}
+
+.car-fullname {
+  font-family: "Poppins", serif;
+  font-weight: var(--semiBold)!important;
+  font-style: normal;
+  font-size: 1.4rem; 
+  color: #25282D !important; 
+}
+
+.text-truncate {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.brand-car-btm-txt-btm {
+    background-color: #f7f7f7 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
