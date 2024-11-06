@@ -42,6 +42,7 @@ use Modules\DeliveryCharges\Entities\DeliveryCharge;
 use Modules\Models\Entities\ModelsCars;
 use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
+use Cache;
 
 
 use App\Helpers\MailHelper;
@@ -1277,6 +1278,12 @@ class HomeController extends Controller
     
         return ['start_price_num' => $start_price_num, 'end_price_num' => $end_price_num];
     }
+
+
+
+
+
+
     
 
     public function listings(Request $request){
@@ -1318,6 +1325,10 @@ class HomeController extends Controller
         $year = date('Y'); 
          $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
     }
+
+
+    
+
 
 
     if ($request->brand) {
@@ -1515,6 +1526,78 @@ class HomeController extends Controller
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
     }
+
+
+    public function getBrandsWithModels(): array
+{
+    // Cache key for storing results
+    // $cacheKey = 'brands_models_' . Session::get('front_lang');
+
+    // // Try to get from cache first
+    // return Cache::remember($cacheKey, now()->addHours(24), function() {
+    //     // Get all brands with translations
+    //     $brands = DB::table('brands as b')
+    //         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+    //         ->where('bt.lang_code', Session::get('front_lang'))
+    //         ->select('b.slug', 'bt.name')
+    //         ->get();
+
+    //     // Get all models in a single efficient query
+    //     $allModels = DB::table('auct_lots_xml_jp_op')
+    //         ->select(
+    //             DB::raw('LOWER(company_en) as brand_slug'),
+    //             'model_name_en'
+    //         )
+    //         ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
+    //         ->distinct()
+    //         ->get();
+
+    //     // Group models by brand using collection methods
+    //     return $allModels
+    //         ->groupBy('brand_slug')
+    //         ->map(function ($models) {
+    //             return $models->pluck('model_name_en')->unique()->values();
+    //         })
+    //         ->all();
+    // });
+    $brands = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->where('bt.lang_code', Session::get('front_lang'))
+        ->select('b.slug', 'bt.name')
+        ->get();
+
+    $result = [];
+    
+    // Process in chunks to handle large datasets efficiently
+    $brands = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->where('bt.lang_code', Session::get('front_lang'))
+        ->select('b.slug', 'bt.name')
+        ->get();
+
+    $result = [];
+
+    DB::table('auct_lots_xml_jp_op')
+        ->select(
+            DB::raw('LOWER(company_en) as brand_slug'),
+            'model_name_en'
+        )
+        ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
+        ->distinct()
+        ->orderBy('company_en')
+        ->chunk(1000, function($models) use (&$result) {
+            foreach ($models as $model) {
+                // Normalize case in PHP
+                $normalizedName = ucwords(strtolower($model->model_name_en));
+                $result[$model->brand_slug][$normalizedName] = true;
+            }
+        });
+
+    // Convert to final format and sort
+    return collect($result)->map(function($models) {
+        return collect(array_keys($models))->sort()->values();
+    })->all();
+}
     public function car_listing(Request $request){
 
         $seo_setting = SeoSetting::where('id', 1)->first();
@@ -1526,8 +1609,16 @@ class HomeController extends Controller
         ->where('bt.lang_code',Session::get('front_lang'))
         ->select('b.slug','bt.name as name')
         ->distinct('b.slug')->get();
+
+
+        $brand_arr=$this->getBrandsWithModels();
+
+
         
-        $models=[];
+        
+
+    
+    $models=[];
 
     DB::enableQueryLog();
     // Initialize the query for cars
@@ -1746,7 +1837,8 @@ class HomeController extends Controller
         'transmission' => $transmission,
         'scores' => $scores,
         'jdm_legend'=>$jdm_brand,
-        'models'=>$models
+        'models'=>$models,
+        'brand_arr'=>$brand_arr
         // 'jdm_legend_heavy'=>$jdm_legend_heavy,
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
