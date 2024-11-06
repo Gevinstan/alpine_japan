@@ -29,12 +29,12 @@
 
     <!-- Inventory-part-start -->
 
-    <section class="inventory feature-two listing-breadcrumb">
+    <section class="inventory feature-two listing-breadcrumb bg-light-grey">
         <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
+            <nav aria-label="breadcrumb" class="pt-3">
+                <ol class="breadcrumb breadcrumb-list">
+                    <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -57,125 +57,41 @@
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
-                                                    @if (request()->has('brands'))
-                                                        @php
-                                                            $brand_arr = request()->get('brands');
-                                                        @endphp
-
-                                                        @foreach ($brands as $brand)
-                                                        <span class="form-check">
-                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
-                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                {{ $brand->name }}
-                                                            </label>
-                                                        </span>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach ($brands as $brand)
-                                                            <!-- <span class="form-check">
-                                                                <input name="brands[]" class="form-check-input" type="checkbox"
-                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                    {{ $brand->name }}
-                                                                </label> -->
-                                                                <div class="accordion" id="accordionExample">
-                                                                <div class="accordion-item">
-                                                            <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                    <input name="brands[]" class="form-check-input" type="checkbox"
-                                                                        id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                    <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                        {{ $brand->name }}
-                                                                    </label>
-                                                                </div>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body">
-                                                                                <span class="select-Brand-box p-0 px-2 border-0">
-                                                                                    @if (request()->has('brands'))
-                                                                                        @php
-                                                                                            $brand_arr = request()->get('brands');
-                                                                                        @endphp
-
-                                                                                        @foreach ($brands as $brand)
+                                                    @foreach ($brands as $index=> $brand)
+                                                            <div class="accordion" id="accordionExample">
+                                                            <div class="accordion-item">
+                                                                <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
+                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <input name="brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                             value="{{ $brand->slug }}"
+                                                                            {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
+                                                                        <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                            {{ $brand->name }}
+                                                                        </label>
+                                                                    </div>
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                        <div class="accordion-body">
+                                                                            <span class="select-Brand-box p-0 px-2 border-0">
+                                                                            @if(array_key_exists($brand->slug, $brand_arr))
+                                                                                    @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
-                                                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
-                                                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                                                {{ $brand->name }}
+                                                                                            <input name="model[]" class="form-check-input brand-search" type="checkbox"
+                                                                                                    value="{{ $model }}"
+                                                                                                    {{ in_array(trim($model), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                            <label class="form-check-label">
+                                                                                                {{ $model }}
                                                                                             </label>
                                                                                         </span>
-                                                                                        @endforeach
-                                                                                    @else
-                                                                                        @foreach ($brands as $brand)
-                                                                                            <span class="form-check">
-                                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
-                                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                                                    {{ $brand->name }}
-                                                                                                </label>
-                                                                                            </span>
-                                                                                        @endforeach
-                                                                                    @endif
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                <!-- <div class="accordion" id="accordionExample">
-                                                                    <div class="accordion-item">
-                                                                        <h2 class="accordion-header" id="headingOne">
-                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
-                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                                    {{ $brand->name }}
-                                                                                </label>
-                                                                            </button>
-                                                                        </h2>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body">
-                                                                                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                                            </div>
-                                                                        </div>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse show pt-3" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body">
-                                                                                <span class="select-Brand-box">
-                                                                                    @if (request()->has('brands'))
-                                                                                        @php
-                                                                                            $brand_arr = request()->get('brands');
-                                                                                        @endphp
-
-                                                                                        @foreach ($brands as $brand)
-                                                                                        <span class="form-check">
-                                                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
-                                                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                                                {{ $brand->name }}
-                                                                                            </label>
-                                                                                        </span>
-                                                                                        @endforeach
-                                                                                    @else
-                                                                                        @foreach ($brands as $brand)
-                                                                                            <span class="form-check">
-                                                                                                <input name="brands[]" class="form-check-input" type="checkbox"
-                                                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                                                    {{ $brand->name }}
-                                                                                                </label>
-                                                                                            </span>
-                                                                                        @endforeach
-                                                                                    @endif
-                                                                                </span>
-                                                                            </div>
+                                                                                    @endforeach
+                                                                            @endif
+                                                                            </span>
                                                                         </div>
                                                                     </div>
-                                                                </div> -->
-                                                            </span>
-                                                        </div>
-                                                        </div> 
-                                                        @endforeach
-                                                    @endif
-
-                                                </span>
+                                                        </span>
+                                                    </div>
+                                                    </div> 
+                                                    @endforeach
+                                             </span>
                                             </div>
                                         </div>
                                     </div>
@@ -183,59 +99,6 @@
                                 </div>
                             </div>
                         <!-- Select Your Brand End-->
-
-
-                        <!-- Select Your Model Start -->
-                            <div class="inventory-main-box my-3">
-                                <!-- Select Your Model  -->
-                                <div class="accordion" id="accordionPanelsStayOpenExample">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                                aria-controls="panelsStayOpen-collapseOne">
-                                                Model
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
-                                            aria-labelledby="panelsStayOpen-headingOne">
-                                            <div class="accordion-body">
-                                                <span class="select-Brand-box">
-                                                    @if (request()->has('brands'))
-                                                        @php
-                                                            $brand_arr = request()->get('brands');
-                                                        @endphp
-
-                                                        @foreach ($brands as $brand)
-                                                        <span class="form-check">
-                                                            <input {{ in_array($brand->id, $brand_arr) ? 'checked' : '' }} name="brands[]" class="form-check-input" type="checkbox"
-                                                                id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                            <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                {{ $brand->name }}
-                                                            </label>
-                                                        </span>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach ($brands as $brand)
-                                                            <span class="form-check">
-                                                                <input name="brands[]" class="form-check-input" type="checkbox"
-                                                                    id="flexCheckDefault-{{ $brand->id }}" value="{{ $brand->id }}">
-                                                                <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
-                                                                    {{ $brand->name }}
-                                                                </label>
-                                                            </span>
-                                                        @endforeach
-                                                    @endif
-
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <!-- Select Your Model End -->
-
-
                         <!-- Select Your Budget Start -->
                         <div class="inventory-main-box">
 
@@ -246,7 +109,7 @@
                                         <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
                                             data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                             aria-controls="panelsStayOpen-collapsetwo">
-                                            Budget
+                                            Year
                                         </button>
                                     </h2>
                                     <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
@@ -257,9 +120,11 @@
                                             <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                 <div class="d-flex justify-content-between align-items-center flex-column mt-32px">
                                                     <input type="range" min="1960" max="2024" value="1960" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                    <input type="hidden" id="start_year" name="year">
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <span class="slider-label m-0">1960</span>
-                                                        <span class="slider-value m-0" id="modelYearValue">1960</span>
+                                                         <output name="age_output" id="age_output" for="start" ></output>
+                                                        <span class="slider-value m-0" id="modelYearValue">1960</span>  
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-content-between flex-column gap-4">
@@ -501,44 +366,46 @@
 
                     <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-5">
                         <div class="d-flex align-items-center flex-wrap gap-3">
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
+                        @if(request('brand') && count(request('brand')) > 0)
+                        @foreach(request('brand') as $index => $brandSlug)
+                            <p class="position-relative filter-text px-3 py-1">
+                                <span class="position-relative brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                            <span class="alert-close">
+                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                            </span>
+                                        </span> 
+                                </span>              
                             </p>
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
+                            @endforeach
+                            @endif
+                        @if(request('model') && count(request('model')) > 0)
+                        @foreach(request('model') as $index => $brandSlug)
+                            <p class="position-relative filter-text px-3 py-1">
+                                <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                            <span class="alert-close-model">
+                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                            </span>
+                                        </span> 
+                                </span>              
                             </p>
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
+                            @endforeach
+                            @endif
+                            @if(request('year'))
+                            <p class="position-relative filter-text px-3 py-1">
+                                <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ request('year') }}
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                            <span class="alert-close-year">
+                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                            </span>
+                                        </span> 
+                                </span>              
                             </p>
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
-                            </p>
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
-                            </p>
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
-                            </p>
-                            <p class="position-relative filter-text px-3 py-1"> New alerts
-                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                    <span class=""><img src="{{asset('japan_home/close (2).png')}}" alt="close" /></span>
-                                </span>
-                            </p>
+                            @endif
                         </div>
                         <div>
-                            <button class="btn search-clear-btn">clear</button>
+                            <button class="btn search-clear-btn clear-url">clear</button>
                         </div>
                     </div>
 
@@ -1059,18 +926,144 @@
         (function($) {
             "use strict"
             $(document).ready(function () {
-
+                const form = $('#search_form');
                 $("#outside_form_search").on("keyup",function(e){
                     let inputValue = $(this).val();
                     $("#inside_form_search").val(inputValue);
                 })
 
-                $("#outside_form_btn").on("click",function(e){
+                $("#outside_form_btn,go-button").on("click",function(e){
                     $("#search_form").submit();
                 })
+                $(".brand-search").on('change',function(e){
+                    e.preventDefault();   
+                    $(".model-search").val("")
+                    form.submit();
+                }) 
+                $("#modelYearSlider").on('input',function(e){
+                    $("#age_output").val(parseInt($(this).val()))
+                    $("#start_year").val(parseInt($(this).val()));
+                    // form.submit();
+                })
 
+                $(".clear-url").on('click',function(){
+                    const urlObject = new URL(window.location.href);
+        
+                        // Get origin (protocol + hostname + port)
+                        const origin = urlObject.origin;
+                        
+                        // Get pathname without query parameters
+                        const pathname = urlObject.pathname;
+                        console.log(origin + pathname)
+                        
+                        window.location.href = origin + pathname.toString();
+                        // Combine origin and pathname
+                })
             });
         })(jQuery);
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+            // Attach event listeners to all close buttons
+            const closeButtons = document.querySelectorAll('.alert-close img');
+            const closeButtonsModel = document.querySelectorAll('.alert-close-model img');
+            const closeButtonsYear = document.querySelectorAll('.alert-close-year img');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Prevent default behavior
+                event.preventDefault();
+                
+                // Get the brand slug that is associated with this close button
+                const brandItem = event.target.closest('.brand-item');
+                const brandSlug = brandItem.getAttribute('data-brand');
+                
+                // Get the current URL with the query string
+                const url = new URL(window.location.href);
+                
+                // Get all current brand parameters
+                let brands = url.searchParams.getAll('brand[]'); // Note the change here to 'brand[]'
+                
+                // If no brands found with 'brand[]', try with 'brand'
+                if (brands.length === 0) {
+                    brands = url.searchParams.getAll('brand');
+                }
+                
+                // Remove the clicked brand from the brands array
+                brands = brands.filter(slug => slug !== brandSlug);
+                
+                // Remove all brand parameters
+                url.searchParams.delete('brand[]');
+                url.searchParams.delete('brand');
+                
+                // Add the updated brands back
+                brands.forEach(slug => {
+                    url.searchParams.append('brand[]', slug);
+                });
+                
+                // Remove the brand item from the DOM
+                brandItem.closest('.filter-text').remove();
+                
+                // Navigate to the new URL
+                window.location.href = url.toString();
+            });
+        });
+        closeButtonsModel.forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Prevent default behavior
+                event.preventDefault();
+                
+                // Get the brand slug that is associated with this close button
+                const brandItem = event.target.closest('.model-item');
+                const brandSlug = brandItem.getAttribute('data-brand');
+                
+                // Get the current URL with the query string
+                const url = new URL(window.location.href);
+                
+                // Get all current brand parameters
+                let brands = url.searchParams.getAll('model[]'); // Note the change here to 'brand[]'
+                
+                // If no brands found with 'brand[]', try with 'brand'
+                if (brands.length === 0) {
+                    brands = url.searchParams.getAll('model');
+                }
+                
+                // Remove the clicked brand from the brands array
+                brands = brands.filter(slug => slug !== brandSlug);
+                
+                // Remove all brand parameters
+                url.searchParams.delete('model[]');
+                url.searchParams.delete('model');
+                
+                // Add the updated brands back
+                brands.forEach(slug => {
+                    url.searchParams.append('model[]', slug);
+                });
+                
+                // Remove the brand item from the DOM
+                brandItem.closest('.filter-text').remove();
+                
+                // Navigate to the new URL
+                window.location.href = url.toString();
+            });
+        });
+        closeButtonsYear.forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Prevent default behavior
+                event.preventDefault();
+                // Get the current URL with the query string
+                const url = new URL(window.location.href);
+                // Remove all brand parameters
+                url.searchParams.delete('year');
+                // Navigate to the new URL
+                window.location.href = url.toString();
+            });
+        });
+
+        //year slider work
+       
+    });
+
+
 
     </script>
 @endpush

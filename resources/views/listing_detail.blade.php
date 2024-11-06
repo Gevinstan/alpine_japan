@@ -190,6 +190,7 @@
                                                 <input type="hidden" name="total_car_price" value="" id="hidden_total">
                                                 <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
                                                 <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="url_link" value="{{$url_link}}">
 
                                                 <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
                                             </div>
@@ -292,7 +293,7 @@
 
                                                         {{ __('translate.Chassis number') }}
                                                     </span>
-                                                    {{ html_decode($car->chassis) }}
+                                                    {{ html_decode($car->chassis) }}  
                                                 </li>
 
                                                 <li>

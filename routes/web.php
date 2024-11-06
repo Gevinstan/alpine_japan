@@ -88,12 +88,13 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');
             Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
             Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
-            ->middleware('auth:web');;
+            ->middleware('auth:web');
 
             Route::get('/dealers', 'dealers')->name('dealers');
             Route::get('/dealer/{slug}', 'dealer')->name('dealer');
             Route::post('/send-message-to-dealer/{id}', 'send_message_to_dealer')->name('send-message-to-dealer');
-            Route::post('/send_message_to_company', 'send_message_to_company')->name('send_message_to_company');
+            Route::post('/send_message_to_company', 'send_message_to_company')->name('send_message_to_company')
+            ->middleware('auth:web');
 
             Route::get('/join-as-dealer', 'join_as_dealer')->name('join-as-dealer');
 

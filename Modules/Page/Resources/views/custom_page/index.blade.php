@@ -93,9 +93,11 @@
                                                     </td>
 
                                                     <td class="crancy-table__column-2 crancy-table__data-2">
-                                                        <a href="{{ route('admin.custom-page.edit',['custom_page' => $custom_page->id, 'lang_code' => admin_lang()]) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
+                                                        {{-- <!-- <a href="{{ route('admin.custom-page.edit',['custom_page' => $custom_page->id, 'lang_code' => admin_lang()]) }}" class="crancy-btn"><i class="fas fa-edit"></i> {{ __('translate.Edit') }}</a>
 
-                                                        <a onclick="itemDeleteConfrimation({{ $custom_page->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a>
+                                                        <a onclick="itemDeleteConfrimation({{ $custom_page->id }})" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="crancy-btn delete_danger_btn"><i class="fas fa-trash"></i> {{ __('translate.Delete') }}</a> --> --}}
+                                                        <a href="{{ route('admin.custom-page.edit',['custom_page' => $custom_page->id, 'lang_code' => admin_lang()]) }}" style="color:grey;"><i class="fas fa-edit"></i></a>
+                                                        <a onclick="itemDeleteConfrimation({{ $custom_page->id }})" title="Delete" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                             @endforeach

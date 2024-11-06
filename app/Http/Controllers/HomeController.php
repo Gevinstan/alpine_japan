@@ -42,6 +42,7 @@ use Modules\DeliveryCharges\Entities\DeliveryCharge;
 use Modules\Models\Entities\ModelsCars;
 use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
+use Cache;
 
 
 use App\Helpers\MailHelper;
@@ -242,9 +243,10 @@ class HomeController extends Controller
             ->distinct('b.slug')->get();
 
 
+
             $jdm_brand['car']=$jdm_legend;
             $jdm_brand['heavy']=$jdm_legend_heavy;
-            $jdm_brand['small_heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
             // echo json_encode($jdm_car_listings);die();
 
@@ -453,7 +455,7 @@ class HomeController extends Controller
 
             $jdm_brand['car']=$jdm_legend;
             $jdm_brand['heavy']=$jdm_legend_heavy;
-            $jdm_brand['small_heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
             // echo json_encode($jdm_car_listings);die();
 
@@ -738,7 +740,7 @@ class HomeController extends Controller
 
             $jdm_brand['car']=$jdm_legend;
             $jdm_brand['heavy']=$jdm_legend_heavy;
-            $jdm_brand['small_heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
             $price_range = $this->getPriceRange();
             $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
             ->groupBy('transmission_en')
@@ -811,7 +813,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
         $jdm_core_brand = Brand::where('status', 'enable')->get();
 
         return view('jdm-listing', [
@@ -873,7 +875,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
         $seo_setting = SeoSetting::where('id', 3)->first();
 
@@ -925,7 +927,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
         return view('contact_us')->with([
@@ -963,7 +965,7 @@ class HomeController extends Controller
  
          $jdm_brand['car']=$jdm_legend;
          $jdm_brand['heavy']=$jdm_legend_heavy;
-         $jdm_brand['small_heavy']=$jdm_legend_heavy;
+         $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
  
         return view('shipment')->with([
             'seo_setting' => $seo_setting,
@@ -1028,7 +1030,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
         
 
@@ -1090,7 +1092,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
         return view('brand-listing')->with([
@@ -1154,7 +1156,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
      
@@ -1203,7 +1205,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
         
@@ -1276,6 +1278,12 @@ class HomeController extends Controller
     
         return ['start_price_num' => $start_price_num, 'end_price_num' => $end_price_num];
     }
+
+
+
+
+
+
     
 
     public function listings(Request $request){
@@ -1319,6 +1327,10 @@ class HomeController extends Controller
     }
 
 
+    
+
+
+
     if ($request->brand) {
         // $brand_arr = array_filter($request->brand); // Filter out any empty values
         // if ($brand_arr) {
@@ -1492,7 +1504,7 @@ class HomeController extends Controller
 
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
-    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
     return view('listing', [
@@ -1514,6 +1526,78 @@ class HomeController extends Controller
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
     }
+
+
+    public function getBrandsWithModels(): array
+{
+    // Cache key for storing results
+    // $cacheKey = 'brands_models_' . Session::get('front_lang');
+
+    // // Try to get from cache first
+    // return Cache::remember($cacheKey, now()->addHours(24), function() {
+    //     // Get all brands with translations
+    //     $brands = DB::table('brands as b')
+    //         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+    //         ->where('bt.lang_code', Session::get('front_lang'))
+    //         ->select('b.slug', 'bt.name')
+    //         ->get();
+
+    //     // Get all models in a single efficient query
+    //     $allModels = DB::table('auct_lots_xml_jp_op')
+    //         ->select(
+    //             DB::raw('LOWER(company_en) as brand_slug'),
+    //             'model_name_en'
+    //         )
+    //         ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
+    //         ->distinct()
+    //         ->get();
+
+    //     // Group models by brand using collection methods
+    //     return $allModels
+    //         ->groupBy('brand_slug')
+    //         ->map(function ($models) {
+    //             return $models->pluck('model_name_en')->unique()->values();
+    //         })
+    //         ->all();
+    // });
+    $brands = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->where('bt.lang_code', Session::get('front_lang'))
+        ->select('b.slug', 'bt.name')
+        ->get();
+
+    $result = [];
+    
+    // Process in chunks to handle large datasets efficiently
+    $brands = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->where('bt.lang_code', Session::get('front_lang'))
+        ->select('b.slug', 'bt.name')
+        ->get();
+
+    $result = [];
+
+    DB::table('auct_lots_xml_jp_op')
+        ->select(
+            DB::raw('LOWER(company_en) as brand_slug'),
+            'model_name_en'
+        )
+        ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
+        ->distinct()
+        ->orderBy('company_en')
+        ->chunk(1000, function($models) use (&$result) {
+            foreach ($models as $model) {
+                // Normalize case in PHP
+                $normalizedName = ucwords(strtolower($model->model_name_en));
+                $result[$model->brand_slug][$normalizedName] = true;
+            }
+        });
+
+    // Convert to final format and sort
+    return collect($result)->map(function($models) {
+        return collect(array_keys($models))->sort()->values();
+    })->all();
+}
     public function car_listing(Request $request){
 
         $seo_setting = SeoSetting::where('id', 1)->first();
@@ -1525,8 +1609,16 @@ class HomeController extends Controller
         ->where('bt.lang_code',Session::get('front_lang'))
         ->select('b.slug','bt.name as name')
         ->distinct('b.slug')->get();
+
+
+        $brand_arr=$this->getBrandsWithModels();
+
+
         
-        $models=[];
+        
+
+    
+    $models=[];
 
     DB::enableQueryLog();
     // Initialize the query for cars
@@ -1728,7 +1820,7 @@ class HomeController extends Controller
 
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
-    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
     return view('car-listing', [
@@ -1745,7 +1837,8 @@ class HomeController extends Controller
         'transmission' => $transmission,
         'scores' => $scores,
         'jdm_legend'=>$jdm_brand,
-        'models'=>$models
+        'models'=>$models,
+        'brand_arr'=>$brand_arr
         // 'jdm_legend_heavy'=>$jdm_legend_heavy,
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
@@ -2001,7 +2094,7 @@ class HomeController extends Controller
 
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
-    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
         return view('top-ratings', [
             'seo_setting' => $seo_setting,
@@ -2189,7 +2282,7 @@ class HomeController extends Controller
        
 
         // Pagination
-        $cars = $carsQuery->where('active_status','1')->paginate(12);
+        $cars = $carsQuery->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -2257,7 +2350,7 @@ class HomeController extends Controller
 
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
-    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
     // echo json_encode($models);die();
 
@@ -2510,7 +2603,7 @@ class HomeController extends Controller
 
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
-    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+    $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
         return view('new-arrival', [
             'seo_setting' => $seo_setting,
@@ -2671,7 +2764,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
 
@@ -2728,7 +2821,7 @@ class HomeController extends Controller
 
         $jdm_brand['car']=$jdm_legend;
         $jdm_brand['heavy']=$jdm_legend_heavy;
-        $jdm_brand['small_heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
 
