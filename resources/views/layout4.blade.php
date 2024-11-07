@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/fontawesome/css/all.css') }}">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
     @stack('style_section')
 
