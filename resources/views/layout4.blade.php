@@ -71,7 +71,7 @@
     @else
     <header class="header header-two inner-header p-0">
     @endif
-        <div class="container header-border py-2">
+        <div class="container header-border py-2 px-5 ">
             <div class="d-flex justify-content-end align-items-center">
                 <!-- <div class="col-lg-7 col-p-0">
                     <div class="header-left-item">
@@ -114,47 +114,47 @@
                     <ul class="d-flex gap-5">
                         <li>
                             <div class="dropdown">
-                            <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
-                                id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>
-                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <ellipse cx="11.0001" cy="11" rx="4" ry="10" stroke-width="1.5" />
-                                        <path
-                                            d="M20.9962 10.7205C19.1938 12.2016 15.3949 13.2222 11 13.2222C6.60511 13.2222 2.80619 12.2016 1.00383 10.7205M20.9962 10.7205C20.8482 5.32691 16.4294 1 11 1C5.57061 1 1.15183 5.32691 1.00383 10.7205M20.9962 10.7205C20.9987 10.8134 21 10.9065 21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 10.9065 1.00128 10.8134 1.00383 10.7205"
-                                            stroke-width="1.5" />
-                                    </svg>
-                                </span>
-                                {{ Session::get('front_lang_name') }}
+                                <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
+                                    id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <ellipse cx="11.0001" cy="11" rx="4" ry="10" stroke-width="1.5" />
+                                            <path
+                                                d="M20.9962 10.7205C19.1938 12.2016 15.3949 13.2222 11 13.2222C6.60511 13.2222 2.80619 12.2016 1.00383 10.7205M20.9962 10.7205C20.8482 5.32691 16.4294 1 11 1C5.57061 1 1.15183 5.32691 1.00383 10.7205M20.9962 10.7205C20.9987 10.8134 21 10.9065 21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 10.9065 1.00128 10.8134 1.00383 10.7205"
+                                                stroke-width="1.5" />
+                                        </svg>
+                                    </span>
+                                    {{ Session::get('front_lang_name') }}
 
-                                <span class="btn-arrow">
-                                    <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
-                                    </svg>
-                                </span>
-                            </a>
+                                    <span class="btn-arrow">
+                                        <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
+                                        </svg>
+                                    </span>
+                                </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach ($language_list as $language_dropdown_item)
-                                    <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    @foreach ($language_list as $language_dropdown_item)
+                                        <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </li>
                         <li class="text-white heading-fs-14">
-                        <span class="icon-circle"><i class="bi bi-envelope"></i></span>
+                            <img src="{{asset('japan_home/mail-id.svg')}}" />
                              {{ $setting->email }}
                         </li>
                         <li class="text-white heading-fs-14">
-                        <span class="icon-circle"><i class="bi bi-phone"></i></span>
-                            {{ $setting->phone }}
+                            <img src="{{asset('japan_home/phone.svg')}}" />
+                             {{ $setting->phone }}
                         </li>
                         <li>
-                            <img src="{{asset('japan_home/insta.png')}}" />
-                            <img src="{{asset('japan_home/facebook.png')}}" />
-                            <img src="{{asset('japan_home/youtube.png')}}" />
+                            <img src="{{asset('japan_home/instagram.svg')}}" />
+                            <img src="{{asset('japan_home/facebook.svg')}}" />
+                            <img src="{{asset('japan_home/youtube.svg')}}" />
                         </li>
                     </ul>
                 </div>

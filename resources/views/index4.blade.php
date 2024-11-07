@@ -205,7 +205,12 @@
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
-                                                 <img src="{{ asset($car['picture']) }}" alt="thumb">
+
+                                                <div class="brand-new-car">
+                                                    <!-- <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image"> -->
+                                                    <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/>
+                                                </div>
+                                                 
 
                                                     <div class="brand-car-item-img-text justify-content-end">
                                                         <div class="icon-main">
@@ -221,24 +226,26 @@
 
                                                 <div class="brand-car-inner">
                                                     <div class="brand-car-inner-item">
-                                                        <span class="fw-bolder">
+
+                                                        <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
                                                             @if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                             @else
                                                             {{ $car['company'] }}
                                                             @endif
                                                         </span>
-                                                        <p>
+                                                        <p class="listcar_price pt-3 pe-4">
                                                             @if(session('front_lang')=='en')
                                                             {{'$'.$car['start_price_num'] }}
                                                             @else
                                                             {{'$'.$car['start_price'] }}
                                                             @endif
                                                         </p>
+
                                                     </div>
 
-                                                    <a href="{{ route('listing', $car['id']) }}">
-                                                        <h3>
+                                                     <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                        <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                             @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
                                                             @else
@@ -247,7 +254,7 @@
                                                         </h3>
                                                     </a>
 
-                                                    <div class="brand-car-inner-item-main">
+                                                    <div class="brand-car-inner-item-main pt-2 px-4">
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -267,6 +274,7 @@
                                                                 @endif
                                                             </span>
                                                         </div>
+                                                        <p>.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -282,6 +290,7 @@
                                                               
                                                             </span>
                                                         </div>
+                                                        <p>.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -298,9 +307,9 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="brand-car-btm-txt-btm">
+                                                    <div class="brand-car-btm-txt-btm py-2 px-3">
                                                         <p>
-                                                            <i class="bi bi-geo-alt-fill"></i>
+                                                            <i class="bi bi-geo-alt-fill fs-6"></i>
                                                             <span class="brand-location">Hyogo, Japan</span>
                                                         </p>
                                                         <div class="d-flex flex-column">
