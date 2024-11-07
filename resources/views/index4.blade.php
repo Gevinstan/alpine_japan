@@ -885,7 +885,7 @@
             </div>
 
             <div class="d-flex align-items-center justify-content-center pt-5">
-                <a href="{{ route('new-arrival') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
+                <a href="{{ route('new-arrival-responsive') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
     </section>

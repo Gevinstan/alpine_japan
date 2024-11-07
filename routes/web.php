@@ -84,6 +84,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/top-selling', 'top_selling')->name('top-selling');
             Route::get('/top-selling_responsive', 'top_selling1')->name('top-selling_responsive');
             Route::get('/new-arrival', 'new_arrival')->name('new-arrival');
+            Route::get('/new-arrival-responsive', 'new_arrival1')->name('new-arrival-responsive');
             Route::post('/get-brand-models', 'getBrandModels')->name('get-brand-models');
             Route::get('/listing/{slug}', 'listing')->name('listing');
             Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');
