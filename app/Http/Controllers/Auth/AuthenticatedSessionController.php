@@ -91,7 +91,8 @@ class AuthenticatedSessionController extends Controller
                             $notification=array('messege'=>$notification,'alert-type'=>'success');
                         
                             if(Session::get('auct_id')!=""){
-                                return redirect()->route('auction-car-marketplace')->with($notification);
+                                // return redirect()->route('auction-car-marketplace')->with($notification);
+                                return redirect()->route('auction-car-marketplace-responsive')->with($notification);
                             } else {
                                 return redirect()->route('user.dashboard')->with($notification);
                             }

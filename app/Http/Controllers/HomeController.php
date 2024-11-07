@@ -1482,7 +1482,7 @@ class HomeController extends Controller
     $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
-    return view('listing1', [
+    return view('listing', [
         'seo_setting' => $seo_setting,
         'brands' => $brands,
         'cities' => $cities,
@@ -1528,7 +1528,7 @@ public function getBrandsWithModels($keywhere,$database_name): array
         $tableName='auct_lots_xml_jp';
     }
 
-    DB::table('auct_lots_xml_jp_op')
+    DB::table($tableName)
         ->select(
             DB::raw('LOWER(company_en) as brand_slug'),
             'model_name_en'
@@ -2649,6 +2649,10 @@ public function car_listing(Request $request){
         ->where('bt.lang_code',Session::get('front_lang'))
         ->select('b.slug','bt.name as name')
         ->distinct('b.slug')->get();
+
+        $keyWhere ="";
+        $tableName='2';
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
         $models=[];
 
 
@@ -2672,20 +2676,24 @@ public function car_listing(Request $request){
         }
 
         if ($request->brand) {
-            // $brand_arr = array_filter($request->brand); // Filter out any empty values
-            // if ($brand_arr) {
-                // $carsQuery->whereIn('company_en', $brand_arr); 
-                $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
+            $brand_arr = array_filter($request->brand); // Filter out any empty values
+            if ($brand_arr) {
+                $carsQuery->whereIn('company_en', $brand_arr); 
+                // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp_op')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
                 ->groupBy('model_name_en') 
                 ->select('model_name_en')
                 ->get();
-            // }    
+            }    
         }
     
         if($request->model){
-            $carsQuery->where('model_name_en', $request->model); 
+            $model_arr = array_filter($request->model); // Filter out any empty values
+            if ($model_arr) {
+                $carsQuery->whereIn('model_name_en', $model_arr); 
+            }
+            // $carsQuery->where('model_name_en', $request->model); 
         }
 
         if($request->brand_new_cars){
@@ -2891,7 +2899,7 @@ public function car_listing(Request $request){
 
     // echo json_encode($models);die();
 
-        return view('auction-car-marketplace', [
+        return view('auction-car-marketplace1', [
             'seo_setting' => $seo_setting,
             'brands' => $brands,
             'cities' => $cities,
@@ -2905,7 +2913,12 @@ public function car_listing(Request $request){
             'scores' => $scores,
             'jdm_legend'=>$jdm_brand,
             'jdm_core_brand'=>$jdm_core_brand,
-            'models'=>$models
+            'models'=>$models,
+            'brand_arr'=>$brand_list,
+            'minYear'=>$minYear,
+            'maxYear'=>$maxYear,
+            'minPrice'=>$minPrice,
+            'maxPrice'=>$maxPrice
         ]);
     }
     public function new_arrival(Request $request){
@@ -3335,7 +3348,7 @@ public function car_listing(Request $request){
 
 
 
-        return view('listing_detail1', [
+        return view('listing_detail', [
             'car' => $car,
             'galleries' => $images, 
             'related_listings' => $related_listings,

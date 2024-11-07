@@ -611,7 +611,7 @@
     </section>
 
     <!-- pagination ends -->
-            <script>
+<script>
   const setLabel = (lbl, val) => {
   const label = $(`#slider-${lbl}-label`);
   label.text(val);

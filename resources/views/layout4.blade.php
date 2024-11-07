@@ -221,7 +221,7 @@
                                         </li>
                                         <li class="nav-item">
                                             @if(Auth::guard('web')->check())
-                                                <a class="nav-link" href="{{ route('auction-car-marketplace') }}">
+                                                <a class="nav-link" href="{{ route('auction-car-marketplace-responsive') }}">
                                                 {{ __('translate.Live Auction') }}
                                                 </a>
                                             @else 
@@ -877,67 +877,77 @@
                 toastr.error("{{ Session::get('messege') }}");
                 break;
         }
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <script>
-                    toastr.error('{{ $error }}');
-                </script>
-            @endforeach
         @endif
+    </script>
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                toastr.error('{{ $error }}');
+            </script>
+        @endforeach
+    @endif
 
 
-        @stack('js_section')
+    @stack('js_section')
 
-        <script>
-            (function($) {
-                "use strict"
-                $(document).ready(function () {
-                    $('.cookie_consent_close_btn').on('click', function(){
-                        $('.cookie_consent_modal').addClass('d-none');
-                    });
-
-                    $('.cookie_consent_accept_btn').on('click',function() {
-                        localStorage.setItem('car-listo-cookie','1');
-                        $('.cookie_consent_modal').addClass('d-none');
-                    });
-
-                    $('.before_auth_wishlist').on("click", function(){
-                        toastr.error("{{ __('translate.Please login first') }}")
-                    });
-
+    <script>
+         $(()=>{
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         });
+         });
+        (function($) {
+            "use strict"
+            $(document).ready(function () {
+                $('.cookie_consent_close_btn').on('click', function(){
+                    $('.cookie_consent_modal').addClass('d-none');
                 });
-            })(jQuery);
 
-            if (localStorage.getItem('car-listo-cookie') != '1') {
-                $('.cookie_consent_modal').removeClass('d-none');
-            }
-            function auct_logout(){
-                Swal.fire({
-                    title: "{{__('Login or Register to access this page ?')}}",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: "{{__('Yes, Ok')}}",
-                    cancelButtonText: "{{__('Cancel')}}",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url:"{{route('auct-sess-creation')}}",
-                            type:'POST',
-                            data:{'key':'acut_sess'},
-                            success:function(data){
-                                window.location.href = "{{ url('/user/dashboard') }}";
-                            }    
-                        })
-                        // $("#remove_car_"+id).submit();
-                    }
+                $('.cookie_consent_accept_btn').on('click',function() {
+                    localStorage.setItem('car-listo-cookie','1');
+                    $('.cookie_consent_modal').addClass('d-none');
+                });
 
-                })
-            }
+                $('.before_auth_wishlist').on("click", function(){
+                    toastr.error("{{ __('translate.Please login first') }}")
+                });
 
-        </script>
+            });
+        })(jQuery);
 
+        if (localStorage.getItem('car-listo-cookie') != '1') {
+            $('.cookie_consent_modal').removeClass('d-none');
+        }
+
+
+        function auct_logout(){
+            Swal.fire({
+                title: "{{__('Login or Register to access this page ?')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "{{__('Yes, Ok')}}",
+                cancelButtonText: "{{__('Cancel')}}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:"{{route('auct-sess-creation')}}",
+                        type:'POST',
+                        data:{'key':'acut_sess'},
+                        success:function(data){
+                            window.location.href = "{{ url('/user/dashboard') }}";
+                        }    
+                    })
+                    // $("#remove_car_"+id).submit();
+                }
+
+            })
+        }
+    </script>
     </body>
 
     </html>

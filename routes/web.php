@@ -90,6 +90,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
             Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
             ->middleware('auth:web');
+            Route::get('/auction-car-marketplace-responsive', 'auctionCar1')->name('auction-car-marketplace-responsive')
+            ->middleware('auth:web');
 
             Route::get('/dealers', 'dealers')->name('dealers');
             Route::get('/dealer/{slug}', 'dealer')->name('dealer');
