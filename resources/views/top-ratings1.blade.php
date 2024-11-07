@@ -1074,7 +1074,7 @@ $('#ex2').on('slide', function(slideEvt) {
   var minYear = slideEvt.value[0];
   var maxYear = slideEvt.value[1];
 
-  console.log(`${minYear},${maxYear}`)
+
   // Update the input values
   $('#ex2').val(`${minYear},${maxYear}`);
 

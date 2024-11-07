@@ -1503,38 +1503,8 @@ class HomeController extends Controller
     }
 
 
-    public function getBrandsWithModels(): array
-{
-    // Cache key for storing results
-    // $cacheKey = 'brands_models_' . Session::get('front_lang');
-
-    // // Try to get from cache first
-    // return Cache::remember($cacheKey, now()->addHours(24), function() {
-    //     // Get all brands with translations
-    //     $brands = DB::table('brands as b')
-    //         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
-    //         ->where('bt.lang_code', Session::get('front_lang'))
-    //         ->select('b.slug', 'bt.name')
-    //         ->get();
-
-    //     // Get all models in a single efficient query
-    //     $allModels = DB::table('auct_lots_xml_jp_op')
-    //         ->select(
-    //             DB::raw('LOWER(company_en) as brand_slug'),
-    //             'model_name_en'
-    //         )
-    //         ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
-    //         ->distinct()
-    //         ->get();
-
-    //     // Group models by brand using collection methods
-    //     return $allModels
-    //         ->groupBy('brand_slug')
-    //         ->map(function ($models) {
-    //             return $models->pluck('model_name_en')->unique()->values();
-    //         })
-    //         ->all();
-    // });
+public function getBrandsWithModels(): array
+{    
     $brands = DB::table('brands as b')
         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
         ->where('bt.lang_code', Session::get('front_lang'))
@@ -1573,7 +1543,7 @@ class HomeController extends Controller
         return collect(array_keys($models))->sort()->values();
     })->all();
 }
-    public function car_listing(Request $request){
+public function car_listing(Request $request){
 
         $seo_setting = SeoSetting::where('id', 1)->first();
 
@@ -1600,10 +1570,18 @@ class HomeController extends Controller
     $yearRange = CarDataJpOp::where('active_status', '1')
     ->selectRaw('MIN(model_year_en) as min_year, MAX(model_year_en) as max_year')
     ->first();
+    $priceRange = CarDataJpOp::where('active_status', '1')
+    ->selectRaw('MIN(start_price_num) as min_sal, MAX(start_price_num) as max_sal')
+    ->first();
+
+
+    // echo json_encode($priceRange);die();
 
     // Get min and max years
     $minYear = $yearRange->min_year;
     $maxYear = $yearRange->max_year;
+    $minPrice = $priceRange->min_sal;
+    $maxPrice = $priceRange->max_sal;
 
 
 
@@ -1611,13 +1589,12 @@ class HomeController extends Controller
     $carsQuery = CarDataJpOp::query();
 
     // Apply filters based on request parameters
-    if ($request->location) {
-        $carsQuery->where('city_id', $request->location);
-    }
+   
 
     if($request->price_range_scale){
         if($request->price_range_scale !=""){  
-            $parts = explode('-', $request->price_range_scale);
+            $parts = explode(',', $request->price_range_scale);
+
             $startValue = trim($parts[0]);
             $endValue = trim($parts[1]);
             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
@@ -1627,10 +1604,6 @@ class HomeController extends Controller
         }
     }
 
-    if($request->brand_new_cars){
-        $year = date('Y'); 
-         $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
-    }
 
 
     if ($request->brand) {
@@ -1652,12 +1625,12 @@ class HomeController extends Controller
             $carsQuery->whereIn('model_name_en', $model_arr); 
         }
     }
-    if ($request->tranmission) {
-        $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
-        if ($transmission_arr) {
-            $carsQuery->whereIn('transmission_en', $transmission_arr); 
-        }    
-    }
+    // if ($request->tranmission) {
+    //     $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
+    //     if ($transmission_arr) {
+    //         $carsQuery->whereIn('transmission_en', $transmission_arr); 
+    //     }    
+    // }
 
     if($request->year){
         if($request->year !="")
@@ -1693,21 +1666,21 @@ class HomeController extends Controller
         }  
     }
 
-    if ($request->scores_en) {
-        $score_arr = array_filter($request->scores_en); // Filter out any empty values
-        if ($score_arr) {
-            $carsQuery->whereIn('scores_en', $score_arr); 
-        }
-    }
+    // if ($request->scores_en) {
+    //     $score_arr = array_filter($request->scores_en); // Filter out any empty values
+    //     if ($score_arr) {
+    //         $carsQuery->whereIn('scores_en', $score_arr); 
+    //     }
+    // }
 
 
-    if ($request->price_filter) {
-        if ($request->price_filter === 'low_to_high') {
-            $carsQuery->orderBy('regular_price', 'asc');
-        } elseif ($request->price_filter === 'high_to_low') {
-            $carsQuery->orderBy('regular_price', 'desc');
-        }
-    }
+    // if ($request->price_filter) {
+    //     if ($request->price_filter === 'low_to_high') {
+    //         $carsQuery->orderBy('regular_price', 'asc');
+    //     } elseif ($request->price_filter === 'high_to_low') {
+    //         $carsQuery->orderBy('regular_price', 'desc');
+    //     }
+    // }
 
     if ($request->search) {
         // if(Session::get('front_lang') == '')
@@ -1768,23 +1741,23 @@ class HomeController extends Controller
 
     // Get additional data
     $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
-    $cities = City::with('translate')->get();
-    $features = Feature::with('translate')->get();
+    // $cities = City::with('translate')->get();
+    // $features = Feature::with('translate')->get();
 
     $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
         ->groupBy('company_en')
         ->having('count', '>', 1)
         ->get();
 
-    $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
-        ->groupBy('transmission_en')
-        ->having('count', '>', 1)
-        ->get();
+    // $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+    //     ->groupBy('transmission_en')
+    //     ->having('count', '>', 1)
+    //     ->get();
 
-    $scores = CarDataJpOp::selectRaw('scores_en, COUNT(*) as count')
-        ->groupBy('scores_en')
-        ->having('count', '>', 1)
-        ->get();
+    // $scores = CarDataJpOp::selectRaw('scores_en, COUNT(*) as count')
+    //     ->groupBy('scores_en')
+    //     ->having('count', '>', 1)
+    //     ->get();
 
     $price_range = $this->getPriceRange();
 
@@ -1830,7 +1803,9 @@ class HomeController extends Controller
         'models'=>$models,
         'brand_arr'=>$brand_arr,
         'minYear'=>$minYear,
-        'maxYear'=>$maxYear
+        'maxYear'=>$maxYear,
+        'minPrice'=>$minPrice,
+        'maxPrice'=>$maxPrice
         // 'jdm_legend_heavy'=>$jdm_legend_heavy,
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
