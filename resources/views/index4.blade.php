@@ -77,7 +77,8 @@
                         <div class="banner-slick">
                         @foreach (array_slice($top_sells, 0, 3) as $index => $car)
                                 <div class="banner-slick-thumb">
-                                <img src="{{ asset($car['picture']) }}" alt="thumb" >
+                                    <img src="{{ asset($car['picture']) }}" alt="thumb" >
+
                                     <div class="banner-slick-thumb-overlay">
                                         <div class="banner-slick-thumb-txt">
                                             <p>{{ $car['model_name_en'] }}</p>
@@ -125,7 +126,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
                         </div>
                     </div>
                 </div>
