@@ -168,7 +168,7 @@
 
             <div class="d-flex align-items-center justify-content-center pt-5">
                 <div class="categories-three-view-btn">
-                    <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
+                    <a href="{{ route('brand-listing') }}" class="thm-btn">SEE ALL</a>
                 </div>
             </div>
         </div>

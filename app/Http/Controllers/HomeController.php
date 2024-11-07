@@ -1568,7 +1568,7 @@ public function car_listing(Request $request){
         ->distinct('b.slug')->get();
 
 
-        $keyWhere =="";
+        $keyWhere ="";
         $tableName='1';
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
 
