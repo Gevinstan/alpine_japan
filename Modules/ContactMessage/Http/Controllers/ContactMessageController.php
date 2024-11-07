@@ -83,7 +83,6 @@ class ContactMessageController extends Controller
     }
 
     public function contact_message(){
-
         $contact_messages = ContactMessage::orderBy('id','desc')->latest()->get();
         return view('contactmessage::contact_message', compact('contact_messages'));
     }

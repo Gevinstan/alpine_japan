@@ -42,7 +42,7 @@
                 </div>
             </div>
         </section>
-        <section>
+      <section>
             <div class="container-fluid">
                 <div class="row" style=" padding-top: 20px;padding-bottom: 14px">
                     <div class="col-lg-12">
@@ -621,7 +621,7 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section> 
 
     <!-- Inventory-part-end -->
 

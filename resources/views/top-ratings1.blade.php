@@ -7,25 +7,7 @@
 
 @section('body-content')
 <main>
-    <!-- banner-part-start  -->
 
-    <!-- <section class="inner-banner">
-        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="inner-banner-df">
-                    <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- banner-part-end -->
 
     <!-- Inventory-part-start -->
 
@@ -134,44 +116,6 @@
                                                 <!-- <button class="clear-button">Clear</button>
                                                 <button class="go-button">Go</button> -->
                                             </div>
-
-                                                <!-- @if (request()->has('condition'))
-                                                    @php
-                                                        $condition_arr = request()->get('condition');
-                                                    @endphp
-
-                                                    <span class="form-check">
-                                                        <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
-                                                            id="new_condition" name="condition[]">
-                                                        <label class="form-check-label" for="new_condition">
-                                                            {{ __('translate.New') }}
-                                                        </label>
-                                                    </span>
-                                                    <span class="form-check">
-                                                        <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
-                                                            id="used_condition" name="condition[]">
-                                                        <label class="form-check-label" for="used_condition">
-                                                            {{ __('translate.Used') }}
-                                                        </label>
-                                                    </span>
-
-                                                @else
-                                                    <span class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="New"
-                                                            id="new_condition" name="condition[]">
-                                                        <label class="form-check-label" for="new_condition">
-                                                            {{ __('translate.New') }}
-                                                        </label>
-                                                    </span>
-                                                    <span class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="Used"
-                                                            id="used_condition" name="condition[]">
-                                                        <label class="form-check-label" for="used_condition">
-                                                            {{ __('translate.Used') }}
-                                                        </label>
-                                                    </span>
-                                                @endif -->
-
                                             </span>
                                         </div>
                                     </div>
@@ -179,7 +123,7 @@
 
                             </div>
 
-                         
+                   
 
                         </div>
                         <!-- Select Your Year End -->
@@ -1042,3 +986,4 @@ $('#ex2').on('slide', function(slideEvt) {
 
     </script>
 @endpush
+        

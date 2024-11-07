@@ -476,7 +476,7 @@
                             </div>
                         </div>
                         <div class="brand-car-btn mt-48px">
-                            <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
+                            <a href="{{ route('top-selling_responsive') }}" class="thm-btn">SEE ALL</a>
                         </div>
                     </div>
                 </div>

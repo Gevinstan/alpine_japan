@@ -30,6 +30,8 @@
 
     <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('frontend/assets/fontawesome/css/all.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
     @stack('style_section')
 
 
@@ -850,6 +852,10 @@
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
+
+    <!-- jquery  -->
+    <script src="{{ asset('global/jquery-3.7.1.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
 
     <script>
         @if(Session::has('messege'))

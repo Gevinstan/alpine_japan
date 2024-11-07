@@ -715,10 +715,7 @@ endRange.addEventListener('input', () => {
         //     yearChanged = ($(this).val() !== initialYear);
         // });
 
-        $("#outside_form_search").on("keyup", function(e) {
-            let inputValue = $(this).val();
-            $("#inside_form_search").val(inputValue);
-        });
+     
 
         $("#outside_form_btn").on("click", function(e) {
             e.preventDefault();   
