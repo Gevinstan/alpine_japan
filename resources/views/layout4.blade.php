@@ -4,12 +4,13 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="icon" href="{{ asset($setting->favicon) }}">
 
         @yield('title')
+        <!-- Additionally cdn link  -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
         <!-- fontawesome csn link  -->
         <link rel="stylesheet" href="{{ asset('frontend/assets/fontawesome/css/all.css') }}">
         <!--bootstrap.min.css  -->
@@ -27,12 +28,7 @@
 
         <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('frontend/assets/fontawesome/css/all.css') }}">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" crossorigin="anonymous" />
-    @stack('style_section')
+        @stack('style_section')
 
 
         @if ($google_analytic->status == 1)
@@ -67,49 +63,18 @@
 
     <body>
 
-    <!-- header part start  -->
-    @if (Route::is('home'))
-    <header class="header p-0 {{ Session::get('selected_theme') != 'theme_three' ? 'header-two' : ''  }}  {{ Session::get('selected_theme') == 'theme_two' ? 'header-three' : ''  }}">
-    @else
-    <header class="header header-two inner-header p-0">
-    @endif
-        <div class="container header-border py-2 px-5 ">
-            <div class="d-flex justify-content-end align-items-center">
-                <!-- <div class="col-lg-7 col-p-0">
-                    <div class="header-left-item">
-                        <div class="header-left-inner">
-                            <div class="icon">
-                                <span>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M2 12V7C2 4.79086 3.79086 3 6 3H18C20.2091 3 22 4.79086 22 7V17C22 19.2091 20.2091 21 18 21H8M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M2 15H8M2 18H8"
-                                            stroke-width="1.5" stroke-linecap="round" />
-                                    </svg>
-                                </span>
-                            </div>
-                            </li>
-                            <li class="text-white heading-fs-14">
-                            <span class="icon-circle"><i class="bi bi-envelope"></i></span>
-                                {{ $setting->email }}
-                            </li>
-                            <li class="text-white heading-fs-14">
-                            <span class="icon-circle"><i class="bi bi-phone"></i></span>
-                                {{ $setting->phone }}
-                            </li>
+        <!-- header part start  -->
+        @if (Route::is('home'))
+        <header class="header p-0 {{ Session::get('selected_theme') != 'theme_three' ? 'header-two' : ''  }}  {{ Session::get('selected_theme') == 'theme_two' ? 'header-three' : ''  }}">
+        @else
+        <header class="header header-two inner-header p-0">
+        @endif
+            <div class="container header-border py-2 px-5">
+                <div class="d-flex justify-content-end align-items-center">
+                    <div>
+                        <ul class="d-flex gap-5">
                             <li>
-                                <img src="{{asset('japan_home/insta.png')}}" />
-                                <img src="{{asset('japan_home/facebook.png')}}" />
-                                <img src="{{asset('japan_home/youtube.png')}}" />
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
-
-                <div>
-                    <ul class="d-flex gap-5">
-                        <li>
-                            <div class="dropdown">
+                                <div class="dropdown">
                                 <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
                                     id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>
@@ -138,27 +103,28 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </li>
-                        <li class="text-white heading-fs-14">
-                            <img src="{{asset('japan_home/mail-id.svg')}}" />
-                             {{ $setting->email }}
-                        </li>
-                        <li class="text-white heading-fs-14">
-                            <img src="{{asset('japan_home/phone.svg')}}" />
-                             {{ $setting->phone }}
-                        </li>
-                        <li>
-                            <img src="{{asset('japan_home/instagram.svg')}}" />
-                            <img src="{{asset('japan_home/facebook.svg')}}" />
-                            <img src="{{asset('japan_home/youtube.svg')}}" />
-                        </li>
-                    </ul>
+                            </li>
+                            <li class="text-white heading-fs-14">
+                                <img src="{{asset('japan_home/email.png')}}" />
+                                {{ $setting->email }}
+                            </li>
+                            <li class="text-white heading-fs-14">
+                                <img src="{{asset('japan_home/mob.png')}}" />
+                                {{ $setting->phone }}
+                            </li>
+                            <li>
+                                <img src="{{asset('japan_home/insta.png')}}" />
+                                <img src="{{asset('japan_home/facebook.png')}}" />
+                                <img src="{{asset('japan_home/youtube.png')}}" />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
 
             <nav class="menu-bg m-0 px-2">
-                <div class="container">
+                <div class="container ">
                     <div class="row">
                         <div class="col-lg-12 col-p-0">
                             <div class="nav-main">
@@ -169,79 +135,133 @@
                                         </a>
                                     </div>
 
+                                    <!-- <div class="menu">
+                                        <ul>
+                                            <li><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
 
-                                  
-                                </div>
+                                            <div class="dropdown ">
+                                                <li><a href="" class="dropbtn text-nowrap">{{ __('JDM Stock') }}</a></li>
 
-                                <div class="nav-btn pe-4">
-                                <div class="menu">
-                                    <ul class="nav nav_texthead">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ __('translate.JDM Stock') }}
-                                            </a>
-                                            <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
-                                                <div class="p-3">
+                                                <div class="dropdown-content sub-menu">
+                                                    <div class="header">
+                                                    </div>
+
                                                     <div class="row">
+                                                        
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Cars</h6>
-                                                            <div>
-                                                                @foreach($jdm_legend['car'] as $jdm)
-                                                                <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
-                                                                @endforeach
-                                                            </div>
+                                                            <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Honda</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Suzuki</a>
                                                         </div>
+                                                        
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Buses</h6>
-                                                            <div>
-                                                                @foreach($jdm_legend['heavy'] as $jdm)
-                                                                <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
-                                                                @endforeach
-                                                            </div>
+                                                            <h6 class="dropdown-header nav-dropdown-header">Buses</h6>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
                                                         </div>
+                                                        
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Trucks</h6>
-                                                            <div class="d-flex flex-column">
-                                                                @foreach($jdm_legend['small_heavy'] as $jdm)
-                                                                <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
-                                                                @endforeach
-                                                            </div>
+                                                            <h6 class="dropdown-header nav-dropdown-header">Trucks</h6>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Toyota</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Nissan</a>
+                                                            <a class="dropdown-item nav-dropdown-item" href="{{ route('listings') }}">Mitsubishi</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('new-arrival') }}">{{ __('translate.New Car Arrivals') }}</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            @if(Auth::guard('web')->check())
-                                                <a class="nav-link" href="{{ route('auction-car-marketplace-responsive') }}">
-                                                {{ __('translate.Live Auction') }}
+                                            </div>
+
+                                            <li><a href="{{ route('about-us') }}">Buy Now Cars</a></li>
+
+                                            <li><a href="{{ route('listings') }}">New Car Arrivals</a></li>
+
+                                            <li><a href="{{ route('dealers') }}">Useful Links</a></li>
+
+                                            <li><a href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
+
+                                        </ul>
+                                    </div> -->
+                                </div>
+
+                                <div class="nav-btn pe-4">
+                                    <div class="menu">
+                                        <ul class="nav nav_texthead">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {{ __('JDM Stock') }}
                                                 </a>
-                                            @else 
-                                                <a class="nav-link" href="#" onclick="auct_logout()">
-                                                {{ __('translate.Live Auction') }}
-                                                </a>
-                                            @endif 
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
-                                        </li>
-                                        <li class="nav-item">
+                                                <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
+                                                    <div class="p-3">
+                                                        <div class="row">
+                                                            <div class="col-md-4 nav-dropdown-list">
+                                                                <h6 class="dropdown-header nav-dropdown-header text-nowrap">Cars</h6>
+                                                                <div>
+                                                                    @foreach($jdm_legend['car'] as $jdm)
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 nav-dropdown-list">
+                                                                <h6 class="dropdown-header nav-dropdown-header text-nowrap">Buses</h6>
+                                                                <div>
+                                                                    @foreach($jdm_legend['heavy'] as $jdm)
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 nav-dropdown-list">
+                                                                <h6 class="dropdown-header nav-dropdown-header text-nowrap">Trucks</h6>
+                                                                <div class="d-flex flex-column">
+                                                                    @foreach($jdm_legend['small_heavy'] as $jdm)
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                     
+                                                    </div>
+                                                </ul>
+
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('about-us') }}">{{ __('translate.Buy Now Cars') }}</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('listings') }}">{{ __('translate.New Car Arrivals') }}</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                @if(Auth::guard('web')->check())
+                                                    <a class="nav-link" href="{{ route('auction-car-marketplace-responsive') }}">
+                                                    {{ __('translate.Live Auction') }}
+                                                    </a>
+                                                @else 
+                                                    <a class="nav-link" href="#" onclick="auct_logout()">
+                                                    {{ __('translate.Live Auction') }}
+                                                    </a>
+                                                @endif 
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
+                                            </li>
+                                            <li class="nav-item">
                                             <a class="nav-link" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
-                                    </ul>
+                                        </ul>
+                                    </div>
+                                    <a href="{{ route('user.select-car-purpose') }}" class="thm-btn ms-3">Login</a> 
                                 </div>
-                                <a href="{{ route('user.select-car-purpose') }}" class="thm-btn ms-3">Login</a>
-                            </div>
 
+                            
                             </div>
                         </div>
                     </div>
@@ -763,6 +783,7 @@
 
 
         <!-- back-to-top  -->
+
         @if (Route::is('home'))
             @if (Session::get('selected_theme') == 'theme_two')
                 <div class="back-to-top">
@@ -835,7 +856,6 @@
         <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 
         <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
-        <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
 
         <script>
             @if(Session::has('messege'))
@@ -857,98 +877,43 @@
             @endif
         </script>
 
-    <!-- jquery  -->
-    <script src="{{ asset('global/jquery-3.7.1.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
-
-    <script>
-        @if(Session::has('messege'))
-        var type="{{Session::get('alert-type','info') }}"
-        switch(type){
-            case 'info':
-                toastr.info("{{ Session::get('messege') }}");
-                break;
-            case 'success':
-                toastr.success("{{ Session::get('messege') }}");
-                break;
-            case 'warning':
-                toastr.warning("{{ Session::get('messege') }}");
-                break;
-            case 'error':
-                toastr.error("{{ Session::get('messege') }}");
-                break;
-        }
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <script>
+                    toastr.error('{{ $error }}');
+                </script>
+            @endforeach
         @endif
-    </script>
-
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <script>
-                toastr.error('{{ $error }}');
-            </script>
-        @endforeach
-    @endif
 
 
-    @stack('js_section')
+        @stack('js_section')
 
-    <script>
-         $(()=>{
-            $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        <script>
+            (function($) {
+                "use strict"
+                $(document).ready(function () {
+                    $('.cookie_consent_close_btn').on('click', function(){
+                        $('.cookie_consent_modal').addClass('d-none');
+                    });
+
+                    $('.cookie_consent_accept_btn').on('click',function() {
+                        localStorage.setItem('car-listo-cookie','1');
+                        $('.cookie_consent_modal').addClass('d-none');
+                    });
+
+                    $('.before_auth_wishlist').on("click", function(){
+                        toastr.error("{{ __('translate.Please login first') }}")
+                    });
+
+                });
+            })(jQuery);
+
+            if (localStorage.getItem('car-listo-cookie') != '1') {
+                $('.cookie_consent_modal').removeClass('d-none');
             }
-         });
-         });
-        (function($) {
-            "use strict"
-            $(document).ready(function () {
-                $('.cookie_consent_close_btn').on('click', function(){
-                    $('.cookie_consent_modal').addClass('d-none');
-                });
 
-                $('.cookie_consent_accept_btn').on('click',function() {
-                    localStorage.setItem('car-listo-cookie','1');
-                    $('.cookie_consent_modal').addClass('d-none');
-                });
+        </script>
 
-                $('.before_auth_wishlist').on("click", function(){
-                    toastr.error("{{ __('translate.Please login first') }}")
-                });
-
-            });
-        })(jQuery);
-
-        if (localStorage.getItem('car-listo-cookie') != '1') {
-            $('.cookie_consent_modal').removeClass('d-none');
-        }
-
-
-        function auct_logout(){
-            Swal.fire({
-                title: "{{__('Login or Register to access this page ?')}}",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: "{{__('Yes, Ok')}}",
-                cancelButtonText: "{{__('Cancel')}}",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url:"{{route('auct-sess-creation')}}",
-                        type:'POST',
-                        data:{'key':'acut_sess'},
-                        success:function(data){
-                            window.location.href = "{{ url('/user/dashboard') }}";
-                        }    
-                    })
-                    // $("#remove_car_"+id).submit();
-                }
-
-            })
-        }
-    </script>
     </body>
 
     </html>
