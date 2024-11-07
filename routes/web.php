@@ -82,6 +82,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::post('/get-model-year', 'get_model_year')->name('get-model-year');
             Route::get('/jdm-stock-all', 'jdm_stock_all')->name('jdm-stock-all');
             Route::get('/top-selling', 'top_selling')->name('top-selling');
+            Route::get('/top-selling_responsive', 'top_selling1')->name('top-selling_responsive');
             Route::get('/new-arrival', 'new_arrival')->name('new-arrival');
             Route::post('/get-brand-models', 'getBrandModels')->name('get-brand-models');
             Route::get('/listing/{slug}', 'listing')->name('listing');

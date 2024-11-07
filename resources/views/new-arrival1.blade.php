@@ -7,7 +7,25 @@
 
 @section('body-content')
 <main>
+    <!-- banner-part-start  -->
 
+    <!-- <section class="inner-banner">
+        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="inner-banner-df">
+                    <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- banner-part-end -->
 
     <!-- Inventory-part-start -->
 
@@ -116,6 +134,44 @@
                                                 <!-- <button class="clear-button">Clear</button>
                                                 <button class="go-button">Go</button> -->
                                             </div>
+
+                                                <!-- @if (request()->has('condition'))
+                                                    @php
+                                                        $condition_arr = request()->get('condition');
+                                                    @endphp
+
+                                                    <span class="form-check">
+                                                        <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
+                                                            id="new_condition" name="condition[]">
+                                                        <label class="form-check-label" for="new_condition">
+                                                            {{ __('translate.New') }}
+                                                        </label>
+                                                    </span>
+                                                    <span class="form-check">
+                                                        <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
+                                                            id="used_condition" name="condition[]">
+                                                        <label class="form-check-label" for="used_condition">
+                                                            {{ __('translate.Used') }}
+                                                        </label>
+                                                    </span>
+
+                                                @else
+                                                    <span class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="New"
+                                                            id="new_condition" name="condition[]">
+                                                        <label class="form-check-label" for="new_condition">
+                                                            {{ __('translate.New') }}
+                                                        </label>
+                                                    </span>
+                                                    <span class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Used"
+                                                            id="used_condition" name="condition[]">
+                                                        <label class="form-check-label" for="used_condition">
+                                                            {{ __('translate.Used') }}
+                                                        </label>
+                                                    </span>
+                                                @endif -->
+
                                             </span>
                                         </div>
                                     </div>
@@ -123,7 +179,52 @@
 
                             </div>
 
-                   
+                            <!-- Transmission -->
+                            <!-- <div class="accordion" id="accordionPanelsStayOpenExample4">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingfive">
+                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                            aria-controls="panelsStayOpen-collapsefive">
+                                            {{ __('translate.Features') }}
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                        aria-labelledby="panelsStayOpen-headingfive">
+                                        <div class="accordion-body">
+                                            <span class="select-Brand-box">
+                                                @if (request()->has('features'))
+                                                    @php
+                                                        $features_arr = request()->get('features');
+                                                    @endphp
+
+                                                    @foreach ($features as $index => $feature)
+                                                        <span class="form-check">
+                                                            <input {{ in_array($feature->id, $features_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
+                                                                id="feature{{ $index }}">
+                                                            <label class="form-check-label" for="feature{{ $index }}">
+                                                                {{ $feature->name }}
+                                                            </label>
+                                                        </span>
+                                                    @endforeach
+
+                                                @else
+                                                    @foreach ($features as $index => $feature)
+                                                        <span class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
+                                                                id="feature{{ $index }}">
+                                                            <label class="form-check-label" for="feature{{ $index }}">
+                                                                {{ $feature->name }}
+                                                            </label>
+                                                        </span>
+                                                    @endforeach
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div> -->
 
                         </div>
                         <!-- Select Your Year End -->

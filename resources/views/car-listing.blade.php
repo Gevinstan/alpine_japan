@@ -179,52 +179,7 @@
 
                             </div>
 
-                            <!-- Transmission -->
-                            <!-- <div class="accordion" id="accordionPanelsStayOpenExample4">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingfive">
-                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapsefive">
-                                            {{ __('translate.Features') }}
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
-                                        aria-labelledby="panelsStayOpen-headingfive">
-                                        <div class="accordion-body">
-                                            <span class="select-Brand-box">
-                                                @if (request()->has('features'))
-                                                    @php
-                                                        $features_arr = request()->get('features');
-                                                    @endphp
-
-                                                    @foreach ($features as $index => $feature)
-                                                        <span class="form-check">
-                                                            <input {{ in_array($feature->id, $features_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
-                                                                id="feature{{ $index }}">
-                                                            <label class="form-check-label" for="feature{{ $index }}">
-                                                                {{ $feature->name }}
-                                                            </label>
-                                                        </span>
-                                                    @endforeach
-
-                                                @else
-                                                    @foreach ($features as $index => $feature)
-                                                        <span class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="{{ $feature->id }}" name="features[]"
-                                                                id="feature{{ $index }}">
-                                                            <label class="form-check-label" for="feature{{ $index }}">
-                                                                {{ $feature->name }}
-                                                            </label>
-                                                        </span>
-                                                    @endforeach
-                                                @endif
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> -->
+                         
 
                         </div>
                         <!-- Select Your Year End -->
@@ -924,10 +879,7 @@
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-                $("#outside_form_search").on("keyup",function(e){
-                    let inputValue = $(this).val();
-                    $("#inside_form_search").val(inputValue);
-                })
+                
 
                 $("#outside_form_btn,go-button").on("click",function(e){
                     $("#search_form").submit();
