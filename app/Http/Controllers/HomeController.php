@@ -224,7 +224,7 @@ class HomeController extends Controller
             // echo json_encode($jdm_car_listings);die();
 
         
-            return view('index3', [
+            return view('index4', [
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
                 'brands' => $brands,
@@ -1482,7 +1482,7 @@ class HomeController extends Controller
     $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
 
-    return view('listing', [
+    return view('listing1', [
         'seo_setting' => $seo_setting,
         'brands' => $brands,
         'cities' => $cities,
@@ -3335,7 +3335,7 @@ public function car_listing(Request $request){
 
 
 
-        return view('listing_detail', [
+        return view('listing_detail1', [
             'car' => $car,
             'galleries' => $images, 
             'related_listings' => $related_listings,
@@ -3395,7 +3395,6 @@ public function car_listing(Request $request){
         return view('car-listing-details', [
             'car' => $car,
             'galleries' => $images,
-            'related_listings' => $related_listings,
             'reviews' => $reviews,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,

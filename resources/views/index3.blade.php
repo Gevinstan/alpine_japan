@@ -438,7 +438,6 @@
                                                     <img src="{{ asset('Cars/' . $car->image) }}" alt="logo" class="" style="height:100%; width: 100%">
                                                 </div>
                                                 
-
                                                 <div class="brand-car-item-img-text">
                                                     <div class="text-df">
                                                       
@@ -1031,7 +1030,13 @@
                                 </div>  
                             </div> 
                         </div>
-                </div> 
+                </div>  -->
+        <section class="buy-section steps-section py-5 gap-5">
+            <div class="buy-container">
+                <div class="pb-5">
+                    <h1 class="pb-2">Buy in 3 Easy Steps</h1>
+                    <p class="text-center disc buy-text-white d-flex justify-content-center">Adding smiles to your miles. Car buying made simpler</p>
+                </div>
 
 
                      
