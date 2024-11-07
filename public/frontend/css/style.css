@@ -7600,8 +7600,8 @@ p {
 .footer {
     padding: 20px 0 0px 0;
     /* background: url(../assets/images/hero/footer-bg.png) no-repeat center/cover; */
-    /* position: sticky; */
-    bottom: 0;
+    /* position: fixed; */
+    /* bottom: 0; */
     /* overflow-x: hidden; */
     background-color: #0e124b !important;
 }
@@ -8310,7 +8310,7 @@ a:link {
 
 .header .menu-bg {
     background-color: var(--white-color);
-    padding: 10px 0;
+    padding: 4px 0 !important;
     margin-top: 0px;
 }
 
@@ -15968,17 +15968,252 @@ a:link {
 
 /***** range slider2 in listing page *****/
 
-        #slider-div {
-            display: flex;
-            flex-direction: row;
-            margin-top: 30px;
-        }
-        #slider-div > div {
-            margin: 8px;
-        }
-        .slider-label {
-            position: absolute;
-            background-color: #eee;
-            padding: 4px;
-            font-size: 0.75rem;
-        }
+#slider-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+#slider-div > div {
+    margin: 8px;
+}
+.slider-label {
+    position: absolute;
+    background-color: #eee;
+    padding: 4px;
+    font-size: 0.75rem;
+}
+
+/**********  Car Buy section Start  *********/
+
+.buy-section {
+    background-color: var(--primary-color-1);
+    background-image: url("../japan_home/buy-bg.png");
+    color: var(--white-color) !important;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.buy-container {
+    padding: 50px 0;
+}
+.buy-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.disc {
+    font-size: 1rem;
+}
+.step-circle {
+    background-color: white;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+    position: relative;
+}
+.step-circle::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid white;
+}
+.step-circle:last-child::before {
+    display: none;
+}
+.step-icon {
+    font-size: 3rem;
+    color: #004080;
+}
+.step-title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.step-description {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.buy-text-white {
+    color: var(--white-color);
+}
+
+@media (max-width: 768px) {
+    .step-circle {
+        width: 120px;
+        height: 120px;
+    }
+    .step-circle::before {
+        right: -30px;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 20px solid white;
+    }
+}
+
+/* Inner Card Styling */
+.inner-card {
+    width: 125px;
+    height: 125px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); /* Inner shadow */
+}
+
+/* Responsive Layout */
+@media (max-width: 767px) {
+    .inner-card {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/**********  Car Buy section End  *********/
+
+/********* About section Start **********/
+
+.about-section {
+    background-color: #f1f5fb;
+    padding: 50px 0;
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.about-section .highlight-text {
+    color: #038ffc;
+}
+
+.about-section p {
+    color: #6c757d;
+    font-size: 0.925rem;
+    line-height: 22px !important;
+}
+
+.about-section .btn-primary {
+    background-color: #038ffc;
+    border-color: #038ffc;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.about-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/********* About section End **********/
+
+/********* Quality section Start **********/
+.quality-compliance {
+    background-color: #f9fafb;
+    padding: 60px 0;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.section-title .highlight {
+    color: var(--primary-color-1);
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.compliance-item {
+    position: relative;
+    background-color: #fff;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* This aligns content to the bottom */
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.compliance-item:hover {
+    transform: scale(1.05);
+}
+
+.compliance-logo {
+    max-width: 100%;
+    height: auto;
+}
+
+.compliance-content {
+    text-align: center;
+    padding-bottom: 20px; /* Add space between content and bottom of the circle */
+}
+
+.compliance-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.compliance-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.compliance-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #2a73ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.quality-compliance h2,
+.quality-compliance p {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .compliance-item {
+        width: 160px;
+        height: 160px;
+    }
+
+    .compliance-icon {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+}
+
+/********* Quality section End **********/
+
+
+
