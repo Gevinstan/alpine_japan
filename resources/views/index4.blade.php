@@ -163,8 +163,7 @@
                                                 <div class="brand-car-item-img">
 
                                                 <div class="brand-new-car">
-                                                    <!-- <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image"> -->
-                                                    <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/>
+                                                    <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                 </div>
                                                  
 
