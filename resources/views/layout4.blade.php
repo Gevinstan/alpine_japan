@@ -75,42 +75,42 @@
             <div class="d-flex justify-content-end align-items-center">
                 <div>
                     <ul class="d-flex gap-5">
-                        <li>
+                        <li class="px-5">
                             <div class="dropdown">
-                            <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
-                                id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>
-                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <ellipse cx="11.0001" cy="11" rx="4" ry="10" stroke-width="1.5" />
-                                        <path
-                                            d="M20.9962 10.7205C19.1938 12.2016 15.3949 13.2222 11 13.2222C6.60511 13.2222 2.80619 12.2016 1.00383 10.7205M20.9962 10.7205C20.8482 5.32691 16.4294 1 11 1C5.57061 1 1.15183 5.32691 1.00383 10.7205M20.9962 10.7205C20.9987 10.8134 21 10.9065 21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 10.9065 1.00128 10.8134 1.00383 10.7205"
-                                            stroke-width="1.5" />
-                                    </svg>
-                                </span>
-                                {{ Session::get('front_lang_name') }}
+                                <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
+                                    id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <ellipse cx="11.0001" cy="11" rx="4" ry="10" stroke-width="1.5" />
+                                            <path
+                                                d="M20.9962 10.7205C19.1938 12.2016 15.3949 13.2222 11 13.2222C6.60511 13.2222 2.80619 12.2016 1.00383 10.7205M20.9962 10.7205C20.8482 5.32691 16.4294 1 11 1C5.57061 1 1.15183 5.32691 1.00383 10.7205M20.9962 10.7205C20.9987 10.8134 21 10.9065 21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 10.9065 1.00128 10.8134 1.00383 10.7205"
+                                                stroke-width="1.5" />
+                                        </svg>
+                                    </span>
+                                    {{ Session::get('front_lang_name') }}
 
-                                <span class="btn-arrow">
-                                    <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
-                                    </svg>
-                                </span>
-                            </a>
+                                    <span class="btn-arrow">
+                                        <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
+                                        </svg>
+                                    </span>
+                                </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach ($language_list as $language_dropdown_item)
-                                    <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                                <ul class="dropdown-menu lang_dropdown" aria-labelledby="dropdownMenuLink">
+                                    @foreach ($language_list as $language_dropdown_item)
+                                        <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </li>
-                        <li class="text-white heading-fs-14">
+                        <li class="text-white heading-fs-14 px-3">
                             <img src="{{asset('japan_home/email.png')}}" />
                             {{ $setting->email }}
                         </li>
-                        <li class="text-white heading-fs-14">
+                        <li class="text-white heading-fs-14 px-3">
                             <img src="{{asset('japan_home/mob.png')}}" />
                             {{ $setting->phone }}
                         </li>
@@ -191,11 +191,11 @@
                                 <div class="menu">
                                     <ul class="nav nav_texthead">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 {{ __('JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
@@ -259,21 +259,21 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('about-us') }}">{{ __('translate.Buy Now Cars') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('about-us') }}">{{ __('translate.Buy Now Cars') }}</a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('listings') }}">{{ __('translate.New Car Arrivals') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('listings') }}">{{ __('translate.New Car Arrivals') }}</a>
                                         </li>
 
                                         <li class="nav-item">
                                            
                                             @if(Auth::guard('web')->check())
-                                                    <a class="nav-link" href="{{ route('auction-car-marketplace-responsive') }}">
+                                                    <a class="nav-link mx-2" href="{{ route('auction-car-marketplace-responsive') }}">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @else 
-                                                    <a class="nav-link" href="#" onclick="auct_logout()">
+                                                    <a class="nav-link mx-2" href="#" onclick="auct_logout()">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @endif 
@@ -281,10 +281,10 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -307,10 +307,24 @@
                 <div class="p-left">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{asset('japan_home/japan-logo.png')}}" alt="logo">
-                        </a>
+                            @if (Route::is('home'))
+                                @if (Session::get('selected_theme') == 'theme_two')
+                                    <img src="{{ asset($setting->logo) }}" alt="logo">
+                                @elseif (Session::get('selected_theme') == 'theme_three')
+                                <img src="{{ asset($setting->logo) }}" alt="logo">
+                                @else
+                                    <img src="{{ asset($setting->logo) }}" alt="logo">
+                                @endif
+                            @else
+                                <img src="{{ asset($setting->logo) }}" alt="logo">
+                            @endif
+
+                            <p style="color:white; font-size:30px; font-weight:bold; display: inline; padding-left:100px; padding-top: ">Alpine Japan</p>
+                        </a>  
                     </div>
+                    
                 </div>
+
                 <div class="p-right">
                     <button id="nav-opn-btn">
                         <i class="fa-solid fa-bars"></i>
@@ -334,61 +348,27 @@
 
                     @if (Route::is('home'))
                         @if (Session::get('selected_theme') == 'theme_two')
-                            <img src="{{ asset($setting->home2_logo2) }}" alt="logo">
+                            <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                         @elseif (Session::get('selected_theme') == 'theme_three')
-                        <img src="{{ asset($setting->home3_logo2) }}" alt="logo">
+                        <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                         @else
-                            <img src="{{ asset($setting->inner_logo) }}" alt="logo">
+                            <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                         @endif
                     @else
-                        <img src="{{ asset($setting->inner_logo) }}" alt="logo">
+                        <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                     @endif
+
+                    <p style="display: inline;padding-left:35px;padding-bottom:40px;font-size:20px; font-weight:bold; color: black">Alpine Japan</p>
                 </a>
+
+                
             </div>
 
 
-            <div class="header-right-item">
-                <div class="header-right-item-btn-main">
-                    <div class="header-right-item-btn">
-                        <div class="dropdown two">
-                            <a class=" btn-secondary dropdown-toggle" href="#" role="button"
-                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="container header-right-item">
+                <div class="row header-right-item-btn-main">
 
-                                <span class="usd-icon">
-                                    <svg width="10" height="20" viewBox="0 0 10 20" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M9 6.5C9 4.567 7.32107 3 5.25 3C3.17893 3 1.5 4.567 1.5 6.5C1.5 8.433 3.17893 10 5.25 10"
-                                            stroke-width="1.5" stroke-linecap="round" />
-                                        <path
-                                            d="M1.5 13.5C1.5 15.433 3.17893 17 5.25 17C7.32107 17 9 15.433 9 13.5C9 11.567 7.32107 10 5.25 10"
-                                            stroke-width="1.5" stroke-linecap="round" />
-                                        <path d="M5.25 1V19" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-
-
-                                </span>
-
-                                {{ Session::get('currency_name') }}
-                                <span class="btn-arrow">
-                                    <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
-                                    </svg>
-                                </span>
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach ($currency_list as $currency_dropdown_item)
-                                    <li><a class="dropdown-item" href="{{ route('currency-switcher', ['currency_code' => $currency_dropdown_item->currency_code]) }}">{{ $currency_dropdown_item->currency_name }}</a></li>
-                                @endforeach
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="header-right-item-btn">
+                    <div class="col-md-12 header-right-item-btn">
                         <div class="dropdown">
 
                             <a class=" btn-secondary dropdown-toggle" href="#" role="button"
@@ -413,7 +393,7 @@
                                 </span>
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <ul class="dropdown-menu lang_dropdown" aria-labelledby="dropdownMenuLink">
                                 @foreach ($language_list as $language_dropdown_item)
                                     <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
                                 @endforeach
@@ -421,31 +401,82 @@
 
                         </div>
                     </div>
+
+                    <div class="col-md-12 header-right-item-btn">
+                        <div class="header-right-phone-num-btn" style="padding-right:35px;" >
+                            <span style=" padding:3px; border-radius:50%"><i class="bi bi-envelope"></i></span>
+                            <span style="color:black; font-size: 14px; padding-top: -10px !important"> sales@alpinejapan.com </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 header-right-item-btn">
+                        <div class="header-right-phone-num-btn" style="padding-right:20px;">
+                            <span style="padding-top:30px !important; border-radius:50%"><i class="bi bi-phone"></i></span>
+                            <span style="color:black; font-size: 14px; display:inline">+81 78 242 1568 </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 header-right-item-btn">
+                        <div class="header-right-social-media-btn">
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-instagram"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-facebook"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-youtube"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-linkedin"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-twitter"></i></span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <ul class="nav-links">
-                <li><a href="{{ route('about-us') }}">{{ __('translate.Home') }}</a></li>
-                <li class="dropdown">
-                <a href="javascript:;">{{ __('JDM Stock') }}
-                     <span>
-                     <i class="fa-solid fa-angle-down"></i>
-                    </span>
-                 </a>
-                    <ul class="d-menu">
-                        <li><a href="{{ route('home', ['theme' => 'one']) }}">{{ __('translate.Home-01') }} </a> </li>
-                        <li><a href="{{ route('home', ['theme' => 'two']) }}">{{ __('translate.Home-02') }} </a> </li>
-                        <li><a href="{{ route('home', ['theme' => 'three']) }}">{{ __('translate.Home-03') }} </a> </li>
-                    </ul>
+                <li style="color: black !important" class="dropdown">
+                    <a style="color: black !important" href="javascript:;">{{ __('Home') }}
+                        <!-- <span>
+                        <i class="fa-solid fa-angle-down"></i>
+                        </span> -->
+                    </a>
+
+                    <!-- <ul class="d-menu">
+                        <li><a style="color: black !important" href="{{ route('home', ['theme' => 'one']) }}">{{ __('translate.Home-01') }} </a> </li>
+                        <li><a style="color: black !important" href="{{ route('home', ['theme' => 'two']) }}">{{ __('translate.Home-02') }} </a> </li>
+                        <li><a style="color: black !important" href="{{ route('home', ['theme' => 'three']) }}">{{ __('translate.Home-03') }} </a> </li>
+                    </ul> -->
                 </li>
-                <li><a href="{{ route('about-us') }}">Buy Now Cars</a></li>
 
-                <li><a href="{{ route('listings') }}">New Car Arrivals</a></li>
+                <li><a style="color: black !important" href="{{ route('about-us') }}">{{ __('JDM Stock') }}</a></li>
 
-                <li><a href="{{ route('dealers') }}">Useful Links</a></li>
+                <li><a style="color: black !important" href="{{ route('listings') }}">{{ __('Buy Now Cars') }}</a></li>
 
-                <li><a href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
+                <li><a style="color: black !important" href="{{ route('dealers') }}">{{ __('New Car Arrivals') }}</a></li>
 
+                <li><a style="color: black !important" href="{{ route('blogs') }}">{{ __('Useful Links') }}</a></li>
+
+                <!-- <li class="dropdown">
+                    <a href="#">{{ __('translate.Pages') }}
+                        <span>
+                             <i class="fa-solid fa-angle-down"></i>
+                        </span>
+                     </a>
+
+                    <ul class="d-menu">
+
+                        <li><a href="{{ route('pricing-plan') }}">{{ __('translate.Pricing Plan') }}</a></li>
+
+                        <li><a href="{{ route('terms-conditions') }}">{{ __('translate.Terms and Conditions') }}</a></li>
+
+                        <li><a href="{{ route('privacy-policy') }}">{{ __('translate.Privacy Policy') }}</a></li>
+
+                        @foreach ($custom_pages as $custom_page)
+                            <li><a href="{{ route('custom-page', $custom_page->slug) }}">{{ $custom_page->page_name }}</a></li>
+                        @endforeach
+
+                    </ul>
+
+                </li> -->
+
+                <!-- <li><a href="{{ route('faq') }}">{{ __('translate.FAQ') }}</a></li> -->
+                <li><a style="color: black !important" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
             </ul>
         </nav>
     </aside>

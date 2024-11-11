@@ -13,14 +13,14 @@
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">
         <div class="container">
-            <nav aria-label="breadcrumb" class="pt-3">
+            <nav aria-label="breadcrumb" class="pb-2">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3">  
                     <form action="" id="search_form">
                         
                         <!-- Select Your Brand Start-->
@@ -82,8 +82,7 @@
                             </div>
                         <!-- Select Your Brand End-->
                         <!-- Select Your Year Start -->
-                        <div class="inventory-main-box">
-
+                        <div class="inventory-main-box mb-3">
                             <!-- Select Your Budget  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample1">
                                 <div class="accordion-item">
@@ -101,13 +100,14 @@
 
                                             <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                 <div class="d-flex justify-content-between align-items-center flex-column mt-32px">
-                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                    <input type="hidden" id="start_year" name="year">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="slider-label m-0">{{$minYear}}</span>
-                                                         <output name="age_output" id="age_output" for="start" ></output>
-                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
-                                                    </div>
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="year">
+
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <span class="slider-label m-0">{{$minYear}}</span>
+                                                            <output name="age_output" id="age_output" for="start" ></output>
+                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                        </div>
                                                 </div>
                                                 <div class="d-flex align-content-between flex-column gap-4">
                                                     <button class="clear-button">Clear</button>
@@ -122,16 +122,11 @@
                                 </div>
 
                             </div>
-
-                   
-
                         </div>
                         <!-- Select Your Year End -->
-
-
-                       
+        
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box">
+                            <div class="inventory-main-box mb-3">
                                 <!-- Budget -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample4">
                                     <div class="accordion-item">
@@ -194,7 +189,7 @@
                     
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
-                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
+                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
                         </div>
                     @endif
                 </div>
@@ -203,6 +198,7 @@
                     <div class="inventory-ber mb-3">
                         <div class="inventory-ber-left">
                             <div class="inventory-sarch-ber-item flex-row">
+                                
                                 <div class="inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">

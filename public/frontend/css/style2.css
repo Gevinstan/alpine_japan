@@ -1,6 +1,5 @@
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @keyframes slideDown {
     from {
@@ -642,7 +641,7 @@
 .thm-btn {
     position: relative;
     width: 156px;
-    border-radius: 4px;
+    border-radius: 8px;
     height: 56px;
     display: flex;
     align-items: center;
@@ -976,6 +975,7 @@
     font-weight: 400;
     line-height: 16px;
     border-radius: 0;
+    border-bottom: 3px solid #6E6E6E;
 }
 
 .banner .banner-search-bar .banner-sarchber-box {
@@ -3073,11 +3073,11 @@ p {
 
 .categories .categories-logo {
     border: 1px solid #e0f4eb;
-    border-radius: 7px;
+    border-radius: 8px;
     position: relative;
     z-index: 1;
     text-align: center;
-    background-color: #f6fdfa;
+    background-color: #ffffff;
 }
 
 .categories .categories-logo .categories-logo-thumb {
@@ -7229,14 +7229,16 @@ p {
     border: 1px solid rgb(237, 237, 237);
 }
 
-.feature .feature-thumb {
+/* .feature .feature-thumb {
     margin-top: 0px;
     padding-left: 5px;
-}
+} */
 
 .feature .feature-thumb img {
-    width: 342px;
-    height: 600px;
+    /* width: 342px;
+    height: 600px; */
+    width: 100%;
+    height: auto;
 }
 
 .feature-slick-prev,
@@ -7490,7 +7492,7 @@ p {
 
 .footer {
     padding: 55px 0 0px 0;
-    background: #0E124B;
+    background: #0e124b;
     /* position: sticky; */
     bottom: 0;
     overflow-x: hidden;
@@ -7508,7 +7510,7 @@ p {
 }
 
 .footer .footer-bb {
-    border-bottom: 1px solid #484EA7;
+    border-bottom: 1px solid #484ea7;
     padding-bottom: 56px;
 }
 
@@ -7528,7 +7530,7 @@ p {
 
 .footer .newsletter-sarch-box {
     width: 400px;
-    background-color: #2E326C;
+    background-color: #2e326c;
     padding: 8px;
     display: flex;
     align-items: center;
@@ -8359,7 +8361,7 @@ p {
 .header-two .nav-bg .nav-main {
     border-top: 1px solid transparent !important;
     margin-top: 0px !important;
-    padding: 20px 0 !important;
+    padding: 6px 0 !important;
 }
 
 .header-two .header-left-item .header-left-inner .icon span svg {
@@ -8434,7 +8436,7 @@ p {
 
 .header-two .menu-bg .nav-main {
     border-top: 1px solid #2b4e88;
-    padding-top: 14px;
+    /* padding-top: 14px; */
 }
 
 .header-two .menu-bg .nav-main .nav-left .menu ul li:hover .sub-menu {
@@ -8833,7 +8835,7 @@ p {
 .inner-header .menu-bg .nav-main {
     border-top: 1px solid transparent;
     margin-top: 0;
-    padding: 22px 0;
+    padding: 5px 0;
 }
 
 .inner-header .menu-bg .nav-main .nav-left .menu ul {
@@ -9470,8 +9472,9 @@ p {
 }
 
 .inventory-main-box-thumb img {
-    width: 100%;
-    height: 525px;
+    width: 28.5rem;
+    height: 41.25rem;
+
 }
 
 .inventory-main-box-thumb .close {
@@ -13812,7 +13815,7 @@ p {
 }
 
 .container {
-    max-width: 1440px;
+    max-width: 100%;
 }
 
 .g-5,
@@ -14250,11 +14253,11 @@ p {
     display: block;
 }
 
-.categories .highlight,
-.brand-car .highlight,
-.feature .highlight,
-.testimonial .highlight {
-    color: #038ffc;
+.highlight     {
+    color: #005bac !important;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 /************ NAV-BAR DROPDOWN STYLE START **************/
@@ -14300,16 +14303,15 @@ p {
 } */
 
 .nav-tabs .nav-link {
-    color: black; 
-    border-top: 2px solid transparent; 
-    transition: color 0.3s, border-top 0.3s; 
+    color: black;
+    border-top: 2px solid transparent;
+    transition: color 0.3s, border-top 0.3s;
 }
 
 .nav-tabs .nav-link:hover {
-    color: var(--primary-color-1) !important; 
-    border-top: 2px solid var(--primary-color-1); 
+    color: var(--primary-color-1) !important;
+    border-top: 2px solid var(--primary-color-1);
 }
-
 
 .banner .banner-search-bar .banner-sarchber-box {
     border: 1px solid #038ffc !important;
@@ -14353,7 +14355,7 @@ p {
 
 .buy-section {
     background-color: var(--primary-color-1);
-    background-image: url('../../japan_home/buy-bg.png');
+    background-image: url("../../japan_home/buy-bg.jpg");
     color: var(--white-color) !important;
     font-family: Arial, sans-serif;
     overflow: hidden;
@@ -14382,7 +14384,7 @@ p {
     margin: 0 auto 20px;
     position: relative;
 }
-.step-circle::before {
+/* .step-circle::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -14391,7 +14393,7 @@ p {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
     border-left: 30px solid white;
-}
+} */
 .step-circle:last-child::before {
     display: none;
 }
@@ -14425,9 +14427,10 @@ p {
         border-left: 20px solid white;
     }
 }
-  
-  /* Inner Card Styling */
-  .inner-card {
+
+/* Inner Card Styling */
+.inner-card {
+    position: absolute;
     width: 125px;
     height: 125px;
     background-color: #f8f9fa;
@@ -14436,16 +14439,15 @@ p {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); /* Inner shadow */
-  }
-  
-  /* Responsive Layout */
-  @media (max-width: 767px) {
+}
+
+/* Responsive Layout */
+@media (max-width: 767px) {
     .inner-card {
-      width: 100px;
-      height: 100px;
+        width: 100px;
+        height: 100px;
     }
-  }
-  
+}
 
 /**********  Car Buy section End  *********/
 
@@ -14467,7 +14469,7 @@ p {
 
 .about-section p {
     color: #6c757d;
-    font-size: .925rem;
+    font-size: 0.925rem;
     line-height: 22px !important;
 }
 
@@ -14583,17 +14585,17 @@ p {
 /********* Quality section End **********/
 
 .aj-dropdown {
-    width: 170px;         
-    padding: 10px;          
-    border: 1px solid #ced4da;  
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
-    background-color: white; 
-    font-size: .875rem;        
-    color: #333; 
-  }
-  
-  /* Change arrow icon styling */
-  .aj-dropdown::after {
+    width: 170px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    font-size: 0.875rem;
+    color: #333;
+}
+
+/* Change arrow icon styling */
+.aj-dropdown::after {
     content: "";
     position: absolute;
     right: 16px;
@@ -14602,77 +14604,83 @@ p {
     border: 5px solid transparent;
     border-top-color: #333; /* Dark arrow */
     pointer-events: none;
-  }
-  
-  /* Dropdown focus/hover effect */
-  .aj-dropdown:focus {
+}
+
+/* Dropdown focus/hover effect */
+.aj-dropdown:focus {
     outline: none;
-    border-color: #007bff;  /* Change border color on focus */
+    border-color: #007bff; /* Change border color on focus */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
-  }  
+}
 
-  .custom-tabs li {
+.custom-tabs li {
     width: 170px;
-  }
+}
 
-  .bg-no-color {
+.bg-no-color {
     background-color: transparent !important;
-  }
+}
 
-  .brand-location {
-    font-size: .875rem;
+.brand-location {
+    font-size: 0.875rem;
     font-family: "Poppins", serif;
-    font-weight: normal!important;
+    font-weight: normal !important;
     font-style: normal;
-    color: #25282D !important; 
+    color: #25282d !important;
+}
 
-  }
-
-  .brand-date{
-    font-size: .75rem;
+.brand-date {
+    font-size: 0.75rem;
     font-family: "Poppins", serif;
-    font-weight: normal!important;
+    font-weight: normal !important;
     font-style: normal;
-    color: #9EA3AD;
-  }
+    color: #9ea3ad;
+}
 
-  .custom-tabs li a {
+.custom-tabs li a {
     height: 44px;
-    font-size: .875rem !important;
+    font-size: 0.875rem !important;
     text-align: center;
     align-content: space-evenly;
-  }
+}
 
-  .banner-serch {
+.banner-serch {
     height: 100%;
     width: 100%;
     background-color: var(--primary-color-1);
     color: var(--white-color);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-  }
+}
 
-  .custom-tabs {
+.custom-tabs {
     border: none !important;
-  }
+}
 
-  .heading-section li:nth-child(2){
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
-  }
+.heading-section li:nth-child(2) {
+    border-left: 2px solid #6E6E6E;
+}
 
-  .email-input {
+.custom-tabs li:nth-child(2) {
+    border-left: 2px solid #6E6E6E;
+}
+
+.custom-tabs li:nth-child(3) {
+    border-left: 2px solid #6E6E6E;
+}
+
+.email-input {
     padding: 10px 15px !important;
-    background-color: #2E326C !important;
+    background-color: #2e326c !important;
     color: var(--white-color) !important;
-  }
+}
 
-  .email-btn {
+.email-btn {
     height: 40px !important;
     font-size: 14px !important;
-  }
+}
 
-  .footer-logo a {
+.footer-logo a {
     width: 140px;
     background: #ffff;
     display: flex;
@@ -14680,246 +14688,244 @@ p {
     border-radius: 32px;
     border-right: 3px solid var(--primary-color-1);
     border-left: 3px solid var(--primary-color-1);
-  }
+}
 
-  /********* header section style start **********/
+/********* header section style start **********/
 
-  .header-dropdown, .header-dropdown:hover {
+.header-dropdown,
+.header-dropdown:hover {
     background-color: transparent;
     border-color: transparent;
-  }
+}
 
-  .header-dropdown::after {
-    vertical-align: .15em;
-  }
+.header-dropdown::after {
+    vertical-align: 0.15em;
+}
 
-  .header-border {
-    background-color: #0F1350;
-  }
+.header-border {
+    background-color: #0f1350;
+}
 
-  .heading-fs-14 {
-    font-size: .875rem !important;
-  }
-  /********* header section style end **********/
+.heading-fs-14 {
+    font-size: 0.875rem !important;
+}
+/********* header section style end **********/
 
+/********* Listing Page style Start **********/
 
-
-  /********* Listing Page style Start **********/
-
- /********* breadcrumb Start ***********/
- .listing-breadcrumb {
+/********* breadcrumb Start ***********/
+.listing-breadcrumb {
     padding: 145px 0 0 0 !important;
 }
 
 .breadcrumb-list .breadcrumb-link a,
-.breadcrumb-list .breadcrumb-link{
-    color: #8B9298 !important;
+.breadcrumb-list .breadcrumb-link {
+    color: #8b9298 !important;
 }
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
     content: var(--bs-breadcrumb-divider, ">") !important;
 }
-  @media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 768px) and (max-width: 991.98px) {
     .listing-breadcrumb {
         padding: 20px 0 0 0 !important;
     }
-  }
-  @media (min-width: 992px) and (max-width: 1199.98px) {
-    
+}
+@media (min-width: 992px) and (max-width: 1199.98px) {
     .listing-breadcrumb {
         padding: 150px 0 0 0 !important;
     }
-  }
-  @media (max-width: 767px) {
+}
+@media (max-width: 767px) {
     .listing-breadcrumb {
         padding: 10px 0 70px 0 !important;
     }
-  }
-  /********* breadcrumb End ***********/
+}
+/********* breadcrumb End ***********/
 
-  /********* Search section style Start ***********/
-  .search-btn {
+/********* Search section style Start ***********/
+.search-btn {
     position: absolute;
     top: 15px;
     right: 15px;
-  }
-  .sort-text {
+}
+.sort-text {
     font-size: 14px;
     font-weight: 600;
-  }
-  .sort-dropdown button {
+}
+.sort-dropdown button {
     color: var(--primary-color-2);
     background-color: var(--white-color);
     border-color: var(--white-color);
-  }
-  .sort-dropdown button{
+}
+.sort-dropdown button {
     border: none;
-  }
-  .sort-dropdown button:hover,
-  .sort-dropdown button:active,
-  .sort-dropdown button:focus-visible,
-  .sort-dropdown button:focus {
+}
+.sort-dropdown button:hover,
+.sort-dropdown button:active,
+.sort-dropdown button:focus-visible,
+.sort-dropdown button:focus {
     color: var(--primary-color-2);
     background-color: var(--white-color);
     border-color: var(--white-color);
     border: none;
     box-shadow: none;
-  }
-  .search-clear-btn,
-  .search-clear-btn:hover {
-    color: #FF6363;
-    background-color: #FF6363 10% !important;
-    border: 1.5px solid #FF6363;
-  }
-  .filter-text {
-    color:#131650;
-    background-color: #045EAC1A;
-    border: 1px solid #045EAD !important;
-    font-size: .75rem;
+}
+.search-clear-btn,
+.search-clear-btn:hover {
+    color: #ff6363;
+    background-color: #ff6363 10% !important;
+    border: 1.5px solid #ff6363;
+}
+.filter-text {
+    color: #131650;
+    background-color: #045eac1a;
+    border: 1px solid #045ead !important;
+    font-size: 0.75rem;
     line-height: 18px !important;
     border-radius: 6px;
-  }
-  /********* Search section style End ***********/
-  
-  /********* input range slider  style Start ***********/
-    .slider-container {
-        display: flex;
-        align-items: center;
-        margin: 20px;
-    }
-    .slider-label {
-        margin-right: 20px;
-    }
-    .slider-input {
-        width: 100%;
-        height: 2px;    
-    }
-    .slider-value {
-        margin-right: 20px;
-    }
-    .clear-button {
-        padding: 5px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        background: none;
-        border: none;
-        color: #FF6363;
-    }
-    .go-button {
-        background-color: var(--primary-color-1); /* Blue color */
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-  /********* input range slider  style End ***********/
-  .inventory-main-box {
-    border: 1px solid #24272C1A;
-  }
-  .bg-light-grey {
-    background-color: #f5f5f5 !important;
-  }
+}
+/********* Search section style End ***********/
 
-  .brand-body {
+/********* input range slider  style Start ***********/
+.slider-container {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+.slider-label {
+    margin-right: 20px;
+}
+.slider-input {
+    width: 100%;
+    height: 2px;
+}
+.slider-value {
+    margin-right: 20px;
+}
+.clear-button {
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #ff6363;
+}
+.go-button {
+    background-color: var(--primary-color-1); /* Blue color */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+/********* input range slider  style End ***********/
+.inventory-main-box {
+    border: 1px solid #24272c1a;
+}
+.bg-light-grey {
+    background-color: #f5f5f5 !important;
+}
+
+.brand-body {
     height: 285px;
     overflow-y: scroll;
 }
 
 .slider-handle {
-    background-color: #038FFC !important;
+    background-color: #038ffc !important;
 }
 
 .slider-handle.round {
-    background: #038FFC !important;
+    background: #038ffc !important;
 }
 .slider-selection {
-    background-image: linear-gradient(to bottom, #038FFC, #038FFC) !important;
+    background-image: linear-gradient(to bottom, #038ffc, #038ffc) !important;
 }
 
 .slider-horizontal {
     width: 100% !important;
 }
-  /********* Listing page End ***********/
+/********* Listing page End ***********/
 
-  /********* Listing Detail page Start ***********/
-  .form-section{
-    background: #F2F2F2 !important;
-    border: 1px solid #FFFFFF !important;
-  }
-  .car-listing-details p {
-    font-size: .975rem;
+/********* Listing Detail page Start ***********/
+.form-section {
+    background: #f2f2f2 !important;
+    border: 1px solid #ffffff !important;
+}
+.car-listing-details p {
+    font-size: 0.975rem;
     line-height: 22px;
-  }
-  .car-listing-details .brand-text{
-    color: #25282D;
-  }
-  .car-listing-details h3{
-    color: #0D274E;
+}
+.car-listing-details .brand-text {
+    color: #25282d;
+}
+.car-listing-details h3 {
+    color: #0d274e;
     font-size: 1.5rem;
     line-height: 22px;
-  }
-  .car-listing-details .amount-text {
-    color: #868B96;
-  }
-  .car-listing-details .price-text {
-    color: #038FFC;
+}
+.car-listing-details .amount-text {
+    color: #868b96;
+}
+.car-listing-details .price-text {
+    color: #038ffc;
     font-weight: 600;
     font-size: 1.1rem;
-  }
-  .car-listing-details .commission-text {
-    color: #0D274E;
+}
+.car-listing-details .commission-text {
+    color: #0d274e;
     font-weight: 600;
     font-size: 1.1rem;
-  }
-  .cal-btn {
-    color: #038FFC;
-    border: 1.5px solid #038FFC;
+}
+.cal-btn {
+    color: #038ffc;
+    border: 1.5px solid #038ffc;
     border-radius: 6px;
     background-color: var(--white-color);
-    font-size: .75rem;
+    font-size: 0.75rem;
     font-weight: 500;
     padding: 10px;
-  }
-  .total-price span {
+}
+.total-price span {
     font-size: 2rem;
     font-weight: 500;
     bottom: 2px;
     left: 85px;
-  }
-  .charge-btn {
-    border: 1px solid #24272C1A;
-    color: #24272C40;
-  }
-  .location-dropdown button{
+}
+.charge-btn {
+    border: 1px solid #24272c1a;
+    color: #24272c40;
+}
+.location-dropdown button {
     background-color: var(--white-color);
-    color: #24272C80;
-    border: 1px solid #24272C1A;
-  }
-  .location-dropdown button:hover,
-  .location-dropdown button:focus,
-  .location-dropdown button:focus-visible {
+    color: #24272c80;
+    border: 1px solid #24272c1a;
+}
+.location-dropdown button:hover,
+.location-dropdown button:focus,
+.location-dropdown button:focus-visible {
     border: none;
     background: var(--white-color);
-    color: #24272C80;
+    color: #24272c80;
     box-shadow: none;
-    border: 1px solid #24272C1A;
-  }
-  .accessories-text {
-    border: 1px solid #038FFC;
-    color: #0E274F;
-    font-size: .75rem;
-    background: #038FFC26;
+    border: 1px solid #24272c1a;
+}
+.accessories-text {
+    border: 1px solid #038ffc;
+    color: #0e274f;
+    font-size: 0.75rem;
+    background: #038ffc26;
     font-weight: 500;
-  }
-  .accessories-hide-text {
-    border: 1px solid #E9E9E9;
-    color:  #86888C;
-    font-size: .75rem;
-    background: #F5F6F680;
+}
+.accessories-hide-text {
+    border: 1px solid #e9e9e9;
+    color: #86888c;
+    font-size: 0.75rem;
+    background: #f5f6f680;
     font-weight: 500;
-  }
+}
 
-  /********* Listing Page style End **********/
+/********* Listing Page style End **********/
 
 /********** Listing page card work **********/
 
@@ -14929,32 +14935,32 @@ p {
 }
 
 .card_image {
-    height:100%; 
+    height: 100%;
     width: 100%;
 }
 
 .car-name {
-  font-family: "Poppins", serif;
-  font-weight: var(--semiBold)!important;
-  font-style: normal;
-  font-size: 1.2rem; 
-  color: #25282D !important;
+    font-family: "Poppins", serif;
+    font-weight: var(--semiBold) !important;
+    font-style: normal;
+    font-size: 1.2rem;
+    color: #25282d !important;
 }
 
 .listcar_price {
-  font-family: "Poppins", serif;
-  font-weight: var(--bold)!important;
-  font-style: normal;
-  font-size: 1.3rem; 
-  color:  #038FFC;
+    font-family: "Poppins", serif;
+    font-weight: var(--bold) !important;
+    font-style: normal;
+    font-size: 1.3rem;
+    color: #038ffc;
 }
 
 .car-fullname {
-  font-family: "Poppins", serif;
-  font-weight: var(--semiBold)!important;
-  font-style: normal;
-  font-size: 1.4rem; 
-  color: #25282D !important; 
+    font-family: "Poppins", serif;
+    font-weight: var(--semiBold) !important;
+    font-style: normal;
+    font-size: 1.4rem;
+    color: #25282d !important;
 }
 
 .text-truncate {
@@ -15001,9 +15007,11 @@ p {
 
 @media (max-width: 1024px) {
     .nav-btn .menu ul li a {
-        font-size: 0.75em !important;
+        font-size: 0.5em !important;
     }
 }
+
+
 
 .dropdown {
     position: relative;
@@ -15012,75 +15020,76 @@ p {
 .nav-btn .menu ul li a {
     font-size: 14px;
     font-weight: 600;
-  }
-  .sort-dropdown button {
+    font-family: "Poppins";
+    font-style: normal;
+
+}
+.sort-dropdown button {
     color: var(--primary-color-2);
     background-color: var(--white-color);
     border-color: var(--white-color);
-  }
-  .sort-dropdown button{
+}
+.sort-dropdown button {
     border: none;
-  }
-  .sort-dropdown button:hover,
-  .sort-dropdown button:active,
-  .sort-dropdown button:focus-visible,
-  .sort-dropdown button:focus {
+}
+.sort-dropdown button:hover,
+.sort-dropdown button:active,
+.sort-dropdown button:focus-visible,
+.sort-dropdown button:focus {
     color: var(--primary-color-2);
     background-color: var(--white-color);
     border-color: var(--white-color);
     border: none;
     box-shadow: none;
-  }
-  .search-clear-btn,
-  .search-clear-btn:hover {
-    color: #FF6363;
-    background-color: #FF6363 10% !important;
-    border: 1.5px solid #FF6363;
-  }
-  .filter-text {
-    color:#131650;
-    background-color: #045EAC1A;
-    border: 1px solid #045EAD !important;
-    font-size: .75rem;
+}
+.search-clear-btn,
+.search-clear-btn:hover {
+    color: #ff6363;
+    background-color: #ff6363 10% !important;
+    border: 1.5px solid #ff6363;
+}
+.filter-text {
+    color: #131650;
+    background-color: #045eac1a;
+    border: 1px solid #045ead !important;
+    font-size: 0.75rem;
     line-height: 18px !important;
     border-radius: 6px;
-  }
+}
 
+/***** admin prod work *****/
+.main_wid {
+    overflow: hidden;
+}
 
+.lang_dropdown {
+    min-width: 5rem !important;
+}
 
+.background_image {
+    background-image: url("../../japan_home/Cover1.jpg");
+}
 
+/* @media (max-width: 1440px) {
+     .background_image {
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        height: 100vh !important;
+     }
+} */
 
+.section-heading {
+    .poppins-bold {
+        font-family: "Poppins";
+        font-weight: 900 !important;
+    }
+}
 
+.email-input::placeholder {
+    color: white !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.five_star {
+    color: #FFC200;
+}
