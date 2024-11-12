@@ -25,7 +25,7 @@
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
                         <div class="inventory-details-slick-for m-0">
-                            {{--@foreach ($galleries as $gallery)
+                            @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
                                     <div class="inventory-details-slick-img-tag">
                                         <div class="icon-main">
@@ -48,14 +48,15 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <img src="{{ asset($gallery->image) }}" alt="img">
+                                    <img src="{{ asset($gallery) }}" alt="img">
                                 </div>
-                            @endforeach--}}
+                            @endforeach
                         </div>
 
                         <div class="inventory-details-slick-nav">
                             @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
+                                    <img src="{{ asset($gallery) }}" alt="img">
                                 </div>
                             @endforeach
                         </div>
@@ -649,7 +650,7 @@
 
 
     <!-- Cars Listing-part-start -->
-        @if ($related_listings->count() > 0)
+       {{-- @if ($related_listings->count() > 0)
             <section class="cars-listing feature-two mt-3 bg-light-grey">
                 <div class="container">
                     <div class="row">
@@ -813,7 +814,7 @@
                     </div>
                 </div>
             </section>
-        @endif
+        @endif --}}
 
     <!--Cars Listing-part-end -->
 
