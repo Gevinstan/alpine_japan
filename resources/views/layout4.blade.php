@@ -187,7 +187,7 @@
                                 </div> -->
                             </div>
 
-                            <div class="nav-btn pe-4">
+                            <div class="nav-btn">
                                 <div class="menu">
                                     <ul class="nav nav_texthead">
                                         <li class="nav-item">
