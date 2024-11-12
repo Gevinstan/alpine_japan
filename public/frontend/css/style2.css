@@ -14847,7 +14847,7 @@ p {
     font-size: 2rem;
     font-weight: 500;
     bottom: 2px;
-    left: 85px;
+    left: 81px;
 }
 .charge-btn {
     border: 1px solid #24272c1a;
@@ -15032,6 +15032,9 @@ p {
     color: #FFC200;
 }
 
+.location-select {
+    padding: 10px !important;
+}
 /******* Listing page responsive workk start ********/
 
 .breadcrumb-list {

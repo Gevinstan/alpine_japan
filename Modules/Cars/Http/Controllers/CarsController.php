@@ -11,6 +11,7 @@ use Modules\Cars\Entities\Cars;
 use File;
 use Modules\Brand\Entities\Brand;
 use Modules\Models\Entities\ModelsCars;
+use Modules\Cars\Entities\AddProductImages;
 class CarsController extends Controller
 {
     /**
@@ -55,17 +56,22 @@ class CarsController extends Controller
         } else {
             $image_name = '';
         }
+
+
+
+
+
         $cars->image=$image_name;
         $cars->title=$request->title;
         // $cars->make=$request->maker;
         $model=ModelsCars::whereId($request->model)->value('model');
         if(!empty($model)){
             $cars->model=$model;
-          } else {
+        } else {
               $notification= trans('translate.Model Not Found');
               $notification=array('messege'=>$notification,'alert-type'=>'error');
               return redirect()->route('admin.car.index',)->with($notification); 
-          }
+        }
         $brand=Brand::whereId($request->brand)->value('slug');
         if(!empty($brand)){
           $cars->make=$brand;
@@ -87,8 +93,6 @@ class CarsController extends Controller
         $cars->transmission=$request->transmission;
         $cars->fuel=$request->fuel;
         $cars->has_video=$request->video_link;
-        $cars->has_video=$request->video_link;
-        $cars->has_video=$request->video_link;
         $cars->inside=$request->inside;
         $cars->outside=$request->outside;
         // $cars->dimensions=$request->dimensions;
@@ -106,6 +110,50 @@ class CarsController extends Controller
         $cars->ab=$request->ab_air_bag == 'on' ? '1' : '0';
         $cars->sr=$request->sr_sunroof == 'on' ? '1' : '0';
         $cars->save();
+
+       // First get the last ID or set to 0 if no records exist
+$lastId = AddProductImages::max('id') ?? 0;
+
+// Create directory for the car if it doesn't exist
+
+
+if($request->hasFile('cover_image')) {
+    $model_image = $request->file('cover_image');
+    $baseDir = public_path() . '/Cars/ProductImages/' . $cars->id;
+    foreach($model_image as $model_image) {
+
+        // Create new instance for each image
+        $product_images = new AddProductImages();
+        $product_images->category = $cars->id;
+        
+        // Increment lastId for each new image
+        $lastId++;
+        
+        // Get original file details
+        $org_filename = $model_image->getClientOriginalName();
+ 
+        $org_extension = $model_image->getClientOriginalExtension();
+        
+        // Generate unique name for each image
+        $image_name = $cars->id . '-' . $lastId . 
+                     date('-Y-m-d-h-i-s-') . 
+                     rand(999,9999) . '.' . 
+                     $org_extension;
+        
+        // Set the full path for storing the image
+        $full_path = 'ProductImages/' . $cars->id . '/' . $image_name;
+        
+        // Move the file
+        $model_image->move($baseDir, $image_name);
+        
+        // Save image record
+        $product_images->image = $full_path;
+        $product_images->save();
+    }
+}
+
+
+
         $notification= trans('translate.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.car.index',)->with($notification);

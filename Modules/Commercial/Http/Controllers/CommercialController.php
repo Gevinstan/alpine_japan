@@ -9,6 +9,7 @@ use Modules\Commercial\Entities\Commercial;
 use Modules\Categories\Entities\ProductCategories;
 use File;
 use Yajra\DataTables\Facades\DataTables;
+use Modules\Cars\Entities\AddCommercialImages;
 use Modules\Brand\Entities\Brand;
 use Modules\Models\Entities\ModelsCars;
 use DB;
@@ -124,6 +125,50 @@ class CommercialController extends Controller
         $smallHeavy->is_ru_market=$request->russia_market == 'on' ? '1' : '0';
         $smallHeavy->is_na_market=$request->north_america_market == 'on' ? '1' : '0';
         $smallHeavy->save();
+        
+        $lastId = AddCommercialImages::max('id') ?? 0;
+
+// Create directory for the car if it doesn't exist
+
+
+if($request->hasFile('cover_image')) {
+    $model_image = $request->file('cover_image');
+    $baseDir = public_path() . '/Cars/ProductImages/' . $cars->id;
+    foreach($model_image as $model_image) {
+
+        // Create new instance for each image
+        $product_images = new AddCommercialImages();
+        $product_images->category = $smallHeavy->id;
+        
+        // Increment lastId for each new image
+        $lastId++;
+        
+        // Get original file details
+        $org_filename = $model_image->getClientOriginalName();
+ 
+        $org_extension = $model_image->getClientOriginalExtension();
+        
+        // Generate unique name for each image
+        $image_name = $smallHeavy->id . '-' . $lastId . 
+                     date('-Y-m-d-h-i-s-') . 
+                     rand(999,9999) . '.' . 
+                     $org_extension;
+        
+        // Set the full path for storing the image
+        $full_path = 'heavy_photos/' . $smallHeavy->id . '/' . $image_name;
+        
+        // Move the file
+        $model_image->move($baseDir, $image_name);
+        
+        // Save image record
+        $product_images->image = $full_path;
+        $product_images->save();
+    }
+}
+
+
+
+
         $notification= trans('translate.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->route('admin.commercial.index',)->with($notification);

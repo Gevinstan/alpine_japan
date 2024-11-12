@@ -69,6 +69,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/blogs', 'blogs')->name('blogs');
             Route::get('/blog/{slug}', 'blog_show')->name('blog');
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
+            Route::get('/jdm-stock-responsive/{slug}/{type}', 'jdm_stock_responsive')->name('jdm-stock-responsive');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
             Route::post('/auct-sess-creation',function(Request $request){
