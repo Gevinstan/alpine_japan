@@ -18,6 +18,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    
                 </ol>
             </nav>
             <div class="row">

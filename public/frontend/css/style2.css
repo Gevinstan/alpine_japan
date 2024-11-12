@@ -754,7 +754,7 @@
     height: 100%;
     content: "";
     margin: auto;
-    background-color: var(--primary-color-2);
+    background-color: #038FFC;
     transition: all 0.5s;
     z-index: -1;
 }
@@ -827,7 +827,7 @@
 }
 
 .banner {
-    padding-top: 270px;
+    padding-top: 100px;
     position: relative;
     z-index: 1;
     background-color: #f7f7f7;
@@ -841,7 +841,7 @@
     font-family: var(--DMSans);
     font-size: 24px;
     font-weight: 500;
-    line-height: 24px;
+    line-height: 90px;
     color: var(--primary-color-1);
 }
 
@@ -7866,9 +7866,10 @@ p {
     gap: 36px;
     margin-top: 30px;
 }
-.dropdown-menu {
+
+.dropdown_bg {
     background-color: #fff;
-    color: #3e16ee;
+    color: #038FFC;
     min-width: 22rem !important;
 }
 
@@ -9513,13 +9514,6 @@ p {
     width: 100%;
 }
 
-.inventory-ber
-    .inventory-ber-left
-    .inventory-sarch-ber-item
-    .inventory-sarch-ber {
-    position: relative;
-    width: 100%;
-}
 
 .inventory-ber
     .inventory-ber-left
@@ -9621,7 +9615,7 @@ p {
 .inventory-ber .inventory-ber-right .nav-pills .nav-link.active,
 .inventory-ber .inventory-ber-right .nav-pills .show > .nav-link {
     color: var(--white-color) !important;
-    background-color: var(--primary-color-2) !important;
+    background-color: #038FFC !important;
 }
 
 .inventory-ber .inventory-ber-right .nav-pills .nav-link.active span svg,
@@ -14732,7 +14726,12 @@ p {
 }
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .listing-breadcrumb {
-        padding: 150px 0 0 0 !important;
+        padding: 132px 0 0 0 !important;
+    }
+}
+@media (min-width: 1440px) and (max-width: 1920.98px) {
+    .listing-breadcrumb {
+        padding: 132px 0 0 0 !important;
     }
 }
 @media (max-width: 767px) {
@@ -14742,49 +14741,7 @@ p {
 }
 /********* breadcrumb End ***********/
 
-/********* Search section style Start ***********/
-.search-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
-.sort-text {
-    font-size: 14px;
-    font-weight: 600;
-}
-.sort-dropdown button {
-    color: var(--primary-color-2);
-    background-color: var(--white-color);
-    border-color: var(--white-color);
-}
-.sort-dropdown button {
-    border: none;
-}
-.sort-dropdown button:hover,
-.sort-dropdown button:active,
-.sort-dropdown button:focus-visible,
-.sort-dropdown button:focus {
-    color: var(--primary-color-2);
-    background-color: var(--white-color);
-    border-color: var(--white-color);
-    border: none;
-    box-shadow: none;
-}
-.search-clear-btn,
-.search-clear-btn:hover {
-    color: #ff6363;
-    background-color: #ff6363 10% !important;
-    border: 1.5px solid #ff6363;
-}
-.filter-text {
-    color: #131650;
-    background-color: #045eac1a;
-    border: 1px solid #045ead !important;
-    font-size: 0.75rem;
-    line-height: 18px !important;
-    border-radius: 6px;
-}
-/********* Search section style End ***********/
+
 
 /********* input range slider  style Start ***********/
 .slider-container {
@@ -15011,8 +14968,6 @@ p {
     }
 }
 
-
-
 .dropdown {
     position: relative;
 }
@@ -15024,24 +14979,7 @@ p {
     font-style: normal;
 
 }
-.sort-dropdown button {
-    color: var(--primary-color-2);
-    background-color: var(--white-color);
-    border-color: var(--white-color);
-}
-.sort-dropdown button {
-    border: none;
-}
-.sort-dropdown button:hover,
-.sort-dropdown button:active,
-.sort-dropdown button:focus-visible,
-.sort-dropdown button:focus {
-    color: var(--primary-color-2);
-    background-color: var(--white-color);
-    border-color: var(--white-color);
-    border: none;
-    box-shadow: none;
-}
+
 .search-clear-btn,
 .search-clear-btn:hover {
     color: #ff6363;
@@ -15093,3 +15031,247 @@ p {
 .five_star {
     color: #FFC200;
 }
+
+/******* Listing page responsive workk start ********/
+
+.breadcrumb-list {
+    font-family: "Poppins";
+    font-weight: 500 ;
+    font-style: normal;
+}
+
+.inventory-main-box-thumb img {
+    width: 28.5rem;
+    height: 41.25rem;
+
+}
+
+/****** Pagination works Start *******/
+.next-prev-btn ul .active {
+    background-color: #038FFC;
+    border: 1px solid #038FFC;
+    color: var(--white-color);
+}
+
+.next-prev-btn ul li a:hover {
+    background-color: #038FFC;
+    border: 1px solid #038FFC;
+    color: var(--white-color);
+}
+
+/* Default styles for pagination (will apply on larger screens) */
+.next-prev-btn ul {
+    display: flex;
+    justify-content: center; /* Centers pagination buttons */
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.next-prev-btn ul li {
+    margin: 0 5px;
+}
+
+.next-prev-btn ul li a {
+    text-decoration: none;
+    font-size: 1rem; /* Default font size */
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.next-prev-btn ul li a.active {
+    background-color: #007bff; /* Active page style */
+    color: white;
+}
+
+.next-prev-btn ul li a.two {
+    font-weight: bold; /* Next/Prev buttons */
+}
+
+/* Media Queries */
+
+/* Small screens (mobile devices) */
+@media (max-width: 425px) {
+    .next-prev-btn ul {
+        flex-wrap: wrap; /* Allow pagination to wrap on smaller screens */
+        justify-content: flex-start; /* Align to the left */
+    }
+
+    .next-prev-btn ul li {
+        margin: 0 5px;
+    }
+
+    .next-prev-btn ul li a {
+        font-size: 0.8rem; /* Smaller font size for mobile */
+        padding: 6px 12px; /* Smaller padding */
+    }
+
+    /* If you want smaller pagination on mobile, you can adjust button sizes further */
+    .next-prev-btn ul li a.two {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+    .next-prev-btn ul {
+        flex-wrap: wrap; /* Pagination wraps on tablets */
+        justify-content: center; /* Center pagination on tablets */
+    }
+
+    .next-prev-btn ul li a {
+        font-size: 0.9rem; /* Medium font size */
+        padding: 7px 14px; /* Slightly larger padding */
+    }
+
+    .next-prev-btn ul li a.two {
+        font-size: 0.9rem;
+        padding: 7px 14px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .next-prev-btn ul {
+        flex-wrap: wrap !important; /* Pagination wraps on tablets */
+        justify-content: center !important; /* Center pagination on tablets */
+    }
+
+    .next-prev-btn ul li a {
+        font-size: 1rem !important; /* Medium font size */
+        padding: 8px 16px !important; /* Slightly larger padding */
+    }
+
+    .next-prev-btn ul li a.two {
+        font-size: 1rem !important;
+        padding: 8px 16px !important;
+    }
+
+}
+
+/* Large screens (desktops) */
+@media (min-width: 992px) {
+    .next-prev-btn ul {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+        justify-content: center; /* Center pagination on large screens */
+    }
+
+    .next-prev-btn ul li a {
+        font-size: 1rem; /* Default font size for larger screens */
+        padding: 8px 16px; /* Default padding */
+    }
+
+    .next-prev-btn ul li a.two {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+}
+
+
+/***** Pagination works End ******/
+
+
+/********* Search section style Start ***********/
+
+.inventory-sarch-ber .form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    width: 100%; 
+    max-width: 350px; 
+    transition: width 0.3s ease-in-out;
+}
+
+.inventory-ber
+    .inventory-ber-left
+    .inventory-sarch-ber-item
+    .inventory-sarch-ber {
+    position: relative;
+    width: 100%;
+}
+
+.search-btn {
+    position: absolute;
+    bottom: 1rem !important;
+    left: 16.6rem !important;
+    cursor: pointer;
+}
+
+.search-btn .bi-search {
+    color: #6E6E6E;
+}
+
+.sort-text {
+    font-size: 16px;
+    font-weight: 800;
+    text-wrap: nowrap;
+    font-family: var(--roboto);
+    color: #232323;
+}
+.sort-dropdown button {
+    color: #038FFC;
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+}
+
+.sort-dropdown button {
+    border: none;
+}
+
+.sort-dropdown button:hover,
+.sort-dropdown button:active,
+.sort-dropdown button:focus-visible,
+.sort-dropdown button:focus {
+    color: #038FFC;
+    background-color: var(--white-color);
+    border-color: var(--white-color);
+    border: none;
+    box-shadow: none;
+}
+
+.search-clear-btn,
+.search-clear-btn:hover {
+    color: #ff6363;
+    background-color: #ff6363 10% !important;
+    border: 1.5px solid #ff6363;
+}
+
+.filter-text {
+    color: #131650;
+    background-color: #045eac1a;
+    border: 1px solid #045ead !important;
+    font-size: 0.75rem;
+    line-height: 18px !important;
+    border-radius: 6px;
+}
+
+.brand-item {
+    position: relative !important;
+}
+
+.brand-item img {
+    position: absolute !important;
+    left: 60 !important;
+    top: 40 !important;
+}
+
+/********* Search section style End ***********/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
