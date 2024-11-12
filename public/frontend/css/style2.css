@@ -14784,8 +14784,8 @@ p {
 }
 
 .brand-body {
-    height: 285px;
-    overflow-y: scroll;
+    max-height: 285px;
+    overflow-y: auto;
 }
 
 .slider-handle {

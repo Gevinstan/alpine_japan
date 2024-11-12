@@ -2144,7 +2144,7 @@ public function car_listing(Request $request){
 
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
-                $parts = explode('-', $request->price_range_scale);
+                $parts = explode(',', $request->price_range_scale);
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
@@ -2417,7 +2417,10 @@ public function car_listing(Request $request){
         }
     
         if($request->model){
-            $carsQuery->where('model_name_en', $request->model); 
+                $model_arr = array_filter($request->model); // Filter out any empty values
+        if ($model_arr) {
+            $carsQuery->whereIn('model_name_en', $model_arr); 
+        }
         }
 
         if($request->brand_new_cars){
