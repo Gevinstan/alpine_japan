@@ -873,7 +873,7 @@
                 @if ($home3_ads->status == 'enable')
                 <div class="col-lg-3">
                     <div class="feature-thumb">
-                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/big_sale.svg') }}" class="image_bigsale" alt="img"></a>
+                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/bigsale.jpg') }}" class="image_bigsale img-fluid" alt="img"></a>
                     </div>
                 </div>
                 @endif
