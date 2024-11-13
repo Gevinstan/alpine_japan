@@ -22,7 +22,7 @@
                 </ol>
             </nav>
             <div class="row">
-                <div class="col-lg-8 col-sm-12 col-12">
+                <div class="col-lg-8 col-sm-12 col-12 listing_image">
                     <div class="row">
                         <div class="inventory-details-slick-for m-0">
                             @foreach ($galleries as $gallery)
@@ -137,7 +137,7 @@
 
                 </div>
 
-                <div class="col-lg-4 col-sm-12 col-12">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
                     <div class="p-sticky">
                     <div class="auto-sales-item form-section">
                         <div class="d-flex flex-column gap-2 car-listing-details">
@@ -180,8 +180,7 @@
                                 <div class="w-100">
                                     <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
                                         Delivery Charge
-                                    </button>
-                                    
+                                    </button> 
                                 </div>
                             </div>
                             <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
@@ -191,53 +190,64 @@
                     </div>
 
                         </div>
-                            
-
-
-
                             <form method="POST" action="{{route('send_message_to_company')}}">
                                 @csrf
                                 <div class="auto-sales-form">
 
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInput3"
-                                            placeholder="{{ __('translate.Name') }} *" name="name" value="{{ old('name') }}">
-                                    </div>
-                                    <div class="auto-sales-form-item">
-                                        <input type="email" class="form-control" id="exampleFormControlInput4"
-                                            placeholder="{{ __('translate.Email') }} *" name="email" value="{{ old('email') }}">
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput3"
+                                                            placeholder="" name="name" value="{{ old('name') }}">
+                                                        <span class="placeholder-text">Name <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInput5"
-                                            placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="email" class="form-control" id="exampleFormControlInput4"
+                                                            placeholder="" name="email" value="{{ old('email') }}">
+                                                        <span class="placeholder-text">Email <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
-                                            placeholder="{{ __('translate.Subject') }} *" value="{{ old('subject') }}" name="subject">
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput5"
+                                                            placeholder="" name="phone" value="{{ old('phone') }}">
+                                                        <span class="placeholder-text">Phone <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <div class="auto-sales-form-item">
-                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
-                                            placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
+                                                            placeholder="" value="{{ old('subject') }}" name="subject">
+                                                        <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    @if($google_recaptcha->status==1)
-                                        <div class="auto-sales-form-item">
-                                            <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
-                                        </div>
-                                    @endif
-                                    
-                                    <input type="hidden" name="car_id" value="{{$car->id}}">
-                                    <input type="hidden" name="commission" value="" id="hidden_commission">
-                                    <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
-                                    <input type="hidden" name="total_car_price" value="" id="hidden_total">
-                                    <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
-                                    <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
-                                    <input type="hidden" name="url_link" value="{{$url_link}}">
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
+                                                            placeholder="" name="message">{{ old('message') }}</textarea>
+                                                        <span class="placeholder-text">Message <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
+                                                @if($google_recaptcha->status==1)
+                                                    <div class="auto-sales-form-item">
+                                                        <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
+                                                    </div>
+                                                @endif
+                                                <input type="hidden" name="car_id" value="{{$car->id}}">
+                                                <input type="hidden" name="commission" value="" id="hidden_commission">
+                                                <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
+                                                <input type="hidden" name="total_car_price" value="" id="hidden_total">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="url_link" value="{{$url_link}}">
+
+                                                <button type="submit" class="thm-btn-two">INQUIERY NOW</button>
                                 </div>
                             </form>
 
@@ -266,8 +276,8 @@
                                     <div class="row gx-5">
                                         <div class="col-lg-6 ">
                                             <ul class="key-information" >
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -284,8 +294,8 @@
                                                     </span>
                                                     {{ html_decode($car->company_en) }}
                                                 </li>
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -303,8 +313,8 @@
                                                     {{ html_decode($car->model_name_en) }}
                                                 </li>
                                             
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="20" height="23" viewBox="0 0 20 23" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -328,8 +338,8 @@
                                                     {{ html_decode($car->model_grade_en) }}
                                                 </li>
 
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -341,8 +351,8 @@
                                                     {{ html_decode($car->displacement) }}
                                                 </li>
 
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -360,8 +370,8 @@
 
 
 
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -400,8 +410,8 @@
                                         </div>
                                         <div class="col-lg-6 ">
                                             <ul class="key-information two">
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -412,8 +422,8 @@
                                                     {{ html_decode($car->model_year_en) }}
 
                                                 </li>
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -429,8 +439,8 @@
                                                             {{ __('translate.New') }}
                                                         @endif
                                                 </li>
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg class="svg-stock" width="21" height="22"
                                                             viewBox="0 0 21 22" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -476,8 +486,8 @@
 
                                             
 
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -499,8 +509,8 @@
 
 
 
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg class="svg-stock" width="18" height="18"
                                                             viewBox="0 0 18 18" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -563,8 +573,8 @@
                                                     </span>
                                                     {{ html_decode($car->fuel_type) }}
                                                 </li>
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="18" height="21" viewBox="0 0 18 21" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path

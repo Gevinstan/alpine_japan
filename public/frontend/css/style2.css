@@ -719,7 +719,7 @@
     text-transform: capitalize;
     transition: all 0.5s ease-in-out 0.2s;
     z-index: 1;
-    border: 1px solid var(--primary-color-2);
+    border: 1px solid #038FFC;
 }
 
 .thm-btn-two a {
@@ -727,7 +727,7 @@
 }
 
 .thm-btn-two:hover {
-    color: var(--headline-color);
+    color: #038FFC;
 }
 
 .thm-btn-two:before {
@@ -738,7 +738,7 @@
     height: 100%;
     content: "";
     margin: auto;
-    background-color: var(--primary-color-2);
+    background-color: #038FFC;
     transition: all 0.5s;
     z-index: -1;
 }
@@ -3443,11 +3443,13 @@ p {
     line-height: 0;
     border-radius: 4px 4px 0px 0px;
     background-color: #e7ebfe;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: var(--bold);
     line-height: 34px;
     color: var(--headline-color);
     padding: 10px 30px;
+    font-family: "Poppins", serif; 
+    font-style: normal;
 }
 
 .car-compare .accordion-button:focus {
@@ -8025,6 +8027,7 @@ p {
     box-shadow: 0 14px 16px 0 rgba(11, 2, 55, 0.1);
 }
 
+.header .nav-bg
 .header .header-left-item {
     display: flex;
     align-items: center;
@@ -9469,12 +9472,6 @@ p {
 }
 
     
-
-.inventory-main-box-thumb img {
-    width: 28.5rem;
-    height: 41.25rem;
-
-}
 
 .inventory-main-box-thumb .close {
     position: absolute;
@@ -14768,10 +14765,34 @@ p {
 .go-button {
     background-color: var(--primary-color-1); /* Blue color */
     color: white;
-    padding: 5px 10px;
+    padding: 5px 6px !important;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+
+@media (max-width: 1024px) { 
+
+.clear-button {
+    padding: 3px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #ff6363;
+    font-size: 8px;
+}
+.go-button {
+    background-color: var(--primary-color-1); /* Blue color */
+    color: white;
+    padding: 3px 6px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 8px;
+}
+
 }
 /********* input range slider  style End ***********/
 .inventory-main-box {
@@ -14837,9 +14858,11 @@ p {
     border: 1.5px solid #038ffc;
     border-radius: 6px;
     background-color: var(--white-color);
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.9375rem;
     padding: 10px;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
 }
 .total-price span {
     font-size: 2rem;
@@ -15039,8 +15062,9 @@ p {
 .inventory-main-box-thumb img {
     width: 28.5rem;
     height: 41.25rem;
-
 }
+
+
 
 /****** Pagination works Start *******/
 .next-prev-btn ul .active {
@@ -15273,8 +15297,152 @@ p {
     font-size: 16px;  
 }
 
+.charge-btn:hover {
+    color: #868b96;
+}
+
+.delivery_charge {
+    font-family: "Poppins" !important;
+    font-size: 14px !important;
+}
+
+.auto-sales-form-item input::placeholder {
+    font-family: "Poppins" !important;
+    font-size: 15px !important;
+}
+
+.auto-sales-form-item textarea::placeholder {
+    font-family: "Poppins" !important;
+    font-size: 15px !important;
+}
+
+.textarea-wrapper {
+    position: relative;
+}
+
+.placeholder-text {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #BABABA;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+.required {
+    color: red;
+}
+
+textarea {
+    padding-top: 20px; /* Adjust padding to prevent overlap */
+}
+
+textarea:focus + .placeholder-text,
+textarea:not(:placeholder-shown) + .placeholder-text {
+    opacity: 0;
+}
+
+input:focus + .placeholder-text,
+input:not(:placeholder-shown) + .placeholder-text {
+    opacity: 0;
+}
+
+.thm-btn-two {
+    font-family: "Poppins" !important;
+    font-size: 15px !important;
+}
+
+.thm-btn-two:hover {
+    border : 1px solid #038FFC !important;
+    color: #038FFC !important; 
+}
+
+.inventory-details .auto-sales-item .auto-sales-form .auto-sales-form-item .form-control:focus {
+    border-color: #038FFC !important;
+}
+
+.car_model_name {
+    font-family: "Poppins", serif !important;
+    font-weight: 600 !important;
+    font-style: normal;
+    font-size: 14px !important;
+    color: #0E305B !important; 
+}
+
+.car_model_spec {
+    font-family: "Poppins", serif !important;
+    font-weight: 600 !important;
+    font-style: normal;
+    font-size: 14px !important;
+    color: #86888C !important;
+}
+
+@media (max-width: 1024px) {
+    .listing_form {
+        width: 100% !important; /* Make the second column full width on 1024px screens */
+    }
+}
+
+@media (max-width: 1024px) {
+    .listing_image {
+        width: 100% !important; /* Make the second column full width on 1024px screens */
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .header .nav-bg {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 1366px) {
+.image_bigsale {
+    height: 32.5rem !important;
+}
+}
+
+@media (max-width: 1440px) {
+.image_bigsale {
+    height: 36.5rem !important;
+}
+}
+
+@media (max-width: 1920px) {
+.image_bigsale {
+    height: 36.5rem !important;
+}
+}
+
+@media (max-width: 1024px) {
+.image_bigsale {
+    height: 36.5rem !important;
+    padding-top: 0px !important;
+}
+}
+
+@media (max-width: 1024px) {
+.New_arrival {
+    width: 100% !important;
+}
+}
 
 
+@media (max-width: 1024px) {
+.New_arrival_image {
+    display: none;
+}
+}
+
+.footer-two .newsletter-txt span {
+    color: #038FFC !important; 
+}
+
+.footer-two .footer-item-text-link ul li a:hover {
+    color: #038FFC !important;
+}
+
+.contact_us_logo {
+    color: #038FFC !important;
+}
 
 
 

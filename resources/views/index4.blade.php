@@ -49,7 +49,7 @@
                                     </li>
                                     <li class="nav-item"> 
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" name="jdm_model" id="jdm_model">
+                                            <select class="aj-dropdown" name="jdm_model[]" id="jdm_model">
                                             <option selected>Model</option>
                                             </select>
                                         </div>
@@ -726,7 +726,7 @@
     <section class="feature py-5 my-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-9 New_arrival">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
                         <h2 class="section-heading">New<span class="highlight"> Arrivals<span></h2>
@@ -871,9 +871,9 @@
                 </div>
 
                 @if ($home3_ads->status == 'enable')
-                <div class="col-lg-3">
+                <div class="col-lg-3 New_arrival_image">
                     <div class="feature-thumb">
-                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/bigsale.jpg') }}" class="image_bigsale img-fluid" alt="img"></a>
+                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/bigsale.jpg') }}" class="image_bigsale" alt="img"></a>
                     </div>
                 </div>
                 @endif
