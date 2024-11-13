@@ -125,9 +125,9 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="amount-text" id="price_value">Price <span class="price-text">
                                     @if(session('front_lang')=='en')
-                                        ${{$car->start_price_num}}
+                                        ${{$car->price}}
                                         @else
-                                        {{$car->start_price}}
+                                        {{$car->price}}
                                     @endif 
                                 </span></p>
                                 <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 

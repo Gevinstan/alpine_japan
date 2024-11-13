@@ -49,7 +49,7 @@
                                     </li>
                                     <li class="nav-item"> 
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" name="jdm_model" id="jdm_model">
+                                            <select class="aj-dropdown" name="jdm_model[]" id="jdm_model">
                                             <option selected>Model</option>
                                             </select>
                                         </div>
@@ -158,7 +158,7 @@
                 @foreach ($brands->take(6) as $index => $brand)
                     <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                         <div class="categories-logo">
-                            <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
+                            <a href="{{ route('jdm-stock-responsive',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                             <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                             </a>
                         </div>
@@ -590,7 +590,7 @@
 
                                             
 
-                                                <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('jdm-stock-responsive', [$car->make, 'car']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                         <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                     @if(session('front_lang')=='en')
                                                                 {{ $car->model }}
@@ -787,7 +787,7 @@
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                        <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                             <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                 @if(session('front_lang')=='en')
                                                     {{ html_decode($car['model_name_en']) }}
