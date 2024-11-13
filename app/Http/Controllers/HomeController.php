@@ -70,7 +70,7 @@ class HomeController extends Controller
 
         $brands = Brand::where('status', 'enable')->get();
 
-        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(10);
+        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(8);
 
        
  
@@ -101,7 +101,15 @@ class HomeController extends Controller
         $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
         $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
         $home3_ads = AdsBanner::where('position_key', 'home_new_arrivals')->first();
-        $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
+        // $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
+
+        $jdm_car_listings = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name','blog.*')
+        ->orderBy('blog.id','desc')->take(8)
+        ->get();
+
 
         $brands = Brand::where('status', 'enable')->get();
 
@@ -822,6 +830,8 @@ class HomeController extends Controller
         // echo json_encode($request->all());die();
         $jdm_legend = Brand::where('status', 'enable')->get();
         $seo_setting = SeoSetting::where('id', 1)->first();
+        $brand_label= Brand::where('slug', $slug)->first();
+      
 
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
@@ -867,7 +877,7 @@ class HomeController extends Controller
         $minYear = $yearRange->min_year;
 
         $maxYear = $yearRange->max_year;
-        $minPrice = $priceRange->min_sal;
+        $minPrice = $priceRange->min_sal == 0 ? 1 : $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
 
@@ -917,27 +927,36 @@ class HomeController extends Controller
             }
         }
 
-        // if($request->price_range_scale){
-        //     if($request->price_range_scale !=""){  
-        //         $parts = explode(',', $request->price_range_scale);
-        //         $startValue = trim($parts[0]);
-        //         $endValue = trim($parts[1]);
-        //         if($type== 'car'){
-        //             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-        //                 $q->whereBetween('blog.price', [$startValue, $endValue]);
-        //             });
-        //           }  else if($type == 'heavy'){
-        //             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-        //                 $q->whereBetween('heavy.price', [$startValue, $endValue]);
-        //             });
-        //           } else if($type =='small_heavy'){
-        //             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-        //                 $q->whereBetween('small_heavy.price', [$startValue, $endValue]);
-        //             }); 
-        //           }
+        if($request->price_range_scale){
+            if($request->price_range_scale !=""){  
+                $parts = explode(',', $request->price_range_scale);
+                $startValue = trim($parts[0]);
+                $endValue = trim($parts[1]);
+                if($type== 'car'){
+                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                        // $q->whereBetween('blog.price', [$startValue, $endValue]);
+                        $q->whereRaw(
+                            'CAST(REGEXP_REPLACE(blog.price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
+                        );
+                    });
+                  }  else if($type == 'heavy'){
+                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                        // $q->whereBetween('heavy.price', [$startValue, $endValue]);
+                        $q->whereRaw(
+                            'CAST(REGEXP_REPLACE(blog.price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
+                        );
+                    });
+                  } else if($type =='small_heavy'){
+                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                        // $q->whereBetween('small_heavy.price', [$startValue, $endValue]);
+                        $q->whereRaw(
+                            'CAST(REGEXP_REPLACE(blog.price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
+                        );
+                    }); 
+                  }
              
-        //     }
-        // }
+            }
+        }
         if($request->year){
             if($request->year !="")
             {
@@ -953,9 +972,7 @@ class HomeController extends Controller
         
         if($request->model){
             $model_arr = array_filter($request->model); 
-            // echo $request->model;
-            // echo json_encode($model_arr);die();
-            // Filter out any empty values
+
             if ($model_arr) {
                 // echo "one";die();
                 if($type== 'car'){
@@ -1126,7 +1143,8 @@ class HomeController extends Controller
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'brand_label'=>$brand_label
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -1409,23 +1427,79 @@ class HomeController extends Controller
     
 
     public function terms_conditions(){
-        $seo_setting = SeoSetting::where('id', 6)->first();
+        $seo_setting = SeoSetting::where('id', 4)->first();
+         $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                      ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                      ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+         $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+         ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+         $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+         ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+ 
+ 
+         $jdm_brand['car']=$jdm_legend;
+         $jdm_brand['heavy']=$jdm_legend_heavy;
+         $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+ 
 
         $terms_condition = TermAndCondition::where('lang_code', Session::get('front_lang'))->first();
 
         return view('terms_conditions')->with([
             'seo_setting' => $seo_setting,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
             'terms_condition' => $terms_condition,
         ]);
     }
 
     public function privacy_policy(){
         $seo_setting = SeoSetting::where('id', 7)->first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                      ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                      ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+         $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+         ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+         $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+         ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+ 
+ 
+         $jdm_brand['car']=$jdm_legend;
+         $jdm_brand['heavy']=$jdm_legend_heavy;
+         $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+ 
 
         $privacy_policy = PrivacyPolicy::where('lang_code', Session::get('front_lang'))->first();
 
         return view('privacy_policy')->with([
             'seo_setting' => $seo_setting,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
             'privacy_policy' => $privacy_policy,
         ]);
     }

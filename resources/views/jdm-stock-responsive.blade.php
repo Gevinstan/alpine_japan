@@ -65,7 +65,7 @@
                                                                         <input name="brand[]" class="form-check-input brand-search" type="checkbox"
                                                                            >
                                                                         <label class="form-check-label">
-                                                                            Toyota
+                                                                           {{$brand_label->name}}
                                                                         </label>
                                                                     </div>
                                                                     <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -823,19 +823,32 @@
 @push('js_section')
 
     <script>
+
+        function clear_price_slider(){
+            let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+            let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+            if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                $('input[name="price_range_scale"]').val('');
+            } 
+            $('#ex2').prop('disabled', true);
+
+        }
         (function($) {
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
+                let initialMinPrice = $('#ex2').data('slider-min');
+                let initialMaxPrice = $('#ex2').data('slider-max');
                 
 
                 $("#outside_form_btn,go-button").on("click",function(e){
+                    clear_price_slider();
                     $("#search_form").submit();
                 })
                 $(".brand-search").on('change',function(e){
-                    e.preventDefault();   
+                    e.preventDefault();         
+                    clear_price_slider();          
                     $(".model-search").val("")
-                    $('#ex2').prop('disabled', true);
                     form.submit();
                 }) 
                 $("#modelYearSlider").on('input',function(e){
@@ -844,7 +857,8 @@
                     // form.submit();
                 })
                 $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
+                    e.preventDefault(); 
+                    clear_price_slider();  
                     form.submit();
                 });
 
