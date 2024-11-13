@@ -34,7 +34,7 @@
     </div>
 </div> -->
 
-<div class="row">   
+<div class="row pb-5">   
     <div class="col-lg-12">
         <div class="next-prev-btn">
             <ul class="pagination pagination-sm">
