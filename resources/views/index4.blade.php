@@ -62,8 +62,7 @@
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn banner-serch" type="submit"><img src="{{ asset('japan_home/search.png') }}" height="15" width="15"/> search</button>
-                                        
+                                        <button class="btn banner-serch" type="submit"><img src="{{ asset('japan_home/search.png') }}" height="15" width="15"/> search</button>   
                                     </li>
                                 </ul>
                             </form>    

@@ -18,11 +18,10 @@
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
-                    <p>...</p>
                 </ol>
             </nav>
             <div class="row">
-                <div class="col-lg-8 col-md-7">
+                <div class="col-lg-8 col-sm-12 col-12">
                     <div class="row">
                         <div class="inventory-details-slick-for m-0">
                             @foreach ($galleries as $gallery)
@@ -137,7 +136,7 @@
 
                 </div>
 
-                <div class="col-lg-4 col-md-5">
+                <div class="col-lg-4 col-sm-12 col-12">
                     <div class="p-sticky">
                     <div class="auto-sales-item form-section">
                         <div class="d-flex flex-column gap-2 car-listing-details">

@@ -15103,13 +15103,13 @@ p {
 
     .next-prev-btn ul li a {
         font-size: 0.8rem; /* Smaller font size for mobile */
-        padding: 6px 12px; /* Smaller padding */
+        padding: 6px 35px !important; /* Smaller padding */
     }
 
     /* If you want smaller pagination on mobile, you can adjust button sizes further */
     .next-prev-btn ul li a.two {
         font-size: 0.8rem;
-        padding: 6px 12px;
+        padding: 6px 35px !important;
     }
 }
 

@@ -81,7 +81,6 @@
 
                         <!-- Select Your Year Start -->
                         <div class="inventory-main-box my-2">
-
                             <!-- Select Your Budget  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample1">
                                 <div class="accordion-item">
@@ -120,9 +119,6 @@
                                 </div>
 
                             </div>
-
-                         
-
                         </div>
                         <!-- Select Your Year End -->
 
