@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('add_small_heavy_images', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->String('image',200);
+            $table->String('category',100);
+            $table->tinyInteger('is_active')->default('1');
         });
     }
 

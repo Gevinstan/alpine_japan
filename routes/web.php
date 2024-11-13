@@ -70,6 +70,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/blog/{slug}', 'blog_show')->name('blog');
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
             Route::get('/jdm-stock-responsive/{slug}/{type}', 'jdm_stock_responsive')->name('jdm-stock-responsive');
+            Route::get('/jdm-stock-listing/{slug}/{type}', 'jdm_stock_listing')->name('jdm-stock-listing');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
             Route::post('/auct-sess-creation',function(Request $request){
@@ -82,6 +83,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::post('/get-brands', 'get_brands')->name('get-brands');
             Route::post('/get-model-year', 'get_model_year')->name('get-model-year');
             Route::get('/jdm-stock-all', 'jdm_stock_all')->name('jdm-stock-all');
+            Route::get('/jdm-stock-all-resposive', 'jdm_stock_all_resposive')->name('jdm-stock-all-resposive');
             Route::get('/top-selling', 'top_selling')->name('top-selling');
             Route::get('/top-selling_responsive', 'top_selling1')->name('top-selling_responsive');
             Route::get('/new-arrival', 'new_arrival')->name('new-arrival');

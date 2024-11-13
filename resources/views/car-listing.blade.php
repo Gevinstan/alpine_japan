@@ -814,13 +814,21 @@
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-                
+                let initialMinPrice = $('#ex2').data('slider-min');
+                let initialMaxPrice = $('#ex2').data('slider-max');
 
                 $("#outside_form_btn,go-button").on("click",function(e){
                     $("#search_form").submit();
                 })
                 $(".brand-search").on('change',function(e){
                     e.preventDefault();   
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+
+                    // Check if the slider values have changed
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        $('input[name="price_range_scale"]').val('');
+                    } 
                     $(".model-search").val("")
                     form.submit();
                 }) 
@@ -830,7 +838,16 @@
                     // form.submit();
                 })
                 $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
+                    e.preventDefault();  
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+
+                    // Check if the slider values have changed
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        // Submit the form
+                        console.log("one")
+                        $('input[name="price_range_scale"]').val('');
+                    }  
                     form.submit();
                 });
 

@@ -205,7 +205,7 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Cars</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['car'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -213,7 +213,7 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Buses</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['heavy'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -221,7 +221,7 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Trucks</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -984,8 +984,10 @@
 
     <!-- back-to-top  -->
 
+
     <!-- fontawesome  -->
     <script src="{{ asset('frontend/assets/fontawesome/js/all.js') }}"></script>
+    
 
     <!-- jquery  -->
     <script src="{{ asset('global/jquery-3.7.1.min.js') }}"></script>
@@ -1001,10 +1003,13 @@
     <script src="{{ asset('frontend/assets/js/slick.min.js') }}"></script>
     <!-- aos.js -->
     <script src="{{ asset('frontend/assets/js/aos.js') }}"></script>
+    
     <!-- custom.js -->
     <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
+   
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
 
