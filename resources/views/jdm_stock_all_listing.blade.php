@@ -62,26 +62,25 @@
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <input name="brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                           >
+                                                                    <input class="form-check-input brand-search" name="jdm_brand" type="checkbox" value="{{$brands->slug}}"
+                                                                        {{ in_array(trim($brands->slug), (array)request('jdm_brand', [])) ? 'checked' : '' }}>
                                                                         <label class="form-check-label">
-                                                                            Toyota
+                                                                            {{ $brands->name }}
                                                                         </label>
                                                                     </div>
                                                                     <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                            
-                                                                                    @foreach ($brands as $index=> $brand)
+                                                                                    @foreach($models as $brand)
                                                                                         <span class="form-check">
-                                                                                            <input name="model[]" class="form-check-input brand-search" type="checkbox"
-                                                                                                    value="{{ $brand->model }}"
-                                                                                                    {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
-                                                                                            <label class="form-check-label">
-                                                                                                {{ $brand->model }}
-                                                                                            </label>
+                                                                                        <input class="form-check-input model-search" name="jdm_model[]" type="checkbox" value="{{$brand}}"
+                                                                                        {{ in_array(trim($brand), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                        <label class="form-check-label">
+                                                                                            {{ $brand}}
+                                                                                        </label>
                                                                                         </span>
-                                                                                    @endforeach
+                                                                                    @endforeach 
                                                                       
                                                                             </span>
                                                                         </div>
@@ -375,9 +374,9 @@
                                                 <div class="brand-car-item-img-text">
                                                     <div class="text-df">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price'] }}
+                                                        {{ '$'.$car['start_price_num'] }}
                                                         @else
-                                                            {{ $car['start_price'] }}
+                                                        {{ '$'.$car['start_price_num'] }}
                                                         @endif 
                                                     </div>
                                                 </div>
@@ -388,9 +387,9 @@
 
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['model_name'] }}
+                                                            {{ html_decode($car['model_name_en']) }}
                                                         @else
-                                                            {{ $car['model_name'] }}
+                                                            {{ html_decode($car['model_name_en']) }}
                                                         @endif
                                                     </span>
                                                     
@@ -399,12 +398,12 @@
 
                                                 </div>
 
-                                                <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="#"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['model_name']) }}
+                                                            {{ html_decode($car['model_name_en']) }}
                                                         @else
-                                                            {{ html_decode($car['model_name']) }}
+                                                          {{ html_decode($car['model_name_en']) }}    
                                                         @endif
                                                     </h3>
                                                 </a>
@@ -876,6 +875,13 @@
                     $('#ex2').prop('disabled', true);
                     form.submit();
                 }) 
+
+                $(".model-search").on('change',function(e){
+                    e.preventDefault();  
+                    $('#ex2').prop('disabled', true); 
+                    form.submit();    
+                })
+
                 $("#modelYearSlider").on('input',function(e){
                     $("#age_output").val(parseInt($(this).val()))
                     $("#start_year").val(parseInt($(this).val()));

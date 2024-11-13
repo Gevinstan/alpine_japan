@@ -35,7 +35,7 @@
                             </ul>
                         </div>
                         <div>
-                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}">
+                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all-resposive')}}">
                                 <ul class="nav nav-tabs custom-tabs mb-3 rounded-0">
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">

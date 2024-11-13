@@ -119,7 +119,7 @@ $lastId = AddProductImages::max('id') ?? 0;
 
 if($request->hasFile('cover_image')) {
     $model_image = $request->file('cover_image');
-    $baseDir = public_path() . '/Cars/ProductImages/' . $cars->id;
+    $baseDir = public_path() . '/Cars/' . $cars->id;
     foreach($model_image as $model_image) {
 
         // Create new instance for each image
@@ -135,13 +135,10 @@ if($request->hasFile('cover_image')) {
         $org_extension = $model_image->getClientOriginalExtension();
         
         // Generate unique name for each image
-        $image_name = $cars->id . '-' . $lastId . 
-                     date('-Y-m-d-h-i-s-') . 
-                     rand(999,9999) . '.' . 
-                     $org_extension;
+        $image_name = $cars->id . '-' . $lastId . $org_extension;
         
         // Set the full path for storing the image
-        $full_path = 'ProductImages/' . $cars->id . '/' . $image_name;
+        $full_path =  $image_name;
         
         // Move the file
         $model_image->move($baseDir, $image_name);
