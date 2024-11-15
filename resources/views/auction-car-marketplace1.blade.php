@@ -6,7 +6,7 @@
 @endsection
 
 @section('body-content')
-<main>
+<main class="main_wid">
     <!-- banner-part-start  -->
 
     <!-- <section class="inner-banner">
@@ -336,7 +336,7 @@
                                 <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -407,7 +407,7 @@
 
                                                 </div>
 
-                                                <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}

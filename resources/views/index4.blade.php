@@ -40,7 +40,7 @@
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
                                             <select class="aj-dropdown" id="jdm_brand" name="jdm_brand">
-                                            <option selected>Brand</option>
+                                            <option selected value="">Brand</option>
                                             @foreach($jdm_core_brand as $brand)
                                             <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</option>
                                             @endforeach
@@ -49,15 +49,15 @@
                                     </li>
                                     <li class="nav-item"> 
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" name="jdm_model[]" id="jdm_model">
-                                            <option selected>Model</option>
+                                            <select class="aj-dropdown" name="jdm_model" id="jdm_model">
+                                            <option selected value="">Model</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
                                             <select class="aj-dropdown" class="jdm_year" id="jdm_year">
-                                            <option selected>Year</option>
+                                            <option selected value="">Year</option>
                                             </select>
                                         </div>
                                     </li>
@@ -537,30 +537,14 @@
                                                 <!-- <img src="{{ asset($car->thumb_image) }}" alt="thumb"> -->
 
                                                 <div class="brand-new-car">
-                                                    <img src="{{ asset('Cars/' . $car->image) }}" alt="logo" class="card_image">
+                                                    <img src="{{ asset('Cars/' . $car->image) }}" alt="lthumb" class="card_image">
                                                 </div>
                                                 
 
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                      
-                                                    </div>
-
+                                                <div class="brand-car-item-img-text justify-content-end">
                                                     <div class="icon-main">
                                                         @guest('web')
                                                         @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}" class="icon">
-                                                                <span>
-                                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg">
-                                                                        <path
-                                                                            d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
-                                                                            stroke-width="1.3" stroke-linejoin="round"></path>
-                                                                    </svg>
-
-                                                                </span>
-                                                            </a>
-
                                                         @endif
                                                     </div>
                                                 </div>
@@ -726,7 +710,7 @@
     <section class="feature py-5 my-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 New_arrival">
+                <div class="col-lg-9">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
                         <h2 class="section-heading">New<span class="highlight"> Arrivals<span></h2>
@@ -871,9 +855,9 @@
                 </div>
 
                 @if ($home3_ads->status == 'enable')
-                <div class="col-lg-3 New_arrival_image">
+                <div class="col-lg-3">
                     <div class="feature-thumb">
-                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/bigsale.jpg') }}" class="image_bigsale" alt="img"></a>
+                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/big_sale.svg') }}" class="image_bigsale" alt="img"></a>
                     </div>
                 </div>
                 @endif

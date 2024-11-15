@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ $custom_page->page_name }}</title>
     <meta name="title" content="{{ $custom_page->page_name }}">

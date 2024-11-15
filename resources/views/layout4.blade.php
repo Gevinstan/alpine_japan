@@ -263,7 +263,7 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link mx-2" href="{{ route('listings') }}">{{ __('translate.New Car Arrivals') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('new-arrival-responsive') }}">{{ __('translate.New Car Arrivals') }}</a>
                                         </li>
 
                                         <li class="nav-item">
@@ -781,7 +781,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                            <a href="#"> <span>
+                                            <a href="{{ route('custom-page', 'how-to-buy') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -791,7 +791,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"> <span>
+                                            <a href="{{ route('custom-page', 'our-stocks') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -801,7 +801,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#"> <span>
+                                            <a href="{{ route('custom-page', 'useful-links') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -912,7 +912,7 @@
     <!-- footer prart start  end -->
 
 
-    @if ($cookie_consent->status == 1)
+  {{--  @if ($cookie_consent->status == 1)
         <!-- common-modal start  -->
         <div class="common-modal cookie_consent_modal d-none" >
             <button type="button" class="btn-close cookie_consent_close_btn" aria-label="Close"></button>
@@ -926,7 +926,7 @@
 
         </div>
         <!-- common-modal end  -->
-    @endif
+    @endif --}}
 
 
 
