@@ -210,16 +210,16 @@
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a  onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a  data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click"  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a  data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click"  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
                             </div>
-
+s
                         </div>
 
                         <div class="inventory-ber-right">
@@ -814,6 +814,18 @@
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
+
+                $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
+
                 let initialMinPrice = $('#ex2').data('slider-min');
                 let initialMaxPrice = $('#ex2').data('slider-max');
 
@@ -858,6 +870,18 @@
                     window.location.replace(baseUrl);
                         // Combine origin and pathname
                 })
+
+            //     function updateButtonText(selectedBrand,selectedText) {
+            //     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+            //     if (dropdownButton) {
+            //         dropdownButton.innerText = selectedText;
+            //         $("#sort_by_field").val(selectedBrand);
+            //         $('#search_form').submit();
+            //     } else {
+            //         console.error('Dropdown button not found');
+            //     }
+            // }
+
             });
         })(jQuery);
 
@@ -962,16 +986,7 @@
        
     });
 
-    function updateButtonText(selectedBrand,selectedText) {
-    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
-    if (dropdownButton) {
-        dropdownButton.innerText = selectedText;
-        $("#sort_by_field").val(selectedBrand);
-        $('#search_form').submit();
-    } else {
-        console.error('Dropdown button not found');
-    }
-}
+   
 
 $('#ex2').on('slide', function(slideEvt) {
   // Get the current min and max values from the slider

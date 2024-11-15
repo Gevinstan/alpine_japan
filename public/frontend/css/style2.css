@@ -8231,7 +8231,7 @@ p {
 }
 
 .header .menu-bg .nav-main .nav-left .logo {
-    width: 170.165px;
+    width: 100.165px !important;
     height: 47px;
 }
 
@@ -14998,6 +14998,7 @@ p {
     }
 }
 
+
 .dropdown {
     position: relative;
 }
@@ -15296,7 +15297,7 @@ p {
     font-family: "Poppins", serif !important;
     font-weight: bold !important;
     font-style: normal !important;
-    font-size: 16px !important;
+    font-size: 12px !important;
     color: #868b96 !important;
 }
 
@@ -15306,7 +15307,9 @@ p {
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal; 
-    font-size: 16px;  
+    font-size: 12px !important; 
+    padding-top: 10px !important;
+    padding-bottom: 10px !important; 
 }
 
 .charge-btn:hover {
@@ -15402,7 +15405,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .header .nav-bg {
-        padding: 0px;
+        padding: 0px !important;
     }
 }
 
@@ -15512,6 +15515,14 @@ input:not(:placeholder-shown) + .placeholder-text {
   padding: 120px 0 0px 0 !important;
 }
 
+@media (max-width: 1024px) {
+    .nav-btn .menu ul li a {
+    font-size: 10px !important;
+    font-weight: 600;
+    font-family: "Poppins";
+    font-style: normal;
+    }
+}
 
 @media (max-width: 768px) {
   .contact_us_header 

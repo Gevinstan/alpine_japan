@@ -155,6 +155,8 @@ class HomeController extends Controller
                 'home3_ads' => $home3_ads,
             ]);
         }elseif($selected_theme == 'theme_three'){
+            $top_cars=[];
+            
             foreach($top_sells as $cars){
                   $last_image=$this->last_image($cars->pictures);
                     $top_cars[]=array(
@@ -1754,9 +1756,46 @@ class HomeController extends Controller
     public function custom_page($slug){
 
         $custom_page = CustomPage::where('slug', $slug)->first();
+        $seo_setting = SeoSetting::where('id', 7)->first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                      ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                      ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+         $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+         ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+         $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+         ->where('bt.lang_code',Session::get('front_lang'))
+         ->select('b.slug','bt.name as brand_name')
+         ->distinct('b.slug')->get();
+
+ 
+ 
+         $jdm_brand['car']=$jdm_legend;
+         $jdm_brand['heavy']=$jdm_legend_heavy;
+         $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+ 
+
+        // return view('privacy_policy')->with([
+        //     'seo_setting' => $seo_setting,
+        //     'jdm_legend'=>$jdm_brand,
+        //     'jdm_core_brand'=>$jdm_core_brand,
+        //     'privacy_policy' => $privacy_policy,
+        // ]);
 
         return view('custom_page')->with([
             'custom_page' => $custom_page,
+            'seo_setting' => $seo_setting,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand,
         ]);
     }
 
@@ -3040,7 +3079,7 @@ public function car_listing(Request $request){
 
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
-                $parts = explode('-', $request->price_range_scale);
+                $parts = explode(',', $request->price_range_scale);
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
@@ -3316,7 +3355,7 @@ public function car_listing(Request $request){
 
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
-                $parts = explode('-', $request->price_range_scale);
+                $parts = explode(',', $request->price_range_scale);
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
@@ -4816,11 +4855,15 @@ public function car_listing(Request $request){
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
                     if($price_range_scale !=""){  
-                        $parts = explode('-', $price_range_scale);
+                        $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
+                     
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw(
+                                'CAST(REGEXP_REPLACE(price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
+                            );
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
                         });
                     }
                 })
@@ -4855,6 +4898,9 @@ public function car_listing(Request $request){
                 ->select('model','price','image','id','make','title');
 
 
+                
+
+
 
       
             // Query for Heavy table
@@ -4882,11 +4928,14 @@ public function car_listing(Request $request){
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
                     if($price_range_scale !=""){  
-                        $parts = explode('-', $price_range_scale);
+                        $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw(
+                                'CAST(REGEXP_REPLACE(price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
+                            );
                         });
                     }
                 })
@@ -4902,6 +4951,7 @@ public function car_listing(Request $request){
                 ->when($sort_by, function ($query, $sort_by) {
                     switch ($sort_by) {
                         case 'price_low_high':
+                            
                            return  $query->orderBy('price', 'asc');
                             break;
                         case 'price_high_low':
@@ -4939,11 +4989,14 @@ public function car_listing(Request $request){
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
                     if($price_range_scale !=""){  
-                        $parts = explode('-', $price_range_scale);
+                        $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw(
+                                'CAST(REGEXP_REPLACE(price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
+                            );
                         });
                     }
                 })
@@ -5257,7 +5310,7 @@ public function car_listing(Request $request){
 
 
 
-        return view('auction-listing', [
+        return view('auction-listing1', [
             'car' => $car,
             'galleries' => $images,
             'related_listings' => $related_listings,
@@ -5277,13 +5330,31 @@ public function car_listing(Request $request){
 
     public function jdm_stock_all_listing($slug){
         $seo_setting = SeoSetting::where('id', 1)->first();
-        $blogCar =  DB::table('blog')->where('id', $slug)->first();
+        $blogCar =  Cars::where('id', $slug)->first();
         $heavyCar = Heavy::where('id', $slug)->first();
         $smallHeavyCar = SmallHeavy::where('id', $slug)->first();
         
         // Check which one exists
         $car = $blogCar ?? $heavyCar ?? $smallHeavyCar;
-
+        if(!empty($blogCar)){
+            $car_images = DB::table('add_product_images')
+            ->where('category', $car->id)
+            ->get();
+            $image_folder='Cars';
+        }
+        if(!empty($heavyCar)){
+            $car_images = DB::table('add_heavy_images')
+            ->where('category', $car->id)
+            ->get();
+            $image_folder='heavy_photos';   
+        }
+        if(!empty($smallHeavyCar)){
+            $car_images = DB::table('add_small_images')
+            ->where('category', $car->id)
+            ->get();
+            $image_folder='small_heavy';
+        }
+     
 
  
 
@@ -5322,13 +5393,16 @@ public function car_listing(Request $request){
         $jdm_brand['small_heavy']=$jdm_legend_heavy;
 
     
-        return view('jdm-stock-all-listing', [
+        return view('jdm_stock_all_listing1', [
             'car' => $car,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
             'jdm_legend'=>$jdm_brand,
             'jdm_core_brand'=>$jdm_core_brand,
-            'url_link'=>url()->full()
+            'url_link'=>url()->full(),
+            'car_images'=>$car_images,
+            'image_folder'=>$image_folder,
+            'slug'=>$slug,
         ]);
     
     }

@@ -347,7 +347,7 @@
 
                                                 </div>
 
-                                                <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}

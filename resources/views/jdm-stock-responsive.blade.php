@@ -297,7 +297,7 @@
                                 <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -823,8 +823,11 @@
 @push('js_section')
 
     <script>
-
-        function clear_price_slider(){
+        (function($) {
+            let initialMinPrice = $('#ex2').data('slider-min');
+            let initialMaxPrice = $('#ex2').data('slider-max');
+            
+            function clear_price_slider(){
             let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
             let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
             if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
@@ -832,8 +835,7 @@
             } 
             $('#ex2').prop('disabled', true);
 
-        }
-        (function($) {
+            }
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');

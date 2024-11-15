@@ -76,7 +76,7 @@
                                                                                     @foreach($models as $brand)
                                                                                         <span class="form-check">
                                                                                         <input class="form-check-input model-search" name="jdm_model[]" type="checkbox" value="{{$brand}}"
-                                                                                        {{ in_array(trim($brand), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                        {{ in_array(trim($brand), (array) request('jdm_model', [])) ? 'checked' : '' }}>
                                                                                         <label class="form-check-label">
                                                                                             {{ $brand}}
                                                                                         </label>
@@ -236,9 +236,9 @@
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a onclick='updateButtonText("recent", "Recently Added")' data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a onclick='updateButtonText("price_low_high","Low to High")' data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a onclick='updateButtonText("price_high_low","High to Low")' data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -291,13 +291,13 @@
                             </p>
                             @endforeach
                             @endif
-                        @if(request('model') && count(request('model')) > 0)
-                        @foreach(request('model') as $index => $brandSlug)
+                        @if(request('jdm_model') && count(request('jdm_model')) > 0)
+                        @foreach(request('jdm_model') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
                                 <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -361,7 +361,7 @@
 
                                                 </div>
 
-                                                <a href="#"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{route('jdm-stock-all-listing', $car['id'])}}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -824,9 +824,30 @@
 
     <script>
         (function($) {
+           
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
+            //     function updateButtonText(selectedBrand,selectedText) {
+            //         const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+            //         if (dropdownButton) {
+            //             dropdownButton.innerText = selectedText;
+            //             $("#sort_by_field").val(selectedBrand);
+            //             $('#search_form').submit();
+            //         } else {
+            //             console.error('Dropdown button not found');
+            //         }
+            // }
+                $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
                 
 
                 $("#outside_form_btn,go-button").on("click",function(e){
@@ -865,6 +886,7 @@
             });
         })(jQuery);
 
+       
 
     document.addEventListener('DOMContentLoaded', function () {
             // Attach event listeners to all close buttons
@@ -966,16 +988,7 @@
        
     });
 
-    function updateButtonText(selectedBrand,selectedText) {
-    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
-    if (dropdownButton) {
-        dropdownButton.innerText = selectedText;
-        $("#sort_by_field").val(selectedBrand);
-        $('#search_form').submit();
-    } else {
-        console.error('Dropdown button not found');
-    }
-}
+   
 
 $('#ex2').on('slide', function(slideEvt) {
   // Get the current min and max values from the slider
