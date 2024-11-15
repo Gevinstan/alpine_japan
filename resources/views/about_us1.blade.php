@@ -14,15 +14,14 @@
         <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
         <div class="container">
             <div class="col-lg-12">
-
                 <div class="inner-banner-df">
-                <h1 class="inner-banner-taitel">{{ __('translate.About Us') }}</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('translate.About Us') }}</li>
-                    </ol>
-                </nav>
+                    <h1 class="inner-banner-taitel">{{ __('translate.About Us') }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.About Us') }}</li>
+                        </ol>
+                    </nav>
                 </div>
 
             </div>

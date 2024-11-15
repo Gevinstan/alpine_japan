@@ -7,18 +7,18 @@
 
 @section('body-content')
 
-<main>
+<main class="main_wid">
     <!-- about-part-start -->
-    <section class="about ">
+    <section class="about">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5">
+                <div class="col-lg-5 pt-5">
                     <div class="mb-2">
-                        <h2 style="display: inline;">About</h2> 
-                        <h2 style="display: inline; color: #038ffc;">Us</h2>
+                        <h2 class="about_us">About</h2> 
+                        <h2 class="about_us about-us-color">Us</h2>    
                     </div>
 
-                    <div class="about-img">
+                    <div class="about-img"> 
                         <img src="{{ asset($about_us->about_image) }}" alt="img">
                     </div>
                 </div>
