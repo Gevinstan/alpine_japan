@@ -572,7 +572,7 @@
 
                     
                                                     <p class="listcar_price pt-3 pe-4">
-                                                     @if(session('front_lang')=='en')
+                                                        @if(session('front_lang')=='en')
                                                             {{ '$'.$car->price }}
                                                         @else
                                                             {{ '$'.$car->price }}
@@ -583,12 +583,16 @@
                                             
 
                                                 <a href="{{ route('jdm-stock-responsive', [$car->make, 'car']) }}"data-bs-toggle="tooltip" title="FORWARD">
-                                                        <h3 class="text-truncate car-fullname pt-3 ps-3"> 
-                                                    @if(session('front_lang')=='en')
-                                                                {{ $car->model }}
-                                                            @else
+                                                    <h3 class="text-truncate car-fullname pt-3 ps-3"> 
+                                                        @if(session('front_lang')=='en')
                                                             {{ $car->model }}
-                                                            @endif
+                                                        @else
+                                                            {{ $car->model }}
+                                                        @endif     
+                                                        <!-- <div class="py-1">
+                                                            &nbsp;&nbsp;&nbsp;
+                                                        </div> -->
+                                                        
                                                     </h3>
                                                 </a>
 
@@ -727,7 +731,7 @@
     <section class="feature py-5 my-5">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-9 New_arrival pt-2">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
                         <h2 class="section-heading">New<span class="highlight"> Arrivals<span></h2>

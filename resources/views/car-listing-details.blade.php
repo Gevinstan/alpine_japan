@@ -12,7 +12,7 @@
     <!-- Inventory Details-part-start -->
 
 
-    <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">
+    <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">   
         <div class="container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-list mb-4">
