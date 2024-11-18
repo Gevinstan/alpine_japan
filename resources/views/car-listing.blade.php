@@ -219,7 +219,6 @@
                                 </div>
 
                             </div>
-s
                         </div>
 
                         <div class="inventory-ber-right">
@@ -309,15 +308,7 @@ s
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div>
 
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
-                                                        @else
-                                                            {{ $car['start_price'] }}
-                                                        @endif 
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
 
                                             <div class="brand-car-inner">
@@ -334,9 +325,9 @@ s
 
                                                     <p class="listcar_price pt-3 pe-4">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
+                                                            {{ '$'.$car['start_price_num'] }}
                                                         @else
-                                                            {{ $car['start_price'] }}
+                                                            {{ '$'.$car['start_price'] }}
                                                         @endif
                                                     </p>
 

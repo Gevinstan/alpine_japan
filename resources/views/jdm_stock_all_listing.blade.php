@@ -330,18 +330,8 @@
                                     <div class="col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <div class="brand-new-car">
+                                                <div class="">
                                                 <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
-                                                </div>
-
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price_num'] }}
-                                                        @else
-                                                        {{ '$'.$car['start_price_num'] }}
-                                                        @endif 
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -350,12 +340,18 @@
 
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['model_name_en']) }}
+                                                            {{ html_decode($car['company_en']) }}
                                                         @else
-                                                            {{ html_decode($car['model_name_en']) }}
+                                                            {{ html_decode($car['company_en']) }}
                                                         @endif
                                                     </span>
-                                                    
+                                                    <p class="listcar_price pt-3 pe-4">
+                                                        @if(session('front_lang')=='en')
+                                                            {{ '$'.$car['start_price_num'] }}
+                                                        @else
+                                                            {{ '$'.$car['start_price'] }}
+                                                        @endif
+                                                    </p>
 
                                                    
 

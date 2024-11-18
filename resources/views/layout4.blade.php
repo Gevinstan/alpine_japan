@@ -778,7 +778,7 @@
 
                                     <li>
                                          @if(Auth::guard('web')->check())
-                                            <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                            <a href="{{ route('auction-car-marketplace-responsive') }}"> <span>
                                             @else
                                             <a href="#" class="auct_logout" onclick="auct_logout()"><span>
                                             @endif

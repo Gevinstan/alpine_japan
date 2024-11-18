@@ -834,6 +834,10 @@ class HomeController extends Controller
         $jdm_legend = Brand::where('status', 'enable')->get();
         $seo_setting = SeoSetting::where('id', 1)->first();
 
+   
+        $brand_label=Brand::where('slug',$slug)->first();
+      
+
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -860,9 +864,32 @@ class HomeController extends Controller
 
         $brand_list=$this->getJdmSpecificRecord($type);
 
+        // DB::enableQueryLog();
         $yearRange = Cars::where('is_active', '1')
-        ->selectRaw('MIN(YEAR(STR_TO_DATE(yom, "%M %Y"))) as min_year, MAX(YEAR(STR_TO_DATE(yom, "%M %Y"))) as max_year')
-        ->first();        
+                ->selectRaw('
+                MIN(YEAR(
+                    IF(
+                        STR_TO_DATE(yom, "%M %Y") IS NOT NULL, 
+                        STR_TO_DATE(yom, "%M %Y"), 
+                        CONCAT(CAST(yom AS CHAR), "-01-01")
+                    )
+                )) AS min_year, 
+                MAX(YEAR(
+                    IF(
+                        STR_TO_DATE(yom, "%M %Y") IS NOT NULL, 
+                        STR_TO_DATE(yom, "%M %Y"), 
+                        CONCAT(CAST(yom AS CHAR), "-01-01")
+                    )
+                )) AS max_year
+            ')
+        // ->selectRaw('MIN(YEAR(STR_TO_DATE(yom, "%M %Y"))) as min_year, MAX(YEAR(STR_TO_DATE(yom, "%M %Y"))) as max_year')
+        ->whereNotNull('yom')
+        ->first();     
+        
+        
+        
+        
+        // dd(DB::getQueryLog($yearRange));
         // $priceRange = Cars::where('is_active', '1')
         // ->selectRaw('MIN(price) as min_sal, MAX(price) as max_sal')
         // ->where('price','!=','Sold')
@@ -1137,7 +1164,8 @@ class HomeController extends Controller
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'brand_label'=>$brand_label
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
@@ -5026,6 +5054,8 @@ public function car_listing(Request $request){
 
        
         $brands="";
+
+        
 
         if($request->jdm_brand !=""){
             $brands = Brand::where('status', 'enable')

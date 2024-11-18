@@ -250,7 +250,8 @@
                     
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
-                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
+                        <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
+                            <!-- <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a> -->
                         </div>
                     @endif
                 </div>
@@ -369,20 +370,12 @@
                                     <div class="col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <div class="brand-new-car">
+                                                <div class="">
                                                     <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div>
 
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
-                                                        @else
-                                                            {{ $car['start_price'] }}
-                                                        @endif 
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
 
                                             <div class="brand-car-inner">

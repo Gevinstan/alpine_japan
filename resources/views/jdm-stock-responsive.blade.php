@@ -309,7 +309,7 @@
                                 <span class="position-relative model-item" data-brand="{{ request('year') }}">{{ request('year') }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -330,18 +330,8 @@
                                     <div class="col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <div class="brand-new-car">
+                                                <div class="">
                                                 <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
-                                                </div>
-
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['start_price'] }}
-                                                        @else
-                                                            {{ $car['start_price'] }}
-                                                        @endif 
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -350,15 +340,18 @@
 
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['model_name'] }}
+                                                            {{ $car['make'] }}
                                                         @else
-                                                            {{ $car['model_name'] }}
+                                                            {{ $car['make'] }}
                                                         @endif
                                                     </span>
-                                                    
-
-                                                   
-
+                                                    <p>
+                                                       @if(session('front_lang')=='en')
+                                                        {{ '$'.$car['start_price'] }}
+                                                        @else
+                                                            {{ '$'.$car['start_price'] }}
+                                                        @endif
+                                                    </p>
                                                 </div>
 
                                                 <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="FORWARD">

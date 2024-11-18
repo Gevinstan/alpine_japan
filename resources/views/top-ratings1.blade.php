@@ -309,7 +309,7 @@
                                     <div class="col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <div class="brand-new-car">
+                                                <div class="">
                                                     <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div>

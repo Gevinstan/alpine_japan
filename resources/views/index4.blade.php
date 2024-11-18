@@ -206,7 +206,7 @@
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
 
-                                                <div class="brand-new-car">
+                                                <div class="">
                                                     <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                 </div>
                                                  
@@ -544,7 +544,7 @@
                                             <div class="brand-car-item-img">
                                                 <!-- <img src="{{ asset($car->thumb_image) }}" alt="thumb"> -->
 
-                                                <div class="brand-new-car">
+                                                <div class="">
                                                     <img src="{{ asset('Cars/' . $car->image) }}" alt="lthumb" class="card_image">
                                                 </div>
                                                 
@@ -665,11 +665,11 @@
                         </div>
                     </div>
 
-                    <div class="d-flex align-items-center justify-content-center pt-5">
+                    {{--<div class="d-flex align-items-center justify-content-center pt-5">
                         <div class="categories-three-view-btn">
                             <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>    
         </div>
@@ -768,7 +768,7 @@
                                 <div class="brand-car-item">
                                     <div class="brand-car-item-img">
                                 
-                                     <div class="brand-new-car">
+                                     <div class="">
                                         <img src="{{ asset($car['picture']) }}" alt="thumb" class="card_image">
                                     </div>
 
