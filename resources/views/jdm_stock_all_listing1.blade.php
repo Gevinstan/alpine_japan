@@ -526,6 +526,35 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12 pb-3">
+                    <div class="accordion" id="accordionPanelsStayOpenExample4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingfive">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapsefive">
+                                    {{__('translate.Remarks')}}
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
+                                <div class="accordion-body row">
+                                <!-- <div class="row"> -->
+                                    @foreach($accesories as $value)
+                                    
+                                    <div class="py-2 d-flex gap-3 flex-wrap col-sm-4 ">
+                                    
+                                        <span class="accessories-text px-3 h-100">
+                                                {{ isset($value) ? $value : '--' }}
+                                            </span> 
+                                        </div>
+                                    </div>
+                                        
+                                    @endforeach
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
 
                 

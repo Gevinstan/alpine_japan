@@ -312,7 +312,7 @@ s
                                                 <div class="brand-car-item-img-text">
                                                     <div class="text-df">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
+                                                            {{ $car['start_price'] }}
                                                         @else
                                                             {{ $car['start_price'] }}
                                                         @endif 
@@ -325,16 +325,16 @@ s
 
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['company_en'] }}
+                                                            {{ $car['make'] }}
                                                         @else
-                                                            {{ $car['company'] }}
+                                                            {{ $car['make'] }}
                                                         @endif
                                                     </span>
                                                     
 
                                                     <p class="listcar_price pt-3 pe-4">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
+                                                            {{ $car['start_price'] }}
                                                         @else
                                                             {{ $car['start_price'] }}
                                                         @endif
@@ -345,7 +345,7 @@ s
                                                 <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['model_name_en']) }}
+                                                            {{ html_decode($car['model_name']) }}
                                                         @else
                                                             {{ html_decode($car['model_name']) }}
                                                         @endif
@@ -364,11 +364,7 @@ s
                                                         </div>
 
                                                         <span>
-                                                        @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage']) }}
-                                                        @else
-                                                            {{ html_decode($car['mileage_en']) }}
-                                                        @endif
+                                                      
                                                         </span>
                                                     </div>
                                                     <p>.</p>

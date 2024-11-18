@@ -24,13 +24,13 @@
                         <div>
                             <ul class="nav nav-tabs custom-tabs heading-section">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">JDM Stock</a>
+                                    <a class="nav-link active" href="#">{{__('translate.Brand')}}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Buy Now Cars</a>
+                                    <a class="nav-link" href="#">{{__('translate.Model')}}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">New Car Arrivals</a>
+                                    <a class="nav-link" href="#">{{__('translate.Year')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -201,7 +201,7 @@
 
                                 <div class="row g-5">
                                     @foreach ($top_sells as $car)
-                                        <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
+                                        <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
@@ -267,9 +267,9 @@
 
                                                             <span>
                                                                 @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage']) }}
-                                                                @else
                                                                 {{ html_decode($car['mileage_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['mileage']) }}
                                                                 @endif
                                                             </span>
                                                         </div>
@@ -286,7 +286,11 @@
                                                             </div>
 
                                                             <span>
-                                                              
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['year_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['year']) }}
+                                                                @endif
                                                             </span>
                                                         </div>
                                                         <p>.</p>
@@ -301,7 +305,11 @@
                                                             </div>
 
                                                             <span>
-                                                                
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['transmission']) }}
+                                                                @else
+                                                                {{ html_decode($car['transmission_en']) }}
+                                                                @endif
                                                             </span>
                                                         </div>
                                                     </div>
@@ -357,7 +365,7 @@
                                                                     <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <path
-                                                                    d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
+                                                                    d="M9.61204 2.324L9 2.96329L8.38796  2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z"
                                                                     stroke-width="1.3" stroke-linejoin="round"></path>
                                                             </svg>
 
@@ -596,6 +604,9 @@
 
                                                             </span>
                                                         </div>
+                                                        <span>
+                                                            {{$car->yom}}
+                                                        </span>
                                                     </div>
                                                     <p>.</p>
                                                     <div class="brand-car-inner-item-two">
@@ -607,6 +618,9 @@
                                                                 </svg>
                                                             </span>
                                                         </div>
+                                                        <span>
+                                                            {{$car->transmission}}
+                                                        </span>
                                                     </div>
                                                     <p>.</p>
                                                     <div class="brand-car-inner-item-two">
@@ -617,6 +631,9 @@
                                                                 </svg>
                                                             </span>
                                                         </div>  
+                                                        <span>
+                                                            {{$car->transmission}}
+                                                        </span>
                                                     </div>
                                                 </div>
 
