@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset($setting->favicon) }}">
 
     @yield('title')
@@ -75,42 +75,42 @@
             <div class="d-flex justify-content-end align-items-center">
                 <div>
                     <ul class="d-flex gap-5">
-                        <li>
+                        <li class="px-5">
                             <div class="dropdown">
-                            <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
-                                id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span>
-                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <ellipse cx="11.0001" cy="11" rx="4" ry="10" stroke-width="1.5" />
-                                        <path
-                                            d="M20.9962 10.7205C19.1938 12.2016 15.3949 13.2222 11 13.2222C6.60511 13.2222 2.80619 12.2016 1.00383 10.7205M20.9962 10.7205C20.8482 5.32691 16.4294 1 11 1C5.57061 1 1.15183 5.32691 1.00383 10.7205M20.9962 10.7205C20.9987 10.8134 21 10.9065 21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 10.9065 1.00128 10.8134 1.00383 10.7205"
-                                            stroke-width="1.5" />
-                                    </svg>
-                                </span>
-                                {{ Session::get('front_lang_name') }}
+                                <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
+                                    id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span>
+                                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <ellipse cx="11.0001" cy="11" rx="4" ry="10" stroke-width="1.5" />
+                                            <path
+                                                d="M20.9962 10.7205C19.1938 12.2016 15.3949 13.2222 11 13.2222C6.60511 13.2222 2.80619 12.2016 1.00383 10.7205M20.9962 10.7205C20.8482 5.32691 16.4294 1 11 1C5.57061 1 1.15183 5.32691 1.00383 10.7205M20.9962 10.7205C20.9987 10.8134 21 10.9065 21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 10.9065 1.00128 10.8134 1.00383 10.7205"
+                                                stroke-width="1.5" />
+                                        </svg>
+                                    </span>
+                                    {{ Session::get('front_lang_name') }}
 
-                                <span class="btn-arrow">
-                                    <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
-                                    </svg>
-                                </span>
-                            </a>
+                                    <span class="btn-arrow">
+                                        <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
+                                        </svg>
+                                    </span>
+                                </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach ($language_list as $language_dropdown_item)
-                                    <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
+                                <ul class="dropdown-menu lang_dropdown" aria-labelledby="dropdownMenuLink">
+                                    @foreach ($language_list as $language_dropdown_item)
+                                        <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </li>
-                        <li class="text-white heading-fs-14">
+                        <li class="text-white heading-fs-14 px-3">
                             <img src="{{asset('japan_home/email.png')}}" />
                             {{ $setting->email }}
                         </li>
-                        <li class="text-white heading-fs-14">
+                        <li class="text-white heading-fs-14 px-3">
                             <img src="{{asset('japan_home/mob.png')}}" />
                             {{ $setting->phone }}
                         </li>
@@ -187,16 +187,16 @@
                                 </div> -->
                             </div>
 
-                            <div class="nav-btn pe-4">
+                            <div class="nav-btn">
                                 <div class="menu">
                                     <ul class="nav nav_texthead">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ __('JDM Stock') }}
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ __('translate.JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
                                                 <div class="p-3">
@@ -205,23 +205,23 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Cars</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['car'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Buses</h6>
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Heavy</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['heavy'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Trucks</h6>
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -257,23 +257,73 @@
                                             </ul>
 
                                         </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ __('translate.Brand New Cars') }}
+                                            </a>
+                                            <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
+                                                <div class="p-3">
+                                                    <div class="row">
+                                                        <div class="col-md-4 nav-dropdown-list">
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Auction')}}</h6>
+                                                        </a>   
+                                                        </div>
+                                                        <div class="col-md-4 nav-dropdown-list">
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Market Price')}}</h6>
+                                                        </a> 
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <!-- <div class="row">
+                                                        <div class="col-md-4">
+                                                            <h6>Cars</h6>
+                                                            <div>
+                                                                <div><a href="">tyoto</a></div>
+                                                                <div><a href="">tyoto</a></div>
+                                                                <div><a href="">tyoto</a></div>
+                                                            </div>
 
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('about-us') }}">{{ __('translate.Buy Now Cars') }}</a>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <h6>Cars</h6>
+                                                            <div>
+                                                                <div><a href="">tyoto</a></div>
+                                                                <div><a href="">tyoto</a></div>
+                                                                <div><a href="">tyoto</a></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                           <h6>Cars</h6> 
+                                                           <div>
+                                                                <div><a href="">tyoto</a></div>
+                                                                <div><a href="">tyoto</a></div>
+                                                                <div><a href="">tyoto</a></div>
+                                                            </div>
+                                                        </div>              
+                                                    </div> -->
+                                                </div>
+                                            </ul>
+
                                         </li>
 
+                                        <!-- <li class="nav-item">
+                                            <a class="nav-link mx-2" href="{{ route('about-us') }}">{{ __('translate.Buy Now Cars') }}</a>
+                                        </li> -->
+
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('listings') }}">{{ __('translate.New Car Arrivals') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('new-arrival-responsive') }}">{{ __('translate.New Car Arrivals') }}</a>
                                         </li>
 
                                         <li class="nav-item">
                                            
                                             @if(Auth::guard('web')->check())
-                                                    <a class="nav-link" href="{{ route('auction-car-marketplace-responsive') }}">
+                                                    <a class="nav-link mx-2" href="{{ route('auction-car-marketplace-responsive') }}">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @else 
-                                                    <a class="nav-link" href="#" onclick="auct_logout()">
+                                                    <a class="nav-link mx-2 auct_logout" href="#" onclick="auct_logout()">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @endif 
@@ -281,10 +331,10 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -307,10 +357,24 @@
                 <div class="p-left">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{asset('japan_home/japan-logo.png')}}" alt="logo">
-                        </a>
+                            @if (Route::is('home'))
+                                @if (Session::get('selected_theme') == 'theme_two')
+                                    <img src="{{ asset($setting->logo) }}" alt="logo">
+                                @elseif (Session::get('selected_theme') == 'theme_three')
+                                <img src="{{ asset($setting->logo) }}" alt="logo">
+                                @else
+                                    <img src="{{ asset($setting->logo) }}" alt="logo">
+                                @endif
+                            @else
+                                <img src="{{ asset($setting->logo) }}" alt="logo">
+                            @endif
+
+                            <p style="color:white; font-size:30px; font-weight:bold; display: inline; padding-left:100px; padding-top: ">Alpine Japan</p>
+                        </a>  
                     </div>
+                    
                 </div>
+
                 <div class="p-right">
                     <button id="nav-opn-btn">
                         <i class="fa-solid fa-bars"></i>
@@ -334,61 +398,27 @@
 
                     @if (Route::is('home'))
                         @if (Session::get('selected_theme') == 'theme_two')
-                            <img src="{{ asset($setting->home2_logo2) }}" alt="logo">
+                            <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                         @elseif (Session::get('selected_theme') == 'theme_three')
-                        <img src="{{ asset($setting->home3_logo2) }}" alt="logo">
+                        <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                         @else
-                            <img src="{{ asset($setting->inner_logo) }}" alt="logo">
+                            <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                         @endif
                     @else
-                        <img src="{{ asset($setting->inner_logo) }}" alt="logo">
+                        <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
                     @endif
+
+                    <p style="display: inline;padding-left:35px;padding-bottom:40px;font-size:20px; font-weight:bold; color: black">Alpine Japan</p>
                 </a>
+
+                
             </div>
 
 
-            <div class="header-right-item">
-                <div class="header-right-item-btn-main">
-                    <div class="header-right-item-btn">
-                        <div class="dropdown two">
-                            <a class=" btn-secondary dropdown-toggle" href="#" role="button"
-                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="container header-right-item">
+                <div class="row header-right-item-btn-main">
 
-                                <span class="usd-icon">
-                                    <svg width="10" height="20" viewBox="0 0 10 20" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M9 6.5C9 4.567 7.32107 3 5.25 3C3.17893 3 1.5 4.567 1.5 6.5C1.5 8.433 3.17893 10 5.25 10"
-                                            stroke-width="1.5" stroke-linecap="round" />
-                                        <path
-                                            d="M1.5 13.5C1.5 15.433 3.17893 17 5.25 17C7.32107 17 9 15.433 9 13.5C9 11.567 7.32107 10 5.25 10"
-                                            stroke-width="1.5" stroke-linecap="round" />
-                                        <path d="M5.25 1V19" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-
-
-                                </span>
-
-                                {{ Session::get('currency_name') }}
-                                <span class="btn-arrow">
-                                    <svg width="12" height="6" viewBox="0 0 12 6" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M12.0002 0.633816C11.947 0.446997 11.8572 0.28353 11.6808 0.158011C11.3813 -0.0492418 10.9487 -0.0550799 10.6493 0.155092C10.5927 0.195958 10.5361 0.239744 10.4829 0.286449C9.02543 1.56499 7.56465 2.84645 6.10719 4.125C6.07391 4.15419 6.04729 4.18922 5.96743 4.24176C5.94414 4.20673 5.93083 4.16294 5.89755 4.13375C4.42679 2.84062 2.95269 1.5504 1.48192 0.257257C1.22237 0.0295716 0.922896 -0.0579998 0.563523 0.0412478C0.0411014 0.1872 -0.17186 0.776848 0.157565 1.16216C0.194168 1.20595 0.237426 1.24681 0.280683 1.28768C1.97772 2.7764 3.67144 4.26511 5.36848 5.75091C5.67794 6.02238 6.07059 6.07492 6.42663 5.89394C6.51315 5.85015 6.58968 5.78594 6.65956 5.72464C8.30669 4.27971 9.95049 2.83478 11.6009 1.39277C11.784 1.23222 11.947 1.06875 12.0002 0.838149C12.0002 0.771011 12.0002 0.703873 12.0002 0.633816Z" />
-                                    </svg>
-                                </span>
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                @foreach ($currency_list as $currency_dropdown_item)
-                                    <li><a class="dropdown-item" href="{{ route('currency-switcher', ['currency_code' => $currency_dropdown_item->currency_code]) }}">{{ $currency_dropdown_item->currency_name }}</a></li>
-                                @endforeach
-                            </ul>
-
-                        </div>
-                    </div>
-                    <div class="header-right-item-btn">
+                    <div class="col-md-12 header-right-item-btn">
                         <div class="dropdown">
 
                             <a class=" btn-secondary dropdown-toggle" href="#" role="button"
@@ -413,7 +443,7 @@
                                 </span>
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <ul class="dropdown-menu lang_dropdown" aria-labelledby="dropdownMenuLink">
                                 @foreach ($language_list as $language_dropdown_item)
                                     <li><a class="dropdown-item" href="{{ route('language-switcher', ['lang_code' => $language_dropdown_item->lang_code]) }}">{{ $language_dropdown_item->lang_name }}</a></li>
                                 @endforeach
@@ -421,31 +451,82 @@
 
                         </div>
                     </div>
+
+                    <div class="col-md-12 header-right-item-btn">
+                        <div class="header-right-phone-num-btn" style="padding-right:35px;" >
+                            <span style=" padding:3px; border-radius:50%"><i class="bi bi-envelope"></i></span>
+                            <span style="color:black; font-size: 14px; padding-top: -10px !important"> sales@alpinejapan.com </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 header-right-item-btn">
+                        <div class="header-right-phone-num-btn" style="padding-right:20px;">
+                            <span style="padding-top:30px !important; border-radius:50%"><i class="bi bi-phone"></i></span>
+                            <span style="color:black; font-size: 14px; display:inline">+81 78 242 1568 </span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 header-right-item-btn">
+                        <div class="header-right-social-media-btn">
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-instagram"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-facebook"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-youtube"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-linkedin"></i></span>
+                            <span style="color: black; padding-right:22px; border-radius:50%"><i class="bi bi-twitter"></i></span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
             <ul class="nav-links">
-                <li><a href="{{ route('about-us') }}">{{ __('translate.Home') }}</a></li>
-                <li class="dropdown">
-                <a href="javascript:;">{{ __('JDM Stock') }}
-                     <span>
-                     <i class="fa-solid fa-angle-down"></i>
-                    </span>
-                 </a>
-                    <ul class="d-menu">
-                        <li><a href="{{ route('home', ['theme' => 'one']) }}">{{ __('translate.Home-01') }} </a> </li>
-                        <li><a href="{{ route('home', ['theme' => 'two']) }}">{{ __('translate.Home-02') }} </a> </li>
-                        <li><a href="{{ route('home', ['theme' => 'three']) }}">{{ __('translate.Home-03') }} </a> </li>
-                    </ul>
+                <li style="color: black !important" class="dropdown">
+                    <a style="color: black !important" href="javascript:;">{{ __('Home') }}
+                        <!-- <span>
+                        <i class="fa-solid fa-angle-down"></i>
+                        </span> -->
+                    </a>
+
+                    <!-- <ul class="d-menu">
+                        <li><a style="color: black !important" href="{{ route('home', ['theme' => 'one']) }}">{{ __('translate.Home-01') }} </a> </li>
+                        <li><a style="color: black !important" href="{{ route('home', ['theme' => 'two']) }}">{{ __('translate.Home-02') }} </a> </li>
+                        <li><a style="color: black !important" href="{{ route('home', ['theme' => 'three']) }}">{{ __('translate.Home-03') }} </a> </li>
+                    </ul> -->
                 </li>
-                <li><a href="{{ route('about-us') }}">Buy Now Cars</a></li>
 
-                <li><a href="{{ route('listings') }}">New Car Arrivals</a></li>
+                <li><a style="color: black !important" href="{{ route('about-us') }}">{{ __('JDM Stock') }}</a></li>
 
-                <li><a href="{{ route('dealers') }}">Useful Links</a></li>
+                <li><a style="color: black !important" href="{{ route('listings') }}">{{ __('Buy Now Cars') }}</a></li>
 
-                <li><a href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
+                <li><a style="color: black !important" href="{{ route('dealers') }}">{{ __('New Car Arrivals') }}</a></li>
 
+                <li><a style="color: black !important" href="{{ route('blogs') }}">{{ __('Useful Links') }}</a></li>
+
+                <!-- <li class="dropdown">
+                    <a href="#">{{ __('translate.Pages') }}
+                        <span>
+                             <i class="fa-solid fa-angle-down"></i>
+                        </span>
+                     </a>
+
+                    <ul class="d-menu">
+
+                        <li><a href="{{ route('pricing-plan') }}">{{ __('translate.Pricing Plan') }}</a></li>
+
+                        <li><a href="{{ route('terms-conditions') }}">{{ __('translate.Terms and Conditions') }}</a></li>
+
+                        <li><a href="{{ route('privacy-policy') }}">{{ __('translate.Privacy Policy') }}</a></li>
+
+                        @foreach ($custom_pages as $custom_page)
+                            <li><a href="{{ route('custom-page', $custom_page->slug) }}">{{ $custom_page->page_name }}</a></li>
+                        @endforeach
+
+                    </ul>
+
+                </li> -->
+
+                <!-- <li><a href="{{ route('faq') }}">{{ __('translate.FAQ') }}</a></li> -->
+                <li><a style="color: black !important" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a></li>
             </ul>
         </nav>
     </aside>
@@ -458,19 +539,6 @@
 
 
 
-    @if ($tawk_chat->status == 1)
-        <script type="text/javascript">
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='{{ $tawk_chat->chat_link }}';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-            })();
-        </script>
-    @endif
 
 
     <!-- footer prart start  -->
@@ -491,7 +559,7 @@
                 </div>
                 <div class="col-lg-7 col-p-0" data-aos="fade-left" data-aos-delay="100">
                     <div class="newsletter-sarch-box-main-item justify-content-md-end justify-content-start">
-                        <div class="newsletter-sarch-box-main">
+                        <div class="newsletter-sarch-box-main pt-3">
                             <form action="{{ route('newsletter-request') }}" class="newsletter-sarch-box" method="POST">
                                 @csrf
                                 <div class="newsletter-sarch-box-item">
@@ -636,7 +704,7 @@
                             <div class="footer-item-text-link">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('about-us') }}">  <span>
+                                        <a href="{{ route('blogs') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -646,17 +714,7 @@
                                         </span>{{ __('translate.Blogs') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('contact-us') }}">  <span>
-                                            <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>{{ __('translate.Careers') }}</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('blogs') }}">  <span>
+                                        <a href="{{ route('about-us') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -666,7 +724,7 @@
                                         </span>{{ __('translate.About us') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('join-as-dealer') }}">  <span>
+                                        <a href="{{ route('contact-us') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -676,7 +734,7 @@
                                         </span>{{ __('translate.Contact Us') }}</a>
                                     </li>
                                     <li>
-                                            <a href="{{ route('join-as-dealer') }}">  <span>
+                                            <a href="{{ route('terms-conditions') }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -686,7 +744,7 @@
                                             </span>{{ __('translate.Terms and Conditions') }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('join-as-dealer') }}">  <span>
+                                            <a href="{{ route('privacy-policy') }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -720,20 +778,20 @@
 
                                     <li>
                                          @if(Auth::guard('web')->check())
-                                            <a href="{{ route('auction-car-marketplace') }}"> <span>
+                                            <a href="{{ route('auction-car-marketplace-responsive') }}"> <span>
                                             @else
-                                            <a href="#" onclick="auct_logout()"><span>
+                                            <a href="#" class="auct_logout" onclick="auct_logout()"><span>
                                             @endif
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                             stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg></span> {{__('translate.Auction Car Marketplace') }}
+                                                    </svg></span> {{__('translate.Auction Car MarketPlace') }}
                                            </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('listings') }}"> <span>
+                                        <a href="{{ route('car_listing') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -743,7 +801,7 @@
                                             </a>
                                         </li>
                                     <li>
-                                        <a href="{{ route('user.edit-profile') }}"> <span>
+                                        <a href="{{ route('new-arrival-responsive') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -763,7 +821,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                            <a href="{{ route('howtobuy') }}"> <span>
+                                            <a href="{{ route('custom-page', 'how-to-buy') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -773,7 +831,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('user.reviews') }}"> <span>
+                                            <a href="{{ route('custom-page', 'our-stocks') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -783,7 +841,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('user.reviews') }}"> <span>
+                                            <a href="{{ route('custom-page', 'useful-links') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -807,7 +865,7 @@
                                 <ul>
                                     <li>
                                         <a href="tel:{{ $setting->phone }}">
-                                            <span>
+                                            <span >
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M3 1.75C2.30964 1.75 1.75 2.30964 1.75 3C1.75 11.4223 8.57766 18.25 17 18.25C17.6904 18.25 18.25 17.6904 18.25 17V15.3541C18.25 14.8429 17.9388 14.3833 17.4642 14.1935L15.4301 13.3798C14.8265 13.1384 14.1386 13.3999 13.8478 13.9814L13.6708 14.3354C13.5196 14.6379 13.1846 14.8018 12.8529 14.7354L13 14C12.8529 14.7354 12.8532 14.7355 12.8529 14.7354L12.8519 14.7352L12.8507 14.735L12.8475 14.7343L12.8385 14.7325L12.8097 14.7263C12.7859 14.721 12.7529 14.7135 12.7114 14.7034C12.6285 14.6832 12.5115 14.6528 12.3665 14.6101C12.0768 14.525 11.6734 14.3903 11.2046 14.1894C10.2704 13.789 9.05609 13.1167 7.96967 12.0303C6.88325 10.9439 6.21099 9.72958 5.81064 8.79544C5.60973 8.32664 5.47504 7.92316 5.38985 7.6335C5.34721 7.48851 5.31682 7.37154 5.29664 7.28859C5.28655 7.2471 5.279 7.21408 5.27374 7.19026L5.26753 7.1615L5.26566 7.15247L5.26501 7.14932L5.26477 7.14809C5.26472 7.14785 5.26456 7.14709 6 7L5.26456 7.14709C5.19824 6.81544 5.36208 6.48043 5.66459 6.32918L6.01861 6.15217C6.60008 5.86143 6.86163 5.17351 6.62018 4.5699L5.80653 2.53576C5.6167 2.06119 5.15706 1.75 4.64593 1.75H3ZM6.88322 7.38709C8.02553 6.69729 8.51646 5.27171 8.0129 4.01281L7.19925 1.97868C6.78162 0.934616 5.77042 0.25 4.64593 0.25H3C1.48122 0.25 0.25 1.48122 0.25 3C0.25 12.2508 7.74923 19.75 17 19.75C18.5188 19.75 19.75 18.5188 19.75 17V15.3541C19.75 14.2296 19.0654 13.2184 18.0213 12.8008L15.9872 11.9871C14.7283 11.4835 13.3027 11.9745 12.6129 13.1168C12.3906 13.0457 12.111 12.9459 11.7954 12.8106C10.9796 12.461 9.94391 11.8833 9.03033 10.9697C8.11675 10.0561 7.53901 9.02042 7.18936 8.20456C7.05411 7.88897 6.95433 7.60941 6.88322 7.38709ZM10.25 1C10.25 0.585786 10.5858 0.25 11 0.25C12.1491 0.25 13.2869 0.476325 14.3485 0.916054C15.4101 1.35578 16.3747 2.0003 17.1872 2.81282C17.9997 3.62533 18.6442 4.58992 19.0839 5.65152C19.5237 6.71312 19.75 7.85093 19.75 9C19.75 9.41421 19.4142 9.75 19 9.75C18.5858 9.75 18.25 9.41421 18.25 9C18.25 8.04792 18.0625 7.10516 17.6981 6.22554C17.3338 5.34593 16.7997 4.5467 16.1265 3.87348C15.4533 3.20025 14.6541 2.66622 13.7745 2.30187C12.8948 1.93753 11.9521 1.75 11 1.75C10.5858 1.75 10.25 1.41421 10.25 1ZM10.25 5C10.25 4.58579 10.5858 4.25 11 4.25C11.6238 4.25 12.2415 4.37286 12.8177 4.61157C13.394 4.85028 13.9177 5.20016 14.3588 5.64124C14.7998 6.08232 15.1497 6.60596 15.3884 7.18225C15.6271 7.75855 15.75 8.37622 15.75 9C15.75 9.41421 15.4142 9.75 15 9.75C14.5858 9.75 14.25 9.41421 14.25 9C14.25 8.5732 14.1659 8.15059 14.0026 7.75628C13.8393 7.36197 13.5999 7.00369 13.2981 6.7019C12.9963 6.40011 12.638 6.16072 12.2437 5.99739C11.8494 5.83406 11.4268 5.75 11 5.75C10.5858 5.75 10.25 5.41421 10.25 5Z"/>
                                                     </svg>
@@ -894,7 +952,7 @@
     <!-- footer prart start  end -->
 
 
-    @if ($cookie_consent->status == 1)
+  {{--  @if ($cookie_consent->status == 1)
         <!-- common-modal start  -->
         <div class="common-modal cookie_consent_modal d-none" >
             <button type="button" class="btn-close cookie_consent_close_btn" aria-label="Close"></button>
@@ -908,7 +966,7 @@
 
         </div>
         <!-- common-modal end  -->
-    @endif
+    @endif --}}
 
 
 
@@ -966,11 +1024,15 @@
 
     <!-- back-to-top  -->
 
+
     <!-- fontawesome  -->
-    <script src="{{ asset('frontend/assets/fontawesome/js/all.js') }}"></script>
+    
 
     <!-- jquery  -->
+    <script src="{{ asset('frontend/assets/fontawesome/js/all.js') }}"></script>
+
     <script src="{{ asset('global/jquery-3.7.1.min.js') }}"></script>
+
 
     <!-- bootstrap.bundle.min.js -->
     <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -983,10 +1045,13 @@
     <script src="{{ asset('frontend/assets/js/slick.min.js') }}"></script>
     <!-- aos.js -->
     <script src="{{ asset('frontend/assets/js/aos.js') }}"></script>
+    
     <!-- custom.js -->
     <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
+   
 
     <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('global/sweetalert/sweetalert2@11.js') }}"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
 
@@ -1024,6 +1089,11 @@
 
     <script>
         (function($) {
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
             "use strict"
             $(document).ready(function () {
                 $('.cookie_consent_close_btn').on('click', function(){
@@ -1038,14 +1108,67 @@
                 $('.before_auth_wishlist').on("click", function(){
                     toastr.error("{{ __('translate.Please login first') }}")
                 });
+                
+                if (localStorage.getItem('car-listo-cookie') != '1') {
+                $('.cookie_consent_modal').removeClass('d-none');
+                }
+
+                $(".auct_logout").on('click',function(){
+                    Swal.fire({
+                        title: "{{__('Login or Register to access this page ?')}}",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: "{{__('Yes, Ok')}}",
+                        cancelButtonText: "{{__('Cancel')}}",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.noConflict();
+                            $.ajax({
+                                url:"{{route('auct-sess-creation')}}",
+                                type:'POST',
+                                data:{'key':'acut_sess'},
+                                success:function(data){
+                                    window.location.href = "{{ url('/user/dashboard') }}";
+                                }    
+                            })
+                            // $("#remove_car_"+id).submit();
+                        }
+
+                    })
+                })
 
             });
         })(jQuery);
 
-        if (localStorage.getItem('car-listo-cookie') != '1') {
-            $('.cookie_consent_modal').removeClass('d-none');
-        }
+       
 
+        // function auct_logout(){
+        //     Swal.fire({
+        //         title: "{{__('Login or Register to access this page ?')}}",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: "{{__('Yes, Ok')}}",
+        //         cancelButtonText: "{{__('Cancel')}}",
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $.noConflict();
+        //             $.ajax({
+        //                 url:"{{route('auct-sess-creation')}}",
+        //                 type:'POST',
+        //                 data:{'key':'acut_sess'},
+        //                 success:function(data){
+        //                     window.location.href = "{{ url('/user/dashboard') }}";
+        //                 }    
+        //             })
+        //             // $("#remove_car_"+id).submit();
+        //         }
+
+        //     })
+        // }
     </script>
 
 </body>

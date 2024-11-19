@@ -6,43 +6,22 @@
 @endsection
 
 @section('body-content')
-<main>
-    <!-- banner-part-start  -->
-
-    <!-- <section class="inner-banner">
-        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="inner-banner-df">
-                    <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- banner-part-end -->
-
-    <!-- Inventory-part-start -->
+<main class="main_wid">
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">
         <div class="container">
-            <nav aria-label="breadcrumb" class="pt-3">
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
             </nav>
-            <div class="row">
+            <div class="row py-1">
                 <div class="col-lg-3">
                     <form action="" id="search_form">
                         
                         <!-- Select Your Brand Start-->
-                            <div class="inventory-main-box mb-3">
+                            <div class="inventory-main-box mb-2">
                                 <!-- Select Your Brand  -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item">
@@ -99,9 +78,9 @@
                                 </div>
                             </div>
                         <!-- Select Your Brand End-->
-                        <!-- Select Your Year Start -->
-                        <div class="inventory-main-box">
 
+                        <!-- Select Your Year Start -->
+                        <div class="inventory-main-box my-2">
                             <!-- Select Your Budget  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample1">
                                 <div class="accordion-item">
@@ -116,78 +95,35 @@
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
+                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                    
+                                                    <div class="d-flex flex-column align-items-center mt-32px w-100">
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="year">
 
-                                            <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                <div class="d-flex justify-content-between align-items-center flex-column mt-32px">
-                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                    <input type="hidden" id="start_year" name="year">
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <span class="slider-label m-0">{{$minYear}}</span>
-                                                         <output name="age_output" id="age_output" for="start" ></output>
-                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                        <div class="d-flex justify-content-between align-items-center w-100">
+                                                            <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                            <output name="age_output" id="age_output" for="start"></output>
+                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-flex align-content-between flex-column gap-4">
+                                                        <button class="clear-button">Clear</button>
+                                                        <button class="go-button">Go</button>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-content-between flex-column gap-4">
-                                                    <button class="clear-button">Clear</button>
-                                                    <button class="go-button">Go</button>
-                                                </div>
-                                                <!-- <button class="clear-button">Clear</button>
-                                                <button class="go-button">Go</button> -->
-                                            </div>
-
-                                                <!-- @if (request()->has('condition'))
-                                                    @php
-                                                        $condition_arr = request()->get('condition');
-                                                    @endphp
-
-                                                    <span class="form-check">
-                                                        <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
-                                                            id="new_condition" name="condition[]">
-                                                        <label class="form-check-label" for="new_condition">
-                                                            {{ __('translate.New') }}
-                                                        </label>
-                                                    </span>
-                                                    <span class="form-check">
-                                                        <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
-                                                            id="used_condition" name="condition[]">
-                                                        <label class="form-check-label" for="used_condition">
-                                                            {{ __('translate.Used') }}
-                                                        </label>
-                                                    </span>
-
-                                                @else
-                                                    <span class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="New"
-                                                            id="new_condition" name="condition[]">
-                                                        <label class="form-check-label" for="new_condition">
-                                                            {{ __('translate.New') }}
-                                                        </label>
-                                                    </span>
-                                                    <span class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="Used"
-                                                            id="used_condition" name="condition[]">
-                                                        <label class="form-check-label" for="used_condition">
-                                                            {{ __('translate.Used') }}
-                                                        </label>
-                                                    </span>
-                                                @endif -->
-
                                             </span>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-
-                         
-
                         </div>
                         <!-- Select Your Year End -->
 
-
-                       
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box">
+                            <div class="inventory-main-box my-2">
                                 <!-- Budget -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample4">
                                     <div class="accordion-item">
@@ -250,7 +186,7 @@
                     
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
-                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
+                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
                         </div>
                     @endif
                 </div>
@@ -262,9 +198,8 @@
                                 <div class="inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
-                                     <span class="search-btn" style="cursor: pointer;">
-                                       <a href="javascript:void(0);" id="outside_form_btn">
-                                            <i class="bi bi-search"></i></a></span></span>
+                                     <span class="search-btn"><a href="javascript:void(0);" id="outside_form_btn">
+                                            <i class="bi bi-search"></i></a></span>
                                 </div>
 
                                 <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
@@ -272,19 +207,18 @@
                                      <p class="sort-text pl-2">Sort By:</p>
                                      <div class="dropdown sort-dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Dropdown
+                                            Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a  data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a  data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click"  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a  data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click"  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
 
                             </div>
-
                         </div>
 
                         <div class="inventory-ber-right">
@@ -315,15 +249,15 @@
                         </div>
                     </div>
 
-                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-5">
+                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-3">
                         <div class="d-flex align-items-center flex-wrap gap-3">
                         @if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  >
                                             <span class="alert-close">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -333,10 +267,10 @@
                         @if(request('model') && count(request('model')) > 0)
                         @foreach(request('model') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -345,10 +279,10 @@
                             @endif
                             @if(request('year'))
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative model-item" data-brand="{{ request('year') }}">{{ request('year') }}
+                                <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -374,15 +308,7 @@
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div>
 
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
-                                                        @else
-                                                            {{ $car['start_price'] }}
-                                                        @endif 
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
 
                                             <div class="brand-car-inner">
@@ -399,15 +325,15 @@
 
                                                     <p class="listcar_price pt-3 pe-4">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
+                                                            {{ '$'.$car['start_price_num'] }}
                                                         @else
-                                                            {{ $car['start_price'] }}
+                                                            {{ '$'.$car['start_price'] }}
                                                         @endif
                                                     </p>
 
                                                 </div>
 
-                                                <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -852,12 +778,12 @@
                         </div>
                     </div>
 
-
-                    @if ($cars->hasPages())
-                    {{ $cars->links('pagination_box') }}
-                    @endif
-
-
+                    
+                        @if ($cars->hasPages())
+                        {{ $cars->links('pagination_box') }}
+                        @endif
+                    
+                    
                 </div>
              </form>    
             </div>
@@ -879,13 +805,33 @@
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-                
+
+                $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
+
+                let initialMinPrice = $('#ex2').data('slider-min');
+                let initialMaxPrice = $('#ex2').data('slider-max');
 
                 $("#outside_form_btn,go-button").on("click",function(e){
                     $("#search_form").submit();
                 })
                 $(".brand-search").on('change',function(e){
                     e.preventDefault();   
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+
+                    // Check if the slider values have changed
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        $('input[name="price_range_scale"]').val('');
+                    } 
                     $(".model-search").val("")
                     form.submit();
                 }) 
@@ -894,11 +840,6 @@
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-                $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
-                    form.submit();
-                });
-
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();
                     const urlObject = new URL(window.location.href);
@@ -906,6 +847,18 @@
                     window.location.replace(baseUrl);
                         // Combine origin and pathname
                 })
+
+            //     function updateButtonText(selectedBrand,selectedText) {
+            //     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+            //     if (dropdownButton) {
+            //         dropdownButton.innerText = selectedText;
+            //         $("#sort_by_field").val(selectedBrand);
+            //         $('#search_form').submit();
+            //     } else {
+            //         console.error('Dropdown button not found');
+            //     }
+            // }
+
             });
         })(jQuery);
 
@@ -1010,16 +963,7 @@
        
     });
 
-    function updateButtonText(selectedBrand,selectedText) {
-    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
-    if (dropdownButton) {
-        dropdownButton.innerText = selectedText;
-        $("#sort_by_field").val(selectedBrand);
-        $('#search_form').submit();
-    } else {
-        console.error('Dropdown button not found');
-    }
-}
+   
 
 $('#ex2').on('slide', function(slideEvt) {
   // Get the current min and max values from the slider

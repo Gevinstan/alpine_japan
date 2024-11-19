@@ -12,200 +12,153 @@
     <!-- Inventory Details-part-start -->
 
 
-    <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">
+    <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">   
         <div class="container">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-list">
+                <ol class="breadcrumb breadcrumb-list mb-4">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    
                 </ol>
             </nav>
             <div class="row">
-                <div class="col-lg-8 col-md-7">
+                <div class="col-lg-8 col-sm-12 col-12 listing_image">
                     <div class="row">
                         <div class="inventory-details-slick-for m-0">
-                            {{--@foreach ($galleries as $gallery)
+                            @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
                                     <div class="inventory-details-slick-img-tag">
                                         <div class="icon-main">
-                                            <a href="javascript:;" class="icon before_auth_wishlist">
-                                                <span>
-                                                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M9.61204 2.324L9 2.96329L8.38796 2.324C6.69786 0.558667 3.95767 0.558666 2.26757 2.324C0.577476 4.08933 0.577475 6.95151 2.26757 8.71684L7.77592 14.4704C8.45196 15.1765 9.54804 15.1765 10.2241 14.4704L15.7324 8.71684C17.4225 6.95151 17.4225 4.08934 15.7324 2.324C14.0423 0.558667 11.3021 0.558666 9.61204 2.324Z" stroke-width="1.3" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </span>
-                                            </a>
-
-
-                                            <a href="http://localhost/carbaz/add-to-compare/13" class="icon">
-                                                <span>
-                                                    <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M1 10V9C1 6.23858 3.23858 4 6 4H17L14 1" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M17 10V11C17 13.7614 14.7614 16 12 16H1L4 19" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </span>
-                                            </a>
+                                           
                                         </div>
                                     </div>
-                                    <img src="{{ asset($gallery->image) }}" alt="img">
+                                    <a href="#"><img src="{{ asset($gallery) }}" alt="img"></a>
                                 </div>
-                            @endforeach--}}
+                            @endforeach
                         </div>
 
                         <div class="inventory-details-slick-nav">
                             @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
+                                <img src="{{ asset($gallery) }}" alt="img">
                                 </div>
                             @endforeach
                         </div>
                     </div>
-
-
-                    {{-- @if ($listing_ads->status == 'enable')
-                        <div class="inventory-details-thumb" data-aos="fade-up" data-aos-delay="50">
-                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
-                        </div>
-                    @endif --}}
-
-
-                  
-                    {{-- @if ($reviews->count() > 0)
-                        <!-- Write Your Review -->
-                        <div class="accordion aos-init aos-animate" id="accordionPanelsStayOpenExample5" data-aos="fade-up"
-                        data-aos-delay="350">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingsix">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapsesix" aria-expanded="false" aria-controls="panelsStayOpen-collapsesix">
-                                        {{ __('translate.Car Reviews') }}
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingsix">
-                                    <div class="accordion-body">
-
-                                        @foreach ($reviews as $review)
-                                            <div class="reviews">
-                                                <div class="reviews-item">
-
-                                                    <ul class="icon">
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($review->rating < $i)
-                                                            <li><span><i class="fa-regular fa-star"></i></span></li>
-                                                            @else
-                                                            <li><span><i class="fa-solid fa-star"></i></span></li>
-                                                            @endif
-                                                        @endfor
-                                                    </ul>
-
-                                                    <div class="text">
-                                                        <h6>{{ $review->created_at->format('M d Y') }}</h6>
-                                                    </div>
-                                                </div>
-
-                                                <p>
-                                                    {{ html_decode($review->comment) }}
-                                                </p>
-
-                                                <div class="reviews-inner">
-                                                    <div class="reviews-inner-item">
-                                                        <div class="reviews-inner-img">
-                                                            <img src="{{ asset($review?->user?->image) }}" alt="img">
-                                                        </div>
-
-                                                        <div class="reviews-inner-text">
-                                                            <h3>{{ html_decode($review?->user?->name) }}</h3>
-                                                            <p>{{ html_decode($review?->user?->designation) }}</p>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-
-
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif --}}
-
-                
-
-
+                     <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Pictures Downloaded')}}</button>
                 </div>
 
-                <div class="col-lg-4 col-md-5">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
                     <div class="p-sticky">
                     <div class="auto-sales-item form-section">
                         <div class="d-flex flex-column gap-2 car-listing-details">
-                            <p class="brand-text fw-bolder">Volvo</p>
-                            <h3>2019 volvo Camry Hybrid</h3>
+                            <p class="brand-text fw-bolder">{{$car->company_en}}</p>
+                            <h3>{{$car->model_name_en}}</h3>
                             <div class="d-flex align-items-center justify-content-between">
-                                <p class="amount-text">Price <span class="price-text"> $29200</span></p>
-                                <p class="amount-text">Commission <span class="commission-text"> $1500</span></p>
+                                <p class="amount-text" id="price_value">Price <span class="price-text">
+                                    @if(session('front_lang')=='en')
+                                        ${{$car->start_price_num}}
+                                        @else
+                                        {{$car->start_price}}
+                                    @endif 
+                                </span></p>
+                                <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                                ${{$car->commission_value}}
+                                </span></p>
                             </div>
                             <div class="d-flex align-items-center gap-3">
                                 <div class="dropdown location-dropdown w-100">
-                                    <button class="d-flex justify-content-between align-items-center btn w-100 btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <!-- <button class="d-flex justify-content-between align-items-center btn w-100 btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Location
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">Action</a>
                                         <a class="dropdown-item" href="#">Another action</a>
                                         <a class="dropdown-item" href="#">Something else here</a>
-                                    </div>
+                                    </div> -->
+
+                                    <select class="form-select form-select location-select"
+                                        aria-label=".form-select example" name="location" id="location">
+                                        <option class="" selected value="">
+                                            {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                        </option>
+                                        
+                                        @foreach ($delivery_charges as $charges)
+                                        <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="w-100">
-                                    <button class="btn w-100 bg-white charge-btn" type="button">
+                                    <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
                                         Delivery Charge
-                                    </button>
-                                    
+                                    </button> 
                                 </div>
                             </div>
-                            <button class="w-100 cal-btn">CALCULATE TOTAL PRICE</button>
+                            <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
+                            <div class="d-flex align-content-center gap-4">
                             <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                            <p class="" id="total_price"></p>
+                    </div>
 
                         </div>
-                            
-
-
-
-                            <form method="POST" action="">
+                            <form method="POST" action="{{route('send_message_to_company')}}">
                                 @csrf
                                 <div class="auto-sales-form">
 
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInput3"
-                                            placeholder="{{ __('translate.Name') }} *" name="name" value="{{ old('name') }}">
-                                    </div>
-                                    <div class="auto-sales-form-item">
-                                        <input type="email" class="form-control" id="exampleFormControlInput4"
-                                            placeholder="{{ __('translate.Email') }} *" name="email" value="{{ old('email') }}">
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput3"
+                                                            placeholder="" name="name" value="{{ old('name') }}">
+                                                        <span class="placeholder-text">Name <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInput5"
-                                            placeholder="{{ __('translate.Phone') }}" name="phone" value="{{ old('phone') }}">
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="email" class="form-control" id="exampleFormControlInput4"
+                                                            placeholder="" name="email" value="{{ old('email') }}">
+                                                        <span class="placeholder-text">Email <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <div class="auto-sales-form-item">
-                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
-                                            placeholder="{{ __('translate.Subject') }} *" value="{{ old('subject') }}" name="subject">
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInput5"
+                                                            placeholder="" name="phone" value="{{ old('phone') }}">
+                                                        <span class="placeholder-text">Phone <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <div class="auto-sales-form-item">
-                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
-                                            placeholder="{{ __('translate.Message') }} *" name="message">{{ old('message') }}</textarea>
-                                    </div>
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <input type="text" class="form-control" id="exampleFormControlInpu6"
+                                                            placeholder="" value="{{ old('subject') }}" name="subject">
+                                                        <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    @if($google_recaptcha->status==1)
-                                        <div class="auto-sales-form-item">
-                                            <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
-                                        </div>
-                                    @endif
+                                                <div class="auto-sales-form-item">
+                                                    <div class="textarea-wrapper">
+                                                        <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
+                                                            placeholder="" name="message">{{ old('message') }}</textarea>
+                                                        <span class="placeholder-text">Message <span class="required">*</span></span>
+                                                    </div>
+                                                </div>
 
-                                    <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
+                                                @if($google_recaptcha->status==1)
+                                                    <div class="auto-sales-form-item">
+                                                        <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
+                                                    </div>
+                                                @endif
+                                                <input type="hidden" name="car_id" value="{{$car->id}}">
+                                                <input type="hidden" name="commission" value="" id="hidden_commission">
+                                                <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
+                                                <input type="hidden" name="total_car_price" value="" id="hidden_total">
+                                                <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
+                                                <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                                <input type="hidden" name="url_link" value="{{$url_link}}">
+
+                                                <button type="submit" class="thm-btn-two">INQUIERY NOW</button>
                                 </div>
                             </form>
 
@@ -225,7 +178,7 @@
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsetwo">
-                                    {{ __('translate.Key Information') }}
+                                    {{ __('translate.Car Specifications') }}
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show"
@@ -234,8 +187,8 @@
                                     <div class="row gx-5">
                                         <div class="col-lg-6 ">
                                             <ul class="key-information" >
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -248,25 +201,13 @@
                                                                 d="M14.7051 9.60986C14.7051 10.5296 15.4404 11.2778 16.3442 11.2778H17.485C17.6525 11.2778 17.7882 11.1397 17.7882 10.9693C17.7882 10.7989 17.6525 10.6608 17.485 10.6608H16.3442C15.7748 10.6608 15.3115 10.1893 15.3115 9.60986C15.3115 9.03041 15.7747 8.55894 16.3442 8.55894H17.2611C17.4286 8.55894 17.5643 8.42081 17.5643 8.25042C17.5643 8.08003 17.4286 7.94189 17.2611 7.94189H16.3442C15.4404 7.94189 14.7051 8.69013 14.7051 9.60986Z" />
                                                         </svg>
 
-                                                        {{ __('translate.Body Type') }}
+                                                        {{ __('translate.Make') }}
                                                     </span>
-                                                    {{ html_decode($car->body_type) }}
+                                                    {{ html_decode($car->company_en) }}
                                                 </li>
-                                                <li>
-                                                    <span>
-                                                        <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M17.4167 7.23819H16.7833C16.5314 7.23819 16.2897 7.3586 16.1116 7.57293C15.9334 7.78726 15.8333 8.07795 15.8333 8.38106V8.76202H15.2V6.85723C15.2 6.55412 15.0999 6.26343 14.9218 6.0491C14.7436 5.83477 14.502 5.71436 14.25 5.71436H13.3C13.216 5.71436 13.1355 5.67422 13.0761 5.60278C13.0167 5.53134 12.9833 5.43444 12.9833 5.3334V4.57149C12.9833 4.26838 12.8832 3.97769 12.7051 3.76336C12.5269 3.54903 12.2853 3.42862 12.0333 3.42862H10.7667V2.28574H12.35C12.602 2.28574 12.8436 2.16533 13.0218 1.951C13.1999 1.73667 13.3 1.44598 13.3 1.14287C13.3 0.839764 13.1999 0.549069 13.0218 0.334739C12.8436 0.120409 12.602 0 12.35 0H6.01667C5.76471 0 5.52307 0.120409 5.34491 0.334739C5.16676 0.549069 5.06667 0.839764 5.06667 1.14287C5.06667 1.44598 5.16676 1.73667 5.34491 1.951C5.52307 2.16533 5.76471 2.28574 6.01667 2.28574H7.6V3.42862H6.01667C5.76471 3.42862 5.52307 3.54903 5.34491 3.76336C5.16676 3.97769 5.06667 4.26838 5.06667 4.57149C5.06667 4.67252 5.0333 4.76942 4.97392 4.84087C4.91453 4.91231 4.83399 4.95245 4.75 4.95245H3.8C3.54804 4.95245 3.30641 5.07285 3.12825 5.28719C2.95009 5.50152 2.85 5.79221 2.85 6.09532V7.61915H1.9V6.09532C1.9 5.79221 1.79991 5.50152 1.62175 5.28719C1.44359 5.07285 1.20196 4.95245 0.95 4.95245C0.698044 4.95245 0.456408 5.07285 0.278249 5.28719C0.100089 5.50152 0 5.79221 0 6.09532L0 12.1906C0 12.4937 0.100089 12.7844 0.278249 12.9988C0.456408 13.2131 0.698044 13.3335 0.95 13.3335C1.20196 13.3335 1.44359 13.2131 1.62175 12.9988C1.79991 12.7844 1.9 12.4937 1.9 12.1906V10.6668H2.85V12.5716C2.85 12.8747 2.95009 13.1654 3.12825 13.3797C3.30641 13.5941 3.54804 13.7145 3.8 13.7145H5.12113C5.20511 13.7145 5.28564 13.7546 5.34502 13.8261L6.87388 15.6653C6.96185 15.7719 7.06651 15.8563 7.18181 15.9138C7.2971 15.9713 7.42073 16.0006 7.54553 16.0002H14.25C14.502 16.0002 14.7436 15.8798 14.9218 15.6655C15.0999 15.4511 15.2 15.1604 15.2 14.8573V13.3335H15.8333V13.7145C15.8333 14.0176 15.9334 14.3083 16.1116 14.5226C16.2897 14.7369 16.5314 14.8573 16.7833 14.8573H17.4167C17.8364 14.8567 18.2389 14.6559 18.5357 14.2988C18.8325 13.9417 18.9995 13.4575 19 12.9526V9.14298C18.9995 8.63798 18.8325 8.15384 18.5357 7.79676C18.2389 7.43967 17.8364 7.23879 17.4167 7.23819ZM5.7 1.14287C5.7 1.04184 5.73336 0.944938 5.79275 0.873495C5.85214 0.802051 5.93268 0.761915 6.01667 0.761915H12.35C12.434 0.761915 12.5145 0.802051 12.5739 0.873495C12.6333 0.944938 12.6667 1.04184 12.6667 1.14287C12.6667 1.24391 12.6333 1.34081 12.5739 1.41225C12.5145 1.48369 12.434 1.52383 12.35 1.52383H6.01667C5.93268 1.52383 5.85214 1.48369 5.79275 1.41225C5.73336 1.34081 5.7 1.24391 5.7 1.14287ZM8.23333 2.28574H10.1333V3.42862H8.23333V2.28574ZM1.26667 12.1906C1.26667 12.2917 1.2333 12.3886 1.17392 12.46C1.11453 12.5315 1.03399 12.5716 0.95 12.5716C0.866015 12.5716 0.785469 12.5315 0.726083 12.46C0.666696 12.3886 0.633333 12.2917 0.633333 12.1906V6.09532C0.633333 5.99428 0.666696 5.89738 0.726083 5.82594C0.785469 5.7545 0.866015 5.71436 0.95 5.71436C1.03399 5.71436 1.11453 5.7545 1.17392 5.82594C1.2333 5.89738 1.26667 5.99428 1.26667 6.09532V12.1906ZM1.9 9.90489V8.38106H2.85V9.90489H1.9ZM14.5667 14.8573C14.5667 14.9584 14.5333 15.0553 14.4739 15.1267C14.4145 15.1982 14.334 15.2383 14.25 15.2383H7.54553C7.46155 15.2383 7.38102 15.1981 7.32165 15.1267L5.79278 13.2874C5.70478 13.181 5.6001 13.0966 5.48482 13.0391C5.36954 12.9816 5.24593 12.9522 5.12113 12.9526H3.8C3.71601 12.9526 3.63547 12.9124 3.57608 12.841C3.5167 12.7695 3.48333 12.6726 3.48333 12.5716V6.09532C3.48333 5.99428 3.5167 5.89738 3.57608 5.82594C3.63547 5.7545 3.71601 5.71436 3.8 5.71436H4.75C5.00196 5.71436 5.24359 5.59395 5.42175 5.37962C5.59991 5.16529 5.7 4.8746 5.7 4.57149C5.7 4.47045 5.73336 4.37355 5.79275 4.30211C5.85214 4.23067 5.93268 4.19053 6.01667 4.19053H12.0333C12.1173 4.19053 12.1979 4.23067 12.2573 4.30211C12.3166 4.37355 12.35 4.47045 12.35 4.57149V5.3334C12.35 5.63651 12.4501 5.92721 12.6282 6.14154C12.8064 6.35587 13.048 6.47627 13.3 6.47628H14.25C14.334 6.47628 14.4145 6.51641 14.4739 6.58785C14.5333 6.6593 14.5667 6.7562 14.5667 6.85723V14.8573ZM15.2 12.5716V9.52393H15.8333V12.5716H15.2ZM18.3667 12.9526C18.3667 13.2557 18.2666 13.5464 18.0884 13.7607C17.9103 13.975 17.6686 14.0954 17.4167 14.0954H16.7833C16.6993 14.0954 16.6188 14.0553 16.5594 13.9838C16.5 13.9124 16.4667 13.8155 16.4667 13.7145V8.38106C16.4667 8.28003 16.5 8.18313 16.5594 8.11168C16.6188 8.04024 16.6993 8.0001 16.7833 8.0001H17.4167C17.6686 8.0001 17.9103 8.12051 18.0884 8.33484C18.2666 8.54917 18.3667 8.83987 18.3667 9.14298V12.9526Z" />
-                                                        </svg>
-
-                                                        {{ __('translate.Engine Size') }}
-                                                    </span>
-                                                    {{ html_decode($car->engine_size) }}
-                                                </li>
-
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
+                                                        
                                                         <svg width="20" height="23" viewBox="0 0 20 23" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -285,13 +226,13 @@
                                                                 d="M12.0212 2.38332H7.97849C7.87127 2.38332 7.76844 2.34469 7.69263 2.27593C7.61681 2.20717 7.57422 2.1139 7.57422 2.01666V0.366665C7.57422 0.26942 7.61681 0.176157 7.69263 0.107394C7.76844 0.0386307 7.87127 0 7.97849 0H12.0212C12.1284 0 12.2312 0.0386307 12.307 0.107394C12.3829 0.176157 12.4254 0.26942 12.4254 0.366665V2.01666C12.4254 2.1139 12.3829 2.20717 12.307 2.27593C12.2312 2.34469 12.1284 2.38332 12.0212 2.38332ZM8.38276 1.64999H11.6169V0.733331H8.38276V1.64999Z" />
                                                         </svg>
 
-                                                        {{ __('translate.Drive') }}
+                                                        {{ __('translate.Model') }}
                                                     </span>
-                                                    {{ html_decode($car->drive) }}
+                                                    {{ html_decode($car->model_name_en) }}
                                                 </li>
-
-                                                <li>
-                                                    <span>
+                                            
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -300,17 +241,112 @@
                                                                 d="M10 0C4.486 0 0 4.486 0 10C0 15.514 4.486 20 10 20C15.514 20 20 15.514 20 10C20 4.486 15.514 0 10 0ZM10 19.3333C4.8535 19.3333 0.666667 15.1465 0.666667 10C0.666667 4.8535 4.8535 0.666667 10 0.666667C15.1465 0.666667 19.3333 4.8535 19.3333 10C19.3333 15.1465 15.1465 19.3333 10 19.3333Z" />
                                                             <path
                                                                 d="M10 2C5.58888 2 2 5.58888 2 10C2 14.4111 5.58888 18 10 18C14.4111 18 18 14.4111 18 10C18 5.58888 14.4111 2 10 2ZM10 2.66667C13.116 2.66667 15.7825 4.62104 16.8428 7.36771L14.3454 8.20017C13.4888 8.48567 12.5627 8.44104 11.737 8.07387C10.6332 7.583 9.36671 7.583 8.26321 8.07387L8.13692 8.12988C7.38625 8.46388 6.53521 8.53125 5.74058 8.31933L3.06967 7.60708C4.06417 4.73525 6.79421 2.66667 10 2.66667ZM2.66667 10C2.66667 9.93208 2.66996 9.86496 2.67183 9.7975L2.90333 9.87467C6.18983 10.9701 8.51404 13.8415 8.92746 17.2541C5.39054 16.7335 2.66667 13.6793 2.66667 10ZM10 17.3333C9.86763 17.3333 9.73617 17.3294 9.6055 17.3224C9.21158 13.589 6.69408 10.4356 3.11425 9.2425L2.72233 9.11188C2.75804 8.81771 2.81058 8.52875 2.88017 8.24629L5.56867 8.96325C5.929 9.05929 6.29896 9.10713 6.66858 9.10713C7.26429 9.10713 7.85854 8.98342 8.4075 8.73929L8.53379 8.68329C9.46542 8.26858 10.5341 8.26892 11.467 8.68363C12.4444 9.11754 13.5414 9.17092 14.5563 8.83238L17.0537 7.99988C17.156 8.36017 17.2314 8.7315 17.2776 9.11188L16.8857 9.2425C13.3058 10.4356 10.7883 13.589 10.3944 17.3224C10.2638 17.3294 10.1324 17.3333 10 17.3333ZM11.0726 17.2541C11.486 13.8415 13.8102 10.9701 17.0967 9.87467L17.3282 9.7975C17.33 9.86496 17.3334 9.93208 17.3334 10C17.3333 13.6793 14.6095 16.7335 11.0726 17.2541Z" />
+                                                        </svg> 
+
+                                                        {{ __('translate.Grade') }}
+                                                    </span>
+                                                    {{ html_decode($car->model_grade_en) }}
+                                                </li>
+
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
+                                                        <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M17.4167 7.23819H16.7833C16.5314 7.23819 16.2897 7.3586 16.1116 7.57293C15.9334 7.78726 15.8333 8.07795 15.8333 8.38106V8.76202H15.2V6.85723C15.2 6.55412 15.0999 6.26343 14.9218 6.0491C14.7436 5.83477 14.502 5.71436 14.25 5.71436H13.3C13.216 5.71436 13.1355 5.67422 13.0761 5.60278C13.0167 5.53134 12.9833 5.43444 12.9833 5.3334V4.57149C12.9833 4.26838 12.8832 3.97769 12.7051 3.76336C12.5269 3.54903 12.2853 3.42862 12.0333 3.42862H10.7667V2.28574H12.35C12.602 2.28574 12.8436 2.16533 13.0218 1.951C13.1999 1.73667 13.3 1.44598 13.3 1.14287C13.3 0.839764 13.1999 0.549069 13.0218 0.334739C12.8436 0.120409 12.602 0 12.35 0H6.01667C5.76471 0 5.52307 0.120409 5.34491 0.334739C5.16676 0.549069 5.06667 0.839764 5.06667 1.14287C5.06667 1.44598 5.16676 1.73667 5.34491 1.951C5.52307 2.16533 5.76471 2.28574 6.01667 2.28574H7.6V3.42862H6.01667C5.76471 3.42862 5.52307 3.54903 5.34491 3.76336C5.16676 3.97769 5.06667 4.26838 5.06667 4.57149C5.06667 4.67252 5.0333 4.76942 4.97392 4.84087C4.91453 4.91231 4.83399 4.95245 4.75 4.95245H3.8C3.54804 4.95245 3.30641 5.07285 3.12825 5.28719C2.95009 5.50152 2.85 5.79221 2.85 6.09532V7.61915H1.9V6.09532C1.9 5.79221 1.79991 5.50152 1.62175 5.28719C1.44359 5.07285 1.20196 4.95245 0.95 4.95245C0.698044 4.95245 0.456408 5.07285 0.278249 5.28719C0.100089 5.50152 0 5.79221 0 6.09532L0 12.1906C0 12.4937 0.100089 12.7844 0.278249 12.9988C0.456408 13.2131 0.698044 13.3335 0.95 13.3335C1.20196 13.3335 1.44359 13.2131 1.62175 12.9988C1.79991 12.7844 1.9 12.4937 1.9 12.1906V10.6668H2.85V12.5716C2.85 12.8747 2.95009 13.1654 3.12825 13.3797C3.30641 13.5941 3.54804 13.7145 3.8 13.7145H5.12113C5.20511 13.7145 5.28564 13.7546 5.34502 13.8261L6.87388 15.6653C6.96185 15.7719 7.06651 15.8563 7.18181 15.9138C7.2971 15.9713 7.42073 16.0006 7.54553 16.0002H14.25C14.502 16.0002 14.7436 15.8798 14.9218 15.6655C15.0999 15.4511 15.2 15.1604 15.2 14.8573V13.3335H15.8333V13.7145C15.8333 14.0176 15.9334 14.3083 16.1116 14.5226C16.2897 14.7369 16.5314 14.8573 16.7833 14.8573H17.4167C17.8364 14.8567 18.2389 14.6559 18.5357 14.2988C18.8325 13.9417 18.9995 13.4575 19 12.9526V9.14298C18.9995 8.63798 18.8325 8.15384 18.5357 7.79676C18.2389 7.43967 17.8364 7.23879 17.4167 7.23819ZM5.7 1.14287C5.7 1.04184 5.73336 0.944938 5.79275 0.873495C5.85214 0.802051 5.93268 0.761915 6.01667 0.761915H12.35C12.434 0.761915 12.5145 0.802051 12.5739 0.873495C12.6333 0.944938 12.6667 1.04184 12.6667 1.14287C12.6667 1.24391 12.6333 1.34081 12.5739 1.41225C12.5145 1.48369 12.434 1.52383 12.35 1.52383H6.01667C5.93268 1.52383 5.85214 1.48369 5.79275 1.41225C5.73336 1.34081 5.7 1.24391 5.7 1.14287ZM8.23333 2.28574H10.1333V3.42862H8.23333V2.28574ZM1.26667 12.1906C1.26667 12.2917 1.2333 12.3886 1.17392 12.46C1.11453 12.5315 1.03399 12.5716 0.95 12.5716C0.866015 12.5716 0.785469 12.5315 0.726083 12.46C0.666696 12.3886 0.633333 12.2917 0.633333 12.1906V6.09532C0.633333 5.99428 0.666696 5.89738 0.726083 5.82594C0.785469 5.7545 0.866015 5.71436 0.95 5.71436C1.03399 5.71436 1.11453 5.7545 1.17392 5.82594C1.2333 5.89738 1.26667 5.99428 1.26667 6.09532V12.1906ZM1.9 9.90489V8.38106H2.85V9.90489H1.9ZM14.5667 14.8573C14.5667 14.9584 14.5333 15.0553 14.4739 15.1267C14.4145 15.1982 14.334 15.2383 14.25 15.2383H7.54553C7.46155 15.2383 7.38102 15.1981 7.32165 15.1267L5.79278 13.2874C5.70478 13.181 5.6001 13.0966 5.48482 13.0391C5.36954 12.9816 5.24593 12.9522 5.12113 12.9526H3.8C3.71601 12.9526 3.63547 12.9124 3.57608 12.841C3.5167 12.7695 3.48333 12.6726 3.48333 12.5716V6.09532C3.48333 5.99428 3.5167 5.89738 3.57608 5.82594C3.63547 5.7545 3.71601 5.71436 3.8 5.71436H4.75C5.00196 5.71436 5.24359 5.59395 5.42175 5.37962C5.59991 5.16529 5.7 4.8746 5.7 4.57149C5.7 4.47045 5.73336 4.37355 5.79275 4.30211C5.85214 4.23067 5.93268 4.19053 6.01667 4.19053H12.0333C12.1173 4.19053 12.1979 4.23067 12.2573 4.30211C12.3166 4.37355 12.35 4.47045 12.35 4.57149V5.3334C12.35 5.63651 12.4501 5.92721 12.6282 6.14154C12.8064 6.35587 13.048 6.47627 13.3 6.47628H14.25C14.334 6.47628 14.4145 6.51641 14.4739 6.58785C14.5333 6.6593 14.5667 6.7562 14.5667 6.85723V14.8573ZM15.2 12.5716V9.52393H15.8333V12.5716H15.2ZM18.3667 12.9526C18.3667 13.2557 18.2666 13.5464 18.0884 13.7607C17.9103 13.975 17.6686 14.0954 17.4167 14.0954H16.7833C16.6993 14.0954 16.6188 14.0553 16.5594 13.9838C16.5 13.9124 16.4667 13.8155 16.4667 13.7145V8.38106C16.4667 8.28003 16.5 8.18313 16.5594 8.11168C16.6188 8.04024 16.6993 8.0001 16.7833 8.0001H17.4167C17.6686 8.0001 17.9103 8.12051 18.0884 8.33484C18.2666 8.54917 18.3667 8.83987 18.3667 9.14298V12.9526Z" />
                                                         </svg>
 
-                                                        {{ __('translate.Interior Color') }}
+                                                        {{ __('translate.Engine Size') }}
                                                     </span>
-                                                    {{ html_decode($car->interior_color) }}
+                                                    {{ html_decode($car->displacement) }}
+                                                </li>
+
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
+                                                        <svg class="svg-stock" width="18" height="18"
+                                                            viewBox="0 0 18 18" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+
+                                                            <g mask="url(#mask0_390_111658)">
+                                                                <path
+                                                                    d="M13.7484 15.8337L13.5343 16.5192C13.3069 17.2472 12.6416 17.7363 11.8789 17.7363H6.13239C5.36967 17.7363 4.70444 17.2472 4.47702 16.5192L2.54789 10.3439C2.25398 9.40317 2.4002 8.4207 2.88054 7.63263"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M11.541 5.65203C12.2304 5.82007 12.9205 6.0539 13.6079 6.35273C15.1642 7.02948 15.9573 8.75812 15.4525 10.3739L14.1141 14.6591"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M3.70117 6.72571C3.89629 6.5777 4.11109 6.44942 4.34313 6.34567C5.04098 6.03317 5.74762 5.79231 6.45812 5.62391"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M10.9609 6.60094C11.6967 6.75531 12.4389 6.99434 13.1884 7.32023C14.2459 7.77973 14.7908 8.95887 14.447 10.0593L12.5271 16.2046C12.4385 16.4883 12.1759 16.6816 11.8785 16.6816H6.13217C5.83475 16.6816 5.57213 16.4883 5.48319 16.2046L3.55416 10.0294C3.21561 8.94519 3.73487 7.77234 4.77198 7.30828C5.51307 6.97676 6.2612 6.73277 7.01635 6.57984"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M9.7675 8.44635C10.3159 8.72479 10.6914 9.29432 10.6914 9.95139V13.0153C10.6914 13.9473 9.9359 14.7028 9.00391 14.7028C8.07191 14.7028 7.31641 13.9473 7.31641 13.0153V9.95139C7.31641 9.29397 7.69223 8.72479 8.24066 8.446"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M8.24023 6.71168V10.8012C8.24023 11.2228 8.58199 11.5646 9.00355 11.5646C9.42514 11.5646 9.76689 11.2228 9.76689 10.8012V6.71168"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M11.9043 8.8125H12.2551" stroke-width="0.6"
+                                                                    stroke-miterlimit="10" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M11.9043 11.0734H12.2551"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path d="M11.9043 13.3342H12.2551"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M12.3327 1.82244H13.8107C14.0209 1.82244 14.1914 1.99298 14.1914 2.20318V3.56481C14.1914 3.77501 14.0209 3.94556 13.8107 3.94556H12.2969"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                                <path
+                                                                    d="M12.1688 1.55057L11.5508 0.673354C11.3698 0.416502 11.0753 0.263713 10.7611 0.263713H7.24786C6.93367 0.263713 6.6391 0.416502 6.45815 0.673354L5.8401 1.55057C5.38718 2.19348 5.30492 3.02689 5.6234 3.74594L6.72815 6.23989C6.85524 6.52676 7.13951 6.71179 7.45328 6.71179H10.5556C10.8694 6.71179 11.1537 6.52676 11.2808 6.23989L12.3855 3.74594C12.704 3.02692 12.6217 2.19348 12.1688 1.55057Z"
+                                                                    stroke-width="0.6" stroke-miterlimit="10"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
+                                                            </g>
+                                                        </svg>
+
+                                                        {{ __('translate.Chassis number') }}
+                                                    </span>
+                                                    {{ html_decode($car->model_type_en) }}
                                                 </li>
 
 
 
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
+                                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M18.8912 10.0815L18.1165 6.28894C17.9921 5.67736 17.4744 5.25023 16.8574 5.25023H9.3699C9.21132 5.25023 9.08273 5.38046 9.08273 5.54106C9.08273 5.70166 9.21132 5.83189 9.3699 5.83189H16.8574C17.1988 5.83189 17.4852 6.06807 17.554 6.40655L18.3022 10.0695H16.9507C16.812 9.15267 16.0278 8.4482 15.0844 8.4482C14.1409 8.4482 13.3567 9.15267 13.218 10.0695H4.71468L4.83542 9.47587C4.86744 9.31856 4.76745 9.16474 4.61211 9.13236C4.45685 9.10006 4.30492 9.2012 4.2729 9.35851L4.12582 10.0815C2.94275 10.202 2.01608 11.2162 2.01608 12.4455V18.0065C2.01608 18.1672 2.14467 18.2973 2.30326 18.2973H3.11248V19.377C3.11248 19.7205 3.38786 19.9999 3.72637 19.9999H5.58316C5.92233 19.9999 6.19821 19.7205 6.19821 19.377V18.2973H8.01662V18.8495C8.01662 19.0102 8.14521 19.1404 8.30379 19.1404H14.7123C14.871 19.1404 14.9995 19.0101 14.9995 18.8495V18.2973H16.8179V19.377C16.8179 19.7205 17.0938 19.9999 17.433 19.9999H19.2897C19.6289 19.9999 19.9048 19.7205 19.9048 19.377V18.2973H20.7128C20.8715 18.2973 21 18.1671 21 18.0065V12.4443C21 11.2156 20.0737 10.2019 18.8912 10.0815ZM15.0844 9.02977C15.7102 9.02977 16.2348 9.47525 16.3662 10.0694H13.8026C13.934 9.47525 14.4586 9.02977 15.0844 9.02977ZM2.5904 13.7537H4.23205C4.57825 13.7537 4.85992 14.0389 4.85992 14.3895V15.3055H2.5904V13.7537ZM5.62381 19.377C5.62381 19.399 5.60478 19.4182 5.58312 19.4182H3.72633C3.70492 19.4182 3.68679 19.3994 3.68679 19.377V18.2973H5.62381V19.377ZM14.4251 18.5587H8.59089V17.4555H14.4251V18.5587H14.4251ZM19.3304 19.377C19.3304 19.399 19.3114 19.4182 19.2897 19.4182H17.433C17.4113 19.4182 17.3923 19.399 17.3923 19.377V18.2973H19.3304V19.377ZM20.4256 15.3055H18.1562V14.3895C18.1562 14.0389 18.4378 13.7537 18.784 13.7537H20.4256L20.4256 15.3055ZM20.4256 13.172H18.7839C18.121 13.172 17.5817 13.7181 17.5817 14.3895V15.5963C17.5817 15.7569 17.7103 15.8871 17.8689 15.8871H20.4256V17.7157H14.9995V17.1646C14.9995 17.004 14.8709 16.8738 14.7123 16.8738H8.30375C8.14516 16.8738 8.01658 17.004 8.01658 17.1646V17.7157H2.5904V15.8871H5.1471C5.30569 15.8871 5.43427 15.7569 5.43427 15.5963V14.3895C5.43427 13.7181 4.89497 13.172 4.23205 13.172H2.5904V12.4455C2.5904 11.4562 3.38507 10.6513 4.36196 10.6511C4.36216 10.6511 4.36237 10.6512 4.36258 10.6512C4.36274 10.6512 4.36286 10.6511 4.36303 10.6511H18.6542C18.6543 10.6511 18.6545 10.6512 18.6546 10.6512C18.6548 10.6512 18.655 10.6511 18.6552 10.6511C19.6315 10.6513 20.4256 11.4556 20.4256 12.4444V13.172ZM15.6308 13.172H7.38641C7.29592 13.172 7.21069 13.2152 7.15648 13.2886C7.10223 13.362 7.08534 13.4569 7.1109 13.5449L7.73059 15.6784C7.76655 15.8021 7.8787 15.8872 8.0061 15.8872H15.0111C15.1385 15.8872 15.2507 15.8021 15.2866 15.6784L15.9063 13.5449C15.9319 13.4569 15.915 13.362 15.8608 13.2886C15.8065 13.2152 15.7214 13.172 15.6308 13.172ZM14.7963 15.3055H8.22095L7.77021 13.7537H15.247L14.7963 15.3055ZM5.325 1.91809C3.43315 1.91809 1.89399 3.47677 1.89399 5.39269C1.89399 7.30862 3.43315 8.86729 5.325 8.86729C7.21685 8.86729 8.75601 7.30858 8.75601 5.39269C8.75601 3.47681 7.21685 1.91809 5.325 1.91809ZM5.325 8.28564C3.74984 8.28564 2.46834 6.98787 2.46834 5.39269C2.46834 3.79752 3.74984 2.49974 5.325 2.49974C6.90016 2.49974 8.18166 3.79752 8.18166 5.39269C8.18166 6.98787 6.90016 8.28564 5.325 8.28564ZM6.99966 4.41417L7.41962 4.5014C7.575 4.53366 7.67511 4.68735 7.64326 4.84471C7.6154 4.98234 7.49577 5.07719 7.36225 5.07719C7.34314 5.07719 7.32374 5.07523 7.30426 5.07119L6.67397 4.9403L5.89932 5.39327L6.67397 5.8462L7.30426 5.71531C7.45952 5.68319 7.61137 5.78444 7.64326 5.9418C7.67511 6.09916 7.575 6.25285 7.41962 6.28511L6.99978 6.3723L7.13556 6.78415C7.18578 6.93651 7.10458 7.10124 6.95412 7.15209C6.92396 7.16229 6.89326 7.16716 6.86314 7.16716C6.74297 7.16716 6.63095 7.09017 6.59079 6.96835L6.38696 6.35003L5.61218 5.89702V6.80221L6.03966 7.28947C6.14499 7.40954 6.13426 7.59337 6.0157 7.70008C5.961 7.74927 5.8929 7.77349 5.82505 7.77349C5.74586 7.77349 5.667 7.74053 5.61025 7.67586L5.325 7.35069L5.03975 7.67586C4.93442 7.79596 4.7529 7.80674 4.6343 7.70012C4.51574 7.59345 4.50501 7.40962 4.61034 7.28952L5.03782 6.80225V5.89706L4.26325 6.34995L4.06048 6.96802C4.02045 7.09 3.90834 7.16724 3.78797 7.16724C3.75797 7.16724 3.72744 7.16241 3.6974 7.15234C3.54686 7.10169 3.46541 6.93705 3.51542 6.78465L3.65063 6.3725L3.2303 6.28523C3.07492 6.25298 2.97481 6.09928 3.00666 5.94192C3.03851 5.78457 3.19027 5.68331 3.34566 5.71544L3.97595 5.84633L4.7506 5.3934L3.97595 4.94043L3.34566 5.07132C3.32622 5.07536 3.30682 5.07731 3.28767 5.07731C3.15415 5.07731 3.03452 4.98251 3.00666 4.84483C2.97481 4.68748 3.07492 4.53378 3.2303 4.50153L3.65075 4.41421L3.51534 4.00082C3.46541 3.84837 3.54695 3.68377 3.69748 3.63321C3.84814 3.58268 4.01055 3.66525 4.06048 3.81766L4.26329 4.43681L5.03778 4.88966V3.98326L4.6103 3.49599C4.50497 3.37593 4.5157 3.1921 4.63426 3.08539C4.75282 2.97872 4.93434 2.98959 5.03971 3.10965L5.32496 3.43482L5.61021 3.10965C5.71553 2.98959 5.8971 2.97877 6.01566 3.08539C6.13422 3.19206 6.14495 3.37588 6.03962 3.49599L5.61214 3.98326V4.88966L6.38688 4.43669L6.59075 3.81728C6.64085 3.66488 6.80351 3.58248 6.954 3.63333C7.10445 3.68411 7.18578 3.84883 7.13564 4.00119L6.99966 4.41417ZM2.05097 9.64643C0.747534 8.61613 0 7.06569 0 5.39265C0 2.41913 2.38878 0 5.325 0C6.99497 0 8.56196 0.793197 9.56671 2.13338L9.64816 1.34501C9.66469 1.18524 9.80589 1.06917 9.96366 1.08602C10.1214 1.10275 10.2359 1.24579 10.2194 1.40552L10.0625 2.92441C10.047 3.07386 9.9224 3.18498 9.77716 3.18498C9.76722 3.18498 9.75723 3.18448 9.74712 3.1834L8.24844 3.02563C8.09067 3.00902 7.9761 2.86606 7.99249 2.70629C8.00889 2.54656 8.14997 2.43053 8.30782 2.4471L9.14696 2.53541C8.2523 1.30905 6.83573 0.581611 5.32496 0.581611C2.70547 0.581611 0.574315 2.73984 0.574315 5.39261C0.574315 6.88524 1.24134 8.26854 2.40431 9.18784C2.52933 9.28668 2.55156 9.46942 2.454 9.59607C2.39737 9.66952 2.31284 9.70798 2.2274 9.70798C2.16567 9.70798 2.10345 9.68788 2.05097 9.64643Z" />
+                                                        </svg>
+                                                        {{ __('translate.Model Detail Name') }}
+                                                    </span>
+                                                    {{ html_decode($car->model_details_en) }}
+                                                </li>
+                                             
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-6 ">
+                                            <ul class="key-information two">
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -342,43 +378,11 @@
                                                         </svg>
                                                         {{ __('translate.Year') }}
                                                     </span>
-                                                    {{ html_decode($car->year) }}
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M18.8912 10.0815L18.1165 6.28894C17.9921 5.67736 17.4744 5.25023 16.8574 5.25023H9.3699C9.21132 5.25023 9.08273 5.38046 9.08273 5.54106C9.08273 5.70166 9.21132 5.83189 9.3699 5.83189H16.8574C17.1988 5.83189 17.4852 6.06807 17.554 6.40655L18.3022 10.0695H16.9507C16.812 9.15267 16.0278 8.4482 15.0844 8.4482C14.1409 8.4482 13.3567 9.15267 13.218 10.0695H4.71468L4.83542 9.47587C4.86744 9.31856 4.76745 9.16474 4.61211 9.13236C4.45685 9.10006 4.30492 9.2012 4.2729 9.35851L4.12582 10.0815C2.94275 10.202 2.01608 11.2162 2.01608 12.4455V18.0065C2.01608 18.1672 2.14467 18.2973 2.30326 18.2973H3.11248V19.377C3.11248 19.7205 3.38786 19.9999 3.72637 19.9999H5.58316C5.92233 19.9999 6.19821 19.7205 6.19821 19.377V18.2973H8.01662V18.8495C8.01662 19.0102 8.14521 19.1404 8.30379 19.1404H14.7123C14.871 19.1404 14.9995 19.0101 14.9995 18.8495V18.2973H16.8179V19.377C16.8179 19.7205 17.0938 19.9999 17.433 19.9999H19.2897C19.6289 19.9999 19.9048 19.7205 19.9048 19.377V18.2973H20.7128C20.8715 18.2973 21 18.1671 21 18.0065V12.4443C21 11.2156 20.0737 10.2019 18.8912 10.0815ZM15.0844 9.02977C15.7102 9.02977 16.2348 9.47525 16.3662 10.0694H13.8026C13.934 9.47525 14.4586 9.02977 15.0844 9.02977ZM2.5904 13.7537H4.23205C4.57825 13.7537 4.85992 14.0389 4.85992 14.3895V15.3055H2.5904V13.7537ZM5.62381 19.377C5.62381 19.399 5.60478 19.4182 5.58312 19.4182H3.72633C3.70492 19.4182 3.68679 19.3994 3.68679 19.377V18.2973H5.62381V19.377ZM14.4251 18.5587H8.59089V17.4555H14.4251V18.5587H14.4251ZM19.3304 19.377C19.3304 19.399 19.3114 19.4182 19.2897 19.4182H17.433C17.4113 19.4182 17.3923 19.399 17.3923 19.377V18.2973H19.3304V19.377ZM20.4256 15.3055H18.1562V14.3895C18.1562 14.0389 18.4378 13.7537 18.784 13.7537H20.4256L20.4256 15.3055ZM20.4256 13.172H18.7839C18.121 13.172 17.5817 13.7181 17.5817 14.3895V15.5963C17.5817 15.7569 17.7103 15.8871 17.8689 15.8871H20.4256V17.7157H14.9995V17.1646C14.9995 17.004 14.8709 16.8738 14.7123 16.8738H8.30375C8.14516 16.8738 8.01658 17.004 8.01658 17.1646V17.7157H2.5904V15.8871H5.1471C5.30569 15.8871 5.43427 15.7569 5.43427 15.5963V14.3895C5.43427 13.7181 4.89497 13.172 4.23205 13.172H2.5904V12.4455C2.5904 11.4562 3.38507 10.6513 4.36196 10.6511C4.36216 10.6511 4.36237 10.6512 4.36258 10.6512C4.36274 10.6512 4.36286 10.6511 4.36303 10.6511H18.6542C18.6543 10.6511 18.6545 10.6512 18.6546 10.6512C18.6548 10.6512 18.655 10.6511 18.6552 10.6511C19.6315 10.6513 20.4256 11.4556 20.4256 12.4444V13.172ZM15.6308 13.172H7.38641C7.29592 13.172 7.21069 13.2152 7.15648 13.2886C7.10223 13.362 7.08534 13.4569 7.1109 13.5449L7.73059 15.6784C7.76655 15.8021 7.8787 15.8872 8.0061 15.8872H15.0111C15.1385 15.8872 15.2507 15.8021 15.2866 15.6784L15.9063 13.5449C15.9319 13.4569 15.915 13.362 15.8608 13.2886C15.8065 13.2152 15.7214 13.172 15.6308 13.172ZM14.7963 15.3055H8.22095L7.77021 13.7537H15.247L14.7963 15.3055ZM5.325 1.91809C3.43315 1.91809 1.89399 3.47677 1.89399 5.39269C1.89399 7.30862 3.43315 8.86729 5.325 8.86729C7.21685 8.86729 8.75601 7.30858 8.75601 5.39269C8.75601 3.47681 7.21685 1.91809 5.325 1.91809ZM5.325 8.28564C3.74984 8.28564 2.46834 6.98787 2.46834 5.39269C2.46834 3.79752 3.74984 2.49974 5.325 2.49974C6.90016 2.49974 8.18166 3.79752 8.18166 5.39269C8.18166 6.98787 6.90016 8.28564 5.325 8.28564ZM6.99966 4.41417L7.41962 4.5014C7.575 4.53366 7.67511 4.68735 7.64326 4.84471C7.6154 4.98234 7.49577 5.07719 7.36225 5.07719C7.34314 5.07719 7.32374 5.07523 7.30426 5.07119L6.67397 4.9403L5.89932 5.39327L6.67397 5.8462L7.30426 5.71531C7.45952 5.68319 7.61137 5.78444 7.64326 5.9418C7.67511 6.09916 7.575 6.25285 7.41962 6.28511L6.99978 6.3723L7.13556 6.78415C7.18578 6.93651 7.10458 7.10124 6.95412 7.15209C6.92396 7.16229 6.89326 7.16716 6.86314 7.16716C6.74297 7.16716 6.63095 7.09017 6.59079 6.96835L6.38696 6.35003L5.61218 5.89702V6.80221L6.03966 7.28947C6.14499 7.40954 6.13426 7.59337 6.0157 7.70008C5.961 7.74927 5.8929 7.77349 5.82505 7.77349C5.74586 7.77349 5.667 7.74053 5.61025 7.67586L5.325 7.35069L5.03975 7.67586C4.93442 7.79596 4.7529 7.80674 4.6343 7.70012C4.51574 7.59345 4.50501 7.40962 4.61034 7.28952L5.03782 6.80225V5.89706L4.26325 6.34995L4.06048 6.96802C4.02045 7.09 3.90834 7.16724 3.78797 7.16724C3.75797 7.16724 3.72744 7.16241 3.6974 7.15234C3.54686 7.10169 3.46541 6.93705 3.51542 6.78465L3.65063 6.3725L3.2303 6.28523C3.07492 6.25298 2.97481 6.09928 3.00666 5.94192C3.03851 5.78457 3.19027 5.68331 3.34566 5.71544L3.97595 5.84633L4.7506 5.3934L3.97595 4.94043L3.34566 5.07132C3.32622 5.07536 3.30682 5.07731 3.28767 5.07731C3.15415 5.07731 3.03452 4.98251 3.00666 4.84483C2.97481 4.68748 3.07492 4.53378 3.2303 4.50153L3.65075 4.41421L3.51534 4.00082C3.46541 3.84837 3.54695 3.68377 3.69748 3.63321C3.84814 3.58268 4.01055 3.66525 4.06048 3.81766L4.26329 4.43681L5.03778 4.88966V3.98326L4.6103 3.49599C4.50497 3.37593 4.5157 3.1921 4.63426 3.08539C4.75282 2.97872 4.93434 2.98959 5.03971 3.10965L5.32496 3.43482L5.61021 3.10965C5.71553 2.98959 5.8971 2.97877 6.01566 3.08539C6.13422 3.19206 6.14495 3.37588 6.03962 3.49599L5.61214 3.98326V4.88966L6.38688 4.43669L6.59075 3.81728C6.64085 3.66488 6.80351 3.58248 6.954 3.63333C7.10445 3.68411 7.18578 3.84883 7.13564 4.00119L6.99966 4.41417ZM2.05097 9.64643C0.747534 8.61613 0 7.06569 0 5.39265C0 2.41913 2.38878 0 5.325 0C6.99497 0 8.56196 0.793197 9.56671 2.13338L9.64816 1.34501C9.66469 1.18524 9.80589 1.06917 9.96366 1.08602C10.1214 1.10275 10.2359 1.24579 10.2194 1.40552L10.0625 2.92441C10.047 3.07386 9.9224 3.18498 9.77716 3.18498C9.76722 3.18498 9.75723 3.18448 9.74712 3.1834L8.24844 3.02563C8.09067 3.00902 7.9761 2.86606 7.99249 2.70629C8.00889 2.54656 8.14997 2.43053 8.30782 2.4471L9.14696 2.53541C8.2523 1.30905 6.83573 0.581611 5.32496 0.581611C2.70547 0.581611 0.574315 2.73984 0.574315 5.39261C0.574315 6.88524 1.24134 8.26854 2.40431 9.18784C2.52933 9.28668 2.55156 9.46942 2.454 9.59607C2.39737 9.66952 2.31284 9.70798 2.2274 9.70798C2.16567 9.70798 2.10345 9.68788 2.05097 9.64643Z" />
-                                                        </svg>
-                                                        {{ __('translate.Condition') }}
-                                                    </span>
-                                                    @if($car->condition == 'Used')
-                                                        {{ __('translate.Used') }}
-                                                    @else
-                                                        {{ __('translate.New') }}
-                                                    @endif
+                                                    {{ html_decode($car->model_year_en) }}
 
                                                 </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-6 ">
-                                            <ul class="key-information two">
-                                                <li>
-                                                    <span>
-                                                        <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M19 9.29347C19 6.75456 17.9535 4.45057 16.2608 2.77159C16.2476 2.7544 16.2335 2.73758 16.2175 2.72192C16.2015 2.70626 16.1843 2.69249 16.1668 2.67963C14.4505 1.02368 12.0953 0 9.5 0C6.90472 0 4.54953 1.02374 2.83318 2.67963C2.81561 2.69255 2.79848 2.70632 2.78247 2.72192C2.76646 2.73758 2.75238 2.75434 2.73918 2.77159C1.0465 4.45057 0 6.75456 0 9.29347C0 11.7755 0.987938 14.1089 2.78179 15.8642C2.78204 15.8644 2.78229 15.8647 2.78253 15.865C2.78272 15.8651 2.78285 15.8653 2.78303 15.8654C2.78328 15.8656 2.78353 15.8659 2.78378 15.8661C2.87498 15.9553 2.99452 15.9999 3.11407 15.9999C3.23368 15.9999 3.35328 15.9553 3.44448 15.866C3.45227 15.8584 3.45931 15.8503 3.46641 15.8422L4.90617 14.4337C5.08864 14.2552 5.08864 13.9658 4.90617 13.7873C4.72371 13.6089 4.42787 13.6089 4.24547 13.7873L3.12192 14.8864C1.81179 13.4602 1.05173 11.6653 0.947197 9.75053H2.53616C2.79418 9.75053 3.00337 9.54595 3.00337 9.29347C3.00337 9.041 2.79418 8.83642 2.53616 8.83642H0.947321C1.05596 6.86974 1.86107 5.08137 3.12497 3.70343L4.24547 4.79958C4.33667 4.88879 4.45628 4.9334 4.57582 4.9334C4.69537 4.9334 4.81497 4.88879 4.90617 4.79958C5.08864 4.62102 5.08864 4.33167 4.90617 4.15318L3.78573 3.05697C5.19435 1.82055 7.0224 1.03295 9.03279 0.926727V2.48108C9.03279 2.73356 9.24197 2.93814 9.5 2.93814C9.75803 2.93814 9.96721 2.73356 9.96721 2.48108V0.926727C11.9776 1.03295 13.8056 1.82061 15.2143 3.05703L14.0938 4.15318C13.9113 4.33173 13.9113 4.62108 14.0938 4.79958C14.185 4.88879 14.3046 4.9334 14.4241 4.9334C14.5437 4.9334 14.6633 4.88879 14.7545 4.79958L15.875 3.70343C17.1389 5.08143 17.944 6.86974 18.0526 8.83642H16.4637C16.2057 8.83642 15.9965 9.041 15.9965 9.29347C15.9965 9.54595 16.2057 9.75053 16.4637 9.75053H18.0527C17.9481 11.6653 17.1881 13.4603 15.878 14.8865L14.7545 13.7873C14.5721 13.6089 14.2762 13.6089 14.0938 13.7873C13.9113 13.9659 13.9113 14.2552 14.0938 14.4337L15.5568 15.8649C15.648 15.9541 15.7676 15.9987 15.8871 15.9987C15.9469 15.9987 16.0067 15.9876 16.0629 15.9653C16.1192 15.943 16.1719 15.9095 16.2175 15.8649C18.0118 14.1096 19 11.7758 19 9.29347Z" />
-                                                            <path
-                                                                d="M11.6465 4.05209C11.4068 3.95818 11.135 4.07202 11.039 4.3064L9.68891 7.60329C9.62599 7.59671 9.56307 7.5922 9.50009 7.5922C8.8425 7.5922 8.24852 7.94852 7.94981 8.5221C7.63759 9.12169 7.71758 9.83811 8.16361 10.4384C8.20921 10.4997 8.26652 10.5559 8.32969 10.6008C8.69206 10.8585 9.09679 10.9947 9.50009 10.9947C10.1577 10.9947 10.7517 10.6384 11.0504 10.0648C11.3626 9.46522 11.2826 8.74886 10.8369 8.14902C10.7913 8.08747 10.7338 8.03116 10.6705 7.98606C10.6364 7.96181 10.6016 7.93969 10.5668 7.91763L11.9064 4.64626C12.0024 4.41201 11.886 4.14594 11.6465 4.05209ZM10.2177 9.64987C10.0793 9.91551 9.80434 10.0805 9.50003 10.0805C9.30043 10.0805 9.09953 10.0123 8.90268 9.87779C8.67842 9.56278 8.63437 9.22127 8.78245 8.93698C8.92075 8.67134 9.19572 8.50631 9.50009 8.50631C9.59715 8.50631 9.69445 8.52277 9.79151 8.55476C9.79468 8.55604 9.79761 8.55769 9.80085 8.55897C9.81107 8.56293 9.82134 8.56616 9.83162 8.56939C9.92071 8.60284 10.0094 8.64891 10.0974 8.709C10.3216 9.02401 10.3657 9.36558 10.2177 9.64987Z" />
-                                                        </svg>
-                                                        {{ __('translate.Mileage') }}
-                                                    </span>
-                                                    {{ html_decode($car->mileage) }}
-                                                </li>
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg class="svg-stock" width="21" height="22"
                                                             viewBox="0 0 21 22" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -415,15 +419,35 @@
                                                             <path d="M16.8086 5.55975V11.8377" stroke-width="0.8"
                                                                 stroke-miterlimit="10" stroke-linecap="round"
                                                                 stroke-linejoin="round" />
+                                                        </svg> 
+                                                        {{ __('translate.Condition') }}
+                                                    </span>
+                                                        @if($car->condition == 'Used')
+                                                            {{ __('translate.Used') }}
+                                                        @else
+                                                            {{ __('translate.New') }}
+                                                        @endif
+                                                </li>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
+                                                        
+                                                        <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M19 9.29347C19 6.75456 17.9535 4.45057 16.2608 2.77159C16.2476 2.7544 16.2335 2.73758 16.2175 2.72192C16.2015 2.70626 16.1843 2.69249 16.1668 2.67963C14.4505 1.02368 12.0953 0 9.5 0C6.90472 0 4.54953 1.02374 2.83318 2.67963C2.81561 2.69255 2.79848 2.70632 2.78247 2.72192C2.76646 2.73758 2.75238 2.75434 2.73918 2.77159C1.0465 4.45057 0 6.75456 0 9.29347C0 11.7755 0.987938 14.1089 2.78179 15.8642C2.78204 15.8644 2.78229 15.8647 2.78253 15.865C2.78272 15.8651 2.78285 15.8653 2.78303 15.8654C2.78328 15.8656 2.78353 15.8659 2.78378 15.8661C2.87498 15.9553 2.99452 15.9999 3.11407 15.9999C3.23368 15.9999 3.35328 15.9553 3.44448 15.866C3.45227 15.8584 3.45931 15.8503 3.46641 15.8422L4.90617 14.4337C5.08864 14.2552 5.08864 13.9658 4.90617 13.7873C4.72371 13.6089 4.42787 13.6089 4.24547 13.7873L3.12192 14.8864C1.81179 13.4602 1.05173 11.6653 0.947197 9.75053H2.53616C2.79418 9.75053 3.00337 9.54595 3.00337 9.29347C3.00337 9.041 2.79418 8.83642 2.53616 8.83642H0.947321C1.05596 6.86974 1.86107 5.08137 3.12497 3.70343L4.24547 4.79958C4.33667 4.88879 4.45628 4.9334 4.57582 4.9334C4.69537 4.9334 4.81497 4.88879 4.90617 4.79958C5.08864 4.62102 5.08864 4.33167 4.90617 4.15318L3.78573 3.05697C5.19435 1.82055 7.0224 1.03295 9.03279 0.926727V2.48108C9.03279 2.73356 9.24197 2.93814 9.5 2.93814C9.75803 2.93814 9.96721 2.73356 9.96721 2.48108V0.926727C11.9776 1.03295 13.8056 1.82061 15.2143 3.05703L14.0938 4.15318C13.9113 4.33173 13.9113 4.62108 14.0938 4.79958C14.185 4.88879 14.3046 4.9334 14.4241 4.9334C14.5437 4.9334 14.6633 4.88879 14.7545 4.79958L15.875 3.70343C17.1389 5.08143 17.944 6.86974 18.0526 8.83642H16.4637C16.2057 8.83642 15.9965 9.041 15.9965 9.29347C15.9965 9.54595 16.2057 9.75053 16.4637 9.75053H18.0527C17.9481 11.6653 17.1881 13.4603 15.878 14.8865L14.7545 13.7873C14.5721 13.6089 14.2762 13.6089 14.0938 13.7873C13.9113 13.9659 13.9113 14.2552 14.0938 14.4337L15.5568 15.8649C15.648 15.9541 15.7676 15.9987 15.8871 15.9987C15.9469 15.9987 16.0067 15.9876 16.0629 15.9653C16.1192 15.943 16.1719 15.9095 16.2175 15.8649C18.0118 14.1096 19 11.7758 19 9.29347Z" />
+                                                            <path
+                                                                d="M11.6465 4.05209C11.4068 3.95818 11.135 4.07202 11.039 4.3064L9.68891 7.60329C9.62599 7.59671 9.56307 7.5922 9.50009 7.5922C8.8425 7.5922 8.24852 7.94852 7.94981 8.5221C7.63759 9.12169 7.71758 9.83811 8.16361 10.4384C8.20921 10.4997 8.26652 10.5559 8.32969 10.6008C8.69206 10.8585 9.09679 10.9947 9.50009 10.9947C10.1577 10.9947 10.7517 10.6384 11.0504 10.0648C11.3626 9.46522 11.2826 8.74886 10.8369 8.14902C10.7913 8.08747 10.7338 8.03116 10.6705 7.98606C10.6364 7.96181 10.6016 7.93969 10.5668 7.91763L11.9064 4.64626C12.0024 4.41201 11.886 4.14594 11.6465 4.05209ZM10.2177 9.64987C10.0793 9.91551 9.80434 10.0805 9.50003 10.0805C9.30043 10.0805 9.09953 10.0123 8.90268 9.87779C8.67842 9.56278 8.63437 9.22127 8.78245 8.93698C8.92075 8.67134 9.19572 8.50631 9.50009 8.50631C9.59715 8.50631 9.69445 8.52277 9.79151 8.55476C9.79468 8.55604 9.79761 8.55769 9.80085 8.55897C9.81107 8.56293 9.82134 8.56616 9.83162 8.56939C9.92071 8.60284 10.0094 8.64891 10.0974 8.709C10.3216 9.02401 10.3657 9.36558 10.2177 9.64987Z" />
                                                         </svg>
 
-                                                        {{ __('translate.No. of Owners') }}
+                                                        {{ __('translate.Mileage') }}
                                                     </span>
-                                                    {{ html_decode($car->number_of_owner) }}
+                                                    {{ html_decode($car->mileage_en) }}
                                                 </li>
 
-                                                <li>
-                                                    <span>
+                                            
+
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="19" height="16" viewBox="0 0 19 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -434,15 +458,17 @@
                                                                 d="M1.51608 11.2778H2.65689C3.56068 11.2778 4.29602 10.5296 4.29602 9.60986C4.29602 8.69017 3.56072 7.94189 2.65689 7.94189H1.74C1.57256 7.94189 1.43681 8.08003 1.43681 8.25042C1.43681 8.42081 1.57256 8.55894 1.74 8.55894H2.65689C3.22632 8.55894 3.68964 9.03037 3.68964 9.60986C3.68964 10.1893 3.22636 10.6608 2.65689 10.6608H1.51608C1.34864 10.6608 1.21289 10.7989 1.21289 10.9693C1.21289 11.1397 1.34864 11.2778 1.51608 11.2778Z" />
                                                             <path
                                                                 d="M14.7051 9.60986C14.7051 10.5296 15.4404 11.2778 16.3442 11.2778H17.485C17.6525 11.2778 17.7882 11.1397 17.7882 10.9693C17.7882 10.7989 17.6525 10.6608 17.485 10.6608H16.3442C15.7748 10.6608 15.3115 10.1893 15.3115 9.60986C15.3115 9.03041 15.7747 8.55894 16.3442 8.55894H17.2611C17.4286 8.55894 17.5643 8.42081 17.5643 8.25042C17.5643 8.08003 17.4286 7.94189 17.2611 7.94189H16.3442C15.4404 7.94189 14.7051 8.69013 14.7051 9.60986Z" />
-                                                        </svg>
+                                                        </svg> 
 
                                                         {{ __('translate.Exterior Color') }}
                                                     </span>
-                                                    {{ html_decode($car->exterior_color) }}
+                                                    {{ html_decode($car->color_en) }}
                                                 </li>
 
-                                                <li>
-                                                    <span>
+
+
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -456,16 +482,12 @@
                                                             <path
                                                                 d="M8.63307 6.66367L8.23157 8.2566C8.20135 8.37631 8.08723 8.46102 7.95599 8.46102C7.93395 8.46114 7.91216 8.45871 7.89076 8.45385C7.73878 8.42031 7.64437 8.27775 7.67977 8.13519L8.08114 6.54225C8.10448 6.44989 8.17853 6.37612 8.27553 6.3489C8.37254 6.32155 8.47771 6.34489 8.5515 6.40991C8.62516 6.47505 8.65628 6.57203 8.63307 6.6644V6.66367Z" />
                                                         </svg>
-
                                                         {{ __('translate.Fuel Type') }}
                                                     </span>
                                                     {{ html_decode($car->fuel_type) }}
                                                 </li>
-
-
-
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg class="svg-stock" width="18" height="18"
                                                             viewBox="0 0 18 18" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -528,8 +550,8 @@
                                                     </span>
                                                     {{ html_decode($car->transmission) }}
                                                 </li>
-                                                <li>
-                                                    <span>
+                                                <li class="car_model_name">
+                                                    <span class="car_model_spec">
                                                         <svg width="18" height="21" viewBox="0 0 18 21" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
                                                             <path
@@ -537,9 +559,9 @@
                                                             <path
                                                                 d="M17.9267 16.6022C17.9267 16.5979 17.9267 16.5936 17.9267 16.5892C17.9267 16.5546 17.9223 16.52 17.9223 16.481C17.8961 15.6241 17.8394 13.6202 15.9452 12.9797C15.9321 12.9754 15.9146 12.971 15.9015 12.9667C13.9331 12.469 12.2963 11.3437 12.2789 11.3307C12.0126 11.1446 11.646 11.2095 11.4583 11.4735C11.2706 11.7375 11.3361 12.1011 11.6024 12.2872C11.6766 12.3391 13.4137 13.538 15.5873 14.092C16.6042 14.4512 16.7177 15.5289 16.7483 16.5157C16.7483 16.5546 16.7483 16.5892 16.7526 16.6239C16.757 17.0134 16.7308 17.615 16.661 17.9612C15.9539 18.3594 13.1824 19.7357 8.96613 19.7357C4.76736 19.7357 1.97836 18.3551 1.26693 17.9569C1.19709 17.6107 1.16654 17.0091 1.17527 16.6195C1.17527 16.5849 1.17964 16.5503 1.17964 16.5113C1.21019 15.5246 1.32367 14.4469 2.34063 14.0877C4.51421 13.5337 6.25133 12.3305 6.32553 12.2829C6.59177 12.0968 6.65724 11.7332 6.46956 11.4692C6.28188 11.2052 5.91525 11.1403 5.64901 11.3264C5.63155 11.3394 4.00355 12.4647 2.02637 12.9624C2.00892 12.9667 1.99582 12.971 1.98273 12.9754C0.0884804 13.6202 0.0317404 15.6241 0.00555262 16.4767C0.00555262 16.5157 0.00555252 16.5503 0.0011879 16.5849C0.0011879 16.5892 0.0011879 16.5936 0.0011879 16.5979C-0.00317673 16.823 -0.00754126 17.9785 0.223784 18.5585C0.26743 18.671 0.345993 18.7662 0.450744 18.8312C0.581683 18.9177 3.71985 20.8999 8.97049 20.8999C14.2211 20.8999 17.3593 18.9134 17.4902 18.8312C17.5906 18.7662 17.6736 18.671 17.7172 18.5585C17.9354 17.9829 17.9311 16.8273 17.9267 16.6022Z" />
                                                         </svg>
-                                                        {{ __('translate.Seller Type') }}
+                                                        {{ __('translate.Inspection') }}
                                                     </span>
-                                                    {{ html_decode($car->seller_type) }}
+                                                    {{ html_decode($car->inspection) }}
                                                 </li>
                                             </ul>
                                         </div>
@@ -552,21 +574,23 @@
                 <!-- Car Specifications End  -->
 
                 <!-- Accessories Start -->
-                <div class="col-sm-12">
+                <div class="col-sm-12 pb-3">
                     <div class="accordion" id="accordionPanelsStayOpenExample4" data-aos="fade-up" data-aos-delay="300">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingfive">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsefive">
-                                    Accessories
+                                    {{__('translate.Sell Points')}}
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
                                 <div class="accordion-body">
                                     <div class="py-2 d-flex gap-3 flex-wrap">
-                                        <span class="accessories-text px-3 h-100">ABS equipped</span>
-                                        <span class="accessories-hide-text px-3">ABS equipped</span>
+                                    <span class="accessories-text px-3 h-100">
+                                            {{ isset($process_data_en['Condition']) ? $process_data_en['Condition'] : '--' }}
+                                        </span>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -575,70 +599,9 @@
                 </div>
                 <!-- Accessories End -->
 
-                <!-- Description Overview Start -->
-                <div class="col-sm-12">
-                    <div class="accordion" id="accordionPanelsStayOpenExample" data-aos="fade-up" data-aos-delay="100">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapseOne">
-                                    {{ __('translate.Description Overview') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-                                aria-labelledby="panelsStayOpen-headingOne">
-                                <div class="accordion-body">
-                                    {!! clean(html_decode($car->description)) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Description Overview End -->
+                
 
-                <!-- Video Section Start -->
-                <div class="col-sm-12">
-                    <div class="accordion" id="accordionPanelsStayOpenExample3" data-aos="fade-up" data-aos-delay="250">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="panelsStayOpen-headingfour">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapsefour" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapsefour">
-                                    {{ __('translate.Video') }}
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show"
-                                aria-labelledby="panelsStayOpen-headingfour">
-                                <div class="accordion-body">
-                                    {{ html_decode($car->video_description) }}
-
-
-
-                                    <span class="inventory-details-vedio w-100">
-                                        <img src="{{ asset($car->video_image) }}" alt="img">
-
-                                        <span class="overlay">
-                                            <a class="my-video-links" data-autoplay="true" data-vbtype="video"
-                                                href="https://youtu.be/{{ $car->video_id }}">
-                                                <span>
-                                                    <svg width="80" height="80" viewBox="0 0 80 80" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M40 76.0001C59.8822 76.0001 76.0001 59.8827 76.0001 40C76.0001 20.1178 59.8827 3.99992 40 3.99992C20.1178 3.99992 3.99992 20.1178 3.99992 40C3.99992 59.8822 20.1178 76.0001 40 76.0001ZM40 80C62.0911 80 80 62.0911 80 40C80 17.9084 62.0911 0 40 0C17.9084 0 0 17.9084 0 40C0 62.0911 17.9084 80 40 80Z" />
-                                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                                            d="M50.3927 40.0003L31.9984 27.7375V52.2634L50.3927 40.0003ZM54.1089 37.6706C55.7716 38.7791 55.7716 41.2219 54.1089 42.3303L32.3513 56.8357C30.4906 58.0763 27.998 56.742 27.998 54.5057V25.4953C27.998 23.259 30.4906 21.9251 32.3513 23.1657L54.1089 37.6706Z" />
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Video Section End -->
+            
 
             </div>
         </div>
@@ -648,7 +611,7 @@
 
 
     <!-- Cars Listing-part-start -->
-        @if ($related_listings->count() > 0)
+      {{-- @if ($related_listings->count() > 0)
             <section class="cars-listing feature-two mt-3 bg-light-grey">
                 <div class="container">
                     <div class="row">
@@ -812,7 +775,7 @@
                     </div>
                 </div>
             </section>
-        @endif
+        @endif --}}
 
     <!--Cars Listing-part-end -->
 
@@ -900,6 +863,39 @@
             $("#monthly_payment").html(appendCurrency);
         })
 
+
+        $("#calculate_total_price").on('click',function(){
+           
+           if($("#location").val() != ""){
+             var start_price = $("#price_value").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
+             var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+ 
+            
+ 
+             // Convert to numbers
+             var start_price_num = Number(start_price);
+             var comission_price_num = Number(comission_price);
+             var delivery_charge_num = Number(delivery_charge);
+ 
+             // Check if conversion was successful
+             if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num)) {
+                 console.error("One of the prices is not a valid number.");
+             } else {
+                 // Calculate total
+                 var total_price = start_price_num + comission_price_num + delivery_charge_num;
+ 
+                 // Display the total price
+                 $("#total_price").text('$'+total_price);
+             }
+           } else {
+             toastr.error('Select Location','Failed')
+           }
+ 
+             
+ 
+         })
+
         $("#loan_amount").on("keyup", function(e){
             let enteredValue = e.target.value;
             let numericValue = enteredValue.replace(/[^0-9.]/g, '');
@@ -938,6 +934,61 @@
             $("#monthly_payment").html(appendCurrency);
 
         })
+
+        $("#location").on('change',function(){
+             var locations=@json($delivery_charges);
+             var user_info=locations.filter(p=>p.id==$(this).val());
+             if(user_info!=""){
+                $("#delivery_charge").text('$'+user_info[0].rate);
+             }
+        })
+
+        $('.download-gallery').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var images = @json($galleries);
+            var baseUrl = window.location.origin;
+            var button = $(this);
+            var originalText = button.text();  // Save original text
+            button.text('Processing...');   
+            button.attr('disabled',true);  
+
+            images.forEach(function(imageUrl, index) {
+                var proxyUrl = '/proxy-image?url=' + encodeURIComponent(imageUrl);
+                    $.ajax({
+                        url: proxyUrl,
+                        method: 'GET',
+                        xhrFields: {
+                            responseType: 'blob'
+                        },
+                        success: function(blob) {
+                            const url = window.URL.createObjectURL(blob);
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = `image_${index + 1}.jpg`;
+                            link.style.display = 'none';
+                            document.body.appendChild(link);
+                            link.click();
+
+                            // Cleanup
+                            setTimeout(function() {
+                                window.URL.revokeObjectURL(url);
+                                document.body.removeChild(link);
+                            }, 100);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error downloading image:', error);
+                        }
+                    });
+
+            });
+            setTimeout(function() {
+                button.text(originalText); // Restore original button text
+                button.attr('disabled', false);
+            }, images.length * 1000);
+            });
+
 
     </script>
 

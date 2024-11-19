@@ -57,6 +57,18 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Cover Image') }} </label>
+                                                        <input type="file" class="form-control" name="cover_image[]" multiple>
+                                                        @error('image')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="row mg-top-30">
+                                            <div class="col-4">
+                                                    <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Title') }} * </label>
                                                         <input class="crancy__item-input" type="text" name="title" id="title">
                                                         @error('title')
@@ -64,17 +76,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30">
-                                                <!-- <div class="col-4">
-                                                    <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Maker') }} * </label>
-                                                        <input class="crancy__item-input" type="text" name="maker" id="maker">
-                                                        @error('maker')
-                                                            <div style="color: red;">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div> -->
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Maker') }} * </label>
@@ -100,6 +101,10 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                              
+                                            </div>
+                                            <div class="row mg-top-30">
+                                              
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Grade') }}  </label>
@@ -109,9 +114,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30">
-                                              
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Color') }} * </label>
@@ -130,6 +132,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mg-top-30">
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Year Of Registration') }}  </label>
@@ -139,9 +143,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30">
-                                              
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Chassis number') }} </label>
@@ -160,6 +161,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mg-top-30"> 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Year Of Made') }} </label>
@@ -168,10 +171,7 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="row mg-top-30"> 
-                                                        
+                                                </div>      
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Kilometers') }} </label>
@@ -189,7 +189,9 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> 
+                                            </div>
+                                            <div class="row mg-top-30"> 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Engine type') }} </label>
@@ -198,10 +200,7 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div> 
-                                            </div>
-                                            <div class="row mg-top-30"> 
-                                                                                            
+                                                </div>                                    
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Transmission') }} </label>
@@ -220,6 +219,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row mg-top-30">     
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Video Link') }} </label>
@@ -229,9 +230,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30">     
-                                              
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.inside') }} </label>
@@ -250,22 +248,8 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{__('Active')}} </label>
-                                                        <div class="crancy-ptabs__notify-switch  crancy-ptabs__notify-switch--two">
-                                                            <label class="crancy__item-switch">
-                                                            <input name="active" type="checkbox">
-                                                            <span class="crancy__item-switch--slide crancy__item-switch--round"></span>
-                                                            </label>
-                                                        </div>
-                                                        @error('active')
-                                                                <div style="color: red;">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
                                             </div>
-                                            <div class="row mg-top-30">           
+                                            <div class="row mg-top-30">  
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Price($)') }}  </label>
@@ -297,19 +281,29 @@
 
                                             <div class="row mg-top-30">                                  
                                                
-                                                <div class="col-4">
+                                                <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Remarks') }}  </label>
-                                                        <textarea name="remarks" id="remarks" class='crancy__item-input'></textarea>
+                                                        <!-- <textarea name="remarks" id="remarks" class='crancy__item-input'></textarea> -->
+                                                        <textarea class="crancy__item-input crancy__item-textarea summernote"  name="remarks" id="remarks">
+                                                            {{ old('remarks') }}
+                                                        </textarea>
                                                         @error('remarks')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                               
+                                            </div>
+
+                                            <div class="row mg-top-30"> 
+                                            <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Sell Points') }}  </label>
-                                                        <textarea name="sell_points" id="sell_points" class='crancy__item-input'></textarea>
+                                                        <!-- <textarea name="sell_points" id="sell_points" class='crancy__item-input'></textarea> -->
+                                                        <textarea class="crancy__item-input crancy__item-textarea summernote"  name="sell_points" id="sell_points">
+                                                            {{ old('sell_points') }}
+                                                        </textarea>
                                                         @error('sell_points')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
@@ -318,6 +312,20 @@
                                             </div>
                                           
                                             <div class="row mg-top-30">
+                                                <div class="col-4">
+                                                    <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{__('Active')}} </label>
+                                                        <div class="crancy-ptabs__notify-switch  crancy-ptabs__notify-switch--two">
+                                                            <label class="crancy__item-switch">
+                                                            <input name="active" type="checkbox">
+                                                            <span class="crancy__item-switch--slide crancy__item-switch--round"></span>
+                                                            </label>
+                                                        </div>
+                                                        @error('active')
+                                                                <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>         
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{__('translate.North America market')}} </label>
@@ -346,6 +354,9 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                
+                                            </div>
+                                            <div class="row mg-top-30">
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{__('translate.ABS Anti-lock braking systems')}} </label>
@@ -360,8 +371,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30">
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{__('AW Alloy Wheels')}} </label>
@@ -390,6 +399,9 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                          
+                                            </div>
+                                            <div class="row mg-top-30"> 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{__('PS Power Steering')}} </label>
@@ -404,8 +416,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row mg-top-30"> 
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{__('AB Airbag')}} </label>
@@ -456,7 +466,20 @@
     <!-- End crancy Dashboard -->
 @endsection
 
+@push('style_section')
+    <link rel="stylesheet" href="{{ asset('global/tagify/tagify.css') }}">
+
+    <style>
+        .tox .tox-promotion,
+        .tox-statusbar__branding{
+            display: none !important;
+        }
+    </style>
+@endpush
+
 @push('js_section')
+<script src="{{ asset('global/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('global/tagify/tagify.js') }}"></script>
     <script>
         (function($) {
             "use strict"
@@ -466,6 +489,21 @@
                     let slug = inputValue.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
                     $("#slug").val(slug);
                 })
+
+                tinymce.init({
+                    selector: '.summernote',
+                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ]
+                });
+
+                $('.tags').tagify();
+
 
                 $("#category").on('change',function(e){
                     var models=@json($models);

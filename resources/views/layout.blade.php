@@ -262,8 +262,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="dropdown ">
+                                            <li><a href="" class="dropbtn text-nowrap">{{ __('Buy Now Cars') }}</a></li>
+                                            <div class="dropdown-content sub-menu">
+                                                <div class="header">
+                                                </div>
+                                                <div class="row">
+                                                    <!-- Column 1 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Cars</h6>
+                                                        @foreach($jdm_legend['car'] as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- Column 2 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Heavy</h6>
+                                                        @foreach($jdm_legend['heavy'] as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                        @endforeach
+                                                    </div>
+                                                    <!-- Column 3 -->
+                                                    <div class="col-md-4 nav-dropdown-list">
+                                                        <h6 class="dropdown-header nav-dropdown-header">Small Heavy</h6>
+                                                        @foreach($jdm_legend['small_heavy'] as $jdm)
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                        <li><a style="color: black !important" href="{{ route('listings') }}">{{ __('translate.Buy Now Cars') }}</a></li>
 
                                         <li><a style="color: black !important" href="{{ route('new-arrival') }}">{{ __('translate.New Car Arrivals') }}</a></li>
 

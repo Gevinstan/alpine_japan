@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
@@ -11,20 +11,23 @@
     <!-- banner-part-start  -->
 
     <section class="inner-banner">
-    <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-        <div class="container">
-        <div class="col-lg-12">
-            <div class="inner-banner-df">
-                <h1 class="inner-banner-taitel">{{ __('translate.Blogs') }}</h1>
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Blogs') }}</li>
-                    </ol>
-                </nav>
-            </div>
+    <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;">
+        <div class="container blog_text">
+            <div class="col-lg-12">
+                <div class="inner-banner-df">
+                    <h1 class="inner-banner-taitel blog_header">{{ __('translate.Blogs') }}</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb ">
+                            <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}" class="blog-list">{{ __('translate.Home') }}</a></li>
+                            <li class="breadcrumb-item active breadcrumb-link blog-list" aria-current="page">{{ __('translate.Blogs') }}</li>
+                            <!-- <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                            <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li> -->
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
+    </div>
     </section>
     <!-- banner-part-end -->
 

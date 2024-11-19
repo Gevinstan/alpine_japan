@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
@@ -32,7 +32,7 @@
                 <div class="col-md-12 faq-img">
                     <img src="{{  asset('japan_home/faq_img.svg')  }}" alt="HTML tutorial" class="img-fluid">
 
-                    <div class="faq-top-left">
+                    <!-- <div class="faq-top-left">
                         <p class="faq-top-left-p" style="display: inline">How To Buy</p>
                         <p class="faq-top-left-p1" style="display: inline">JDM Car</p>
                         <br>
@@ -45,7 +45,7 @@
                         <p class="faq-bottom-left-p"><b>How to choose Japan car?</b></p><br>
                         <p class="faq-bottom-left-p"><b>How do we export and delivery Japan car?</b></p><br>
                         <p class="faq-bottom-left-p"><b>How is the payment processed?</b></p><br>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

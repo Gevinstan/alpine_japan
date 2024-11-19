@@ -317,13 +317,7 @@
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                             <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
-                                           {{-- @if($type == 'car')
-                                            <img src="{{ asset('cars/' . $car['picture']) }}" alt="thumb">
-                                            @elseif ($type == 'heavy')
-                                            <img src="{{ asset('heavy_photos/'.$car['picture']) }}" alt="thumb">
-                                            @else
-                                             <img src="{{ asset('Small-Heavy/' . $car['picture']) }}" alt="thumb">
-                                            @endif --}}
+                                       
                                            
                                                 <div class="brand-car-item-img-text">
 

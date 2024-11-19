@@ -69,6 +69,9 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/blogs', 'blogs')->name('blogs');
             Route::get('/blog/{slug}', 'blog_show')->name('blog');
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
+            Route::get('/jdm-stock-responsive/{slug}/{type}', 'jdm_stock_responsive')->name('jdm-stock-responsive');
+            Route::get('/jdm_brand_new','jdm_brand_new')->name('jdm_brand_new');
+            Route::get('/jdm-stock-listing/{slug}/{type}', 'jdm_stock_listing')->name('jdm-stock-listing');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
             Route::post('/auct-sess-creation',function(Request $request){
@@ -81,6 +84,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::post('/get-brands', 'get_brands')->name('get-brands');
             Route::post('/get-model-year', 'get_model_year')->name('get-model-year');
             Route::get('/jdm-stock-all', 'jdm_stock_all')->name('jdm-stock-all');
+            Route::get('/jdm-stock-all-resposive', 'jdm_stock_all_resposive')->name('jdm-stock-all-resposive');
             Route::get('/top-selling', 'top_selling')->name('top-selling');
             Route::get('/top-selling_responsive', 'top_selling1')->name('top-selling_responsive');
             Route::get('/new-arrival', 'new_arrival')->name('new-arrival');
@@ -93,12 +97,14 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             ->middleware('auth:web');
             Route::get('/auction-car-marketplace-responsive', 'auctionCar1')->name('auction-car-marketplace-responsive')
             ->middleware('auth:web');
+            Route::get('/auction-brand-new-car', 'auctionBrandNewCar')->name('auction-brand-new-car')
+            ->middleware('auth:web');
 
             Route::get('/dealers', 'dealers')->name('dealers');
             Route::get('/dealer/{slug}', 'dealer')->name('dealer');
             Route::post('/send-message-to-dealer/{id}', 'send_message_to_dealer')->name('send-message-to-dealer');
-            Route::post('/send_message_to_company', 'send_message_to_company')->name('send_message_to_company')
-            ->middleware('auth:web');
+            Route::post('/send_message_to_company', 'send_message_to_company')->name('send_message_to_company');
+       
 
             Route::get('/join-as-dealer', 'join_as_dealer')->name('join-as-dealer');
 
@@ -251,4 +257,12 @@ Route::get('/migrate-for-update', function(){
     $notification = array('messege' => $notification, 'alert-type' => 'success');
     return redirect()->route('home')->with($notification);
 });
+
+Route::get('/proxy-image', function (Request $request) {
+    $imageUrl = $request->input('url');
+    $response = Http::get($imageUrl);
+    return response($response->body())
+        ->header('Content-Type', $response->header('Content-Type'));
+});
+
 

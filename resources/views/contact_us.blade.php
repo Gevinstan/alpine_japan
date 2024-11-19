@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
@@ -9,13 +9,13 @@
 <main>
      <!-- banner-part-start  -->
 
-    <section class="inner-banner">
+    <section class="inner-banner contact_us_header">
         <div class="container">
-            <div class="row" style=" padding-top: 20px;padding-bottom: 20px; background-color:#F2F2F2">
+            <div class="row py-3 banner_color">
                 <div class="col-lg-12">
                     <div>
-                        <h2 style="display: inline;">Contact</h2> 
-                        <h2 style="display: inline; color: #038ffc;">Us</h2>
+                        <h2 class="contact_us" >Contact</h2> 
+                        <h2 class="contact_us contact-us-color">Us</h2>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                             <div class="text">
                                 <h4>{{ __('translate.Live Chat') }}</h4>
 
-                                <p>{{ __('translate.Wait time of ~10 minutes.') }}</p>
+                                <p class="">{{ __('translate.Wait time of ~10 minutes.') }}</p>
                             </div>
                         </div>
                         <div class="contact-us-inner">
@@ -82,6 +82,9 @@
                     </div>
 
 
+                    
+
+
                     <div class="contact-box ps-4">
                         <a href="">ALPINE JAPAN</a>
                         <h5><b>+81 78 242-1568</b></h5>
@@ -94,7 +97,8 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6 ">
-                                    <div class="location" >
+                                    <div class="location d-flex" >
+                                        
                                         <a href="javascript:;">
                                             <span>
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -110,7 +114,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6" style="padding-left: 70px">
+                                <div class="col-md-6 follow_us">
                                     <div class="text">
                                         <span>{{ __('translate.Follow Us') }}:</span>
                                     </div>
@@ -174,34 +178,43 @@
 
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
-                                    
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <div class="textarea-wrapper">
+                                        <input type="text" class="form-control" id="exampleFormControlInput1"
                                         placeholder="{{ __('Name*') }}" name="name" value="{{ old('name') }}">
-
+                                    </div>
+                                    
                                 </div>
                                 <div class="get-in-touch-form-inner">
-                                    
-                                    <input type="text" class="form-control" id="exampleFormControlInput2"
+                                    <div>
+                                        <input type="text" class="form-control" id="exampleFormControlInput2"
                                         placeholder="{{ __('Phone Number*') }}" name="phone" value="{{ old('phone') }}">
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
-                                    
-                                    <input type="email" class="form-control" id="exampleFormControlInput4"
+                                    <div>
+                                        <input type="email" class="form-control" id="exampleFormControlInput4"
                                         placeholder="{{ __('Email*') }}" value="{{ old('email') }}" name="email">
+                                    </div>
+                                    
                                 </div>
                                 <div class="get-in-touch-form-inner">
-                                    
-                                    <input type="text" class="form-control" id="exampleFormControlInput3"
+                                    <div>
+                                        <input type="text" class="form-control" id="exampleFormControlInput3"
                                         placeholder="{{ __('Country of Delivery*') }}" name="subject" value="{{ old('subject') }}">
+                                        
+                                    </div>
                                 </div>
                             </div>
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
+                                    <div>
+                                        <textarea class="form-control" id="exampleFormControlTextarea6" rows="8" placeholder="{{ __('Message*') }}" name="message">{{ old('message') }}</textarea>
                                     
-                                    <textarea class="form-control" id="exampleFormControlTextarea6" rows="8"
-                                        placeholder="{{ __('Message*') }}" name="message">{{ old('message') }}</textarea>
+                                        
+                                    </div>
                                 </div>
 
                             </div>
@@ -214,9 +227,7 @@
                                 </div>
                             @endif
 
-
                             <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
-
                         </form>
 
                     </div>
