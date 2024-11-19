@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <div class="privacy-text-item">
+                        <div class="privacy-text-item">    
                             {!! clean($custom_page->description) !!}
                         </div>
 
