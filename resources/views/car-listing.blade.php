@@ -915,26 +915,26 @@
             // }
 
             });
-            document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
-                brandCheckbox.addEventListener('change', function() {
+            // document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+            //     brandCheckbox.addEventListener('change', function() {
 
-                    const brandId = this.getAttribute('data-brand-id');
-                    console.log(brandId)
-                    const accordionItem = this.closest('.accordion-item');
-                    const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
-                    // const modelCheckboxes = accordionItem.querySelectorAll(`.model-search[data-parent-brand]`);
+            //         const brandId = this.getAttribute('data-brand-id');
+            //         console.log(brandId)
+            //         const accordionItem = this.closest('.accordion-item');
+            //         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+            //         // const modelCheckboxes = accordionItem.querySelectorAll(`.model-search[data-parent-brand]`);
 
-                    // console.log(modelCheckboxes);
-                    // console.log(accordionItem.querySelectorAll(`.model-search[data-parent-brand]`));
+            //         // console.log(modelCheckboxes);
+            //         // console.log(accordionItem.querySelectorAll(`.model-search[data-parent-brand]`));
                     
-                    // Check/uncheck only models belonging to this brand
-                    modelCheckboxes.forEach(modelCheckbox => {
-                        modelCheckbox.checked = this.checked;
-                    });
-                    clear_price_slider();
-                    $('#search_form').submit();
-                });
-            });
+            //         // Check/uncheck only models belonging to this brand
+            //         modelCheckboxes.forEach(modelCheckbox => {
+            //             modelCheckbox.checked = this.checked;
+            //         });
+            //         clear_price_slider();
+            //         $('#search_form').submit();
+            //     });
+            // });
         })(jQuery);
 
 
