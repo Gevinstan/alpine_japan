@@ -64,7 +64,7 @@
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="jdm_brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                             value="{{ $brand->slug }}"
+                                                                             value="{{ $brand->slug }}"  data-brand-id="{{ $brand->slug }}"
                                                                             {{ in_array(trim($brand->slug), (array) request('jdm_brand', [])) ? 'checked' : '' }}>
                                                                         <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
                                                                             {{ $brand->brand_name }}
@@ -75,10 +75,12 @@
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
-                                                                                        <span class="form-check">
-                                                                                            <input name="jdm_model[]" class="form-check-input brand-search" type="checkbox"
-                                                                                                    value="{{ $model }}"
-                                                                                                    {{ in_array(trim($model), (array) request('jdm_model', [])) ? 'checked' : '' }}>
+                                                                                        <span class="form-check model-search">
+                                                                                            <input name="jdm_model[]" class="form-check-input" type="checkbox"
+                                                                                                    value="{{ $model }}"  data-parent-brand="{{ $brand->slug }}"
+                                                                                                        data-model-name="{{ $model }}"
+                                                                                                    {{ in_array(trim($model), (array) request('jdm_model', [])) && 
+                                                                                                        in_array(trim($brand->slug), (array) request('jdm_brand', [])) ? 'checked' : '' }}>
                                                                                             <label class="form-check-label">
                                                                                                 {{ $model }}
                                                                                             </label>
@@ -120,12 +122,14 @@
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="jdm_year">
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                        value="{{ request('jdm_year', $minYear) }}" 
+                                                        class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="jdm_year" value="{{ request('jdm_year', '') }}">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start"></output>
+                                                            <output name="age_output" id="age_output" for="start">{{ request('jdm_year', '') }}</output>
                                                             <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                         </div>
                                                     </div>
@@ -174,7 +178,9 @@
                                                         <div id="slider-div">
                                                             <div>
                                                                 <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                                data-slider-max="{{$maxPrice}}" 
+                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
                                                                 />
                                                             </div>
                                                         </div>
@@ -800,7 +806,7 @@
 
 
                     @if ($cars->hasPages())
-                    {{ $cars->links('pagination_box') }}
+                    {{ $cars->appends(request()->query())->links() }}                    
                     @endif
 
 
@@ -821,7 +827,21 @@
 @push('js_section')
 
 <script>
+         const initialMinPrice = $('#ex2').data('slider-min');
+         const initialMaxPrice = $('#ex2').data('slider-max');
         (function($) {
+       
+            function clear_price_slider(){
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        
+                        $('input[name="price_range_scale"]').val('');
+                    } 
+                    $('#ex2').prop('disabled', true);
+                    
+
+                }
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
@@ -837,24 +857,31 @@
                     }
                 })
 
-                let initialMinPrice = $('#ex2').data('slider-min');
-                let initialMaxPrice = $('#ex2').data('slider-max');
+                $(".popular-search").on('change',function(e){
+                    e.preventDefault();   
+                    clear_price_slider();    
+                    form.submit();
+                })
+               
 
                 $("#outside_form_btn,go-button").on("click",function(e){
+                    clear_price_slider();
                     $("#search_form").submit();
                 })
-                $(".brand-search").on('change',function(e){
-                    e.preventDefault();   
-                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
-                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                // $(".brand-search").on('change',function(e){
+                //     e.preventDefault();   
+                //     // let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                //     // let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
 
-                    // Check if the slider values have changed
-                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
-                        $('input[name="price_range_scale"]').val('');
-                    } 
-                    $(".model-search").val("")
-                    form.submit();
-                }) 
+                //     // // Check if the slider values have changed
+                //     // if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                //     //     $('input[name="price_range_scale"]').val('');
+                //     // } 
+                //     clear_price_slider();
+                //     $(".model-search").val("")
+                //     form.submit();
+                // }) 
+               
                 $("#modelYearSlider").on('input',function(e){
                     $("#age_output").val(parseInt($(this).val()))
                     $("#start_year").val(parseInt($(this).val()));
@@ -880,7 +907,45 @@
             // }
 
             });
+
+            document.querySelectorAll('.model-search').forEach(modelCheckbox => {
+                modelCheckbox.addEventListener('change', function() {
+                    // Find the parent accordion item and its brand checkbox
+                    const accordionItem = this.closest('.accordion-item');
+                    const brandCheckbox = accordionItem.querySelector('.brand-search');
+                    const modelCheckboxes = accordionItem.querySelectorAll('.model-search');
+
+                    console.log(brandCheckbox)
+                    
+                    // Check if all model checkboxes are checked
+                    // const allChecked = Array.from(modelCheckboxes).every(checkbox => checkbox.checked);
+                    
+                    
+                    // Update brand checkbox accordingly
+                    brandCheckbox.checked = true;
+                    clear_price_slider();
+                    $('#search_form').submit();
+                });
+            });
+            document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                brandCheckbox.addEventListener('change', function() {
+
+                    const brandId = this.getAttribute('data-brand-id');
+                    console.log(brandId)
+                    const accordionItem = this.closest('.accordion-item');
+                    const modelCheckboxes = accordionItem.querySelectorAll('input[name="jdm_model[]"]');
+                    modelCheckboxes.forEach(modelCheckbox => {
+                        modelCheckbox.checked = this.checked;
+                    });
+                    clear_price_slider();
+                    $('#search_form').submit();
+                });
+            });
+
         })(jQuery);
+
+
+       
 
 
     document.addEventListener('DOMContentLoaded', function () {

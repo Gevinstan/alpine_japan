@@ -754,14 +754,14 @@
                                             </span>{{ __('translate.Privacy & Policy') }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('faq') }}">  <span>
+                                            <a href="{{ route('how-to-buy') }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </span>{{ __('translate.FAQ') }}</a>
+                                            </span>{{ __('translate.How To Buy') }}</a>
                                         </li>
 
 
@@ -820,7 +820,7 @@
                                                 </svg></span> {{ __('translate.Shipment') }}
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                             <a href="{{ route('custom-page', 'how-to-buy') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -829,7 +829,7 @@
                                                             stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg></span> {{ __('translate.How To Buy') }}
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="{{ route('custom-page', 'our-stocks') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"

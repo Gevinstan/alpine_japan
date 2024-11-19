@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ html_decode(isset($car->seo_title) ?  $car->seo_title : '') }}</title>
     <meta name="title" content="{{ html_decode(isset($car->seo_title) ?  $car->seo_title : '') }}">
