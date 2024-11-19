@@ -219,7 +219,7 @@
                                 </div>
 
                             </div>
-s
+
                         </div>
 
                         <div class="inventory-ber-right">

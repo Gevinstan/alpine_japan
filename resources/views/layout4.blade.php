@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset($setting->favicon) }}">
 
     @yield('title')
@@ -263,7 +263,7 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link mx-2" href="{{ route('listings') }}">{{ __('translate.New Car Arrivals') }}</a>
+                                            <a class="nav-link mx-2" href="{{ route('new-arrival-responsive') }}">{{ __('translate.New Car Arrivals') }}</a>
                                         </li>
 
                                         <li class="nav-item">
@@ -273,7 +273,7 @@
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @else 
-                                                    <a class="nav-link mx-2" href="#" onclick="auct_logout()">
+                                                    <a class="nav-link mx-2 auct_logout" href="#" onclick="auct_logout()">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @endif 
@@ -654,7 +654,7 @@
                             <div class="footer-item-text-link">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('about-us') }}">  <span>
+                                        <a href="{{ route('blogs') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -674,7 +674,7 @@
                                         </span>{{ __('translate.Careers') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('blogs') }}">  <span>
+                                        <a href="{{ route('about-us') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -684,7 +684,7 @@
                                         </span>{{ __('translate.About us') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('join-as-dealer') }}">  <span>
+                                        <a href="{{ route('contact-us') }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -694,7 +694,7 @@
                                         </span>{{ __('translate.Contact Us') }}</a>
                                     </li>
                                     <li>
-                                            <a href="{{ route('join-as-dealer') }}">  <span>
+                                            <a href="{{ route('terms-conditions') }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -704,7 +704,7 @@
                                             </span>{{ __('translate.Terms and Conditions') }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('join-as-dealer') }}">  <span>
+                                            <a href="{{ route('privacy-policy') }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -740,18 +740,18 @@
                                          @if(Auth::guard('web')->check())
                                             <a href="{{ route('auction-car-marketplace') }}"> <span>
                                             @else
-                                            <a href="#" onclick="auct_logout()"><span>
+                                            <a href="#" class="auct_logout" onclick="auct_logout()"><span>
                                             @endif
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                             stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg></span> {{__('translate.Auction Car Marketplace') }}
+                                                    </svg></span> {{__('translate.Auction Car MarketPlace') }}
                                            </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('listings') }}"> <span>
+                                        <a href="{{ route('car_listing') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -761,7 +761,7 @@
                                             </a>
                                         </li>
                                     <li>
-                                        <a href="{{ route('user.edit-profile') }}"> <span>
+                                        <a href="{{ route('new-arrival-responsive') }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -781,7 +781,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                            <a href="{{ route('howtobuy') }}"> <span>
+                                            <a href="{{ route('custom-page', 'how-to-buy') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -791,7 +791,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('user.reviews') }}"> <span>
+                                            <a href="{{ route('custom-page', 'our-stocks') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -801,7 +801,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('user.reviews') }}"> <span>
+                                            <a href="{{ route('custom-page', 'useful-links') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -912,7 +912,7 @@
     <!-- footer prart start  end -->
 
 
-    @if ($cookie_consent->status == 1)
+  {{--  @if ($cookie_consent->status == 1)
         <!-- common-modal start  -->
         <div class="common-modal cookie_consent_modal d-none" >
             <button type="button" class="btn-close cookie_consent_close_btn" aria-label="Close"></button>
@@ -926,7 +926,7 @@
 
         </div>
         <!-- common-modal end  -->
-    @endif
+    @endif --}}
 
 
 
@@ -986,11 +986,13 @@
 
 
     <!-- fontawesome  -->
-    <script src="{{ asset('frontend/assets/fontawesome/js/all.js') }}"></script>
     
 
     <!-- jquery  -->
+    <script src="{{ asset('frontend/assets/fontawesome/js/all.js') }}"></script>
+
     <script src="{{ asset('global/jquery-3.7.1.min.js') }}"></script>
+
 
     <!-- bootstrap.bundle.min.js -->
     <script src="{{ asset('frontend/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -1047,6 +1049,11 @@
 
     <script>
         (function($) {
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+            });
             "use strict"
             $(document).ready(function () {
                 $('.cookie_consent_close_btn').on('click', function(){
@@ -1061,14 +1068,67 @@
                 $('.before_auth_wishlist').on("click", function(){
                     toastr.error("{{ __('translate.Please login first') }}")
                 });
+                
+                if (localStorage.getItem('car-listo-cookie') != '1') {
+                $('.cookie_consent_modal').removeClass('d-none');
+                }
+
+                $(".auct_logout").on('click',function(){
+                    Swal.fire({
+                        title: "{{__('Login or Register to access this page ?')}}",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: "{{__('Yes, Ok')}}",
+                        cancelButtonText: "{{__('Cancel')}}",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.noConflict();
+                            $.ajax({
+                                url:"{{route('auct-sess-creation')}}",
+                                type:'POST',
+                                data:{'key':'acut_sess'},
+                                success:function(data){
+                                    window.location.href = "{{ url('/user/dashboard') }}";
+                                }    
+                            })
+                            // $("#remove_car_"+id).submit();
+                        }
+
+                    })
+                })
 
             });
         })(jQuery);
 
-        if (localStorage.getItem('car-listo-cookie') != '1') {
-            $('.cookie_consent_modal').removeClass('d-none');
-        }
+       
 
+        // function auct_logout(){
+        //     Swal.fire({
+        //         title: "{{__('Login or Register to access this page ?')}}",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: "{{__('Yes, Ok')}}",
+        //         cancelButtonText: "{{__('Cancel')}}",
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $.noConflict();
+        //             $.ajax({
+        //                 url:"{{route('auct-sess-creation')}}",
+        //                 type:'POST',
+        //                 data:{'key':'acut_sess'},
+        //                 success:function(data){
+        //                     window.location.href = "{{ url('/user/dashboard') }}";
+        //                 }    
+        //             })
+        //             // $("#remove_car_"+id).submit();
+        //         }
+
+        //     })
+        // }
     </script>
 
 </body>

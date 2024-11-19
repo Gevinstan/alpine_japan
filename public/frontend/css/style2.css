@@ -996,7 +996,7 @@
 }
 
 .banner .banner-slick {
-    width: 488px;
+    width: 365px;
     border-radius: 6px;
     border: 4px solid var(--white-color);
     position: relative;
@@ -1028,7 +1028,7 @@
 }
 
 .banner .banner-slick-thumb {
-    height: 562px;
+    height: 426px;
     position: relative;
     z-index: 1;
 }
@@ -1043,7 +1043,7 @@
     background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.79) 63.5%
+        rgba(0, 0, 0, 0.49) 63.5%
     );
 }
 
@@ -13317,15 +13317,15 @@ h5.preloader-text::after {
 }
 
 .testimonial.two .feature-slick-next {
-    border: 1px solid var(--primary-color-2);
+    border: 1px solid var(--primary-color-1);
 }
 
 .testimonial.two .feature-slick-next span svg {
-    color: var(--primary-color-2);
+    color: var(--primary-color-1);
 }
 
 .testimonial.two .feature-slick-next:hover {
-    background-color: var(--primary-color-2);
+    background-color: var(--primary-color-1);
 }
 
 .testimonial.two .feature-slick-next:hover span svg {
@@ -13333,15 +13333,15 @@ h5.preloader-text::after {
 }
 
 .testimonial.two .feature-slick-prev {
-    border: 1px solid var(--primary-color-2);
+    border: 1px solid var(--primary-color-1);
 }
 
 .testimonial.two .feature-slick-prev span svg {
-    color: var(--primary-color-2);
+    color: var(--primary-color-1);
 }
 
 .testimonial.two .feature-slick-prev:hover {
-    background-color: var(--primary-color-2);
+    background-color: var(--primary-color-1);
 }
 
 .testimonial.two .feature-slick-prev:hover span svg {
@@ -13753,9 +13753,9 @@ h5.preloader-text::after {
     font-family: var(--DMSans);
 }
 
-.taitel.two span {
+/* .taitel.two span {
     color: var(--primary-color-2);
-}
+} */
 
 .taitel.thr span {
     color: var(--primary-color-3);
@@ -15077,7 +15077,97 @@ p {
     height: 41.25rem;
 }
 
+.inventory-sarch-ber input:focus + .search-btn {
+    display: none;
+}
 
+/* .inventory-sarch-ber input {
+    border: 1px solid #038FFC !important;
+} */
+
+.inventory-sarch-ber input:focus {
+    border-color: #038FFC !important;
+}
+.banner-serch {
+    /* height: 100%;
+    width: 100%;
+    background-color: var(--primary-color-1);
+    color: var(--white-color); */
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.thm-btn-search  {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-color);
+    background-color: var(--white-color);
+    overflow: hidden;
+    font-family: var(--roboto);
+    text-transform: capitalize;
+    transition: all 0.5s ease-in-out 0.5s;
+    z-index: 1;
+    border: 1px solid var(--primary-color-1);
+}
+
+.banner-serch.thm-btn-search:hover {
+    background-color: var(--white-color); /* Violet background on hover */
+    color: var(--primary-color-1);; /* Change text/icon color to white */
+    border-color: var(--primary-color-1); /* Optional: change border color to violet */
+}
+
+
+.thm-btn-search img {
+    color: var(--white-color);
+    transition: all 0.5s ease-in-out 0.5s;
+    z-index: 1;
+}
+
+
+.banner-serch.thm-btn-search:hover img  {
+    color: var(--primary-color-1) !important;
+    filter: brightness(0) saturate(100%) invert(44%) sepia(76%) saturate(6250%) hue-rotate(171deg) brightness(92%) contrast(100%);
+ }
+
+
+
+.thm-btn-search:before {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    content: "";
+    margin: auto;
+    background-color: var(--primary-color-1);
+    transition: all 0.5s;
+    z-index: -1;
+}
+.thm-btn-search:hover:before {
+    transform: rotateX(90deg);
+}
+
+.thm-btn-search::after  {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    content: "";
+    margin: auto;
+    background-color: var(--primary-color-1);
+    transition: all 0.5s;
+    z-index: -1;
+}
+
+.thm-btn-search:hover::after  {
+    transform: rotateY(90deg);
+
+}
 
 /****** Pagination works Start *******/
 .next-prev-btn ul .active {
@@ -15431,6 +15521,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 .image_bigsale {
     height: 36.5rem !important;
     padding-top: 0px !important;
+    display: none;
 }
 }
 
@@ -15548,10 +15639,32 @@ input:not(:placeholder-shown) + .placeholder-text {
     padding-left: 70px;
 }
 
+/***** About Us Workk Responsive *****/
+
 .about_us {
     display: inline;
 }
 
 .about-us-color {
     color: #038ffc;
+}
+
+@media (max-width: 768px) {
+.spacing_about {
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+}
+}
+
+@media (max-width: 425px) {
+.spacing_about {
+    padding-top: 0px !important;
+    margin-top: 0px !important;
+}
+}
+
+@media (max-width: 1366px) {
+.spacing_about {
+    padding-top: 0rem !important;
+}
 }
