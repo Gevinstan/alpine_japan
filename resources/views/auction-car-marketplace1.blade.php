@@ -887,10 +887,7 @@
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-                $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
-                    form.submit();
-                });
+              
 
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();

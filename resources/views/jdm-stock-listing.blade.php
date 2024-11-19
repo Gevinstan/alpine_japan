@@ -17,7 +17,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.JDM Stock Listing') }}</li>
                     <p>...</p>
                 </ol>
             </nav>
@@ -120,8 +120,8 @@
                     <div class="p-sticky">
                     <div class="auto-sales-item form-section">
                         <div class="d-flex flex-column gap-2 car-listing-details">
-                            <p class="brand-text fw-bolder">Volvo</p>
-                            <h3>2019 volvo Camry Hybrid</h3>
+                            <p class="brand-text fw-bolder">{{$car->make}}</p>
+                            <h3>{{$car->model}}</h3>
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="amount-text" id="price_value">Price <span class="price-text">
                                     @if(session('front_lang')=='en')
@@ -614,7 +614,7 @@
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsefive">
-                                    {{__('translate.Remarks')}}
+                                    {{__('translate.Accessories')}}
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">

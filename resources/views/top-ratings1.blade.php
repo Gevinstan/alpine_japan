@@ -16,7 +16,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Top Rating Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -215,9 +215,9 @@
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a  onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a data-brand="price_high_low" data-text="High to Low"   class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -314,15 +314,7 @@
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div>
 
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
-                                                        @else
-                                                            {{ $car['start_price'] }}
-                                                        @endif 
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
 
                                             <div class="brand-car-inner">
@@ -339,9 +331,9 @@
 
                                                     <p class="listcar_price pt-3 pe-4">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
+                                                            {{ '$'.$car['start_price_num'] }}
                                                         @else
-                                                            {{ $car['start_price'] }}
+                                                            {{ '$'.$car['start_price_num'] }}
                                                         @endif
                                                     </p>
 
@@ -370,9 +362,9 @@
 
                                                         <span>
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage']) }}
-                                                        @else
                                                             {{ html_decode($car['mileage_en']) }}
+                                                        @else
+                                                            {{ html_decode($car['mileage']) }}
                                                         @endif
                                                         </span>
                                                     </div>
@@ -389,7 +381,11 @@
                                                         </div>
 
                                                         <span>
-                                                           
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['year_en']) }}
+                                                            @else
+                                                                {{ html_decode($car['year']) }}
+                                                            @endif
                                                         </span>
                                                     </div>
                                                     <p>.</p>
@@ -404,7 +400,11 @@
                                                         </div>
 
                                                         <span>
-                                                           
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['transmission_en']) }}
+                                                            @else
+                                                                {{ html_decode($car['transmission']) }}
+                                                            @endif
                                                         </span>
                                                     </div>
                                                 </div>
@@ -830,6 +830,20 @@
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
+                $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
+
+
+
+
                 let initialMinPrice = $('#ex2').data('slider-min');
                 let initialMaxPrice = $('#ex2').data('slider-max');
                 

@@ -57,39 +57,41 @@
                                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
-                                                <span class="select-Brand-box border-0 px-2">
-                                                
+                                            <span class="select-Brand-box border-0 px-2">
+                                                    @foreach ($brands as $index=> $brand)
                                                             <div class="accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                    <input class="form-check-input brand-search" name="jdm_brand" type="checkbox" value="{{$brands->slug}}"
-                                                                        {{ in_array(trim($brands->slug), (array)request('jdm_brand', [])) ? 'checked' : '' }}>
-                                                                        <label class="form-check-label">
-                                                                            {{ $brands->name }}
+                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <input name="jdm_brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                             value="{{ $brand->slug }}"
+                                                                            {{ in_array(trim($brand->slug), (array) request('jdm_brand', [])) ? 'checked' : '' }}>
+                                                                        <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                            {{ $brand->brand_name }}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" dat   a-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
-                                                                           
-                                                                                    @foreach($models as $brand)
+                                                                            @if(array_key_exists($brand->slug, $brand_arr))
+                                                                                    @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
-                                                                                        <input class="form-check-input model-search" name="jdm_model[]" type="checkbox" value="{{$brand}}"
-                                                                                        {{ in_array(trim($brand), (array) request('jdm_model', [])) ? 'checked' : '' }}>
-                                                                                        <label class="form-check-label">
-                                                                                            {{ $brand}}
-                                                                                        </label>
+                                                                                            <input name="jdm_model[]" class="form-check-input brand-search" type="checkbox"
+                                                                                                    value="{{ $model }}"
+                                                                                                    {{ in_array(trim($model), (array) request('jdm_model', [])) ? 'checked' : '' }}>
+                                                                                            <label class="form-check-label">
+                                                                                                {{ $model }}
+                                                                                            </label>
                                                                                         </span>
-                                                                                    @endforeach 
-                                                                      
+                                                                                    @endforeach
+                                                                            @endif
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                         </span>
                                                     </div>
                                                     </div> 
-                                    
+                                                    @endforeach
                                              </span>
                                             </div>
                                         </div>
@@ -119,7 +121,7 @@
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
                                                         <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year">
+                                                        <input type="hidden" id="start_year" name="jdm_year">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
@@ -236,9 +238,9 @@
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a onclick='updateButtonText("recent", "Recently Added")' data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a onclick='updateButtonText("price_low_high","Low to High")' data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a onclick='updateButtonText("price_high_low","High to Low")' data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a  data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a  data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a  data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -818,22 +820,12 @@
 
 @push('js_section')
 
-    <script>
+<script>
         (function($) {
-           
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-            //     function updateButtonText(selectedBrand,selectedText) {
-            //         const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
-            //         if (dropdownButton) {
-            //             dropdownButton.innerText = selectedText;
-            //             $("#sort_by_field").val(selectedBrand);
-            //             $('#search_form').submit();
-            //         } else {
-            //             console.error('Dropdown button not found');
-            //         }
-            // }
+
                 $(".dropdown-click").on('click',function(){
                     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
                     if (dropdownButton) {
@@ -844,34 +836,30 @@
                         console.error('Dropdown button not found');
                     }
                 })
-                
+
+                let initialMinPrice = $('#ex2').data('slider-min');
+                let initialMaxPrice = $('#ex2').data('slider-max');
 
                 $("#outside_form_btn,go-button").on("click",function(e){
                     $("#search_form").submit();
                 })
                 $(".brand-search").on('change',function(e){
                     e.preventDefault();   
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+
+                    // Check if the slider values have changed
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        $('input[name="price_range_scale"]').val('');
+                    } 
                     $(".model-search").val("")
-                    $('#ex2').prop('disabled', true);
                     form.submit();
                 }) 
-
-                $(".model-search").on('change',function(e){
-                    e.preventDefault();  
-                    $('#ex2').prop('disabled', true); 
-                    form.submit();    
-                })
-
                 $("#modelYearSlider").on('input',function(e){
                     $("#age_output").val(parseInt($(this).val()))
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-                $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
-                    form.submit();
-                });
-
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();
                     const urlObject = new URL(window.location.href);
@@ -879,10 +867,21 @@
                     window.location.replace(baseUrl);
                         // Combine origin and pathname
                 })
+
+            //     function updateButtonText(selectedBrand,selectedText) {
+            //     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+            //     if (dropdownButton) {
+            //         dropdownButton.innerText = selectedText;
+            //         $("#sort_by_field").val(selectedBrand);
+            //         $('#search_form').submit();
+            //     } else {
+            //         console.error('Dropdown button not found');
+            //     }
+            // }
+
             });
         })(jQuery);
 
-       
 
     document.addEventListener('DOMContentLoaded', function () {
             // Attach event listeners to all close buttons
@@ -994,7 +993,6 @@ $('#ex2').on('slide', function(slideEvt) {
   console.log(`${minYear},${maxYear}`)
   // Update the input values
   $('#ex2').val(`${minYear},${maxYear}`);
-
 
   // Optionally, you can also update your server-side query here
 });

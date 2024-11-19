@@ -196,7 +196,7 @@
 
                                         <li class="nav-item dropdown">
                                             <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ __('JDM Stock') }}
+                                                {{ __('translate.JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
                                                 <div class="p-3">

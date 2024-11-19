@@ -281,9 +281,9 @@
                                             Dropdown
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a  data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a  data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a  data-brand="price_high_low" data-text="High to Low"   class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -877,7 +877,16 @@
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-                
+                $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
 
                 $("#outside_form_btn,go-button").on("click",function(e){
                     $("#search_form").submit();
@@ -892,11 +901,6 @@
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-                $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
-                    form.submit();
-                });
-
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();
                     const urlObject = new URL(window.location.href);

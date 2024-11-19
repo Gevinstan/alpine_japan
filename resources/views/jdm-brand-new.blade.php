@@ -217,9 +217,7 @@
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
                                 </div>
-
                             </div>
-s
                         </div>
 
                         <div class="inventory-ber-right">
