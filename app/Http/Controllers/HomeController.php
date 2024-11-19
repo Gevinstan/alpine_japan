@@ -2367,6 +2367,10 @@ public function car_listing(Request $request){
             'id' => $car->id,
             'mileage' => $car->mileage,
             'mileage_en' => $car->mileage_en,
+            'year'=>$car->model_year,
+            'year_en'=>$car->model_year_en,
+            'transmission'=>$car->transmission,
+            'transmission_en'=>$car->transmission_en
             
         ];
     });
