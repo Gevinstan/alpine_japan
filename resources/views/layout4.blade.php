@@ -210,7 +210,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Buses</h6>
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Heavy</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['heavy'] as $jdm)
                                                                     <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
@@ -218,7 +218,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Trucks</h6>
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
                                                                     <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
@@ -265,12 +265,12 @@
                                                 <div class="p-3">
                                                     <div class="row">
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Auction')}}</h6>
                                                         </a>   
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Market Price')}}</h6>
                                                         </a> 
                                                         </div>

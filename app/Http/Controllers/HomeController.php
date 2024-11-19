@@ -904,7 +904,8 @@ class HomeController extends Controller
         // echo json_encode($priceRange);die();
     
         // Get min and max years
-        $minYear = $yearRange->min_year;
+        // $minYear = $yearRange->min_year;
+        $minYear = 1950;
 
         $maxYear = $yearRange->max_year;
         $minPrice = $priceRange->min_sal;
@@ -3715,6 +3716,10 @@ public function car_listing(Request $request){
                 'id' => $car->id,
                 'mileage' => $car->mileage,
                 'mileage_en' => $car->mileage_en,
+                'year'=>$car->model_year,
+                'year_en'=>$car->model_year_en,
+                'transmission'=>$car->transmission,
+                'transmission_en'=>$car->transmission_en
             ];
         });
 
@@ -5118,7 +5123,8 @@ public function car_listing(Request $request){
         ->selectRaw('MIN(CAST(price AS DECIMAL)) as min_sal, MAX(CAST(price AS DECIMAL)) as max_sal')
         ->first();
 
-        $minYear = $yearRange->min_year;
+        // $minYear = $yearRange->min_year;
+        $minYear = 1950;
         $maxYear = $yearRange->max_year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;   
@@ -5731,179 +5737,433 @@ public function car_listing(Request $request){
     
     }
     public function jdm_brand_new(Request $request){
+        $models=[];
         $seo_setting = SeoSetting::where('id', 1)->first();
-        $brands= Brand::where('status', 'enable')->get();
-        $brand_list=$this->getJdmBrandsWithModels();
-      
-        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
-        ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        ->where('bt.lang_code',Session::get('front_lang'))
-        ->select('b.slug','bt.name as brand_name')
-        ->distinct('b.slug')->get();
 
+       
+        $brands="";
+        
+        $models=$this->getJdmBrandModels($request->jdm_brand);
+ 
 
-        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
-        ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        ->where('bt.lang_code',Session::get('front_lang'))
-        ->select('b.slug','bt.name as brand_name')
-        ->distinct('b.slug')->get();
-
-        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
-        ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        ->where('bt.lang_code',Session::get('front_lang'))
-        ->select('b.slug','bt.name as brand_name')
-        ->distinct('b.slug')->get();
-        $jdm_core_brand = Brand::where('status', 'enable')->get();
-
-        // $brands=$this->getJdmBrands($type,$slug);
-      
-
-        // $brand_list=$this->getJdmSpecificRecord($type);
+        $jdmBrand = $request->input('jdm_brand');
+        $jdmModel = $request->input('jdm_model');
+        $jdmYear = $request->input('jdm_year');
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        $price_range_scale=$request->input('price_range_scale');
+        $transmission=$request->input('transmission');
+        $search=$request->input('search');
+        $brand_new_cars=$request->input('brand_new_cars');
+        $sort_by=$request->input('sort_by');
 
         $yearRange = Cars::where('is_active', '1')
         ->selectRaw('MIN(YEAR(STR_TO_DATE(yom, "%M %Y"))) as min_year, MAX(YEAR(STR_TO_DATE(yom, "%M %Y"))) as max_year')
-        ->first();        
-
+        ->first();   
         $priceRange = Cars::where('is_active', '1')
         ->selectRaw('MIN(CAST(price AS DECIMAL)) as min_sal, MAX(CAST(price AS DECIMAL)) as max_sal')
         ->first();
-    
-    
-        // echo json_encode($priceRange);die();
-    
-        // Get min and max years
-        $minYear = $yearRange->min_year;
 
+        // $minYear = $yearRange->min_year;
+        $minYear = 1950;
         $maxYear = $yearRange->max_year;
-        $minPrice = $priceRange->min_sal == 0 ? 1 : $priceRange->min_sal;
-        $maxPrice = $priceRange->max_sal;
-
+        $minPrice = $priceRange->min_sal;
+        $maxPrice = $priceRange->max_sal;   
+        // Initialize the query for cars
+        // $carsQuery = CarDataJpOp::query();
+      
      
-
-        DB::enableQueryLog();
-
-       
-            $carsQuery = Cars::join('models_cars as mc', 'mc.model', '=', 'blog.model')
-            ->where('is_active','1')
-            ->select('blog.*');
-            
-   
-
-        if($request->search){
-            if($request->search !=""){
-                    $carsQuery->where(function ($query) use ($request) {
-                        $query->where('blog.title', 'LIKE', $request->search . '%')
-                              ->orWhere('blog.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
-                              ->orWhere('blog.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
-                    }); 
-                
-            }
-        }
-
-        if($request->price_range_scale){
-            if($request->price_range_scale !=""){  
-                $parts = explode(',', $request->price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
-                    $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                        $q->whereRaw(
-                            'CAST(REGEXP_REPLACE(blog.price, "[,\\\\s]+", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [$startValue, $endValue]
-                        );
-                    });     
-            }
-        }
-        if($request->year){
-            if($request->year !="")
-            {
-                    $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
-            }
-        }
-        
-        if($request->model){
-            $model_arr = array_filter($request->model); 
-            if ($model_arr) {
-                    $carsQuery->whereIn('blog.model', $model_arr); 
-            }
-        }
-  
-        if($request->brand_new_cars){
-            $year = date('Y'); 
-             $carsQuery->where('blog.year_of_reg', 'LIKE', $year . '%');    
-        }
-
-        if ($request->sort_by) {
-            switch ($request->sort_by) {
-                case 'price_low_high':
-                        $carsQuery->orderBy('blog.price', 'asc');    
-                    break;
-                case 'price_high_low':
-                    $carsQuery->orderBy('blog.price', 'desc'); 
-                    break;
-                case 'recent':   
-                        $recentCarIds = $carsQuery->orderBy('blog.id', 'desc')
-                        ->limit(100)
-                        ->pluck('id');
-                        $carsQuery = $carsQuery->whereIn('blog.id', $recentCarIds);  
-                    break;
-            }
-        }
-
         $currentYear = now()->year;
         $previousYear = now()->subYear()->year;
-        $carsQuery->whereBetween('blog.yom',[$previousYear,$currentYear]);
+            // Query for Blog table
+            $blogCars = Cars::when($jdmBrand, function ($query, $jdmBrand) {
+                    return $query->where(DB::raw('LOWER(make)'), $jdmBrand);
+                })
+                ->when($jdmModel, function ($query, $jdmModel) {
+                    $brand_arr = array_filter($jdmModel);
+                    if ($brand_arr) {
+                        // return $query->where('model', $jdmModel);
+                        return $query->whereIn('model', $jdmModel);
+                    }   
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('model', 'like', '%' . $search . '%');
+                })
+                ->when($jdmYear, function ($query, $jdmYear) {
+                    // $yom_arr = array_filter($jdmYear);
+                    if ($jdmYear!="") {
+                        return $query->where('yom', $jdmYear);
+                    } 
+                })
+                ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    if($price_range_scale !=""){  
+                        $parts = explode(',', $price_range_scale);
+                        $startValue = trim($parts[0]);
+                        $endValue = trim($parts[1]);
+                        $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                            return $q->whereBetween('price', [$startValue, $endValue]);
+                        });
+                    }
+                })
+                ->when($transmission, function ($query, $transmission) {
+                    $transmission_arr = array_filter($transmission);
+                    if ($transmission_arr) {
+                        return $query->whereIn('transmission', $transmission_arr);
+                    } 
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->when($sort_by, function ($query, $sort_by) {
+                    switch ($sort_by) {
+                        case 'price_low_high':
+                           return  $query->orderBy('price', 'asc');
+                            break;
+                        case 'price_high_low':
+                            return  $query->orderBy('price', 'desc');
+                            break;
+                        case 'recent':
+                            $recentCarIds = $query->orderBy('id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                        
+                        // Then reset the query and use these IDs
+                        return $query = $query->whereIn('id', $recentCarIds);
+                        break;
+                    }
+                })
+                ->whereBetween('yom',[$previousYear,$currentYear])
+                ->where('is_active','1')
+                ->select('model','price','image','id','make','title');
 
 
-        // Pagination
-        $cars = $carsQuery->paginate(12);
-        // Transform cars into an array for the view
-        $cars_array = $cars->map(function ($car) {
-        // $car_image=$this->last_image($car->pictures);
-            return [
-                'model_name' => $car->model,
-                'start_price' => $car->price,
-                'picture' =>$car->image,
-                'id' => $car->id,
-                'make'=>$car->make
+
+      
+            // Query for Heavy table
+            $heavyCars = Heavy::when($jdmBrand, function ($query, $jdmBrand) {
+                return $query->where(DB::raw('LOWER(make)'), $jdmBrand);
+                })
+                ->when($jdmModel, function ($query, $jdmModel) {
+                    $brand_arr = array_filter($jdmModel);
+                    if ($brand_arr) {
+                        // return $query->where('model', $jdmModel);
+                        return $query->whereIn('model', $jdmModel);
+                    }  
+                })
+                ->when($jdmYear, function ($query, $jdmYear) {
+                    // $yom_arr = array_filter($jdmYear);
+                    if ($jdmYear!="") {
+                        return $query->where('yom', $jdmYear);
+                    } 
+                })
+                ->when($transmission, function ($query, $transmission) {
+                    $transmission_arr = array_filter($transmission);
+                    if ($transmission_arr) {
+                        return $query->whereIn('transmission', $transmission_arr);
+                    } 
+                })
+                ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    if($price_range_scale !=""){  
+                        $parts = explode(',', $price_range_scale);
+                        $startValue = trim($parts[0]);
+                        $endValue = trim($parts[1]);
+                        $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                            return $q->whereBetween('price', [$startValue, $endValue]);
+                        });
+                    }
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('model', 'like', '%' . $search . '%');
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->when($sort_by, function ($query, $sort_by) {
+                    switch ($sort_by) {
+                        case 'price_low_high':
+                           return  $query->orderBy('price', 'asc');
+                            break;
+                        case 'price_high_low':
+                            return  $query->orderBy('price', 'desc');
+                            break;
+                        case 'recent':
+                            $recentCarIds = $query->orderBy('id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                        
+                        // Then reset the query and use these IDs
+                        return $query = $query->whereIn('id', $recentCarIds);
+                        break;
+                    }
+                })
+                ->whereBetween('yom',[$previousYear,$currentYear])
+                ->where('is_active','1')
+                ->select('model','price','image','id','make','title');
+
+            // Query for Small Heavy table
+            $smallHeavyCars = SmallHeavy::when($jdmBrand, function ($query, $jdmBrand) {
+                return $query->where(DB::raw('LOWER(make)'), $jdmBrand);
+                })
+                ->when($jdmModel, function ($query, $jdmModel) {
+                    $brand_arr = array_filter($jdmModel);
+                    if ($brand_arr) {
+                        // return $query->where('model', $jdmModel);
+                        return $query->whereIn('model', $jdmModel);
+                    }  
+                })
+                ->when($jdmYear, function ($query, $jdmYear) {
+                    // $yom_arr = array_filter($jdmYear);
+                    if ($jdmYear!="") {
+                        return $query->where('yom', $jdmYear);
+                    }  
+                })
+                ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    if($price_range_scale !=""){  
+                        $parts = explode(',', $price_range_scale);
+                        $startValue = trim($parts[0]);
+                        $endValue = trim($parts[1]);
+                        $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
+                            return $q->whereBetween('price', [$startValue, $endValue]);
+                        });
+                    }
+                })
+                ->when($transmission, function ($query, $transmission) {
+                    $transmission_arr = array_filter($transmission);
+                    if ($transmission_arr) {
+                        return $query->whereIn('transmission', $transmission_arr);
+                    } 
+                })
+                ->when($search, function ($query, $search) {
+                    return $query->where('model', 'like', '%' . $search . '%');
+                })  
+                ->when($brand_new_cars, function ($query, $brand_new_cars) {
+                    return $query->where('yom', $brand_new_cars);
+                })
+                ->when($sort_by, function ($query, $sort_by) {
+                    switch ($sort_by) {
+                        case 'price_low_high':
+                           return  $query->orderBy('price', 'asc');
+                            break;
+                        case 'price_high_low':
+                            return  $query->orderBy('price', 'desc');
+                            break;
+                        case 'recent':
+                            $recentCarIds = $query->orderBy('id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                        
+                        // Then reset the query and use these IDs
+                        return $query = $query->whereIn('id', $recentCarIds);
+                        break;
+                    }
+                })
+                ->whereBetween('yom',[$previousYear,$currentYear])
+                ->where('is_active','1')
+                ->select('model','price','image','id','make','title');
+
+       
+
+        if($request->price_range){
+            $priceRanges = [
+                "Under $5000" => ["start" => 0, "end" => 5000],
+                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
             ];
-        });
 
-     
+            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+        
+
+    
+            if ($result['start_price_num'] === null) {
+                // Count for "Above" range
+                $carsQuery = $carsQuery->where('start_price_num', '>', $result['start_price_num'])
+                            ->orWhere('end_price_num', '>', $result['start_price_num']);
+            } else {
+                // Count for other ranges
+                $carsQuery = $carsQuery->where(function ($q) use ($result) {
+                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                });
+            }  
+        }
+
+        if ($request->scores_en) {
+            $score_arr = array_filter($request->scores_en); // Filter out any empty values
+            if ($score_arr) {
+                $carsQuery->whereIn('scores_en', $score_arr); 
+            }
+        }
+
+        if ($request->search) {
+            $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+        }
+
+       
+
+        $cars = $blogCars
+        ->union($heavyCars)
+        ->union($smallHeavyCars)
+        ->orderBy('model')
+        ->distinct()
+        ->paginate(12); 
+
+        
+ 
+
+
+
     
     
-        // Get additional data
-        $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+    // Transform cars into an array for the view
+    $cars_array = $cars->map(function ($car) {
+    // $car_image=$this->last_image($car->pictures);
+        return [
+            'company_en' => $car->make,
+            'model_name_en' => $car->title,
+            'start_price_num' => $car->price,
+            'picture' =>$car->image,
+            'id' => $car->id,
+        ];
+    });
 
-      
-      
 
-      
-
-            $jdm_brand['car']=$jdm_legend;
-            $jdm_brand['heavy']=$jdm_legend_heavy;
-            $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
-            $price_range = $this->getPriceRange();
+    // echo json_encode($cars_array);die();
 
 
-            
 
-        return view('jdm-brand-new', [
-            'seo_setting' => $seo_setting,
-            'jdm_legend'=>$jdm_brand,
-            'jdm_core_brand'=>$jdm_core_brand,
-            'brands' => $brands,
-            'cars_array' => $cars_array,
-            'listing_ads' => $listing_ads,
-            'cars' => $cars,
-            'price_range' => $price_range,
-            'brand_arr'=>$brand_list,
-            'minYear'=>$minYear,
-            'maxYear'=>$maxYear,
-            'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice,
-            'brand_list'=>$brand_list
-            // 'jdm_legend_heavy'=>$jdm_legend_heavy,
-            // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
-        ]);
+ 
+
+
+    // Get additional data
+    $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
+    // $cities = City::with('translate')->get();
+
+    // $brand_count = CarDataJpOp::selectRaw('company_en,company,COUNT(*) as count')
+    //     ->groupBy('company_en')
+    //     ->having('count', '>', 1)
+    //     ->get();
+
+    // $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
+    //         ->groupBy('transmission_en')
+    //         ->having('count', '>', 1)
+    //         ->get();
+
+    // $price_range = $this->getPriceRange();
+    $price_range = $this->getJDMPriceRange();
+    $jdm_legend = Brand::where('status', 'enable')->get();
+
+ 
+
+
+
+    // $transmissions = \DB::select(
+    //     'SELECT transmission, SUM(model_count) as total_count FROM (
+    //         (SELECT transmission, COUNT(*) as model_count FROM blog WHERE transmission IS NOT NULL AND transmission != "" GROUP BY transmission)
+    //         UNION ALL
+    //         (SELECT transmission, COUNT(*) as model_count FROM heavy WHERE transmission IS NOT NULL AND transmission != "" GROUP BY transmission)
+    //         UNION ALL
+    //         (SELECT transmission, COUNT(*) as model_count FROM small_heavy WHERE transmission IS NOT NULL AND transmission != "" GROUP BY transmission)
+    //     ) as combined_models
+    //     GROUP BY transmission
+    //     HAVING total_count > 0'
+    // );
+    $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+    $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                 ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+
+    $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+
+
+
+
+
+    $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+    ->join('brand_translations as bt','bt.brand_id','=','b.id')
+    ->where('bt.lang_code',Session::get('front_lang'))
+    ->select('b.slug','bt.name as brand_name')
+    ->distinct('b.slug')->get();
+
+    $brands = $jdm_legend
+    ->concat($jdm_legend_heavy)
+    ->concat($jdm_legend_small_heavy)
+    ->unique('slug')
+    ->values();
+
+
+   
+    $result = [];
+
+
+    $processModels = function($query, $makeColumn) use ($brands,&$result) {
+        $query->whereIn(DB::raw('LOWER(' . $makeColumn . '.make)'), $brands->pluck('slug'))
+            ->select(
+                DB::raw('LOWER(' . $makeColumn . '.make) as brand_slug'), 
+                'model'
+            )
+            ->distinct()
+            ->orderBy('make')
+            ->chunk(1000, function($models) use (&$result) {
+                foreach ($models as $model) {
+                    $normalizedName = ucwords(strtolower($model->model));
+                    $result[$model->brand_slug][] = $normalizedName;
+                }
+            });
+    };
+
+    
+    // Process models from three tables
+    $processModels(Cars::query(), 'blog');
+    $processModels(Heavy::query(), 'heavy');
+    $processModels(SmallHeavy::query(), 'small_heavy');
+
+
+
+    $jdm_brand['car']=$jdm_legend;
+    $jdm_brand['heavy']=$jdm_legend_heavy;  
+    $jdm_brand['small_heavy']=$jdm_legend_heavy;
+
+
+
+
+    
+
+    return view('jdm-brand-new', [
+        'seo_setting' => $seo_setting,
+        'brands' => $brands,
+        // 'cities' => $cities,
+        'cars_array' => $cars_array,
+        'listing_ads' => $listing_ads,
+        'cars' => $cars,
+        // 'brand_count' => $models,
+        'price_range' => $price_range,
+        // 'transmission' => $transmissions,
+        'jdm_legend'=>$jdm_brand,
+        'jdm_core_brand'=>$jdm_core_brand,
+        'models'=>$models,
+        'minYear'=>$minYear,
+        'maxYear'=>$maxYear,
+        'minPrice'=>$minPrice,
+        'maxPrice'=>$maxPrice,
+        'brand_arr'=>$result
+
+    ]);
     }
 
     public function dealers(Request $request){
