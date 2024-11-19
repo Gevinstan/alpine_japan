@@ -618,16 +618,18 @@
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
-                                <div class="accordion-body">
+                                <div class="accordion-body d-flex flex-row gap-3 ">
                                     @foreach($accesories as $value)
-                                        <div class="py-2 d-flex gap-3 flex-wrap">
-                                        <span class="accessories-text px-3 h-100">
+                                        <div class="py-2 gap-3">
+                                            <span class="accessories-text  px-3 py-1 h-100">
                                                 {{ isset($value) ? $value : '--' }}
                                             </span> 
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
+                            
+
                         </div>
                     </div>
                 </div>
