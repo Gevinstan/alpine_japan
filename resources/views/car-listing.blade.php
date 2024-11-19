@@ -219,7 +219,6 @@
                                 </div>
 
                             </div>
-
                         </div>
 
                         <div class="inventory-ber-right">
@@ -309,15 +308,7 @@
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div>
 
-                                                <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
-                                                        @else
-                                                            {{ $car['start_price'] }}
-                                                        @endif 
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
 
                                             <div class="brand-car-inner">
@@ -334,9 +325,9 @@
 
                                                     <p class="listcar_price pt-3 pe-4">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['start_price_num'] }}
+                                                            {{ '$'.$car['start_price_num'] }}
                                                         @else
-                                                            {{ $car['start_price'] }}
+                                                            {{ '$'.$car['start_price'] }}
                                                         @endif
                                                     </p>
 
@@ -857,7 +848,7 @@
                     // Check if the slider values have changed
                     if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                         // Submit the form
-                        console.log("one")
+                      
                         $('input[name="price_range_scale"]').val('');
                     }  
                     form.submit();

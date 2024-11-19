@@ -31,7 +31,7 @@
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">
         <div class="container">
-            <nav aria-label="breadcrumb" class="">
+            <nav aria-label="breadcrumb" class="pt-3">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
@@ -42,7 +42,7 @@
                     <form action="" id="search_form">
                         
                         <!-- Select Your Brand Start-->
-                            <div class="inventory-main-box mb-2">
+                            <div class="inventory-main-box mb-3">
                                 <!-- Select Your Brand  -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item">
@@ -57,39 +57,40 @@
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
-                                                
+                                                    @foreach ($brands as $index=> $brand)
                                                             <div class="accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                           >
-                                                                        <label class="form-check-label">
-                                                                           {{$brand_label->name}}
+                                                                             value="{{ $brand->slug }}"
+                                                                            {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
+                                                                        <label class="form-check-label" for="flexCheckDefault-{{ $brand->id }}">
+                                                                            {{ $brand->name }}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
-                                                                           
-                                                                                    @foreach ($brands as $index=> $brand)
+                                                                            @if(array_key_exists($brand->slug, $brand_arr))
+                                                                                    @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
                                                                                             <input name="model[]" class="form-check-input brand-search" type="checkbox"
-                                                                                                    value="{{ $brand->model }}"
-                                                                                                    {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                                    value="{{ $model }}"
+                                                                                                    {{ in_array(trim($model), (array) request('model', [])) ? 'checked' : '' }}>
                                                                                             <label class="form-check-label">
-                                                                                                {{ $brand->model }}
+                                                                                                {{ $model }}
                                                                                             </label>
                                                                                         </span>
                                                                                     @endforeach
-                                                                      
+                                                                            @endif
                                                                             </span>
                                                                         </div>
                                                                     </div>
                                                         </span>
                                                     </div>
                                                     </div> 
-                                    
+                                                    @endforeach
                                              </span>
                                             </div>
                                         </div>
@@ -99,7 +100,7 @@
                             </div>
                         <!-- Select Your Brand End-->
                         <!-- Select Your Year Start -->
-                        <div class="inventory-main-box my-2">
+                        <div class="inventory-main-box">
 
                             <!-- Select Your Budget  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample1">
@@ -115,24 +116,62 @@
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
-                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                    
-                                                    <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year">
 
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start"></output>
-                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="d-flex align-content-between flex-column gap-4">
-                                                        <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
+                                            <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                <div class="d-flex justify-content-between align-items-center flex-column mt-32px">
+                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                    <input type="hidden" id="start_year" name="year">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <span class="slider-label m-0">{{$minYear}}</span>
+                                                         <output name="age_output" id="age_output" for="start" ></output>
+                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                     </div>
                                                 </div>
+                                                <div class="d-flex align-content-between flex-column gap-4">
+                                                    <button class="clear-button">Clear</button>
+                                                    <button class="go-button">Go</button>
+                                                </div>
+                                                <!-- <button class="clear-button">Clear</button>
+                                                <button class="go-button">Go</button> -->
+                                            </div>
+
+                                                <!-- @if (request()->has('condition'))
+                                                    @php
+                                                        $condition_arr = request()->get('condition');
+                                                    @endphp
+
+                                                    <span class="form-check">
+                                                        <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
+                                                            id="new_condition" name="condition[]">
+                                                        <label class="form-check-label" for="new_condition">
+                                                            {{ __('translate.New') }}
+                                                        </label>
+                                                    </span>
+                                                    <span class="form-check">
+                                                        <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
+                                                            id="used_condition" name="condition[]">
+                                                        <label class="form-check-label" for="used_condition">
+                                                            {{ __('translate.Used') }}
+                                                        </label>
+                                                    </span>
+
+                                                @else
+                                                    <span class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="New"
+                                                            id="new_condition" name="condition[]">
+                                                        <label class="form-check-label" for="new_condition">
+                                                            {{ __('translate.New') }}
+                                                        </label>
+                                                    </span>
+                                                    <span class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Used"
+                                                            id="used_condition" name="condition[]">
+                                                        <label class="form-check-label" for="used_condition">
+                                                            {{ __('translate.Used') }}
+                                                        </label>
+                                                    </span>
+                                                @endif -->
+
                                             </span>
                                         </div>
                                     </div>
@@ -148,7 +187,7 @@
 
                        
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box">
                                 <!-- Budget -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample4">
                                     <div class="accordion-item">
@@ -211,7 +250,7 @@
                     
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
-                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
+                            <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset($listing_ads->image) }}" alt="img"></a>
                         </div>
                     @endif
                 </div>
@@ -233,12 +272,12 @@
                                      <p class="sort-text pl-2">Sort By:</p>
                                      <div class="dropdown sort-dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Recently Added
+                                            Dropdown
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a style="color:#038ffc !important" onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a style="color:#038ffc !important"  onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -276,7 +315,7 @@
                         </div>
                     </div>
 
-                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-3">
+                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-5">
                         <div class="d-flex align-items-center flex-wrap gap-3">
                         @if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
@@ -309,7 +348,7 @@
                                 <span class="position-relative model-item" data-brand="{{ request('year') }}">{{ request('year') }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
-                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -330,8 +369,19 @@
                                     <div class="col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <div class="">
-                                                <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
+                                                <div class="brand-new-car">
+                                                    <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                    <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
+                                                </div>
+
+                                                <div class="brand-car-item-img-text">
+                                                    <div class="text-df">
+                                                        @if(session('front_lang')=='en')
+                                                            {{ $car['start_price_num'] }}
+                                                        @else
+                                                            {{ $car['start_price'] }}
+                                                        @endif 
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -340,24 +390,27 @@
 
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car['make'] }}
+                                                            {{ $car['company_en'] }}
                                                         @else
-                                                            {{ $car['make'] }}
+                                                            {{ $car['company'] }}
                                                         @endif
                                                     </span>
-                                                    <p>
-                                                       @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price'] }}
+                                                    
+
+                                                    <p class="listcar_price pt-3 pe-4">
+                                                        @if(session('front_lang')=='en')
+                                                            {{ $car['start_price_num'] }}
                                                         @else
-                                                            {{ '$'.$car['start_price'] }}
+                                                            {{ $car['start_price'] }}
                                                         @endif
                                                     </p>
+
                                                 </div>
 
-                                                <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['model_name']) }}
+                                                            {{ html_decode($car['model_name_en']) }}
                                                         @else
                                                             {{ html_decode($car['model_name']) }}
                                                         @endif
@@ -375,7 +428,13 @@
                                                             </span>
                                                         </div>
 
-                                                   
+                                                        <span>
+                                                        @if(session('front_lang')=='en')
+                                                            {{ html_decode($car['mileage']) }}
+                                                        @else
+                                                            {{ html_decode($car['mileage_en']) }}
+                                                        @endif
+                                                        </span>
                                                     </div>
                                                     <p>.</p>
                                                     <div class="brand-car-inner-item-two">
@@ -817,32 +876,16 @@
 
     <script>
         (function($) {
-            let initialMinPrice = $('#ex2').data('slider-min');
-            let initialMaxPrice = $('#ex2').data('slider-max');
-            
-            function clear_price_slider(){
-            let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
-            let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
-            if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
-                $('input[name="price_range_scale"]').val('');
-            } 
-            $('#ex2').prop('disabled', true);
-
-            }
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-                let initialMinPrice = $('#ex2').data('slider-min');
-                let initialMaxPrice = $('#ex2').data('slider-max');
                 
 
                 $("#outside_form_btn,go-button").on("click",function(e){
-                    clear_price_slider();
                     $("#search_form").submit();
                 })
                 $(".brand-search").on('change',function(e){
-                    e.preventDefault();         
-                    clear_price_slider();          
+                    e.preventDefault();   
                     $(".model-search").val("")
                     form.submit();
                 }) 
@@ -852,8 +895,7 @@
                     // form.submit();
                 })
                 $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault(); 
-                    clear_price_slider();  
+                    e.preventDefault();   
                     form.submit();
                 });
 
@@ -987,7 +1029,6 @@ $('#ex2').on('slide', function(slideEvt) {
   console.log(`${minYear},${maxYear}`)
   // Update the input values
   $('#ex2').val(`${minYear},${maxYear}`);
-
 
   // Optionally, you can also update your server-side query here
 });
