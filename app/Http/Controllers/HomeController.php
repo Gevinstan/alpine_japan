@@ -5908,18 +5908,26 @@ public function car_listing(Request $request){
                     return $query->where('model', 'like', '%' . $search . '%');
                 })
                 ->when($jdmYear, function ($query, $jdmYear) {
+                    $query->whereRaw('REGEXP_REPLACE(yom, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     // $yom_arr = array_filter($jdmYear);
                     if ($jdmYear!="") {
-                        return $query->where('yom', $jdmYear);
+                        return $query->whereRaw('CAST(REGEXP_REPLACE(yom, "[,\\\\s]", "") AS DECIMAL(10, 0)) = ?', [
+                            $jdmYear
+                        ]);
                     } 
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    $query->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     if($price_range_scale !=""){  
                         $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw('CAST(REGEXP_REPLACE(price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
+                                $startValue, 
+                                $endValue
+                            ]);
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
                         });
                     }
                 })
@@ -5974,9 +5982,12 @@ public function car_listing(Request $request){
                     }  
                 })
                 ->when($jdmYear, function ($query, $jdmYear) {
+                    $query->whereRaw('REGEXP_REPLACE(yom, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     // $yom_arr = array_filter($jdmYear);
                     if ($jdmYear!="") {
-                        return $query->where('yom', $jdmYear);
+                        return $query->whereRaw('CAST(REGEXP_REPLACE(yom, "[,\\\\s]", "") AS DECIMAL(10, 0)) = ?', [
+                            $jdmYear
+                        ]);
                     } 
                 })
                 ->when($transmission, function ($query, $transmission) {
@@ -5986,12 +5997,17 @@ public function car_listing(Request $request){
                     } 
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    $query->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     if($price_range_scale !=""){  
                         $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw('CAST(REGEXP_REPLACE(price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
+                                $startValue, 
+                                $endValue
+                            ]);
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
                         });
                     }
                 })
@@ -6042,18 +6058,26 @@ public function car_listing(Request $request){
                     }  
                 })
                 ->when($jdmYear, function ($query, $jdmYear) {
+                    $query->whereRaw('REGEXP_REPLACE(yom, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     // $yom_arr = array_filter($jdmYear);
                     if ($jdmYear!="") {
-                        return $query->where('yom', $jdmYear);
-                    }  
+                        return $query->whereRaw('CAST(REGEXP_REPLACE(yom, "[,\\\\s]", "") AS DECIMAL(10, 0)) = ?', [
+                            $jdmYear
+                        ]);
+                    } 
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    $query->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     if($price_range_scale !=""){  
                         $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw('CAST(REGEXP_REPLACE(price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
+                                $startValue, 
+                                $endValue
+                            ]);
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
                         });
                     }
                 })
