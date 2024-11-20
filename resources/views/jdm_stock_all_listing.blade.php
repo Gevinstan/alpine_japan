@@ -136,7 +136,7 @@
 
                                                     <div class="d-flex align-content-between flex-column gap-4">
                                                         <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
+                                                        <button type="button" id="year_search" class="go-button">Go</button>
                                                     </div>
                                                 </div>
                                             </span>
@@ -204,7 +204,7 @@
                                                 </div>
                                                 <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
                                                     <button class="clear-button">Clear</button>
-                                                    <button class="go-button">Go</button>
+                                                    <button class="go-button" type="button" id="budget_search">Go</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -830,7 +830,17 @@
          const initialMinPrice = $('#ex2').data('slider-min');
          const initialMaxPrice = $('#ex2').data('slider-max');
         (function($) {
-       
+            $("#year_search").on('click',function(e){
+                e.preventDefault();   
+                clear_price_slider();    
+                $('#search_form').submit();
+           });
+            $("#budget_search").on('click',function(e){
+                e.preventDefault();   
+                clear_price_slider();    
+                $('#search_form').submit();
+           });
+
             function clear_price_slider(){
                     let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
                     let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
@@ -864,9 +874,10 @@
                 })
                
 
-                $("#outside_form_btn,go-button").on("click",function(e){
+                $("#outside_form_btn").on("click",function(e){
+                    e.preventDefault();
                     clear_price_slider();
-                    $("#search_form").submit();
+                    // $("#search_form").submit();
                 })
                 // $(".brand-search").on('change',function(e){
                 //     e.preventDefault();   
