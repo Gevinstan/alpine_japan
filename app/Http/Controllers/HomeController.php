@@ -5212,12 +5212,17 @@ public function car_listing(Request $request){
                     } 
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    $query->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     if($price_range_scale !=""){  
                         $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw('CAST(REGEXP_REPLACE(price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
+                                $startValue, 
+                                $endValue
+                            ]);
+                            // return $q->whereBetween('price', [$startValue, $endValue]);
                         });
                     }
                 })
@@ -5286,12 +5291,16 @@ public function car_listing(Request $request){
                     } 
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    $query->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     if($price_range_scale !=""){  
                         $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw('CAST(REGEXP_REPLACE(price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
+                                $startValue, 
+                                $endValue
+                            ]);
                         });
                     }
                 })
@@ -5350,12 +5359,16 @@ public function car_listing(Request $request){
                     }  
                 })
                 ->when($price_range_scale, function ($query) use ($price_range_scale) {
+                    $query->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                     if($price_range_scale !=""){  
                         $parts = explode(',', $price_range_scale);
                         $startValue = trim($parts[0]);
                         $endValue = trim($parts[1]);
                         $carsQuery = $query->where(function ($q) use ($startValue,$endValue) {
-                            return $q->whereBetween('price', [$startValue, $endValue]);
+                            return $q->whereRaw('CAST(REGEXP_REPLACE(price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
+                                $startValue, 
+                                $endValue
+                            ]);
                         });
                     }
                 })
@@ -6439,6 +6452,7 @@ public function car_listing(Request $request){
         $setting = Setting::first();
        
     
+    
         // MailHelper::setMailConfig();
         $template = EmailTemplate::find(2);
 
@@ -6455,7 +6469,7 @@ public function car_listing(Request $request){
       
 
         // Mail::to(env('MAIL_FROM_ADDRESS'))->send(new SendContactMessage($message,$subject, $request->email, $request->name));
-        Mail::to('vbjr317@gmail.com')->send(new SendContactMessage($message,$subject, $request->email, $request->name,$request->url_link));
+        Mail::to($setting->email)->send(new SendContactMessage($message,$subject, $request->email, $request->name,$request->url_link));
 
    
         $Enquiry=new VehicleEnquiry();
