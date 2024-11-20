@@ -836,20 +836,27 @@
                 $('#search_form').submit();
            });
             $("#budget_search").on('click',function(e){
-                e.preventDefault();   
-                clear_price_slider();    
+                e.preventDefault();     
                 $('#search_form').submit();
            });
+
+            $('#ex2').on('slide', function(slideEvt) {
+                // Get the current min and max values from the slider
+                var minYear = slideEvt.value[0];
+                var maxYear = slideEvt.value[1];
+                // Update the input values
+                $('#ex2').val(`${minYear},${maxYear}`);
+
+                // Optionally, you can also update your server-side query here
+            });
 
             function clear_price_slider(){
                     let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
                     let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
                     if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
-                        
                         $('input[name="price_range_scale"]').val('');
                     } 
-                    $('#ex2').prop('disabled', true);
-                    
+                    $('#ex2').prop('disabled', true);                    
 
                 }
             "use strict"
@@ -1061,17 +1068,7 @@
 
    
 
-$('#ex2').on('slide', function(slideEvt) {
-  // Get the current min and max values from the slider
-  var minYear = slideEvt.value[0];
-  var maxYear = slideEvt.value[1];
 
-  console.log(`${minYear},${maxYear}`)
-  // Update the input values
-  $('#ex2').val(`${minYear},${maxYear}`);
-
-  // Optionally, you can also update your server-side query here
-});
 
 
     var $j = jQuery.noConflict();

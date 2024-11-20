@@ -21,7 +21,7 @@
                         Start your simplified car buying experience with us today!</p>
                     </div>
                     <div class="banner-search-bar">
-                        <div>
+                        <div class="nav-tabs-hide">
                             <ul class="nav nav-tabs custom-tabs heading-section">
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#">{{__('translate.Brand')}}</a>

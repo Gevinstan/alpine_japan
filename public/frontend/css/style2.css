@@ -15668,3 +15668,15 @@ input:not(:placeholder-shown) + .placeholder-text {
     padding-top: 0rem !important;
 }
 }
+
+@media (max-width: 425px) {
+    .nav-tabs-hide {
+        display: none;
+    }
+    .custom-tabs li:nth-child(2) {
+        border-left: none;
+    }
+    .custom-tabs li:nth-child(3) {
+        border-left: none;
+    }
+}

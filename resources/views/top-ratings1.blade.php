@@ -898,7 +898,7 @@
                 $(".brand-search").on('change',function(e){
                     e.preventDefault();   
                     clear_price_slider();
-                    $(".model-search").val("")
+                    // $(".model-search").val("")
                     form.submit();
                 }) 
 
