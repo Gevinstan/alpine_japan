@@ -122,12 +122,13 @@
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="jdm_year">
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}"  value="{{ request('jdm_year', '') }}" 
+                                                         class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="jdm_year" value="{{ request('jdm_year', '') }}">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start"></output>
+                                                            <output name="age_output" id="age_output" for="start">{{ request('jdm_year', '') }}</output>
                                                             <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                         </div>
                                                     </div>
@@ -176,7 +177,9 @@
                                                         <div id="slider-div">
                                                             <div>
                                                                 <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                                data-slider-max="{{$maxPrice}}"
+                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
                                                                 />
                                                             </div>
                                                         </div>

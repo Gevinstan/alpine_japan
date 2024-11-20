@@ -123,7 +123,7 @@
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
                                                         <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                        value="{{ request('jdm_year', $minYear) }}" 
+                                                        value="{{ request('jdm_year', '') }}" 
                                                         class="slider-input mx-0 my-2" id="modelYearSlider">
                                                         <input type="hidden" id="start_year" name="jdm_year" value="{{ request('jdm_year', '') }}">
 

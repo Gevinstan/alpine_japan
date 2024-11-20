@@ -101,9 +101,9 @@
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
                                                         <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                         value="{{ request('year', $minYear) }}" 
+                                                         value="{{ request('year', '') }}" 
                                                          class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year','') }}">
+                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
@@ -872,6 +872,18 @@
                     }
                 })
 
+                $('#ex2').on('slide', function(slideEvt) {
+                // Get the current min and max values from the slider
+                var minYear = slideEvt.value[0];
+                var maxYear = slideEvt.value[1];
+
+                console.log(`${minYear},${maxYear}`)
+                // Update the input values
+                $('#ex2').val(`${minYear},${maxYear}`);
+
+                // Optionally, you can also update your server-side query here
+                });
+
 
 
 
@@ -1028,17 +1040,7 @@
     }
 }
 
-$('#ex2').on('slide', function(slideEvt) {
-  // Get the current min and max values from the slider
-  var minYear = slideEvt.value[0];
-  var maxYear = slideEvt.value[1];
 
-  console.log(`${minYear},${maxYear}`)
-  // Update the input values
-  $('#ex2').val(`${minYear},${maxYear}`);
-
-  // Optionally, you can also update your server-side query here
-});
 
 
     var $j = jQuery.noConflict();
