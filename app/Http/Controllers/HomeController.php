@@ -907,7 +907,8 @@ class HomeController extends Controller
         // $minYear = $yearRange->min_year;
         $minYear = 1950;
 
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = 2024;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
@@ -5879,7 +5880,8 @@ public function car_listing(Request $request){
 
         // $minYear = $yearRange->min_year;
         $minYear = 1950;
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = 2024;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;   
         // Initialize the query for cars
