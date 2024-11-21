@@ -196,7 +196,7 @@
 
                                         <li class="nav-item dropdown">
                                             <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                {{ __('JDM Stock') }}
+                                                {{ __('translate.JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
                                                 <div class="p-3">
@@ -210,7 +210,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Buses</h6>
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Heavy</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['heavy'] as $jdm)
                                                                     <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
@@ -218,7 +218,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Trucks</h6>
+                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
                                                                     <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
@@ -265,12 +265,12 @@
                                                 <div class="p-3">
                                                     <div class="row">
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Auction')}}</h6>
                                                         </a>   
                                                         </div>
                                                         <div class="col-md-4 nav-dropdown-list">
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Market Price')}}</h6>
                                                         </a> 
                                                         </div>
@@ -754,14 +754,14 @@
                                             </span>{{ __('translate.Privacy & Policy') }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('faq') }}">  <span>
+                                            <a href="{{ route('how-to-buy') }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M8.62856 9L12.2952 5M12.2952 5L8.62856 0.999999M12.2952 5L1.29523 5"
                                                         stroke-linecap="round" stroke-linejoin="round" />
                                                 </svg>
-                                            </span>{{ __('translate.FAQ') }}</a>
+                                            </span>{{ __('translate.How To Buy') }}</a>
                                         </li>
 
 
@@ -820,7 +820,7 @@
                                                 </svg></span> {{ __('translate.Shipment') }}
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                             <a href="{{ route('custom-page', 'how-to-buy') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -829,7 +829,7 @@
                                                             stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg></span> {{ __('translate.How To Buy') }}
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="{{ route('custom-page', 'our-stocks') }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"

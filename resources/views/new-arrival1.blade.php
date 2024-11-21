@@ -120,12 +120,14 @@
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year">
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                        value="{{ request('year', $minYear) }}" 
+                                                        class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start"></output>
+                                                            <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
                                                             <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                         </div>
                                                     </div>
@@ -217,7 +219,9 @@
                                                         <div id="slider-div">
                                                             <div>
                                                                 <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                                data-slider-max="{{$maxPrice}}" 
+                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
                                                                 />
                                                             </div>
                                                         </div>
@@ -281,9 +285,9 @@
                                             Dropdown
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a  data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a  data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a  data-brand="price_high_low" data-text="High to Low"   class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -329,7 +333,7 @@
                                 <span class="position-relative brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -342,7 +346,7 @@
                                 <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -354,7 +358,7 @@
                                 <span class="position-relative model-item" data-brand="{{ request('year') }}">{{ request('year') }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
-                                                <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
@@ -405,7 +409,7 @@
 
                                                 </div>
 
-                                                <a href="{{ route('listing', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -428,7 +432,7 @@
 
                                                         <span>
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage']) }}
+                                                            {{ html_decode($car['mileage_en']) }}
                                                         @else
                                                             {{ html_decode($car['mileage_en']) }}
                                                         @endif
@@ -438,16 +442,45 @@
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
-                                                                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M15.8901 3.09765L14.3901 1.76431C14.2436 1.63409 14.0063 1.63409 13.8598 1.76431C13.7133 1.89453 13.7133 2.10547 13.8598 2.23565L15.0947 3.33331L13.8598 4.43096C13.7895 4.49346 13.75 4.57809 13.75 4.66665V5.66665C13.75 6.40202 14.4227 6.99999 15.25 6.99999V12.6666C15.25 12.8505 15.0819 13 14.875 13C14.6681 13 14.5 12.8506 14.5 12.6666V12C14.5 11.4485 13.9953 11 13.375 11H13V2.33334C13 1.59797 12.3273 1 11.5 1H4.00001C3.17275 1 2.50001 1.59797 2.50001 2.33334V14.3333C1.67275 14.3333 1 14.9313 1 15.6667V16.6667C1 16.8509 1.16773 17 1.37501 17H14.125C14.3323 17 14.5 16.8509 14.5 16.6667V15.6667C14.5 14.9313 13.8273 14.3333 13 14.3333V11.6667H13.375C13.5819 11.6667 13.75 11.8161 13.75 12V12.6667C13.75 13.2181 14.2546 13.6667 14.875 13.6667C15.4954 13.6667 16 13.2181 16 12.6667V3.33334C16 3.24478 15.9604 3.16015 15.8901 3.09765ZM3.25003 2.33334C3.25003 1.96584 3.58658 1.66669 4.00001 1.66669H11.5C11.9134 1.66669 12.25 1.96584 12.25 2.33334V14.3333H3.24999L3.25003 2.33334ZM13.75 15.6666V16.3333H1.75002V15.6666C1.75002 15.2991 2.08657 15 2.50001 15H13C13.4134 15 13.75 15.2991 13.75 15.6666ZM15.25 6.33333C14.8365 6.33333 14.5 6.03418 14.5 5.66668V4.80468L15.25 4.13803V6.33333Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                    <path d="M11.041 2.52344H4.29103C4.08375 2.52344 3.91602 2.66929 3.91602 2.84954V6.76876C3.91602 6.94901 4.08375 7.09487 4.29103 7.09487H11.041C11.2483 7.09487 11.416 6.94901 11.416 6.76876V2.84951C11.416 2.66929 11.2483 2.52344 11.041 2.52344ZM10.666 6.44265H4.666V3.17562H10.666V6.44265Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                            <svg width="20" height="20" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M16.6597 2.2666C16.6571 2.25505 16.6501 2.24593 16.6466 2.23503C16.641 2.21631 16.6335 2.19824 16.6243 2.18099C16.6139 2.16113 16.6014 2.14258 16.5871 2.12533C16.5755 2.111 16.5628 2.09766 16.549 2.08529C16.5322 2.07113 16.5138 2.05892 16.4943 2.04867C16.4779 2.03874 16.4604 2.03027 16.4424 2.02327C16.4207 2.01644 16.3983 2.01188 16.3757 2.0096C16.3618 2.00553 16.3477 2.00228 16.3333 2H14.6527C14.5667 0.839681 14.0283 0 13.3333 0C12.6383 0 12.0999 0.839681 12.014 2H11.3193C11.2334 0.839681 10.695 0 10 0C9.30501 0 8.7666 0.839681 8.68066 2H7.986C7.90007 0.839681 7.36165 0 6.66667 0C5.97168 0 5.43327 0.839681 5.34733 2H4.65267C4.56673 0.839681 4.02832 0 3.33333 0C2.63835 0 2.09994 0.839681 2.014 2H0.333333C0.149251 2 0 2.14925 0 2.33333V19.6667C0 19.8507 0.149251 20 0.333333 20H16.3333C16.5174 20 16.6667 19.8507 16.6667 19.6667V18.6667H19.6667C19.7668 18.6667 19.8615 18.6216 19.9246 18.5441C19.988 18.4665 20.013 18.3647 19.993 18.2666L16.6597 2.2666ZM13.3333 0.666667C13.5741 0.666667 13.91 1.17741 13.984 2H12.6839C12.7567 1.17741 13.0926 0.666667 13.3333 0.666667ZM10 0.666667C10.2407 0.666667 10.5767 1.17741 10.6507 2H9.35059C9.42334 1.17741 9.75928 0.666667 10 0.666667ZM6.66667 0.666667C6.90739 0.666667 7.24333 1.17741 7.31738 2H6.01725C6.09001 1.17741 6.42594 0.666667 6.66667 0.666667ZM3.33333 0.666667C3.57406 0.666667 3.90999 1.17741 3.98405 2H2.68392C2.75667 1.17741 3.09261 0.666667 3.33333 0.666667ZM0.666667 2.66667H2.014C2.09994 3.82699 2.63835 4.66667 3.33333 4.66667C3.51742 4.66667 3.66667 4.51742 3.66667 4.33333C3.66667 4.14925 3.51742 4 3.33333 4C3.09261 4 2.75667 3.48926 2.68262 2.66667H5.34733C5.43441 3.82699 5.97168 4.66667 6.66667 4.66667C6.85075 4.66667 7 4.51742 7 4.33333C7 4.14925 6.85075 4 6.66667 4C6.42594 4 6.09001 3.48926 6.01595 2.66667H8.68066C8.76774 3.82699 9.30501 4.66667 10 4.66667C10.1841 4.66667 10.3333 4.51742 10.3333 4.33333C10.3333 4.14925 10.1841 4 10 4C9.75928 4 9.42334 3.48926 9.34928 2.66667H12.014C12.1011 3.82699 12.6383 4.66667 13.3333 4.66667C13.5174 4.66667 13.6667 4.51742 13.6667 4.33333C13.6667 4.14925 13.5174 4 13.3333 4C13.0926 4 12.7567 3.48926 12.6826 2.66667H16V6H0.666667V2.66667ZM16 19.3333H0.666667V6.66667H16V19.3333ZM16.6667 18V5.56673L19.257 18H16.6667Z" />
+                                                                        <path
+                                                                            d="M7.33268 11.9999H5.99935C5.81527 11.9999 5.66602 12.1492 5.66602 12.3333V13.6666C5.66602 13.8507 5.81527 13.9999 5.99935 13.9999H7.33268C7.51676 13.9999 7.66602 13.8507 7.66602 13.6666V12.3333C7.66602 12.1492 7.51676 11.9999 7.33268 11.9999ZM6.99935 13.3333H6.33268V12.6666H6.99935V13.3333Z" />
+                                                                        <path
+                                                                            d="M10.6667 12H9.33333C9.14925 12 9 12.1493 9 12.3333V13.6667C9 13.8507 9.14925 14 9.33333 14H10.6667C10.8507 14 11 13.8507 11 13.6667V12.3333C11 12.1493 10.8507 12 10.6667 12ZM10.3333 13.3333H9.66667V12.6667H10.3333V13.3333Z" />
+                                                                        <path
+                                                                            d="M4.00065 12H2.66732C2.48324 12 2.33398 12.1493 2.33398 12.3333V13.6667C2.33398 13.8507 2.48324 14 2.66732 14H4.00065C4.18473 14 4.33398 13.8507 4.33398 13.6667V12.3333C4.33398 12.1493 4.18473 12 4.00065 12ZM3.66732 13.3333H3.00065V12.6667H3.66732V13.3333Z" />
+                                                                        <path
+                                                                            d="M7.33268 15.3334H5.99935C5.81527 15.3334 5.66602 15.4826 5.66602 15.6667V17C5.66602 17.1841 5.81527 17.3334 5.99935 17.3334H7.33268C7.51676 17.3334 7.66602 17.1841 7.66602 17V15.6667C7.66602 15.4826 7.51676 15.3334 7.33268 15.3334ZM6.99935 16.6667H6.33268V16H6.99935V16.6667Z" />
+                                                                        <path
+                                                                            d="M10.6667 15.3334H9.33333C9.14925 15.3334 9 15.4826 9 15.6667V17C9 17.1841 9.14925 17.3334 9.33333 17.3334H10.6667C10.8507 17.3334 11 17.1841 11 17V15.6667C11 15.4826 10.8507 15.3334 10.6667 15.3334ZM10.3333 16.6667H9.66667V16H10.3333V16.6667Z" />
+                                                                        <path
+                                                                            d="M4.00065 15.3334H2.66732C2.48324 15.3334 2.33398 15.4826 2.33398 15.6667V17C2.33398 17.1841 2.48324 17.3334 2.66732 17.3334H4.00065C4.18473 17.3334 4.33398 17.1841 4.33398 17V15.6667C4.33398 15.4826 4.18473 15.3334 4.00065 15.3334ZM3.66732 16.6667H3.00065V16H3.66732V16.6667Z" />
+                                                                        <path
+                                                                            d="M7.33268 8.66669H5.99935C5.81527 8.66669 5.66602 8.81594 5.66602 9.00002V10.3334C5.66602 10.5174 5.81527 10.6667 5.99935 10.6667H7.33268C7.51676 10.6667 7.66602 10.5174 7.66602 10.3334V9.00002C7.66602 8.81594 7.51676 8.66669 7.33268 8.66669ZM6.99935 10H6.33268V9.33335H6.99935V10Z" />
+                                                                        <path
+                                                                            d="M10.6667 8.66663H9.33333C9.14925 8.66663 9 8.81588 9 8.99996V10.3333C9 10.5174 9.14925 10.6666 9.33333 10.6666H10.6667C10.8507 10.6666 11 10.5174 11 10.3333V8.99996C11 8.81588 10.8507 8.66663 10.6667 8.66663ZM10.3333 9.99996H9.66667V9.33329H10.3333V9.99996Z" />
+                                                                        <path
+                                                                            d="M14.0007 12H12.6673C12.4832 12 12.334 12.1493 12.334 12.3333V13.6667C12.334 13.8507 12.4832 14 12.6673 14H14.0007C14.1847 14 14.334 13.8507 14.334 13.6667V12.3333C14.334 12.1493 14.1847 12 14.0007 12ZM13.6673 13.3333H13.0007V12.6667H13.6673V13.3333Z" />
+                                                                        <path
+                                                                            d="M14.0007 15.3334H12.6673C12.4832 15.3334 12.334 15.4826 12.334 15.6667V17C12.334 17.1841 12.4832 17.3334 12.6673 17.3334H14.0007C14.1847 17.3334 14.334 17.1841 14.334 17V15.6667C14.334 15.4826 14.1847 15.3334 14.0007 15.3334ZM13.6673 16.6667H13.0007V16H13.6673V16.6667Z" />
+                                                                        <path
+                                                                            d="M14.0007 8.66663H12.6673C12.4832 8.66663 12.334 8.81588 12.334 8.99996V10.3333C12.334 10.5174 12.4832 10.6666 12.6673 10.6666H14.0007C14.1847 10.6666 14.334 10.5174 14.334 10.3333V8.99996C14.334 8.81588 14.1847 8.66663 14.0007 8.66663ZM13.6673 9.99996H13.0007V9.33329H13.6673V9.99996Z" />
+                                                                        <path
+                                                                            d="M4.00065 8.66663H2.66732C2.48324 8.66663 2.33398 8.81588 2.33398 8.99996V10.3333C2.33398 10.5174 2.48324 10.6666 2.66732 10.6666H4.00065C4.18473 10.6666 4.33398 10.5174 4.33398 10.3333V8.99996C4.33398 8.81588 4.18473 8.66663 4.00065 8.66663ZM3.66732 9.99996H3.00065V9.33329H3.66732V9.99996Z" />
                                                                     </svg>
 
                                                             </span>
                                                         </div>
 
                                                         <span>
-                                                           
+                                                        @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['year_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['year']) }}
+                                                                @endif
                                                         </span>
                                                     </div>
                                                     <p>.</p>
@@ -462,7 +495,11 @@
                                                         </div>
 
                                                         <span>
-                                                           
+                                                        @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['transmission']) }}
+                                                                @else
+                                                                {{ html_decode($car['transmission_en']) }}
+                                                                @endif
                                                         </span>
                                                     </div>
                                                 </div>
@@ -852,7 +889,7 @@
 
 
                     @if ($cars->hasPages())
-                    {{ $cars->links('pagination_box') }}
+                    {{ $cars->appends(request()->query())->links() }}
                     @endif
 
 
@@ -874,16 +911,44 @@
 
     <script>
         (function($) {
+            const initialMinPrice = $('#ex2').data('slider-min');
+            const initialMaxPrice = $('#ex2').data('slider-max');
+            function clear_price_slider(){
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        $('input[name="price_range_scale"]').val('');
+                    } 
+              
+                }
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-                
+                $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
 
                 $("#outside_form_btn,go-button").on("click",function(e){
+                    clear_price_slider();
                     $("#search_form").submit();
                 })
+                
+                $(".popular-search").on('change',function(e){
+                    e.preventDefault();   
+                    clear_price_slider();
+                    form.submit();
+                })
+
                 $(".brand-search").on('change',function(e){
                     e.preventDefault();   
+                    clear_price_slider();
                     $(".model-search").val("")
                     form.submit();
                 }) 
@@ -892,11 +957,6 @@
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-                $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault();   
-                    form.submit();
-                });
-
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();
                     const urlObject = new URL(window.location.href);

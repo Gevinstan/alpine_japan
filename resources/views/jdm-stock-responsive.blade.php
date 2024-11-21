@@ -118,12 +118,14 @@
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year">
+                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                        value="{{ request('year', $minYear) }}" 
+                                                        class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
                                                             <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start"></output>
+                                                            <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
                                                             <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                         </div>
                                                     </div>
@@ -171,8 +173,10 @@
                                                     <div id="slider-outer-div" class="ms-2">
                                                         <div id="slider-div">
                                                             <div>
-                                                                <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                                <input id="ex2" type="text" name="price_range_scale" 
+                                                                data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
+                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
                                                                 />
                                                             </div>
                                                         </div>
@@ -236,9 +240,9 @@
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                                            <li><a onclick='updateButtonText("recent", "Recently Added")' class="dropdown-item" href="javascript:void(0)" >Recently Added</a></li>
-                                            <li><a onclick='updateButtonText("price_low_high","Low to High")'  class="dropdown-item" href="javascript:void(0)">Low to High</a></li>
-                                            <li><a onclick='updateButtonText("price_high_low","High to Low")'  class="dropdown-item" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
+                                            <li><a data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
+                                            <li><a data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field">
                                     </div>
@@ -795,7 +799,7 @@
 
 
                     @if ($cars->hasPages())
-                    {{ $cars->links('pagination_box') }}
+                    {{ $cars->appends(request()->query())->links() }}
                     @endif
 
 
@@ -817,17 +821,27 @@
 
     <script>
         (function($) {
-            let initialMinPrice = $('#ex2').data('slider-min');
-            let initialMaxPrice = $('#ex2').data('slider-max');
+            const initialMinPrice = $('#ex2').data('slider-min');
+            const initialMaxPrice = $('#ex2').data('slider-max');
+            $(".dropdown-click").on('click',function(){
+                    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+                    if (dropdownButton) {
+                        dropdownButton.innerText = $(this).data('text');
+                        $("#sort_by_field").val($(this).data('brand'));
+                        $('#search_form').submit();
+                    } else {
+                        console.error('Dropdown button not found');
+                    }
+                })
+
             
             function clear_price_slider(){
-            let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
-            let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
-            if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
-                $('input[name="price_range_scale"]').val('');
-            } 
-            $('#ex2').prop('disabled', true);
-
+                let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                    $('input[name="price_range_scale"]').val('');
+                } 
+                $('#ex2').prop('disabled', true);
             }
             "use strict"
             $(document).ready(function () {
@@ -846,17 +860,16 @@
                     $(".model-search").val("")
                     form.submit();
                 }) 
+                $(".popular-search").on('change',function(e){
+                    e.preventDefault();   
+                    clear_price_slider();    
+                    form.submit();
+                })
                 $("#modelYearSlider").on('input',function(e){
                     $("#age_output").val(parseInt($(this).val()))
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-                $("#outside_form_search").on("click", function(e) {
-                    e.preventDefault(); 
-                    clear_price_slider();  
-                    form.submit();
-                });
-
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();
                     const urlObject = new URL(window.location.href);

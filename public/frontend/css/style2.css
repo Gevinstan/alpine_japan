@@ -15828,6 +15828,17 @@ input:not(:placeholder-shown) + .placeholder-text {
         line-height:55px !important;
     }
 
-    
+
 }
 
+@media (max-width: 425px) {
+    .nav-tabs-hide {
+        display: none;
+    }
+    .custom-tabs li:nth-child(2) {
+        border-left: none;
+    }
+    .custom-tabs li:nth-child(3) {
+        border-left: none;
+    }
+}

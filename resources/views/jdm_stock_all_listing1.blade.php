@@ -1,8 +1,8 @@
 @extends('layout4')
 @section('title')
-    <title>{{ html_decode($car->seo_title) }}</title>
-    <meta name="title" content="{{ html_decode($car->seo_title) }}">
-    <meta name="description" content="{{ html_decode($car->seo_description) }}">
+    <title>{{ html_decode(isset($car->seo_title) ?  $car->seo_title : '') }}</title>
+    <meta name="title" content="{{ html_decode(isset($car->seo_title) ?  $car->seo_title : '') }}">
+    <meta name="description" content="{{ html_decode(isset($car->seo_description) ?  $car->seo_description : '') }}">
 @endsection
 
 @section('body-content')
@@ -47,8 +47,8 @@
                     <div class="p-sticky">
                     <div class="auto-sales-item form-section">
                         <div class="d-flex flex-column gap-2 car-listing-details">
-                            <p class="brand-text fw-bolder">Volvo</p>
-                            <h3>2019 volvo Camry Hybrid</h3>
+                            <p class="brand-text fw-bolder">{{$car->make}}</p>
+                            <h3>{{$car->model}}</h3>
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="amount-text" id="price_value">Price <span class="price-text">
                                     @if(session('front_lang')=='en')
@@ -130,8 +130,8 @@
                                     <input type="hidden" name="commission" value="" id="hidden_commission">
                                     <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
                                     <input type="hidden" name="total_car_price" value="" id="hidden_total">
-                                    <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
-                                    <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                                    <input type="hidden" name="vehicle_brand" value="{{$car->make}}">
+                                    <input type="hidden" name="vehicle_model" value="{{$car->model}}">
                                     <input type="hidden" name="url_link" value="{{$url_link}}">
 
                                     <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
@@ -467,7 +467,7 @@
                                                         </svg>
                                                         {{ __('translate.Seller Type') }}
                                                     </span>
-                                                    {{ html_decode($car->seller_type) }}
+                                                    {{ html_decode(isset($car->seller_type) ? $car->seller_type  : '') }}
                                                 </li>
                                             </ul>
                                         </div>
@@ -533,24 +533,19 @@
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsefive">
-                                    {{__('translate.Remarks')}}
+                                    {{__('translate.Accessories')}}
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
-                                <div class="accordion-body row">
-                                <!-- <div class="row"> -->
+                                <div class="accordion-body d-flex flex-row gap-3 ">
                                     @foreach($accesories as $value)
-                                    
-                                    <div class="py-2 d-flex gap-3 flex-wrap col-sm-4 ">
-                                    
-                                        <span class="accessories-text px-3 h-100">
+                                        <div class="py-2 gap-3">
+                                            <span class="accessories-text  px-3 py-1 h-100">
                                                 {{ isset($value) ? $value : '--' }}
                                             </span> 
                                         </div>
-                                    </div>
-                                        
                                     @endforeach
-                                <!-- </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
