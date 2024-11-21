@@ -26,7 +26,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#">{{__('translate.Brand')}}</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item model-text">
                                     <a class="nav-link" href="#">{{__('translate.Model')}}</a>
                                 </li>
                                 <li class="nav-item">
@@ -62,7 +62,7 @@
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn banner-serch thm-btn-search" type="submit"><img src="{{ asset('japan_home/search.svg') }}" height="15" width="15" /> search</button>   
+                                        <button class="btn banner-serch d-flex gap-3 thm-btn-search" type="submit"><img src="{{ asset('japan_home/search.svg') }}" height="15" width="15" /> search</button>   
                                     </li>
                                 </ul>
                             </form>    
@@ -989,7 +989,7 @@
                 @if ($home3_ads->status == 'enable')
                 <div class="col-lg-3">
                     <div class="feature-thumb">
-                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/big_sale.svg') }}" class="image_bigsale" alt="img"></a>
+                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/UsedCar_1.jpg') }}" class="image_bigsale" alt="img"></a>
                     </div>
                 </div>
                 @endif
@@ -1181,7 +1181,7 @@
 
 
     <!-- Car Buy section Start -->
-        <section class="buy-section steps-section py-5 gap-5">
+        <section class="buy-section steps-section px-sm-2 px-md-5 py-5 gap-5">
             <div class="buy-container">
                 <div class="pb-5">
                     <h1 class="pb-2">Buy in 3 Easy Steps</h1>
@@ -1384,6 +1384,19 @@ $(()=>{
 $("#searchBtn").on('click',function(){
      $("#jdm_stock_form").submit();
 })
-</script>
+
+
+
+    // jQuery to handle active state
+    $(document).ready(function () {
+      $(".custom-tabs .nav-item a").click(function () {
+        // Remove 'active' class from all <li>
+        $(".custom-tabs .nav-item a").removeClass("active");
+
+        // Add 'active' class to the clicked <li>
+        $(this).addClass("active");
+      });
+    });
+    </script>
 @endpush
 
