@@ -549,9 +549,9 @@
     <footer class="footer footer-two">
     @endif
 
-        <div class="container">
+        <div class="container px-sm-2 px-md-5">
             <div class="footer-bb d-md-flex d-sm-flex    align-items-center ">
-                <div class="col-lg-5 col-p-0" data-aos="fade-right" data-aos-delay="50">
+                <div class="col-lg-5 col-p-0 p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
                         {{ __('translate.Join Our') }} <span>{{ __('translate.Newsletter') }}</span> &
                         {{ __('translate.Get updated.') }}
@@ -926,7 +926,7 @@
 
 
         <div class="copyright">
-            <div class="container">
+            <div class="container px-sm-2 px-md-5">
                 <div class="row ">
                     <div class="col-lg-6 col-sm-6 col-md-6">
                         <div class="copyright-text">

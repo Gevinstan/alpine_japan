@@ -981,7 +981,7 @@
     font-weight: 400;
     line-height: 16px;
     border-radius: 0;
-    border-bottom: 3px solid #6E6E6E;
+    border-bottom: 1px solid #6E6E6E;
 }
 
 .banner .banner-search-bar .banner-sarchber-box {
@@ -14329,6 +14329,7 @@ p {
 .section-heading {
     font-size: clamp(1.75rem, 1.6364rem + 0.4848vw, 2rem) !important;
     padding: 0 !important;
+    font-weight: 900 !important;
 }
 
 .car-poster {
@@ -14588,7 +14589,7 @@ p {
 .aj-dropdown {
     width: 170px;
     padding: 10px;
-    border: 1px solid #ced4da;
+    border: 1px solid #EBEBEB;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
     font-size: 0.875rem;
@@ -14658,17 +14659,17 @@ p {
     border: none !important;
 }
 
-.heading-section li:nth-child(2) {
+/* .heading-section li:nth-child(2) {
     border-left: 2px solid #6E6E6E;
-}
+} */
 
-.custom-tabs li:nth-child(2) {
+/* .custom-tabs li:nth-child(2) {
     border-left: 2px solid #6E6E6E;
-}
+} */
 
-.custom-tabs li:nth-child(3) {
+/* .custom-tabs li:nth-child(3) {
     border-left: 2px solid #6E6E6E;
-}
+} */
 
 .email-input {
     padding: 10px 15px !important;
@@ -15673,10 +15674,35 @@ input:not(:placeholder-shown) + .placeholder-text {
     .nav-tabs-hide {
         display: none;
     }
-    .custom-tabs li:nth-child(2) {
+    /* .custom-tabs li:nth-child(2) {
         border-left: none;
-    }
+    } */
     .custom-tabs li:nth-child(3) {
         border-left: none;
     }
 }
+
+.model-text {
+    border-right: 1px solid #EBEBEB;
+}
+
+.custom-tabs .nav-link.active {
+    color: var(--primary-color-1) !important;
+    border-top: 2px solid var(--primary-color-1);
+}
+
+.brand-car-item, .brand-car-item {
+    box-shadow: 0px 3px 4px 0px #0000001C !important;
+}
+
+@media screen and (min-width: 1400px) {
+    .feature-thumb a img {
+      height: 580px !important;
+    }
+  }
+  
+  @media screen and (max-width: 1400px) {
+    .feature-thumb a img {
+      height: 540px !important;
+    }
+  }

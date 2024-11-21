@@ -26,7 +26,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" href="#">{{__('translate.Brand')}}</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item model-text">
                                     <a class="nav-link" href="#">{{__('translate.Model')}}</a>
                                 </li>
                                 <li class="nav-item">
@@ -62,7 +62,7 @@
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn banner-serch thm-btn-search" type="submit"><img src="{{ asset('japan_home/search.svg') }}" height="15" width="15" /> search</button>   
+                                        <button class="btn banner-serch d-flex gap-3 thm-btn-search" type="submit"><img src="{{ asset('japan_home/search.svg') }}" height="15" width="15" /> search</button>   
                                     </li>
                                 </ul>
                             </form>    
@@ -162,11 +162,11 @@
 
 
     <!-- Categories-part-start -->
-    <section class="categories">
+    <section class="categories px-sm-2 px-md-5">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-lg-8 col-sm-8 col-md-12  ">
-                    <h2 class="section-heading">{{__('translate.Popular')}}<span class="highlight">{{__('translate.Brands')}}<span></h2>
+                    <h2 class="section-heading">{{__('translate.Popular')}} <span class="highlight"> {{__('translate.Brands')}}<span></h2>
                 </div>
 
                 <div class="col-lg-4">
@@ -201,7 +201,7 @@
 
 
     <!--  Brand Car-part-start -->
-        <section class="brand-car py-5 my-3">
+        <section class="brand-car px-sm-2 px-md-5 py-5 my-3">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -212,7 +212,7 @@
                 </div>
                 <div class="row align-items-end">
                     <div class="col-lg-6 col-sm-6  col-md-6">
-                        <h2 class="section-heading">{{__('translate.Top Selling')}}<span class="highlight">{{__('translate.Cars')}}<span></h2>
+                        <h2 class="section-heading">{{__('translate.Top Selling')}} <span class="highlight"> {{__('translate.Cars')}}<span></h2>
                     </div>
                 </div>
 
@@ -545,7 +545,7 @@
 
 
 <!-- JDM Car listing-->
-<section class="brand-car py-5 my-3">
+<section class="brand-car px-sm-2 px-md-5 py-5 my-3">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -570,7 +570,7 @@
 
                     <div class="row align-items-end">
                         <div class="col-lg-6 col-sm-6  col-md-6">
-                            <h2 class="section-heading">{{__('translate.JDM')}}<span class="highlight">{{__('translate.Cars')}}<span></h2>
+                            <h2 class="section-heading">{{__('translate.JDM')}} <span class="highlight"> {{__('translate.Cars')}}<span></h2>
                         </div>
                     </div>        
                 </div>
@@ -752,7 +752,7 @@
 
 
     <!--  Car-Poster-part-start -->
-    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5">
+    <section class="car-poster px-sm-2 px-md-5 d-flex flex-wrap justify-content-center gap-2 mb-5">
         <div class="col-md-auto">
             <a href="#">
                 <img src="{{ asset('japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -802,13 +802,13 @@
 
 
     <!--  Feature-part-start -->
-    <section class="feature py-5 my-5">
+    <section class="feature py-5 px-sm-2 px-md-5 my-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 New_arrival pt-2">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
-                        <h2 class="section-heading">{{__('translate.New')}}<span class="highlight">{{__('translate.Arrivals')}}<span></h2>
+                        <h2 class="section-heading">{{__('translate.New')}} <span class="highlight"> {{__('translate.Arrivals')}}<span></h2>
                         </div>
 
                         <div class="col-lg-4 col-sm-6 col-md-6">
@@ -985,7 +985,7 @@
                 @if ($home3_ads->status == 'enable')
                 <div class="col-lg-3">
                     <div class="feature-thumb">
-                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/big_sale.svg') }}" class="image_bigsale" alt="img"></a>
+                        <a  href="{{ $home3_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/UsedCar_1.jpg') }}" class="image_bigsale" alt="img"></a>
                     </div>
                 </div>
                 @endif
@@ -1006,7 +1006,7 @@
 
 
     <!--  vedio-part-start -->
-    <section class="vedio">
+    <section class="vedio px-sm-2 px-md-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
@@ -1048,7 +1048,7 @@
 
 
     <!--   Testimonial-part-start -->
-    <section class=" testimonial py-5 my-4 overflow-hidden">
+    <section class=" testimonial py-5 px-sm-2 px-md-5 my-4 overflow-hidden">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
@@ -1174,7 +1174,7 @@
 
 
     <!-- Car Buy section Start -->
-        <section class="buy-section steps-section py-5 gap-5">
+        <section class="buy-section steps-section px-sm-2 px-md-5 py-5 gap-5">
             <div class="buy-container">
                 <div class="pb-5">
                     <h1 class="pb-2">Buy in 3 Easy Steps</h1>
@@ -1216,7 +1216,7 @@
 
 
     <!-- About section Start-->
-        <section class="about-section">
+        <section class="about-section px-sm-2 px-md-5">
             <div class="container text-sm-center text-md-start">
                 <h2 class="pb-2 section-heading">About <span class="highlight">Alpine Japan</span></h2>
                 <div class="row align-items-center mt-3">
@@ -1239,7 +1239,7 @@
 
 
     <!-- Quality section start -->
-        <section class="quality-compliance py-5">
+        <section class="quality-compliance px-sm-2 px-md-5 py-5">
             <div class="container text-center px-5">
                 <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
                 <p class="section-subtitle">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
@@ -1377,6 +1377,19 @@ $(()=>{
 $("#searchBtn").on('click',function(){
      $("#jdm_stock_form").submit();
 })
+
+
+
+    // jQuery to handle active state
+    $(document).ready(function () {
+      $(".custom-tabs .nav-item a").click(function () {
+        // Remove 'active' class from all <li>
+        $(".custom-tabs .nav-item a").removeClass("active");
+
+        // Add 'active' class to the clicked <li>
+        $(this).addClass("active");
+      });
+    });
 </script>
 @endpush
 
