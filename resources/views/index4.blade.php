@@ -162,11 +162,11 @@
 
 
     <!-- Categories-part-start -->
-    <section class="categories mx-5">
+    <section class="categories px-2 px-sm-3 px-lg-5">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-lg-8 col-sm-8 col-md-12  ">
-                    <h2 class="section-heading">{{__('translate.Popular')}}<span class="highlight">{{__('translate.Brands')}}<span></h2>
+                    <h2 class="section-heading">{{__('translate.Popular')}} <span class="highlight">{{__('translate.Brands')}}<span></h2>
                 </div>
 
                 <div class="col-lg-4">
@@ -201,7 +201,7 @@
 
 
     <!--  Brand Car-part-start -->
-        <section class="brand-car py-5 my-3 mx-5">
+        <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -212,7 +212,7 @@
                 </div>
                 <div class="row align-items-end">
                     <div class="col-lg-6 col-sm-6  col-md-6">
-                        <h2 class="section-heading">{{__('translate.Top Selling')}}<span class="highlight">{{__('translate.Cars')}}<span></h2>
+                        <h2 class="section-heading">{{__('translate.Top Selling')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
                     </div>
                 </div>
 
@@ -549,7 +549,7 @@
 
 
 <!-- JDM Car listing-->
-    <section class="brand-car py-5 my-3 mx-5">
+    <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -574,7 +574,7 @@
 
                     <div class="row align-items-end">
                         <div class="col-lg-6 col-sm-6  col-md-6">
-                            <h2 class="section-heading">{{__('translate.JDM')}}<span class="highlight">{{__('translate.Cars')}}<span></h2>
+                            <h2 class="section-heading">{{__('translate.JDM')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
                         </div>
                     </div>        
                 </div>
@@ -756,7 +756,7 @@
 
 
     <!--  Car-Poster-part-start -->
-    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 mx-5">
+    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 px-2 px-sm-3 px-lg-5">
         <div class="col-md-auto">
             <a href="#">
                 <img src="{{ asset('japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -806,13 +806,13 @@
 
 
     <!--  Feature-part-start -->
-    <section class="feature py-5 my-5 mx-5">
-        <div class="container">
+    <section class="feature py-5 my-5 px-2 px-sm-3 px-lg-5">
+        <div class="container ">
             <div class="row">
                 <div class="col-lg-9 New_arrival pt-2">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
-                        <h2 class="section-heading">{{__('translate.New')}}<span class="highlight">{{__('translate.Arrivals')}}<span></h2>
+                            <h2 class="section-heading">{{__('translate.New')}} <span class="highlight">{{__('translate.Arrivals')}}</span></h2>
                         </div>
 
                         <div class="col-lg-4 col-sm-6 col-md-6">
@@ -993,6 +993,9 @@
                     </div>
                 </div>
                 @endif
+                <div>
+
+                </div>
             </div>
 
             <div class="row">
@@ -1010,7 +1013,7 @@
 
 
     <!--  vedio-part-start -->
-    <section class="vedio mx-5">
+    <section class="vedio px-2 px-sm-3 px-lg-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
@@ -1052,8 +1055,8 @@
 
 
     <!--   Testimonial-part-start -->
-    <section class=" testimonial py-5 my-4 overflow-hidden mx-5">
-        <div class="container">
+    <section class=" testimonial py-5 my-4 overflow-hidden px-lg-5">
+        <div class="container px-2 px-sm-3 px-lg-5">
             <div class="row px-5">
                 <div class="col-lg-5">
 
@@ -1220,14 +1223,14 @@
 
 
     <!-- About section Start-->
-        <section class="about-section mx-5">
-            <div class="container text-sm-center text-md-start">
+        <section class="about-section px-2 px-sm-3 px-lg-5">
+            <div class="container text-sm-center text-md-start px-2 px-sm-3 px-lg-5">
                 <h2 class="pb-2 section-heading">About <span class="highlight">Alpine Japan</span></h2>
                 <div class="row align-items-center mt-3">
                 <div class="col-md-4 col-12">
                     <img src="{{asset('japan_home/about.svg')}}" class="img-fluid rounded" alt="Alpine Japan Car">
                 </div>
-                <div class="col-md-8 col-12 d-md-block d-sm-flex flex-sm-column mt-md-0 mt-sm-2 justify-content-sm-center align-items-sm-center">
+                <div class="col-md-8 col-12 d-md-block d-sm-flex flex-sm-column mt-md-0 mt-sm-2 justify-content-sm-center align-items-sm-center py-2 py-lg-0">
                     <p class="fw-bolder text-black">
                     Alpine Japan, founded in 2009, provides a unique range of vehicles from passenger cars to heavy equipment and cranes. Japanese vehicles are known to stand out for their quality, reliability and ease of use. Our company is committed to making the unique experience of owning Japanese vehicles available to as many people as possible in different countries and continents.
                     </p>
@@ -1243,8 +1246,8 @@
 
 
     <!-- Quality section start -->
-        <section class="quality-compliance py-5 mx-5">
-            <div class="container text-center px-5">
+        <section class="quality-compliance py-5 ">
+            <div class="container text-center px-2 px-sm-3 px-lg-5">
                 <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
                 <p class="section-subtitle">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
 
