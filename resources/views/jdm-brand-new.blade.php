@@ -122,8 +122,9 @@
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}"  value="{{ request('jdm_year', '') }}" 
-                                                         class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                        value="{{ request('jdm_year', '') }}" 
+                                                        class="slider-input mx-0 my-2" id="modelYearSlider">
                                                         <input type="hidden" id="start_year" name="jdm_year" value="{{ request('jdm_year', '') }}">
 
                                                         <div class="d-flex justify-content-between align-items-center w-100">
@@ -135,7 +136,7 @@
 
                                                     <div class="d-flex align-content-between flex-column gap-4">
                                                         <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
+                                                        <button type="button" id="year_search" class="go-button">Go</button>
                                                     </div>
                                                 </div>
                                             </span>
@@ -177,7 +178,7 @@
                                                         <div id="slider-div">
                                                             <div>
                                                                 <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                data-slider-max="{{$maxPrice}}"
+                                                                data-slider-max="{{$maxPrice}}" 
                                                                 value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
                                                                 data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
                                                                 />
@@ -203,7 +204,7 @@
                                                 </div>
                                                 <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
                                                     <button class="clear-button">Clear</button>
-                                                    <button class="go-button">Go</button>
+                                                    <button class="go-button" type="button" id="budget_search">Go</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -826,22 +827,36 @@
 @push('js_section')
 
 <script>
-         let initialMinPrice = $('#ex2').data('slider-min');
-         let initialMaxPrice = $('#ex2').data('slider-max');
+         const initialMinPrice = $('#ex2').data('slider-min');
+         const initialMaxPrice = $('#ex2').data('slider-max');
         (function($) {
-       
+            $("#year_search").on('click',function(e){
+                e.preventDefault();   
+                clear_price_slider();    
+                $('#search_form').submit();
+           });
+            $("#budget_search").on('click',function(e){
+                e.preventDefault();     
+                $('#search_form').submit();
+           });
+
+            $('#ex2').on('slide', function(slideEvt) {
+                // Get the current min and max values from the slider
+                var minYear = slideEvt.value[0];
+                var maxYear = slideEvt.value[1];
+                // Update the input values
+                $('#ex2').val(`${minYear},${maxYear}`);
+
+                // Optionally, you can also update your server-side query here
+            });
+
             function clear_price_slider(){
                     let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
                     let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
                     if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                         $('input[name="price_range_scale"]').val('');
                     } 
-                    //  else {
-                    //     $('input[name="price_range_scale"]').val(currentMinPrice + ',' + currentMaxPrice);
-                    //     $('#ex2').slider('setValue', [currentMinPrice, currentMaxPrice]);
-                    // }
-                    $('#ex2').prop('disabled', true);
-                    
+                    $('#ex2').prop('disabled', true);                    
 
                 }
             "use strict"
@@ -859,9 +874,16 @@
                     }
                 })
 
+                $(".popular-search").on('change',function(e){
+                    e.preventDefault();   
+                    clear_price_slider();    
+                    form.submit();
+                })
                
 
-                $("#outside_form_btn,go-button").on("click",function(e){
+                $("#outside_form_btn").on("click",function(e){
+                    e.preventDefault();
+                    clear_price_slider();
                     $("#search_form").submit();
                 })
                 // $(".brand-search").on('change',function(e){
@@ -930,12 +952,6 @@
                     console.log(brandId)
                     const accordionItem = this.closest('.accordion-item');
                     const modelCheckboxes = accordionItem.querySelectorAll('input[name="jdm_model[]"]');
-                    // const modelCheckboxes = accordionItem.querySelectorAll(`.model-search[data-parent-brand]`);
-
-                    // console.log(modelCheckboxes);
-                    // console.log(accordionItem.querySelectorAll(`.model-search[data-parent-brand]`));
-                    
-                    // Check/uncheck only models belonging to this brand
                     modelCheckboxes.forEach(modelCheckbox => {
                         modelCheckbox.checked = this.checked;
                     });
@@ -1052,17 +1068,7 @@
 
    
 
-$('#ex2').on('slide', function(slideEvt) {
-  // Get the current min and max values from the slider
-  var minYear = slideEvt.value[0];
-  var maxYear = slideEvt.value[1];
 
-  console.log(`${minYear},${maxYear}`)
-  // Update the input values
-  $('#ex2').val(`${minYear},${maxYear}`);
-
-  // Optionally, you can also update your server-side query here
-});
 
 
     var $j = jQuery.noConflict();
