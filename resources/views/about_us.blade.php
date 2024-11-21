@@ -11,9 +11,9 @@
     <!-- about-part-start -->
     <section class="about">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 pt-5 spacing_about">
-                    <div class="mb-2 pt-3 mt-5">
+            <div class="row ">
+                <div class="col-lg-5 spacing_about ">
+                    <div class="">
                         <h2 class="about_us">About</h2> 
                         <h2 class="about_us about-us-color">Us</h2>    
                     </div>
@@ -23,12 +23,12 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 about-pl " style="padding-top:100px;">
+                <div class="col-lg-7 about-pl pt-2" >
                     <div class="taitel two">
-                        <span style="padding-top:100px; color: black; font-size:45px">{{ $about_us->header }}</span>
+                        <span class="about_us_title">{{ $about_us->header }}</span>
                     </div>
 
-                    <h2 class="about-taitel" style="padding-top:30px;color: #038ffc;font-size:30px">{{ $about_us->title }}</h2>
+                    <h2 class="about-taitel">{{ $about_us->title }}</h2>
 
                     <div class="about_description">
                         {!! clean($about_us->description) !!}
@@ -56,7 +56,6 @@
                                 <p>{{ $about_us->total_review_title }}</p>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -223,9 +222,92 @@
         </div>
     </section> -->
     <!--  help-part-end -->
+    <br>
+    <br>
+    <!-- Target Customer Part start -->
 
+    <div class="container target-customer py-5">
+        <div class="row">
+            <!-- Column 1 -->
+            <div class="col-12 col-md-3 p-0">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                    <img src="{{ asset('japan_home/About1.svg') }}" class="tar_cus_img" alt="delete">
+                    <h1 class="text-light">10+</h1>
+                    <p class="tar_cus_txt">Awards Win</p>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="col-12 col-md-3 p-0">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                    <img src="{{ asset('japan_home/About2.svg') }}" class="tar_cus_img" alt="delete">
+                    <h1 class="text-light">1500+</h1>
+                    <p class="tar_cus_txt">Completed Deliveries</p>
+                </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="col-12 col-md-3 p-0">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                    <img src="{{ asset('japan_home/About3.svg') }}" class="tar_cus_img">
+                    <h1 class="text-light">50+</h1>
+                    <p class="tar_cus_txt">Worldwide Delivery Countries</p>
+                </div>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="col-12 col-md-3 p-0">
+                <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                    <img src="{{ asset('japan_home/About4.svg') }}" class="tar_cus_img">
+                    <h1 class="text-light">1500+</h1>
+                    <p class="tar_cus_txt">Happy Customers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Customer Part end -->
+
+    <!---- Our Vision Starts ---->
+
+    <div class="card card_vision">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="image-container">
+                        <img src="{{ asset('japan_home/Vision1.svg') }}" class="image1" alt="delete">
+                        <img src="{{ asset('japan_home/Vision2.png') }}" class="image2" alt="Vision 2">
+                        <img src="{{ asset('japan_home/Vision3.svg') }}" class="image3" alt="Vision 3">
+                    </div>
+                </div>
+                
+
+                <div class="col-md-4 vision_right_color">
+                    <h2 class="d-inline">Our</h2> 
+                    <h2 class="d-inline vision_color">Vision</h2>
+                        <p class="fs-3 pt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                            when an unknown printer took a galley of type and scrambled it to make a type 
+                            specimen book.</b></p>
+                        
+                        <p style="fs-3 pt-2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in 
+                            a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+                            </p>
+                        
+                        <p style="fs-3 pt-2">It is a long established fact that a reader will be distracted by the readable content of 
+                            a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less 
+                            normal distribution</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!---- Our Vision ends ---->
+
+    <br>
+    <br>
     <!--   Testimonial-part-start -->
-    <section class=" testimonial two py-120px">
+    <section class=" testimonial testimonial-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
@@ -360,6 +442,47 @@
         </div>
     </section>
     <!--   Testimonial-part-end -->
+
+    <br>
+    <br>
+
+    <!---- Our Office starts---->
+    <!-- <div class="container" style="background-color: lightgrey">
+        <div class="row" style="margin-top: 100px; padding-top: 60px; padding-bottom: 60px;">
+            <div class="text-center" style="padding-bottom: 40px;">
+                <h2 style="display: inline;">Our</h2>
+                <h2 style="display: inline; color: #038ffc;">Office</h2>
+            </div>
+
+            <div class="row" style="margin-top: 0px; padding-top: 20px; padding-bottom: 60px;">
+                <div class="col-md-4 pb-3 ps-3 pe-3"> 
+                    <img src="{{ asset('japan_home/Office1.svg') }}" class="img-fluid" alt="delete">
+                </div>
+
+                <div class="col-md-4 pb-3 ps-3 pe-3">
+                    <img src="{{ asset('japan_home/Office2.svg') }}" class="img-fluid" alt="delete">
+                </div>
+
+                <div class="col-md-4 pb-3 ps-3 pe-3">
+                    <img src="{{ asset('japan_home/Office3.svg') }}" class="img-fluid" alt="delete">
+                </div>
+
+                <div class="col-md-4 pb-3 ps-3 pe-3 pt-3"> 
+                    <img src="{{ asset('japan_home/Office4.svg') }}" class="img-fluid" alt="delete">
+                </div>
+
+                <div class="col-md-4 pb-3 ps-3 pe-3 pt-3">
+                    <img src="{{ asset('japan_home/Office5.svg') }}" class="img-fluid" alt="delete">
+                </div>
+
+                <div class="col-md-4 pb-3 ps-3 pe-3 pt-3">
+                    <img src="{{ asset('japan_home/Office6.svg') }}" class="img-fluid" alt="delete">
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+    <!---- Our Office endss---->
 
 </main>
 @endsection

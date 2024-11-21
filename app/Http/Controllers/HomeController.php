@@ -830,12 +830,13 @@ class HomeController extends Controller
     public function jdm_stock_responsive(Request $request,$slug,$type){
 
 
-        // echo json_encode($request->all());die();
+       
         $jdm_legend = Brand::where('status', 'enable')->get();
         $seo_setting = SeoSetting::where('id', 1)->first();
 
    
         $brand_label=Brand::where('slug',$slug)->first();
+     
       
 
 
