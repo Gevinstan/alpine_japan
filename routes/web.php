@@ -49,8 +49,9 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
             Route::get('/', 'index')->name('home');
             Route::get('home_page_responsive', 'home_page_responsive')->name('home_page_responsive');
-            Route::get('car_listing', 'car_listing')->name('car_listing');
-            Route::get('car_listing_details/{slug}', 'car_listing_details')->name('car_listing_details');
+            Route::get('fixed-car-marketplace', 'car_listing')->name('fixed-car-marketplace');
+            // Route::get('car_listing_details/{slug}', 'car_listing_details')->name('car_listing_details');
+            Route::get('fixed-car-marketplace-details/{slug}', 'car_listing_details')->name('fixed-car-marketplace-details');
             Route::get('/about-us', 'about_us')->name('about-us');
             Route::get('/contact-us', 'contact_us')->name('contact-us');
             Route::get('/shipment', 'shipment')->name('shipment');
@@ -69,8 +70,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
             Route::get('/blogs', 'blogs')->name('blogs');
             Route::get('/blog/{slug}', 'blog_show')->name('blog');
-            Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
-            Route::get('/jdm-stock-responsive/{slug}/{type}', 'jdm_stock_responsive')->name('jdm-stock-responsive');
+            // Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
+            Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock_responsive')->name('jdm-stock');
             Route::get('/jdm_brand_new','jdm_brand_new')->name('jdm_brand_new');
             Route::get('/jdm-stock-listing/{slug}/{type}', 'jdm_stock_listing')->name('jdm-stock-listing');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
@@ -84,19 +85,19 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/listings', 'listings')->name('listings');
             Route::post('/get-brands', 'get_brands')->name('get-brands');
             Route::post('/get-model-year', 'get_model_year')->name('get-model-year');
-            Route::get('/jdm-stock-all', 'jdm_stock_all')->name('jdm-stock-all');
-            Route::get('/jdm-stock-all-resposive', 'jdm_stock_all_resposive')->name('jdm-stock-all-resposive');
-            Route::get('/top-selling', 'top_selling')->name('top-selling');
-            Route::get('/top-selling_responsive', 'top_selling1')->name('top-selling_responsive');
-            Route::get('/new-arrival', 'new_arrival')->name('new-arrival');
-            Route::get('/new-arrival-responsive', 'new_arrival1')->name('new-arrival-responsive');
+            Route::get('/jdm-stock-all', 'jdm_stock_all_resposive')->name('jdm-stock-all');
+            // Route::get('/jdm-stock-all-resposive', 'jdm_stock_all_resposive')->name('jdm-stock-all-resposive');
+            // Route::get('/top-selling', 'top_selling')->name('top-selling');
+            Route::get('/top-selling', 'top_selling1')->name('top-selling');
+            // Route::get('/new-arrival', 'new_arrival')->name('new-arrival');
+            Route::get('/new-arrivals', 'new_arrival1')->name('new-arrivals');
             Route::post('/get-brand-models', 'getBrandModels')->name('get-brand-models');
             Route::get('/listing/{slug}', 'listing')->name('listing');
-            Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');
+            Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');  
             Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
-            Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
-            ->middleware('auth:web');
-            Route::get('/auction-car-marketplace-responsive', 'auctionCar1')->name('auction-car-marketplace-responsive')
+            // Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
+            // ->middleware('auth:web');
+            Route::get('/auction-car-marketplace', 'auctionCar1')->name('auction-car-marketplace')
             ->middleware('auth:web');
             Route::get('/auction-brand-new-car', 'auctionBrandNewCar')->name('auction-brand-new-car')
             ->middleware('auth:web');

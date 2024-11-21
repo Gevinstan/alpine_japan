@@ -27,7 +27,10 @@
                         <div class="inventory-details-slick-for m-0">
                         @foreach ($car_images as $gallery)
                                 <div class="inventory-details-slick-img">
-                                    <img src="{{ asset($image_folder.'/'.$slug.'/'. $gallery->image) }}" alt="thumb">
+                                <img src="{{ file_exists(public_path($image_folder.'/'.$slug.'/'. $gallery->image)) ? 
+                                        asset($image_folder.'/'.$slug.'/'. $gallery->image) : 
+                                        asset('uploads/website-images/no-image.jpg') }}" 
+                                    alt="thumb" class="card_image">
                                 </div>
                         @endforeach        
                         </div>
@@ -35,7 +38,10 @@
                         <div class="inventory-details-slick-nav">
                             @foreach ($car_images as $gallery)
                                 <div class="inventory-details-slick-img">
-                                <img src="{{ asset($image_folder.'/'.$slug.'/'. $gallery->image) }}" alt="thumb">
+                                <img src="{{ file_exists(public_path($image_folder.'/'.$slug.'/'. $gallery->image)) ? 
+                                        asset($image_folder.'/'.$slug.'/'. $gallery->image) : 
+                                        asset('uploads/website-images/no-image.jpg') }}" 
+                                    alt="thumb" class="card_image">
                                 </div>
                             @endforeach
                         </div>

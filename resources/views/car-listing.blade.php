@@ -32,7 +32,7 @@
                                                 Brand
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -48,7 +48,7 @@
                                                                             {{ $brand->name }}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
@@ -91,7 +91,7 @@
                                             Year
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
@@ -112,8 +112,8 @@
                                                     </div>
 
                                                     <div class="d-flex align-content-between flex-column gap-4">
-                                                        <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
+                                                        <button class="clear-button" id="clear-year">Clear</button>
+                                                        <button type="button" id="year_search" class="go-button">Go</button>
                                                     </div>
                                                 </div>
                                             </span>
@@ -137,7 +137,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse "
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
                                                 <div class="d-flex flex-column align-content-between col-sm-9">
@@ -175,8 +175,8 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
-                                                    <button class="clear-button">Clear</button>
-                                                    <button class="go-button">Go</button>
+                                                    <button class="clear-button" id="clear-budget">Clear</button>
+                                                    <button class="go-button" type="button" id="budget_search">Go</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -337,7 +337,7 @@
                                                     </p>
 
                                                 </div>
-                                                <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -865,6 +865,16 @@
                     }
                 })
 
+                $("#year_search").on('click',function(e){
+                    e.preventDefault();   
+                    clear_price_slider();    
+                    $('#search_form').submit();
+                });
+                $("#budget_search").on('click',function(e){
+                    e.preventDefault();     
+                    $('#search_form').submit();
+                });
+
                 $(".popular-search").on('change',function(e){
                     e.preventDefault();   
                     form.submit();
@@ -873,8 +883,17 @@
                 let initialMinPrice = $('#ex2').data('slider-min');
                 let initialMaxPrice = $('#ex2').data('slider-max');
 
-                $("#outside_form_btn,go-button").on("click",function(e){
+                $("#outside_form_btn").on("click",function(e){
                     clear_price_slider();
+                    $("#search_form").submit();
+                })
+                $("#clear-year").on('click',function(e){
+                    $("#modelYearSlider").val({{$minYear}});
+                    $("#start_year").val("");
+                    $("#search_form").submit();
+                })
+                $("#clear-budget").on('click',function(e){  
+                    $('input[name="price_range_scale"]').val("")
                     $("#search_form").submit();
                 })
 

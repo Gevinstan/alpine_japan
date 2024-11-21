@@ -92,7 +92,7 @@
                                             Brand & Model
                                         </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
+                                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse ">
                                         
                                             <div class="form-check me-3" style="padding-bottom: 20px">
                                                     <label class="form-check-label" for="brand_new_cars">
@@ -141,7 +141,7 @@
                                             Budget
                                         </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse show">
+                                        <div id="panelsStayOpen-collapsefour" class="accordion-collapse collapse ">
                                             <div class="accordion-body">
                                                 <input type="hidden" id="priceSearch" name="price_range_scale" value="">
                                                 <button id="searchButton" style="margin-left: 5px; padding: 5px 10px;">Search</button>
@@ -186,7 +186,7 @@
                                             Model Year
                                         </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show">
+                                        <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse">
                                             <div class="accordion-body">
                                             <span><p style="color: #038ffc;padding-left:10px; font-size:12px"><b>$1,00,000 $3,00,000</b></p></span>
                                                 <div class="range-container">
@@ -207,7 +207,7 @@
                                             Transmission
                                         </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseeight" class="accordion-collapse collapse show">
+                                        <div id="panelsStayOpen-collapseeight" class="accordion-collapse collapse">
                                         <div class="accordion-body">
                                             @foreach($transmission as $transmission)
                                             <div class="d-flex align-items-center">
@@ -697,7 +697,7 @@ function setSortByParam(selectedBrand,selectedText) {
 
 window.addEventListener("load", function() {
       document.getElementById("pageLoader").classList.add("hidden");
-    });
+});
 
 
 </script>   <!------- Range ------->

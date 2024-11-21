@@ -7,6 +7,11 @@
 
 @section('body-content')
 <main class="main_wid">
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 
     <!-- Inventory-part-start -->
@@ -16,7 +21,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Top Rating Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Top Selling Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -35,7 +40,7 @@
                                                 Brand
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -51,7 +56,7 @@
                                                                             {{ $brand->name }}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
@@ -93,7 +98,7 @@
                                             Year
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
@@ -101,7 +106,7 @@
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
                                                         <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                         value="{{ request('year', '') }}" 
+                                                         value="{{ request('year', $minYear) }}" 
                                                          class="slider-input mx-0 my-2" id="modelYearSlider">
                                                         <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
 
@@ -113,8 +118,8 @@
                                                     </div>
 
                                                     <div class="d-flex align-content-between flex-column gap-4">
-                                                        <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
+                                                        <button class="clear-button" id="clear-year">Clear</button>
+                                                        <button type="button" id="year_search" class="go-button">Go</button>
                                                     </div>
                                                 </div>
                                             </span>
@@ -138,7 +143,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse"
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
                                                 <div class="d-flex flex-column align-content-between col-sm-9">
@@ -176,10 +181,9 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
-                                                    <button class="clear-button">Clear</button>
-                                                    <button class="go-button">Go</button>
+                                                    <button class="clear-button" id="clear-budget">Clear</button>
+                                                    <button class="go-button" type="button" id="budget_search">Go</button>
                                                 </div>
-                                                
                                             </div>
                                         </div>
                                     </div>
@@ -343,7 +347,7 @@
 
                                                 </div>
 
-                                                <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -851,6 +855,18 @@
             "use strict"
             const initialMinPrice = $('#ex2').data('slider-min');
             const initialMaxPrice = $('#ex2').data('slider-max');
+
+            $("#year_search").on('click',function(e){
+                e.preventDefault();   
+                clear_price_slider();    
+                $('#search_form').submit();
+           });
+           $("#budget_search").on('click',function(e){
+                e.preventDefault();     
+                $('#search_form').submit();
+           });
+
+
             function clear_price_slider(){
             let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
             let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
@@ -877,7 +893,7 @@
                 var minYear = slideEvt.value[0];
                 var maxYear = slideEvt.value[1];
 
-                console.log(`${minYear},${maxYear}`)
+           
                 // Update the input values
                 $('#ex2').val(`${minYear},${maxYear}`);
 
@@ -893,6 +909,15 @@
 
                 $("#outside_form_btn,go-button").on("click",function(e){
                     clear_price_slider();
+                    $("#search_form").submit();
+                })
+                $("#clear-year").on('click',function(e){
+                    $("#modelYearSlider").val("");
+                    $("#start_year").val("");
+                    $("#search_form").submit();
+                })
+                $("#clear-budget").on('click',function(e){  
+                    $('input[name="price_range_scale"]').val('')
                     $("#search_form").submit();
                 })
                 $(".brand-search").on('change',function(e){
@@ -1040,6 +1065,9 @@
     }
 }
 
+window.addEventListener("load", function() {
+        document.getElementById("pageLoader").classList.add("hidden");
+});
 
 
 

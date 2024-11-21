@@ -9,6 +9,12 @@
 
 <main class="bg-light-grey">
 
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
     <!-- Inventory Details-part-start -->
 
 
@@ -946,6 +952,10 @@
                 $("#delivery_charge").text('$'+user_info[0].rate);
              }
         })
+
+        window.addEventListener("load", function() {
+             document.getElementById("pageLoader").classList.add("hidden");
+        });
 
 
     </script>
