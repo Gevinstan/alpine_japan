@@ -14556,17 +14556,17 @@ p {
     border: none !important;
 }
 
-.heading-section li:nth-child(2) {
+/* .heading-section li:nth-child(2) {
     border-left: 2px solid #6e6e6e;
-}
+} */
 
-.custom-tabs li:nth-child(2) {
+/* .custom-tabs li:nth-child(2) {
     border-left: 2px solid #6e6e6e;
 }
 
 .custom-tabs li:nth-child(3) {
     border-left: 2px solid #6e6e6e;
-}
+} */
 
 .email-input {
     padding: 10px 15px !important;
@@ -15775,9 +15775,9 @@ input:not(:placeholder-shown) + .placeholder-text {
         display: none;
     }
 
-    .custom-tabs li:nth-child(2) {
+    /* .custom-tabs li:nth-child(2) {
         border-left: none;
-    }
+    } */
 
     .custom-tabs li:nth-child(3) {
         border-left: none;
