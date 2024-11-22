@@ -181,6 +181,7 @@
                                             </ul>
 
                                         </li>
+                                        
                                         <li class="nav-item dropdown">
                                             <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 {{ __('translate.Brand New Cars') }}
@@ -231,8 +232,6 @@
                                 </div>
                                 <a href="{{ route('user.select-car-purpose') }}" class="thm-btn ms-3">Login</a> 
                             </div>
-
-                        
                         </div>
                     </div>
                 </div>
@@ -401,8 +400,8 @@
     <footer class="footer footer-two">
     @endif
 
-        <div class="container">
-            <div class="footer-bb d-md-flex d-sm-flex    align-items-center ">
+        <div class="container px-2 px-sm-3 px-lg-5">
+            <div class="footer-bb d-md-flex d-sm-flex    align-items-center px-lg-5">
                 <div class="col-lg-5 col-p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
                         {{ __('translate.Join Our') }} <span>{{ __('translate.Newsletter') }}</span> &
@@ -434,8 +433,9 @@
                 </div>
             </div>
 
+            <hr class="text-white mx-auto">
 
-            <div class="row footer-mt-75px   ">
+            <div class="row footer-mt-75px  px-lg-5 ">
                 <div class=" col-xl-4 col-lg-6 col-md-12 " data-aos="fade-right" data-aos-delay="100">
                     <div class="footer-logo">
 
@@ -682,15 +682,15 @@
         </div>
 
 
-        <div class="copyright">
+        <div class="copyright px-2 px-sm-3 px-lg-5">
             <div class="container">
                 <div class="row ">
-                    <div class="col-lg-6 col-sm-6 col-md-6">
+                    <div class="col-lg-6 col-sm-6 col-md-6 px-lg-5">
                         <div class="copyright-text">
                             <p class="text-white heading-fs-14">{{ $setting->copyright }}</p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6  col-md-6">
+                    <div class="col-lg-6 col-sm-6  col-md-6 px-lg-5">
                         <div class="copyright-item gap-0">
                             <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">{{ $setting->developed_by}}</a>
                             <a href="{{ route('terms-conditions') }}">
@@ -764,7 +764,7 @@
 
     <!-- top-to-bottom -->
 
-    <div class="top-to-bottom">
+    <!-- <div class="top-to-bottom">
         <span>
             <svg width="39" height="75" viewBox="0 0 39 75" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
                 <path d="M17.235 75.0022L18.3095 74.9021C18.3095 74.8855 18.3144 74.8688 18.3168 74.8521C18.0878 74.8283 17.8612 74.7854 17.6322 74.7831C15.744 74.7759 13.9751 74.2448 12.2526 73.5542C8.50789 72.0514 5.51357 69.6293 3.26965 66.3332C1.58854 63.8612 0.51897 61.1438 0.192494 58.1906C0.0268193 56.6902 0.0195101 55.1708 0.0146374 53.6585C-0.00485375 47.2806 0.0073282 40.9028 1.90292e-05 34.5249C-0.00485375 30.6382 0.925847 27.0087 3.08205 23.7221C5.88146 19.4567 9.78943 16.6536 14.7986 15.3676C16.9281 14.8222 19.0989 14.6245 21.3014 14.8627C27.6384 15.5486 32.5185 18.5517 36.0001 23.7555C37.4546 25.9298 38.3902 28.3233 38.7678 30.8978C38.9311 32.0171 38.9847 33.1603 38.9896 34.2939C39.0066 41.1386 38.9993 47.9808 38.992 54.8255C38.992 55.8519 39.0066 56.8855 38.9092 57.9048C38.7021 60.0673 38.0735 62.1226 37.0965 64.0731C35.2741 67.7098 32.5843 70.5558 28.9809 72.5372C26.793 73.7423 24.4443 74.5235 21.9348 74.7878C21.4987 74.8331 21.0553 74.8307 20.6119 74.8902C20.7386 74.926 20.8653 74.9641 20.9919 74.9998H17.2399L17.235 75.0022ZM3.08449 44.8395H3.08692C3.08692 48.3309 3.06743 51.8223 3.09911 55.3137C3.10885 56.3973 3.18925 57.4881 3.3598 58.5574C3.7618 61.1128 4.80458 63.4301 6.40772 65.4735C9.05851 68.8553 12.5133 70.9868 16.8355 71.6989C18.8869 72.0371 20.9432 72.0228 22.9654 71.5775C26.8271 70.7249 30.0236 68.7886 32.4649 65.714C34.8891 62.6608 36.0001 59.1885 35.9831 55.3208C35.9489 48.2214 35.9684 41.1195 35.9757 34.0177C35.9757 32.7554 35.8344 31.5099 35.5372 30.2881C34.7015 26.8587 32.94 23.9674 30.1698 21.6978C26.1522 18.4041 21.5401 17.1823 16.3994 18.123C12.8374 18.7756 9.82841 20.4737 7.38959 23.1315C4.53901 26.2371 3.12103 29.8785 3.09423 34.0391C3.07231 37.64 3.08936 41.2386 3.08936 44.8395H3.08449Z" fill="#038FFC"></path>
@@ -773,7 +773,7 @@
                 <path d="M16.0442 34.8738C16.0442 34.0641 16.0004 33.2496 16.054 32.4423C16.1612 30.799 17.5231 29.482 19.2042 29.4439C20.9609 29.4034 22.2668 30.6132 22.5275 32.0779C22.6079 32.5328 22.6395 33.0019 22.6395 33.464C22.6395 34.7381 22.6517 36.0146 22.5908 37.2888C22.508 38.9844 21.0242 40.3205 19.3187 40.3086C17.5694 40.2967 16.1417 38.9725 16.0589 37.2459C16.0223 36.4576 16.0515 35.6645 16.0515 34.8738C16.0515 34.8738 16.0491 34.8738 16.0467 34.8738H16.0442Z" fill="#038FFC"></path>
             </svg>   
         </span>
-    </div>
+    </div> -->
         
 
     <!-- top-to-bottom -->

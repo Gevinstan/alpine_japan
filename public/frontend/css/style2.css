@@ -1454,7 +1454,7 @@
     margin-top: -3px;
     position: relative;
     z-index: 1;
-    background-color: var(--white-color);
+    background-color: var(--white-color) !important;
 }
 
 .brand-car .brand-car-position-img {
@@ -2974,7 +2974,7 @@ p {
 }
 
 .categories {
-    background-color: var(--white-color);
+    background-color: #fff;
     position: relative;
     z-index: 1;
 }
@@ -7087,7 +7087,7 @@ p {
 }
 
 .feature {
-    background-color: var(--white-color);
+    background-color: #F4FAFF;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -7449,7 +7449,7 @@ p {
     background: #0e124b;
     /* position: sticky; */
     bottom: 0;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 .footer .newsletter-txt {
@@ -7464,8 +7464,8 @@ p {
 }
 
 .footer .footer-bb {
-    border-bottom: 1px solid #484ea7;
-    padding-bottom: 56px;
+    /* border-bottom: 1px solid #484ea7; */
+    padding-bottom: 30px;
 }
 
 .footer .newsletter-sarch-box-main-item .form-label {
@@ -7619,7 +7619,7 @@ p {
 
 .footer .copyright {
     padding: 20px 0;
-    margin-top: 85px;
+    margin-top: 10px;
     background-color: #030514;
 }
 
@@ -7824,7 +7824,7 @@ p {
 .dropdown_bg {
     background-color: #fff;
     color: #038ffc;
-    min-width: 22rem !important;
+    min-width: 26rem !important;
 }
 
 .footer.two .footer-icon .text h5 {
@@ -7974,7 +7974,7 @@ p {
     z-index: 999;
     position: relative;
     background: var(--headline-color);
-    padding-bottom: 15px;
+    /* padding-bottom: 15px; */
     box-shadow: 0 14px 16px 0 rgba(11, 2, 55, 0.1);
 }
 
@@ -8152,7 +8152,7 @@ p {
 
 .header .menu-bg {
     background-color: var(--white-color);
-    padding: 4px 0;
+    /* padding: 4px 0; */
     margin-top: 7px;
 }
 
@@ -14228,16 +14228,6 @@ p {
     padding: 0 !important;
 }
 
-/* .banner-search-bar .nav .nav-link.active {
-    background-color: var(--primary-color-1);
-}
- */
-
-/* .banner .banner-search-bar .nav .nav-link.active {
-    color: var(--primary-color-1);
-    border: 1px solid var(--primary-color-1) !important;
-} */
-
 .nav-tabs .nav-link {
     color: black;
     border-top: 2px solid transparent;
@@ -14245,7 +14235,7 @@ p {
 }
 
 .nav-tabs .nav-link:hover {
-    color: var(--primary-color-1) !important;
+    color: #038ffc !important;
     border-top: 2px solid var(--primary-color-1);
 }
 
@@ -14254,7 +14244,7 @@ p {
 }
 
 .banner .banner-search-bar .banner-sarchber-box-inner .icon svg {
-    color: #038ffc; /* Change the color via CSS */
+    color: #038ffc; 
 }
 
 .banner .slick-dots li.slick-active button {
@@ -14264,10 +14254,11 @@ p {
 .section-heading {
     font-size: clamp(1.75rem, 1.6364rem + 0.4848vw, 2rem) !important;
     padding: 0 !important;
+    font-weight: 900 !important;
 }
 
 .car-poster {
-    justify-content: space-around; /* Adjusts the spacing between images */
+    justify-content: space-around; 
 }
 
 .poster-img {
@@ -14389,13 +14380,22 @@ p {
 
 /********* Quality section Start **********/
 .quality-compliance {
-    background-color: #f9fafb;
+    background-color: #fff;
     padding: 60px 0;
+}
+
+.quality-compliance .highlight {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
 }
 
 .section-title {
     font-size: 2rem;
-    font-weight: bold;
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
 }
 
 .section-title .highlight {
@@ -14454,7 +14454,7 @@ p {
     right: 10px;
     width: 30px;
     height: 30px;
-    background-color: #2a73ff;
+    background-color: #038FFC;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -14486,7 +14486,7 @@ p {
 .aj-dropdown {
     width: 170px;
     padding: 10px;
-    border: 1px solid #ced4da;
+    border: 1px solid #EBEBEB;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
     font-size: 0.875rem;
@@ -14556,17 +14556,17 @@ p {
     border: none !important;
 }
 
-.heading-section li:nth-child(2) {
+/* .heading-section li:nth-child(2) {
     border-left: 2px solid #6e6e6e;
-}
+} */
 
-.custom-tabs li:nth-child(2) {
+/* .custom-tabs li:nth-child(2) {
     border-left: 2px solid #6e6e6e;
 }
 
 .custom-tabs li:nth-child(3) {
     border-left: 2px solid #6e6e6e;
-}
+} */
 
 .email-input {
     padding: 10px 15px !important;
@@ -14854,6 +14854,7 @@ p {
 .brand-car-btm-txt-btm {
     background-color: #f7f7f7 !important;
 }
+
 /* Home Page Top Navbar Responsive issue */
 
 .nav-dropdown-list {
@@ -14864,14 +14865,20 @@ p {
     color: black;
     text-decoration: none;
     border-bottom: 3px solid transparent;
-    padding: 0.5rem 0.6rem !important;
+    padding: 1.2rem 0.6rem !important;
+
 }
 
 .nav-link:hover {
     text-decoration: none;
+    color: #038ffc;
     text-decoration-color: #038ffc;
-    text-underline-offset: 3px;
     border-bottom: 3px solid #038ffc;
+    
+}
+
+.nav-link:focus {
+   color: #038ffc; 
 }
 
 .dropdown-item {
@@ -14920,6 +14927,7 @@ p {
 /***** admin prod work *****/
 .main_wid {
     overflow: hidden;
+
 }
 
 .lang_dropdown {
@@ -15575,7 +15583,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 /********* About section Start **********/
 
 .about-section {
-    background-color: #f1f5fb;
+    background-color: #F4FAFF;
     padding: 50px 0;
 }
 
@@ -15767,9 +15775,9 @@ input:not(:placeholder-shown) + .placeholder-text {
         display: none;
     }
 
-    .custom-tabs li:nth-child(2) {
+    /* .custom-tabs li:nth-child(2) {
         border-left: none;
-    }
+    } */
 
     .custom-tabs li:nth-child(3) {
         border-left: none;
@@ -15835,9 +15843,9 @@ input:not(:placeholder-shown) + .placeholder-text {
     .nav-tabs-hide {
         display: none;
     }
-    .custom-tabs li:nth-child(2) {
+    /* .custom-tabs li:nth-child(2) {
         border-left: none;
-    }
+    } */
     .custom-tabs li:nth-child(3) {
         border-left: none;
     }
@@ -15858,4 +15866,92 @@ input:not(:placeholder-shown) + .placeholder-text {
   }
   #pageLoader.hidden {
     display: none;
+  }
+/****** About Alpine Japan  *******/
+
+.about-section .section-heading {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.about-section .highlight {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+    color: #005bac;
+}
+
+/****** feature Alpine Japan  *******/
+
+.feature .section-heading {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+
+}
+
+.feature .highlight {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+    color: #005bac;
+}
+
+
+.brand-car .section-heading {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.brand-car .highlight {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+    color: #005bac;
+}
+.categories .section-heading {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.categories .highlight {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+    color: #005bac;
+}
+.model-text {
+    border-right: 1px solid #EBEBEB;
+}
+
+.custom-tabs .nav-link.active {
+    color: var(--primary-color-1) !important;
+    border-top: 2px solid var(--primary-color-1);
+}
+
+.brand-car-item, .brand-car-item {
+    box-shadow: 0px 3px 4px 0px #0000001C !important;
+}
+
+@media screen and (min-width: 1400px) {
+    .feature-thumb a img {
+      height: 580px !important;
+    }
+  }
+  
+  @media screen and (max-width: 1400px) {
+    .feature-thumb a img {
+      height: 540px !important;
+    }
   }
