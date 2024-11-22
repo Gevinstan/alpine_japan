@@ -15964,3 +15964,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-weight: 500;
     color: #7E8082;
   }
+
+  .contact-us .contact-share {
+    margin-top: 5px !important;
+  }
