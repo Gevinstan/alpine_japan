@@ -16,7 +16,8 @@
 
     <section class="banner mb-5 background_image">
         <div class="container">
-            <div class="row align-items-center px-2 px-lg-5 pb-5">
+            <!-- <div class="row align-items-center px-2 px-lg-5 pb-5"> -->
+            <div class="row align-items-center px-5  pb-5">
                 <div class="col-lg-12 col-xl-7">
                     <div class="banner-taitel">
                         <span>{{ $homepage->home3_intro_short_title }}</span>
@@ -618,7 +619,8 @@
 
 
     <!--  Car-Poster-part-start -->
-    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 px-2 px-sm-3 px-lg-5">
+    <!-- <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 px-2 px-sm-3 px-lg-5"> -->
+    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5  px-sm-2 px-md-5">
         <div class="col-md-auto">
             <a href="#">
                 <img src="{{ asset('japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -875,7 +877,8 @@
 
 
     <!--  vedio-part-start -->
-    <section class="vedio px-2 px-sm-3 px-lg-5">
+    <!-- <section class="vedio px-2 px-sm-3 px-lg-5"> -->
+    <section class="vedio px-2 px-sm-2 px-md-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
@@ -917,9 +920,12 @@
 
 
     <!--   Testimonial-part-start -->
-    <section class=" testimonial py-5 my-4 overflow-hidden px-lg-5">
-        <div class="container px-2 px-sm-3 px-lg-5">
-            <div class="row px-5">
+    <!-- <section class=" testimonial py-5  my-4 overflow-hidden px-lg-5"> -->
+    <section class=" testimonial py-5 px-sm-2  my-4 overflow-hidden px-md-5">
+        <!-- <div class="container px-2 px-sm-3 px-lg-5"> -->
+        <div class="container">
+            <!-- <div class="row px-5"> -->
+            <div class="row">
                 <div class="col-lg-5">
 
                     <div class="sm-df">
@@ -1085,8 +1091,10 @@
 
 
     <!-- About section Start-->
-        <section class="about-section px-2 px-sm-3 px-lg-5">
-            <div class="container text-sm-center text-md-start px-2 px-sm-3 px-lg-5">
+        <!-- <section class="about-section px-2 px-sm-3 px-lg-5"> -->
+        <section class="about-section px-2 px-sm-2 px-md-5">
+            <!-- <div class="container text-sm-center text-md-start px-2 px-sm-3 px-lg-5"> -->
+            <div class="container text-sm-center text-md-start">
                 <h2 class="pb-2 section-heading">About <span class="highlight">Alpine Japan</span></h2>
                 <div class="row align-items-center mt-3">
                 <div class="col-md-4 col-12">
@@ -1108,8 +1116,11 @@
 
 
     <!-- Quality section start -->
-        <section class="quality-compliance py-5 ">
-            <div class="container text-center px-2 px-sm-3 px-lg-5">
+        <!-- <section class="quality-compliance py-5 "> -->
+        <section class="quality-compliance px-sm-2 px-md-5 py-5 ">
+            <!-- <div class="container text-center px-2 px-sm-3 px-lg-5"> -->
+            <!-- <div class="container text-center px-5"> -->
+            <div class="container text-center">
                 <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
                 <p class="section-subtitle">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
 
