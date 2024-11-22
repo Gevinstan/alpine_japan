@@ -8086,8 +8086,8 @@ p {
 
 .header-right-item .header-right-item-btn .btn-secondary {
     color: var(--white-color);
-    background-color: transparent;
-    border-color: transparent;
+    background-color: transparent !important; 
+    border-color: transparent !important;
     font-size: 14px;
     font-style: normal;
     font-weight: var(--regular);
@@ -9160,9 +9160,9 @@ p {
 }
 
 .inventory-main-box {
-    border-radius: 4px;
+    border-radius: 12px;
     background-color: var(--white-color);
-    padding: 30px;
+    padding: 18px;
     /* Drop Shadow */
     box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06);
 }
@@ -9439,10 +9439,10 @@ p {
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    border-radius: 6px;
-    border: 1px solid #ededed;
-    background: var(--white-color);
-    box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06);
+    /* border-radius: 6px;
+    border: 1px solid #ededed; */
+    /* background: var(--white-color); */
+    /* box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06); */
     margin-bottom: 40px;
 }
 
@@ -9462,9 +9462,10 @@ p {
     .inventory-sarch-ber-item
     .inventory-sarch-ber
     .form-control {
-    width: 100%;
+    width: 25.125rem !important;
+    height: 3.5rem !important;
     padding: 13px 20px;
-    background-color: #f0f3ff;
+    background-color: #FBFBFB;
     border: 1px solid #f0f3ff;
     font-size: 16px;
     font-weight: var(--regular);
@@ -15226,8 +15227,12 @@ p {
 }
 .sort-dropdown button {
     color: #038ffc;
-    background-color: var(--white-color);
-    border-color: var(--white-color);
+    /* background-color: var(--white-color);
+    border-color: var(--white-color); */
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
 }
 
 .sort-dropdown button {
@@ -15939,3 +15944,89 @@ input:not(:placeholder-shown) + .placeholder-text {
       height: 540px !important;
     }
   }
+
+  .budget_price {
+    font-size: 0.7rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .budget_count {
+    color: #9EA3AD !important;
+  }
+
+  .budget-space {
+    --bs-gutter-x: 1rem;
+  }
+
+  .budget-heading {
+    font-family: "Poppins", serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #24272C !important;
+  }
+
+  .brand-heading {
+    font-family: "Poppins", serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #24272C !important;
+  }
+
+  .year-heading {
+    font-family: "Poppins", serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #24272C !important;
+  }
+
+  .year-slider-text {
+    font-size: 0.7rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .slider_num {
+    font-size: 0.7rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .brand_name {
+    font-size: 0.8rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .price_range {
+    font-family: "Poppins", serif !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+ .slider.slider-horizontal .slider-track {
+    height: 2px !important;
+    top: 14px !important;
+ }
+
+ .recently_added {
+    background-color: transparent !important; 
+    border-color: transparent !important;
+ }
+ 
+ .search_icon {
+    height: 24px;
+    width: 24px;
+ }

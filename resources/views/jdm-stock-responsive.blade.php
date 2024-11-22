@@ -47,7 +47,7 @@
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="accordion-button brand-heading p-0" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapseOne">
                                                 Brand
@@ -64,7 +64,7 @@
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="brand[]" class="form-check-input brand-search" type="checkbox"
                                                                            >
-                                                                        <label class="form-check-label">
+                                                                        <label class="form-check-label brand_name">
                                                                            {{$brand_label->name}}
                                                                         </label>
                                                                     </div>
@@ -77,7 +77,7 @@
                                                                                             <input name="model[]" class="form-check-input brand-search" type="checkbox"
                                                                                                     value="{{ $brand->model }}"
                                                                                                     {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
-                                                                                            <label class="form-check-label">
+                                                                                            <label class="form-check-label brand_name">
                                                                                                 {{ $brand->model }}
                                                                                             </label>
                                                                                         </span>
@@ -98,64 +98,63 @@
                                 </div>
                             </div>
                         <!-- Select Your Brand End-->
+
                         <!-- Select Your Year Start -->
-                        <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box my-2">
 
-                            <!-- Select Your Budget  -->
-                            <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapsetwo">
-                                            Year
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
-                                        aria-labelledby="panelsStayOpen-headingtwo">
-                                        <div class="accordion-body">
-                                            <span class="select-Brand-box two four p-0 border-0">
-                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                    
-                                                    <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                        value="{{ request('year', $minYear) }}" 
-                                                        class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
+                                <!-- Select Your Budget  -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                            <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapsetwo">
+                                                Year
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                            <div class="accordion-body">
+                                                <span class="select-Brand-box two four p-0 border-0">
+                                                    <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                        
+                                                        <div class="d-flex flex-column align-items-center mt-32px w-100">
+                                                            <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                                value="{{ request('year', $minYear) }}" 
+                                                                class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                            <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
 
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                            <div class="d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                                <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
+                                                                <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex align-content-between flex-column gap-4">
+                                                            <button class="clear-button">Clear</button>
+                                                            <button class="go-button">Go</button>
                                                         </div>
                                                     </div>
-
-                                                    <div class="d-flex align-content-between flex-column gap-4">
-                                                        <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
-                                                    </div>
-                                                </div>
-                                            </span>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
 
+                            
+
                             </div>
-
-                         
-
-                        </div>
                         <!-- Select Your Year End -->
-
-
                        
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box my-2">   
                                 <!-- Budget -->
-                                <div class="accordion" id="accordionPanelsStayOpenExample4">
+                                <div class="accordion" id="accordionPanelsStayOpenExample4" class="accordion_dd">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingfive">
-                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="accordion-button budget-heading p-0" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapsefive">
                                                 Budget
@@ -164,43 +163,47 @@
                                         <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
-                                                <div class="d-flex flex-column align-content-between col-sm-9">
-                                                    <div class="d-flex justify-content-between">
-                                                        <span class="slider-label m-0">{{$minPrice}}</span>
-                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
-                                                    </div>
+                                                <div class="row">
+                                                    <div class="d-flex flex-column align-content-between col-sm-9">
+                                                        <div class="d-flex justify-content-between slider_num">
+                                                            <span class="slider-label m-0">{{$minPrice}}</span>
+                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
+                                                        </div>
 
-                                                    <div id="slider-outer-div" class="ms-2">
-                                                        <div id="slider-div">
-                                                            <div>
-                                                                <input id="ex2" type="text" name="price_range_scale" 
-                                                                data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
-                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
-                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
-                                                                />
+                                                        <div id="slider-outer-div" class="ms-2">
+                                                            <div id="slider-div">
+                                                                <div>
+                                                                    <input id="ex2" type="text" name="price_range_scale" 
+                                                                    data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
+                                                                    value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                    data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                     
+                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
+                                                        <button class="clear-button">Clear</button>
+                                                        <button class="go-button">Go</button>
+                                                    </div>
+                                                </div>
+                                                
 
-                                                    <h6 style="padding-top:30px">Price Range</h6>
+                                                <div class="row budget-space">
+                                                    <h6 class="pt-2 price_range">Price Range</h6>
 
                                                     @foreach($price_range as $key=>$range)
                                                     <div class="d-flex align-items-center">
-                                                            <div class="form-check me-3">
+                                                            <div class="form-check">
                                                                 <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
-                                                                {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}>
-                                                                <label class="form-check-label" >
-                                                                {{$key}}({{$range}})
-                                                                
+                                                                    {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
+                                                                <label class="form-check-label">
+                                                                    <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
                                                                 </label>
                                                             </div>
                                                     </div>
-
                                                     @endforeach
-                                                </div>
-                                                <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
-                                                    <button class="clear-button">Clear</button>
-                                                    <button class="go-button">Go</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,14 +232,14 @@
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
                                      <span class="search-btn" style="cursor: pointer;">
                                        <a href="javascript:void(0);" id="outside_form_btn">
-                                            <i class="bi bi-search"></i></a></span></span>
+                                            <i class="bi bi-search search_icon"></i></a></span></span>
                                 </div>
 
                                 <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
                                     <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                      <p class="sort-text pl-2">Sort By:</p>
                                      <div class="dropdown sort-dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-secondary recently_added dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
