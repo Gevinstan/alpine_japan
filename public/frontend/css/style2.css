@@ -13654,6 +13654,7 @@ h5.preloader-text::after {
     --bold: 700;
     --DMSans: "DM Sans", sans-serif;
     --roboto: "Roboto", sans-serif;
+    --poppins: "Poppins", serif;
     --transition-all: all linear 0.3s;
     --transition-ease-in-out: all 0.5s ease-in-out;
 }
@@ -15968,3 +15969,97 @@ input:not(:placeholder-shown) + .placeholder-text {
   .contact-us .contact-share {
     margin-top: 5px !important;
   }
+
+  /****** Shipment Page Style Start  ******/
+
+  .shipment-banner-section {
+    padding-top: 120px;
+  }
+
+  @media screen and (max-width: 992px) {
+    .shipment-banner-section {
+        padding-top: 0;
+      }
+  }
+  .shipment-banner-image {
+    background-image: url("../../japan_home/shipment.png");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;  
+    text-align: start;
+  }
+
+  .banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18rem;
+    color: var(--white-color);
+  }
+
+  .banner-content h3 {
+    color: var(--white-color);
+    font-size: 2.5rem;
+    font-family: var(--poppins);
+  }
+
+  .banner-content p {
+    color: var(--white-color);
+    font-size: 1rem;
+    font-family: var(--poppins);
+  }
+
+  .card-section {
+    background-color: #FAFAFA;
+    box-shadow: 0px 8px 25.1px 0px #00000026;
+  }
+
+  .card-section h3 {
+    color: var(--primary-color-1);
+    font-family: var(--poppins);
+  }
+
+  .card-outer {
+    padding: 13px;
+    background: linear-gradient(#F2F4F5, #FFFFFF);
+    box-shadow: 2px 2px 4px 0px #7A8D93BF;
+    top: -65px;
+  }
+
+  .card-inner {
+    padding: 15px;
+    background: linear-gradient(to right,#CCD1DA, #FFFFFF);
+    border: 2px solid #FFFFFF;
+  }
+
+  .card-list img {
+    height: 70px;
+    width: 90px;
+    background: var(--white-color);
+    box-shadow: 0px 4px 4px 0px #00000014;
+    padding: 2px 5px;
+    border: 1px solid #E7E7E7;
+  }
+
+  .card-btn {
+    background: var(--primary-color-1);
+    color: var(--white-color) !important;
+    font-size: .875rem;
+    bottom: -15px;
+    text-transform: uppercase;
+    font-family: var(--poppins);
+  }
+
+  .roro-section h4, .containers-section h4,
+  .Inspection-section h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--poppins);
+  }
+
+  .roro-section p, .containers-section p {
+    font-size: .875rem;
+    color: #86888C;
+    font-family: var(--poppins);
+    text-align: center;
+  }
+  /****** Shipment Page Style End  ******/
