@@ -2788,7 +2788,7 @@ public function car_listing(Request $request){
         $keyWhere="top-sell";
         $tableName='1';
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
-        echo json_encode($brand_list);die();
+       
 
 
  
