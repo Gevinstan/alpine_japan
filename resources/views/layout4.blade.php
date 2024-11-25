@@ -548,9 +548,9 @@
     <footer class="footer footer-two">
     @endif
 
-        <div class="container px-2 px-sm-3 px-lg-5">
-            <div class="footer-bb d-md-flex d-sm-flex    align-items-center px-lg-5">
-                <div class="col-lg-5 col-p-0" data-aos="fade-right" data-aos-delay="50">
+        <div class="container px-sm-2 px-md-5">
+            <div class="footer-bb d-md-flex d-sm-flex    align-items-center">
+                <div class="col-lg-5 col-p-0 p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
                         {{ __('translate.Join Our') }} <span>{{ __('translate.Newsletter') }}</span> &
                         {{ __('translate.Get updated.') }}
@@ -583,7 +583,7 @@
 
             <hr class="text-white mx-auto">
 
-            <div class="row footer-mt-75px  px-lg-5 ">
+            <div class="row footer-mt-75px ">
                 <div class=" col-xl-4 col-lg-6 col-md-12 " data-aos="fade-right" data-aos-delay="100">
                     <div class="footer-logo">
 
@@ -925,15 +925,15 @@
         </div>
 
 
-        <div class="copyright px-2 px-sm-3 px-lg-5">
+        <div class="copyright px-sm-2 px-md-5">
             <div class="container">
                 <div class="row ">
-                    <div class="col-lg-6 col-sm-6 col-md-6 px-lg-5">
+                    <div class="col-lg-6 col-sm-6 col-md-6 p-0">
                         <div class="copyright-text">
                             <p class="text-white heading-fs-14">{{ $setting->copyright }}</p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6  col-md-6 px-lg-5">
+                    <div class="col-lg-6 col-sm-6  col-md-6 p-0">
                         <div class="copyright-item gap-0">
                             <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">{{ $setting->developed_by}}</a>
                             <a href="{{ route('terms-conditions') }}">
@@ -1165,6 +1165,16 @@
 
         //     })
         // }
+
+        $(document).ready(function () {
+      $(".nav_texthead .nav-item a").click(function () {
+        // Remove 'active' class from all <li>
+        $(".nav_texthead .nav-item a").removeClass("active");
+
+        // Add 'active' class to the clicked <li>
+        $(this).addClass("active");
+      });
+    });
     </script>
 
 </body>

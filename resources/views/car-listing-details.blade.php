@@ -7,7 +7,7 @@
 
 @section('body-content')
 
-<main class="bg-light-grey">
+<main class="bg-light-grey px-sm-2 px-md-5">
 
     <!-- Inventory Details-part-start -->
 

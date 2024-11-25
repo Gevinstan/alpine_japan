@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
@@ -8,94 +8,58 @@
 @section('body-content')
 <main>
 
-    <section>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12 shipment-img">
-            <img src="{{  asset('japan_home/shipment.png')  }}" alt="HTML tutorial" class="img-fluid">
+  <!-- Banner Section Start  -->
+  <section class="shipment-banner-section">
+    <div class="container shipment-banner-image">
+      <div class="banner-content p-5 col-sm-6">
+        <h3>Shipment</h3>
+        <p>We are very flexible by offering various different modes of </br> shipments as shown below.
+          After all Customer</br> Satisfaction is our Top Interest.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Banner Section End  -->
 
-            <div class="shipment-top-left">
-              <h2 class="shipment-top-left-p">Shipment</h2>
-            </div>
-
-            <div class="shipment-bottom-left">
-              <p class="shipment-bottom-left-p">
-                <b
-                  >We are very flexible by offering various different modes
-                  of</b
-                >
-              </p>
-
-              <p class="shipment-bottom-left-p">
-                <b>shipments as shown below. After all Customer</b>
-              </p>
-
-              <p class="shipment-bottom-left-p">
-                <b>Satisfaction is our Top Interest.</b>
-              </p>
-            </div>
+  <!-- Credit Card Section Start  -->
+   <section class="pb-5">
+    <div class="container d-flex justify-content-center">
+      <div class="card-section position-relative d-flex justify-content-center p-5">
+        <div class="card-outer position-absolute rounded-circle">
+          <div class="card-inner rounded-circle">
+            <img src="{{  asset('japan_home/cards.png')  }}" alt="card" />
           </div>
         </div>
+        <div class="d-flex justify-content-center flex-column align-items-center gap-4">
+          <h3 class="mt-4">WE AEEEPT CREDIT CARD</h3>
+          <div class="card-list px-5 pb-4">
+              <img src="{{asset('japan_home/ae_ship.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/up_ship.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/jcb_ship.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/visa_ship.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/mc_ship.png')}}" alt="american_express_card" />
+          </div>
+        </div>
+        <button class="btn card-btn position-absolute px-5">Making Car Buying simple - Click Here</button>
       </div>
-    </section>
-
-    <section>
-      <div class="shipment-card">
-        <span class="shipment-bod gap-5">
-          <div class="logo-shipment">
-            <div class="row">
-              <div class="col-md-5 col-lg-5 col-sm-5 col-3"></div>
-              <div class="col-md-2 col-lg-2 col-sm-2 col-2">
-                <div class="shipment_logo">
-                  <img src="{{  asset('japan_home/shipment_logo.png')  }}" alt="HTML tutorial" class="shipment_image img-fluid">
-                </div>
-              </div>
-              <div class="col-md-5 col-lg-5 col-sm-5 col-7"></div>
-            </div>
-          </div>
-
-          <h5 class="card-title">WE ACCEPT CREDIT CARD</h5>
-
-          <div class="card-imge gap-3 mb-3">
-                    <img src="{{  asset('japan_home/ae_ship.png')  }}" class="img-fluid card_image">
-                    <img src="{{  asset('japan_home/up_ship.png')  }}" class="img-fluid card_image">
-                    <img src="{{  asset('japan_home/jcb_ship.png')  }}" class="img-fluid card_image">
-                    <img src="{{  asset('japan_home/visa_ship.png')  }}" class="img-fluid card_image">
-                    <img src="{{  asset('japan_home/mc_ship.png')  }}" class="img-fluid card_image">  
-          </div>
-
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-primary car-buy" type="button">
-              MAKING CAR BUYING SIMPLE-CLICK HERE
-            </button>
-          </div>
-        </span>
-      </div>
-    </section>
-
-    <section>
-      <div class="container roro-center my-5">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-lg-12">
-            <p class="text-center fw-bolder fs-4 text-dark">RORO</p>
-
-            <h6 class="mt-3" style="text-align: justify">
-              Each unit is driven straight into the Vessel carefully, all units
-              are shipped under deck so that you receive the units in immaculate
-              condition just as described at the time of purchase. We have a tie
-              up with all major liners operating from Japan at very special
-              Ocean freight rates and shortest sailing time upto your port of
-              destination.
-            </h6>
-          </div>
-
-          <!-- <div class="col-md-12 col-sm-12 col-lg-12 roro-img mt-3 gap-3">
-            <img src="roro1.png" alt="HTML tutorial" class="img-fluid" />
-            <img src="roro2.png" alt="HTML tutorial" class="img-fluid" />
-            <img src="roro3.png" alt="HTML tutorial" class="img-fluid" />
-          </div> -->
+    </div>
+   </section>
+  <!-- Credit Card Section End  -->
+  
+  <!-- Roro Section Start  -->
+   <section class="roro-section">
+    <div class="container">
+      <div class="content-section p-5 d-flex justify-content-center align-items-center flex-column gap-4">
+        <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3">
+          <h4>RORO</h4>
+          <p class="px-5">Each unit is driven straight into the Vessel carefully, all units are shipped under
+            deck so that you receive the units in immaculate condition just as described at the
+              time of purchase. We have a tie up with all major liners operating from Japan at
+              very special Ocean freight rates and shortest sailing time upto your port of destination.
+          </p>
+        </div>
+        <div class="roro-img-section row">
           <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
-            <img src="{{  asset('japan_home/roro1.png')  }}" alt="HTML tutorial" class="img-fluid">
+              <img src="{{  asset('japan_home/roro1.png')  }}" alt="HTML tutorial" class="img-fluid">
           </div>
           <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
             <img src="{{  asset('japan_home/roro2.png')  }}" alt="HTML tutorial" class="img-fluid">
@@ -105,23 +69,24 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+   </section>
+  <!-- Roro Section End  -->
 
-    <section>
-      <div class="container cont-center my-5">
-        <div class="row">
-          <div class="col-md-12 col-sm-12 col-lg-12">
-            <p class="text-center fw-bolder fs-4 text-dark">Container</p>
-
-            <h6 class="mt-3" style="text-align: justify">
-              We understand that Freight Cost saving plays a major role in any
-              business, Thus we have provision of Container shipment on CKD
-              (complete knock down) basis, Our Highly skilled team has mastered
-              the process of Container Vanning. All your units will be stuffed
-              into the container with utmost care and will be shipped promptly
-              to any desired port Worldwide.
-            </h6>
-          </div>
+  <!-- Containers Section Start  -->
+   <section class="containers-section">
+    <div class="container">
+      <div class="content-section p-5 d-flex justify-content-center align-items-center flex-column gap-4">
+        <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3">
+          <h4>Container</h4>
+          <p class="px-5">We understand that Freight Cost saving plays a major role in any business,
+             Thus we have provision of Container shipment on CKD (complete knock down) basis, Our Highly
+              skilled team has mastered the process of Container Vanning. All your units will be stuffed
+               into the container with utmost care and will be shipped promptly to any desired port
+                Worldwide.
+          </p>
+        </div>
+        <div class="containers-img-section row">
           <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
             <img src="{{  asset('japan_home/con1.png')  }}" alt="HTML tutorial" class="img-fluid">
           </div>
@@ -133,39 +98,58 @@
           </div>
         </div>
       </div>
+    </div>
+   </section>
+  <!-- Containers Section End  -->
+
+  <!-- Inspection section start -->
+    <section class="quality-compliance Inspection-section">
+            <div class="container text-center">
+                <div class="px-5">
+                  <h4 class="section-title pb-4">Inspection</h4>
+                  <p class="section-subtitle px-5">
+                    Every country has different quality compliance procedures, Our operation team take care of that by arranging suitable third party 
+                    inspection for each country by meeting all the compliance requirements.</p>
+                </div>
+                <div class="row justify-content-center px-4">
+                    <div class="col-md-4 col-12 mb-4">
+                        <div class="compliance-item mb-3">
+                            <img src="{{ asset('japan_home/qc_2.svg') }}" alt="QISJ Logo" class="compliance-logo">
+                            <div class="compliance-icon"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <div class="compliance-content">
+                            <h5 class="compliance-title">Quality Inspection Services CO.,LTD</h5>
+                            <p class="compliance-text">Kenya, Tanzania</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-12 mb-4">
+                        <div class="compliance-item mb-3">
+                            <img src="{{ asset('japan_home/qc_3.svg') }}" alt="Bureau Veritas Logo" class="compliance-logo">
+                            <div class="compliance-icon"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <div class="compliance-content">
+                            <h5 class="compliance-title">Bureau Veritas Japan CO.,LTD.</h5>
+                            <p class="compliance-text">Sri Lanka, Mauritius</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-12 mb-4">
+                        <div class="compliance-item mb-3">
+                            <img src="{{ asset('japan_home/qc_1.svg') }}" alt="JAAI Logo" class="compliance-logo">
+                            <div class="compliance-icon"><i class="fas fa-globe"></i></div>
+                        </div>
+                        <div class="compliance-content">
+                            <h5 class="compliance-title">East Africa Automobile Service</h5>
+                            <p class="compliance-text">Tanzania, Uganda</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
+  <!-- Inspection section end -->
 
-    <section>
-      <div class="container-fluid insp-center pb-5">
-        <div class="row justify-content-center">
-          <div class="col-md-12 col-sm-12 col-lg-12">
-            <p class="text-center fw-bolder fs-4 text-dark">Inspection</p>
-
-            <h6 class="mt-3" style="text-align: justify">
-              Every country has different quality compliance procedures, Our
-              operation team take care of that by arranging suitable third party
-              inspection for each country by meeting all the compliance
-              requirements.
-            </h6>
-          </div>
-        </div>
-
-        <div class="row mt-3 text-center">
-          <div class="col-12 col-md-4">
-            <img src="{{ asset('japan_home/qc1.svg') }}" alt="logo" class="img-fluid">
-          </div>
-
-          <div class="col-12 col-md-4">
-            <img src="{{ asset('japan_home/qc2.svg') }}" alt="logo" class="img-fluid">
-          </div>
-
-          <div class="col-12 col-md-4">
-            <img src="{{ asset('japan_home/qc3.svg') }}" alt="logo" class="img-fluid">
-          </div>
-        </div>
-      </div>
-    </section>
-
+  <!-- Our Business section Start -->
     <section class="help">
       <div class="container">
         <div class="row justify-content-center">
@@ -283,6 +267,7 @@
         </div>
       </div>
     </section>
+  <!-- Our Business section End -->
  
 </main>
 @endsection
