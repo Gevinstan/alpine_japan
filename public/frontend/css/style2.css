@@ -2950,6 +2950,7 @@ img {
 
 body {
     overflow-x: hidden;
+    font-family: var(--poppins) !important;
 }
 
 a:hover,
@@ -14736,29 +14737,37 @@ p {
     border: 1px solid #ffffff !important;
 }
 .car-listing-details p {
-    font-size: 0.975rem;
-    line-height: 22px;
+    font-size: 0.65rem;
+    line-height: 10px;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .brand-text {
     color: #25282d;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.5rem;
-    line-height: 22px;
+    font-size: 1.3rem;
+    line-height: 15px;
+    font-weight: 600;
+    padding-bottom: 6px;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .amount-text {
     color: #868b96;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .price-text {
     color: #038ffc;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .commission-text {
     color: #0d274e;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: var(--poppins) !important;
 }
 .cal-btn {
     color: #038ffc;
@@ -14767,9 +14776,9 @@ p {
     background-color: var(--white-color);
     font-size: 0.9375rem;
     padding: 10px;
-    font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
+    font-family: var(--poppins) !important;
 }
 .total-price span {
     font-size: 2rem;
@@ -15294,6 +15303,7 @@ p {
     font-style: normal !important;
     font-size: 12px !important;
     color: #868b96 !important;
+    font-weight: 500 !important;
 }
 
 .charge-btn {
@@ -16207,5 +16217,10 @@ input:not(:placeholder-shown) + .placeholder-text {
 .container {
     padding-left: 0; /* Remove padding from container */
     padding-right: 0; /* Remove padding from container */
+}
+
+.accordion-title {
+    font-family: var(--poppins);
+    font-size: 1.1rem !important;
 }
 

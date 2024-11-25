@@ -23,7 +23,7 @@
             </nav>
             <div class="row">
                 <div class="col-lg-8 col-sm-12 col-12 listing_image">
-                    <div class="row">
+                    <div class="row pb-3">
                         <div class="inventory-details-slick-for m-0">
                             @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
@@ -45,7 +45,9 @@
                             @endforeach
                         </div>
                     </div>
-                     <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Pictures Downloaded')}}</button>
+                    <div class="d-flex justify-content-end px-3">
+                     <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Pictures Downloaded')}} <span class="ps-2"><i class="fa-solid fa-download ml-3"></i> <span></button>
+                    </div>
                 </div>
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
@@ -175,7 +177,7 @@
                     <div class="accordion" id="accordionPanelsStayOpenExample1" data-aos="fade-up" data-aos-delay="150">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button accordion-title" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsetwo">
                                     {{ __('translate.Car Specifications') }}
@@ -585,7 +587,7 @@
                     <div class="accordion" id="accordionPanelsStayOpenExample4" data-aos="fade-up" data-aos-delay="300">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingfive">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button accordion-title" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
                                     aria-controls="panelsStayOpen-collapsefive">
                                     {{__('translate.Sell Points')}}

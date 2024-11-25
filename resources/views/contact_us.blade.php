@@ -35,7 +35,7 @@
                     <p class="contact-us-dec ps-4">{{ $contact_us->description }}</p>
 
 
-                    <div class="contact-us-item p-0 ps-4">
+                    <div class="contact-us-item p-0 ps-4 gap-2">
                         <div class="contact-us-inner">
                             <div class="icon">
                                 <span>
@@ -56,7 +56,7 @@
                             <div class="text">
                                 <h4>{{ __('translate.Live Chat') }}</h4>
 
-                                <p class="">{{ __('translate.Wait time of ~10 minutes.') }}</p>
+                                <p class="text-nowrap">{{ __('translate.Wait time of ~10 minutes.') }}</p>
                             </div>
                         </div>
                         <div class="contact-us-inner">
@@ -95,9 +95,9 @@
 
 
                     <div class="contact-share">
-                        <div class="container-fluid">
+                        <div class="">
                             <div class="row">
-                                <div class="col-md-6 ">
+                                <div class="col-md-6 ps-4">
                                     <div class="location d-flex" >
                                         
                                         <a href="javascript:;">
