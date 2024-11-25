@@ -543,9 +543,9 @@
     <!-- footer prart start  -->
 
     @if (Route::is('home'))
-    <footer class="footer {{ Session::get('selected_theme') == 'theme_two' ? 'footer-three' : ''  }} {{ Session::get('selected_theme') == 'theme_one' ? 'footer-two' : ''  }}">
+    <footer class=" footer {{ Session::get('selected_theme') == 'theme_two' ? 'footer-three' : ''  }} {{ Session::get('selected_theme') == 'theme_one' ? 'footer-two' : ''  }}">
     @else
-    <footer class="footer footer-two">
+    <footer class="overflow-hidden footer footer-two">
     @endif
 
         <div class="container px-sm-2 px-md-5">
