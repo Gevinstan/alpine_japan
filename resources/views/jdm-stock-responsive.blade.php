@@ -6,7 +6,7 @@
 @endsection
 
 @section('body-content')
-<main class="main_wid">
+<main class="main_wid overflow_jdm">
 <div id="pageLoader">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -32,7 +32,7 @@
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="accordion-button brand-heading p-0" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapseOne">
                                                 Brand
@@ -49,7 +49,7 @@
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="brand[]" class="form-check-input brand-search" type="checkbox"
                                                                            >
-                                                                        <label class="form-check-label">
+                                                                        <label class="form-check-label brand_name">
                                                                            {{$brand_label->name}}
                                                                         </label>
                                                                     </div>
@@ -62,7 +62,7 @@
                                                                                             <input name="model[]" class="form-check-input brand-search" type="checkbox"
                                                                                                     value="{{ $brand->model }}"
                                                                                                     {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
-                                                                                            <label class="form-check-label">
+                                                                                            <label class="form-check-label brand_name">
                                                                                                 {{ $brand->model }}
                                                                                             </label>
                                                                                         </span>
@@ -83,8 +83,9 @@
                                 </div>
                             </div>
                         <!-- Select Your Brand End-->
+
                         <!-- Select Your Year Start -->
-                        <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box my-2">
 
                             <!-- Select Your Budget  -->
                             <div class="accordion" id="accordionPanelsStayOpenExample1">
@@ -108,10 +109,16 @@
                                                         class="slider-input mx-0 my-2" id="modelYearSlider">
                                                         <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
 
-                                                        <div class="d-flex justify-content-between align-items-center w-100">
-                                                            <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                            <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                            <div class="d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                                <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
+                                                                <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex align-content-between flex-column gap-4">
+                                                            <button class="clear-button">Clear</button>
+                                                            <button class="go-button">Go</button>
                                                         </div>
                                                     </div>
 
@@ -123,24 +130,21 @@
                                             </span>
                                         </div>
                                     </div>
+
                                 </div>
 
+                            
+
                             </div>
-
-                         
-
-                        </div>
                         <!-- Select Your Year End -->
-
-
                        
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box my-2">   
                                 <!-- Budget -->
-                                <div class="accordion" id="accordionPanelsStayOpenExample4">
+                                <div class="accordion" id="accordionPanelsStayOpenExample4" class="accordion_dd">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingfive">
-                                            <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="accordion-button budget-heading p-0" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapsefive">
                                                 Budget
@@ -149,38 +153,46 @@
                                         <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse "
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
-                                                <div class="d-flex flex-column align-content-between col-sm-9">
-                                                    <div class="d-flex justify-content-between">
-                                                        <span class="slider-label m-0">{{$minPrice}}</span>
-                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
-                                                    </div>
+                                                <div class="row">
+                                                    <div class="d-flex flex-column align-content-between col-sm-9">
+                                                        <div class="d-flex justify-content-between slider_num">
+                                                            <span class="slider-label m-0">{{$minPrice}}</span>
+                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
+                                                        </div>
 
-                                                    <div id="slider-outer-div" class="ms-2">
-                                                        <div id="slider-div">
-                                                            <div>
-                                                                <input id="ex2" type="text" name="price_range_scale" 
-                                                                data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
-                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
-                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
-                                                                />
+                                                        <div id="slider-outer-div" class="ms-2">
+                                                            <div id="slider-div">
+                                                                <div>
+                                                                    <input id="ex2" type="text" name="price_range_scale" 
+                                                                    data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
+                                                                    value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                    data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                     
+                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
+                                                        <button class="clear-button">Clear</button>
+                                                        <button class="go-button">Go</button>
+                                                    </div>
+                                                </div>
+                                                
 
-                                                    <h6 style="padding-top:30px">Price Range</h6>
+                                                <div class="row budget-space">
+                                                    <h6 class="pt-2 price_range">Price Range</h6>
 
                                                     @foreach($price_range as $key=>$range)
                                                     <div class="d-flex align-items-center">
-                                                            <div class="form-check me-3">
+                                                            <div class="form-check">
                                                                 <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
-                                                                {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}>
-                                                                <label class="form-check-label" >
-                                                                {{$key}}({{$range}})
-                                                                
+                                                                    {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
+                                                                <label class="form-check-label">
+                                                                    <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
                                                                 </label>
                                                             </div>
                                                     </div>
-
                                                     @endforeach
                                                 </div>
                                                 <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
@@ -214,14 +226,14 @@
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
                                      <span class="search-btn" style="cursor: pointer;">
                                        <a href="javascript:void(0);" id="outside_form_btn">
-                                            <i class="bi bi-search"></i></a></span></span>
+                                            <i class="bi bi-search search_icon"></i></a></span>
                                 </div>
 
                                 <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
                                     <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                      <p class="sort-text pl-2">Sort By:</p>
                                      <div class="dropdown sort-dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-secondary recently_added dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                             Recently Added
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
@@ -270,20 +282,22 @@
                         @if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
                                             <span class="alert-close">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
                                         </span> 
                                 </span>              
                             </p>
+
+                            
                             @endforeach
                             @endif
                         @if(request('model') && count(request('model')) > 0)
                         @foreach(request('model') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -295,7 +309,7 @@
                             @endif
                             @if(request('year'))
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative model-item" data-brand="{{ request('year') }}">{{ request('year') }}
+                                <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -316,7 +330,8 @@
                             <div class="row g-5">
                             @if(count($cars_array) > 0)  
                                  @foreach ($cars_array as $index => $car)
-                                    <div class="col-lg-4  col-sm-6 col-md-6">
+                                    <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
+                                            data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
@@ -334,7 +349,7 @@
                                                             {{ $car['make'] }}
                                                         @endif
                                                     </span>
-                                                    <p>
+                                                    <p class="listcar_price pt-3 pe-4">
                                                        @if(session('front_lang')=='en')
                                                         {{ '$'.$car['start_price'] }}
                                                         @else
@@ -353,14 +368,14 @@
                                                     </h3>
                                                 </a>
 
-                                                <div class="brand-car-inner-item-main pt-2 px-4">
+                                                <div class="brand-car-inner-item-main px-4">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
                                                                 <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                    <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                </svg>
+                                                                        <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                        <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                        </svg>
                                                             </span>
                                                         </div>
 
@@ -370,10 +385,35 @@
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
-                                                                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M15.8901 3.09765L14.3901 1.76431C14.2436 1.63409 14.0063 1.63409 13.8598 1.76431C13.7133 1.89453 13.7133 2.10547 13.8598 2.23565L15.0947 3.33331L13.8598 4.43096C13.7895 4.49346 13.75 4.57809 13.75 4.66665V5.66665C13.75 6.40202 14.4227 6.99999 15.25 6.99999V12.6666C15.25 12.8505 15.0819 13 14.875 13C14.6681 13 14.5 12.8506 14.5 12.6666V12C14.5 11.4485 13.9953 11 13.375 11H13V2.33334C13 1.59797 12.3273 1 11.5 1H4.00001C3.17275 1 2.50001 1.59797 2.50001 2.33334V14.3333C1.67275 14.3333 1 14.9313 1 15.6667V16.6667C1 16.8509 1.16773 17 1.37501 17H14.125C14.3323 17 14.5 16.8509 14.5 16.6667V15.6667C14.5 14.9313 13.8273 14.3333 13 14.3333V11.6667H13.375C13.5819 11.6667 13.75 11.8161 13.75 12V12.6667C13.75 13.2181 14.2546 13.6667 14.875 13.6667C15.4954 13.6667 16 13.2181 16 12.6667V3.33334C16 3.24478 15.9604 3.16015 15.8901 3.09765ZM3.25003 2.33334C3.25003 1.96584 3.58658 1.66669 4.00001 1.66669H11.5C11.9134 1.66669 12.25 1.96584 12.25 2.33334V14.3333H3.24999L3.25003 2.33334ZM13.75 15.6666V16.3333H1.75002V15.6666C1.75002 15.2991 2.08657 15 2.50001 15H13C13.4134 15 13.75 15.2991 13.75 15.6666ZM15.25 6.33333C14.8365 6.33333 14.5 6.03418 14.5 5.66668V4.80468L15.25 4.13803V6.33333Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                    <path d="M11.041 2.52344H4.29103C4.08375 2.52344 3.91602 2.66929 3.91602 2.84954V6.76876C3.91602 6.94901 4.08375 7.09487 4.29103 7.09487H11.041C11.2483 7.09487 11.416 6.94901 11.416 6.76876V2.84951C11.416 2.66929 11.2483 2.52344 11.041 2.52344ZM10.666 6.44265H4.666V3.17562H10.666V6.44265Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                    </svg>
+                                                                <svg width="20" height="20" viewBox="0 0 20 20" 
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                            d="M16.6597 2.2666C16.6571 2.25505 16.6501 2.24593 16.6466 2.23503C16.641 2.21631 16.6335 2.19824 16.6243 2.18099C16.6139 2.16113 16.6014 2.14258 16.5871 2.12533C16.5755 2.111 16.5628 2.09766 16.549 2.08529C16.5322 2.07113 16.5138 2.05892 16.4943 2.04867C16.4779 2.03874 16.4604 2.03027 16.4424 2.02327C16.4207 2.01644 16.3983 2.01188 16.3757 2.0096C16.3618 2.00553 16.3477 2.00228 16.3333 2H14.6527C14.5667 0.839681 14.0283 0 13.3333 0C12.6383 0 12.0999 0.839681 12.014 2H11.3193C11.2334 0.839681 10.695 0 10 0C9.30501 0 8.7666 0.839681 8.68066 2H7.986C7.90007 0.839681 7.36165 0 6.66667 0C5.97168 0 5.43327 0.839681 5.34733 2H4.65267C4.56673 0.839681 4.02832 0 3.33333 0C2.63835 0 2.09994 0.839681 2.014 2H0.333333C0.149251 2 0 2.14925 0 2.33333V19.6667C0 19.8507 0.149251 20 0.333333 20H16.3333C16.5174 20 16.6667 19.8507 16.6667 19.6667V18.6667H19.6667C19.7668 18.6667 19.8615 18.6216 19.9246 18.5441C19.988 18.4665 20.013 18.3647 19.993 18.2666L16.6597 2.2666ZM13.3333 0.666667C13.5741 0.666667 13.91 1.17741 13.984 2H12.6839C12.7567 1.17741 13.0926 0.666667 13.3333 0.666667ZM10 0.666667C10.2407 0.666667 10.5767 1.17741 10.6507 2H9.35059C9.42334 1.17741 9.75928 0.666667 10 0.666667ZM6.66667 0.666667C6.90739 0.666667 7.24333 1.17741 7.31738 2H6.01725C6.09001 1.17741 6.42594 0.666667 6.66667 0.666667ZM3.33333 0.666667C3.57406 0.666667 3.90999 1.17741 3.98405 2H2.68392C2.75667 1.17741 3.09261 0.666667 3.33333 0.666667ZM0.666667 2.66667H2.014C2.09994 3.82699 2.63835 4.66667 3.33333 4.66667C3.51742 4.66667 3.66667 4.51742 3.66667 4.33333C3.66667 4.14925 3.51742 4 3.33333 4C3.09261 4 2.75667 3.48926 2.68262 2.66667H5.34733C5.43441 3.82699 5.97168 4.66667 6.66667 4.66667C6.85075 4.66667 7 4.51742 7 4.33333C7 4.14925 6.85075 4 6.66667 4C6.42594 4 6.09001 3.48926 6.01595 2.66667H8.68066C8.76774 3.82699 9.30501 4.66667 10 4.66667C10.1841 4.66667 10.3333 4.51742 10.3333 4.33333C10.3333 4.14925 10.1841 4 10 4C9.75928 4 9.42334 3.48926 9.34928 2.66667H12.014C12.1011 3.82699 12.6383 4.66667 13.3333 4.66667C13.5174 4.66667 13.6667 4.51742 13.6667 4.33333C13.6667 4.14925 13.5174 4 13.3333 4C13.0926 4 12.7567 3.48926 12.6826 2.66667H16V6H0.666667V2.66667ZM16 19.3333H0.666667V6.66667H16V19.3333ZM16.6667 18V5.56673L19.257 18H16.6667Z" />
+                                                                        <path
+                                                                            d="M7.33268 11.9999H5.99935C5.81527 11.9999 5.66602 12.1492 5.66602 12.3333V13.6666C5.66602 13.8507 5.81527 13.9999 5.99935 13.9999H7.33268C7.51676 13.9999 7.66602 13.8507 7.66602 13.6666V12.3333C7.66602 12.1492 7.51676 11.9999 7.33268 11.9999ZM6.99935 13.3333H6.33268V12.6666H6.99935V13.3333Z" />
+                                                                        <path
+                                                                            d="M10.6667 12H9.33333C9.14925 12 9 12.1493 9 12.3333V13.6667C9 13.8507 9.14925 14 9.33333 14H10.6667C10.8507 14 11 13.8507 11 13.6667V12.3333C11 12.1493 10.8507 12 10.6667 12ZM10.3333 13.3333H9.66667V12.6667H10.3333V13.3333Z" />
+                                                                        <path
+                                                                            d="M4.00065 12H2.66732C2.48324 12 2.33398 12.1493 2.33398 12.3333V13.6667C2.33398 13.8507 2.48324 14 2.66732 14H4.00065C4.18473 14 4.33398 13.8507 4.33398 13.6667V12.3333C4.33398 12.1493 4.18473 12 4.00065 12ZM3.66732 13.3333H3.00065V12.6667H3.66732V13.3333Z" />
+                                                                        <path
+                                                                            d="M7.33268 15.3334H5.99935C5.81527 15.3334 5.66602 15.4826 5.66602 15.6667V17C5.66602 17.1841 5.81527 17.3334 5.99935 17.3334H7.33268C7.51676 17.3334 7.66602 17.1841 7.66602 17V15.6667C7.66602 15.4826 7.51676 15.3334 7.33268 15.3334ZM6.99935 16.6667H6.33268V16H6.99935V16.6667Z" />
+                                                                        <path
+                                                                            d="M10.6667 15.3334H9.33333C9.14925 15.3334 9 15.4826 9 15.6667V17C9 17.1841 9.14925 17.3334 9.33333 17.3334H10.6667C10.8507 17.3334 11 17.1841 11 17V15.6667C11 15.4826 10.8507 15.3334 10.6667 15.3334ZM10.3333 16.6667H9.66667V16H10.3333V16.6667Z" />
+                                                                        <path
+                                                                            d="M4.00065 15.3334H2.66732C2.48324 15.3334 2.33398 15.4826 2.33398 15.6667V17C2.33398 17.1841 2.48324 17.3334 2.66732 17.3334H4.00065C4.18473 17.3334 4.33398 17.1841 4.33398 17V15.6667C4.33398 15.4826 4.18473 15.3334 4.00065 15.3334ZM3.66732 16.6667H3.00065V16H3.66732V16.6667Z" />
+                                                                        <path
+                                                                            d="M7.33268 8.66669H5.99935C5.81527 8.66669 5.66602 8.81594 5.66602 9.00002V10.3334C5.66602 10.5174 5.81527 10.6667 5.99935 10.6667H7.33268C7.51676 10.6667 7.66602 10.5174 7.66602 10.3334V9.00002C7.66602 8.81594 7.51676 8.66669 7.33268 8.66669ZM6.99935 10H6.33268V9.33335H6.99935V10Z" />
+                                                                        <path
+                                                                            d="M10.6667 8.66663H9.33333C9.14925 8.66663 9 8.81588 9 8.99996V10.3333C9 10.5174 9.14925 10.6666 9.33333 10.6666H10.6667C10.8507 10.6666 11 10.5174 11 10.3333V8.99996C11 8.81588 10.8507 8.66663 10.6667 8.66663ZM10.3333 9.99996H9.66667V9.33329H10.3333V9.99996Z" />
+                                                                        <path
+                                                                            d="M14.0007 12H12.6673C12.4832 12 12.334 12.1493 12.334 12.3333V13.6667C12.334 13.8507 12.4832 14 12.6673 14H14.0007C14.1847 14 14.334 13.8507 14.334 13.6667V12.3333C14.334 12.1493 14.1847 12 14.0007 12ZM13.6673 13.3333H13.0007V12.6667H13.6673V13.3333Z" />
+                                                                        <path
+                                                                            d="M14.0007 15.3334H12.6673C12.4832 15.3334 12.334 15.4826 12.334 15.6667V17C12.334 17.1841 12.4832 17.3334 12.6673 17.3334H14.0007C14.1847 17.3334 14.334 17.1841 14.334 17V15.6667C14.334 15.4826 14.1847 15.3334 14.0007 15.3334ZM13.6673 16.6667H13.0007V16H13.6673V16.6667Z" />
+                                                                        <path
+                                                                            d="M14.0007 8.66663H12.6673C12.4832 8.66663 12.334 8.81588 12.334 8.99996V10.3333C12.334 10.5174 12.4832 10.6666 12.6673 10.6666H14.0007C14.1847 10.6666 14.334 10.5174 14.334 10.3333V8.99996C14.334 8.81588 14.1847 8.66663 14.0007 8.66663ZM13.6673 9.99996H13.0007V9.33329H13.6673V9.99996Z" />
+                                                                        <path
+                                                                            d="M4.00065 8.66663H2.66732C2.48324 8.66663 2.33398 8.81588 2.33398 8.99996V10.3333C2.33398 10.5174 2.48324 10.6666 2.66732 10.6666H4.00065C4.18473 10.6666 4.33398 10.5174 4.33398 10.3333V8.99996C4.33398 8.81588 4.18473 8.66663 4.00065 8.66663ZM3.66732 9.99996H3.00065V9.33329H3.66732V9.99996Z" />
+                                                                </svg>
 
                                                             </span>
                                                         </div>
@@ -782,11 +822,12 @@
                         </div>
                     </div>
 
-
-                    @if ($cars->hasPages())
-                    {{ $cars->appends(request()->query())->links() }}
-                    @endif
-
+                    <div class="py-4">
+                        @if ($cars->hasPages())
+                        {{ $cars->appends(request()->query())->links() }}
+                        @endif
+                    </div>
+                    
 
                 </div>
              </form>    

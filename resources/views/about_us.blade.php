@@ -9,21 +9,23 @@
 
 <main class="main_wid">
     <!-- about-part-start -->
-    <section class="about">
+    <section class="about px-2 px-sm-3 px-lg-5">
         <div class="container">
             <div class="row ">
-                <div class="col-lg-5 spacing_about ">
+                <div class="col-lg-5 spacing_about px-2 px-sm-3 px-lg-5">
                     <div class="">
-                        <h2 class="about_us">About</h2> 
-                        <h2 class="about_us about-us-color">Us</h2>    
+                        <p class="about_us"></p> 
+                        <p class="about_us about-us-color"></p>  
+                        <h2 class="section-heading">About <span class="highlight">Us<span></h2>  
                     </div>
 
                     <div class="about-img"> 
-                        <img src="{{ asset($about_us->about_image) }}" alt="img">
+                        <img src="{{ asset($about_us->about_image) }}" class="img-fluid" alt="img">
+                        <!-- <img src="{{ asset('japan_home/about_us.svg') }}" height="15" width="15" /> -->
                     </div>
                 </div>
 
-                <div class="col-lg-7 about-pl pt-2" >
+                <div class="col-lg-7 about-pl pt-2 px-2 px-sm-3 px-lg-5" >
                     <div class="taitel two">
                         <span class="about_us_title">{{ $about_us->header }}</span>
                     </div>

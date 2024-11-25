@@ -578,9 +578,9 @@
 
 .thm-btn {
     position: relative;
-    width: 156px;
+    width: 150px;
     border-radius: 8px;
-    height: 56px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1703,7 +1703,7 @@
     align-items: center;
     gap: 10px;
     justify-content: space-between;
-    border-top: 1px solid #e9e9e9;
+    /* border-top: 1px solid #e9e9e9; */
     padding-top: 20px;
 }
 
@@ -7359,9 +7359,9 @@ p {
     background-color: var(--primary-color-2);
 }
 
-.feature-two .brand-car-item .brand-car-inner .brand-car-inner-item p {
+/* .feature-two .brand-car-item .brand-car-inner .brand-car-inner-item p {
     color: var(--primary-color-2);
-}
+} */
 
 .feature-two .brand-car-item:hover .brand-car-inner h3 {
     color: var(--primary-color-2);
@@ -7824,7 +7824,7 @@ p {
 .dropdown_bg {
     background-color: #fff;
     color: #038ffc;
-    min-width: 26rem !important;
+    min-width: 28rem !important;
 }
 
 .footer.two .footer-icon .text h5 {
@@ -8086,8 +8086,8 @@ p {
 
 .header-right-item .header-right-item-btn .btn-secondary {
     color: var(--white-color);
-    background-color: transparent;
-    border-color: transparent;
+    background-color: transparent !important; 
+    border-color: transparent !important;
     font-size: 14px;
     font-style: normal;
     font-weight: var(--regular);
@@ -8790,7 +8790,7 @@ p {
 .inner-header .menu-bg .nav-main {
     border-top: 1px solid transparent;
     margin-top: 0;
-    padding: 5px 0;
+    /* padding: 5px 0; */
 }
 
 .inner-header .menu-bg .nav-main .nav-left .menu ul {
@@ -9160,9 +9160,9 @@ p {
 }
 
 .inventory-main-box {
-    border-radius: 4px;
+    border-radius: 12px;
     background-color: var(--white-color);
-    padding: 30px;
+    padding: 18px;
     /* Drop Shadow */
     box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06);
 }
@@ -9320,8 +9320,8 @@ p {
 }
 
 .inventory-main-box .select-Brand-box .form-check-input:checked {
-    background-color: var(--primary-color-2);
-    border-color: var(--primary-color-2);
+    background-color: var(--primary-color-1);
+    border-color: var(--primary-color-1);
 }
 
 .inventory-main-box .noUi-target {
@@ -9439,10 +9439,10 @@ p {
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    border-radius: 6px;
-    border: 1px solid #ededed;
-    background: var(--white-color);
-    box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06);
+    /* border-radius: 6px;
+    border: 1px solid #ededed; */
+    /* background: var(--white-color); */
+    /* box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06); */
     margin-bottom: 40px;
 }
 
@@ -9462,9 +9462,10 @@ p {
     .inventory-sarch-ber-item
     .inventory-sarch-ber
     .form-control {
-    width: 100%;
+    width: 25.125rem !important;
+    height: 3.5rem !important;
     padding: 13px 20px;
-    background-color: #f0f3ff;
+    background-color: #FBFBFB;
     border: 1px solid #f0f3ff;
     font-size: 16px;
     font-weight: var(--regular);
@@ -13654,6 +13655,7 @@ h5.preloader-text::after {
     --bold: 700;
     --DMSans: "DM Sans", sans-serif;
     --roboto: "Roboto", sans-serif;
+    --poppins: "Poppins", serif;
     --transition-all: all linear 0.3s;
     --transition-ease-in-out: all 0.5s ease-in-out;
 }
@@ -14614,8 +14616,8 @@ p {
 
 /********* breadcrumb Start ***********/
 .listing-breadcrumb {
-    padding: 145px 0 0 0 !important;
-}
+    padding: 125px 0 0 0 !important;
+}   
 
 .breadcrumb-list .breadcrumb-link a,
 .breadcrumb-list .breadcrumb-link {
@@ -14855,6 +14857,10 @@ p {
     background-color: #f7f7f7 !important;
 }
 
+.brand-car-inner {
+    background-color: #FFFFFF;
+}
+
 /* Home Page Top Navbar Responsive issue */
 
 .nav-dropdown-list {
@@ -14884,6 +14890,7 @@ p {
 .dropdown-item {
     color: black;
     text-decoration: none;
+    font-size: 12px !important;
 }
 
 .dropdown-item:hover {
@@ -14929,6 +14936,7 @@ p {
     overflow: hidden;
 
 }
+
 
 .lang_dropdown {
     min-width: 5rem !important;
@@ -15226,8 +15234,12 @@ p {
 }
 .sort-dropdown button {
     color: #038ffc;
-    background-color: var(--white-color);
-    border-color: var(--white-color);
+    /* background-color: var(--white-color);
+    border-color: var(--white-color); */
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
 }
 
 .sort-dropdown button {
@@ -15569,10 +15581,10 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-size: 45px;
 }
 
-.about .about-pl {
+/* .about .about-pl {
     padding-left: 126px;
-    /* padding-top:100px; */
-}
+    
+} */
 
 .about-taitel {
     padding-top: 30px;
@@ -15955,3 +15967,261 @@ input:not(:placeholder-shown) + .placeholder-text {
       height: 540px !important;
     }
   }
+
+  .nav_texthead .nav-item a.active {
+    color: #038ffc !important;
+  }
+
+  .contact-us-inner {
+    padding: 20px 35px;
+    background-color: #F9FAFF;
+    border-radius: 5px;
+  }
+
+  .contact-box h5 {
+    color: #264B83;
+  }
+
+  .contact-us .contact-box a {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .address-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7E8082;
+  }
+
+  .contact-us .contact-share {
+    margin-top: 5px !important;
+  }
+
+  /****** Shipment Page Style Start  ******/
+
+  .shipment-banner-section {
+    padding-top: 120px;
+  }
+
+  @media screen and (max-width: 992px) {
+    .shipment-banner-section {
+        padding-top: 0;
+      }
+  }
+  .shipment-banner-image {
+    background-image: url("../../japan_home/shipment.png");
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;  
+    text-align: start;
+  }
+
+  .banner-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18rem;
+    color: var(--white-color);
+  }
+
+  .banner-content h3 {
+    color: var(--white-color);
+    font-size: 2.5rem;
+    font-family: var(--poppins);
+  }
+
+  .banner-content p {
+    color: var(--white-color);
+    font-size: 1rem;
+    font-family: var(--poppins);
+  }
+
+  .card-section {
+    background-color: #FAFAFA;
+    box-shadow: 0px 8px 25.1px 0px #00000026;
+  }
+
+  .card-section h3 {
+    color: var(--primary-color-1);
+    font-family: var(--poppins);
+  }
+
+  .card-outer {
+    padding: 13px;
+    background: linear-gradient(#F2F4F5, #FFFFFF);
+    box-shadow: 2px 2px 4px 0px #7A8D93BF;
+    top: -65px;
+  }
+
+  .card-inner {
+    padding: 15px;
+    background: linear-gradient(to right,#CCD1DA, #FFFFFF);
+    border: 2px solid #FFFFFF;
+  }
+
+  .card-list img {
+    height: 70px;
+    width: 90px;
+    background: var(--white-color);
+    box-shadow: 0px 4px 4px 0px #00000014;
+    padding: 2px 5px;
+    border: 1px solid #E7E7E7;
+  }
+
+  .card-btn {
+    background: var(--primary-color-1);
+    color: var(--white-color) !important;
+    font-size: .875rem;
+    bottom: -15px;
+    text-transform: uppercase;
+    font-family: var(--poppins);
+  }
+
+  .roro-section h4, .containers-section h4,
+  .Inspection-section h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--poppins);
+  }
+
+  .roro-section p, .containers-section p {
+    font-size: .875rem;
+    color: #86888C;
+    font-family: var(--poppins);
+    text-align: center;
+  }
+  /****** Shipment Page Style End  ******/
+  .budget_price {
+    font-size: 0.7rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .budget_count {
+    color: #9EA3AD !important;
+  }
+
+  .budget-space {
+    --bs-gutter-x: 1rem;
+  }
+
+  .budget-heading {
+    font-family: "Poppins", serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #24272C !important;
+  }
+
+  .brand-heading {
+    font-family: "Poppins", serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #24272C !important;
+  }
+
+  .year-heading {
+    font-family: "Poppins", serif !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #24272C !important;
+  }
+
+  .year-slider-text {
+    font-size: 0.7rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .slider_num {
+    font-size: 0.7rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .brand_name {
+    font-size: 0.8rem !important;
+    font-family: "Poppins", serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+  .price_range {
+    font-family: "Poppins", serif !important;
+    font-weight: 600 !important;
+    font-style: normal !important;
+    color: #24272C !important;
+  }
+
+ .slider.slider-horizontal .slider-track {
+    height: 2px !important;
+    top: 14px !important;
+ }
+
+ .recently_added {
+    background-color: transparent !important; 
+    border-color: transparent !important;
+ }
+ 
+.inventory-sarch-ber {
+    position: relative;
+}
+
+.inventory-sarch-ber .form-control {
+    width: 100%;
+    padding-right: 10px; /* Add space for the icon */
+    border-radius: 0.25rem;
+}
+
+.inventory-sarch-ber .search-btn {
+    margin-left: 40px;
+    position: absolute;
+    right: 0px; /* Adjust spacing from the right edge */
+    top: 47%;
+    transform: translateY(-100%);
+    cursor: pointer;
+    color: #000; /* Adjust color */
+}
+
+.inventory-sarch-ber .search-btn i {
+    font-size: 1.25rem; /* Adjust the icon size */
+}
+
+
+  @media screen and (max-width: 425px) {
+    .overflow_jdm {
+        overflow-x: hidden !important;
+    }
+  }
+
+  /***** newly added css for about us ******/
+
+  .spacing_about {
+    padding: 0; /* Remove padding within the column */
+    margin: 0;  /* Remove margin within the column */
+}
+
+.about-pl {
+    padding: 0; /* Remove padding within the column */
+    margin: 0;  /* Remove margin within the column */
+}
+
+.row {
+    margin-left: 0; /* Remove left margin between columns */
+    margin-right: 0; /* Remove right margin between columns */
+    gap: 0; /* Ensure no gap between columns */
+}
+
+.container {
+    padding-left: 0; /* Remove padding from container */
+    padding-right: 0; /* Remove padding from container */
+}
+

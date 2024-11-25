@@ -11,7 +11,7 @@
 
     <section class="inner-banner contact_us_header">
         <div class="container">
-            <div class="row py-3 banner_color">
+            <div class="row py-3 px-sm-2 px-md-5 banner_color">
                 <div class="col-lg-12">
                     <div>
                         <!-- <h2 class="contact_us" >Contact</h2> 
@@ -28,14 +28,14 @@
 
     <!-- contact-us-part-start -->
     <section class="contact-us">
-        <div class="container">
+        <div class="container px-sm-2 px-md-5">
             <div class="row">
                 <div class="col-lg-6 contact-us-wight ">
                     <h3 class="contact-us-taitel ps-4">{{ $contact_us->title }}</h3>
                     <p class="contact-us-dec ps-4">{{ $contact_us->description }}</p>
 
 
-                    <div class="contact-us-item">
+                    <div class="contact-us-item p-0 ps-4">
                         <div class="contact-us-inner">
                             <div class="icon">
                                 <span>
@@ -62,7 +62,7 @@
                         <div class="contact-us-inner">
                             <div class="icon">
                                 <span>
-                                    <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <svg width="49" height="49" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <rect width="55" height="55" fill="url(#pattern0_309_38617)"/>
                                     <defs>
                                     <pattern id="pattern0_309_38617" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -111,7 +111,7 @@
 
                                             <!-- {{ $contact_us->address }} -->
                                         </a>
-                                        <h6><b>Takai Bldg. 301, Kano-cho 4 - 8 - 17, Chuo-ku, Kobe 650-0001</b></h6>
+                                        <h6 class="address-text">Takai Bldg. 301, Kano-cho 4 - 8 - 17, Chuo-ku, Kobe 650-0001</h6>
                                     </div>
                                 </div>
 
