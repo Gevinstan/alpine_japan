@@ -171,8 +171,8 @@
                                                     </div>
                                                      
                                                     <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
-                                                        <button class="clear-button">Clear</button>
-                                                        <button class="go-button">Go</button>
+                                                        <button class="clear-button" id="clear-budget">Clear</button>
+                                                        <button class="go-button" type="button" id="budget_search">Go</button>
                                                     </div>
                                                 </div>
                                                 
@@ -192,13 +192,6 @@
                                                     </div>
                                                     @endforeach
                                                 </div>
-<<<<<<< HEAD
-                                                <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
-                                                    <button class="clear-button" id="clear-budget">Clear</button>
-                                                    <button class="go-button" type="button" id="budget_search">Go</button>
-                                                </div>
-=======
->>>>>>> 1317fa462816c57975cd8b101feb38a45ad75789
                                             </div>
                                         </div>
                                     </div>
