@@ -168,7 +168,9 @@ class HomeController extends Controller
                         'year'=>$cars->model_year,
                         'year_en'=>$cars->model_year_en,
                         'transmission'=>$cars->transmission,
-                        'transmission_en'=>$cars->transmission_en
+                        'transmission_en'=>$cars->transmission_en,
+                        'model_details'=>$cars->model_details,
+                        'model_details_en'=>$cars->model_details_en
                     );
                 // }
            
@@ -1511,10 +1513,38 @@ class HomeController extends Controller
         $seo_setting = SeoSetting::where('id', 6)->first();
 
         $terms_condition = TermAndCondition::where('lang_code', Session::get('front_lang'))->first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+
 
         return view('terms_conditions')->with([
             'seo_setting' => $seo_setting,
             'terms_condition' => $terms_condition,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -2130,12 +2160,44 @@ public function getBrandsWithModels($keywhere,$database_name): array
                     $result[$model->brand_slug][$normalizedName] = true;
                 }
             });
+        // DB::table($tableName)
+        //     ->select(
+        //         DB::raw('LOWER(company_en) as brand_slug'),
+        //         'model_name_en',
+        //         DB::raw('COUNT(*) as model_count')  // Add the model count
+        //     )
+        //     ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
+        //     ->when($keywhere == 'new-arrival', function($query) {
+        //         return $query->where('new_arrival', '1');
+        //     })
+        //     ->when($keywhere == 'top-sell', function($query) {
+        //         return $query->where('top_sell', '1');
+        //     })
+        //     ->groupBy(DB::raw('LOWER(company_en)'), 'model_name_en') // Group by brand and model
+        //     ->distinct()
+        //     ->orderBy('company_en')
+        //     ->chunk(1000, function($models) use (&$result) {
+        //         foreach ($models as $model) {
+        //             // Normalize case in PHP
+        //             $normalizedName = ucwords(strtolower($model->model_name_en));
+
+        //             // Store the model count for each brand and model
+        //             $result[$model->brand_slug][$normalizedName] = $model->model_count;
+        //         }
+        //     });
+
         // dd(DB::getQueryLog());    
 
     // Convert to final format and sort
     return collect($result)->map(function($models) {
         return collect(array_keys($models))->sort()->values();
     })->all();
+
+    // return collect($result)->map(function ($models) {
+    //     return collect($models)->map(function ($count, $model) {
+    //         return ['model' => $model, 'count' => $count];
+    //     })->sortBy('model')->values();
+    // })->all();
 }
 public function getJdmBrandsWithModels(): array
 {    
@@ -2189,13 +2251,6 @@ public function car_listing(Request $request){
         $keyWhere ="";
         $tableName='1';
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
-
-  
-
-
-        
-        
-
     
     $models=[];
 
@@ -2733,6 +2788,7 @@ public function car_listing(Request $request){
         $keyWhere="top-sell";
         $tableName='1';
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        echo json_encode($brand_list);die();
 
 
  

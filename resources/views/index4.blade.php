@@ -366,9 +366,9 @@
 
                                                             <span>
                                                             @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['transmission']) }}
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                                 @else
-                                                                {{ html_decode($car['transmission_en']) }}
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                                 @endif
                                                             </span>
                                                         </div>
