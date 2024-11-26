@@ -832,7 +832,14 @@ class HomeController extends Controller
 
     
     public function jdm_stock_responsive(Request $request,$slug,$type){
-
+        $priceRanges = [
+            "Under $5000" => ["start" => 0, "end" => 5000],
+            "$5000 - $50000" => ["start" => 5000, "end" => 50000],
+            "$50000 - $100000" => ["start" => 50000, "end" => 100000],
+            "$100000 - $200000" => ["start" => 100000, "end" => 200000],
+            "$200000 - $300000" => ["start" => 200000, "end" => 300000],
+            "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+        ];
 
        
         $jdm_legend = Brand::where('status', 'enable')->get();
@@ -841,9 +848,6 @@ class HomeController extends Controller
    
         $brand_label=Brand::where('slug',$slug)->first();
      
-      
-
-
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
         ->where('bt.lang_code',Session::get('front_lang'))
@@ -891,14 +895,6 @@ class HomeController extends Controller
         ->whereNotNull('yom')
         ->first();     
         
-        
-        
-        
-        // dd(DB::getQueryLog($yearRange));
-        // $priceRange = Cars::where('is_active', '1')
-        // ->selectRaw('MIN(price) as min_sal, MAX(price) as max_sal')
-        // ->where('price','!=','Sold')
-        // ->first();
         $priceRange = Cars::where('is_active', '1')
         ->selectRaw('MIN(CAST(price AS DECIMAL)) as min_sal, MAX(CAST(price AS DECIMAL)) as max_sal')
         ->first();
@@ -962,27 +958,6 @@ class HomeController extends Controller
             }
         }
 
-        // if($request->price_range_scale){
-        //     if($request->price_range_scale !=""){  
-        //         $parts = explode(',', $request->price_range_scale);
-        //         $startValue = trim($parts[0]);
-        //         $endValue = trim($parts[1]);
-        //         if($type== 'car'){
-        //             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-        //                 $q->whereBetween('blog.price', [$startValue, $endValue]);
-        //             });
-        //           }  else if($type == 'heavy'){
-        //             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-        //                 $q->whereBetween('heavy.price', [$startValue, $endValue]);
-        //             });
-        //           } else if($type =='small_heavy'){
-        //             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-        //                 $q->whereBetween('small_heavy.price', [$startValue, $endValue]);
-        //             }); 
-        //           }
-             
-        //     }
-        // }
         if($request->year){
             if($request->year !="")
             {
@@ -1012,23 +987,6 @@ class HomeController extends Controller
                   }
             }
         }
-
-      
-      
-    
-        // // Apply filters based on request parameters
-        // if ($request->brand) {
-        //     $brand_arr = array_filter($request->brand); // Filter out any empty values
-        //     if ($brand_arr) {
-        //         if($type== 'car'){
-        //           $carsQuery->whereIn('blog.model', $brand_arr); 
-        //         }  else if($type == 'heavy'){
-        //             $carsQuery->whereIn('heavy.model', $brand_arr);
-        //         } else if($type =='small_heavy'){
-        //             $carsQuery->whereIn('small_heavy.model', $brand_arr);
-        //         }
-        //     }    
-        // }
 
         if($request->brand_new_cars){
             $year = date('Y'); 
@@ -1179,7 +1137,7 @@ class HomeController extends Controller
             $jdm_brand['car']=$jdm_legend;
             $jdm_brand['heavy']=$jdm_legend_heavy;
             $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
-            $price_range = $this->getPriceRange();
+            // $price_range = $this->getPriceRange();
             $transmission = CarDataJpOp::selectRaw('transmission_en, COUNT(*) as count')
             ->groupBy('transmission_en')
             ->having('count', '>', 1)
@@ -1188,6 +1146,8 @@ class HomeController extends Controller
             ->groupBy('scores_en')
             ->having('count', '>', 1)
             ->get();
+
+            $price_range=$this->SelectedJdmRange($type,$priceRanges,$slug);
 
             //  echo json_encode($brands);die();
     
@@ -1552,10 +1512,38 @@ class HomeController extends Controller
         $seo_setting = SeoSetting::where('id', 7)->first();
 
         $privacy_policy = PrivacyPolicy::where('lang_code', Session::get('front_lang'))->first();
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+
+
+
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+
 
         return view('privacy_policy')->with([
             'seo_setting' => $seo_setting,
             'privacy_policy' => $privacy_policy,
+             'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 
@@ -2139,32 +2127,10 @@ public function getBrandsWithModels($keywhere,$database_name): array
 
         // Db::enableQueryLog();
 
-        DB::table($tableName)
-            ->select(
-                DB::raw('LOWER(company_en) as brand_slug'),
-                'model_name_en'
-            )
-            ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
-            ->when($keywhere == 'new-arrival', function($query) {
-                return $query->where('new_arrival', '1');
-            })
-            ->when($keywhere == 'top-sell', function($query) {
-                return $query->where('top_sell', '1');
-            })
-            ->distinct()
-            ->orderBy('company_en')
-            ->chunk(1000, function($models) use (&$result) {
-                foreach ($models as $model) {
-                    // Normalize case in PHP
-                    $normalizedName = ucwords(strtolower($model->model_name_en));
-                    $result[$model->brand_slug][$normalizedName] = true;
-                }
-            });
         // DB::table($tableName)
         //     ->select(
         //         DB::raw('LOWER(company_en) as brand_slug'),
-        //         'model_name_en',
-        //         DB::raw('COUNT(*) as model_count')  // Add the model count
+        //         'model_name_en'
         //     )
         //     ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
         //     ->when($keywhere == 'new-arrival', function($query) {
@@ -2173,31 +2139,53 @@ public function getBrandsWithModels($keywhere,$database_name): array
         //     ->when($keywhere == 'top-sell', function($query) {
         //         return $query->where('top_sell', '1');
         //     })
-        //     ->groupBy(DB::raw('LOWER(company_en)'), 'model_name_en') // Group by brand and model
         //     ->distinct()
         //     ->orderBy('company_en')
         //     ->chunk(1000, function($models) use (&$result) {
         //         foreach ($models as $model) {
         //             // Normalize case in PHP
         //             $normalizedName = ucwords(strtolower($model->model_name_en));
-
-        //             // Store the model count for each brand and model
-        //             $result[$model->brand_slug][$normalizedName] = $model->model_count;
+        //             $result[$model->brand_slug][$normalizedName] = true;
         //         }
         //     });
+        DB::table($tableName)
+            ->select(
+                DB::raw('LOWER(company_en) as brand_slug'),
+                'model_name_en',
+                DB::raw('COUNT(*) as model_count')  // Add the model count
+            )
+            ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
+            ->when($keywhere == 'new-arrival', function($query) {
+                return $query->where('new_arrival', '1');
+            })
+            ->when($keywhere == 'top-sell', function($query) {
+                return $query->where('top_sell', '1');
+            })
+            ->groupBy(DB::raw('LOWER(company_en)'), 'model_name_en') // Group by brand and model
+            ->distinct()
+            ->orderBy('company_en')
+            ->chunk(1000, function($models) use (&$result) {
+                foreach ($models as $model) {
+                    // Normalize case in PHP
+                    $normalizedName = ucwords(strtolower($model->model_name_en));
+
+                    // Store the model count for each brand and model
+                    $result[$model->brand_slug][$normalizedName] = $model->model_count;
+                }
+            });
 
         // dd(DB::getQueryLog());    
 
     // Convert to final format and sort
-    return collect($result)->map(function($models) {
-        return collect(array_keys($models))->sort()->values();
-    })->all();
-
-    // return collect($result)->map(function ($models) {
-    //     return collect($models)->map(function ($count, $model) {
-    //         return ['model' => $model, 'count' => $count];
-    //     })->sortBy('model')->values();
+    // return collect($result)->map(function($models) {
+    //     return collect(array_keys($models))->sort()->values();
     // })->all();
+
+    return collect($result)->map(function ($models) {
+        return collect($models)->map(function ($count, $model) {
+            return ['model' => $model, 'count' => $count];
+        })->sortBy('model')->values();
+    })->all();
 }
 public function getJdmBrandsWithModels(): array
 {    
@@ -2453,7 +2441,7 @@ public function car_listing(Request $request){
     //     ->having('count', '>', 1)
     //     ->get();
 
-    $price_range = $this->getPriceRange();
+    $price_range = $this->getPriceRange('','one-price');
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -2789,9 +2777,6 @@ public function car_listing(Request $request){
         $tableName='1';
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
        
-
-
- 
         // Initialize the query for cars
         $carsQuery = CarDataJpOp::query();
 
@@ -3019,13 +3004,13 @@ public function car_listing(Request $request){
             ->having('count', '>', 1)
             ->get();
 
-        $price_range = $this->getPriceRange();
+        $price_range = $this->getPriceRange('top-selling','one-price');
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
         ->where('bt.lang_code',Session::get('front_lang'))
-    ->select('b.slug','bt.name as brand_name')
-    ->distinct('b.slug')->get();
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
 
 
     $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
@@ -3283,7 +3268,7 @@ public function car_listing(Request $request){
             ->having('count', '>', 1)
             ->get();
 
-        $price_range = $this->getPriceRange();
+        $price_range = $this->getPriceRange('','auction');
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -3563,7 +3548,7 @@ public function car_listing(Request $request){
             ->having('count', '>', 1)
             ->get();
 
-        $price_range = $this->getPriceRange();
+        $price_range = $this->getPriceRange('','auction');
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -4423,7 +4408,7 @@ public function car_listing(Request $request){
             ->having('count', '>', 1)
             ->get();
 
-        $price_range = $this->getPriceRange();
+        $price_range = $this->getPriceRange('new-arrival','one-price');
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -4474,7 +4459,7 @@ public function car_listing(Request $request){
   
    
 
-    public function getPriceRange(){
+    public function getPriceRange($param,$type){
         $price_ranges = [
             'Under $5000' => ['min' => 0, 'max' => 5000],
             '$5000 - $50000' => ['min' => 5000, 'max' => 50000],
@@ -4483,32 +4468,94 @@ public function car_listing(Request $request){
             '$200000 - $300000' => ['min' => 200000, 'max' => 300000],
             'Above $300000' => ['min' => 300000, 'max' => null],
         ];
-        
         $counts = [];
+        if($type=='one-price'){
+            $query = CarDataJpOp::query();
+        } else if($type == 'auction'){
+            $query= Auct_lots_xml_jp::query();
+        }
+  
+        
         
         foreach ($price_ranges as $label => $range) {
-            $query = CarDataJpOp::query();
         
             if ($range['max'] === null) {
                 // Count for "Above" range
-                $count = $query->where('start_price_num', '>', $range['min'])
-                               ->orWhere('end_price_num', '>', $range['min'])
-                               ->count();
+            
+                $count = $query->where(function ($q) use ($range) {
+                    $q->where('start_price_num',  '>', $range['min'])
+                      ->orWhere('end_price_num', '>', $range['min']);
+                })
+                ->when($param == 'top-selling', function($query) {
+                    return $query->where('top_sell', 1);
+                })
+                ->when($param == 'new_arrival', function($query) {
+                    return $query->where('new_arrival', 1);
+                })
+                ->count();
+
+                // $count = $query->where('start_price_num', '>', $range['min'])
+                //                ->orWhere('end_price_num', '>', $range['min'])
+                //                ->when($param == 'top-selling',function($query){
+                //                    return $query->where('top_sell',1);
+                //                })
+                //                ->count();
             } else {
                 // Count for other ranges
                 $count = $query->where(function ($q) use ($range) {
                     $q->whereBetween('start_price_num', [$range['min'], $range['max']])
                       ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
-                })->count();
+                })
+                ->when($param == 'top-selling',function($query){
+                    return $query->where('top_sell',1);
+                })
+                ->when($param == 'new_arrival', function($query) {
+                    return $query->where('new_arrival', 1);
+                })
+                ->count();
             }
-        
             $counts[$label] = $count;
         }
         return $counts;
         
     }
 
-    public function getJDMPriceRange()
+public function SelectedJdmRange($type,$price_ranges,$slug){
+    if ($type == 'car') {
+        $tableName = "blog";   
+    } else if ($type == 'heavy') {
+        $tableName = "heavy";
+    } else if ($type == 'small_heavy') {
+        $tableName = "small_heavy";
+    }   
+    
+    foreach ($price_ranges as $label => $range) {
+        $blogQuery = DB::table($tableName)
+            ->join('models_cars as mc', 'mc.model', '=', $tableName.'.model')
+            ->where(DB::raw('LOWER('.$tableName.'.make)'), '=', $slug)
+            ->where('is_active', 1)
+            ->whereRaw('REGEXP_REPLACE(price, "[,\\s]", "") REGEXP "^[0-9]+$"');
+    
+        if ($range['end'] === null) {
+            // For "Above" price range
+            $blogCount = $blogQuery->whereRaw(
+                'CAST(REGEXP_REPLACE('.$tableName.'.price, "[,\\s]", "") AS DECIMAL(10, 0)) >= ?', 
+                [$range['start']]
+            )->count();
+        } else {
+            // For price ranges between start and end
+            $blogCount = $blogQuery->whereRaw(
+                'CAST(REGEXP_REPLACE('.$tableName.'.price, "[,\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', 
+                [$range['start'], $range['end']]
+            )->count();
+        }
+    
+        $counts[$label] = $blogCount;
+    } 
+    return $counts;
+        
+}
+public function getJDMPriceRange()
 {
     $price_ranges = [
         'Under $5000' => ['min' => 0, 'max' => 5000],

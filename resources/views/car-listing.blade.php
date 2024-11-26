@@ -55,10 +55,10 @@
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
                                                                                             <input name="model[]" class="form-check-input brand-search" type="checkbox"
-                                                                                                    value="{{ $model }}"
-                                                                                                    {{ in_array(trim($model), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                                    value="{{ $model['model'] }}"
+                                                                                                    {{ in_array(trim($model['model']), (array) request('model', [])) ? 'checked' : '' }}>
                                                                                             <label class="form-check-label">
-                                                                                                {{ $model }}
+                                                                                                 {{ $model['model'] . ' (' . $model['count'] . ')' }}
                                                                                             </label>
                                                                                         </span>
                                                                                     @endforeach
