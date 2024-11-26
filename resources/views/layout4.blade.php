@@ -471,7 +471,7 @@
                 <div class=" col-xl-8 col-lg-12 col-12 col-md-12 ">
                     <div class="row footer-ml">
                         <div class="col-xl-4 col-lg-4 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
-                            <div class="footer-item-text">
+                            <div class="footer-item-text ">
                                 <h3>{{ __('translate.Why Alpine') }}</h3>
                             </div>
                             <div class="footer-item-text-link">
@@ -668,7 +668,7 @@
                             </div>
                             <div>
                                 <div class="footer-item-text">
-                                    <h3>We Accept Credit Card</h3>
+                                    <h3 class="text-nowrap">We Accept Credit Card</h3>
                                 </div>
                                 <div class="footer-item-text-link">
                                     <img class="w-100" src="{{ asset('japan_home/group.svg') }}" alt="cards">

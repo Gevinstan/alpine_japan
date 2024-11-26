@@ -2950,6 +2950,7 @@ img {
 
 body {
     overflow-x: hidden;
+    font-family: var(--poppins) !important;
 }
 
 a:hover,
@@ -4613,12 +4614,14 @@ p {
 
 .contact-us .contact-us-taitel {
     font-family: var(--DMSans);
+    font-weight: 600 !important;
+    font-size: 20px !important;
 }
 
 .contact-us .contact-us-dec {
     padding-top: 20px;
     font-family: var(--roboto);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--regular);
     line-height: 28px;
     color: var(--paragraph-color);
@@ -4651,8 +4654,8 @@ p {
 
 .contact-us .contact-us-item .contact-us-inner .text h4 {
     font-family: var(--DMSans);
-    font-size: 22px;
-    font-weight: var(--medium);
+    font-size: 16px;
+    font-weight: 600;
     line-height: 20px;
     padding: 26px 0 10px 0;
     color: var(--headline-color);
@@ -4660,7 +4663,7 @@ p {
 
 .contact-us .contact-us-item .contact-us-inner .text p {
     font-family: var(--roboto);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--regular);
     line-height: 28px;
     color: var(--paragraph-color);
@@ -4735,7 +4738,7 @@ p {
 
 .contact-us .get-in-touch .get-in-touch-taitel {
     font-family: var(--DMSans);
-    font-size: 24px;
+    font-size: 20px;
     font-weight: var(--bold);
     line-height: 34px;
     color: #0d274e;
@@ -7453,8 +7456,8 @@ p {
 }
 
 .footer .newsletter-txt {
-    font-size: 46px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 600;
     line-height: 56px;
     color: var(--white-color);
 }
@@ -7558,9 +7561,9 @@ p {
 }
 
 .footer .footer-item-text h3 {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 36px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 18px;
     color: var(--primary-color-1);
 }
 
@@ -13653,8 +13656,8 @@ h5.preloader-text::after {
     --semiBold: 600;
     --medium: 500;
     --bold: 700;
-    --DMSans: "DM Sans", sans-serif;
-    --roboto: "Roboto", sans-serif;
+    --DMSans: "Poppins", sans-serif;
+    --roboto: "Poppins", sans-serif;
     --poppins: "Poppins", serif;
     --transition-all: all linear 0.3s;
     --transition-ease-in-out: all 0.5s ease-in-out;
@@ -14224,8 +14227,8 @@ p {
 /************ NAV-BAR DROPDOWN STYLE END **************/
 
 .banner-h1 {
-    font-size: clamp(2.5rem, 1.9318rem + 2.4242vw, 3.75rem) !important;
-    font-weight: 700 !important;
+    font-size: 3.5rem !important;
+    font-weight: 600 !important;
     line-height: 65px !important;
     padding: 0 !important;
 }
@@ -14254,9 +14257,9 @@ p {
 }
 
 .section-heading {
-    font-size: clamp(1.75rem, 1.6364rem + 0.4848vw, 2rem) !important;
+    font-size: 1.75rem !important;
     padding: 0 !important;
-    font-weight: 900 !important;
+    font-weight: 700 !important;
 }
 
 .car-poster {
@@ -14736,29 +14739,37 @@ p {
     border: 1px solid #ffffff !important;
 }
 .car-listing-details p {
-    font-size: 0.975rem;
-    line-height: 22px;
+    font-size: 0.65rem;
+    line-height: 10px;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .brand-text {
     color: #25282d;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.5rem;
-    line-height: 22px;
+    font-size: 1.3rem;
+    line-height: 15px;
+    font-weight: 600;
+    padding-bottom: 6px;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .amount-text {
     color: #868b96;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .price-text {
     color: #038ffc;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .commission-text {
     color: #0d274e;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: var(--poppins) !important;
 }
 .cal-btn {
     color: #038ffc;
@@ -14767,9 +14778,9 @@ p {
     background-color: var(--white-color);
     font-size: 0.9375rem;
     padding: 10px;
-    font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
+    font-family: var(--poppins) !important;
 }
 .total-price span {
     font-size: 2rem;
@@ -15294,6 +15305,7 @@ p {
     font-style: normal !important;
     font-size: 12px !important;
     color: #868b96 !important;
+    font-weight: 500 !important;
 }
 
 .charge-btn {
@@ -15983,8 +15995,13 @@ input:not(:placeholder-shown) + .placeholder-text {
   }
 
   .contact-us .contact-box a {
-    font-size: 20px;
-    font-weight: 900;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .contact-box h5 {
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .address-text {
@@ -16223,5 +16240,10 @@ input:not(:placeholder-shown) + .placeholder-text {
 .container {
     padding-left: 0; /* Remove padding from container */
     padding-right: 0; /* Remove padding from container */
+}
+
+.accordion-title {
+    font-family: var(--poppins);
+    font-size: 1.1rem !important;
 }
 
