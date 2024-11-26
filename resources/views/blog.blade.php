@@ -10,7 +10,7 @@
 <main>
     <!-- banner-part-start  -->
 
-    <section class="inner-banner px-2 px-sm-3 px-lg-5">
+    <!-- <section class="inner-banner px-2 px-sm-3 px-lg-5">
         <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;">
             <div class="container blog_text">
                 <div class="col-lg-12">
@@ -20,15 +20,27 @@
                             <ol class="breadcrumb ">
                                 <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}" class="blog-list">{{ __('translate.Home') }}</a></li>
                                 <li class="breadcrumb-item active breadcrumb-link blog-list" aria-current="page">{{ __('translate.Blogs') }}</li>
-                                <!-- <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                                <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li> -->
                             </ol>
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+
+     <section class="privacy_policy_header pt-5">
+            <div class="container pt-5">
+                <div class="row pt-3 px-sm-2 px-md-5 banner_color">
+                    <div class="col-lg-12">
+                        <div class="pb-2">
+                            <!-- <h2 class="contact_us" >Contact</h2> 
+                            <h2 class="contact_us contact-us-color">Us</h2> -->
+                            <h2 class="section-heading">Blogs<span class="highlight"><span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </section>   
     <!-- banner-part-end -->
 
 

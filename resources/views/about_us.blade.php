@@ -320,20 +320,21 @@
                     <div class="sm-df">
                         <div class="t-df-sm">
                             <div class="taitel two">
-                                <div class="taitel-img">
+                                <!-- <div class="taitel-img">
                                     <span>
                                         <svg width="154" height="6" viewBox="0 0 154 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M1 5C21.777 1.98151 81.2647 -2.24439 153 5" stroke="#038ffc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
-
                                     </span>
                                 </div>
                                 <span>
                                     {{ __('translate.Our Testimonial') }}
-                                </span>
+                                </span> -->
                             </div>
 
-                            <h2 class="testimonial-taitel">{{ __('translate.Customer Say About Our Services') }}</h2>
+                            <!-- <h2 class="testimonial-taitel">{{ __('translate.Customer Say About Our Services') }}</h2> -->
+                             <h3 class="cus_our_services">Customer Say About</h3>
+                             <h3 class="our_services">Our Services</h3>
                             <p class="testimonial-p">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
                         </div>
 

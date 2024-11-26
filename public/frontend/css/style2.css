@@ -7091,7 +7091,7 @@ p {
 }
 
 .feature {
-    background-color: #F4FAFF;
+    background-color: #f4faff;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -8090,7 +8090,7 @@ p {
 
 .header-right-item .header-right-item-btn .btn-secondary {
     color: var(--white-color);
-    background-color: transparent !important; 
+    background-color: transparent !important;
     border-color: transparent !important;
     font-size: 14px;
     font-style: normal;
@@ -8789,6 +8789,8 @@ p {
 
 .inner-header .menu-bg {
     background-color: var(--white-color);
+    /* box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); */
+    box-shadow: 0 14px 16px 0 rgba(11, 2, 55, 0.1);
 }
 
 .inner-header .menu-bg .nav-main {
@@ -9469,7 +9471,7 @@ p {
     width: 25.125rem !important;
     height: 3.5rem !important;
     padding: 13px 20px;
-    background-color: #FBFBFB;
+    background-color: #fbfbfb;
     border: 1px solid #f0f3ff;
     font-size: 16px;
     font-weight: var(--regular);
@@ -12399,8 +12401,6 @@ h5.preloader-text::after {
     padding: 40px 0 40px 0;
 }
 
-
-
 .privacy .privacy-text-item.two {
     margin-top: 40px;
 }
@@ -14252,7 +14252,7 @@ p {
 }
 
 .banner .banner-search-bar .banner-sarchber-box-inner .icon svg {
-    color: #038ffc; 
+    color: #038ffc;
 }
 
 .banner .slick-dots li.slick-active button {
@@ -14266,7 +14266,7 @@ p {
 }
 
 .car-poster {
-    justify-content: space-around; 
+    justify-content: space-around;
 }
 
 .poster-img {
@@ -14462,7 +14462,7 @@ p {
     right: 10px;
     width: 30px;
     height: 30px;
-    background-color: #038FFC;
+    background-color: #038ffc;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -14494,7 +14494,7 @@ p {
 .aj-dropdown {
     width: 170px;
     padding: 10px;
-    border: 1px solid #EBEBEB;
+    border: 1px solid #ebebeb;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
     font-size: 0.875rem;
@@ -14623,7 +14623,7 @@ p {
 /********* breadcrumb Start ***********/
 .listing-breadcrumb {
     padding: 125px 0 0 0 !important;
-}   
+}
 
 .breadcrumb-list .breadcrumb-link a,
 .breadcrumb-list .breadcrumb-link {
@@ -14864,7 +14864,7 @@ p {
 }
 
 .brand-car-inner {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 /* Home Page Top Navbar Responsive issue */
@@ -14878,7 +14878,6 @@ p {
     text-decoration: none;
     border-bottom: 3px solid transparent;
     padding: 1.2rem 0.6rem !important;
-
 }
 
 .nav-link:hover {
@@ -14886,11 +14885,15 @@ p {
     color: #038ffc;
     text-decoration-color: #038ffc;
     border-bottom: 3px solid #038ffc;
-    
+}
+
+.nav_texthead .nav-link a.active {
+    color: #038ffc !important;
+    border-bottom: 3px solid #038ffc !important;
 }
 
 .nav-link:focus {
-   color: #038ffc; 
+    color: #038ffc;
 }
 
 .dropdown-item {
@@ -14940,9 +14943,7 @@ p {
 /***** admin prod work *****/
 .main_wid {
     overflow: hidden;
-
 }
-
 
 .lang_dropdown {
     min-width: 5rem !important;
@@ -15553,8 +15554,6 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 /***** About Us Workk Responsive *****/
 
-
-
 @media (max-width: 768px) {
     .spacing_about {
         padding-top: 0px !important;
@@ -15595,7 +15594,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 /********* About section Start **********/
 
 .about-section {
-    background-color: #F4FAFF;
+    background-color: #f4faff;
     padding: 50px 0;
 }
 
@@ -15758,7 +15757,6 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 }
 
-
 .nav_logo_container {
     width: 3.75rem !important;
     height: 3.75rem !important;
@@ -15774,43 +15772,39 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 @media (max-width: 768px) {
     .nav_mobile_head {
-    padding-left: 14.5rem;
-    font-size: 2rem !important;
-    font-weight: 600 !important;
-}
+        padding-left: 14.5rem;
+        font-size: 2rem !important;
+        font-weight: 600 !important;
+    }
 }
 
 @media (max-width: 425px) {
     .nav_mobile_head {
-    padding-left: 4.5rem;
-    font-size: 1.5rem !important;
-    font-weight: 600 !important;
+        padding-left: 4.5rem;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
     }
     .banner-h1 {
         font-size: 30px !important;
-        line-height:55px !important;
+        line-height: 55px !important;
     }
-
-
 }
 
 @media (max-width: 375px) {
     .nav_mobile_head {
-    padding-left: 3.5rem;
-    font-size: 1.5rem !important;
-    font-weight: 600 !important;
+        padding-left: 3.5rem;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
     }
 
     .banner .banner-taitel span {
-    font-size: 23px !important;
+        font-size: 23px !important;
     }
 
     .banner-h1 {
         font-size: 30px !important;
-        line-height:55px !important;
+        line-height: 55px !important;
     }
-
-
 }
 
 @media (max-width: 425px) {
@@ -15849,7 +15843,6 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-weight: 700;
     font-style: normal;
     font-size: 2rem;
-
 }
 
 .feature .highlight {
@@ -15859,7 +15852,6 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-size: 2rem;
     color: #005bac;
 }
-
 
 .brand-car .section-heading {
     font-family: "Poppins", serif;
@@ -15890,7 +15882,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     color: #005bac;
 }
 .model-text {
-    border-right: 1px solid #EBEBEB;
+    border-right: 1px solid #ebebeb;
 }
 
 .custom-tabs .nav-link.active {
@@ -15898,225 +15890,229 @@ input:not(:placeholder-shown) + .placeholder-text {
     border-top: 2px solid var(--primary-color-1);
 }
 
-.brand-car-item, .brand-car-item {
-    box-shadow: 0px 3px 4px 0px #0000001C !important;
+.brand-car-item,
+.brand-car-item {
+    box-shadow: 0px 3px 4px 0px #0000001c !important;
 }
 
 @media screen and (min-width: 1400px) {
     .feature-thumb a img {
-      height: 580px !important;
+        height: 580px !important;
     }
-  }
-  
-  @media screen and (max-width: 1400px) {
+}
+
+@media screen and (max-width: 1400px) {
     .feature-thumb a img {
-      height: 540px !important;
+        height: 540px !important;
     }
-  }
+}
 
-  .nav_texthead .nav-item a.active {
+.nav_texthead .nav-item a.active {
     color: #038ffc !important;
-  }
+    border-bottom: 3px solid #038ffc !important;
+}
 
-  .contact-us-inner {
+.contact-us-inner {
     padding: 20px 35px;
-    background-color: #F9FAFF;
+    background-color: #f9faff;
     border-radius: 5px;
-  }
+}
 
-  .contact-box h5 {
-    color: #264B83;
-  }
+.contact-box h5 {
+    color: #264b83;
+}
 
-  .contact-us .contact-box a {
+.contact-us .contact-box a {
     font-size: 20px;
     font-weight: 900;
-  }
+}
 
-  .address-text {
+.address-text {
     font-size: 14px;
     font-weight: 500;
-    color: #7E8082;
-  }
+    color: #7e8082;
+}
 
-  .contact-us .contact-share {
+.contact-us .contact-share {
     margin-top: 5px !important;
-  }
+}
 
-  /****** Shipment Page Style Start  ******/
+/****** Shipment Page Style Start  ******/
 
-  .shipment-banner-section {
+.shipment-banner-section {
     padding-top: 120px;
-  }
+}
 
-  @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
     .shipment-banner-section {
         padding-top: 0;
-      }
-  }
-  .shipment-banner-image {
+    }
+}
+.shipment-banner-image {
     background-image: url("../../japan_home/shipment.png");
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center;  
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     text-align: start;
-  }
+}
 
-  .banner-content {
+.banner-content {
     display: flex;
     flex-direction: column;
     gap: 18rem;
     color: var(--white-color);
-  }
+}
 
-  .banner-content h3 {
+.banner-content h3 {
     color: var(--white-color);
     font-size: 2.5rem;
     font-family: var(--poppins);
-  }
+}
 
-  .banner-content p {
+.banner-content p {
     color: var(--white-color);
     font-size: 1rem;
     font-family: var(--poppins);
-  }
+}
 
-  .card-section {
-    background-color: #FAFAFA;
+.card-section {
+    background-color: #fafafa;
     box-shadow: 0px 8px 25.1px 0px #00000026;
-  }
+}
 
-  .card-section h3 {
+.card-section h3 {
     color: var(--primary-color-1);
     font-family: var(--poppins);
-  }
+}
 
-  .card-outer {
+.card-outer {
     padding: 13px;
-    background: linear-gradient(#F2F4F5, #FFFFFF);
-    box-shadow: 2px 2px 4px 0px #7A8D93BF;
+    background: linear-gradient(#f2f4f5, #ffffff);
+    box-shadow: 2px 2px 4px 0px #7a8d93bf;
     top: -65px;
-  }
+}
 
-  .card-inner {
+.card-inner {
     padding: 15px;
-    background: linear-gradient(to right,#CCD1DA, #FFFFFF);
-    border: 2px solid #FFFFFF;
-  }
+    background: linear-gradient(to right, #ccd1da, #ffffff);
+    border: 2px solid #ffffff;
+}
 
-  .card-list img {
+.card-list img {
     height: 70px;
     width: 90px;
     background: var(--white-color);
     box-shadow: 0px 4px 4px 0px #00000014;
     padding: 2px 5px;
-    border: 1px solid #E7E7E7;
-  }
+    border: 1px solid #e7e7e7;
+}
 
-  .card-btn {
+.card-btn {
     background: var(--primary-color-1);
     color: var(--white-color) !important;
-    font-size: .875rem;
+    font-size: 0.875rem;
     bottom: -15px;
     text-transform: uppercase;
     font-family: var(--poppins);
-  }
+}
 
-  .roro-section h4, .containers-section h4,
-  .Inspection-section h4 {
+.roro-section h4,
+.containers-section h4,
+.Inspection-section h4 {
     font-size: 1.5rem;
     font-weight: 700;
     font-family: var(--poppins);
-  }
+}
 
-  .roro-section p, .containers-section p {
-    font-size: .875rem;
-    color: #86888C;
+.roro-section p,
+.containers-section p {
+    font-size: 0.875rem;
+    color: #86888c;
     font-family: var(--poppins);
     text-align: center;
-  }
-  /****** Shipment Page Style End  ******/
-  .budget_price {
+}
+/****** Shipment Page Style End  ******/
+.budget_price {
     font-size: 0.7rem !important;
     font-family: "Poppins", serif !important;
     font-weight: 500 !important;
     font-style: normal !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .budget_count {
-    color: #9EA3AD !important;
-  }
+.budget_count {
+    color: #9ea3ad !important;
+}
 
-  .budget-space {
+.budget-space {
     --bs-gutter-x: 1rem;
-  }
+}
 
-  .budget-heading {
+.budget-heading {
     font-family: "Poppins", serif !important;
     font-weight: 700 !important;
     font-style: normal !important;
     font-size: 16px !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .brand-heading {
+.brand-heading {
     font-family: "Poppins", serif !important;
     font-weight: 700 !important;
     font-style: normal !important;
     font-size: 16px !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .year-heading {
+.year-heading {
     font-family: "Poppins", serif !important;
     font-weight: 700 !important;
     font-style: normal !important;
     font-size: 16px !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .year-slider-text {
+.year-slider-text {
     font-size: 0.7rem !important;
     font-family: "Poppins", serif !important;
     font-weight: 500 !important;
     font-style: normal !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .slider_num {
+.slider_num {
     font-size: 0.7rem !important;
     font-family: "Poppins", serif !important;
     font-weight: 500 !important;
     font-style: normal !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .brand_name {
+.brand_name {
     font-size: 0.8rem !important;
     font-family: "Poppins", serif !important;
     font-weight: 500 !important;
     font-style: normal !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
-  .price_range {
+.price_range {
     font-family: "Poppins", serif !important;
     font-weight: 600 !important;
     font-style: normal !important;
-    color: #24272C !important;
-  }
+    color: #24272c !important;
+}
 
- .slider.slider-horizontal .slider-track {
+.slider.slider-horizontal .slider-track {
     height: 2px !important;
     top: 14px !important;
- }
+}
 
- .recently_added {
-    background-color: transparent !important; 
+.recently_added {
+    background-color: transparent !important;
     border-color: transparent !important;
- }
- 
+}
+
 .inventory-sarch-ber {
     position: relative;
 }
@@ -16141,23 +16137,22 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-size: 1.25rem; /* Adjust the icon size */
 }
 
-
-  @media screen and (max-width: 425px) {
+@media screen and (max-width: 425px) {
     .overflow_jdm {
         overflow-x: hidden !important;
     }
-  }
+}
 
-  /***** newly added css for about us ******/
+/***** newly added css for about us ******/
 
-  .spacing_about {
+.spacing_about {
     padding: 0; /* Remove padding within the column */
-    margin: 0;  /* Remove margin within the column */
+    margin: 0; /* Remove margin within the column */
 }
 
 .about-pl {
     padding: 0; /* Remove padding within the column */
-    margin: 0;  /* Remove margin within the column */
+    margin: 0; /* Remove margin within the column */
 }
 
 .row {
@@ -16171,7 +16166,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     padding-right: 0; /* Remove padding from container */
 }
 
-@media (max-width: 1024px) { 
+@media (max-width: 1024px) {
     .spacing_about {
         width: 100%;
     }
@@ -16181,7 +16176,6 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 }
 
-
 /* @media (max-width: 1024px) { 
 
 .card_vision {
@@ -16190,13 +16184,11 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 } */
 
-
-@media screen and (max-width: 1920px)  { 
-
+@media screen and (max-width: 1920px) {
     .card_vision {
-            width: 115.75rem;
-            height: 59.5rem;
-            margin-top: -162px !important;
+        width: 115.75rem;
+        height: 59.5rem;
+        margin-top: -162px !important;
     }
 
     .target-customer {
@@ -16227,10 +16219,9 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-111%, -50%);
         z-index: 1;
         height: 25rem !important;
-        
     }
 
-        .about_us {
+    .about_us {
         display: inline;
         font-family: "Poppins", serif;
         font-weight: 700;
@@ -16238,7 +16229,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-size: 3rem;
     }
 
-        .about-us-color {
+    .about-us-color {
         color: #038ffc;
         font-family: "Roboto", sans-serif;
         font-weight: 500;
@@ -16252,7 +16243,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 25px !important;
         padding-top: 2.5rem;
-    
     }
 
     .about-us-content {
@@ -16265,22 +16255,18 @@ input:not(:placeholder-shown) + .placeholder-text {
 
     .vision_content {
         padding-top: 8.25rem;
-        
     }
-    
 }
 
-@media screen and (max-width: 1440px)  { 
-
+@media screen and (max-width: 1440px) {
     .card_vision {
-    /* padding: 50px 30px;
+        /* padding: 50px 30px;
     margin-right: 80px;
     margin-bottom: 300px;
      */
-    height: 44.75rem;
-    width: 80.5rem;
-    margin-top: -150px !important;
-    
+        height: 44.75rem;
+        width: 80.5rem;
+        margin-top: -150px !important;
     }
 
     .image-container {
@@ -16290,7 +16276,6 @@ input:not(:placeholder-shown) + .placeholder-text {
 
     .image1 {
         height: 39rem !important;
-        
     }
     .image2 {
         position: absolute;
@@ -16299,7 +16284,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-50%, -50%);
         z-index: 1;
         height: 22rem;
-
     }
 
     .image3 {
@@ -16309,64 +16293,59 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-50%, -50%);
         z-index: 1;
         height: 17rem !important;
-        
     }
 
-     .about_us {
-    display: inline;
-    font-family: "Poppins", serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 2rem;
-}
+    .about_us {
+        display: inline;
+        font-family: "Poppins", serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 2rem;
+    }
 
-.about-us-color {
-    color: #038ffc;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 2rem;
-}
+    .about-us-color {
+        color: #038ffc;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 2rem;
+    }
 
-.about-us-content-heading {
-    font-family: "Poppins", serif !important;
-    font-weight: 700 !important;
-    font-style: normal !important;
-    font-size: 20px !important;
-    padding-top: 1.5rem;
-    /* background-color: red !important; */
-    padding-bottom: 1.5rem;
-}
+    .about-us-content-heading {
+        font-family: "Poppins", serif !important;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        font-size: 20px !important;
+        padding-top: 1.5rem;
+        /* background-color: red !important; */
+        padding-bottom: 1.5rem;
+    }
 
-.about-us-content {
-    font-family: "Poppins", serif !important;
-    font-weight: 500 !important;
-    font-style: normal !important;
-    font-size: 18px !important;
-    padding-top: 1.5rem;
-    
-}
+    .about-us-content {
+        font-family: "Poppins", serif !important;
+        font-weight: 500 !important;
+        font-style: normal !important;
+        font-size: 18px !important;
+        padding-top: 1.5rem;
+    }
 
     .vision_content {
         padding-top: 3.75rem;
-        
     }
-
 }
 
-@media screen and (max-width: 1024px)  { 
-
+@media screen and (max-width: 1024px) {
     .card_vision {
-    /* padding: 50px 30px;
+        /* padding: 50px 30px;
     margin-right: 80px;
     margin-bottom: 300px;
     position: absolute;
     top: 165%;
     margin-top: 950px !important; */
-    height: 33rem;
-    width: 59.5rem;
-    margin-top: -150px !important;
-    /* position: absolute;
+        height: 33rem;
+        width: 59.5rem;
+        margin-top: -150px !important;
+        /* position: absolute;
     top: 407%; */
     }
 
@@ -16377,7 +16356,6 @@ input:not(:placeholder-shown) + .placeholder-text {
 
     .image1 {
         height: 27rem !important;
-        
     }
     .image2 {
         position: absolute;
@@ -16386,7 +16364,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-50%, -50%);
         z-index: 1;
         height: 15rem;
-
     }
 
     .image3 {
@@ -16396,10 +16373,9 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-50%, -50%);
         z-index: 1;
         height: 12rem !important;
-        
     }
 
-     .about_us {
+    .about_us {
         display: inline;
         font-family: "Poppins", serif;
         font-weight: 700;
@@ -16408,50 +16384,46 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 
     .about-us-color {
-    color: #038ffc;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 1.5rem;
-}
+        color: #038ffc;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 1.5rem;
+    }
 
     .about-us-content-heading {
-    font-family: "Poppins", serif !important;
-    font-weight: 700 !important;
-    font-style: normal !important;
-    font-size: 16px !important;
-    padding-top: .5rem;
-    /* background-color: red !important; */
-}
+        font-family: "Poppins", serif !important;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        font-size: 16px !important;
+        padding-top: 0.5rem;
+        /* background-color: red !important; */
+    }
 
     .about-us-content {
-    font-family: "Poppins", serif !important;
-    font-weight: 500 !important;
-    font-style: normal !important;
-    font-size: 14px !important;
-    padding-top: .25rem;
-    
-}
+        font-family: "Poppins", serif !important;
+        font-weight: 500 !important;
+        font-style: normal !important;
+        font-size: 14px !important;
+        padding-top: 0.25rem;
+    }
 
     .vision_content {
         padding-top: 0px !important;
-        
     }
-
 }
 
-@media screen and (max-width: 768px)  { 
-
+@media screen and (max-width: 768px) {
     .card_vision {
-    /* padding: 50px 30px;
+        /* padding: 50px 30px;
     margin-right: 80px;
     margin-bottom: 300px;
     position: absolute;
     top: 165%;
     margin-top: 950px !important; */
-    height: 27rem;
-    width: 45.5rem;
-    margin-top: -150px !important;
+        height: 27rem;
+        width: 45.5rem;
+        margin-top: -150px !important;
     }
 
     .image-container {
@@ -16461,7 +16433,6 @@ input:not(:placeholder-shown) + .placeholder-text {
 
     .image1 {
         height: 21rem !important;
-        
     }
     .image2 {
         position: absolute;
@@ -16470,7 +16441,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-50%, -50%);
         z-index: 1;
         height: 12rem;
-
     }
 
     .image3 {
@@ -16480,10 +16450,9 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-50%, -50%);
         z-index: 1;
         height: 9rem !important;
-        
     }
 
-     .about_us {
+    .about_us {
         display: inline;
         font-family: "Poppins", serif;
         font-weight: 700;
@@ -16492,37 +16461,34 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 
     .about-us-color {
-    color: #038ffc;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    font-size: 1rem;
-}
+        color: #038ffc;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        font-size: 1rem;
+    }
 
     .about-us-content-heading {
-    font-family: "Poppins", serif !important;
-    font-weight: 700 !important;
-    font-style: normal !important;
-    font-size: 10px !important;
-    padding-top: .1rem;
-    /* background-color: red !important; */
-    padding-bottom: 0rem;
-}
+        font-family: "Poppins", serif !important;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        font-size: 10px !important;
+        padding-top: 0.1rem;
+        /* background-color: red !important; */
+        padding-bottom: 0rem;
+    }
 
     .about-us-content {
-    font-family: "Poppins", serif !important;
-    font-weight: 500 !important;
-    font-style: normal !important;
-    font-size: 8px !important;
-    padding-top: 1.1rem;
-    
-}
+        font-family: "Poppins", serif !important;
+        font-weight: 500 !important;
+        font-style: normal !important;
+        font-size: 8px !important;
+        padding-top: 1.1rem;
+    }
 
     .vision_content {
         padding-top: 30px !important;
-        
     }
-
 }
 
 @media screen and (max-width: 425px) {
@@ -16533,17 +16499,21 @@ input:not(:placeholder-shown) + .placeholder-text {
     .our-vision-content {
         display: none;
     }
-} 
+}
 
 .privacy_policy_header .highlight {
     color: #038ffc !important;
 }
 
-
-    
- .blogs-rightbar .blog-item-inner .blog-item-inner-item .blog-item-inner-item-box .icon span svg {
+.blogs-rightbar
+    .blog-item-inner
+    .blog-item-inner-item
+    .blog-item-inner-item-box
+    .icon
+    span
+    svg {
     color: #038ffc !important;
- }
+}
 
 /****** How to buy page ******/
 
@@ -16578,7 +16548,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-weight: bolder;
     display: inline;
     /* margin-left:180px;  */
-    top:30px
+    top: 30px;
 }
 
 .faq-top-left-p1 {
@@ -16605,7 +16575,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         color: white;
         font-weight: bold;
         display: inline;
-        
     }
 
     .faq-img {
@@ -16621,7 +16590,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         left: 50px;
         line-height: 0px !important;
         margin-right: 50px;
-        
     }
 
     .faq-bottom-left {
@@ -16728,46 +16696,45 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 @media (min-width: 1920px) {
+    .how-to-buy-image {
+        height: 840px;
+    }
 
-.how-to-buy-image {
-    height: 840px;
-}
+    .faq-top-left-p {
+        font-size: 45px !important;
+        color: white;
+        font-weight: bolder;
+        display: inline;
+        margin-left: 180px;
+        top: 30px;
+    }
 
-.faq-top-left-p {
-    font-size: 45px !important;
-    color: white;
-    font-weight: bolder;
-    display: inline;
-    margin-left:180px; 
-    top:30px;
-}
+    .faq-top-left-p1 {
+        font-size: 85px !important;
+        color: white;
+        font-weight: bold;
+        display: inline;
+    }
 
-.faq-top-left-p1 {
-    font-size: 85px !important;
-    color: white;
-    font-weight: bold;
-    display: inline;
-}
+    .faq-bottom-left-p {
+        color: white;
+        font-size: 24px !important;
+        line-height: 26px !important;
+    }
 
-.faq-bottom-left-p {
-    color: white;
-    font-size: 24px !important;
-    line-height: 26px !important;
-}
+    .faq-top-left {
+        position: absolute;
+        top: 260px;
+        left: 50px;
+        line-height: 50px !important;
+    }
 
-.faq-top-left {
-    position: absolute;
-    top: 260px;
-    left: 50px;
-    line-height: 50px !important;
-}
-
-.faq-bottom-left {
-    position: absolute;
-    bottom: 50px;
-    left: 80px;
-    color: white !important;
-}
+    .faq-bottom-left {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+        color: white !important;
+    }
 }
 
 .our_help {
@@ -16775,7 +16742,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-weight: 700;
     font-style: normal;
     font-size: 38px;
-    color: #0F2850;
+    color: #0f2850;
 }
 
 .our_help_quotation {
@@ -16783,17 +16750,25 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-weight: 600;
     font-style: normal;
     font-size: 26px;
-    color: #038FFC !important;
+    color: #038ffc !important;
 }
 
 .faq .accordion-item {
     margin-bottom: 5px !important;
 }
 
+.cus_our_services {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px;
+  line-height: 50px;
+}
 
-
-
-
-
-
-
+.our_services {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 32px;
+  color: #038ffc !important;
+}
