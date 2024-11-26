@@ -32,7 +32,7 @@
                                                 Brand
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -91,7 +91,7 @@
                                             Year
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
@@ -137,7 +137,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse "
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
                                                 <div class="d-flex flex-column align-content-between col-sm-9">
@@ -872,11 +872,15 @@
                 });
                 $("#budget_search").on('click',function(e){
                     e.preventDefault();     
+                    document.querySelectorAll('.popular-search').forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
                     $('#search_form').submit();
                 });
 
                 $(".popular-search").on('change',function(e){
                     e.preventDefault();   
+                    clear_price_slider();
                     form.submit();
                 })
 
@@ -954,6 +958,17 @@
             //         $('#search_form').submit();
             //     });
             // });
+            $('#ex2').on('slide', function(slideEvt) {
+                // Get the current min and max values from the slider
+                var minYear = slideEvt.value[0];
+                var maxYear = slideEvt.value[1];
+
+                console.log(`${minYear},${maxYear}`)
+                // Update the input values
+                $('#ex2').val(`${minYear},${maxYear}`);
+
+                // Optionally, you can also update your server-side query here
+                });
         })(jQuery);
 
 
@@ -1059,17 +1074,7 @@
 
    
 
-$('#ex2').on('slide', function(slideEvt) {
-  // Get the current min and max values from the slider
-  var minYear = slideEvt.value[0];
-  var maxYear = slideEvt.value[1];
 
-  console.log(`${minYear},${maxYear}`)
-  // Update the input values
-  $('#ex2').val(`${minYear},${maxYear}`);
-
-  // Optionally, you can also update your server-side query here
-});
 
 
     var $j = jQuery.noConflict();

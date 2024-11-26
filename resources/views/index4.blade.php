@@ -43,11 +43,13 @@
                             </ul>
                         </div>
                         <div>
-                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}">
+                            <!-- <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}"> -->
+                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('fixed-car-marketplace')}}">
                                 <ul class="nav nav-tabs custom-tabs mb-3 rounded-0">
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" id="jdm_brand" name="jdm_brand[]">
+                                            <!-- <select class="aj-dropdown" id="jdm_brand" name="jdm_brand[]"> -->
+                                            <select class="aj-dropdown" id="jdm_brand" name="brand[]">
                                             <option selected value="">Brand</option>
                                             @foreach($jdm_core_brand as $brand)
                                             <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</option>
@@ -57,14 +59,14 @@
                                     </li>
                                     <li class="nav-item"> 
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" name="jdm_model[]" id="jdm_model">
+                                            <select class="aj-dropdown" name="model[]" id="jdm_model">
                                             <option selected value="">Model</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" class="jdm_year" id="jdm_year">
+                                            <select class="aj-dropdown" class="jdm_year" id="jdm_year" name="year">
                                             <option selected value="">Year</option>
                                             </select>
                                         </div>
@@ -1226,9 +1228,9 @@ $(()=>{
                 for (let index = 0; index < brands.length; index++) {
                     const element = brands[index];
                     $("#jdm_model").append(
-                        `<option value='${element.model}'>${element.model}</option>`);
+                        `<option value='${element}'>${element}</option>`);
                     }
-            }
+                }
         })  
     })
 
@@ -1247,11 +1249,10 @@ $(()=>{
             $("#jdm_year").append(`
             <option  value=""}>Year</option>`);
              var brands=data.response;
-             console.log(brands)
             for (let index = 0; index < brands.length; index++) {
                 const element = brands[index];
                 $("#jdm_year").append(`
-                <option  value=${element.yom}>${element.yom}</option>`);
+                <option  value=${element.model_year_en}>${element.model_year_en}</option>`);
             }
 
         }
