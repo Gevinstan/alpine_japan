@@ -452,7 +452,7 @@
 
                                                 <div class="brand-car-btm-txt-btm py-2 px-3">
                                                     <p>
-                                                        <i class="bi bi-geo-alt-fill fs-6"></i>
+                                                        <i class="bi bi-geo-alt-fill"></i>
                                                         <span class="brand-location ">Hyogo, Japan</span>
                                                     </p>
                                                     <div class="d-flex flex-column">
