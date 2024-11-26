@@ -10,31 +10,31 @@
 <main>
     <!-- banner-part-start  -->
 
-    <section class="inner-banner">
-    <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;">
-        <div class="container blog_text">
-            <div class="col-lg-12">
-                <div class="inner-banner-df">
-                    <h1 class="inner-banner-taitel blog_header">{{ __('translate.Blogs') }}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb ">
-                            <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}" class="blog-list">{{ __('translate.Home') }}</a></li>
-                            <li class="breadcrumb-item active breadcrumb-link blog-list" aria-current="page">{{ __('translate.Blogs') }}</li>
-                            <!-- <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                            <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li> -->
-                        </ol>
-                    </nav>
+    <section class="inner-banner px-2 px-sm-3 px-lg-5">
+        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;">
+            <div class="container blog_text">
+                <div class="col-lg-12">
+                    <div class="inner-banner-df">
+                        <h1 class="inner-banner-taitel blog_header">{{ __('translate.Blogs') }}</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb ">
+                                <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}" class="blog-list">{{ __('translate.Home') }}</a></li>
+                                <li class="breadcrumb-item active breadcrumb-link blog-list" aria-current="page">{{ __('translate.Blogs') }}</li>
+                                <!-- <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                                <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li> -->
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </section>
     <!-- banner-part-end -->
 
 
     <!--blogs-rightbar-part-start -->
 
-    <section class="blogs-rightbar">
+    <section class="blogs-rightbar px-2 px-sm-3 px-lg-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
