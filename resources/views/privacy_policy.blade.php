@@ -8,16 +8,26 @@
 @section('body-content')
 
     <main>
-        <!-- banner-part-start  -->
+         <!-- banner-part-start  -->
 
-        <section class="inner-banner">
-      
+        <section class="privacy_policy_header pt-5">
+            <div class="container pt-5">
+                <div class="row pt-3 px-sm-2 px-md-5 banner_color">
+                    <div class="col-lg-12">
+                        <div class="pb-2">
+                            <!-- <h2 class="contact_us" >Contact</h2> 
+                            <h2 class="contact_us contact-us-color">Us</h2> -->
+                            <h2 class="section-heading">Privacy <span class="highlight"> Policy<span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- banner-part-end -->
 
         <!-- Privacy and Policy-part start  -->
 
-        <section class="privacy">
+        <section class="privacy px-2 px-sm-3 px-lg-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

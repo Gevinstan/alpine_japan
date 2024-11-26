@@ -29,10 +29,10 @@
 
     <!-- Inventory-part-start -->
 
-    <section class="inventory feature-two listing-breadcrumb bg-light-grey">
-        <div class="container">
+    <section class="inventory feature-two listing-breadcrumb bg-light-grey ">
+        <div class="container px-2 px-sm-3 px-lg-5">
             <nav aria-label="breadcrumb" class="">
-                <ol class="breadcrumb breadcrumb-list">
+                <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
@@ -162,7 +162,7 @@
                                         </h2>
                                         <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
                                             aria-labelledby="panelsStayOpen-headingfive">
-                                            <div class="accordion-body mt-3 row">
+                                            <div class="accordion-body row">
                                                 <div class="row">
                                                     <div class="d-flex flex-column align-content-between col-sm-9">
                                                         <div class="d-flex justify-content-between slider_num">
@@ -170,7 +170,7 @@
                                                             <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
                                                         </div>
 
-                                                        <div id="slider-outer-div" class="ms-2">
+                                                        <div id="slider-outer-div" class="">
                                                             <div id="slider-div">
                                                                 <div>
                                                                     <input id="ex2" type="text" name="price_range_scale" 
@@ -283,7 +283,7 @@
                         </div>
                     </div>
 
-                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 mb-3">
+                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 px-3 mb-3">
                         <div class="d-flex align-items-center flex-wrap gap-3">
                         @if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)

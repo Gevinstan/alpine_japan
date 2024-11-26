@@ -11,9 +11,9 @@
 
     <section class="banner mb-5 background_image">
         <div class="container">
-            <div class="row align-items-center px-2 px-lg-5 pb-5">
+            <div class="row align-items-start px-2 px-lg-5 pb-5 pt-2">
                 <div class="col-lg-12 col-xl-7">
-                    <div class="banner-taitel">
+                    <div class="banner-taitel pt-1">
                         <span>{{ $homepage->home3_intro_short_title }}</span>
                         <h1 class="banner-h1">Simplifying Your Car </br>
                         <span class="banner-h1">Buying Experience</span></h1>

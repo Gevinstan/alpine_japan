@@ -14,9 +14,7 @@
             <div class="row ">
                 <div class="col-lg-5 spacing_about px-2 px-sm-3 px-lg-5">
                     <div class="">
-                        <p class="about_us"></p> 
-                        <p class="about_us about-us-color"></p>  
-                        <h2 class="section-heading">About <span class="highlight">Us<span></h2>  
+                        <h2 class=" about_us">About <span class="about-us-color">Us<span></h2>  
                     </div>
 
                     <div class="about-img"> 
@@ -68,7 +66,7 @@
 
 
     <!-- Categories-part-start -->
-    <section class="categories categories-three py-120px">
+    <section class="categories categories-three py-120px px-2 px-sm-3 px-lg-5">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-lg-6 col-sm-8 col-md-8  ">
@@ -114,7 +112,7 @@
 
     <!--  vedio-part-start -->
 
-    <section class="vedio vedio-two ">
+    <section class="vedio vedio-two px-2 px-sm-3 px-lg-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
@@ -228,90 +226,95 @@
     <br>
     <!-- Target Customer Part start -->
 
-    <div class="container target-customer py-5">
-        <div class="row">
-            <!-- Column 1 -->
-            <div class="col-12 col-md-3 p-0">
-                <div class="text-center d-flex flex-column justify-content-center align-items-center">
-                    <img src="{{ asset('japan_home/About1.svg') }}" class="tar_cus_img" alt="delete">
-                    <h1 class="text-light">10+</h1>
-                    <p class="tar_cus_txt">Awards Win</p>
+    <section>
+        <div class="container target-customer py-5">
+            <div class="row">
+                <!-- Column 1 -->
+                <div class="col-12 col-md-3 p-0">
+                    <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('japan_home/About1.svg') }}" class="tar_cus_img" alt="delete">
+                        <h1 class="text-light">10+</h1>
+                        <p class="tar_cus_txt">Awards Win</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Column 2 -->
-            <div class="col-12 col-md-3 p-0">
-                <div class="text-center d-flex flex-column justify-content-center align-items-center">
-                    <img src="{{ asset('japan_home/About2.svg') }}" class="tar_cus_img" alt="delete">
-                    <h1 class="text-light">1500+</h1>
-                    <p class="tar_cus_txt">Completed Deliveries</p>
+                <!-- Column 2 -->
+                <div class="col-12 col-md-3 p-0">
+                    <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('japan_home/About2.svg') }}" class="tar_cus_img" alt="delete">
+                        <h1 class="text-light">1500+</h1>
+                        <p class="tar_cus_txt">Completed Deliveries</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Column 3 -->
-            <div class="col-12 col-md-3 p-0">
-                <div class="text-center d-flex flex-column justify-content-center align-items-center">
-                    <img src="{{ asset('japan_home/About3.svg') }}" class="tar_cus_img">
-                    <h1 class="text-light">50+</h1>
-                    <p class="tar_cus_txt">Worldwide Delivery Countries</p>
+                <!-- Column 3 -->
+                <div class="col-12 col-md-3 p-0">
+                    <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('japan_home/About3.svg') }}" class="tar_cus_img">
+                        <h1 class="text-light">50+</h1>
+                        <p class="tar_cus_txt">Worldwide Delivery Countries</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Column 4 -->
-            <div class="col-12 col-md-3 p-0">
-                <div class="text-center d-flex flex-column justify-content-center align-items-center">
-                    <img src="{{ asset('japan_home/About4.svg') }}" class="tar_cus_img">
-                    <h1 class="text-light">1500+</h1>
-                    <p class="tar_cus_txt">Happy Customers</p>
+                <!-- Column 4 -->
+                <div class="col-12 col-md-3 p-0">
+                    <div class="text-center d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('japan_home/About4.svg') }}" class="tar_cus_img">
+                        <h1 class="text-light">1500+</h1>
+                        <p class="tar_cus_txt">Happy Customers</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="py-5">
+            <div class="card card_vision px-2 px-sm-3 px-lg-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 our-vision-image py-5">
+                            <div class="image-container ">
+                                <img src="{{ asset('japan_home/Vision1.svg') }}" class="image1" alt="delete">
+                                <img src="{{ asset('japan_home/Vision2.png') }}" class="image2" alt="Vision 2">
+                                <img src="{{ asset('japan_home/Vision3.svg') }}" class="image3" alt="Vision 3">
+                            </div>
+                        </div>         
+
+                        <div class="col-md-4 our-vision-content">
+                            <div class="vision_content ">
+                                <h2 class=" about_us">Our <span class="about-us-color">Vision<span></h2>
+
+                                <h6 class="about-us-content-heading">Working together with our partners, we strive to provide the best support and service to our customers.</h6>
+                                
+                                <h6 class="about-us-content"> <b>“Client Satisfaction"</b> is the prime Business Policy and deeply incorporated within the organization.</h6>
+                                
+                                <h6 class="about-us-content">This is the unchanging commitment we at Alpine Japan have had over many years, Our Straightforward style of doing 
+                                    business has made its easy for us to Foray into new markets.</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    
 
     <!-- Target Customer Part end -->
 
     <!---- Our Vision Starts ---->
 
-    <div class="card card_vision">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="image-container">
-                        <img src="{{ asset('japan_home/Vision1.svg') }}" class="image1" alt="delete">
-                        <img src="{{ asset('japan_home/Vision2.png') }}" class="image2" alt="Vision 2">
-                        <img src="{{ asset('japan_home/Vision3.svg') }}" class="image3" alt="Vision 3">
-                    </div>
-                </div>
-                
 
-                <div class="col-md-4 vision_right_color">
-                    <h2 class="d-inline">Our</h2> 
-                    <h2 class="d-inline vision_color">Vision</h2>
-                        <p class="fs-3 pt-2"><b>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                            when an unknown printer took a galley of type and scrambled it to make a type 
-                            specimen book.</b></p>
-                        
-                        <p style="fs-3 pt-2">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in 
-                            a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
-                            </p>
-                        
-                        <p style="fs-3 pt-2">It is a long established fact that a reader will be distracted by the readable content of 
-                            a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less 
-                            normal distribution</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
     <!---- Our Vision ends ---->
 
     <br>
     <br>
     <!--   Testimonial-part-start -->
-    <section class=" testimonial testimonial-top">
-        <div class="container">
-            <div class="row">
+
+    <section class=" testimonial testimonial-top px-2 px-sm-3 px-lg-5 py-5">
+        <div class="container ">
+            <div class="row px-5">
                 <div class="col-lg-5">
 
                     <div class="sm-df">
@@ -443,6 +446,7 @@
             </div>
         </div>
     </section>
+
     <!--   Testimonial-part-end -->
 
     <br>
