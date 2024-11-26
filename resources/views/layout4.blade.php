@@ -125,7 +125,7 @@
         </div>
 
 
-        <nav class="menu-bg m-0 px-2">
+        <nav class="menu-bg m-0 px-4">
             <div class="container ">
                 <div class="row">
                     <div class="col-lg-12 col-p-0">
