@@ -1,4 +1,3 @@
-
 @extends('layout4')
 @section('title')
     <title>{{ $seo_setting->seo_title }}</title>

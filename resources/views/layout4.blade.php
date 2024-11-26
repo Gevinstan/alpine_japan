@@ -226,7 +226,7 @@
                                             <a class="nav-link mx-2" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link mx-2" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
+                                            <a class="nav-link  mx-2" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
                                     </ul>
                                 </div>
