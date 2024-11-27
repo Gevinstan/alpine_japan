@@ -1223,7 +1223,7 @@
 
 
     <!-- About section Start-->
-        <section class="about-section px-2 px-sm-3 px-lg-5">
+        <section class="about-section">
             <div class="container text-sm-center text-md-start px-2 px-sm-3 px-lg-5">
                 <h2 class="pb-2 section-heading">About <span class="highlight">Alpine Japan</span></h2>
                 <div class="row align-items-center mt-3">
