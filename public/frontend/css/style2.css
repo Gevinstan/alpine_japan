@@ -14409,9 +14409,9 @@ p {
 
 .quality-compliance .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 .section-title {
@@ -15692,7 +15692,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .about-text-2 {
-    color: #818181;
+    color: #818181 !important;
 }
 
 .about .about-item-main .about-item {
@@ -15865,9 +15865,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .about-section .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 
@@ -15882,9 +15882,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .feature .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 
@@ -15897,9 +15897,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .brand-car .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 .categories .section-heading {
@@ -15911,9 +15911,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .categories .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 .model-text {

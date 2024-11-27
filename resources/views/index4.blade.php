@@ -1248,9 +1248,10 @@
     <!-- Quality section start -->
         <section class="quality-compliance py-5 ">
             <div class="container text-center px-2 px-sm-3 px-lg-5">
+                <div class="px-md-5 px-sm-2">
                 <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
-                <p class="section-subtitle">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
-
+                <p class="section-subtitle px-md-5 px-sm-2">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
+                </div>
                 <div class="row justify-content-center px-4">
                     <div class="col-md-4 col-12 mb-4">
                         <div class="compliance-item mb-3">
