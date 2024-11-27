@@ -578,19 +578,19 @@
 
 .thm-btn {
     position: relative;
-    width: 150px;
-    border-radius: 8px;
-    height: 50px;
+    width: 100px;
+    border-radius: 4px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white-color);
-    font-size: 18px;
+    font-size: 14px;
     font-weight: var(--medium);
     background-color: var(--white-color);
     overflow: hidden;
     font-family: var(--roboto);
-    text-transform: capitalize;
+    text-transform: uppercase;
     transition: all 0.5s ease-in-out 0.2s;
     z-index: 1;
     border: 1px solid var(--primary-color-1);
@@ -911,9 +911,9 @@
     font-family: var(--roboto);
     font-size: 16px;
     font-weight: 400;
-    line-height: 16px;
+    line-height: 0;
     border-radius: 0;
-    border-bottom: 3px solid #6e6e6e;
+    border-bottom: 1px solid #EBEBEB;
 }
 
 .banner .banner-search-bar .banner-sarchber-box {
@@ -14349,12 +14349,16 @@ p {
 }
 .step-title {
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 24px !important;
 }
 .step-description {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    line-height: 1.7;
 }
 
 .buy-text-white {
@@ -14504,7 +14508,7 @@ p {
 
 .aj-dropdown {
     width: 170px;
-    padding: 10px;
+    padding: 10px 15px;
     border: 1px solid #ebebeb;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
@@ -14859,7 +14863,7 @@ p {
 
 .listcar_price {
     font-family: "Poppins", serif;
-    font-weight: var(--bold) !important;
+    font-weight: 600 !important;
     font-style: normal;
     font-size: 1.3rem;
     color: #038ffc;
@@ -15631,7 +15635,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .about-section p {
-    color: #6c757d;
+    color: #121A27;
     font-size: 0.925rem;
     line-height: 22px !important;
 }
@@ -15681,6 +15685,14 @@ input:not(:placeholder-shown) + .placeholder-text {
     display: flex;
     align-items: center;
     gap: 107px;
+}
+
+.about-text {
+    font-weight: 600;
+}
+
+.about-text-2 {
+    color: #818181;
 }
 
 .about .about-item-main .about-item {
@@ -15911,6 +15923,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 .custom-tabs .nav-link.active {
     color: var(--primary-color-1) !important;
     border-top: 2px solid var(--primary-color-1);
+    font-weight: 600 !important;
 }
 
 .brand-car-item,
@@ -16815,4 +16828,31 @@ input:not(:placeholder-shown) + .placeholder-text {
 .faq_row {
     padding: 0px !important;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%236E6E6E' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: 10px;
+  }
+
+  select:focus {
+    border: none; 
+    outline: none; 
+  }
+
+  .dropdown:focus-visible {
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+  .dropdown .dropdown-toggle {
+    border: none;
+    background: none;
+    outline: none;
+  }
 
