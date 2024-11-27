@@ -201,7 +201,7 @@
 
 
     <!--  Brand Car-part-start -->
-        <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
+        <section class="brand-car py-5 my-3 px-sm-2 px-lg-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
