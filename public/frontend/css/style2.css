@@ -15983,7 +15983,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 /****** Shipment Page Style Start  ******/
 
 .shipment-banner-section {
-    padding-top: 120px;
+    padding-top: 104px;
 }
 
 @media screen and (max-width: 992px) {

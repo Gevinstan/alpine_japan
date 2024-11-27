@@ -21,7 +21,7 @@
   <!-- Banner Section End  -->
 
   <!-- Credit Card Section Start  -->
-   <section class="pb-5">
+   <section class="pb-5 bg-light-grey">
     <div class="container d-flex justify-content-center">
       <div class="card-section position-relative d-flex justify-content-center p-5">
         <div class="card-outer position-absolute rounded-circle">
@@ -74,7 +74,7 @@
   <!-- Roro Section End  -->
 
   <!-- Containers Section Start  -->
-   <section class="containers-section">
+   <section class="containers-section bg-light-grey">
     <div class="container">
       <div class="content-section p-5 d-flex justify-content-center align-items-center flex-column gap-4">
         <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3">
@@ -150,7 +150,7 @@
   <!-- Inspection section end -->
 
   <!-- Our Business section Start -->
-    <section class="help">
+    <section class="help bg-light-grey">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
