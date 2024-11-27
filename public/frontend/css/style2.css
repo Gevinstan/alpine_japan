@@ -1636,10 +1636,13 @@
 
 .brand-car-item .brand-car-inner .brand-car-inner-item span {
     font-size: 14px;
-    font-weight: var(--regular);
     line-height: 14px;
-    color: var(--paragraph-color);
-    font-family: var(--roboto);
+    color: #25282D;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+
+    
 }
 
 .brand-car-item .brand-car-inner .brand-car-inner-item span svg {
@@ -1656,8 +1659,12 @@
 .brand-car-item .brand-car-inner h3 {
     padding-top: 5px;
     letter-spacing: -1px;
-    font-size: 20px;
+    font-size: 18px !important;
     transition: all linear 0.3s;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #0D274E;
 }
 
 .brand-car-item .brand-car-inner .brand-car-inner-item-two {
@@ -9259,6 +9266,7 @@ p {
     font-size: 18px;
     padding: 20px 0 10px 0;
     color: var(--headline-color);
+    /* color: #6E6E6E !important; */
 }
 
 .inventory-main-box .accordion-button:focus {
@@ -14532,7 +14540,7 @@ p {
 }
 
 .brand-location {
-    font-size: 0.875rem;
+    font-size: 0.625rem;
     font-family: "Poppins", serif;
     font-weight: normal !important;
     font-style: normal;
@@ -14540,13 +14548,16 @@ p {
 }
 
 .brand-date {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     font-family: "Poppins", serif;
     font-weight: normal !important;
     font-style: normal;
     color: #9ea3ad;
 }
 
+.bi-geo-alt-fill {
+    font-size: 0.625rem;
+}
 .custom-tabs li a {
     height: 44px;
     font-size: 0.875rem !important;
@@ -16265,6 +16276,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 25px !important;
         padding-top: 2.5rem;
+        color: #787B81 !important;
     }
 
     .about-us-content {
@@ -16273,6 +16285,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 23px !important;
         padding-top: 2.5rem;
+        color: #787B81 !important;
     }
 
     .vision_content {
@@ -16727,7 +16740,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         color: white;
         font-weight: bolder;
         display: inline;
-        margin-left: 180px;
+        margin-left: 160px;
         top: 30px;
     }
 
@@ -16794,3 +16807,12 @@ input:not(:placeholder-shown) + .placeholder-text {
   font-size: 32px;
   color: #038ffc !important;
 }
+
+.faq_con_flu {
+    padding: 0px !important;
+}
+
+.faq_row {
+    padding: 0px !important;
+}
+

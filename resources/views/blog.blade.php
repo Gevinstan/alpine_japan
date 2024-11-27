@@ -32,7 +32,7 @@
             <div class="container pt-5">
                 <div class="row pt-3 px-sm-2 px-md-5 banner_color">
                     <div class="col-lg-12">
-                        <div class="pb-2">
+                        <div class="pb-2 ps-3">
                             <!-- <h2 class="contact_us" >Contact</h2> 
                             <h2 class="contact_us contact-us-color">Us</h2> -->
                             <h2 class="section-heading">Blogs<span class="highlight"><span></h2>
