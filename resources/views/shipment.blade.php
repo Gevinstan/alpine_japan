@@ -251,8 +251,7 @@
             </div>
 
             <h2 class="help-taitel" data-aos="flip-up" data-aos-duration="1000">
-              <p class="text-center">We Are Proud Of Our Business</p>
-              <br />
+              <p class="text-center">We Are Proud Of Our Business.</p>
               <span class="text-center">Get a Free Quotation Now!</span>
             </h2>
           </div>

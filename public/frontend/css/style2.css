@@ -8952,6 +8952,8 @@ p {
 .help .help-taitel span {
     color: var(--primary-color-1);
     text-decoration-line: underline;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .help .help-img {
@@ -16854,5 +16856,16 @@ select {
     border: none;
     background: none;
     outline: none;
+  }
+
+  .help-box h3 a {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .help-taitel p {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #0F2850;
   }
 
