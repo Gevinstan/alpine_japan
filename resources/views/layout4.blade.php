@@ -548,7 +548,7 @@
     <footer class="overflow-hidden footer footer-two">
     @endif
 
-        <div class="container px-sm-2 px-md-5">
+        <div class="container overflow-hidden px-sm-2 px-md-5">
             <div class="footer-bb d-md-flex d-sm-flex    align-items-center">
                 <div class="col-lg-5 col-p-0 p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">

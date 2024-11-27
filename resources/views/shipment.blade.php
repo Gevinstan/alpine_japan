@@ -150,7 +150,7 @@
   <!-- Inspection section end -->
 
   <!-- Our Business section Start -->
-    <section class="help bg-light-grey">
+    <section class="help bg-light-grey py-5">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
@@ -260,7 +260,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="help-img text-center">
-              <img src="{{ asset('japan_home/faq.png') }}" alt="img" style="width:95%" class="img-fluid">
+              <img src="{{ asset('japan_home/faq.png') }}" alt="img" class="img-fluid">
             </div>
           </div>
         </div>
