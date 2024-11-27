@@ -71,7 +71,7 @@ class HomeController extends Controller
 
         $brands = Brand::where('status', 'enable')->get();
 
-        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(10);
+        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(12);
 
       
 
