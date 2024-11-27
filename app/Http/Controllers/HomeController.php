@@ -71,7 +71,7 @@ class HomeController extends Controller
 
         $brands = Brand::where('status', 'enable')->get();
 
-        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(10);
+        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(12);
 
       
 
@@ -1512,9 +1512,30 @@ class HomeController extends Controller
 
         $terms_condition = TermAndCondition::where('lang_code', Session::get('front_lang'))->first();
 
+        $jdm_core_brand = Brand::where('status', 'enable')->get();
+        $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+                     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                     ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+        $jdm_legend_heavy = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+        $jdm_legend_small_heavy = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+        ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        ->where('bt.lang_code',Session::get('front_lang'))
+        ->select('b.slug','bt.name as brand_name')
+        ->distinct('b.slug')->get();
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
         return view('terms_conditions')->with([
             'seo_setting' => $seo_setting,
             'terms_condition' => $terms_condition,
+            'jdm_legend'=>$jdm_brand,
+            'jdm_core_brand'=>$jdm_core_brand
         ]);
     }
 

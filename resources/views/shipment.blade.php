@@ -21,7 +21,7 @@
   <!-- Banner Section End  -->
 
   <!-- Credit Card Section Start  -->
-   <section class="pb-5">
+   <section class="pb-5 bg-light-grey">
     <div class="container d-flex justify-content-center">
       <div class="card-section position-relative d-flex justify-content-center p-5">
         <div class="card-outer position-absolute rounded-circle">
@@ -74,7 +74,7 @@
   <!-- Roro Section End  -->
 
   <!-- Containers Section Start  -->
-   <section class="containers-section">
+   <section class="containers-section bg-light-grey">
     <div class="container">
       <div class="content-section p-5 d-flex justify-content-center align-items-center flex-column gap-4">
         <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3">
@@ -150,7 +150,7 @@
   <!-- Inspection section end -->
 
   <!-- Our Business section Start -->
-    <section class="help">
+    <section class="help bg-light-grey py-5">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
@@ -251,8 +251,7 @@
             </div>
 
             <h2 class="help-taitel" data-aos="flip-up" data-aos-duration="1000">
-              <p class="text-center">We Are Proud Of Our Business</p>
-              <br />
+              <p class="text-center">We Are Proud Of Our Business.</p>
               <span class="text-center">Get a Free Quotation Now!</span>
             </h2>
           </div>
@@ -261,7 +260,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="help-img text-center">
-              <img src="{{ asset('japan_home/faq.png') }}" alt="img" style="width:95%" class="img-fluid">
+              <img src="{{ asset('japan_home/faq.png') }}" alt="img" class="img-fluid">
             </div>
           </div>
         </div>

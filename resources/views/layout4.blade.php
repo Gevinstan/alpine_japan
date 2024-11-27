@@ -548,7 +548,7 @@
     <footer class="overflow-hidden footer footer-two">
     @endif
 
-        <div class="container px-sm-2 px-md-5">
+        <div class="container overflow-hidden px-sm-2 px-md-5">
             <div class="footer-bb d-md-flex d-sm-flex    align-items-center">
                 <div class="col-lg-5 col-p-0 p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
@@ -698,7 +698,7 @@
                 <div class=" col-xl-8 col-lg-12 col-12 col-md-12 ">
                     <div class="row footer-ml">
                         <div class="col-xl-4 col-lg-4 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
-                            <div class="footer-item-text">
+                            <div class="footer-item-text ">
                                 <h3>{{ __('translate.Why Alpine') }}</h3>
                             </div>
                             <div class="footer-item-text-link">
@@ -905,7 +905,7 @@
                             </div>
                             <div>
                                 <div class="footer-item-text">
-                                    <h3>We Accept Credit Card</h3>
+                                    <h3 class="text-nowrap">We Accept Credit Card</h3>
                                 </div>
                                 <!-- <ul>
                                     <li><img src="{{ asset($setting->home2_logo2) }}" alt="logo"></li>

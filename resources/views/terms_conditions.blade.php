@@ -7,7 +7,7 @@
 
 @section('body-content')
 
-    <main>
+    <main class="px-sm-2 px-md-5">
         <!-- banner-part-start  -->
 
         <section class="inner-banner">

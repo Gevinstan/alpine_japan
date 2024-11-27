@@ -578,19 +578,19 @@
 
 .thm-btn {
     position: relative;
-    width: 150px;
-    border-radius: 8px;
-    height: 50px;
+    width: 120px;
+    border-radius: 4px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white-color);
-    font-size: 18px;
+    font-size: 14px;
     font-weight: var(--medium);
     background-color: var(--white-color);
     overflow: hidden;
     font-family: var(--roboto);
-    text-transform: capitalize;
+    text-transform: uppercase;
     transition: all 0.5s ease-in-out 0.2s;
     z-index: 1;
     border: 1px solid var(--primary-color-1);
@@ -911,9 +911,9 @@
     font-family: var(--roboto);
     font-size: 16px;
     font-weight: 400;
-    line-height: 16px;
+    line-height: 0;
     border-radius: 0;
-    border-bottom: 3px solid #6e6e6e;
+    border-bottom: 1px solid #EBEBEB;
 }
 
 .banner .banner-search-bar .banner-sarchber-box {
@@ -2961,6 +2961,7 @@ img {
 
 body {
     overflow-x: hidden;
+    font-family: var(--poppins) !important;
 }
 
 a:hover,
@@ -4624,12 +4625,14 @@ p {
 
 .contact-us .contact-us-taitel {
     font-family: var(--DMSans);
+    font-weight: 600 !important;
+    font-size: 20px !important;
 }
 
 .contact-us .contact-us-dec {
     padding-top: 20px;
     font-family: var(--roboto);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--regular);
     line-height: 28px;
     color: var(--paragraph-color);
@@ -4662,8 +4665,8 @@ p {
 
 .contact-us .contact-us-item .contact-us-inner .text h4 {
     font-family: var(--DMSans);
-    font-size: 22px;
-    font-weight: var(--medium);
+    font-size: 16px;
+    font-weight: 600;
     line-height: 20px;
     padding: 26px 0 10px 0;
     color: var(--headline-color);
@@ -4671,7 +4674,7 @@ p {
 
 .contact-us .contact-us-item .contact-us-inner .text p {
     font-family: var(--roboto);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--regular);
     line-height: 28px;
     color: var(--paragraph-color);
@@ -4746,7 +4749,7 @@ p {
 
 .contact-us .get-in-touch .get-in-touch-taitel {
     font-family: var(--DMSans);
-    font-size: 24px;
+    font-size: 20px;
     font-weight: var(--bold);
     line-height: 34px;
     color: #0d274e;
@@ -7464,8 +7467,8 @@ p {
 }
 
 .footer .newsletter-txt {
-    font-size: 46px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 600;
     line-height: 56px;
     color: var(--white-color);
 }
@@ -7569,9 +7572,9 @@ p {
 }
 
 .footer .footer-item-text h3 {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 36px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 18px;
     color: var(--primary-color-1);
 }
 
@@ -8949,16 +8952,14 @@ p {
 .help .help-taitel span {
     color: var(--primary-color-1);
     text-decoration-line: underline;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .help .help-img {
     margin-top: 56px;
 }
 
-.help .help-img img {
-    width: 1456px;
-    height: 425px;
-}
 
 .help-two {
     padding-top: 0;
@@ -13667,8 +13668,8 @@ h5.preloader-text::after {
     --semiBold: 600;
     --medium: 500;
     --bold: 700;
-    --DMSans: "DM Sans", sans-serif;
-    --roboto: "Roboto", sans-serif;
+    --DMSans: "Poppins", sans-serif;
+    --roboto: "Poppins", sans-serif;
     --poppins: "Poppins", serif;
     --transition-all: all linear 0.3s;
     --transition-ease-in-out: all 0.5s ease-in-out;
@@ -14238,8 +14239,8 @@ p {
 /************ NAV-BAR DROPDOWN STYLE END **************/
 
 .banner-h1 {
-    font-size: clamp(2.5rem, 1.9318rem + 2.4242vw, 3.75rem) !important;
-    font-weight: 700 !important;
+    font-size: 3.5rem !important;
+    font-weight: 600 !important;
     line-height: 65px !important;
     padding: 0 !important;
 }
@@ -14268,9 +14269,9 @@ p {
 }
 
 .section-heading {
-    font-size: clamp(1.75rem, 1.6364rem + 0.4848vw, 2rem) !important;
+    font-size: 1.75rem !important;
     padding: 0 !important;
-    font-weight: 900 !important;
+    font-weight: 700 !important;
 }
 
 .car-poster {
@@ -14346,12 +14347,16 @@ p {
 }
 .step-title {
     text-align: center;
-    font-weight: bold;
+    /* font-weight: bold; */
     margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 16px !important;
+    line-height: 24px !important;
 }
 .step-description {
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    line-height: 1.7;
 }
 
 .buy-text-white {
@@ -14402,9 +14407,9 @@ p {
 
 .quality-compliance .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 .section-title {
@@ -14501,7 +14506,7 @@ p {
 
 .aj-dropdown {
     width: 170px;
-    padding: 10px;
+    padding: 10px 15px;
     border: 1px solid #ebebeb;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
@@ -14753,29 +14758,37 @@ p {
     border: 1px solid #ffffff !important;
 }
 .car-listing-details p {
-    font-size: 0.975rem;
-    line-height: 22px;
+    font-size: 0.65rem;
+    line-height: 10px;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .brand-text {
     color: #25282d;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.5rem;
-    line-height: 22px;
+    font-size: 1.3rem;
+    line-height: 15px;
+    font-weight: 600;
+    padding-bottom: 6px;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .amount-text {
     color: #868b96;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .price-text {
     color: #038ffc;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: var(--poppins) !important;
 }
 .car-listing-details .commission-text {
     color: #0d274e;
     font-weight: 600;
     font-size: 1.1rem;
+    font-family: var(--poppins) !important;
 }
 .cal-btn {
     color: #038ffc;
@@ -14784,9 +14797,9 @@ p {
     background-color: var(--white-color);
     font-size: 0.9375rem;
     padding: 10px;
-    font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
+    font-family: var(--poppins) !important;
 }
 .total-price span {
     font-size: 2rem;
@@ -14848,7 +14861,7 @@ p {
 
 .listcar_price {
     font-family: "Poppins", serif;
-    font-weight: var(--bold) !important;
+    font-weight: 600 !important;
     font-style: normal;
     font-size: 1.3rem;
     color: #038ffc;
@@ -15312,6 +15325,7 @@ p {
     font-style: normal !important;
     font-size: 12px !important;
     color: #868b96 !important;
+    font-weight: 500 !important;
 }
 
 .charge-btn {
@@ -15529,7 +15543,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 /***** Contact Us Workk Responsive *****/
 
 .contact_us_header {
-    padding: 120px 0 0px 0 !important;
+    padding: 104px 0 0px 0 !important;
 }
 
 @media (max-width: 1024px) {
@@ -15609,7 +15623,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .about-section p {
-    color: #6c757d;
+    color: #121A27;
     font-size: 0.925rem;
     line-height: 22px !important;
 }
@@ -15659,6 +15673,14 @@ input:not(:placeholder-shown) + .placeholder-text {
     display: flex;
     align-items: center;
     gap: 107px;
+}
+
+.about-text {
+    font-weight: 600;
+}
+
+.about-text-2 {
+    color: #818181 !important;
 }
 
 .about .about-item-main .about-item {
@@ -15831,9 +15853,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .about-section .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 
@@ -15848,9 +15870,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .feature .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 
@@ -15863,9 +15885,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .brand-car .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 .categories .section-heading {
@@ -15877,9 +15899,9 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .categories .highlight {
     font-family: "Poppins", serif;
-    font-weight: 600;
+    font-weight: 500;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: #005bac;
 }
 .model-text {
@@ -15889,6 +15911,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 .custom-tabs .nav-link.active {
     color: var(--primary-color-1) !important;
     border-top: 2px solid var(--primary-color-1);
+    font-weight: 600 !important;
 }
 
 .brand-car-item,
@@ -15923,10 +15946,15 @@ input:not(:placeholder-shown) + .placeholder-text {
     color: #264b83;
 }
 
-.contact-us .contact-box a {
-    font-size: 20px;
-    font-weight: 900;
-}
+  .contact-us .contact-box a {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .contact-box h5 {
+    font-size: 16px;
+    font-weight: 600;
+  }
 
 .address-text {
     font-size: 14px;
@@ -15941,7 +15969,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 /****** Shipment Page Style Start  ******/
 
 .shipment-banner-section {
-    padding-top: 120px;
+    padding-top: 104px;
 }
 
 @media screen and (max-width: 992px) {
@@ -16000,12 +16028,20 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .card-list img {
-    height: 70px;
-    width: 90px;
+    height:110px;
+    width: 150px;
     background: var(--white-color);
     box-shadow: 0px 4px 4px 0px #00000014;
     padding: 2px 5px;
     border: 1px solid #e7e7e7;
+}
+
+.card-list {
+    padding: 0 5rem;
+}
+
+.card-section {
+    padding: 5rem 10rem !important;
 }
 
 .card-btn {
@@ -16167,7 +16203,12 @@ input:not(:placeholder-shown) + .placeholder-text {
     padding-right: 0; /* Remove padding from container */
 }
 
-@media (max-width: 1024px) {
+.accordion-title {
+    font-family: var(--poppins);
+    font-size: 1.1rem !important;
+}
+
+@media (max-width: 1024px) { 
     .spacing_about {
         width: 100%;
     }
@@ -16797,6 +16838,44 @@ input:not(:placeholder-shown) + .placeholder-text {
 .faq_row {
     padding: 0px !important;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%236E6E6E' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: 10px;
+  }
+
+  select:focus {
+    border: none; 
+    outline: none; 
+  }
+
+  .dropdown:focus-visible {
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+  .dropdown .dropdown-toggle {
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+  .help-box h3 a {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .help-taitel p {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #0F2850;
+  }
 
 .icon-card {
     color: #0D274E !important;
