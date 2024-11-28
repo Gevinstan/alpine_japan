@@ -205,7 +205,7 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Cars</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['car'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item dropdown-link" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'car']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -213,7 +213,7 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Heavy</h6>
                                                             <div>
                                                                 @foreach($jdm_legend['heavy'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item dropdown-link" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -221,7 +221,7 @@
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
-                                                                    <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
+                                                                    <a class="dropdown-item nav-dropdown-item dropdown-link" href="{{ route('jdm-stock-responsive',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
                                                         </div>
@@ -557,7 +557,7 @@
                     </h2>
                 </div>
                 <div class="col-lg-7 col-p-0" data-aos="fade-left" data-aos-delay="100">
-                    <div class="newsletter-sarch-box-main-item justify-content-md-end justify-content-start">
+                    <div class="newsletter-sarch-box-main-item justify-content-md-center justify-content-start">
                         <div class="newsletter-sarch-box-main pt-3">
                             <form action="{{ route('newsletter-request') }}" class="newsletter-sarch-box" method="POST">
                                 @csrf
@@ -572,7 +572,7 @@
                                 @endif
                             </form>
                             <div class="d-flex justify-content-center text-uppercase">
-                                <label class="form-label">Subscribe to Our Newsletter</label>
+                                <label class="form-label text-label">Subscribe to Our Newsletter</label>
                             </div>
                         </div>
 
