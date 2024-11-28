@@ -133,7 +133,7 @@
                             <div class="nav-left">
                                 <div class="logo nav_logo_container" >
                                     <a href="{{ route('home') }}" >
-                                        <img src="{{asset('japan_home/japan-logo.png')}}" class="nav_logo" alt="logo" >
+                                        <img src="{{asset('japan_home/logo_updated.png')}}" class="nav_logo" alt="logo" >
                                     </a>
                                 </div>
 
@@ -589,7 +589,7 @@
 
 
                         <a href="{{ route('home') }}">
-                            <img src="{{asset('japan_home/japan-logo.png')}}" alt="logo">
+                            <img src="{{asset('japan_home/logo_updated.png')}}" alt="logo">
                         </a>
                     </div>
                     <div class="footer-text-p">
