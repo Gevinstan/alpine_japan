@@ -9,7 +9,7 @@
 
 <main class="main_wid">
     <!-- about-part-start -->
-    <section class="about px-2 px-sm-3 px-lg-5">
+    <!-- <section class="about px-2 px-sm-3 px-lg-5 main_wid_aboutus">
         <div class="container">
             <div class="row ">
                 <div class="col-lg-5 spacing_about px-2 px-sm-3 px-lg-5">
@@ -18,8 +18,7 @@
                     </div>
 
                     <div class="about-img"> 
-                        <img src="{{ asset($about_us->about_image) }}" class="img-fluid" alt="img">
-                        <!-- <img src="{{ asset('japan_home/about_us.svg') }}" height="15" width="15" /> -->
+                        <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid"> 
                     </div>
                 </div>
 
@@ -61,12 +60,78 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+    <!-- about-part-end -->
+    <!-- about us heading-start -->
+
+        <section class="privacy_policy_header pt-5">
+            <div class="container pt-5">
+                <div class="row pt-3 px-sm-2 px-md-5 banner_color">
+                    <div class="col-lg-12">
+                        <div class="pb-2 breadcrum_about">
+                            <!-- <h2 class="contact_us" >Contact</h2> 
+                            <h2 class="contact_us contact-us-color">Us</h2> -->
+                            <h2 class="section-heading_about">About <span class="highlight-about"> Us<span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     <!-- about us heading-end -->
+    <!-- about-part-start -->
+        <!-- <section class="about_us_bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ asset('japan_home/aboutus_image.svg') }}"  alt="delete">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="taitel_two">
+                            <span class="about_us_title">{{ $about_us->header }}</span>
+                        </div>
+                        
+                        <div class="about-taitel py-3">
+                            <p>{{ $about_us->title }}</p>
+                        </div>
+                        
+
+                        <div class="about_description">
+                            <p >{!! clean($about_us->description) !!}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+        <section class="about_us_bg px-sm-2 px-lg-5 pb-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12 col-md-6 col-lg-5 about-us_image">
+                        <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid">
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-7 about-us_text ps-lg-5">
+                        <div class="taitel_two">
+                            <span class="about_us_title">{{ $about_us->header }}</span>
+                        </div>
+                        
+                        <div class="about-taitel py-2">
+                            <p>{{ $about_us->title }}</p>
+                        </div>
+
+                        <div class="about_description">
+                            <p>{!! clean($about_us->description) !!}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     <!-- about-part-end -->
 
 
     <!-- Categories-part-start -->
-    <section class="categories categories-three py-120px px-2 px-sm-3 px-lg-5">
+    <!-- <section class="categories categories-three py-120px px-2 px-sm-3 px-lg-5">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-lg-6 col-sm-8 col-md-8  ">
@@ -107,12 +172,12 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Categories-part-end -->
 
     <!--  vedio-part-start -->
 
-    <section class="vedio vedio-two px-2 px-sm-3 px-lg-5">
+    <!-- <section class="vedio vedio-two px-2 px-sm-3 px-lg-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
@@ -160,7 +225,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--  vedio-part-end -->
 
 
@@ -222,8 +287,7 @@
         </div>
     </section> -->
     <!--  help-part-end -->
-    <br>
-    <br>
+ 
     <!-- Target Customer Part start -->
 
     <section>
@@ -267,7 +331,7 @@
             </div>
         </div>
 
-        <div class="py-5">
+        <div class="py-5 our_vision_bg">
             <div class="card card_vision px-2 px-sm-3 px-lg-5">
                 <div class="container">
                     <div class="row">
@@ -307,12 +371,9 @@
     
     
     <!---- Our Vision ends ---->
-
-    <br>
-    <br>
     <!--   Testimonial-part-start -->
 
-    <section class=" testimonial testimonial-top px-2 px-sm-3 px-lg-5 py-5">
+    <section class=" testimonial testimonial-top px-2 px-sm-3 px-lg-5 mt-5">
         <div class="container ">
             <div class="row px-5">
                 <div class="col-lg-5">
@@ -335,7 +396,7 @@
                             <!-- <h2 class="testimonial-taitel">{{ __('translate.Customer Say About Our Services') }}</h2> -->
                              <h3 class="cus_our_services">Customer Say About</h3>
                              <h3 class="our_services">Our Services</h3>
-                            <p class="testimonial-p">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
+                            <p class="testimonial-p py-2">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
                         </div>
 
                         <div class="t-df-item">
@@ -373,16 +434,15 @@
                                 <div class="testimonial-slick-top-main">
                                     <div class="testimonial-slick-top">
                                         <div class="testimonial-slick-top-thumb">
-                                            <img src="{{ asset($testimonial->image) }}"
-                                                alt="thumb">
+                                            <img src="{{ asset($testimonial->image) }}" alt="thumb" width="47" height="47">
                                         </div>
 
                                         <div class="testimonial-slick-top-txt">
-                                            <h4>{{ $testimonial->name }}</h4>
-                                            <p>{{ $testimonial->designation }}</p>
+                                            <h4 class="testi_name">{{ $testimonial->name }}</h4>
+                                            <p class="testi_designation">{{ $testimonial->designation }}</p>
                                         </div>
                                     </div>
-                                    <p class="testimonial-p">{{ $testimonial->comment }}</p>
+                                    <p class="testimonial-p testi_command">{{ $testimonial->comment }}</p>
 
 
                                     <div class="testimonial-btm-item">
@@ -397,7 +457,7 @@
                                         </div>
 
                                         <div class="testimonial-btm-item-txt-item">
-                                            <h6>{{ __('translate.Quality Service') }}</h6>
+                                            <!-- <h6>{{ __('translate.Quality Service') }}</h6> -->
 
                                             <ul>
                                                 <li>
@@ -450,45 +510,81 @@
 
     <!--   Testimonial-part-end -->
 
-    <br>
-    <br>
-
     <!---- Our Office starts---->
-    <!-- <div class="container" style="background-color: lightgrey">
-        <div class="row" style="margin-top: 100px; padding-top: 60px; padding-bottom: 60px;">
-            <div class="text-center" style="padding-bottom: 40px;">
-                <h2 style="display: inline;">Our</h2>
-                <h2 style="display: inline; color: #038ffc;">Office</h2>
+
+    <section class="main_wid_aboutus">
+        <!-- <div class="container">
+            <div class="row" style="margin-top: 100px; padding-top: 60px; padding-bottom: 60px;">
+                <div class="text-center" style="padding-bottom: 40px;">
+                    <h2 style="display: inline;">Our</h2>
+                    <h2 style="display: inline; color: #038ffc;">Office</h2>
+                </div>
+
+                <div class="row" style="margin-top: 0px; padding-top: 20px; padding-bottom: 60px;">
+                    <div class="col-md-4 pb-3 ps-3 pe-3"> 
+                        <img src="{{ asset('japan_home/Office1.svg') }}" class="img-fluid" alt="delete">
+                    </div>
+
+                    <div class="col-md-4 pb-3 ps-3 pe-3">
+                        <img src="{{ asset('japan_home/Office2.svg') }}" class="img-fluid" alt="delete">
+                    </div>
+
+                    <div class="col-md-4 pb-3 ps-3 pe-3">
+                        <img src="{{ asset('japan_home/Office3.svg') }}" class="img-fluid" alt="delete">
+                    </div>
+
+                    <div class="col-md-4 pb-3 ps-3 pe-3 pt-3"> 
+                        <img src="{{ asset('japan_home/Office4.svg') }}" class="img-fluid" alt="delete">
+                    </div>
+
+                    <div class="col-md-4 pb-3 ps-3 pe-3 pt-3">
+                        <img src="{{ asset('japan_home/Office5.svg') }}" class="img-fluid" alt="delete">
+                    </div>
+
+                    <div class="col-md-4 pb-3 ps-3 pe-3 pt-3">
+                        <img src="{{ asset('japan_home/Office6.svg') }}" class="img-fluid" alt="delete">
+                    </div>
+                </div>
+
             </div>
-
-            <div class="row" style="margin-top: 0px; padding-top: 20px; padding-bottom: 60px;">
-                <div class="col-md-4 pb-3 ps-3 pe-3"> 
-                    <img src="{{ asset('japan_home/Office1.svg') }}" class="img-fluid" alt="delete">
+        </div> -->
+        <div class="container">
+            <div class="row mt-5 pt-5 pb-5">
+                <div class=" mb-4">
+                    <h2 class="section-heading-about text-center">Our <span class="highlight-about">Office<span></h2>
                 </div>
 
-                <div class="col-md-4 pb-3 ps-3 pe-3">
-                    <img src="{{ asset('japan_home/Office2.svg') }}" class="img-fluid" alt="delete">
-                </div>
+                <div class="row pt-3 pb-5">
+                    <div class="col-12 col-md-4 mb-4">
+                        <img src="{{ asset('japan_home/Office1.svg') }}" class="img-fluid office_image" alt="Office 1">
+                    </div>
 
-                <div class="col-md-4 pb-3 ps-3 pe-3">
-                    <img src="{{ asset('japan_home/Office3.svg') }}" class="img-fluid" alt="delete">
-                </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <img src="{{ asset('japan_home/Office2.svg') }}" class="img-fluid office_image" alt="Office 2">
+                    </div>
 
-                <div class="col-md-4 pb-3 ps-3 pe-3 pt-3"> 
-                    <img src="{{ asset('japan_home/Office4.svg') }}" class="img-fluid" alt="delete">
-                </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <img src="{{ asset('japan_home/Office3.svg') }}" class="img-fluid office_image" alt="Office 3">
+                    </div>
 
-                <div class="col-md-4 pb-3 ps-3 pe-3 pt-3">
-                    <img src="{{ asset('japan_home/Office5.svg') }}" class="img-fluid" alt="delete">
-                </div>
+                    <div class="col-12 col-md-4 mb-4">
+                        <img src="{{ asset('japan_home/Office4.svg') }}" class="img-fluid office_image" alt="Office 4">
+                    </div>
 
-                <div class="col-md-4 pb-3 ps-3 pe-3 pt-3">
-                    <img src="{{ asset('japan_home/Office6.svg') }}" class="img-fluid" alt="delete">
+                    <div class="col-12 col-md-4 mb-4">
+                        <img src="{{ asset('japan_home/Office5.svg') }}" class="img-fluid office_image" alt="Office 5">
+                    </div>
+
+                    <div class="col-12 col-md-4 mb-4">
+                        <img src="{{ asset('japan_home/Office6.svg') }}" class="img-fluid office_image" alt="Office 6">
+                    </div>
                 </div>
             </div>
-
         </div>
-    </div> -->
+
+
+    </section>
+    
     <!---- Our Office endss---->
 
 </main>
