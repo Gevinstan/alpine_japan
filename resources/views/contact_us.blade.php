@@ -35,8 +35,8 @@
                     <p class="contact-us-dec ps-4">{{ $contact_us->description }}</p>
 
 
-                    <div class="contact-us-item p-0 ps-4 gap-2">
-                        <div class="contact-us-inner">
+                    <div class="contact-us-item p-0 ps-4 gap-2 flex-wrap">
+                        <div class="contact-us-inner flex-grow-1">
                             <div class="icon">
                                 <span>
                                     <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@
                                 <p class="text-nowrap">{{ __('translate.Wait time of ~10 minutes.') }}</p>
                             </div>
                         </div>
-                        <div class="contact-us-inner">
+                        <div class="contact-us-inner flex-grow-1">
                             <div class="icon">
                                 <span>
                                     <svg width="49" height="49" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

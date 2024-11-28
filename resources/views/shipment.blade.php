@@ -11,7 +11,7 @@
   <!-- Banner Section Start  -->
   <section class="shipment-banner-section">
     <div class="container shipment-banner-image">
-      <div class="banner-content p-5 col-sm-6">
+      <div class="banner-content p-5 col-sm-12">
         <h3>Shipment</h3>
         <p>We are very flexible by offering various different modes of </br> shipments as shown below.
           After all Customer</br> Satisfaction is our Top Interest.</p>
@@ -24,19 +24,21 @@
    <section class="pb-5 bg-light-grey">
     <div class="container d-flex justify-content-center">
       <div class="card-section position-relative d-flex justify-content-center p-5">
-        <div class="card-outer position-absolute rounded-circle">
-          <div class="card-inner rounded-circle">
-            <img src="{{  asset('japan_home/cards.png')  }}" alt="card" />
+        <div class="card-outer-line position-absolute rounded-circle">
+          <div class="card-outer rounded-circle">
+            <div class="card-inner rounded-circle">
+              <img src="{{  asset('japan_home/cards.png')  }}" alt="card" />
+            </div>
           </div>
         </div>
         <div class="d-flex justify-content-center flex-column align-items-center gap-4">
-          <h3 class="mt-4">WE AEEEPT CREDIT CARD</h3>
-          <div class="card-list px-5 pb-4">
-              <img src="{{asset('japan_home/ae_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/up_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/jcb_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/visa_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/mc_ship.png')}}" alt="american_express_card" />
+          <h3 class="mt-5">WE AEEEPT CREDIT CARD</h3>
+          <div class="card-list pb-4 d-flex justify-content-center flex-wrap gap-2">
+              <img src="{{asset('japan_home/AE.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/UP.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/JCB.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/VA.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/MC.png')}}" alt="american_express_card" />
           </div>
         </div>
         <button class="btn card-btn position-absolute px-5">Making Car Buying simple - Click Here</button>
@@ -58,13 +60,13 @@
           </p>
         </div>
         <div class="roro-img-section row">
-          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
+          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 px-1">
               <img src="{{  asset('japan_home/roro1.png')  }}" alt="HTML tutorial" class="img-fluid">
           </div>
-          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
+          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 px-1">
             <img src="{{  asset('japan_home/roro2.png')  }}" alt="HTML tutorial" class="img-fluid">
           </div>
-          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
+          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 px-1">
             <img src="{{  asset('japan_home/roro3.png')  }}" alt="HTML tutorial" class="img-fluid">     
           </div>
         </div>
@@ -87,13 +89,13 @@
           </p>
         </div>
         <div class="containers-img-section row">
-          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
+          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 px-1">
             <img src="{{  asset('japan_home/con1.png')  }}" alt="HTML tutorial" class="img-fluid">
           </div>
-          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
+          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 px-1">
             <img src="{{  asset('japan_home/con2.png')  }}" alt="HTML tutorial" class="img-fluid">
           </div>
-          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 gap-1">
+          <div class="col-md-4 col-sm-4 col-lg-4 roro-img mt-3 px-1">
             <img src="{{  asset('japan_home/con3.png')  }}" alt="HTML tutorial" class="img-fluid">     
           </div>
         </div>
@@ -105,7 +107,7 @@
   <!-- Inspection section start -->
     <section class="quality-compliance Inspection-section">
             <div class="container text-center">
-                <div class="px-5">
+                <div class="px-5 d-flex flex-column align-items-center">
                   <h4 class="section-title pb-4">Inspection</h4>
                   <p class="section-subtitle px-5">
                     Every country has different quality compliance procedures, Our operation team take care of that by arranging suitable third party 
@@ -153,7 +155,7 @@
     <section class="help bg-light-grey py-5">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8">
+          <div class="col-lg-8 align-items-center d-flex flex-column">
             <div class="help-box">
               <div class="icon">
                 <span>
@@ -250,9 +252,9 @@
               </div>
             </div>
 
-            <h2 class="help-taitel" data-aos="flip-up" data-aos-duration="1000">
-              <p class="text-center">We Are Proud Of Our Business.</p>
-              <span class="text-center">Get a Free Quotation Now!</span>
+            <h2 class="help-taitel d-flex flex-column align-items-center" data-aos="flip-up" data-aos-duration="1000">
+              <p>We Are Proud Of Our Business.</p>
+              <span>Get a Free Quotation Now!</span>
             </h2>
           </div>
         </div>
