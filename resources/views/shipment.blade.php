@@ -24,13 +24,15 @@
    <section class="pb-5 bg-light-grey">
     <div class="container d-flex justify-content-center">
       <div class="card-section position-relative d-flex justify-content-center p-5">
-        <div class="card-outer position-absolute rounded-circle">
-          <div class="card-inner rounded-circle">
-            <img src="{{  asset('japan_home/cards.png')  }}" alt="card" />
+        <div class="card-outer-line position-absolute rounded-circle">
+          <div class="card-outer rounded-circle">
+            <div class="card-inner rounded-circle">
+              <img src="{{  asset('japan_home/cards.png')  }}" alt="card" />
+            </div>
           </div>
         </div>
         <div class="d-flex justify-content-center flex-column align-items-center gap-4">
-          <h3 class="mt-4">WE AEEEPT CREDIT CARD</h3>
+          <h3 class="mt-5">WE AEEEPT CREDIT CARD</h3>
           <div class="card-list px-5 pb-4 d-flex justify-content-center flex-wrap gap-2">
               <img src="{{asset('japan_home/ae_ship.png')}}" alt="american_express_card" />
               <img src="{{asset('japan_home/up_ship.png')}}" alt="american_express_card" />

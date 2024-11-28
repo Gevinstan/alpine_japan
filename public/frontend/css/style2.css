@@ -16011,13 +16011,14 @@ input:not(:placeholder-shown) + .placeholder-text {
 .banner-content p {
     color: var(--white-color);
     font-family: var(--poppins);
-    font-size: clamp(1.125rem, 0.906vw + 0.913rem, 2rem);
-    line-height: clamp(1.8rem, 1.036vw + 1.557rem, 2.8rem);
+    font-size: clamp(0.625rem, 1.942vw + 0.17rem, 2.5rem);
+    line-height: 1.5;
 }
 
 .card-section {
     background-color: #fafafa;
     box-shadow: 0px 8px 25.1px 0px #00000026;
+    width: 80%;
 }
 
 .card-section h3 {
@@ -16029,7 +16030,12 @@ input:not(:placeholder-shown) + .placeholder-text {
     padding: 13px;
     background: linear-gradient(#f2f4f5, #ffffff);
     box-shadow: 2px 2px 4px 0px #7a8d93bf;
+}
+
+.card-outer-line {
     top: -65px;
+    border: 1.5px solid #ffff;
+    padding: 8px;
 }
 
 .card-inner {
