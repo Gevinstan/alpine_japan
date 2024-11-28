@@ -33,7 +33,7 @@
         </div>
         <div class="d-flex justify-content-center flex-column align-items-center gap-4">
           <h3 class="mt-5">WE AEEEPT CREDIT CARD</h3>
-          <div class="card-list px-5 pb-4 d-flex justify-content-center flex-wrap gap-2">
+          <div class="card-list pb-4 d-flex justify-content-center flex-wrap gap-2">
               <img src="{{asset('japan_home/ae_ship.png')}}" alt="american_express_card" />
               <img src="{{asset('japan_home/up_ship.png')}}" alt="american_express_card" />
               <img src="{{asset('japan_home/jcb_ship.png')}}" alt="american_express_card" />
