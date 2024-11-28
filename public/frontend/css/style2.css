@@ -914,7 +914,7 @@
     font-weight: 400;
     line-height: 0;
     border-radius: 0;
-    border-bottom: 1px solid #EBEBEB;
+    border-bottom: 1px solid #ebebeb;
 }
 
 .banner .banner-search-bar .banner-sarchber-box {
@@ -1368,7 +1368,7 @@
 }
 
 .inner-banner .breadcrumb .breadcrumb-item {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: var(--regular);
     line-height: 28px;
     color: var(--white-color);
@@ -1638,12 +1638,10 @@
 .brand-car-item .brand-car-inner .brand-car-inner-item span {
     font-size: 14px;
     line-height: 14px;
-    color: #25282D;
+    color: #25282d;
     font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
-
-    
 }
 
 .brand-car-item .brand-car-inner .brand-car-inner-item span svg {
@@ -1665,7 +1663,7 @@
     font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
-    color: #0D274E;
+    color: #0d274e;
 }
 
 .brand-car-item .brand-car-inner .brand-car-inner-item-two {
@@ -8799,7 +8797,6 @@ p {
 .inner-header .menu-bg {
     background-color: var(--white-color);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-    
 }
 
 .inner-header .menu-bg .nav-main {
@@ -8958,7 +8955,6 @@ p {
 .help .help-img {
     margin-top: 56px;
 }
-
 
 .help-two {
     padding-top: 0;
@@ -9176,11 +9172,12 @@ p {
 
 .inventory-main-box {
     border-radius: 12px;
-    background-color: #FFFFFF !important;
-    padding: 10px;
+    background-color: #ffffff !important;
+    padding: 14px;
+    border: 1px solid #E0E4EA;
     /* Drop Shadow */
     /* box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06); */
-}   
+}
 
 .inventory-main-box .inventory-taitel h5 {
     font-weight: var(--medium);
@@ -9254,8 +9251,6 @@ p {
     mask: url(../assets/images/icon/down-arrow.svg) no-repeat center;
     -webkit-mask: url(../assets/images/icon/down-arrow.svg) no-repeat center;
     background-color: #6E6E6E !important; */
-
-
 }
 
 /* .inventory-main-box .accordion-button:not(.collapsed)::after {
@@ -9323,10 +9318,11 @@ p {
 
 .inventory-main-box .select-Brand-box .form-check {
     display: flex;
-    gap: 15px;
+    gap: 8px;
     padding-left: 20px;
     min-height: 0;
 }
+
 
 .inventory-main-box .select-Brand-box .form-check:last-child {
     margin-bottom: 0;
@@ -9490,7 +9486,7 @@ p {
     height: 3.5rem !important;
     padding: 13px 20px;
     background-color: #fbfbfb;
-    border: 1px solid #EBEBEB;
+    border: 1px solid #ebebeb;
     font-size: 16px;
     font-weight: var(--regular);
     line-height: 28px;
@@ -13803,9 +13799,9 @@ p {
     margin-top: 46px;
 }
 
-.mt-32px {
+/* .mt-32px {
     margin-top: 22px;
-}
+} */
 
 .mt-30px {
     margin-top: 30px;
@@ -14232,7 +14228,7 @@ p {
 }
 
 .nav-dropdown-list .nav-dropdown-item {
-    color: #6E6E6E !important;
+    color: #6e6e6e !important;
     background: linear-gradient(#0d6efd 0 0) no-repeat calc(200% - var(--p, 0%))
         100% / 200% var(--p, 0.08em);
     transition: 0.3s var(--t, 0s),
@@ -14556,7 +14552,7 @@ p {
     font-family: "Poppins", serif;
     font-weight: normal !important;
     font-style: normal;
-    color: #25282d !important;
+    color: #0d274e !important;
 }
 
 .brand-date {
@@ -14688,6 +14684,20 @@ p {
 }
 .slider-label {
     margin-right: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 13px;
+    color: #038ffc;
+
+}
+
+#age_output {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 13px;
+    color: #038ffc;
 }
 .slider-input {
     width: 100%;
@@ -14695,14 +14705,25 @@ p {
 }
 .slider-value {
     margin-right: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 13px;
+    color: #038ffc;
+
 }
 .clear-button {
-    padding: 5px 10px;
+    padding: 0px 10px;
     border-radius: 4px;
     cursor: pointer;
     background: none;
     border: none;
     color: #ff6363;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    margin-bottom: 20px;
 }
 .go-button {
     background-color: var(--primary-color-1); /* Blue color */
@@ -14866,7 +14887,7 @@ p {
     font-weight: var(--semiBold) !important;
     font-style: normal !important;
     font-size: 14px !important;
-    color: #25282D !important;
+    color: #25282d !important;
 }
 
 .listcar_price {
@@ -14882,7 +14903,7 @@ p {
     font-weight: var(--semiBold) !important;
     font-style: normal !important;
     font-size: 16px !important;
-    color: #0D274E !important;
+    color: #0d274e !important;
 }
 
 .text-truncate {
@@ -14963,7 +14984,6 @@ p {
 
 .nav-btn .menu ul li a:hover,
 .nav-btn .menu ul li a.active {
-
     color: #038ffc !important;
     border-bottom: 3px solid #038ffc !important;
 }
@@ -15618,12 +15638,10 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 }
 
-
 /* .about .about-pl {
     padding-left: 126px;
     
 } */
-
 
 /********* About section Start **********/
 
@@ -15642,7 +15660,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .about-section p {
-    color: #121A27;
+    color: #121a27;
     font-size: 0.925rem;
     line-height: 22px !important;
 }
@@ -15965,15 +15983,15 @@ input:not(:placeholder-shown) + .placeholder-text {
     color: #264b83;
 }
 
-  .contact-us .contact-box a {
+.contact-us .contact-box a {
     font-size: 18px;
     font-weight: 700;
-  }
+}
 
-  .contact-box h5 {
+.contact-box h5 {
     font-size: 16px;
     font-weight: 600;
-  }
+}
 
 .address-text {
     font-size: 14px;
@@ -16054,7 +16072,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .card-list img {
-    height:102px;
+    height: 102px;
     width: 150px;
     background: var(--white-color);
     box-shadow: 0px 4px 4px 0px #00000014;
@@ -16065,7 +16083,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 @media screen and (min-width: 1580px) {
     .card-list img {
-        height:112px;
+        height: 112px;
         width: 195px;
     }
 }
@@ -16116,7 +16134,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .budget-space {
-    --bs-gutter-x: 1rem;
+    --bs-gutter-x: -1rem;
 }
 
 .budget-heading {
@@ -16205,7 +16223,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .inventory-sarch-ber .search-btn i {
-    font-size: 1.25rem; /* Adjust the icon size */
+    font-size: 24px; /* Adjust the icon size */
 }
 
 @media screen and (max-width: 425px) {
@@ -16242,7 +16260,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     font-size: 1.1rem !important;
 }
 
-@media (max-width: 1024px) { 
+@media (max-width: 1024px) {
     .spacing_about {
         width: 100%;
     }
@@ -16266,7 +16284,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         height: 59.5rem;
         margin-top: -162px !important;
         box-shadow: 7px 3px 19.5px 0px #00000024;
-        background-color: #FFFFFF   ;
+        background-color: #ffffff;
     }
 
     .target-customer {
@@ -16305,7 +16323,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 36px;
-        color: #2B343D !important;
+        color: #2b343d !important;
     }
 
     .about-us-color {
@@ -16314,7 +16332,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 36px;
-        color: #038FFC;
+        color: #038ffc;
     }
 
     .about-us-content-heading {
@@ -16323,7 +16341,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 25px !important;
         padding-top: 2.5rem;
-        color: #787B81 !important;
+        color: #787b81 !important;
     }
 
     .about-us-content {
@@ -16332,7 +16350,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 23px !important;
         padding-top: 2.5rem;
-        color: #787B81 !important;
+        color: #787b81 !important;
     }
 
     .vision_content {
@@ -16384,7 +16402,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 36px;
-        color: #2B343D !important;
+        color: #2b343d !important;
     }
 
     .about-us-color {
@@ -16393,7 +16411,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 36px;
-        color: #038FFC;
+        color: #038ffc;
     }
 
     .about-us-content-heading {
@@ -16467,7 +16485,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 36px;
-        color: #2B343D !important;
+        color: #2b343d !important;
     }
 
     .about-us-color {
@@ -16476,7 +16494,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 36px;
-        color: #038FFC;
+        color: #038ffc;
     }
 
     .about-us-content-heading {
@@ -16513,7 +16531,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         width: 45.5rem;
         margin-top: -150px !important;
         box-shadow: 7px 3px 19.5px 0px #00000024;
-
     }
 
     .image-container {
@@ -16548,7 +16565,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 30px;
-        color: #2B343D !important;
+        color: #2b343d !important;
     }
 
     .about-us-color {
@@ -16557,7 +16574,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 600;
         font-style: normal;
         font-size: 30px;
-        color: #038FFC;
+        color: #038ffc;
     }
 
     .about-us-content-heading {
@@ -16850,19 +16867,19 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .cus_our_services {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 32px;
-  line-height: 50px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    line-height: 50px;
 }
 
 .our_services {
-  font-family: "Poppins", serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 32px;
-  color: #038ffc !important;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 32px;
+    color: #038ffc !important;
 }
 
 .faq_con_flu {
@@ -16881,39 +16898,38 @@ select {
     background-repeat: no-repeat;
     background-position-x: 95%;
     background-position-y: 10px;
-  }
+}
 
-  select:focus {
-    border: none; 
-    outline: none; 
-  }
+select:focus {
+    border: none;
+    outline: none;
+}
 
-  .dropdown:focus-visible {
+.dropdown:focus-visible {
     border: none;
     background: none;
     outline: none;
-  }
+}
 
-  .dropdown .dropdown-toggle {
+.dropdown .dropdown-toggle {
     border: none;
     background: none;
     outline: none;
-  }
+}
 
-  .help-box h3 a {
+.help-box h3 a {
     font-weight: 600;
     font-size: 20px;
-  }
+}
 
-  .help-taitel p {
+.help-taitel p {
     font-weight: 600;
     font-size: 1.8rem;
-    color: #0F2850;
-  }
+    color: #0f2850;
+}
 
-.icon-card {
-    color: #0D274E !important;
-    font-size: 18px !important;
+.icon-card1 {
+    color: #0d274e !important;
 }
 
 #outside_form_search::placeholder {
@@ -16921,44 +16937,48 @@ select {
     font-weight: 400 !important;
     font-style: normal;
     font-size: 16px !important;
-    color: #6E6E6E !important;
+    color: #6e6e6e !important;
+}
+
+.dropdown-toggle::after {
+    color: #6e6e6e; /* Grey color for the arrow */
 }
 
 .main_wid_aboutus {
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 }
 
 .testimonial-top {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 .about_us_bg {
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 }
 
 .about_us_title {
-  font-family: "Poppins", serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 36px;
-  color: #0D274F;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 36px;
+    color: #0d274f;
 }
 
 .about-taitel p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 22px;
-  color: #038FFC; 
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 22px;
+    color: #038ffc;
 }
 
 .about_description p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 14px !important;
-  color: #86888C;
-  line-height: 28px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px !important;
+    color: #86888c;
+    line-height: 28px;
 }
 
 @media (max-width: 1024px) {
@@ -16974,40 +16994,40 @@ select {
 }
 
 .our_vision_bg {
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 }
 
 .testimonial-p {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  font-style: normal; 
-  color: #757676;
-  font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    color: #757676;
+    font-size: 12px;
 }
 
 .testi_name {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal; 
-  color: #173055;
-  font-size: 15px;  
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #173055;
+    font-size: 15px;
 }
 
 .testi_designation {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal; 
-  color: #717272;
-  font-size: 11px;  
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #717272;
+    font-size: 11px;
 }
 
 .testi_command {
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal; 
-  color: #9D9E9E;
-  font-size: 13px;
-  line-height: 20px;   
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #9d9e9e;
+    font-size: 13px;
+    line-height: 20px;
 }
 
 /* @media (max-width: 1920px) {
@@ -17025,7 +17045,7 @@ select {
     font-weight: 600;
     font-style: normal;
     font-size: 36px;
-    color: #2B343D;
+    color: #2b343d;
 }
 
 .highlight-about {
@@ -17033,7 +17053,7 @@ select {
     font-weight: 600;
     font-style: normal;
     font-size: 36px;
-    color: #038FFC;
+    color: #038ffc;
 }
 
 .text-light {
@@ -17041,7 +17061,7 @@ select {
     font-weight: 700;
     font-style: normal;
     font-size: 55px;
-    color: #FFFFFF; 
+    color: #ffffff;
 }
 
 .tar_cus_txt {
@@ -17049,7 +17069,7 @@ select {
     font-weight: 700;
     font-style: normal;
     font-size: 20px;
-    color: #FFFFFF; 
+    color: #ffffff;
 }
 
 .section-heading_about {
@@ -17057,7 +17077,7 @@ select {
     font-weight: 700;
     font-style: normal;
     font-size: 32px;
-    color: #2B343D;
+    color: #2b343d;
 }
 
 .highlight-about {
@@ -17065,7 +17085,7 @@ select {
     font-weight: 500;
     font-style: normal;
     font-size: 32px;
-    color: #038FFC;
+    color: #038ffc;
 }
 
 .office_image {
@@ -17078,10 +17098,23 @@ select {
 }
 
 .budget_go_button {
-   padding-right: 0px; 
-   /* margin-left: 25px; */
+    padding-right: 0px;
+    /* margin-left: 25px; */
 }
 
+.list-dropdown {
+    gap: 0px !important;
+}
 
+/* .spec_dot {
+    color: #9EA3AD;
+    font-size: 10px;
+} */
 
- 
+.gap-4 {
+    gap: 0rem !important;
+}
+
+/* .mt-32px {
+    margin-top: 50px !important;
+} */
