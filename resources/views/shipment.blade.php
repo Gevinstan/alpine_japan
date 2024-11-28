@@ -34,11 +34,11 @@
         <div class="d-flex justify-content-center flex-column align-items-center gap-4">
           <h3 class="mt-5">WE AEEEPT CREDIT CARD</h3>
           <div class="card-list pb-4 d-flex justify-content-center flex-wrap gap-2">
-              <img src="{{asset('japan_home/ae_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/up_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/jcb_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/visa_ship.png')}}" alt="american_express_card" />
-              <img src="{{asset('japan_home/mc_ship.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/AE.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/UP.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/JCB.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/VA.png')}}" alt="american_express_card" />
+              <img src="{{asset('japan_home/MC.png')}}" alt="american_express_card" />
           </div>
         </div>
         <button class="btn card-btn position-absolute px-5">Making Car Buying simple - Click Here</button>
