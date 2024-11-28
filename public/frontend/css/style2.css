@@ -585,7 +585,7 @@
     align-items: center;
     justify-content: center;
     color: var(--white-color);
-    font-size: 14px;
+    font-size: 16px;
     font-weight: var(--medium);
     background-color: var(--white-color);
     overflow: hidden;
@@ -593,6 +593,7 @@
     text-transform: uppercase;
     transition: all 0.5s ease-in-out 0.2s;
     z-index: 1;
+    font-weight: 600;
     border: 1px solid var(--primary-color-1);
 }
 
@@ -1821,7 +1822,7 @@
 
 .brand-car-inner-item-main {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
     gap: 15px;
     padding-bottom: 30px;
@@ -8799,8 +8800,8 @@ p {
 
 .inner-header .menu-bg {
     background-color: var(--white-color);
-    /* box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); */
-    box-shadow: 0 14px 16px 0 rgba(11, 2, 55, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    
 }
 
 .inner-header .menu-bg .nav-main {
@@ -9156,8 +9157,10 @@ p {
 }
 
 .inventory .brand-car-two .brand-car-item .brand-car-item-img img {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0px;
+    margin: 0px;
 }
 
 .inventory .brand-car-two .brand-car-item .brand-car-inner {
@@ -9175,11 +9178,11 @@ p {
 
 .inventory-main-box {
     border-radius: 12px;
-    background-color: var(--white-color);
-    padding: 18px;
+    background-color: #FFFFFF !important;
+    padding: 10px;
     /* Drop Shadow */
-    box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06);
-}
+    /* box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06); */
+}   
 
 .inventory-main-box .inventory-taitel h5 {
     font-weight: var(--medium);
@@ -9246,12 +9249,20 @@ p {
     height: 10px;
     background-image: url(../assets/images/icon/down-arrow.png);
     background-size: cover;
-    transform: rotate(-180deg);
+    /* transform: rotate(-180deg); */
+
+    /* content: ''; 
+    display: inline-block;
+    mask: url(../assets/images/icon/down-arrow.svg) no-repeat center;
+    -webkit-mask: url(../assets/images/icon/down-arrow.svg) no-repeat center;
+    background-color: #6E6E6E !important; */
+
+
 }
 
-.inventory-main-box .accordion-button:not(.collapsed)::after {
+/* .inventory-main-box .accordion-button:not(.collapsed)::after {
     transform: rotate(-360deg);
-}
+} */
 
 .inventory-main-box .accordion-header {
     padding-top: 0;
@@ -9326,7 +9337,7 @@ p {
 .inventory-main-box .select-Brand-box .form-check-input {
     width: 18px;
     height: 18px;
-    background-color: #ededed;
+    /* background-color: #ededed; */
     border: 1px solid #ededed;
 }
 
@@ -9481,7 +9492,7 @@ p {
     height: 3.5rem !important;
     padding: 13px 20px;
     background-color: #fbfbfb;
-    border: 1px solid #f0f3ff;
+    border: 1px solid #EBEBEB;
     font-size: 16px;
     font-weight: var(--regular);
     line-height: 28px;
@@ -13086,13 +13097,13 @@ h5.preloader-text::after {
     left: 0px;
 }
 
-.testimonial .testimonial-p {
+/* .testimonial .testimonial-p {
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
     color: var(--paragraph-color);
     padding-top: 20px;
-}
+} */
 
 .testimonial .sm-df {
     display: flex;
@@ -14216,9 +14227,10 @@ p {
 /************ NAV-BAR DROPDOWN STYLE START **************/
 
 .nav-dropdown-header {
-    color: #0d274e !important;
-    font-size: 1rem;
-    font-weight: 500;
+    color: #232323 !important;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: "Poppins", serif;
 }
 
 .nav-dropdown-list .nav-dropdown-item {
@@ -14723,9 +14735,9 @@ p {
     }
 }
 /********* input range slider  style End ***********/
-.inventory-main-box {
+/* .inventory-main-box {
     border: 1px solid #24272c1a;
-}
+} */
 .bg-light-grey {
     background-color: #f5f5f5 !important;
 }
@@ -14851,27 +14863,27 @@ p {
 }
 
 .car-name {
-    font-family: "Poppins", serif;
+    font-family: "Poppins", serif !important;
     font-weight: var(--semiBold) !important;
-    font-style: normal;
-    font-size: 1.2rem;
-    color: #25282d !important;
+    font-style: normal !important;
+    font-size: 14px !important;
+    color: #25282D !important;
 }
 
 .listcar_price {
-    font-family: "Poppins", serif;
+    font-family: "Poppins", serif !important;
     font-weight: 600 !important;
-    font-style: normal;
-    font-size: 1.3rem;
-    color: #038ffc;
+    font-style: normal !important;
+    font-size: 18px !important;
+    color: #038ffc !important;
 }
 
 .car-fullname {
-    font-family: "Poppins", serif;
+    font-family: "Poppins", serif !important;
     font-weight: var(--semiBold) !important;
-    font-style: normal;
-    font-size: 1.4rem;
-    color: #25282d !important;
+    font-style: normal !important;
+    font-size: 16px !important;
+    color: #0D274E !important;
 }
 
 .text-truncate {
@@ -14946,6 +14958,15 @@ p {
     font-weight: 500;
     font-family: "Poppins";
     font-style: normal;
+    color: #232323;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-btn .menu ul li a:hover,
+.nav-btn .menu ul li a.active {
+
+    color: #038ffc !important;
+    border-bottom: 3px solid #038ffc !important;
 }
 
 .search-clear-btn,
@@ -15257,16 +15278,16 @@ p {
 
 .sort-text {
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
     text-wrap: nowrap;
-    font-family: var(--roboto);
+    font-family: "Poppins", serif !important;
     color: #232323;
 }
 .sort-dropdown button {
     color: #038ffc;
     /* background-color: var(--white-color);
     border-color: var(--white-color); */
-    font-family: "Roboto", sans-serif;
+    font-family: "Poppins", serif !important;
     font-weight: 500;
     font-style: normal;
     font-size: 16px;
@@ -15598,22 +15619,12 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 }
 
-.about_us_title {
-    /* padding-top:100px;  */
-    color: black !important;
-    font-size: 45px;
-}
 
 /* .about .about-pl {
     padding-left: 126px;
     
 } */
 
-.about-taitel {
-    padding-top: 30px;
-    color: #038ffc;
-    font-size: 30px;
-}
 
 /********* About section Start **********/
 
@@ -15670,13 +15681,13 @@ input:not(:placeholder-shown) + .placeholder-text {
     width: 635px;
 }
 
-.about .about_description p {
+/* .about .about_description p {
     font-size: 16px;
     font-weight: var(--regular);
     line-height: 26px;
     font-family: var(--roboto);
     padding-top: 16px;
-}
+} */
 
 .about .about-item-main {
     display: flex;
@@ -16141,11 +16152,11 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .slider_num {
-    font-size: 0.7rem !important;
+    font-size: 13px !important;
     font-family: "Poppins", serif !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     font-style: normal !important;
-    color: #24272c !important;
+    color: #038ffc !important;
 }
 
 .brand_name {
@@ -16180,7 +16191,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 .inventory-sarch-ber .form-control {
     width: 100%;
     padding-right: 10px; /* Add space for the icon */
-    border-radius: 0.25rem;
+    border-radius: 6px;
 }
 
 .inventory-sarch-ber .search-btn {
@@ -16254,6 +16265,8 @@ input:not(:placeholder-shown) + .placeholder-text {
         width: 115.75rem;
         height: 59.5rem;
         margin-top: -162px !important;
+        box-shadow: 7px 3px 19.5px 0px #00000024;
+        background-color: #FFFFFF   ;
     }
 
     .target-customer {
@@ -16289,17 +16302,19 @@ input:not(:placeholder-shown) + .placeholder-text {
     .about_us {
         display: inline;
         font-family: "Poppins", serif;
-        font-weight: 700;
+        font-weight: 600;
         font-style: normal;
-        font-size: 3rem;
+        font-size: 36px;
+        color: #2B343D !important;
     }
 
     .about-us-color {
         color: #038ffc;
         font-family: "Roboto", sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-style: normal;
-        font-size: 3rem;
+        font-size: 36px;
+        color: #038FFC;
     }
 
     .about-us-content-heading {
@@ -16334,6 +16349,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         height: 44.75rem;
         width: 80.5rem;
         margin-top: -150px !important;
+        box-shadow: 7px 3px 19.5px 0px #00000024;
     }
 
     .image-container {
@@ -16365,17 +16381,19 @@ input:not(:placeholder-shown) + .placeholder-text {
     .about_us {
         display: inline;
         font-family: "Poppins", serif;
-        font-weight: 700;
+        font-weight: 600;
         font-style: normal;
-        font-size: 2rem;
+        font-size: 36px;
+        color: #2B343D !important;
     }
 
     .about-us-color {
         color: #038ffc;
         font-family: "Roboto", sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-style: normal;
-        font-size: 2rem;
+        font-size: 36px;
+        color: #038FFC;
     }
 
     .about-us-content-heading {
@@ -16412,6 +16430,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         height: 33rem;
         width: 59.5rem;
         margin-top: -150px !important;
+        box-shadow: 7px 3px 19.5px 0px #00000024;
         /* position: absolute;
     top: 407%; */
     }
@@ -16445,17 +16464,19 @@ input:not(:placeholder-shown) + .placeholder-text {
     .about_us {
         display: inline;
         font-family: "Poppins", serif;
-        font-weight: 700;
+        font-weight: 600;
         font-style: normal;
-        font-size: 1.5rem;
+        font-size: 36px;
+        color: #2B343D !important;
     }
 
     .about-us-color {
         color: #038ffc;
         font-family: "Roboto", sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-style: normal;
-        font-size: 1.5rem;
+        font-size: 36px;
+        color: #038FFC;
     }
 
     .about-us-content-heading {
@@ -16491,6 +16512,8 @@ input:not(:placeholder-shown) + .placeholder-text {
         height: 27rem;
         width: 45.5rem;
         margin-top: -150px !important;
+        box-shadow: 7px 3px 19.5px 0px #00000024;
+
     }
 
     .image-container {
@@ -16522,17 +16545,19 @@ input:not(:placeholder-shown) + .placeholder-text {
     .about_us {
         display: inline;
         font-family: "Poppins", serif;
-        font-weight: 700;
+        font-weight: 600;
         font-style: normal;
-        font-size: 1rem;
+        font-size: 30px;
+        color: #2B343D !important;
     }
 
     .about-us-color {
         color: #038ffc;
         font-family: "Roboto", sans-serif;
-        font-weight: 500;
+        font-weight: 600;
         font-style: normal;
-        font-size: 1rem;
+        font-size: 30px;
+        color: #038FFC;
     }
 
     .about-us-content-heading {
@@ -16890,10 +16915,181 @@ select {
     color: #0F2850;
   }
 
-  
   .nav-dropdown-list .nav-dropdown-item {
     background-color: var(--white-color) !important;
   }
   
+.icon-card {
+    color: #0D274E !important;
+    font-size: 18px !important;
+}
+
+#outside_form_search::placeholder {
+    font-family: "Poppins", sans-serif !important;
+    font-weight: 400 !important;
+    font-style: normal;
+    font-size: 16px !important;
+    color: #6E6E6E !important;
+}
+
+.main_wid_aboutus {
+    background-color: #F5F5F5;
+}
+
+.testimonial-top {
+    background-color: #FFFFFF;
+}
+
+.about_us_bg {
+    background-color: #F5F5F5;
+}
+
+.about_us_title {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 36px;
+  color: #0D274F;
+}
+
+.about-taitel p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 22px;
+  color: #038FFC; 
+}
+
+.about_description p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 14px !important;
+  color: #86888C;
+  line-height: 28px;
+}
+
+@media (max-width: 1024px) {
+    .about-us_image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-us_text {
+        width: 100%;
+    }
+}
+
+.our_vision_bg {
+    background-color: #F5F5F5;
+}
+
+.testimonial-p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal; 
+  color: #757676;
+  font-size: 12px;
+}
+
+.testi_name {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal; 
+  color: #173055;
+  font-size: 15px;  
+}
+
+.testi_designation {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal; 
+  color: #717272;
+  font-size: 11px;  
+}
+
+.testi_command {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal; 
+  color: #9D9E9E;
+  font-size: 13px;
+  line-height: 20px;   
+}
+
+/* @media (max-width: 1920px) {
+.about-us_image img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+}
+
+} */
+
+.section-heading-about {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 36px;
+    color: #2B343D;
+}
+
+.highlight-about {
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 36px;
+    color: #038FFC;
+}
+
+.text-light {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 55px;
+    color: #FFFFFF; 
+}
+
+.tar_cus_txt {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    color: #FFFFFF; 
+}
+
+.section-heading_about {
+    font-family: "Poppins", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 32px;
+    color: #2B343D;
+}
+
+.highlight-about {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 32px;
+    color: #038FFC;
+}
+
+.office_image {
+    width: 100%;
+}
+
+.budget_slider {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.budget_go_button {
+   padding-right: 0px; 
+   /* margin-left: 25px; */
+}
 
 
+
+ 
