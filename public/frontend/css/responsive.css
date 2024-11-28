@@ -2542,12 +2542,12 @@
     .contact-us .contact-us-item {
         padding: 15px;
         flex-direction: column;
-        align-items: start;
+        /* align-items: start; */
         gap: 20px;
     }
-    .contact-us .contact-us-item .contact-us-inner {
+    /* .contact-us .contact-us-item .contact-us-inner {
         text-align: start;
-    }
+    } */
     .faq .accordion-button {
         line-height: 26px;
     }

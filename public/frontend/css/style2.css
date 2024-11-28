@@ -4643,8 +4643,6 @@ p {
     border-radius: 10px;
     /* background: #f9faff; */
     display: flex;
-    align-items: center;
-    justify-content: space-around;
     margin-top: 20px;
 }
 
@@ -4737,9 +4735,9 @@ p {
     color: var(--primary-color-2);
 }
 
-.contact-us .contact-us-wight {
+/* .contact-us .contact-us-wight {
     padding-right: 200px;
-}
+} */
 
 .contact-us .get-in-touch {
     padding: 52px 30px 30px 30px;
