@@ -12,12 +12,12 @@
     <section class="banner mb-5 background_image">
         <div class="container">
             <div class="row align-items-center px-2 px-lg-5 pb-5">
-                <div class="col-lg-12 col-xl-7">
+                <div class="col-lg-12 col-xl-8">
                     <div class="banner-taitel">
                         <span>{{ $homepage->home3_intro_short_title }}</span>
                         <h1 class="banner-h1">Simplifying Your Car </br>
                         <span class="banner-h1">Buying Experience</span></h1>
-                        <p>Weâ€™re committed to helping you find the perfect car with confidence and ease. 
+                        <p>We're committed to helping you find the perfect car with confidence and ease. 
                         Start your simplified car buying experience with us today!</p>
                     </div>
                     <div class="banner-search-bar">
@@ -71,7 +71,7 @@
                 </div>
 
 
-                <div class="col-lg-5 pt-5 mt-5">
+                <div class="col-lg-4 pt-5 mt-5">
                     <div class="banner-slick-main">
 
                         <div class="banner-slick">
@@ -201,7 +201,7 @@
 
 
     <!--  Brand Car-part-start -->
-        <section class="brand-car py-5 my-3 px-sm-2 px-lg-5">
+        <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
