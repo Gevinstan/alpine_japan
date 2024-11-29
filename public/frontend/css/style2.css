@@ -14984,11 +14984,8 @@ p {
     border-bottom: 3px solid transparent;
 }
 
+.nav-btn .menu ul .nav-item .nav-link:hover,
 .nav-btn .menu ul .nav-item .nav-link.active {
-    color: #038ffc !important;
-}
-
-.nav-btn .menu ul .nav-item .nav-link:hover {
     color: #038ffc !important;
     border-bottom: 3px solid #038ffc !important;
 }
