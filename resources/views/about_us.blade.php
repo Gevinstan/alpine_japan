@@ -64,8 +64,8 @@
     <!-- about-part-end -->
     <!-- about us heading-start -->
 
-        <section class="privacy_policy_header pt-5">
-            <div class="container pt-5">
+        <section class="privacy_policy_header">
+            <div class="container about_header">
                 <div class="row pt-3 px-sm-2 px-md-5 banner_color">
                     <div class="col-lg-12">
                         <div class="pb-2 breadcrum_about">
@@ -104,10 +104,10 @@
             </div>
         </section> -->
         <section class="about_us_bg px-sm-2 px-lg-5 pb-4">
-            <div class="container">
+            <div class="container pb-3">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6 col-lg-5 about-us_image">
-                        <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid">
+                        <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid about_image">
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-7 about-us_text ps-lg-5">
