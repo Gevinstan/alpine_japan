@@ -116,7 +116,7 @@
                                                         class="slider-input mx-0 my-2" id="modelYearSlider">
                                                         <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}"> -->
 
-                                                            <div class="d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                            <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
                                                                 <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
                                                                 <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
                                                                 <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
