@@ -111,10 +111,10 @@
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
                                                     
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                    <!-- <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
                                                         value="{{ request('year', $minYear) }}" 
                                                         class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
+                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}"> -->
 
                                                             <div class="d-flex justify-content-between align-items-center year-slider-text w-100">
                                                                 <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
