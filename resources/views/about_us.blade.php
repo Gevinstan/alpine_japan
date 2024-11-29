@@ -331,7 +331,7 @@
             </div>
         </div>
 
-        <div class="py-5 our_vision_bg">
+        <div class="py-5 _bg">
             <div class="card card_vision px-2 px-sm-3 px-lg-5">
                 <div class="container">
                     <div class="row">
@@ -548,7 +548,7 @@
             </div>
         </div> -->
         <div class="container">
-            <div class="row mt-5 pt-5 pb-5">
+            <div class="row mt-5 pt-4 pb-2">
                 <div class=" mb-4">
                     <h2 class="section-heading-about text-center">Our <span class="highlight-about">Office<span></h2>
                 </div>
