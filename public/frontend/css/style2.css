@@ -16743,7 +16743,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         color: white;
         font-weight: bolder;
         display: inline;
-        margin-left: 180px;
+        margin-left: 160px;
         top: 30px;
     }
 

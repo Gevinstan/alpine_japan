@@ -39,7 +39,13 @@ use App\Http\Controllers\PaypalController;
 
 use Modules\GeneralSetting\Entities\Setting;
 
+Route::post('/load-more-filters', function () {
+    // This route will only return the filters partial view
+    return view('partials.filters', ['show_all' => true]);
+})->name('load.more.filters');
+
 Route::group(['middleware' => ['XSS','DEMO']], function () {
+   
 
     Route::group(['middleware' => ['HtmlSpecialchars', 'MaintenanceChecker']], function () {
 

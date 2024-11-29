@@ -240,21 +240,8 @@
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
-
-                                                <div class="">
-                                                    <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
-                                                </div>
-                                                 
-
-                                                    <div class="brand-car-item-img-text justify-content-end ">
-                                                        <div class="icon-main">
-                                                            @guest('web')
-                                                            @else
-                                                                
-                                                            @endif
-                                                        </div>
-
-
+                                                    <div class="">
+                                                        <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     </div>
                                                 </div>
 
@@ -827,9 +814,9 @@
 
                                                 <span>
                                                     @if(session('front_lang')=='en')
-                                                    {{ html_decode($car['transmission_en']) }}
-                                                    @else
-                                                        {{ html_decode($car['transmission']) }}   
+                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        @else
+                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                     @endif
                                                 </span>
                                             </div>

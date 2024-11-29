@@ -893,6 +893,16 @@
                 })
 
             });
+
+          
+            $(".nav_texthead .nav-item a").click(function () {
+                // Remove 'active' class from all <li>
+                $(".nav_texthead .nav-item a").removeClass("active");
+
+                // Add 'active' class to the clicked <li>
+                $(this).addClass("active");
+            });
+
         })(jQuery);
 
        
@@ -923,15 +933,7 @@
         //     })
         // }
 
-        $(document).ready(function () {
-      $(".nav_texthead .nav-item a").click(function () {
-        // Remove 'active' class from all <li>
-        $(".nav_texthead .nav-item a").removeClass("active");
-
-        // Add 'active' class to the clicked <li>
-        $(this).addClass("active");
-      });
-    });
+     
     </script>
 
 </body>

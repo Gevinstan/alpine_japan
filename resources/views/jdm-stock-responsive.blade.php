@@ -6,6 +6,11 @@
 @endsection
 
 @section('body-content')
+
+@php
+    $request_check=0;
+@endphp
+
 <main class="main_wid overflow_jdm">
 <div id="pageLoader">
     <div class="spinner-border text-primary" role="status">
@@ -38,7 +43,7 @@
                                                 Brand
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -48,23 +53,25 @@
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                           >
+                                                                         value="{{$brand_label->slug}}" 
+                                                                         {{ in_array(trim($brand_label->slug), (array) request('brand', [])) ? 'checked' : '' }}>
                                                                         <label class="form-check-label brand_name">
                                                                            {{$brand_label->name}}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne" class="accordion-collapse collapse  w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne" class="accordion-collapse collapse  w-100 {{ request('model',[]) ? 'show' : '' }}"
+                                                                     aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                            
-                                                                                    @foreach ($brands as $index=> $brand)
+                                                                                        @foreach ($brand_arr as $brand)
                                                                                         <span class="form-check">
-                                                                                            <input name="model[]" class="form-check-input brand-search" type="checkbox"
+                                                                                            <input name="model[]" class="form-check-input model-search" type="checkbox"
                                                                                                     value="{{ $brand->model }}"
                                                                                                     {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
                                                                                             <label class="form-check-label brand_name">
-                                                                                                {{ $brand->model }}
-                                                                                            </label>
+                                                                                                {{ $brand->model . ' (' . $brand->count . ')' }}
+                                                                                            </label>    
                                                                                         </span>
                                                                                     @endforeach
                                                                       
@@ -117,7 +124,9 @@
                                                         </div>
 
                                                         <div class="d-flex align-content-between flex-column gap-4">
+                                                        @if($request_check !=0)
                                                         <button class="clear-button" id="clear-year">Clear</button>
+                                                        @endif
                                                         <button type="button" id="year_search" class="go-button">Go</button>
                                                     </div>
                                                     </div>
@@ -171,7 +180,9 @@
                                                     </div>
                                                      
                                                     <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
-                                                        <button class="clear-button" id="clear-budget">Clear</button>
+                                                        @if($request_check !=0)
+                                                            <button class="clear-button" id="clear-budget">Clear</button>
+                                                        @endif    
                                                         <button class="go-button" type="button" id="budget_search">Go</button>
                                                     </div>
                                                 </div>
@@ -272,7 +283,7 @@
 
                     <div class="filtered-section d-flex justify-content-between align-content-center gap-2 px-3 mb-3">
                         <div class="d-flex align-items-center flex-wrap gap-3">
-                        @if(request('brand') && count(request('brand')) > 0)
+                        {{--@if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
                                 <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
@@ -283,10 +294,8 @@
                                         </span> 
                                 </span>              
                             </p>
-
-                            
                             @endforeach
-                            @endif
+                            @endif --}}
                         @if(request('model') && count(request('model')) > 0)
                         @foreach(request('model') as $index => $brandSlug)
                             <p class="position-relative filter-text px-3 py-1">
@@ -298,6 +307,7 @@
                                         </span> 
                                 </span>              
                             </p>
+                            @php $request_check++;@endphp
                             @endforeach
                             @endif
                             @if(request('year'))
@@ -313,7 +323,9 @@
                             @endif
                         </div>
                         <div>
+                        @if($request_check !=0)
                             <button class="btn search-clear-btn clear-url">clear</button>
+                        @endif    
                         </div>
                     </div>
 
@@ -328,7 +340,10 @@
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
-                                                <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
+                                                <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
+                                                                asset('Cars/' .  $car['picture']) : 
+                                                                asset('uploads/website-images/no-image.jpg') }}" 
+                                                        alt="thumb" class="card_image">
                                                 </div>
                                             </div>
 
@@ -570,68 +585,38 @@
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                             aria-labelledby="pills-profile-tab">
                             <div class="row g-5 brand-car-two">
-                                @forelse ($cars as $index => $car)
+                                @forelse ($cars_array as $index => $car)
                                     <div class=" col-xxl-6  col-xl-12  col-lg-12  col-sm-12 ">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car->thumb_image) }}" alt="thumb">
+                                            <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
+                                                                asset('Cars/' .  $car['picture']) : 
+                                                                asset('uploads/website-images/no-image.jpg') }}" 
+                                                        alt="thumb" class="card_image">
 
-                                                <div class="brand-car-item-img-text">
-
-                                                    <div class="text-df">
-                                                        @if ($car->offer_price)
-                                                            <p class="text">{{ calculate_percentage($car->regular_price, $car->offer_price) }}% {{ __('translate.Off') }}</p>
-                                                        @endif
-                                                        @if ($car->condition == 'New')
-                                                                <p class="text text-two ">{{ __('translate.New') }}</p>
-                                                            @else
-                                                                <p class="text text-two ">{{ __('translate.Used') }}</p>
-                                                            @endif
-                                                    </div>
-
-
-
-                                                </div>
                                             </div>
 
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
-                                                    <p>
-                                                        @if ($car->offer_price)
-                                                            {{ currency($car->offer_price) }}
+                                                <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
+                                                 title=" @if(session('front_lang')=='en')
+                                                            {{ $car['make'] }}
                                                         @else
-                                                            {{ currency($car->regular_price) }}
+                                                            {{ $car['make'] }}
+                                                        @endif">
+                                                        @if(session('front_lang')=='en')
+                                                            {{ $car['make'] }}
+                                                        @else
+                                                            {{ $car['make'] }}
+                                                        @endif
+                                                    </span>
+                                                    <p class="listcar_price pt-3 pe-4">
+                                                       @if(session('front_lang')=='en')
+                                                        {{ '$'.$car['start_price'] }}
+                                                        @else
+                                                            {{ '$'.$car['start_price'] }}
                                                         @endif
                                                     </p>
-
-                                                    @guest('web')
-                                                            <a  href="javascript:;" class="before_auth_wishlist">
-                                                                <span>
-                                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M11.765 2.70229L11 3.52422L10.235 2.70229C8.12233 0.432572 4.69709 0.43257 2.58447 2.70229C0.471845 4.972 0.471844 8.65194 2.58447 10.9217L9.4699 18.3191C10.315 19.227 11.685 19.227 12.5301 18.3191L19.4155 10.9217C21.5282 8.65194 21.5282 4.972 19.4155 2.70229C17.3029 0.432571 13.8777 0.432571 11.765 2.70229Z"
-                                                                stroke-linejoin="round" />
-                                                        </svg>
-
-                                                                </span>
-                                                            </a>
-                                                        @else
-                                                            <a href="{{ route('user.add-to-wishlist', $car->id) }}">
-                                                                <span>
-                                                                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M11.765 2.70229L11 3.52422L10.235 2.70229C8.12233 0.432572 4.69709 0.43257 2.58447 2.70229C0.471845 4.972 0.471844 8.65194 2.58447 10.9217L9.4699 18.3191C10.315 19.227 11.685 19.227 12.5301 18.3191L19.4155 10.9217C21.5282 8.65194 21.5282 4.972 19.4155 2.70229C17.3029 0.432571 13.8777 0.432571 11.765 2.70229Z"
-                                                                stroke-linejoin="round" />
-                                                        </svg>
-
-                                                                </span>
-                                                            </a>
-
-                                                        @endif
-
-
                                                 </div>
 
                                            
@@ -648,9 +633,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span>
-                                                            {{ html_decode($car->mileage) }}
-                                                        </span>
+                                                    
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
@@ -663,9 +646,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span>
-                                                            {{ html_decode($car->fuel_type) }}
-                                                        </span>
+                                                       
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
@@ -677,15 +658,27 @@
                                                             </span>
                                                         </div>
 
-                                                        <span>
-                                                            {{ html_decode($car->engine_size) }}
-                                                        </span>
+                                                        
                                                     </div>
                                                 </div>
 
                                                 <div class="brand-car-btm-txt-btm">
-                                                    <h6 class="brand-car-btm-txt">{{ __('translate.Listed by') }} :</span> {{ html_decode($car?->dealer?->name) }}
-                                                    </h6>
+                                                <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                    <h3 class="text-truncate car-fullname pt-3 ps-3"
+                                                    title="
+                                                       @if(session('front_lang')=='en')
+                                                            {{ html_decode($car['model_name']) }}
+                                                        @else
+                                                            {{ html_decode($car['model_name']) }}
+                                                        @endif
+                                                    "> 
+                                                        @if(session('front_lang')=='en')
+                                                            {{ html_decode($car['model_name']) }}
+                                                        @else
+                                                            {{ html_decode($car['model_name']) }}
+                                                        @endif
+                                                    </h3>
+                                                </a>
 
 
                                                 </div>
@@ -892,12 +885,12 @@
                     $('input[name="price_range_scale"]').val('')
                     $("#search_form").submit();
                 })
-                $(".brand-search").on('change',function(e){
-                    e.preventDefault();         
-                    clear_price_slider();          
-                    $(".model-search").val("")
-                    form.submit();
-                }) 
+                // $(".brand-search").on('change',function(e){
+                //     e.preventDefault();         
+                //     clear_price_slider();          
+                //     $(".model-search").val("")
+                //     form.submit();
+                // }) 
                 $(".popular-search").on('change',function(e){
                     e.preventDefault();   
                     clear_price_slider();    
@@ -924,7 +917,123 @@
                     // Update the input values
                     $('#ex2').val(`${minYear},${maxYear}`);
                 });
+                document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                    brandCheckbox.addEventListener('change', function() {
+
+                        const brandId = this.getAttribute('data-brand-id');
+                        const accordionItem = this.closest('.accordion-item');
+                        const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+                        modelCheckboxes.forEach(modelCheckbox => {
+                            modelCheckbox.checked = this.checked;
+                        });
+                        clear_price_slider();
+                        $('#search_form').submit();
+                    });
+            });
+            document.querySelectorAll('.model-search').forEach(modelCheckbox => {
+                modelCheckbox.addEventListener('change', function() {
+                    // Find the parent accordion item and its brand checkbox
+                    const accordionItem = this.closest('.accordion-item');
+                    const brandCheckbox = accordionItem.querySelector('.brand-search');
+                    const modelCheckboxes = accordionItem.querySelectorAll('.model-search');  
+                    // Update brand checkbox accordingly
+                    brandCheckbox.checked = true;
+                    clear_price_slider();
+                    $('#search_form').submit();
+                });
+            });
         })(jQuery);
+
+
+        document.querySelectorAll('.alert-close-model').forEach(button => {
+        button.addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        // Get relevant elements
+        const modelItem = event.target.closest('.model-item');
+        const modelValue = modelItem.textContent.trim(); // Get model value from the text content
+        const filterText = modelItem.closest('.filter-text');
+        
+        // Find corresponding checkboxes
+        const modelCheckboxes = document.querySelectorAll(`input[value="${modelValue}"].model-search`);
+        let brandSlug = '';
+        
+        // Find the brand checkbox by looking through model checkboxes' parent accordions
+        modelCheckboxes.forEach(checkbox => {
+            const accordionItem = checkbox.closest('.accordion-item');
+            if (accordionItem) {
+                const brandCheckbox = accordionItem.querySelector('.brand-search');
+                if (brandCheckbox) {
+                    brandSlug = brandCheckbox.value;
+                }
+            }
+        });
+        
+        // Update URL parameters
+        const url = new URL(window.location.href);
+        
+        // Get all current model parameters
+        let models = url.searchParams.getAll('model[]');
+        if (models.length === 0) {
+            models = url.searchParams.getAll('model');
+        }
+        
+        // Remove the clicked model
+        models = models.filter(model => model !== modelValue);
+        
+        // Clear and update model parameters
+        url.searchParams.delete('model[]');
+        url.searchParams.delete('model');
+        models.forEach(model => {
+            url.searchParams.append('model[]', model);
+        });
+        
+        if (brandSlug) {
+            // Find all checked models for this brand in the accordion
+            const brandAccordion = document.querySelector(`input[value="${brandSlug}"].brand-search`)
+                ?.closest('.accordion-item');
+            
+            if (brandAccordion) {
+                // Get all model checkboxes within this brand's accordion
+                const brandModelCheckboxes = brandAccordion.querySelectorAll('.model-search');
+                const remainingCheckedModels = Array.from(brandModelCheckboxes)
+                    .filter(checkbox => checkbox.checked && checkbox.value !== modelValue);
+                
+                // Only uncheck brand and remove from URL if no models remain checked
+                if (remainingCheckedModels.length === 0) {
+                    const brandCheckbox = brandAccordion.querySelector('.brand-search');
+                    if (brandCheckbox) {
+                        brandCheckbox.checked = false;
+                        
+                        let brands = url.searchParams.getAll('brand[]');
+                        if (brands.length === 0) {
+                            brands = url.searchParams.getAll('brand');
+                        }
+                        
+                        brands = brands.filter(brand => brand !== brandSlug);
+                        
+                        url.searchParams.delete('brand[]');
+                        url.searchParams.delete('brand');
+                        brands.forEach(brand => {
+                            url.searchParams.append('brand[]', brand);
+                        });
+                    }
+                }
+            }
+        }
+        
+        // Uncheck model checkboxes
+        modelCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Remove the filter tag from UI
+        filterText.remove();
+        
+        // Navigate to updated URL
+        window.location.href = url.toString();
+    });
+});
         
         window.addEventListener("load", function() {
             document.getElementById("pageLoader").classList.add("hidden");

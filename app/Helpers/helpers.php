@@ -144,3 +144,19 @@ function generateLang($path = ''){
     file_put_contents('lang/en/translate.php', "<?php\n return {$modifiedData};\n ?>");
 
 }
+
+if (!function_exists('hasCheckedModels')) {
+    function hasCheckedModels($brandSlug, $brand_arr, $selectedModels) {
+        if (!array_key_exists($brandSlug, $brand_arr) || empty($selectedModels)) {
+            return false;
+        }
+        
+        foreach ($brand_arr[$brandSlug] as $model) {
+            if (in_array(trim($model['model']), array_map('trim', (array) $selectedModels))) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
