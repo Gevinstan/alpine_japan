@@ -1223,25 +1223,38 @@
 
 
     <!-- About section Start-->
-        <section class="about-section">
-            <div class="container text-sm-center text-md-start px-2 px-sm-3 px-lg-5">
-                <h2 class="pb-2 section-heading">About <span class="highlight">Alpine Japan</span></h2>
-                <div class="row align-items-center mt-3">
-                <div class="col-md-4 col-12">
-                    <img src="{{asset('japan_home/about_car.png')}}" class="img-fluid rounded" alt="Alpine Japan Car">
-                </div>
-                <div class="col-md-8 col-12 d-md-block d-sm-flex flex-sm-column mt-md-0 mt-sm-2 justify-content-sm-center align-items-sm-center py-2 py-lg-0">
-                    <p class="about-text">
-                    Alpine Japan, founded in 2009, provides a unique range of vehicles from passenger cars to heavy equipment and cranes. Japanese vehicles are known to stand out for their quality, reliability and ease of use. Our company is committed to making the unique experience of owning Japanese vehicles available to as many people as possible in different countries and continents.
-                    </p>
-                    <p class="py-3 about-text-2">
-                    We specialize in exporting JDM vehicles to markets in the United States, Canada, Australia and the United Kingdom. To Malaysia, we supply minivans and new cars, and to the Middle East we supply classic cars. In the African continent market, we provide conventional cars that are becoming an integral part of everyday life.
-                    </p>
-                    <a href="#" class="thm-btn">Read More</a>
-                </div>
-                </div>
-            </div>
-        </section>
+    <section class="about-section py-5 px-md-5 px-sm-2">
+  <div class="container">
+    <h2 class="pb-3 section-heading text-center text-md-start">
+      About <span class="highlight">Alpine Japan</span>
+    </h2>
+    <div class="about-row">
+      <!-- Image Column -->
+      <div class="about-image-container"></div>
+
+      <!-- Content Column -->
+      <div class="about-content">
+        <p class="about-text">
+          Alpine Japan, founded in 2009, provides a unique range of vehicles
+          from passenger cars to heavy equipment and cranes. Japanese vehicles
+          are known to stand out for their quality, reliability, and ease of
+          use. Our company is committed to making the unique experience of
+          owning Japanese vehicles available to as many people as possible in
+          different countries and continents.
+        </p>
+        <p class="about-text">
+          We specialize in exporting JDM vehicles to markets in the United
+          States, Canada, Australia, and the United Kingdom. To Malaysia, we
+          supply minivans and new cars, and to the Middle East we supply classic
+          cars. In the African continent market, we provide conventional cars
+          that are becoming an integral part of everyday life.
+        </p>
+        <a href="#" class="btn thm-btn">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
     <!-- About section End -->
 
 

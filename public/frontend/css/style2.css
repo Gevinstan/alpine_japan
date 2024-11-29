@@ -585,7 +585,7 @@
     align-items: center;
     justify-content: center;
     color: var(--white-color);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: var(--medium);
     background-color: var(--white-color);
     overflow: hidden;
@@ -593,7 +593,7 @@
     text-transform: uppercase;
     transition: all 0.5s ease-in-out 0.2s;
     z-index: 1;
-    font-weight: 600;
+    font-weight: 500;
     border: 1px solid var(--primary-color-1);
 }
 
@@ -15665,10 +15665,16 @@ input:not(:placeholder-shown) + .placeholder-text {
     color: #038ffc;
 }
 
-.about-section p {
-    color: #121a27;
-    font-size: 0.925rem;
-    line-height: 22px !important;
+.about-section p:nth-child(2) {
+    color: #818181;
+    font-size: 0.8rem;
+    line-height: 20px !important;
+}
+
+.about-section p:nth-child(1) {
+    color: #121A27;
+    font-size: 0.8rem;
+    line-height: 20px !important;
 }
 
 .about-section .btn-primary {
@@ -17122,4 +17128,85 @@ select:focus {
 .dropdown-menu {
     border-top: 3px solid var(--primary-color-1);
 }
+
+/********** Home Page About Section Styling Start ***********/
+.about-section {
+    background-color: #f9fbff;
+    padding: 2rem 1rem;
+  }
+  
+  .about-row {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 1.5rem; 
+  }
+  
+  .about-image-container {
+    background-image: url("../../japan_home/about_car.png"); 
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    flex: 1 1 40%; 
+    min-height: 250px; 
+  }
+  
+  .about-content {
+    flex: 1 1 55%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .about-text {
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  
+  @media (max-width: 575.98px) {
+    .about-row {
+      flex-direction: column; 
+    }
+    .about-image-container {
+      min-height: 200px; 
+    }
+    .section-heading {
+      font-size: 1.5rem; 
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .about-image-container {
+      min-height: 220px; 
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .about-row {
+      gap: 2rem; 
+    }
+    .about-image-container {
+      min-height: 250px;
+      flex: 1 1 50%; 
+    }
+    .about-content {
+      flex: 1 1 50%;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .about-image-container {
+      flex: 1 1 40%;
+    }
+    .about-content {
+      flex: 1 1 55%;
+    }
+  }
+  
+/********** Home Page About Section Styling End ***********/
+  
+  
 
