@@ -93,66 +93,101 @@
 
                         <!-- Select Your Year Start -->
                             <div class="inventory-main-box my-2">
-
-                            <!-- Select Your Budget  -->
-                            <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                <div class="accordion-item  ps-3">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                        <button class="accordion-button p-0" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapsetwo">
-                                            Year
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
-                                        aria-labelledby="panelsStayOpen-headingtwo">
-                                        <div class="accordion-body">
-                                            <span class="select-Brand-box two four p-0 border-0">
-                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                    
-                                                    <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                    <!-- <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                        value="{{ request('year', $minYear) }}" 
-                                                        class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}"> -->
-
-                                                            <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                                <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                                <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                                <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                    <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                        <div class="accordion-item ps-3">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                                <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                    aria-controls="panelsStayOpen-collapsetwo">
+                                                    Year
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                                <div class="accordion-body">
+                                                    <span class="select-Brand-box two four p-0 border-0">
+                                                        <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                    <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
+                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>
+                                                                </div>
+                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}"
+                                                                    value="{{ request('year', $minYear) }}"
+                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
                                                             </div>
-                                                        
-                                                            <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                                value="{{ request('year', $minYear) }}" 
-                                                                class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                            <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
+                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                                <button class="clear-button">CLEAR</button>
+                                                                <button class="go-button">GO</button>
+                                                            </div>
                                                         </div>
-
-                                                        <div class="d-flex align-content-between flex-column gap-4">
-                                                        @if($request_check !=0)
-                                                        <button class="clear-button" id="clear-year">Clear</button>
-                                                        @endif
-                                                        <button type="button" id="year_search" class="go-button">Go</button>
-                                                    </div>
-                                                    </div>
-
-                                                  
+                                                    </span>
                                                 </div>
-                                            </span>
+                                            </div>
                                         </div>
                                     </div>
-
-                                </div>
-
-                            
-
                             </div>
+                            <!-- Select Your Budget  -->
+                                <!-- <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                    <div class="accordion-item  ps-3">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                            <button class="accordion-button p-0  year-heading" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapsetwo">
+                                                Year
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
+                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                            <div class="accordion-body">
+                                                <span class="select-Brand-box two four p-0 border-0">
+                                                    <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                        
+                                                        <div class="d-flex flex-column align-items-center mt-32px w-100">
+                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                    <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
+                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                                </div>
+                                                            
+                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                                    value="{{ request('year', $minYear) }}" 
+                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
+                                                            </div>
+
+                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                                @if($request_check !=0)
+                                                                <button class="clear-button" id="clear-year">Clear</button>
+                                                                @endif
+                                                            <button type="button" id="year_search" class="go-button">Go</button>
+                                                        </div>
+                                                        </div>
+
+                                                    
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div> -->
+
+
+                                
+
+                                    
+
+
+
                         <!-- Select Your Year End -->
                        
                         <!-- Select Your Budget Start -->
                             <div class="inventory-main-box my-2">   
                                 <!-- Budget -->
-                                <div class="accordion" id="accordionPanelsStayOpenExample4" class="accordion_dd">
+                                <!-- <div class="accordion" id="accordionPanelsStayOpenExample4" class="accordion_dd">
                                     <div class="accordion-item ps-3">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingfive">
                                             <button class="accordion-button budget-heading p-0" type="button" data-bs-toggle="collapse"
@@ -184,7 +219,7 @@
                                                         </div>
                                                     </div>
                                                      
-                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4">
+                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4 go_clear">
                                                         @if($request_check !=0)
                                                             <button class="clear-button" id="clear-budget">Clear</button>
                                                         @endif    
@@ -213,7 +248,55 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                </div> -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                        <div class="accordion-item ps-3">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                                <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                                    aria-controls="panelsStayOpen-collapsefive">
+                                                    Budget
+                                                </button>
+                                            </h2>
+                                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }}"
+                                            aria-labelledby="panelsStayOpen-headingfive">
+                                                <div class="accordion-body">
+                                                    <span class="select-Brand-box two four p-0 border-0">
+                                                        <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minPrice}}</span>
+                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span>  
+                                                                </div>
+                                                                <input id="ex2" type="text" name="price_range_scale"
+                                                                    data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}"
+                                                                    value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}"
+                                                                    data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>  
+                                                            </div>
+                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                                <button class="clear-button">CLEAR</button>
+                                                                <button class="go-button">GO</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row budget-space">
+                                                            <h6 class="pt-2 price_range">Price Range</h6>
+                                                            @foreach($price_range as $key=>$range)
+                                                            <div class="d-flex align-items-center">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}"
+                                                                            {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
+                                                                        <label class="form-check-label">
+                                                                            <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
+                                                                        </label>
+                                                                    </div>
+                                                            </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                             </div>
                         <!-- Select Your Budget End -->
