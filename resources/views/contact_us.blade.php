@@ -179,42 +179,54 @@
 
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
-                                    <div class="textarea-wrapper">
+                                    <div class="textarea-wrapper input-area">
                                         <input type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="{{ __('Name*') }}" name="name" value="{{ old('name') }}">
+                                        placeholder name="name" value="{{ old('name') }}">
+                                        <span class="input-placeholder">Name 
+                                            <span class="required">*</span>
+                                        </span>
                                     </div>
                                     
                                 </div>
                                 <div class="get-in-touch-form-inner">
-                                    <div>
+                                    <div class="textarea-wrapper input-area">
                                         <input type="text" class="form-control" id="exampleFormControlInput2"
-                                        placeholder="{{ __('Phone Number*') }}" name="phone" value="{{ old('phone') }}">
+                                        placeholder name="phone" value="{{ old('phone') }}">
+                                        <span class="input-placeholder">Phone Number 
+                                            <span class="required">*</span>
+                                        </span>
                                     </div>
                                     
                                 </div>
                             </div>
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
-                                    <div>
+                                    <div class="textarea-wrapper input-area">
                                         <input type="email" class="form-control" id="exampleFormControlInput4"
-                                        placeholder="{{ __('Email*') }}" value="{{ old('email') }}" name="email">
+                                        placeholder value="{{ old('email') }}" name="email">
+                                        <span class="input-placeholder">Email 
+                                            <span class="required">*</span>
+                                        </span>
                                     </div>
                                     
                                 </div>
                                 <div class="get-in-touch-form-inner">
-                                    <div>
+                                    <div class="textarea-wrapper input-area">
                                         <input type="text" class="form-control" id="exampleFormControlInput3"
-                                        placeholder="{{ __('Country of Delivery*') }}" name="subject" value="{{ old('subject') }}">
-                                        
+                                        placeholder name="subject" value="{{ old('subject') }}">
+                                        <span class="input-placeholder">Country of Delivery 
+                                            <span class="required">*</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="get-in-touch-form-item">
                                 <div class="get-in-touch-form-inner">
-                                    <div>
-                                        <textarea class="form-control" id="exampleFormControlTextarea6" rows="8" placeholder="{{ __('Message*') }}" name="message">{{ old('message') }}</textarea>
-                                    
-                                        
+                                    <div class="textarea-wrapper input-area">
+                                        <textarea class="form-control" id="exampleFormControlTextarea6" rows="8" placeholder name="message">{{ old('message') }}</textarea>
+                                        <span class="input-placeholder">Message 
+                                            <span class="required">*</span>
+                                        </span>
                                     </div>
                                 </div>
 

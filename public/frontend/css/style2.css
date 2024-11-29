@@ -15830,8 +15830,8 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .nav_logo_container {
-    width: 3.4rem !important;
-    height: 3.4rem !important;
+    width: 3.3rem !important;
+    height: 3.3rem !important;
 }
 .nav_logo {
     width: 100% !important;
@@ -17208,5 +17208,26 @@ select:focus {
   
 /********** Home Page About Section Styling End ***********/
   
+
+.input-placeholder {
+    position: absolute;
+    left: 25px;
+    top: 18px;
+    color: #bababa;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+
+textarea:focus + .input-placeholder,
+textarea:not(:placeholder-shown) + .input-placeholder {
+    opacity: 0;
+}
+
+input:focus + .input-placeholder,
+input:not(:placeholder-shown) + .input-placeholder {
+    opacity: 0;
+}
+
+
   
 
