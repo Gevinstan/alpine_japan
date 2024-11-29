@@ -87,7 +87,7 @@
 
 
                     <div class="contact-box ps-4">
-                        <a href="">ALPINE JAPAN</a>
+                        <a href="">ALPINE JAPAN 株式会社</a>
                         <h5>+81 78 242-1568</h5>
                         <h5>+81 78 242-1578</h5>
 
