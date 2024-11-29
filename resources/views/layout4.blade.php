@@ -133,7 +133,7 @@
                             <div class="nav-left">
                                 <div class="logo nav_logo_container" >
                                     <a href="{{ route('home') }}" >
-                                        <img src="{{asset('japan_home/japan-logo.png')}}" class="nav_logo" alt="logo" >
+                                        <img src="{{asset('japan_home/logo_updated.png')}}" class="nav_logo" alt="logo" >
                                     </a>
                                 </div>
                             </div>
@@ -400,7 +400,7 @@
     <footer class="overflow-hidden footer footer-two">
     @endif
 
-        <div class="container px-sm-2 px-md-5">
+        <div class="container overflow-hidden px-sm-2 px-md-5">
             <div class="footer-bb d-md-flex d-sm-flex    align-items-center">
                 <div class="col-lg-5 col-p-0 p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
@@ -409,7 +409,7 @@
                     </h2>
                 </div>
                 <div class="col-lg-7 col-p-0" data-aos="fade-left" data-aos-delay="100">
-                    <div class="newsletter-sarch-box-main-item justify-content-md-end justify-content-start">
+                    <div class="newsletter-sarch-box-main-item justify-content-md-center justify-content-start">
                         <div class="newsletter-sarch-box-main pt-3">
                             <form action="{{ route('newsletter-request') }}" class="newsletter-sarch-box" method="POST">
                                 @csrf
@@ -424,7 +424,7 @@
                                 @endif
                             </form>
                             <div class="d-flex justify-content-center text-uppercase">
-                                <label class="form-label">Subscribe to Our Newsletter</label>
+                                <label class="form-label text-label">Subscribe to Our Newsletter</label>
                             </div>
                         </div>
 
@@ -441,7 +441,7 @@
 
 
                         <a href="{{ route('home') }}">
-                            <img src="{{asset('japan_home/japan-logo.png')}}" alt="logo">
+                            <img src="{{asset('japan_home/logo_updated.png')}}" alt="logo">
                         </a>
                     </div>
                     <div class="footer-text-p">

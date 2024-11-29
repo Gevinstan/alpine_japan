@@ -10,9 +10,9 @@
     <!-- banner-part-start  -->
 
     <section>
-        <div class="container px-2 px-sm-3 px-lg-5 ">
-            <div class="row">
-                <div class="col-md-12 faq-img ">
+        <div class="container-fluid faq_con_flu">
+            <div class="row faq_row">
+                <div class="col-md-12 faq-img p-0">
                     <img src="{{  asset('japan_home/faq_img.svg')  }}" alt="HTML tutorial" class="img-fluid how-to-buy-image">
 
                     <div class="faq-top-left">
