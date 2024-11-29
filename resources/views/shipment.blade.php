@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-center flex-column align-items-center gap-4">
-          <h3 class="mt-5">WE AEEEPT CREDIT CARD</h3>
+          <h3 class="mt-5">WE ACCEPT CREDIT CARD</h3>
           <div class="card-list pb-4 d-flex justify-content-center flex-wrap gap-2">
               <img src="{{asset('japan_home/AE.png')}}" alt="american_express_card" />
               <img src="{{asset('japan_home/UP.png')}}" alt="american_express_card" />
