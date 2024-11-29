@@ -14235,6 +14235,7 @@ p {
 
 .nav-dropdown-list .nav-dropdown-item:hover {
     color: var(--primary-color-1) !important;
+    background-color: var(--white-color) !important;
 }
 
 .nav-dropdown-list .nav-dropdown-item.active{
@@ -14983,8 +14984,11 @@ p {
     border-bottom: 3px solid transparent;
 }
 
-.nav-btn .menu ul .nav-item .nav-link:hover,
 .nav-btn .menu ul .nav-item .nav-link.active {
+    color: #038ffc !important;
+}
+
+.nav-btn .menu ul .nav-item .nav-link:hover {
     color: #038ffc !important;
     border-bottom: 3px solid #038ffc !important;
 }
@@ -17116,5 +17120,9 @@ select:focus {
 .spec_dot {
     color: #9EA3AD;
     font-size: 10px;
+}
+
+.dropdown-menu {
+    border-top: 3px solid var(--primary-color-1);
 }
 

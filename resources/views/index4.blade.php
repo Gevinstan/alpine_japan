@@ -1228,7 +1228,7 @@
                 <h2 class="pb-2 section-heading">About <span class="highlight">Alpine Japan</span></h2>
                 <div class="row align-items-center mt-3">
                 <div class="col-md-4 col-12">
-                    <img src="{{asset('japan_home/about.svg')}}" class="img-fluid rounded" alt="Alpine Japan Car">
+                    <img src="{{asset('japan_home/about_car.png')}}" class="img-fluid rounded" alt="Alpine Japan Car">
                 </div>
                 <div class="col-md-8 col-12 d-md-block d-sm-flex flex-sm-column mt-md-0 mt-sm-2 justify-content-sm-center align-items-sm-center py-2 py-lg-0">
                     <p class="about-text">
