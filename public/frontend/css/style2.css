@@ -16624,6 +16624,12 @@ input:not(:placeholder-shown) + .placeholder-text {
     .our-vision-image {
         display: none;
     }
+    .our_vision {
+        display: none;
+    }
+    .card_vision {
+        display: none;
+    }
 
     .our-vision-content {
         display: none;
