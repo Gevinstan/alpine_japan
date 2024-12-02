@@ -257,7 +257,7 @@
                                                             <h6 class="pt-2 price_range">Price Range</h6>
 
                                                             @foreach($price_range as $key=>$range)
-                                                            <div class="d-flex align-items-center">
+                                                            <div class="d-flex align-items-center pb-2">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
                                                                             {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
@@ -278,7 +278,7 @@
                             <!-- Select Your Budget End -->
 
 
-                        
+                        </form> 
                         @if ($listing_ads->status == 'enable')
                             <div class="inventory-main-box-thumb">
                                 <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -287,12 +287,11 @@
                     </div>
 
                     <div class="col-lg-9">
-                        <div class="inventory-ber mb-3">
+                        <div class="inventory-ber mb-2">
                             <div class="inventory-ber-left">
                                 <div class="inventory-sarch-ber-item flex-row">
                                     <div class="inventory-sarch-ber">
-                                        <input type="text" class="form-control" id="outside_form_search" name="search"
-                                            placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
+                                        <input type="text" class="form-control" id="outside_form_search" name="search" placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
 
                                         <span class="search-btn" style="cursor: pointer;">
 
@@ -302,7 +301,7 @@
                                         
                                     </div>
 
-                                    <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
+                                    <div class="align-items-center sort_by d-flex justify-content-end justify-content-md-end justify-content-sm-start">
                                         <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                         <p class="sort-text">Sort By:</p>
                                         <div class="dropdown sort-dropdown pe-4">
@@ -323,7 +322,7 @@
                             </div>
 
                             <div class="inventory-ber-right">
-                                <div class="inventory-ber-right-btn">
+                                <div class="inventory-ber-right-btn sort_by_button">
                                     <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
@@ -403,7 +402,7 @@
                                 <div class="row g-5">
                                 @if(count($cars_array) > 0)  
                                     @foreach ($cars_array as $index => $car)
-                                        <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
+                                        <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
                                                 data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
@@ -484,6 +483,14 @@
                                                                             <path
                                                                                 d="M4.00065 8.66663H2.66732C2.48324 8.66663 2.33398 8.81588 2.33398 8.99996V10.3333C2.33398 10.5174 2.48324 10.6666 2.66732 10.6666H4.00065C4.18473 10.6666 4.33398 10.5174 4.33398 10.3333V8.99996C4.33398 8.81588 4.18473 8.66663 4.00065 8.66663ZM3.66732 9.99996H3.00065V9.33329H3.66732V9.99996Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                     </svg>
+
+                                                                    <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="#0D274E" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M19.5 4H16.5V2.5C16.5 2.36739 16.4473 2.24021 16.3536 2.14645C16.2598 2.05268 16.1326 2 16 2C15.8674 2 15.7402 2.05268 15.6464 2.14645C15.5527 2.24021 15.5 2.36739 15.5 2.5V4H8.5V2.5C8.5 2.36739 8.44732 2.24021 8.35355 2.14645C8.25979 2.05268 8.13261 2 8 2C7.86739 2 7.74021 2.05268 7.64645 2.14645C7.55268 2.24021 7.5 2.36739 7.5 2.5V4H4.5C3.8372 4.00079 3.20178 4.26444 2.73311 4.73311C2.26444 5.20178 2.00079 5.8372 2 6.5V19.5C2.00079 20.1628 2.26444 20.7982 2.73311 21.2669C3.20178 21.7356 3.8372 21.9992 4.5 22H19.5C20.163 22 20.7989 21.7366 21.2678 21.2678C21.7366 20.7989 22 20.163 22 19.5V6.5C22 5.83696 21.7366 5.20107 21.2678 4.73223C20.7989 4.26339 20.163 4 19.5 4ZM21 19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V11H21V19.5ZM21 10H3V6.5C3 5.672 3.67 5 4.5 5H7.5V6.5C7.5 6.63261 7.55268 6.75979 7.64645 6.85355C7.74021 6.94732 7.86739 7 8 7C8.13261 7 8.25979 6.94732 8.35355 6.85355C8.44732 6.75979 8.5 6.63261 8.5 6.5V5H15.5V6.5C15.5 6.63261 15.5527 6.75979 15.6464 6.85355C15.7402 6.94732 15.8674 7 16 7C16.1326 7 16.2598 6.94732 16.3536 6.85355C16.4473 6.75979 16.5 6.63261 16.5 6.5V5H19.5C19.8978 5 20.2794 5.15804 20.5607 5.43934C20.842 5.72064 21 6.10218 21 6.5V10Z" fill="#0D274E"/>
+                                                                        <rect x="5" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                        <rect x="9" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                        <rect x="13" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                        <rect x="17" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                    </svg> -->
 
                                                                 </span>
                                                             </div>
@@ -900,7 +907,7 @@
                         
 
                     </div>
-                </form>    
+                   
                 </div>
             </div>
         </section>
@@ -1107,6 +1114,15 @@
                 $j('#ex2').slider();
                 $j('#ex3').slider();
             });
+
+    // Newly added script code
+
+        AOS.init({  
+             
+        duration: 500, // Animation duration in milliseconds
+        once: true, // Animation happens only once on page load        
+        delay: 0, // Delay before animation starts
+    });
 
         </script>
     @endpush
