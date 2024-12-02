@@ -32,7 +32,7 @@
                                            
                                         </div>
                                     </div>
-                                    <a href="#"><img src="{{ asset($gallery) }}" alt="img"></a>
+                                    <a href="#"><img class="main-image" src="{{ asset($gallery) }}" alt="img"></a>
                                 </div>
                             @endforeach
                         </div>
@@ -91,13 +91,13 @@
                                     </select>
                                 </div>
                                 <div class="w-100">
-                                    <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
+                                    <button class="btn w-100 bg-white charge-btn disabled" type="button" id="delivery_charge">
                                         Delivery Charge
                                     </button> 
                                 </div>
                             </div>
                             <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                            <div class="d-flex align-content-center gap-4">
+                            <div class="d-flex align-content-center total-price-container mt-3">
                             <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
                             <p class="" id="total_price"></p>
                     </div>
@@ -816,7 +816,7 @@
 
     <script>
         "use strict";
-
+       
         let currencyPosition = "{{ Session::get('currency_position') }}";
         let currencyIcon = "{{ Session::get('currency_icon') }}";
 
@@ -998,6 +998,26 @@
             }, images.length * 1000);
             });
 
+            $(document).ready(function () {
+    $('.main-image').on('click', function () {
+      const listingImage = $(this).closest('.listing_image');
+      listingImage.addClass('full-screen');
+      listingImage.append('<button class="close-btn">Close</button>');
+        let el = document.querySelector(".header-two");
+        let e2 = document.querySelector(".mobile-header");
+        el.classList.add("d-none"); 
+        e2.classList.add("d-none"); 
+
+
+      // Close button functionality
+      $('.close-btn').on('click', function () {
+        listingImage.removeClass('full-screen');
+        $(this).remove(); // Remove the close button
+        el.classList.remove("d-none");
+        e2.classList.remove("d-none");
+    });
+    });
+  });
 
     </script>
 

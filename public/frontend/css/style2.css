@@ -14794,18 +14794,19 @@ p {
     border: 1px solid #ffffff !important;
 }
 .car-listing-details p {
-    font-size: 0.65rem;
+    font-size: 1rem;
     line-height: 10px;
     font-family: var(--poppins) !important;
 }
 .car-listing-details .brand-text {
     color: #25282d;
     font-family: var(--poppins) !important;
+    font-size: .8rem;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.3rem;
-    line-height: 15px;
+    font-size: 1.6rem;
+    line-height: 22px;
     font-weight: 600;
     padding-bottom: 6px;
     font-family: var(--poppins) !important;
@@ -14817,7 +14818,7 @@ p {
 .car-listing-details .price-text {
     color: #038ffc;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-family: var(--poppins) !important;
 }
 .car-listing-details .commission-text {
@@ -14840,8 +14841,13 @@ p {
 .total-price span {
     font-size: 2rem;
     font-weight: 500;
-    bottom: 2px;
-    left: 81px;
+    bottom: -2px;
+    left: 90px;
+    color: var(--primary-color-1);
+}
+
+.total-price-container {
+    gap: 2rem;
 }
 
 .location-dropdown button {
@@ -17306,6 +17312,43 @@ input:not(:placeholder-shown) + .input-placeholder {
     width: 100%;
 }
 }
+
+.listing_image {
+    position: relative;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Backdrop effect */
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto; /* Handle content overflow */
+  }
+
+  .full-screen .main-image {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    display: block;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10000;
+  }
 
 
 
