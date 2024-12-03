@@ -65,22 +65,23 @@ $(function() {
         // Handle the visibility of back-to-top and top-to-bottom buttons based on scrolling
         $(window).on("scroll", function () {
             let scrolling = $(this).scrollTop();
+
             let windowHeight = $(window).height();
             let documentHeight = $(document).height();
 
             // Back-to-Top Button Visibility
-            if (scrolling > 200) {
-                $(".back-to-top").fadeIn(500);
-            } else {
-                $(".back-to-top").fadeOut(500);
-            }
-
-            // Top-to-Bottom Button Visibility (Hide when near bottom)
-            if (scrolling + windowHeight >= documentHeight - 200) {
+            if (scrolling > 600) {
                 $(".top-to-bottom").fadeOut(500);
             } else {
                 $(".top-to-bottom").fadeIn(500);
             }
+
+            // Top-to-Bottom Button Visibility (Hide when near bottom)
+            // if (scrolling + windowHeight >= documentHeight - 200) {
+            //     $(".top-to-bottom").fadeOut(500);
+            // } else {
+            //     $(".top-to-bottom").fadeIn(500);
+            // }
         });
     });
 
