@@ -2353,7 +2353,7 @@
     align-items: center;
     gap: 10px;
     font-family: var(--roboto);
-    font-size: 16px;
+    font-size: 0.8rem;
     font-weight: var(--regular);
     line-height: 28px;
     color: var(--paragraph-color);
@@ -7415,7 +7415,7 @@ p {
     color: #0d274e;
     padding: 25px 30px;
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
 }
 
@@ -13767,7 +13767,7 @@ p {
 
 .g-5,
 .gy-5 {
-    --bs-gutter-y: 30px;
+    --bs-gutter-y: 24px;
 }
 
 .g-5,
@@ -17499,5 +17499,9 @@ input:not(:placeholder-shown) + .input-placeholder {
     cursor: zoom-in;
     visibility: hidden;
     border-radius: 50%;
+}
+
+.bottom-image {
+    display: none;
 }
 
