@@ -257,7 +257,7 @@
                                                             <h6 class="pt-2 price_range">Price Range</h6>
 
                                                             @foreach($price_range as $key=>$range)
-                                                            <div class="d-flex align-items-center">
+                                                            <div class="d-flex align-items-center pb-2">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
                                                                             {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
@@ -278,7 +278,7 @@
                             <!-- Select Your Budget End -->
 
 
-                        
+                        </form> 
                         @if ($listing_ads->status == 'enable')
                             <div class="inventory-main-box-thumb">
                                 <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -287,12 +287,11 @@
                     </div>
 
                     <div class="col-lg-9">
-                        <div class="inventory-ber mb-3">
+                        <div class="inventory-ber mb-2">
                             <div class="inventory-ber-left">
                                 <div class="inventory-sarch-ber-item flex-row">
                                     <div class="inventory-sarch-ber">
-                                        <input type="text" class="form-control" id="outside_form_search" name="search"
-                                            placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
+                                        <input type="text" class="form-control" id="outside_form_search" name="search" placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
 
                                         <span class="search-btn" style="cursor: pointer;">
 
@@ -302,7 +301,7 @@
                                         
                                     </div>
 
-                                    <div class="align-items-center d-flex justify-content-end justify-content-md-end justify-content-sm-start">
+                                    <div class="align-items-center sort_by d-flex justify-content-end justify-content-md-end justify-content-sm-start">
                                         <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                         <p class="sort-text">Sort By:</p>
                                         <div class="dropdown sort-dropdown pe-4">
@@ -323,7 +322,7 @@
                             </div>
 
                             <div class="inventory-ber-right">
-                                <div class="inventory-ber-right-btn">
+                                <div class="inventory-ber-right-btn sort_by_button">
                                     <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
@@ -403,7 +402,7 @@
                                 <div class="row g-5">
                                 @if(count($cars_array) > 0)  
                                     @foreach ($cars_array as $index => $car)
-                                        <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
+                                        <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
                                                 data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
@@ -455,7 +454,7 @@
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
-                                                                    <svg width="24" height="24" viewBox="0 0 24 24" 
+                                                                    <!-- <svg width="24" height="24" viewBox="0 0 24 24" 
                                                                             xmlns="http://www.w3.org/2000/svg">
                                                                             <path
                                                                                 d="M16.6597 2.2666C16.6571 2.25505 16.6501 2.24593 16.6466 2.23503C16.641 2.21631 16.6335 2.19824 16.6243 2.18099C16.6139 2.16113 16.6014 2.14258 16.5871 2.12533C16.5755 2.111 16.5628 2.09766 16.549 2.08529C16.5322 2.07113 16.5138 2.05892 16.4943 2.04867C16.4779 2.03874 16.4604 2.03027 16.4424 2.02327C16.4207 2.01644 16.3983 2.01188 16.3757 2.0096C16.3618 2.00553 16.3477 2.00228 16.3333 2H14.6527C14.5667 0.839681 14.0283 0 13.3333 0C12.6383 0 12.0999 0.839681 12.014 2H11.3193C11.2334 0.839681 10.695 0 10 0C9.30501 0 8.7666 0.839681 8.68066 2H7.986C7.90007 0.839681 7.36165 0 6.66667 0C5.97168 0 5.43327 0.839681 5.34733 2H4.65267C4.56673 0.839681 4.02832 0 3.33333 0C2.63835 0 2.09994 0.839681 2.014 2H0.333333C0.149251 2 0 2.14925 0 2.33333V19.6667C0 19.8507 0.149251 20 0.333333 20H16.3333C16.5174 20 16.6667 19.8507 16.6667 19.6667V18.6667H19.6667C19.7668 18.6667 19.8615 18.6216 19.9246 18.5441C19.988 18.4665 20.013 18.3647 19.993 18.2666L16.6597 2.2666ZM13.3333 0.666667C13.5741 0.666667 13.91 1.17741 13.984 2H12.6839C12.7567 1.17741 13.0926 0.666667 13.3333 0.666667ZM10 0.666667C10.2407 0.666667 10.5767 1.17741 10.6507 2H9.35059C9.42334 1.17741 9.75928 0.666667 10 0.666667ZM6.66667 0.666667C6.90739 0.666667 7.24333 1.17741 7.31738 2H6.01725C6.09001 1.17741 6.42594 0.666667 6.66667 0.666667ZM3.33333 0.666667C3.57406 0.666667 3.90999 1.17741 3.98405 2H2.68392C2.75667 1.17741 3.09261 0.666667 3.33333 0.666667ZM0.666667 2.66667H2.014C2.09994 3.82699 2.63835 4.66667 3.33333 4.66667C3.51742 4.66667 3.66667 4.51742 3.66667 4.33333C3.66667 4.14925 3.51742 4 3.33333 4C3.09261 4 2.75667 3.48926 2.68262 2.66667H5.34733C5.43441 3.82699 5.97168 4.66667 6.66667 4.66667C6.85075 4.66667 7 4.51742 7 4.33333C7 4.14925 6.85075 4 6.66667 4C6.42594 4 6.09001 3.48926 6.01595 2.66667H8.68066C8.76774 3.82699 9.30501 4.66667 10 4.66667C10.1841 4.66667 10.3333 4.51742 10.3333 4.33333C10.3333 4.14925 10.1841 4 10 4C9.75928 4 9.42334 3.48926 9.34928 2.66667H12.014C12.1011 3.82699 12.6383 4.66667 13.3333 4.66667C13.5174 4.66667 13.6667 4.51742 13.6667 4.33333C13.6667 4.14925 13.5174 4 13.3333 4C13.0926 4 12.7567 3.48926 12.6826 2.66667H16V6H0.666667V2.66667ZM16 19.3333H0.666667V6.66667H16V19.3333ZM16.6667 18V5.56673L19.257 18H16.6667Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
@@ -483,6 +482,14 @@
                                                                                 d="M14.0007 8.66663H12.6673C12.4832 8.66663 12.334 8.81588 12.334 8.99996V10.3333C12.334 10.5174 12.4832 10.6666 12.6673 10.6666H14.0007C14.1847 10.6666 14.334 10.5174 14.334 10.3333V8.99996C14.334 8.81588 14.1847 8.66663 14.0007 8.66663ZM13.6673 9.99996H13.0007V9.33329H13.6673V9.99996Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                             <path
                                                                                 d="M4.00065 8.66663H2.66732C2.48324 8.66663 2.33398 8.81588 2.33398 8.99996V10.3333C2.33398 10.5174 2.48324 10.6666 2.66732 10.6666H4.00065C4.18473 10.6666 4.33398 10.5174 4.33398 10.3333V8.99996C4.33398 8.81588 4.18473 8.66663 4.00065 8.66663ZM3.66732 9.99996H3.00065V9.33329H3.66732V9.99996Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    </svg> -->
+
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#0D274E" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M19.5 4H16.5V2.5C16.5 2.36739 16.4473 2.24021 16.3536 2.14645C16.2598 2.05268 16.1326 2 16 2C15.8674 2 15.7402 2.05268 15.6464 2.14645C15.5527 2.24021 15.5 2.36739 15.5 2.5V4H8.5V2.5C8.5 2.36739 8.44732 2.24021 8.35355 2.14645C8.25979 2.05268 8.13261 2 8 2C7.86739 2 7.74021 2.05268 7.64645 2.14645C7.55268 2.24021 7.5 2.36739 7.5 2.5V4H4.5C3.8372 4.00079 3.20178 4.26444 2.73311 4.73311C2.26444 5.20178 2.00079 5.8372 2 6.5V19.5C2.00079 20.1628 2.26444 20.7982 2.73311 21.2669C3.20178 21.7356 3.8372 21.9992 4.5 22H19.5C20.163 22 20.7989 21.7366 21.2678 21.2678C21.7366 20.7989 22 20.163 22 19.5V6.5C22 5.83696 21.7366 5.20107 21.2678 4.73223C20.7989 4.26339 20.163 4 19.5 4ZM21 19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V11H21V19.5ZM21 10H3V6.5C3 5.672 3.67 5 4.5 5H7.5V6.5C7.5 6.63261 7.55268 6.75979 7.64645 6.85355C7.74021 6.94732 7.86739 7 8 7C8.13261 7 8.25979 6.94732 8.35355 6.85355C8.44732 6.75979 8.5 6.63261 8.5 6.5V5H15.5V6.5C15.5 6.63261 15.5527 6.75979 15.6464 6.85355C15.7402 6.94732 15.8674 7 16 7C16.1326 7 16.2598 6.94732 16.3536 6.85355C16.4473 6.75979 16.5 6.63261 16.5 6.5V5H19.5C19.8978 5 20.2794 5.15804 20.5607 5.43934C20.842 5.72064 21 6.10218 21 6.5V10Z" fill="#0D274E"/>
+                                                                        <rect x="5" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                        <rect x="9" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                        <rect x="13" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
+                                                                        <rect x="17" y="15" width="2" height="2" rx="0.3" fill="#0D274E"/>
                                                                     </svg>
 
                                                                 </span>
@@ -900,7 +907,7 @@
                         
 
                     </div>
-                </form>    
+                   
                 </div>
             </div>
         </section>
@@ -1107,6 +1114,15 @@
                 $j('#ex2').slider();
                 $j('#ex3').slider();
             });
+
+    // Newly added script code
+
+        AOS.init({  
+             
+        duration: 500, // Animation duration in milliseconds
+        once: true, // Animation happens only once on page load        
+        delay: 0, // Delay before animation starts
+    });
 
         </script>
     @endpush

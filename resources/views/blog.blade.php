@@ -28,19 +28,19 @@
         </div>
     </section> -->
 
-     <section class="privacy_policy_header pt-5">
-            <div class="container pt-5">
+     <section class="privacy_policy_header">
+            <div class="container about_header">
                 <div class="row pt-3 px-sm-2 px-md-5 banner_color">
                     <div class="col-lg-12">
-                        <div class="pb-2 ps-3">
+                        <div class="pb-2 breadcrum_about">
                             <!-- <h2 class="contact_us" >Contact</h2> 
                             <h2 class="contact_us contact-us-color">Us</h2> -->
-                            <h2 class="section-heading">Blogs<span class="highlight"><span></h2>
+                            <h2 class="section-heading_about">Blogs <span class="highlight-about"><span></h2>
                         </div>
                     </div>
                 </div>
             </div>
-     </section>   
+        </section>
     <!-- banner-part-end -->
 
 

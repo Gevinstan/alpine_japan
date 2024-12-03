@@ -37,58 +37,53 @@ $(function() {
     closeBtn.addEventListener("click", closeNav);
 
     // back to top
-    $(" .back-to-top ").on("click", function () {
-        $("html,body").animate({
-            scrollTop: 0,
-        });
-    });
 
-    $(window).on("scroll", function () {
-        var scrolling = $(this).scrollTop();
-
-        if (scrolling > 150) {
-            $(".menu-bg").addClass("nav-bg");
-        } else {
-            $(".menu-bg").removeClass("nav-bg");
-        }
-
-        var scrolling = $(this).scrollTop();
-        if (scrolling > 200) {
-            $(".back-to-top ").fadeIn(500);
-        } else {
-            $(".back-to-top ").fadeOut(500);
-        }
-    });
 
     // top to bottom start
+   
+    $(document).ready(function () {
+        // Back to Top Button
+        $(".back-to-top").on("click", function () {
+            $("html, body").animate(
+                {
+                    scrollTop: 0, // Scroll to the top of the page
+                },
+                1000 // Animation duration in milliseconds
+            );
+        });
 
-    // $(window).on("scroll", function () {
-    //     var scrolling = $(this).scrollTop();
+        // Top to Bottom Button
+        $(".top-to-bottom").on("click", function () {
+            $("html, body").animate(
+                {
+                    scrollTop: $(document).height() - $(window).height(), // Scroll to the bottom of the page
+                },
+                1000 // Animation duration in milliseconds
+            );
+        });
 
-    //     if (scrolling > 150) {
-    //         $(".menu-bg").addClass("nav-bg");
-    //     } else {
-    //         $(".menu-bg").removeClass("nav-bg");
-    //     }
+        // Handle the visibility of back-to-top and top-to-bottom buttons based on scrolling
+        $(window).on("scroll", function () {
+            let scrolling = $(this).scrollTop();
 
-    //     if (scrolling > 200) {
-    //         $(".top-to-bottom").fadeIn(500); 
-    //     } else {
-    //         $(".top-to-bottom").fadeOut(500); 
-    //     }
+            let windowHeight = $(window).height();
+            let documentHeight = $(document).height();
 
-    //     var buttonPosition = scrolling + 100; 
-    //     $(".top-to-bottom").css("top", buttonPosition + "px"); 
-    // });
+            // Back-to-Top Button Visibility
+            if (scrolling > 600) {
+                $(".top-to-bottom").fadeOut(500);
+            } else {
+                $(".top-to-bottom").fadeIn(500);
+            }
 
-    // $(".top-to-bottom").on("click", function () {
-    //     $("html, body").animate(
-    //         {
-    //             scrollTop: 0,
-    //         },
-    //         500
-    //     ); 
-    // });
+            // Top-to-Bottom Button Visibility (Hide when near bottom)
+            // if (scrolling + windowHeight >= documentHeight - 200) {
+            //     $(".top-to-bottom").fadeOut(500);
+            // } else {
+            //     $(".top-to-bottom").fadeIn(500);
+            // }
+        });
+    });
 
     // top to bottom end
 
