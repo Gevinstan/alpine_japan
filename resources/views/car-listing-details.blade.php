@@ -998,26 +998,6 @@
             }, images.length * 1000);
             });
 
-            $(document).ready(function () {
-    $('.main-image').on('click', function () {
-      const listingImage = $(this).closest('.listing_image');
-      listingImage.addClass('full-screen');
-      listingImage.append('<button class="close-btn">Close</button>');
-        let el = document.querySelector(".header-two");
-        let e2 = document.querySelector(".mobile-header");
-        el.classList.add("d-none"); 
-        e2.classList.add("d-none"); 
-
-
-      // Close button functionality
-      $('.close-btn').on('click', function () {
-        listingImage.removeClass('full-screen');
-        $(this).remove(); // Remove the close button
-        el.classList.remove("d-none");
-        e2.classList.remove("d-none");
-    });
-    });
-  });
 
     const locationSelect = document.getElementById("location");
     const deliveryChargeButton = document.getElementById("delivery_charge");
@@ -1025,21 +1005,18 @@
     locationSelect.addEventListener("change", () => {
         if (locationSelect.value) {
             deliveryChargeButton.style.setProperty("color", "#0d274e", "important");
-            deliveryChargeButton.style.setProperty("font-size", "1.2rem", "important");
+            deliveryChargeButton.style.setProperty("font-size", "14px", "important");
             deliveryChargeButton.style.setProperty("font-weight", "600", "important");
             locationSelect.style.setProperty("color", "#0d274e", "important");
-            locationSelect.style.setProperty("font-size", "1.2rem", "important");
+            locationSelect.style.setProperty("font-size", "14px", "important");
             locationSelect.style.setProperty("font-weight", "600", "important");
-            locationSelect.style.setProperty("padding", "13px", "important");
         } else {
             deliveryChargeButton.style.color = "#868b96";
             deliveryChargeButton.style.setProperty("color", "#868b96", "important");
             locationSelect.style.setProperty("color", "#868b96", "important");
-            locationSelect.style.setProperty("font-size", "1rem", "important");
-            locationSelect.style.setProperty("padding", "10px", "important");
+            locationSelect.style.setProperty("font-size", "12px", "important");
         }
     });
-
     </script>
 
 
