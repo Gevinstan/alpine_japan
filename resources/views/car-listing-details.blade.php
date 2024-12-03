@@ -32,7 +32,11 @@
                                            
                                         </div>
                                     </div>
-                                    <a href="#"><img class="main-image" src="{{ asset($gallery) }}" alt="img"></a>
+                                    <div class="image-zoom-container">
+        <img class="main-image" src="{{ asset($gallery) }}" alt="img">
+        <div class="zoom-lens"></div>
+    </div>
+                                    <!-- <a href="#"><img class="main-image" src="{{ asset($gallery) }}" alt="img"></a> -->
                                 </div>
                             @endforeach
                         </div>
@@ -1017,6 +1021,45 @@
             locationSelect.style.setProperty("font-size", "12px", "important");
         }
     });
+
+    $(document).ready(function() {
+    const imageContainer = $(".image-zoom-container");
+    const image = $(".main-image");
+    const zoomLens = $(".zoom-lens");
+
+    imageContainer.mousemove(function(event) {
+        // Get the position of the mouse relative to the container
+        const containerOffset = imageContainer.offset();
+        const mouseX = event.pageX - containerOffset.left;
+        const mouseY = event.pageY - containerOffset.top;
+
+        // Set the position of the zoom lens
+        zoomLens.css({
+            left: mouseX - zoomLens.width() / 2 + 'px',  // Adjust lens center to mouse position
+            top: mouseY - zoomLens.height() / 2 + 'px',  // Adjust lens center to mouse position
+            visibility: 'visible'
+        });
+
+        // Zoom effect: scale the image
+        const zoomRatio = 2; // Adjust zoom level
+        const imageWidth = image.width();
+        const imageHeight = image.height();
+
+        const bgX = (mouseX / imageWidth) * 100;
+        const bgY = (mouseY / imageHeight) * 100;
+
+        image.css({
+            transform: `scale(${zoomRatio})`,
+            transformOrigin: `${bgX}% ${bgY}%`
+        });
+    });
+
+    imageContainer.mouseleave(function() {
+        zoomLens.css("visibility", "hidden");
+        image.css("transform", "scale(1)");  // Reset zoom
+    });
+});
+
     </script>
 
 

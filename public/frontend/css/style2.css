@@ -17474,3 +17474,30 @@ input:not(:placeholder-shown) + .input-placeholder {
     font-size: 14px;
     color: #0d274e;
 }
+
+.inventory-details-slick-img {
+    position: relative;
+    display: inline-block;
+}
+
+.image-zoom-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-image {
+    display: block;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.zoom-lens {
+    position: absolute;
+    border: 2px solid #000;
+    width: 100px; /* Lens size */
+    height: 100px; /* Lens size */
+    cursor: zoom-in;
+    visibility: hidden;
+    border-radius: 50%;
+}
+
