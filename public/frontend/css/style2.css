@@ -2922,7 +2922,6 @@
     margin-top: 88px;
 }
 
-
 * {
     margin: 0;
     padding: 0;
@@ -7413,7 +7412,7 @@ p {
     line-height: 0;
     font-size: 18px;
     line-height: 20px;
-    color: #0D274E;
+    color: #0d274e;
     padding: 25px 30px;
     font-family: "Poppins", serif;
     font-weight: 500;
@@ -7579,7 +7578,6 @@ p {
     color: #c7c7c7;
     transition: var(--transition-all);
 }
-
 
 .footer .footer-item-text-link ul li a:hover,
 .footer .footer-item-text-link ul li a:active,
@@ -9165,7 +9163,7 @@ p {
     border-radius: 12px;
     background-color: #ffffff !important;
     padding: 14px;
-    border: 1px solid #E0E4EA;
+    border: 1px solid #e0e4ea;
     /* Drop Shadow */
     /* box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06); */
 }
@@ -9313,7 +9311,6 @@ p {
     padding-left: 20px;
     min-height: 0;
 }
-
 
 .inventory-main-box .select-Brand-box .form-check:last-child {
     margin-bottom: 0;
@@ -9946,7 +9943,7 @@ p {
 }
 
 .inventory-details .accordion {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .inventory-details .accordion-item:first-of-type .accordion-button {
@@ -9959,6 +9956,7 @@ p {
     line-height: 34px;
     color: var(--headline-color);
     background-color: var(--white-color);
+    border-radius: 5px !important;
 }
 
 .inventory-details .accordion-button:focus {
@@ -9973,12 +9971,12 @@ p {
     background-size: cover;
     width: 16px;
     height: 8px;
-    transform: rotate(-180deg);
+    transform: rotate(-360deg);
 }
 
 .inventory-details .accordion-button:not(.collapsed)::after {
     background-image: url(../assets/images/icon/Arrow.png);
-    transform: rotate(-360deg);
+    transform: rotate(-180deg);
 }
 
 .inventory-details .accordion-button:not(.collapsed) {
@@ -10143,7 +10141,7 @@ p {
 }
 
 .inventory-details .auto-sales-item {
-    padding: 30px;
+    padding: 0px 30px;
     border-radius: 10px;
     background-color: #f9faff;
 }
@@ -10273,9 +10271,9 @@ p {
     fill: transparent;
 }
 
-.inventory-details .auto-sales-item .auto-sales-form {
+/* .inventory-details .auto-sales-item .auto-sales-form {
     margin-top: 24px;
-}
+} */
 
 .inventory-details .auto-sales-item .auto-sales-form .auto-sales-form-item {
     margin-bottom: 14px;
@@ -14219,7 +14217,7 @@ p {
 }
 
 .nav-dropdown-list .nav-dropdown-item {
-    color: #6E6E6E !important;
+    color: #6e6e6e !important;
 }
 
 .nav-dropdown-list .nav-dropdown-item:hover {
@@ -14227,7 +14225,7 @@ p {
     background-color: var(--white-color) !important;
 }
 
-.nav-dropdown-list .nav-dropdown-item.active{
+.nav-dropdown-list .nav-dropdown-item.active {
     color: var(--primary-color-1) !important;
     text-decoration: none;
     font-weight: 600;
@@ -14422,8 +14420,10 @@ p {
 
 .section-subtitle {
     font-size: 1rem;
-    color: #666;
+    color: #818181;
     margin-bottom: 40px;
+    font-weight: 500;
+    line-height: 26px;
 }
 
 .compliance-item {
@@ -14680,7 +14680,6 @@ p {
     font-style: normal;
     font-size: 13px;
     color: #038ffc;
-
 }
 
 #age_output {
@@ -14701,7 +14700,6 @@ p {
     font-style: normal;
     font-size: 13px;
     color: #038ffc;
-
 }
 
 .clear-button {
@@ -14727,7 +14725,7 @@ p {
     cursor: pointer;
     width: 3.125rem;
     height: 1.875rem;
-    font-size: .8125rem;
+    font-size: 0.8125rem;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-style: normal;
@@ -14783,22 +14781,22 @@ p {
 
 /********* Listing Detail page Start ***********/
 .form-section {
-    background: #f2f2f2 !important;
-    border: 1px solid #ffffff !important;
+    background: #f5f5f5 !important;
 }
 .car-listing-details p {
-    font-size: 0.65rem;
+    font-size: 1rem;
     line-height: 10px;
     font-family: var(--poppins) !important;
 }
 .car-listing-details .brand-text {
     color: #25282d;
     font-family: var(--poppins) !important;
+    font-size: 1rem;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.3rem;
-    line-height: 15px;
+    font-size: 1.7rem;
+    line-height: 22px;
     font-weight: 600;
     padding-bottom: 6px;
     font-family: var(--poppins) !important;
@@ -14810,7 +14808,7 @@ p {
 .car-listing-details .price-text {
     color: #038ffc;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-family: var(--poppins) !important;
 }
 .car-listing-details .commission-text {
@@ -14833,8 +14831,12 @@ p {
 .total-price span {
     font-size: 2rem;
     font-weight: 500;
-    bottom: 2px;
-    left: 81px;
+    bottom: -2px;
+    left: 90px;
+}
+
+.total-price-container {
+    gap: 2rem;
 }
 
 .location-dropdown button {
@@ -14857,10 +14859,11 @@ p {
     font-size: 0.75rem;
     background: #038ffc26;
     font-weight: 500;
+    border-radius: 5px;
 }
 .accessories-hide-text {
     border: 1px solid #e9e9e9;
-    color: #86888c;
+    color: #818181;
     font-size: 0.75rem;
     background: #f5f6f680;
     font-weight: 500;
@@ -15369,6 +15372,12 @@ p {
     font-weight: 500 !important;
 }
 
+#total_price {
+    font-size: 1.2rem !important;
+    color: #0d274e !important;
+    font-weight: 600 !important;
+}
+
 .charge-btn {
     border: 1px solid #24272c1a;
     color: #868b96;
@@ -15449,7 +15458,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .car_model_name {
     font-family: "Poppins", serif !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     font-style: normal;
     font-size: 14px !important;
     color: #0e305b !important;
@@ -15668,7 +15677,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .about-section p:nth-child(1) {
-    color: #121A27;
+    color: #121a27;
     font-size: 0.8rem;
     line-height: 20px !important;
 }
@@ -16106,26 +16115,30 @@ input:not(:placeholder-shown) + .placeholder-text {
 .card-btn {
     background: var(--primary-color-1);
     color: var(--white-color) !important;
-    font-size: 0.875rem;
+    font-size: 1rem;
     bottom: -15px;
     text-transform: uppercase;
     font-family: var(--poppins);
+    font-weight: 500;
+    padding: 10px;
 }
 
 .roro-section h4,
 .containers-section h4,
 .Inspection-section h4 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--poppins);
 }
 
 .roro-section p,
 .containers-section p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: #86888c;
     font-family: var(--poppins);
     text-align: center;
+    line-height: 26px !important;
+    font-weight: 500 !important;
 }
 /****** Shipment Page Style End  ******/
 .budget_price {
@@ -16304,7 +16317,6 @@ input:not(:placeholder-shown) + .placeholder-text {
 
     .image1 {
         height: 72rem;
-
     }
 
     .image2 {
@@ -16322,7 +16334,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         transform: translate(-111%, -50%);
         z-index: 1;
         height: 25rem !important;
-
     }
 
     .about_us {
@@ -16330,7 +16341,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif;
         font-weight: 600;
         font-style: normal;
-        font-size:  2.625rem;
+        font-size: 2.625rem;
         color: #2b343d !important;
     }
 
@@ -16339,7 +16350,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Roboto", sans-serif;
         font-weight: 600;
         font-style: normal;
-        font-size:  2.625rem;
+        font-size: 2.625rem;
         color: #038ffc;
     }
 
@@ -16348,7 +16359,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 700 !important;
         font-style: normal !important;
         font-size: 2.2125rem !important;
-        padding-top:  2.5rem;
+        padding-top: 2.5rem;
         color: #787b81 !important;
         line-height: 2.8125rem;
     }
@@ -16359,7 +16370,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 2.2125rem !important;
         padding-top: 2.5rem;
-        color: #86888C !important;
+        color: #86888c !important;
         line-height: 2.8125rem;
     }
 
@@ -16441,7 +16452,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal !important;
         font-size: 1.625rem !important;
         padding-top: 2.5rem;
-        color: #86888C !important;
+        color: #86888c !important;
         line-height: 2.4125rem;
     }
 
@@ -16524,7 +16535,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-size: 1.125rem !important;
         padding-top: 1.5rem;
         line-height: 2.412rem;
-        color: #86888C;
+        color: #86888c;
     }
 
     .vision_content {
@@ -16581,7 +16592,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-style: normal;
         font-size: 1.625rem;
         color: #2b343d !important;
-        
     }
 
     .about-us-color {
@@ -16601,7 +16611,6 @@ input:not(:placeholder-shown) + .placeholder-text {
         padding-top: 0.5rem;
         /* background-color: red !important; */
         line-height: 1.512rem;
-        
     }
 
     .about-us-content {
@@ -16609,10 +16618,10 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-weight: 500 !important;
         font-style: normal !important;
         font-size: 0.925rem !important;
-        padding-top: .25rem;
+        padding-top: 0.25rem;
         line-height: 1.512rem;
-        padding-bottom: .75rem;
-        color: #86888C;
+        padding-bottom: 0.75rem;
+        color: #86888c;
     }
 
     .vision_content {
@@ -16697,7 +16706,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         padding-top: 0.6rem;
         line-height: 1.112rem;
         padding-bottom: 0rem;
-        color: #86888C;
+        color: #86888c;
     }
 
     .vision_content {
@@ -17247,7 +17256,7 @@ select:focus {
 }
 
 .spec_dot {
-    color: #9EA3AD;
+    color: #9ea3ad;
     font-size: 10px;
 }
 
@@ -17259,81 +17268,79 @@ select:focus {
 .about-section {
     background-color: #f9fbff;
     padding: 2rem 1rem;
-  }
-  
-  .about-row {
+}
+
+.about-row {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 1.5rem; 
-  }
-  
-  .about-image-container {
-    background-image: url("../../japan_home/about_car.png"); 
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.about-image-container {
+    background-image: url("../../japan_home/about_car.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 8px;
-    flex: 1 1 40%; 
-    min-height: 250px; 
-  }
-  
-  .about-content {
-    flex: 1 1 55%; 
+    flex: 1 1 40%;
+    min-height: 250px;
+}
+
+.about-content {
+    flex: 1 1 55%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  
-  .about-text {
+}
+
+.about-text {
     font-size: 1rem;
     color: #6c757d;
     line-height: 1.6;
     margin-bottom: 1rem;
-  }
-  
-  
-  @media (max-width: 575.98px) {
+}
+
+@media (max-width: 575.98px) {
     .about-row {
-      flex-direction: column; 
+        flex-direction: column;
     }
     .about-image-container {
-      min-height: 200px; 
+        min-height: 200px;
     }
     .section-heading {
-      font-size: 1.5rem; 
+        font-size: 1.5rem;
     }
-  }
-  
-  @media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
     .about-image-container {
-      min-height: 220px; 
+        min-height: 220px;
     }
-  }
-  
-  @media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
     .about-row {
-      gap: 2rem; 
+        gap: 2rem;
     }
     .about-image-container {
-      min-height: 250px;
-      flex: 1 1 50%; 
+        min-height: 250px;
+        flex: 1 1 50%;
     }
     .about-content {
-      flex: 1 1 50%;
+        flex: 1 1 50%;
     }
-  }
-  
-  @media (min-width: 992px) {
+}
+
+@media (min-width: 992px) {
     .about-image-container {
-      flex: 1 1 40%;
+        flex: 1 1 40%;
     }
     .about-content {
-      flex: 1 1 55%;
+        flex: 1 1 55%;
     }
-  }
-  
+}
+
 /********** Home Page About Section Styling End ***********/
-  
 
 .input-placeholder {
     position: absolute;
@@ -17354,21 +17361,17 @@ input:not(:placeholder-shown) + .input-placeholder {
     opacity: 0;
 }
 
-
-  
 .go_clear {
     gap: 0rem !important;
 }
 
-@media (min-width: 1920px) { 
-
+@media (min-width: 1920px) {
     .about_image {
         width: 100%;
     }
 }
 
-@media (min-width: 1024px) { 
-
+@media (min-width: 1024px) {
     .about_image {
         width: 100%;
     }
@@ -17413,20 +17416,19 @@ input:not(:placeholder-shown) + .input-placeholder {
 }
 
 @media (min-width: 1920px) {
-.how-to-buy-image {
-    width: 100%;
-}
-}
-
-@media (max-width: 1024px)
-{
-.inventory-sarch-ber {
-    width: 100% !important;
+    .how-to-buy-image {
+        width: 100%;
+    }
 }
 
-.sort_by {
-    width: 100%;
-}
+@media (max-width: 1024px) {
+    .inventory-sarch-ber {
+        width: 100% !important;
+    }
+
+    .sort_by {
+        width: 100%;
+    }
 }
 
 .back-to-top {
@@ -17435,7 +17437,6 @@ input:not(:placeholder-shown) + .input-placeholder {
     right: 10px !important;
     cursor: pointer;
     z-index: 999;
-
 }
 
 .top-to-bottom {
@@ -17453,4 +17454,60 @@ input:not(:placeholder-shown) + .input-placeholder {
     padding-bottom: 0.2rem;
 }
 
+.listing_image {
+    position: relative;
+    transition: all 0.5s ease;
+    z-index: 1;
+}
 
+.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Backdrop effect */
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto; /* Handle content overflow */
+}
+
+.full-screen .main-image {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.card-title {
+    font-size: 2.5rem;
+}
+
+.sales-form {
+    background: #f2f2f2 !important;
+    border: 1px solid #ffffff !important;
+    padding: 20px 30px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+#location {
+    line-height: 22px !important;
+}
+
+#location,
+#delivery_charge {
+    transition: all 0.3s ease-in-out;
+}
