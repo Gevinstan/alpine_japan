@@ -17380,4 +17380,13 @@ input:not(:placeholder-shown) + .input-placeholder {
     border-radius: 10px;
   }
 
+  #location {
+    line-height: 22px !important;
+  }
+
+#location,
+#delivery_charge {
+    transition: all 0.3s ease-in-out;
+}
+
 

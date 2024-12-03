@@ -1030,7 +1030,7 @@
             locationSelect.style.setProperty("color", "#0d274e", "important");
             locationSelect.style.setProperty("font-size", "1.2rem", "important");
             locationSelect.style.setProperty("font-weight", "600", "important");
-            locationSelect.style.setProperty("padding", "15px", "important");
+            locationSelect.style.setProperty("padding", "13px", "important");
         } else {
             deliveryChargeButton.style.color = "#868b96";
             deliveryChargeButton.style.setProperty("color", "#868b96", "important");
