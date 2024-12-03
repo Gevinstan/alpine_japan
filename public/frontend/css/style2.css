@@ -9960,7 +9960,7 @@ p {
 }
 
 .inventory-details .accordion {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .inventory-details .accordion-item:first-of-type .accordion-button {
@@ -9973,6 +9973,7 @@ p {
     line-height: 34px;
     color: var(--headline-color);
     background-color: var(--white-color);
+    border-radius: 5px !important;
 }
 
 .inventory-details .accordion-button:focus {
@@ -9987,12 +9988,12 @@ p {
     background-size: cover;
     width: 16px;
     height: 8px;
-    transform: rotate(-180deg);
+    transform: rotate(-360deg);
 }
 
 .inventory-details .accordion-button:not(.collapsed)::after {
     background-image: url(../assets/images/icon/Arrow.png);
-    transform: rotate(-360deg);
+    transform: rotate(-180deg);
 }
 
 .inventory-details .accordion-button:not(.collapsed) {
@@ -10157,7 +10158,7 @@ p {
 }
 
 .inventory-details .auto-sales-item {
-    padding: 30px;
+    padding: 0px 30px;
     border-radius: 10px;
     background-color: #f9faff;
 }
@@ -10287,9 +10288,9 @@ p {
     fill: transparent;
 }
 
-.inventory-details .auto-sales-item .auto-sales-form {
+/* .inventory-details .auto-sales-item .auto-sales-form {
     margin-top: 24px;
-}
+} */
 
 .inventory-details .auto-sales-item .auto-sales-form .auto-sales-form-item {
     margin-bottom: 14px;
@@ -14436,8 +14437,10 @@ p {
 
 .section-subtitle {
     font-size: 1rem;
-    color: #666;
+    color: #818181;
     margin-bottom: 40px;
+    font-weight: 500;
+    line-height: 26px;
 }
 
 .compliance-item {
@@ -14790,8 +14793,7 @@ p {
 
 /********* Listing Detail page Start ***********/
 .form-section {
-    background: #f2f2f2 !important;
-    border: 1px solid #ffffff !important;
+    background: #f5f5f5 !important;
 }
 .car-listing-details p {
     font-size: 1rem;
@@ -14801,11 +14803,11 @@ p {
 .car-listing-details .brand-text {
     color: #25282d;
     font-family: var(--poppins) !important;
-    font-size: .8rem;
+    font-size: 1rem;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     line-height: 22px;
     font-weight: 600;
     padding-bottom: 6px;
@@ -14843,7 +14845,6 @@ p {
     font-weight: 500;
     bottom: -2px;
     left: 90px;
-    color: var(--primary-color-1);
 }
 
 .total-price-container {
@@ -14870,10 +14871,11 @@ p {
     font-size: 0.75rem;
     background: #038ffc26;
     font-weight: 500;
+    border-radius: 5px;
 }
 .accessories-hide-text {
     border: 1px solid #e9e9e9;
-    color: #86888c;
+    color: #818181;
     font-size: 0.75rem;
     background: #f5f6f680;
     font-weight: 500;
@@ -15382,6 +15384,12 @@ p {
     font-weight: 500 !important;
 }
 
+  #total_price {
+    font-size: 1.2rem !important;
+    color: #0d274e !important;
+    font-weight: 600 !important;
+  }
+
 .charge-btn {
     border: 1px solid #24272c1a;
     color: #868b96;
@@ -15462,7 +15470,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .car_model_name {
     font-family: "Poppins", serif !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     font-style: normal;
     font-size: 14px !important;
     color: #0e305b !important;
@@ -16119,26 +16127,30 @@ input:not(:placeholder-shown) + .placeholder-text {
 .card-btn {
     background: var(--primary-color-1);
     color: var(--white-color) !important;
-    font-size: 0.875rem;
+    font-size: 1rem;
     bottom: -15px;
     text-transform: uppercase;
     font-family: var(--poppins);
+    font-weight: 500;
+    padding: 10px;
 }
 
 .roro-section h4,
 .containers-section h4,
 .Inspection-section h4 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--poppins);
 }
 
 .roro-section p,
 .containers-section p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: #86888c;
     font-family: var(--poppins);
     text-align: center;
+    line-height: 26px !important;
+    font-weight: 500 !important;
 }
 /****** Shipment Page Style End  ******/
 .budget_price {
@@ -17356,5 +17368,16 @@ input:not(:placeholder-shown) + .input-placeholder {
     z-index: 10000;
   }
 
+  .card-title {
+    font-size: 2.5rem;
+  }
+
+  .sales-form {
+    background: #f2f2f2 !important;
+    border: 1px solid #ffffff !important;
+    padding: 20px 30px;
+    margin-top: 25px;
+    border-radius: 10px;
+  }
 
 
