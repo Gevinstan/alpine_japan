@@ -8,6 +8,7 @@
 @section('body-content')
 @php
     $request_check=0;
+    use Carbon\Carbon;
 @endphp
 <main class="main_wid">
 
@@ -396,9 +397,9 @@
 
                                                         <span>
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage']) }}
+                                                            {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                         @else
-                                                            {{ html_decode($car['mileage_en']) }}
+                                                        {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
                                                         @endif
                                                         </span>
                                                     </div>
@@ -474,13 +475,19 @@
                                                 </div> -->
 
                                                 <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                    @php
+                                                         $parsed_data=parseCustomFormat($car['parsed_data']);
+                                                         $carbonInstance = Carbon::parse($car['datetime']);
+                                                    @endphp
                                                     <p>
                                                         <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                        <span class="brand-location ">Hyogo, Japan</span>
+                                                        <span class="brand-location ">
+                                                        {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
+                                                        </span>
                                                     </p>
                                                     <div class="d-flex flex-column">
-                                                        <span class="brand-date fw-light">2024-05-24</span>
-                                                        <span class="brand-date fw-light">18:01:00</span>
+                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -647,9 +654,9 @@
 
                                                         <span>
                                                             @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) }}
+                                                                {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                             @else
-                                                                {{ html_decode($car['mileage']) }}
+                                                            {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
                                                             @endif
                                                         </span>
                                                     </div>
@@ -876,6 +883,20 @@
                     } 
               
                 }
+            function clearPriceRangeParams() {
+                // Get the current URL
+                let url = new URL(window.location.href);
+
+                // Get the search parameters
+                let params = url.searchParams;
+
+                // Loop through the keys and delete all 'price_range' parameters
+                params.delete('price_range');
+
+                // Update the URL without reloading the page
+                let newUrl = url.origin + url.pathname + '?' + params.toString();
+                history.replaceState(null, null, newUrl);
+            }
             "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
@@ -902,6 +923,7 @@
                     document.querySelectorAll('.popular-search').forEach(checkbox => {
                         checkbox.checked = false;
                     });
+                    clearPriceRangeParams();
                     clear_price_slider();   
                     $('#search_form').submit();
                 });
@@ -994,9 +1016,9 @@
                         const brandId = this.getAttribute('data-brand-id');
                         const accordionItem = this.closest('.accordion-item');
                         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        // modelCheckboxes.forEach(modelCheckbox => {
+                        //     modelCheckbox.checked = this.checked;
+                        // });
                         clear_price_slider();
                         $('#search_form').submit();
                     });

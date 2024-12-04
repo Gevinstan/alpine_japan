@@ -3,7 +3,7 @@
     <title>{{ $seo_setting->seo_title }}</title>
     <meta name="title" content="{{ $seo_setting->seo_title }}">
     <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
-@endsection
+@endsection 
 
 @section('body-content')
 <main class="main_wid">
@@ -14,6 +14,7 @@
 </div>
 @php
     $request_check=0;
+    use Carbon\Carbon;
 @endphp
 
     
@@ -156,7 +157,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ request('year') ? 'show' : '' }}"
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ (request()->has('price_range') || request()->has('price_range_scale')) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
                                                 <div class="d-flex flex-column align-content-between col-sm-9">
@@ -399,10 +400,10 @@
 
                                                         <span>
                                                         @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage_en']) }}
-                                                        @else
-                                                            {{ html_decode($car['mileage_en']) }}
-                                                        @endif
+                                                                {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'] .',000': '') }}
+                                                            @else
+                                                            {{ html_decode(!empty($car['mileage']) ? $car['mileage']. ',000' : '') }}
+                                                            @endif
                                                         </span>
                                                     </div>
                                                     <p>.</p>
@@ -477,17 +478,22 @@
                                                 </div> -->
 
                                                 <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                    @php
+                                                         $parsed_data=parseCustomFormat($car['parsed_data']);
+                                                         $carbonInstance = Carbon::parse($car['datetime']);
+                                                    @endphp
                                                     <p>
                                                         <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                        <span class="brand-location ">Hyogo, Japan</span>
+                                                        <span class="brand-location ">
+                                                        {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
+                                                        </span>
                                                     </p>
                                                     <div class="d-flex flex-column">
-                                                        <span class="brand-date fw-light">2024-05-24</span>
-                                                        <span class="brand-date fw-light">18:01:00</span>
+                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     @endforeach
@@ -651,9 +657,9 @@
 
                                                         <span>
                                                             @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) }}
+                                                                {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'] .',000': '') }}
                                                             @else
-                                                                {{ html_decode($car['mileage']) }}
+                                                            {{ html_decode(!empty($car['mileage']) ? $car['mileage']. ',000' : '') }}
                                                             @endif
                                                         </span>
                                                     </div>
@@ -1042,9 +1048,9 @@
                         const brandId = this.getAttribute('data-brand-id');
                         const accordionItem = this.closest('.accordion-item');
                         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        // modelCheckboxes.forEach(modelCheckbox => {
+                        //     modelCheckbox.checked = this.checked;
+                        // });
                         clear_price_slider();
                         $('#search_form').submit();
                     });

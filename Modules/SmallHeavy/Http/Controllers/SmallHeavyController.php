@@ -96,7 +96,9 @@ class SmallHeavyController extends Controller
         $smallHeavy->price=$request->price_dollar;
         $smallHeavy->price_ru=$request->price_rupees;
         $smallHeavy->price_jpy=$request->price_yen;
+        $smallHeavy->location=$request->location;
         $smallHeavy->sell_points=$request->sell_points;
+        $smallHeavy->remarks=$request->remarks;
         $smallHeavy->is_active=$request->active == 'on' ? '1' : '0';
         $smallHeavy->is_ru_market=$request->russia_market == 'on' ? '1' : '0';
         $smallHeavy->is_na_market=$request->north_america_market == 'on' ? '1' : '0';
@@ -129,6 +131,8 @@ class SmallHeavyController extends Controller
     {
         $category=ProductCategories::get();
         $smallHeavy=SmallHeavy::find($id);
+
+        // echo json_encode($smallHeavy);die();
         $brands=Brand::get();
         $models=ModelsCars::get();
         return view('smallheavy::edit',compact('category','smallHeavy','brands','models'));
@@ -210,7 +214,9 @@ class SmallHeavyController extends Controller
         $smallHeavy->price=$request->price_dollar;
         $smallHeavy->price_ru=$request->price_rupees;
         $smallHeavy->price_jpy=$request->price_yen;
+        $smallHeavy->location=$request->location;
         $smallHeavy->sell_points=$request->sell_points;
+        $smallHeavy->remarks=$request->remarks;
         $smallHeavy->is_active=$request->active == 'on' ? '1' : '0';
         $smallHeavy->is_ru_market=$request->russia_market == 'on' ? '1' : '0';
         $smallHeavy->is_na_market=$request->north_america_market == 'on' ? '1' : '0';

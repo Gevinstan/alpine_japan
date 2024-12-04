@@ -160,3 +160,35 @@ if (!function_exists('hasCheckedModels')) {
         return false;
     }
 }
+
+
+function parseCustomFormat($string)
+{
+    // Remove CDATA wrapper if present
+    $string = preg_replace('/<!\[CDATA\[(.*?)\]\]>/s', '$1', $string);
+    
+    // Remove outer curly braces if present
+    $string = trim($string, '{}');
+    
+    // Split the string into key-value pairs
+    $pairs = preg_split('/","|,(?=[^:]+:)/', $string);
+    
+    $result = [];
+    foreach ($pairs as $pair) {
+        // Split each pair into key and value
+        list($key, $value) = array_pad(explode(':', $pair, 2), 2, null);
+        
+        // Clean up key and value
+        $key = trim($key, '" ');
+        $value = trim($value, '" ');
+        
+        // Unescape special characters
+        $value = stripcslashes($value);
+        
+        $result[$key] = $value;
+    }
+ 
+    // vehicle  location
+    
+    return $result;
+}

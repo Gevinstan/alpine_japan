@@ -170,7 +170,9 @@ class HomeController extends Controller
                         'transmission'=>$cars->transmission,
                         'transmission_en'=>$cars->transmission_en,
                         'model_details'=>$cars->model_details,
-                        'model_details_en'=>$cars->model_details_en
+                        'model_details_en'=>$cars->model_details_en,
+                        'parsed_data'=>$cars->parsed_data_en,
+                        'datetime'=>$cars->datetime,
                     );
                 // }
            
@@ -197,7 +199,9 @@ class HomeController extends Controller
                       'year'=>$cars->year,
                       'year_en'=>$cars->model_year_en,
                       'transmission'=>$cars->transmission,
-                      'transmission_en'=>$cars->transmission_en
+                      'transmission_en'=>$cars->transmission_en,
+                      'parsed_data'=>$cars->parsed_data_en,
+                      'datetime'=>$cars->datetime,
                   );    
           }
             // $jdm_legend = \DB::table('blog')
@@ -892,17 +896,17 @@ class HomeController extends Controller
         // ->get();
 
         $results = \DB::table($tableName) 
-    ->join('models_cars as mc', function($join) use ($tableName) {
-        $join->on($tableName . '.category', '=', 'mc.category')
-             ->on($tableName . '.model', '=', 'mc.model');
-    })
-    ->whereRaw('LOWER(' . $tableName . '.make) = ?', ['toyota'])
-    ->where($tableName . '.is_active', 1)
-    ->whereNull($tableName . '.deleted_at')
-    ->select($tableName . '.model', \DB::raw('COUNT(*) as count'))
-    ->groupBy($tableName . '.model')
-    ->orderByDesc('count')
-    ->get();
+            ->join('models_cars as mc', function($join) use ($tableName) {
+                $join->on($tableName . '.category', '=', 'mc.category')
+                    ->on($tableName . '.model', '=', 'mc.model');
+            })
+            ->whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
+            ->where($tableName . '.is_active', 1)
+            ->whereNull($tableName . '.deleted_at')
+            ->select($tableName . '.model', \DB::raw('COUNT(*) as count'))
+            ->groupBy($tableName . '.model')
+            ->orderByDesc('count')
+            ->get();
 
     
     // Sum up all the model counts to get the total
@@ -1048,9 +1052,9 @@ class HomeController extends Controller
         $maxPrice = $priceRange->max_sal;
 
 
+        // DB::enableQueryLog();
 
         if($type == 'car'){
-            // DB::enableQueryLog();
         
             $carsQuery =Cars::join('models_cars as mc', function($join) {
                 $join->on('blog.category', '=', 'mc.category')
@@ -1058,6 +1062,7 @@ class HomeController extends Controller
                     })
             ->where(DB::raw('LOWER(blog.make)'), $slug)
             ->where('is_active','1')
+            ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
             ->select('blog.*');
             
         } else if($type == 'heavy'){
@@ -1214,14 +1219,34 @@ class HomeController extends Controller
             // $carsQuery->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
                 $priceRanges = [
                     "Under $5000" => ["start" => 0, "end" => 5000],
-                    "$5000 - $50000" => ["start" => 5000, "end" => 50000],
-                    "$50000 - $100000" => ["start" => 50000, "end" => 100000],
-                    "$100000 - $200000" => ["start" => 100000, "end" => 200000],
-                    "$200000 - $300000" => ["start" => 200000, "end" => 300000],
-                    "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+                    "$5000 - $50000" => ["start" => 5001, "end" => 50000],
+                    "$50000 - $100000" => ["start" => 50001, "end" => 100000],
+                    "$100000 - $200000" => ["start" => 100001, "end" => 200000],
+                    "$200000 - $300000" => ["start" => 200001, "end" => 300000],
+                    "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
                 ];
+                
+                if($type=='car')
+                {
+                    $table='blog.price';
+                } else if($type == 'heavy'){
+                    $table='heavy.price';
+                } else if($type == 'small_heavy'){
+                    $table='small_heavy.price';
+                }    
+
+                $carsQuery->where(function ($query) use ($request, $priceRanges,$table) {
+                    foreach ($request->price_range as $range) {
+                        $result = $this->getPriceRangestart($range, $priceRanges);
+            
+                        $query->whereRaw("REGEXP_REPLACE($table, '[^0-9]', '') BETWEEN ? AND ?", [
+                            $result['start_price_num'],
+                            $result['end_price_num']
+                        ]);
+                    }
+                }); 
     
-                 $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+                //  $result = $this->getPriceRangestart($request->price_range, $priceRanges);
             //     if($type == 'car'){
             //         if ($result['start_price_num'] === null) {
             //             $carsQuery->whereRaw('CAST(REGEXP_REPLACE(blog.price, "[,\\\\s]", "") AS DECIMAL(10, 0)) BETWEEN ? AND ?', [
@@ -1273,27 +1298,28 @@ class HomeController extends Controller
             //     } 
             //    }
 
-             if($type=='car')
-             {
-                $carsQuery->whereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                    $result['start_price_num'],
-                    $result['end_price_num']
-               ]);
-             } else if($type == 'heavy'){
-                $carsQuery->whereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                    $result['start_price_num'],
-                    $result['end_price_num']
-               ]);
-             } else if($type == 'small_heavy'){
-                $carsQuery->whereRaw("REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                    $result['start_price_num'],
-                    $result['end_price_num']
-               ]);
-             }
+            //  if($type=='car')
+            //  {
+            //     $carsQuery->whereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
+            //         $result['start_price_num'],
+            //         $result['end_price_num']
+            //    ]);
+            //  } else if($type == 'heavy'){
+            //     $carsQuery->whereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
+            //         $result['start_price_num'],
+            //         $result['end_price_num']
+            //    ]);
+            //  } else if($type == 'small_heavy'){
+            //     $carsQuery->whereRaw("REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
+            //         $result['start_price_num'],
+            //         $result['end_price_num']
+            //    ]);
+            //  }
 
 
         }
       
+        // dd(DB::getQueryLog($carsQuery->get()));
         
         // Pagination
         $cars = $carsQuery->paginate(12);
@@ -2066,11 +2092,13 @@ class HomeController extends Controller
     function getPriceRangestart($selectedRanges, $priceRanges) {
         $start_price_num = null;
         $end_price_num = null;
+
+        // echo json_encode($priceRanges);die();
     
-        foreach ($selectedRanges as $range) {
-            if (isset($priceRanges[$range])) {
-                $start = $priceRanges[$range]['start'];
-                $end = $priceRanges[$range]['end'];
+        // foreach ($selectedRanges as $range) {
+            if (isset($priceRanges[$selectedRanges])) {
+                $start = $priceRanges[$selectedRanges]['start'];
+                $end = $priceRanges[$selectedRanges]['end'];
     
                 // Set the overall start and end prices based on the selected ranges
                 if ($start_price_num === null || $start < $start_price_num) {
@@ -2080,7 +2108,7 @@ class HomeController extends Controller
                     $end_price_num = $end; // Update if it's higher
                 }
             }
-        }
+        // }
     
         return ['start_price_num' => $start_price_num, 'end_price_num' => $end_price_num];
     }
@@ -2376,6 +2404,7 @@ public function getBrandsWithModels($keywhere,$database_name): array
         //             $result[$model->brand_slug][$normalizedName] = true;
         //         }
         //     });
+        // Db::enableQueryLog();
         DB::table($tableName)
             ->select(
                 DB::raw('LOWER(company_en) as brand_slug'),
@@ -2551,31 +2580,52 @@ public function car_listing(Request $request){
     if($request->price_range){
         $priceRanges = [
             "Under $5000" => ["start" => 0, "end" => 5000],
-            "$5000 - $50000" => ["start" => 5000, "end" => 50000],
-            "$50000 - $100000" => ["start" => 50000, "end" => 100000],
-            "$100000 - $200000" => ["start" => 100000, "end" => 200000],
-            "$200000 - $300000" => ["start" => 200000, "end" => 300000],
-            "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+            "$5000 - $50000" => ["start" => 5001, "end" => 50000],
+            "$50000 - $100000" => ["start" => 50001, "end" => 100000],
+            "$100000 - $200000" => ["start" => 100001, "end" => 200000],
+            "$200000 - $300000" => ["start" => 200001, "end" => 300000],
+            "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
         ];
 
-        $result = $this->getPriceRangestart($request->price_range, $priceRanges);
-      
-       
 
-  
-        if ($result['start_price_num'] === null) {
-            // Count for "Above" range
-           
-            $carsQuery = $carsQuery->where('start_price_num', '>', $result['start_price_num'])
-                           ->orWhere('end_price_num', '>', $result['start_price_num']);
-        } else {
-            $result['end_price_num']=$result['end_price_num'] == null ? $endValue : $result['end_price_num'];
-            // Count for other ranges
-            $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-            });
-        }  
+
+        $carsQuery->where(function ($query) use ($request, $priceRanges) {
+            foreach ($request->price_range as $range) {
+                $result = $this->getPriceRangestart($range, $priceRanges);
+    
+                if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
+                    // Group the conditions for this range
+                    $query->orWhere(function ($subQuery) use ($result) {
+                        $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                                 ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                    });
+                }
+            }
+        }); 
+
+
+
+
+            // foreach($request->price_range as $range){
+            //     $result = $this->getPriceRangestart($range, $priceRanges);
+
+            //     $carsQuery=$carsQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+            //     ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+            //     // if ($result['start_price_num'] === null) {
+            //     //     // Count for "Above" range
+                
+            //     //     $carsQuery = $carsQuery->where('start_price_num', '>', $result['start_price_num'])
+            //     //                    ->orWhere('end_price_num', '>', $result['start_price_num']);
+            //     // } else {
+            //     //     $result['end_price_num']=$result['end_price_num'] == null ? $endValue : $result['end_price_num'];
+            //     //     // Count for other ranges
+            //     //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //     //         $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+            //     //           ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+            //     //     });
+            //     // }  
+                
+            // }  
     }
 
     
@@ -2611,19 +2661,23 @@ public function car_listing(Request $request){
 
   
     // Pagination
-    $price_range_counts = $this->getPriceRangeCounts(
-        $carsQuery, 
-        $hasPriceRangeScale, 
-        $startValue, 
-        $endValue,
-        '',
-    );
+        $price_range_counts = $this->getPriceRangeCounts(
+            $carsQuery, 
+            $hasPriceRangeScale, 
+            $startValue, 
+            $endValue,
+            '',
+        );
 
+
+
+        // $carsQuery->orderBy('id', 'desc')
+        // ->select('auct_lots_xml_jp_op.*')->get();
   
 
-    
+    // dd(DB::getQueryLog($carsQuery));
     // $price_range = $this->getPriceRangeCounts();
-    // ->orderBy('id','desc')
+    // ->orderBy('id','desc')y
     // ->paginate(12);
     $cars = $carsQuery->orderBy('id', 'desc')
     ->select('auct_lots_xml_jp_op.*')->paginate(12);
@@ -2648,12 +2702,14 @@ public function car_listing(Request $request){
             'year'=>$car->model_year,
             'year_en'=>$car->model_year_en,
             'transmission'=>$car->transmission,
-            'transmission_en'=>$car->transmission_en
-            
+            'transmission_en'=>$car->transmission_en,
+            'parsed_data'=>$car->parsed_data_en,
+            'datetime'=>$car->datetime    
         ];
     });
 
 
+ 
     // Get additional data
     $listing_ads = AdsBanner::where('position_key', 'listing_page_sidebar')->first();
     // $cities = City::with('translate')->get();
@@ -2730,66 +2786,127 @@ public function car_listing(Request $request){
     public function getPriceRangeCounts($baseQuery, $hasRangeFilter = false, $startValue = null, $endValue = null,$param) {
         $price_ranges = [
             'Under $5000' => ['min' => 0, 'max' => 5000],
-            '$5000 - $50000' => ['min' => 5000, 'max' => 50000],
-            '$50000 - $100000' => ['min' => 50000, 'max' => 100000],
-            '$100000 - $200000' => ['min' => 100000, 'max' => 200000],
-            '$200000 - $300000' => ['min' => 200000, 'max' => 300000],
-            'Above $300000' => ['min' => 300000, 'max' => null],
+            '$5000 - $50000' => ['min' => 5001, 'max' => 50000],
+            '$50000 - $100000' => ['min' => 50001, 'max' => 100000],
+            '$100000 - $200000' => ['min' => 100001, 'max' => 200000],
+            '$200000 - $300000' => ['min' => 200001, 'max' => 300000],
+            'Above $300000' => ['min' => 300001, 'max' => PHP_INT_MAX],
         ];
+            // DB::enableQueryLog();
+
+        // foreach ($price_ranges as $label => $range) {
+        //     // Clone the base query to avoid modifying the original
+        //     $query = CarDataJpOp::query();
+
+        //     $query->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
+        //     ->join('brand_translations as bt','bt.brand_id','=','b.id')
+        //     ->where('bt.lang_code',Session::get('front_lang'));
+    
+        //     if ($hasRangeFilter) {
+        //         // Apply the price_range_scale filter if it's enabled
+        //         $query->where(function ($q) use ($startValue, $endValue) {
+        //             $q->whereBetween('start_price_num', [$startValue, $endValue])
+        //               ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+        //         })
+        //         ->when($param == 'top-selling', function($query) {
+        //             return $query->where('top_sell', 1);
+        //         })
+        //         ->when($param == 'new_arrival', function($query) {
+        //             return $query->where('new_arrival', 1);
+        //         });
+        //     }
+            
+        //     // Then apply the range counting logic
+        //     if ($range['max'] === null) {
+        //         // For "Above" range
+        //         $count = $query->where(function($q) use ($range) {
+        //             $q->where('start_price_num', '>', $range['min'])
+        //               ->orWhere('end_price_num', '>', $range['min']);
+        //         })
+        //         ->when($param == 'top-selling',function($query){
+        //             return $query->where('top_sell',1);
+        //         })
+        //         ->when($param == 'new_arrival', function($query) {
+        //             return $query->where('new_arrival', 1);
+        //         })
+        //         ->count();
+        //     } else {
+        //         // For other ranges
+        //         $count = $query->where(function($q) use ($range) {
+        //             $q->whereBetween('start_price_num', [$range['min'], $range['max']])
+        //               ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
+        //         })
+        //         ->when($param == 'top-selling',function($query){
+        //             return $query->where('top_sell',1);
+        //         })
+        //         ->when($param == 'new_arrival', function($query) {
+        //             return $query->where('new_arrival', 1);
+        //         })
+        //         ->count();
+        //     }
+
+
+    
+        //     $counts[$label] = $count;
+        // }
     
         $counts = [];
-    
-        foreach ($price_ranges as $label => $range) {
-            // Clone the base query to avoid modifying the original
-            $query = CarDataJpOp::query();
-    
-            if ($hasRangeFilter) {
-                // Apply the price_range_scale filter if it's enabled
-                $query->where(function ($q) use ($startValue, $endValue) {
+        $priceCount=[];
+
+        if($hasRangeFilter){
+            foreach ($price_ranges as $label => $range) {    
+                $query =DB::table('auct_lots_xml_jp_op as t') // Alias the table dynamically
+                ->join('brands as b', DB::raw('LOWER(T.company_en)'), '=', 'b.slug')
+                ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                ->where('bt.lang_code',Session::get('front_lang'))
+                ->when($param == 'top-selling',function($query){
+                    return $query->where('top_sell',1);
+                })
+                ->when($param == 'new-arrival', function($query) {
+                    return $query->where('new_arrival', 1);
+                })
+                ->where(function ($q) use ($startValue, $endValue) {
+                    // Apply the budget filter on start_price_num and end_price_num
                     $q->whereBetween('start_price_num', [$startValue, $endValue])
                       ->orWhereBetween('end_price_num', [$startValue, $endValue]);
-                })
-                ->when($param == 'top-selling', function($query) {
-                    return $query->where('top_sell', 1);
-                })
-                ->when($param == 'new_arrival', function($query) {
-                    return $query->where('new_arrival', 1);
                 });
-            }
-            
-            // Then apply the range counting logic
-            if ($range['max'] === null) {
-                // For "Above" range
-                $count = $query->where(function($q) use ($range) {
-                    $q->where('start_price_num', '>', $range['min'])
-                      ->orWhere('end_price_num', '>', $range['min']);
-                })
-                ->when($param == 'top-selling',function($query){
-                    return $query->where('top_sell',1);
-                })
-                ->when($param == 'new_arrival', function($query) {
-                    return $query->where('new_arrival', 1);
-                })
-                ->count();
-            } else {
-                // For other ranges
-                $count = $query->where(function($q) use ($range) {
+                                  
+                $count = $query->where(function ($q) use ($range) {
                     $q->whereBetween('start_price_num', [$range['min'], $range['max']])
                       ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
-                })
+                })->count();
+                // Store the count for the current range
+                $priceCount[$label] = $count;
+            }
+        } else {
+            foreach ($price_ranges as $label => $range) {    
+                $query =DB::table('auct_lots_xml_jp_op as t') // Alias the table dynamically
+                ->join('brands as b', DB::raw('LOWER(T.company_en)'), '=', 'b.slug')
+                ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                ->where('bt.lang_code',Session::get('front_lang'))      
                 ->when($param == 'top-selling',function($query){
                     return $query->where('top_sell',1);
                 })
-                ->when($param == 'new_arrival', function($query) {
+                ->when($param == 'new-arrival', function($query) {
                     return $query->where('new_arrival', 1);
-                })
-                ->count();
+                });            
+                $count = $query->where(function ($q) use ($range) {
+                    $q->whereBetween('start_price_num', [$range['min'], $range['max']])
+                      ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
+                })->count();
+                // Store the count for the current range
+                $priceCount[$label] = $count;
             }
-    
-            $counts[$label] = $count;
         }
     
-        return $counts;
+        // DB::enableQueryLog();
+        
+
+        // dd(DB::getQueryLog());
+
+        return $priceCount;
+    
+        // return $counts;
     }
     
     public function getAuctionPriceRangeCounts($baseQuery, $hasRangeFilter = false, $startValue = null, $endValue = null) {
@@ -3128,11 +3245,7 @@ public function car_listing(Request $request){
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
        
         // Initialize the query for cars
-        $carsQuery = CarDataJpOp::query();
-
-        $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
-        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
-        ->where('bt.lang_code', Session::get('front_lang'));
+      
 
         
         $yearRange = CarDataJpOp::where('active_status', '1')
@@ -3149,6 +3262,13 @@ public function car_listing(Request $request){
         $hasPriceRangeScale = false;
         $startValue = $minPrice;
         $endValue = $maxPrice;
+
+        DB::enableQueryLog();
+        $carsQuery = CarDataJpOp::query();
+
+        $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->where('bt.lang_code', Session::get('front_lang'));
 
 
       
@@ -3197,33 +3317,44 @@ public function car_listing(Request $request){
 
             $priceRanges = [
                 "Under $5000" => ["start" => 0, "end" => 5000],
-                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
-                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
-                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
-                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
-                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+                "$5000 - $50000" => ["start" => 5001, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50001, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100001, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200001, "end" => 300000],
+                "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
             ];
 
-
-
-            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
-
+            $carsQuery->where(function ($query) use ($request, $priceRanges) {
+                foreach ($request->price_range as $range) {
+                    $result = $this->getPriceRangestart($range, $priceRanges);
         
+                    if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
+                        // Group the conditions for this range
+                        $query->orWhere(function ($subQuery) use ($result) {
+                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                                     ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        });
+                    }
+                }
+            }); 
 
-    
-            if (is_null($result['end_price_num'])) {
-                // Count for "Above" range
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
-                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
-                });
-            } else {
-                // Count for other ranges
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-                });
-            }  
+
+
+            // $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+
+            // if (is_null($result['end_price_num'])) {
+            //     // Count for "Above" range
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+            //           ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+            //     });
+            // } else {
+            //     // Count for other ranges
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+            //         ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+            //     });
+            // }  
         }
 
         // if ($request->scores_en) {
@@ -3327,6 +3458,8 @@ public function car_listing(Request $request){
         }
     }
 
+    // dd(DB::getQueryLog($carsQuery->get()));
+
 
     
 
@@ -3352,7 +3485,9 @@ public function car_listing(Request $request){
                 'year'=>$car->model_year,
                 'year_en'=>$car->model_year_en,
                 'transmission'=>$car->transmission,
-                'transmission_en'=>$car->transmission_en
+                'transmission_en'=>$car->transmission_en,
+                'parsed_data'=>$car->parsed_data_en,
+                'datetime'=>$car->datetime 
             ];
         });
 
@@ -4674,33 +4809,46 @@ public function car_listing(Request $request){
 
             $priceRanges = [
                 "Under $5000" => ["start" => 0, "end" => 5000],
-                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
-                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
-                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
-                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
-                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+                "$5000 - $50000" => ["start" => 5001, "end" => 50000],
+                "$50000 - $100000" => ["start" => 50001, "end" => 100000],
+                "$100000 - $200000" => ["start" => 100001, "end" => 200000],
+                "$200000 - $300000" => ["start" => 200001, "end" => 300000],
+                "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
             ];
+             
+            $carsQuery->where(function ($query) use ($request, $priceRanges) {
+                foreach ($request->price_range as $range) {
+                    $result = $this->getPriceRangestart($range, $priceRanges);
+        
+                    if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
+                        // Group the conditions for this range
+                        $query->orWhere(function ($subQuery) use ($result) {
+                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                                     ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        });
+                    }
+                }
+            }); 
 
 
-
-            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+            // $result = $this->getPriceRangestart($request->price_range, $priceRanges);
 
         
 
     
-            if (is_null($result['end_price_num'])) {
-                // Count for "Above" range
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
-                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
-                });
-            } else {
-                // Count for other ranges
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-                });
-            }  
+            // if (is_null($result['end_price_num'])) {
+            //     // Count for "Above" range
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+            //           ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+            //     });
+            // } else {
+            //     // Count for other ranges
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+            //         ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+            //     });
+            // }  
         }
 
         // if ($request->scores_en) {
@@ -4796,7 +4944,9 @@ public function car_listing(Request $request){
                 'year'=>$car->model_year,
                 'year_en'=>$car->model_year_en,
                 'transmission'=>$car->transmission,
-                'transmission_en'=>$car->transmission_en
+                'transmission_en'=>$car->transmission_en,
+                'parsed_data'=>$car->parsed_data_en,
+                'datetime'=>$car->datetime 
             ];
         });
 
@@ -4829,6 +4979,7 @@ public function car_listing(Request $request){
             'new-arrival',
         );
 
+   
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
         ->where('bt.lang_code',Session::get('front_lang'))

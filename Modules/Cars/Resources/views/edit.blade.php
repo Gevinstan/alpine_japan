@@ -313,22 +313,37 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="row mg-top-30">
+                                                 <div class="col-4">
+                                                    <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Location') }}  </label>
+                                                        <input class="crancy__item-input" type="text" name="location" 
+                                                        id="location" value="{{$cars->location}}">
+                                                        @error('price_yen')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div> 
+                                            </div>   
 
                                             <div class="row mg-top-30">                                  
                                                 
-                                                <div class="col-4">
+                                                <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Remarks') }} * </label>
-                                                        <textarea name="remarks" id="remarks" class='crancy__item-input'>{{$cars->remarks}}</textarea>
+                                                        <textarea name="remarks" id="remarks" class='crancy__item-input crancy__item-textarea summernote'>{{$cars->remarks}}</textarea>
                                                         @error('remarks')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                            </div>
+
+                                            <div class="row mg-top-30">
+                                            <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Sell Points') }} * </label>
-                                                        <textarea name="sell_points" id="sell_points" class='crancy__item-input'>{{$cars->sell_points}}</textarea>
+                                                        <textarea name="sell_points" id="sell_points" class='crancy__item-input crancy__item-textarea summernote'>{{$cars->sell_points}}</textarea>
                                                         @error('sell_points')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
@@ -476,8 +491,20 @@
     </section>
     <!-- End crancy Dashboard -->
 @endsection
+@push('style_section')
+    <link rel="stylesheet" href="{{ asset('global/tagify/tagify.css') }}">
+
+    <style>
+        .tox .tox-promotion,
+        .tox-statusbar__branding{
+            display: none !important;
+        }
+    </style>
+@endpush
 
 @push('js_section')
+<script src="{{ asset('global/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('global/tagify/tagify.js') }}"></script>
     <script>
         (function($) {
             "use strict"
@@ -518,6 +545,19 @@
                 }
                 })     
             });
+            tinymce.init({
+                    selector: '.summernote',
+                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ]
+                });
+
+                $('.tags').tagify();
         })(jQuery);
 
         function previewImage(event) {

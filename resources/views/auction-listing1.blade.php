@@ -455,7 +455,12 @@
 
                                                         {{ __('translate.Mileage') }}
                                                     </span>
-                                                    {{ html_decode($car->mileage_en) }}
+                                                    @if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car->mileage_en) ? $car->mileage_en .',000': '') }}
+                                                            @else
+                                                            {{ html_decode(!empty($car->mileage_en) ? $car->mileage_en. ',000' : '') }}
+                                                            @endif
+                                                    <!-- {{ html_decode($car->mileage_en) }} -->
                                                 </li>
 
                                             
