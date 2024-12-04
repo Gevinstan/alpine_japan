@@ -77,7 +77,7 @@
                                                                                                 <input name="model[]" class="form-check-input brand-search" type="checkbox"
                                                                                                         value="{{ $brand->model }}"
                                                                                                         {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
-                                                                                                <label class="form-check-label brand_name">
+                                                                                                <label class="form-check-label brand_name ps-2">
                                                                                                     {{ $brand->model }}
                                                                                                 </label>
                                                                                             </span>
@@ -292,10 +292,10 @@
                     </div>
 
                     <div class="col-lg-9">
-                        <div class="inventory-ber mb-2">
+                        <div class="inventory-ber mb-2 px-2">
                             <div class="inventory-ber-left">
                                 <div class="inventory-sarch-ber-item flex-row">
-                                    <div class="inventory-sarch-ber">
+                                    <div class="inventory-sarch-ber px-1">
                                         <input type="text" class="form-control" id="outside_form_search" name="search" placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
 
                                         <span class="search-btn" style="cursor: pointer;">
@@ -326,7 +326,7 @@
 
                             </div>
 
-                            <div class="inventory-ber-right">
+                            <div class="inventory-ber-right pe-1">
                                 <div class="inventory-ber-right-btn sort_by_button">
                                     <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                         <li class="nav-item" role="presentation">
@@ -445,7 +445,7 @@
                                                     </a>
 
                                                     <div class="brand-car-inner-item-main px-4">
-                                                        <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-two ps-4">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
                                                                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -456,7 +456,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- <p class="spec_dot">.</p> -->
-                                                        <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-two ">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
                                                                     <!-- <svg width="24" height="24" viewBox="0 0 24 24" 
@@ -501,7 +501,7 @@
                                                             </span>
                                                         </div>
                                                         <!-- <p class="spec_dot">.</p> -->
-                                                        <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-two pe-4">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1" style="font-size:40px;">
                                                                     <svg width="24" height="24" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
