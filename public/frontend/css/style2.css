@@ -16062,6 +16062,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     background-color: #fafafa;
     box-shadow: 0px 8px 25.1px 0px #00000026;
     width: 70%;
+    border-radius: .8rem;
 }
 
 .card-section h3 {
