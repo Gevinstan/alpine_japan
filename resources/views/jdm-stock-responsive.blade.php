@@ -281,7 +281,7 @@
                                                         <div class="row budget-space">
                                                             <h6 class="pt-2 price_range">Price Range</h6>
                                                             @foreach($price_range as $key=>$range)
-                                                            <div class="d-flex align-items-center">
+                                                            <div class="d-flex align-items-center pb-2">
                                                                     <div class="form-check">
                                                                         <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}"
                                                                             {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
@@ -1246,9 +1246,17 @@
 
     var $j = jQuery.noConflict();
         $j(document).ready(function() {
-            $j('#ex2').slider();
+            $j('#ex2').slider();    
             $j('#ex3').slider();
         });
+        AOS.init({  
+             
+             duration: 500, // Animation duration in milliseconds
+             once: true, // Animation happens only once on page load        
+             delay: 0, // Delay before animation starts
+         });
+     
 
     </script>
 @endpush
+

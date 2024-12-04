@@ -2161,7 +2161,7 @@
     .blog-item-inner-item-box
     .txt
     a {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: var(--regular);
     line-height: 26px;
     font-family: var(--roboto);
@@ -2328,9 +2328,9 @@
 
 .blogs-rightbar-item .blogs-list-item .blogs-list-inner .blogs-list-text a {
     font-family: var(--roboto);
-    font-size: 18px;
+    font-size: 0.9rem;
     font-weight: var(--medium);
-    line-height: 26px;
+    line-height: 1.2rem;
     color: var(--headline-color);
     transition: var(--transition-all);
 }
@@ -2920,22 +2920,6 @@
     background: #f9faff;
     padding: 40px;
     margin-top: 88px;
-}
-
-.back-to-top {
-    position: fixed;
-    bottom: 132px;
-    right: 10px !important;
-    cursor: pointer;
-    z-index: 999;
-}
-
-.top-to-bottom {
-    position: fixed;
-    top: 132px;
-    right: 55px;
-    cursor: pointer;
-    z-index: 999;
 }
 
 * {
@@ -7130,8 +7114,8 @@ p {
 }
 
 .feature .feature-slick-icon .feature-slick-prev {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border: 1px solid var(--primary-color-1);
     border-radius: 4px;
     display: flex;
@@ -7159,8 +7143,8 @@ p {
 }
 
 .feature .feature-slick-icon .feature-slick-next {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border: 1px solid var(--primary-color-1);
     background-color: var(--primary-color-1);
     border-radius: 4px;
@@ -7209,8 +7193,8 @@ p {
 
 .feature-slick-prev,
 .trending-slick-prve {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border: 1px solid var(--primary-color-1);
     border-radius: 4px;
     display: flex !important;
@@ -7243,8 +7227,8 @@ p {
 
 .feature-slick-next,
 .trending-slick-next {
-    width: 50px;
-    height: 50px;
+    width: 38px;
+    height: 38px;
     border: 1px solid var(--primary-color-1);
     border-radius: 4px;
     display: flex !important;
@@ -7426,12 +7410,13 @@ p {
 
 .faq .accordion-button {
     line-height: 0;
-    font-family: var(--roboto);
     font-size: 18px;
-    font-weight: var(--medium);
     line-height: 20px;
-    color: var(--headline-color);
+    color: #0d274e;
     padding: 25px 30px;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .faq .accordion-button:focus {
@@ -7593,7 +7578,6 @@ p {
     color: #c7c7c7;
     transition: var(--transition-all);
 }
-
 
 .footer .footer-item-text-link ul li a:hover,
 .footer .footer-item-text-link ul li a:active,
@@ -9179,7 +9163,7 @@ p {
     border-radius: 12px;
     background-color: #ffffff !important;
     padding: 14px;
-    border: 1px solid #E0E4EA;
+    border: 1px solid #e0e4ea;
     /* Drop Shadow */
     /* box-shadow: 0px 9px 126px 0px rgba(20, 0, 255, 0.06); */
 }
@@ -9327,7 +9311,6 @@ p {
     padding-left: 20px;
     min-height: 0;
 }
-
 
 .inventory-main-box .select-Brand-box .form-check:last-child {
     margin-bottom: 0;
@@ -9960,7 +9943,7 @@ p {
 }
 
 .inventory-details .accordion {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .inventory-details .accordion-item:first-of-type .accordion-button {
@@ -9973,6 +9956,7 @@ p {
     line-height: 34px;
     color: var(--headline-color);
     background-color: var(--white-color);
+    border-radius: 5px !important;
 }
 
 .inventory-details .accordion-button:focus {
@@ -9987,12 +9971,12 @@ p {
     background-size: cover;
     width: 16px;
     height: 8px;
-    transform: rotate(-180deg);
+    transform: rotate(-360deg);
 }
 
 .inventory-details .accordion-button:not(.collapsed)::after {
     background-image: url(../assets/images/icon/Arrow.png);
-    transform: rotate(-360deg);
+    transform: rotate(-180deg);
 }
 
 .inventory-details .accordion-button:not(.collapsed) {
@@ -10157,7 +10141,7 @@ p {
 }
 
 .inventory-details .auto-sales-item {
-    padding: 30px;
+    padding: 0px 30px;
     border-radius: 10px;
     background-color: #f9faff;
 }
@@ -10287,9 +10271,9 @@ p {
     fill: transparent;
 }
 
-.inventory-details .auto-sales-item .auto-sales-form {
+/* .inventory-details .auto-sales-item .auto-sales-form {
     margin-top: 24px;
-}
+} */
 
 .inventory-details .auto-sales-item .auto-sales-form .auto-sales-form-item {
     margin-bottom: 14px;
@@ -13113,7 +13097,7 @@ h5.preloader-text::after {
     display: flex;
     align-items: center;
     gap: 20px;
-    margin-top: 52px;
+    margin-top: 15px;
 }
 
 .testimonial .testimonial-slick-btn .feature-slick-next span {
@@ -13121,7 +13105,7 @@ h5.preloader-text::after {
 }
 
 .testimonial .testimonial-slick-main {
-    padding: 40px 40px 30px 40px;
+    padding: 25px 30px 18px 30px;
     background-color: var(--white-color);
     box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
@@ -13134,7 +13118,7 @@ h5.preloader-text::after {
     .testimonial-slick
     .testimonial-slick-top-main
     .testimonial-p {
-    padding: 25px 0;
+    padding: 15px 0;
     border-bottom: 1px solid #e9e9e9;
 }
 
@@ -13146,7 +13130,7 @@ h5.preloader-text::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .testimonial
@@ -13257,8 +13241,8 @@ h5.preloader-text::after {
 
 .testimonial .testimonial-position-img .testimonial-position-img-left {
     position: absolute;
-    bottom: -61px;
-    left: -325px;
+    bottom: -30px;
+    left: -224px;
     z-index: -1;
     background: url(../assets/images/thumb/testimonial-pos-left.png) no-repeat
         center;
@@ -13271,8 +13255,8 @@ h5.preloader-text::after {
     bottom: -120px;
     right: -370px;
     z-index: -1;
-    background: url(../assets/images/thumb/testimonial-pos-right.png) no-repeat
-        center;
+    /* background: url(../assets/images/thumb/testimonial-pos-right.png) no-repeat
+        center; */
     width: 721.37px;
     height: 318.51px;
 }
@@ -14233,7 +14217,7 @@ p {
 }
 
 .nav-dropdown-list .nav-dropdown-item {
-    color: #6E6E6E !important;
+    color: #6e6e6e !important;
 }
 
 .nav-dropdown-list .nav-dropdown-item:hover {
@@ -14241,7 +14225,7 @@ p {
     background-color: var(--white-color) !important;
 }
 
-.nav-dropdown-list .nav-dropdown-item.active{
+.nav-dropdown-list .nav-dropdown-item.active {
     color: var(--primary-color-1) !important;
     text-decoration: none;
     font-weight: 600;
@@ -14436,8 +14420,10 @@ p {
 
 .section-subtitle {
     font-size: 1rem;
-    color: #666;
+    color: #818181;
     margin-bottom: 40px;
+    font-weight: 500;
+    line-height: 26px;
 }
 
 .compliance-item {
@@ -14694,7 +14680,6 @@ p {
     font-style: normal;
     font-size: 13px;
     color: #038ffc;
-
 }
 
 #age_output {
@@ -14715,8 +14700,8 @@ p {
     font-style: normal;
     font-size: 13px;
     color: #038ffc;
-
 }
+
 .clear-button {
     padding: 0px 10px;
     border-radius: 4px;
@@ -14730,13 +14715,20 @@ p {
     font-style: normal;
     margin-bottom: 20px;
 }
+
 .go-button {
     background-color: var(--primary-color-1); /* Blue color */
     color: white;
     padding: 5px 6px !important;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    width: 3.125rem;
+    height: 1.875rem;
+    font-size: 0.8125rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
 @media (max-width: 1024px) {
@@ -14754,9 +14746,8 @@ p {
         color: white;
         padding: 3px 6px;
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
         cursor: pointer;
-        font-size: 8px;
     }
 }
 /********* input range slider  style End ***********/
@@ -14790,22 +14781,22 @@ p {
 
 /********* Listing Detail page Start ***********/
 .form-section {
-    background: #f2f2f2 !important;
-    border: 1px solid #ffffff !important;
+    background: #f5f5f5 !important;
 }
 .car-listing-details p {
-    font-size: 0.65rem;
+    font-size: 1rem;
     line-height: 10px;
     font-family: var(--poppins) !important;
 }
 .car-listing-details .brand-text {
     color: #25282d;
     font-family: var(--poppins) !important;
+    font-size: 1rem;
 }
 .car-listing-details h3 {
     color: #0d274e;
-    font-size: 1.3rem;
-    line-height: 15px;
+    font-size: 1.7rem;
+    line-height: 22px;
     font-weight: 600;
     padding-bottom: 6px;
     font-family: var(--poppins) !important;
@@ -14817,7 +14808,7 @@ p {
 .car-listing-details .price-text {
     color: #038ffc;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-family: var(--poppins) !important;
 }
 .car-listing-details .commission-text {
@@ -14840,8 +14831,12 @@ p {
 .total-price span {
     font-size: 2rem;
     font-weight: 500;
-    bottom: 2px;
-    left: 81px;
+    bottom: -2px;
+    left: 90px;
+}
+
+.total-price-container {
+    gap: 2rem;
 }
 
 .location-dropdown button {
@@ -14864,10 +14859,11 @@ p {
     font-size: 0.75rem;
     background: #038ffc26;
     font-weight: 500;
+    border-radius: 5px;
 }
 .accessories-hide-text {
     border: 1px solid #e9e9e9;
-    color: #86888c;
+    color: #818181;
     font-size: 0.75rem;
     background: #f5f6f680;
     font-weight: 500;
@@ -15376,6 +15372,12 @@ p {
     font-weight: 500 !important;
 }
 
+#total_price {
+    font-size: 1.2rem !important;
+    color: #0d274e !important;
+    font-weight: 600 !important;
+}
+
 .charge-btn {
     border: 1px solid #24272c1a;
     color: #868b96;
@@ -15456,7 +15458,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .car_model_name {
     font-family: "Poppins", serif !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     font-style: normal;
     font-size: 14px !important;
     color: #0e305b !important;
@@ -15675,7 +15677,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 
 .about-section p:nth-child(1) {
-    color: #121A27;
+    color: #121a27;
     font-size: 0.8rem;
     line-height: 20px !important;
 }
@@ -16129,26 +16131,30 @@ input:not(:placeholder-shown) + .placeholder-text {
 .card-btn {
     background: var(--primary-color-1);
     color: var(--white-color) !important;
-    font-size: 0.875rem;
+    font-size: 1rem;
     bottom: -15px;
     text-transform: uppercase;
     font-family: var(--poppins);
+    font-weight: 500;
+    padding: 10px;
 }
 
 .roro-section h4,
 .containers-section h4,
 .Inspection-section h4 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     font-family: var(--poppins);
 }
 
 .roro-section p,
 .containers-section p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: #86888c;
     font-family: var(--poppins);
     text-align: center;
+    line-height: 26px !important;
+    font-weight: 500 !important;
 }
 /****** Shipment Page Style End  ******/
 .budget_price {
@@ -16307,6 +16313,87 @@ input:not(:placeholder-shown) + .placeholder-text {
         height: 47.5rem;
     }
 } */
+@media screen and (max-width: 2560px) {
+    .card_vision {
+        width: 145.75rem;
+        height: 78.5rem;
+        margin-top: -162px !important;
+        box-shadow: 7px 3px 19.5px 0px #00000024;
+        background-color: #ffffff;
+    }
+
+    .target-customer {
+        position: relative;
+    }
+
+    .image-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .image1 {
+        height: 72rem;
+    }
+
+    .image2 {
+        height: 30rem;
+        top: 50%;
+        left: 85.5%;
+        transform: translate(-103%, 0%);
+        z-index: 1;
+    }
+
+    .image3 {
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translate(-111%, -50%);
+        z-index: 1;
+        height: 25rem !important;
+    }
+
+    .about_us {
+        display: inline;
+        font-family: "Poppins", serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 2.625rem;
+        color: #2b343d !important;
+    }
+
+    .about-us-color {
+        color: #038ffc;
+        font-family: "Roboto", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 2.625rem;
+        color: #038ffc;
+    }
+
+    .about-us-content-heading {
+        font-family: "Poppins", serif !important;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        font-size: 2.2125rem !important;
+        padding-top: 2.5rem;
+        color: #787b81 !important;
+        line-height: 2.8125rem;
+    }
+
+    .about-us-content {
+        font-family: "Poppins", serif !important;
+        font-weight: 500 !important;
+        font-style: normal !important;
+        font-size: 2.2125rem !important;
+        padding-top: 2.5rem;
+        color: #86888c !important;
+        line-height: 2.8125rem;
+    }
+
+    .vision_content {
+        padding-top: 8.25rem;
+    }
+}
 
 @media screen and (max-width: 1920px) {
     .card_vision {
@@ -16352,7 +16439,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 36px;
+        font-size: 2.225rem;
         color: #2b343d !important;
     }
 
@@ -16361,7 +16448,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Roboto", sans-serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 36px;
+        font-size: 2.225rem;
         color: #038ffc;
     }
 
@@ -16369,18 +16456,20 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif !important;
         font-weight: 700 !important;
         font-style: normal !important;
-        font-size: 25px !important;
+        font-size: 1.625rem !important;
         padding-top: 2.5rem;
         color: #787b81 !important;
+        line-height: 2.4125rem;
     }
 
     .about-us-content {
         font-family: "Poppins", serif !important;
         font-weight: 500 !important;
         font-style: normal !important;
-        font-size: 23px !important;
+        font-size: 1.625rem !important;
         padding-top: 2.5rem;
-        color: #787b81 !important;
+        color: #86888c !important;
+        line-height: 2.4125rem;
     }
 
     .vision_content {
@@ -16431,7 +16520,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 36px;
+        font-size: 1.925rem;
         color: #2b343d !important;
     }
 
@@ -16440,7 +16529,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Roboto", sans-serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 36px;
+        font-size: 1.925rem;
         color: #038ffc;
     }
 
@@ -16448,18 +16537,21 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif !important;
         font-weight: 700 !important;
         font-style: normal !important;
-        font-size: 20px !important;
+        font-size: 1.125rem !important;
         padding-top: 1.5rem;
         /* background-color: red !important; */
         padding-bottom: 1.5rem;
+        line-height: 2.412rem;
     }
 
     .about-us-content {
         font-family: "Poppins", serif !important;
         font-weight: 500 !important;
         font-style: normal !important;
-        font-size: 18px !important;
+        font-size: 1.125rem !important;
         padding-top: 1.5rem;
+        line-height: 2.412rem;
+        color: #86888c;
     }
 
     .vision_content {
@@ -16514,7 +16606,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 36px;
+        font-size: 1.625rem;
         color: #2b343d !important;
     }
 
@@ -16523,7 +16615,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Roboto", sans-serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 36px;
+        font-size: 1.625rem;
         color: #038ffc;
     }
 
@@ -16531,21 +16623,25 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif !important;
         font-weight: 700 !important;
         font-style: normal !important;
-        font-size: 16px !important;
+        font-size: 0.925rem !important;
         padding-top: 0.5rem;
         /* background-color: red !important; */
+        line-height: 1.512rem;
     }
 
     .about-us-content {
         font-family: "Poppins", serif !important;
         font-weight: 500 !important;
         font-style: normal !important;
-        font-size: 14px !important;
+        font-size: 0.925rem !important;
         padding-top: 0.25rem;
+        line-height: 1.512rem;
+        padding-bottom: 0.75rem;
+        color: #86888c;
     }
 
     .vision_content {
-        padding-top: 0px !important;
+        padding-top: 2.65rem;
     }
 }
 
@@ -16594,7 +16690,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 30px;
+        font-size: 1.225rem;
         color: #2b343d !important;
     }
 
@@ -16603,7 +16699,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Roboto", sans-serif;
         font-weight: 600;
         font-style: normal;
-        font-size: 30px;
+        font-size: 1.225rem;
         color: #038ffc;
     }
 
@@ -16611,22 +16707,26 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-family: "Poppins", serif !important;
         font-weight: 700 !important;
         font-style: normal !important;
-        font-size: 10px !important;
+        font-size: 0.725rem !important;
         padding-top: 0.1rem;
         /* background-color: red !important; */
         padding-bottom: 0rem;
+        line-height: 1.112rem;
     }
 
     .about-us-content {
         font-family: "Poppins", serif !important;
         font-weight: 500 !important;
         font-style: normal !important;
-        font-size: 8px !important;
-        padding-top: 1.1rem;
+        font-size: 0.725rem !important;
+        padding-top: 0.6rem;
+        line-height: 1.112rem;
+        padding-bottom: 0rem;
+        color: #86888c;
     }
 
     .vision_content {
-        padding-top: 30px !important;
+        padding-top: 2.65rem !important;
     }
 }
 
@@ -16799,16 +16899,20 @@ input:not(:placeholder-shown) + .placeholder-text {
 /* Large devices (desktops) */
 @media (min-width: 992px) {
     .faq-top-left-p {
-        font-size: 25px !important;
+        font-size: 2.5rem !important;
         color: white;
-        font-weight: bolder;
+        font-family: "Poppins", serif;
+        font-weight: 600;
+        font-style: normal;
         display: inline;
     }
 
     .faq-top-left-p1 {
-        font-size: 55px !important;
+        font-size: 5.3125rem !important;
         color: white;
-        font-weight: bold;
+        font-family: "Poppins", serif;
+        font-weight: 700;
+        font-style: normal;
         display: inline;
     }
 
@@ -16835,8 +16939,11 @@ input:not(:placeholder-shown) + .placeholder-text {
 
     .faq-bottom-left-p {
         color: white;
-        font-size: 15px !important;
+        font-size: 1.25rem !important;
         line-height: 15px !important;
+        font-family: "Poppins", serif;
+        font-weight: 500;
+        font-style: normal;
     }
 }
 
@@ -16846,25 +16953,32 @@ input:not(:placeholder-shown) + .placeholder-text {
     } */
 
     .faq-top-left-p {
-        font-size: 45px !important;
+        font-size: 2.5rem !important;
         color: white;
-        font-weight: bolder;
+        font-family: "Poppins", serif;
+        font-weight: 600;
+        font-style: normal;
         display: inline;
         margin-left: 160px;
         top: 30px;
     }
 
     .faq-top-left-p1 {
-        font-size: 85px !important;
+        font-size: 5.3125rem !important;
         color: white;
-        font-weight: bold;
         display: inline;
+        font-family: "Poppins", serif;
+        font-weight: 700;
+        font-style: normal;
     }
 
     .faq-bottom-left-p {
         color: white;
-        font-size: 24px !important;
+        font-size: 1.25rem !important;
         line-height: 26px !important;
+        font-family: "Poppins", serif;
+        font-weight: 500;
+        font-style: normal;
     }
 
     .faq-top-left {
@@ -17158,7 +17272,7 @@ select:focus {
 }
 
 .spec_dot {
-    color: #9EA3AD;
+    color: #9ea3ad;
     font-size: 10px;
 }
 
@@ -17170,81 +17284,79 @@ select:focus {
 .about-section {
     background-color: #f9fbff;
     padding: 2rem 1rem;
-  }
-  
-  .about-row {
+}
+
+.about-row {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 1.5rem; 
-  }
-  
-  .about-image-container {
-    background-image: url("../../japan_home/about_car.png"); 
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.about-image-container {
+    background-image: url("../../japan_home/about_car.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 8px;
-    flex: 1 1 40%; 
-    min-height: 250px; 
-  }
-  
-  .about-content {
-    flex: 1 1 55%; 
+    flex: 1 1 40%;
+    min-height: 250px;
+}
+
+.about-content {
+    flex: 1 1 55%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  
-  .about-text {
+}
+
+.about-text {
     font-size: 1rem;
     color: #6c757d;
     line-height: 1.6;
     margin-bottom: 1rem;
-  }
-  
-  
-  @media (max-width: 575.98px) {
+}
+
+@media (max-width: 575.98px) {
     .about-row {
-      flex-direction: column; 
+        flex-direction: column;
     }
     .about-image-container {
-      min-height: 200px; 
+        min-height: 200px;
     }
     .section-heading {
-      font-size: 1.5rem; 
+        font-size: 1.5rem;
     }
-  }
-  
-  @media (min-width: 576px) and (max-width: 767.98px) {
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
     .about-image-container {
-      min-height: 220px; 
+        min-height: 220px;
     }
-  }
-  
-  @media (min-width: 768px) and (max-width: 991.98px) {
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
     .about-row {
-      gap: 2rem; 
+        gap: 2rem;
     }
     .about-image-container {
-      min-height: 250px;
-      flex: 1 1 50%; 
+        min-height: 250px;
+        flex: 1 1 50%;
     }
     .about-content {
-      flex: 1 1 50%;
+        flex: 1 1 50%;
     }
-  }
-  
-  @media (min-width: 992px) {
+}
+
+@media (min-width: 992px) {
     .about-image-container {
-      flex: 1 1 40%;
+        flex: 1 1 40%;
     }
     .about-content {
-      flex: 1 1 55%;
+        flex: 1 1 55%;
     }
-  }
-  
+}
+
 /********** Home Page About Section Styling End ***********/
-  
 
 .input-placeholder {
     position: absolute;
@@ -17265,21 +17377,17 @@ input:not(:placeholder-shown) + .input-placeholder {
     opacity: 0;
 }
 
-
-  
 .go_clear {
     gap: 0rem !important;
 }
 
-@media (min-width: 1920px) { 
-
+@media (min-width: 1920px) {
     .about_image {
         width: 100%;
     }
 }
 
-@media (min-width: 1024px) { 
-
+@media (min-width: 1024px) {
     .about_image {
         width: 100%;
     }
@@ -17324,10 +17432,88 @@ input:not(:placeholder-shown) + .input-placeholder {
 }
 
 @media (min-width: 1920px) {
-.how-to-buy-image {
+    .how-to-buy-image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .inventory-sarch-ber {
+        width: 100% !important;
+    }
+
+    .sort_by {
+        width: 100%;
+    }
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 132px;
+    right: 10px !important;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.top-to-bottom {
+    position: fixed !important;
+    top: 132px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 999 !important;
+}
+
+.our_office_image {
+    padding-right: 0rem !important;
+    padding-left: 0.2rem !important;
+    padding-top: 0rem;
+    padding-bottom: 0.2rem;
+}
+
+  .card-title {
+    font-size: 2.5rem;
+}
+
+.sales-form {
+    background: #f2f2f2 !important;
+    border: 1px solid #ffffff !important;
+    padding: 20px 30px;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+  #location {
+    line-height: 20px !important;
+  }
+
+#location option {
+    font-size: 14px;
+    color: #0d274e;
+}
+
+.inventory-details-slick-img {
+    position: relative;
+    display: inline-block;
+}
+
+.image-zoom-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-image {
+    display: block;
     width: 100%;
-}
+    transition: transform 0.3s ease;
 }
 
-
+.zoom-lens {
+    position: absolute;
+    border: 2px solid #000;
+    width: 100px; /* Lens size */
+    height: 100px; /* Lens size */
+    cursor: zoom-in;
+    visibility: hidden;
+    border-radius: 50%;
+}
 

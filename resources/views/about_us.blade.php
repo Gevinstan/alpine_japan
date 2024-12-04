@@ -103,14 +103,14 @@
                 </div>
             </div>
         </section> -->
-        <section class="about_us_bg px-sm-2 px-lg-5 pb-4">
+        <section class="about_us_bg px-sm-2 px-lg-5 pb-5">
             <div class="container pb-3">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6 col-lg-5 about-us_image">
                         <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid about_image">
                     </div>
 
-                    <div class="col-12 col-md-6 col-lg-7 about-us_text ps-lg-5">
+                    <div class="col-12 col-md-6 col-lg-7 about-us_text ">
                         <div class="taitel_two">
                             <span class="about_us_title">{{ $about_us->header }}</span>
                         </div>
@@ -375,10 +375,10 @@
 
     <section class=" testimonial testimonial-top px-2 px-sm-3 px-lg-5 mt-5">
         <div class="container ">
-            <div class="row px-5">
-                <div class="col-lg-5">
+            <div class="row ps-5">
+                <div class="col-lg-5 ps-5">
 
-                    <div class="sm-df">
+                    <div class="sm-df ps-5">
                         <div class="t-df-sm">
                             <div class="taitel two">
                                 <!-- <div class="taitel-img">
@@ -403,7 +403,7 @@
                             <div class="testimonial-slick-btn">
                                 <div class="feature-slick-prev testimonial-slick-prve">
                                     <span>
-                                        <svg width="23" height="16" viewBox="0 0 23 16" fill="none"
+                                        <svg width="16" height="16" viewBox="0 0 23 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M8 1L1 8M1 8L8 15M1 8L22 8" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round" />
@@ -412,7 +412,7 @@
                                 </div>
                                 <div class="feature-slick-next testimonial-slick-next">
                                     <span>
-                                        <svg width="23" height="16" viewBox="0 0 23 16" fill="none"
+                                        <svg width="16" height="16" viewBox="0 0 23 16" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path d="M15 15L22 8M22 8L15 0.999999M22 8L1 8" stroke-width="1.5"
                                                 stroke-linecap="round" stroke-linejoin="round" />
@@ -511,7 +511,7 @@
 
     <!---- Our Office starts---->
 
-    <section class="main_wid_aboutus">
+    <section class="main_wid_aboutus px-2 px-sm-3 px-lg-5">
         <!-- <div class="container">
             <div class="row" style="margin-top: 100px; padding-top: 60px; padding-bottom: 60px;">
                 <div class="text-center" style="padding-bottom: 40px;">
@@ -548,33 +548,33 @@
             </div>
         </div> -->
         <div class="container">
-            <div class="row mt-5 pt-4 pb-2">
+            <div class="row mt-5 pt-3">
                 <div class=" mb-4">
                     <h2 class="section-heading-about text-center">Our <span class="highlight-about">Office<span></h2>
                 </div>
 
-                <div class="row pt-3 pb-5">
-                    <div class="col-12 col-md-4 mb-4">
+                <div class="row mb-4">
+                    <div class="col-12 col-md-4  our_office_image">
                         <img src="{{ asset('japan_home/Office1.svg') }}" class="img-fluid office_image" alt="Office 1">
                     </div>
 
-                    <div class="col-12 col-md-4 mb-4">
+                    <div class="col-12 col-md-4  our_office_image">
                         <img src="{{ asset('japan_home/Office2.svg') }}" class="img-fluid office_image" alt="Office 2">
                     </div>
 
-                    <div class="col-12 col-md-4 mb-4">
+                    <div class="col-12 col-md-4  our_office_image">
                         <img src="{{ asset('japan_home/Office3.svg') }}" class="img-fluid office_image" alt="Office 3">
                     </div>
 
-                    <div class="col-12 col-md-4 mb-4">
+                    <div class="col-12 col-md-4 our_office_image">
                         <img src="{{ asset('japan_home/Office4.svg') }}" class="img-fluid office_image" alt="Office 4">
                     </div>
 
-                    <div class="col-12 col-md-4 mb-4">
+                    <div class="col-12 col-md-4 our_office_image">
                         <img src="{{ asset('japan_home/Office5.svg') }}" class="img-fluid office_image" alt="Office 5">
                     </div>
 
-                    <div class="col-12 col-md-4 mb-4">
+                    <div class="col-12 col-md-4 our_office_image">
                         <img src="{{ asset('japan_home/Office6.svg') }}" class="img-fluid office_image" alt="Office 6">
                     </div>
                 </div>
