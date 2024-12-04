@@ -9307,7 +9307,7 @@ p {
 
 .inventory-main-box .select-Brand-box .form-check {
     display: flex;
-    gap: 8px;
+    gap: 2px;
     padding-left: 20px;
     min-height: 0;
 }
@@ -14703,7 +14703,7 @@ p {
 }
 
 .clear-button {
-    padding: 0px 10px;
+    padding: px 10px;
     border-radius: 4px;
     cursor: pointer;
     background: none;
@@ -14765,6 +14765,9 @@ p {
 
 .slider-handle {
     background-color: #038ffc !important;
+    width: 15px !important;
+    height: 15px !important;
+    top: 2px !important;
 }
 
 .slider-handle.round {
@@ -16142,7 +16145,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 }
 /****** Shipment Page Style End  ******/
 .budget_price {
-    font-size: 0.7rem !important;
+    font-size: 0.8rem !important;
     font-family: "Poppins", serif !important;
     font-weight: 500 !important;
     font-style: normal !important;
