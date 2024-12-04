@@ -548,7 +548,7 @@
     border: 1px solid #e9e9e9;
     background: var(--white-color);
     padding: 20px 25px;
-    color: #b1b1b1;
+    color: var(--headline-color) !important;
     font-family: var(--roboto);
     font-size: 16px;
     font-weight: var(--regular);
