@@ -9299,7 +9299,7 @@ p {
 .inventory-main-box .select-Brand-box .form-check-label {
     font-size: 16px;
     font-weight: var(--regular);
-    line-height: normal;
+    /* line-height: normal; */
     color: var(--headline-color);
     font-family: var(--roboto);
     margin-top: 18px;
