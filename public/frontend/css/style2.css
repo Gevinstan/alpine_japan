@@ -14961,7 +14961,7 @@ p {
     font-size: 12px !important;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,.dropdown-item.active {
     text-decoration: underline;
     text-decoration-color: #038ffc;
     text-underline-offset: 4px;
