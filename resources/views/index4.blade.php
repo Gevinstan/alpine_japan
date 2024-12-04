@@ -230,17 +230,9 @@
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
 
-                                                <div class="slider-container">
-                                                    <div class="slider">
-                                                        <img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1">
-                                                        <img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2">
-                                                        <img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3">
-                                                    </div>
-                                                </div>
-
-                                                <!-- <div class="">
+                                                <div class="">
                                                     <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
-                                                </div> -->
+                                                </div>
                                                  
 
                                                     <div class="brand-car-item-img-text justify-content-end ">
@@ -1417,20 +1409,6 @@ $("#searchBtn").on('click',function(){
 
         // Add 'active' class to the clicked <li>
         $(this).addClass("active");
-      });
-    });
-
-    $(document).ready(function () {
-      const $slider = $('.slider');
-
-      // Start sliding animation on mouse enter
-      $('.slider-container').mouseenter(function () {
-        $slider.addClass('active');
-      });
-
-      // Stop sliding animation on mouse leave
-      $('.slider-container').mouseleave(function () {
-        $slider.removeClass('active');
       });
     });
     </script>
