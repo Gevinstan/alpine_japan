@@ -1,13 +1,18 @@
 @extends('layout4')
 @section('title')
-    <title>{{ html_decode($car->seo_title) }}</title>
-    <meta name="title" content="{{ html_decode($car->seo_title) }}">
-    <meta name="description" content="{{ html_decode($car->seo_description) }}">
+    <title>{{ html_decode($seo_setting->seo_title) }}</title>
+    <meta name="title" content="{{ html_decode($seo_setting->seo_title) }}">
+    <meta name="description" content="{{ html_decode($seo_setting->seo_description) }}">
 @endsection
 
 @section('body-content')
 
-<main class="bg-light-grey px-sm-2 px-md-5">
+<main class="bg-light-grey  px-sm-2 px-md-5">
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
     <!-- Inventory Details-part-start -->
 
@@ -1000,6 +1005,10 @@
                 button.text(originalText); // Restore original button text
                 button.attr('disabled', false);
             }, images.length * 1000);
+            });
+
+            window.addEventListener("load", function() {
+             document.getElementById("pageLoader").classList.add("hidden");
             });
 
 

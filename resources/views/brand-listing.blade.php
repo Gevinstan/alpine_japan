@@ -25,6 +25,11 @@
 
 
 <main>
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
     <section class="categories  pb-120px">
         <div class="container-fluid">
             <div class="row align-items-end">
@@ -54,7 +59,7 @@
                 @foreach ($brands as $index => $brand)
                 <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                     <div class="categories-logo">
-                        <a href="{{ route('jdm-stock-responsive',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
+                        <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                             <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                         </a>
                     </div>
@@ -81,45 +86,10 @@
 
 <script>
 
-const startRange = document.getElementById('customRangeMin');
-const endRange = document.getElementById('customRangeMax');
-const priceRangeScale = document.getElementById('priceSearch');
-const valueDisplay = document.querySelector('span p');
 
-// Function to format currency
-const formatCurrency = (value) => {
-    return `$${(value * 100000).toLocaleString()}`;
-};
 
-// Function to update the display
-const updateDisplay = () => {
-    const startValue = formatCurrency(startRange.value);
-    const endValue = formatCurrency(endRange.value);
-    valueDisplay.textContent = `${startValue} ${endValue}`;
-    const startValueNumber = formatNumber(startRange.value * 100000);
-    const endValueNumber = formatNumber(endRange.value * 100000);
-    console.log(startValueNumber);
-    priceRangeScale.value=`${startValueNumber} - ${endValueNumber}`;
-};
-function formatNumber(value) {
-    return Math.round(value);
-}
 
-// Event listener for the start range input
-startRange.addEventListener('input', () => {
-    if (parseFloat(startRange.value) > parseFloat(endRange.value)) {
-        startRange.value = endRange.value;
-    }
-    updateDisplay();
-});
 
-// Event listener for the end range input
-endRange.addEventListener('input', () => {
-    if (parseFloat(endRange.value) < parseFloat(startRange.value)) {
-        endRange.value = startRange.value;
-    }
-    updateDisplay();
-});
 
 
 (function($) {
@@ -175,6 +145,9 @@ endRange.addEventListener('input', () => {
     
     });
 })(jQuery);
+    window.addEventListener("load", function() {
+        document.getElementById("pageLoader").classList.add("hidden");
+    });
 </script>   <!------- Range ------->
 @endpush
 

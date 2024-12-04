@@ -6,6 +6,11 @@
 @endsection
 
 @section('body-content')
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 <main class="bg-light-grey">
 
@@ -729,6 +734,9 @@
              }
         })
 
+        window.addEventListener("load", function() {
+            document.getElementById("pageLoader").classList.add("hidden");
+        });
 
     </script>
 

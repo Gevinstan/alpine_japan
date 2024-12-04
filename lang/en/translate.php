@@ -15,7 +15,6 @@
   'Commercial List'=>'Commercial List',
   'Small heavy'=>'Small heavy',
   'Models'=>'Models',
-  
   'Model'=>'Model',
   'Scification'=>'Scification',
   'Year Of Made'=>'Year Of Made',
@@ -1019,8 +1018,9 @@
   'Auction'=>'Auction',
   'Accessories'=>'Accessories',
   'JDM Stock Listing'=>'JDM Stock Listing',
+  'Auction Brand New Cars'=>'Auction Brand New Cars',
   'Auction Listing'=>'Auction Listing',
-  'Top Rating Listing'=>'Top Rating Listing',
+  'Top Selling Listing'=>'Top Selling Listing',
   'Brand New Cars'=>'Brand New Cars',
   'Market Price'=>'Market Price',
   'Auction Car MarketPlace'=>'Auction Car MarketPlace',
