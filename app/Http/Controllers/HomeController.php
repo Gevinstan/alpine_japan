@@ -1051,8 +1051,13 @@ class HomeController extends Controller
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
+        $hasPriceRangeScale = false;
+        $startValue = $minPrice;
+        $endValue = $maxPrice;
 
-        // DB::enableQueryLog();
+
+
+      
 
         if($type == 'car'){
         
@@ -1188,6 +1193,7 @@ class HomeController extends Controller
         }
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
+                $hasPriceRangeScale=true;
                 $parts = explode(',', $request->price_range_scale);
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
@@ -1239,7 +1245,7 @@ class HomeController extends Controller
                     foreach ($request->price_range as $range) {
                         $result = $this->getPriceRangestart($range, $priceRanges);
             
-                        $query->whereRaw("REGEXP_REPLACE($table, '[^0-9]', '') BETWEEN ? AND ?", [
+                        $query->orWhereRaw("REGEXP_REPLACE($table, '[^0-9]', '') BETWEEN ? AND ?", [
                             $result['start_price_num'],
                             $result['end_price_num']
                         ]);
@@ -1331,7 +1337,11 @@ class HomeController extends Controller
                 'start_price' => $car->price,
                 'picture' =>$car->image,
                 'id' => $car->id,
-                'make'=>$car->make
+                'make'=>$car->make,
+                'kms'=>$car->kms,
+                'yor'=>$car->year_of_reg,
+                'location'=>$car->location,
+                'created_at'=>$car->created_at,
             ];
         });
 
@@ -1363,8 +1373,12 @@ class HomeController extends Controller
             ->having('count', '>', 1)
             ->get();
 
-            $price_range=$this->SelectedJdmRange($type,$priceRanges,$slug);
+            
 
+        $price_range=$this->SelectedJdmRange($type,$priceRanges,$slug,
+        $hasPriceRangeScale,$startValue,$endValue);
+
+      
          
     
 
@@ -4052,7 +4066,9 @@ public function car_listing(Request $request){
                 'year'=>$car->model_year,
                 'year_en'=>$car->model_year_en,
                 'transmission'=>$car->transmission,
-                'transmission_en'=>$car->transmission_en
+                'transmission_en'=>$car->transmission_en,
+                'parsed_data'=>$car->parsed_data_en,
+                'datetime'=>$car->datetime 
             ];
         });
 
@@ -5092,7 +5108,8 @@ public function car_listing(Request $request){
         
     }
 
-public function SelectedJdmRange($type,$price_ranges,$slug){
+public function SelectedJdmRange($type,$price_ranges,$slug,
+$hasPriceRangeScale,$startValue,$endValue){
     if ($type == 'car') {
         $tableName = "blog";   
     } else if ($type == 'heavy') {
@@ -5131,16 +5148,26 @@ public function SelectedJdmRange($type,$price_ranges,$slug){
 
     // Loop through each price range and count the records in that range
     foreach ($price_ranges as $label => $range) {
-        $count = DB::table($tableName . ' as t') // Alias the table dynamically
+        // DB::enableQueryLog();
+        $query = DB::table($tableName . ' as t') // Alias the table dynamically
         ->join('models_cars as mc', function($join) {
             $join->on('t.category', '=', 'mc.category')  
                  ->on('t.model', '=', 'mc.model');       
         })
         ->where(DB::raw('LOWER(t.make)'), $slug)      
         ->where('t.is_active', 1)                     
-        ->whereNull('t.deleted_at')                   
-        ->whereRaw("REGEXP_REPLACE(t.price, '[^0-9]', '') BETWEEN ? AND ?", [$range['start'], $range['end']])
-        ->count();
+        ->whereNull('t.deleted_at')   
+        ->whereRaw('REGEXP_REPLACE(t.price, "[,\\s]", "") REGEXP "^[0-9]+$"');                
+        if ($hasPriceRangeScale) {
+            $query->whereRaw("REGEXP_REPLACE(t.price, '[^0-9]', '') BETWEEN ? AND ?", [$startValue, $endValue]);
+        }
+    
+        // Add the condition for the current price range
+        $query->whereRaw("REGEXP_REPLACE(t.price, '[^0-9]', '') BETWEEN ? AND ?", [$range['start'], $range['end']]);
+    
+        // Get the count
+        $count = $query->count();
+        // dd(DB::getQueryLog());
 
     
         // Store the count for the current range

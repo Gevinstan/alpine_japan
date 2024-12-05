@@ -9,14 +9,15 @@
 
 @php
     $request_check=0;
+    use Carbon\Carbon;
 @endphp
 
 <main class="main_wid overflow_jdm">
-<div id="pageLoader">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+    <div id="pageLoader">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
-</div>
     <!-- Inventory-part-start -->
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey ">
@@ -103,7 +104,7 @@
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
-                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                                aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
@@ -258,8 +259,8 @@
                                                     Budget
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }}"
-                                            aria-labelledby="panelsStayOpen-headingfive">
+                                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ (request()->has('price_range') || request()->has('price_range_scale')) ? 'show' : '' }}"
+                                                 aria-labelledby="panelsStayOpen-headingfive">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
@@ -478,6 +479,13 @@
                                                                         </svg>
                                                             </span>
                                                         </div>
+                                                        <span>
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
+                                                            @else
+                                                            {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
+                                                            @endif
+                                                        </span>
                                                     </div>
                                                     <!-- <p class="spec_dot">.</p> -->
                                                     <div class="brand-car-inner-item-two">
@@ -517,7 +525,11 @@
                                                         </div>
 
                                                         <span>
-                                                           
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
+                                                            @else
+                                                            {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
+                                                            @endif
                                                         </span>
                                                     </div>
                                                     <!-- <p class="spec_dot">.</p> -->
@@ -532,7 +544,7 @@
                                                         </div>
 
                                                         <span>
-                                                           
+                                    
                                                         </span>
                                                     </div>
                                                 </div>
@@ -543,13 +555,16 @@
                                                 </div> -->
 
                                                 <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                    @php
+                                                         $carbonInstance = Carbon::parse($car['created_at']);
+                                                    @endphp
                                                     <p>
                                                         <i class="bi bi-geo-alt-fill"></i>
-                                                        <span class="brand-location ">Hyogo, Japan</span>
+                                                        <span class="brand-location ">{{ isset($car['location']) ? $car['location'] : '--' }}  </span>
                                                     </p>
                                                     <div class="d-flex flex-column">
-                                                        <span class="brand-date fw-light">2024-05-24</span>
-                                                        <span class="brand-date fw-light">18:01:00</span>
+                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -953,7 +968,7 @@
                 if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                     $('input[name="price_range_scale"]').val('');
                 } 
-                $('#ex2').prop('disabled', true);
+                // $('#ex2').prop('disabled', true);
             }
             "use strict"
             $(document).ready(function () {
@@ -1013,9 +1028,9 @@
                         const brandId = this.getAttribute('data-brand-id');
                         const accordionItem = this.closest('.accordion-item');
                         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        // modelCheckboxes.forEach(modelCheckbox => {
+                        //     modelCheckbox.checked = this.checked;
+                        // });
                         clear_price_slider();
                         $('#search_form').submit();
                     });

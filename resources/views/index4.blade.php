@@ -7,6 +7,7 @@
 
 @php
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 @endphp
 
 @section('body-content')
@@ -377,7 +378,7 @@ use Carbon\Carbon;
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
                                                             <span class="brand-location">
-                                                            {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
+                                                            {{ isset($parsed_data['vehicle  location']) ? trim(Str::limit($parsed_data['vehicle  location'], 10, '...')) : '--' }}
                                                             </span>
                                                         </p>
                                                         <div class="d-flex flex-column">
@@ -526,7 +527,7 @@ use Carbon\Carbon;
                                                             </span>
                                                         </div>
                                                         <span>
-                                                            --
+                                                            {{$car->kms}}
                                                         </span>
                                                     </div>
                                                     <p>.</p>
@@ -588,9 +589,9 @@ use Carbon\Carbon;
                                                         $carbonInstance = Carbon::parse($car->created_at);
                                                         @endphp
 
-                                                        <p>
+                                                        <p> 
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                            <span class="brand-location">{{$car->location}}</span>
+                                                            <span class="brand-location">{{Str::limit($car->location, 10, '...')}}</span>
                                                         </p>
                                                         <div class="d-flex flex-column">
                                                             <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
@@ -843,7 +844,7 @@ use Carbon\Carbon;
                                             @endphp
                                             <p>
                                                 <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                <span class="brand-location"> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>
+                                                <span class="brand-location"> {{ isset($parsed_data['vehicle  location']) ? trim(Str::limit($parsed_data['vehicle  location'], 10, '...')) : '--' }}</span>
                                             </p>
                                             <div class="d-flex flex-column">
                                                 <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>

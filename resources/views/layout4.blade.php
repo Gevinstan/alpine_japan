@@ -142,7 +142,7 @@
                             </div>
 
                             <div class="nav-btn">
-                                <div class="menu">
+                                <div class="menu">  
                                     <ul class="nav nav_texthead">
                                         <li class="nav-item">
                                             <a class="nav-link mx-2 {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
