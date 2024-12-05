@@ -194,11 +194,11 @@
                                 <div class="menu">
                                     <ul class="nav nav_texthead">
                                         <li class="nav-item">
-                                            <a class="nav-link mx-2" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
+                                            <a class="nav-link mx-2 {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">{{ __('translate.Home') }}</a>
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap {{ Route::is('jdm-stock') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 {{ __('translate.JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
@@ -262,7 +262,7 @@
                                         </li>
                                         
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap {{ Route::is('auction-brand-new-car') || Route::is('jdm_brand_new') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 {{ __('translate.Brand New Cars') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
@@ -317,13 +317,13 @@
                                         </li> -->
 
                                         <li class="nav-item">
-                                            <a class="nav-link mx-2" href="{{ route('new-arrival-responsive') }}">{{ __('translate.New Car Arrivals') }}</a>
+                                            <a class="nav-link mx-2 {{ Route::is('new-arrivals') ? 'active' : '' }}" href="{{ route('new-arrival-responsive') }}">{{ __('translate.New Car Arrivals') }}</a>
                                         </li>
 
                                         <li class="nav-item">
                                            
                                             @if(Auth::guard('web')->check())
-                                                    <a class="nav-link mx-2" href="{{ route('auction-car-marketplace-responsive') }}">
+                                                    <a class="nav-link mx-2 {{ Route::is('auction-car-marketplace') ? 'active' : '' }}" href="{{ route('auction-car-marketplace-responsive') }}">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @else 
@@ -335,10 +335,10 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link mx-2" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
+                                            <a class="nav-link mx-2 {{ Route::is('contact-us') ? 'active' : '' }}" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link  mx-2" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
+                                            <a class="nav-link  mx-2 {{ Route::is('blogs') ? 'active' : '' }}" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -707,7 +707,7 @@
                             <div class="footer-item-text-link">
                                 <ul>
                                     <li>
-                                        <a href="{{ route('blogs') }}">  <span>
+                                        <a href="{{ route('blogs') }}" class="{{ Route::is('blogs') ? 'active' : '' }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -717,7 +717,7 @@
                                         </span>{{ __('translate.Blogs') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('about-us') }}">  <span>
+                                        <a href="{{ route('about-us') }}"  class="{{ Route::is('about-us') ? 'active' : '' }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -727,7 +727,7 @@
                                         </span>{{ __('translate.About us') }}</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('contact-us') }}">  <span>
+                                        <a href="{{ route('contact-us') }}" class="{{ Route::is('contact-us') ? 'active' : '' }}">  <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -737,7 +737,7 @@
                                         </span>{{ __('translate.Contact Us') }}</a>
                                     </li>
                                     <li>
-                                            <a href="{{ route('terms-conditions') }}">  <span>
+                                            <a href="{{ route('terms-conditions') }}" class="{{ Route::is('terms-conditions') ? 'active' : '' }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -747,7 +747,7 @@
                                             </span>{{ __('translate.Terms and Conditions') }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('privacy-policy') }}">  <span>
+                                            <a href="{{ route('privacy-policy') }}" class="{{ Route::is('privacy-policy') ? 'active' : '' }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -757,7 +757,7 @@
                                             </span>{{ __('translate.Privacy & Policy') }}</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('how-to-buy') }}">  <span>
+                                            <a href="{{ route('how-to-buy') }}" class="{{ Route::is('how-to-buy') ? 'active' : '' }}">  <span>
                                                 <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -781,7 +781,7 @@
 
                                     <li>
                                          @if(Auth::guard('web')->check())
-                                            <a href="{{ route('auction-car-marketplace-responsive') }}"> <span>
+                                            <a href="{{ route('auction-car-marketplace-responsive') }}" class="{{ Route::is('auction-car-marketplace') ? 'active' : '' }}"> <span>
                                             @else
                                             <a href="#" class="auct_logout" onclick="auct_logout()"><span>
                                             @endif
@@ -794,7 +794,7 @@
                                            </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('car_listing') }}"> <span>
+                                        <a href="{{ route('car_listing') }}" class="{{ Route::is('fixed-car-marketplace') ? 'active' : '' }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -804,7 +804,7 @@
                                             </a>
                                         </li>
                                     <li>
-                                        <a href="{{ route('new-arrival-responsive') }}"> <span>
+                                        <a href="{{ route('new-arrival-responsive') }}" class="{{ Route::is('new-arrivals') ? 'active' : '' }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -814,7 +814,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('shipment') }}"> <span>
+                                        <a href="{{ route('shipment') }}" class="{{ Route::is('shipment') ? 'active' : '' }}"> <span>
                                         <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -834,7 +834,7 @@
                                             </a>
                                         </li> -->
                                         <li>
-                                            <a href="{{ route('custom-page', 'our-stocks') }}"> <span>
+                                            <a href="{{ route('custom-page', 'our-stocks') }}" class="{{ Route::is('custom-page') &&  request()->segment(2) === 'our-stocks' ? 'active' : '' }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
@@ -844,7 +844,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('custom-page', 'useful-links') }}"> <span>
+                                            <a href="{{ route('custom-page', 'useful-links') }}" class="{{Route::is('custom-page') && request()->segment(2) == 'useful-links' ? 'active' : '' }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path
