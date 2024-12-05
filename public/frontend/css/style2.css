@@ -7525,7 +7525,7 @@ p {
 }
 
 .footer .footer-icon .text h5 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: var(--regular);
     color: var(--white-color);
     font-family: var(--roboto);
@@ -7552,7 +7552,7 @@ p {
 }
 
 .footer .footer-item-text {
-    padding-bottom: 16px;
+    padding-bottom: 5px;
 }
 
 .footer .footer-item-text h3 {
@@ -13242,7 +13242,7 @@ h5.preloader-text::after {
 .testimonial .testimonial-position-img .testimonial-position-img-left {
     position: absolute;
     bottom: -30px;
-    left: -224px;
+    left: -238px;
     z-index: -1;
     background: url(../assets/images/thumb/testimonial-pos-left.png) no-repeat
         center;
@@ -14203,7 +14203,7 @@ p {
 .highlight {
     color: #005bac !important;
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
 }
 
@@ -14286,8 +14286,9 @@ p {
 }
 
 .video-content h2 {
-    font-size: 2rem;
-    line-height: 45px !important;
+    font-size: 1.7rem;
+    line-height: 40px !important;
+    font-weight: 500;
 }
 
 /**********  Car Buy section Start  *********/
@@ -14402,7 +14403,7 @@ p {
 
 .quality-compliance .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
 }
@@ -14412,6 +14413,7 @@ p {
     font-family: "Poppins", serif;
     font-weight: 700;
     font-style: normal;
+    color: #2B343D !important;
 }
 
 .section-title .highlight {
@@ -14593,6 +14595,7 @@ p {
     padding: 10px 15px !important;
     background-color: #2e326c !important;
     color: var(--white-color) !important;
+    padding-left: 25px !important;
 }
 
 .email-btn {
@@ -15677,6 +15680,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     color: #818181;
     font-size: 0.8rem;
     line-height: 20px !important;
+    font-weight: 500;
 }
 
 .about-section p:nth-child(1) {
@@ -15910,7 +15914,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .about-section .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -15927,7 +15931,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .feature .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -15942,7 +15946,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .brand-car .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -15956,7 +15960,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .categories .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -17563,5 +17567,9 @@ input:not(:placeholder-shown) + .input-placeholder {
 .nav-item.dropdown:hover .dropdown-menu {
     opacity: 1;
     visibility: visible;
+}
+
+.email-icon {
+    bottom: 6px;
 }
 
