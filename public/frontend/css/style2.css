@@ -17079,7 +17079,7 @@ select:focus {
 }
 
 .dropdown-toggle::after {
-    color: #6e6e6e; /* Grey color for the arrow */
+    color: var(--white-color); 
 }
 
 .main_wid_aboutus {
@@ -17549,4 +17549,19 @@ input:not(:placeholder-shown) + .input-placeholder {
   .top-slider.active {
     animation: slide 6s infinite;
   }
+
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-item .dropdown-menu {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
 

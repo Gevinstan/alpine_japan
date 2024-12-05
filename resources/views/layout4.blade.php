@@ -198,7 +198,7 @@
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap {{ Route::is('jdm-stock') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link mx-2 dropdown-toggle hide-down-arow text-nowrap {{ Route::is('jdm-stock') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
                                                 {{ __('translate.JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
@@ -260,9 +260,23 @@
                                             </ul>
 
                                         </li>
+
+                                        <li class="nav-item">
+                                        
+                                            @if(Auth::guard('web')->check())
+                                                    <a class="nav-link mx-2 {{ Route::is('auction-car-marketplace') ? 'active' : '' }}" href="{{ route('auction-car-marketplace-responsive') }}">
+                                                    {{ __('translate.Live Auction') }}
+                                                    </a>
+                                                @else 
+                                                    <a class="nav-link mx-2 auct_logout" href="#" onclick="auct_logout()">
+                                                    {{ __('translate.Live Auction') }}
+                                                    </a>
+                                                @endif 
+                                        
+                                        </li>
                                         
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap {{ Route::is('auction-brand-new-car') || Route::is('jdm_brand_new') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap {{ Route::is('auction-brand-new-car') || Route::is('jdm_brand_new') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
                                                 {{ __('translate.Brand New Cars') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
@@ -312,6 +326,8 @@
 
                                         </li>
 
+                                        
+
                                         <!-- <li class="nav-item">
                                             <a class="nav-link mx-2" href="{{ route('about-us') }}">{{ __('translate.Buy Now Cars') }}</a>
                                         </li> -->
@@ -321,24 +337,11 @@
                                         </li>
 
                                         <li class="nav-item">
-                                           
-                                            @if(Auth::guard('web')->check())
-                                                    <a class="nav-link mx-2 {{ Route::is('auction-car-marketplace') ? 'active' : '' }}" href="{{ route('auction-car-marketplace-responsive') }}">
-                                                    {{ __('translate.Live Auction') }}
-                                                    </a>
-                                                @else 
-                                                    <a class="nav-link mx-2 auct_logout" href="#" onclick="auct_logout()">
-                                                    {{ __('translate.Live Auction') }}
-                                                    </a>
-                                                @endif 
-                                           
+                                            <a class="nav-link  mx-2 {{ Route::is('blogs') ? 'active' : '' }}" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
 
                                         <li class="nav-item">
                                             <a class="nav-link mx-2 {{ Route::is('contact-us') ? 'active' : '' }}" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link  mx-2 {{ Route::is('blogs') ? 'active' : '' }}" href="{{ route('blogs') }}">{{ __('translate.Blogs') }}</a>
                                         </li>
                                     </ul>
                                 </div>
