@@ -39,8 +39,7 @@
                 </nav>
                 <div class="row">
                     <div class="col-lg-3">
-                        <form action="" id="search_form">
-                            
+                        <form action="" id="search_form">                       
                             <!-- Select Your Brand Start-->
                                 <div class="inventory-main-box mb-2">
                                     <!-- Select Your Brand  -->
@@ -58,7 +57,7 @@
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box border-0 px-2">
                                                     
-                                                                <div class="accordion" id="accordionExample">
+                                                            <div class="accordion" id="accordionExample">
                                                                 <div class="accordion-item">
                                                                     <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                         <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -86,11 +85,11 @@
                                                                                 </span>
                                                                             </div>
                                                                         </div>
-                                                            </span>
-                                                        </div>
-                                                        </div> 
+                                                                    </span>
+                                                                </div>
+                                                            </div> 
                                         
-                                                </span>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,9 +152,9 @@
 
                                 </div>
                             <!-- Select Your Year End -->
-                        
+
                             <!-- Select Your Budget Start -->
-                                <!-- <div class="inventory-main-box my-2">   
+                           <!-- <div class="inventory-main-box my-2">   
                                     
                                     <div class="accordion" id="accordionPanelsStayOpenExample4" class="accordion_dd">
                                         <div class="accordion-item ps-3">
@@ -300,7 +299,7 @@
 
                                         <span class="search-btn" style="cursor: pointer;">
 
-                                        <a href="javascript:void(0);" id="outside_form_btn"><i class="bi bi-search search_icon"></i></a>
+                                            <a href="javascript:void(0);" id="outside_form_btn"><i class="bi bi-search search_icon"></i></a>
                                         
                                         </span>
                                         
@@ -418,7 +417,7 @@
 
                                                 <div class="brand-car-inner">
                                                     <div class="brand-car-inner-item">
-                                                        <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
+                                                        <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="{{ $car['make'] }}">
                                                             @if(session('front_lang')=='en')
                                                                 {{ $car['make'] }}
                                                             @else
@@ -434,7 +433,7 @@
                                                         </p>
                                                     </div>
 
-                                                    <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                    <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name']) }}">
                                                         <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['model_name']) }}

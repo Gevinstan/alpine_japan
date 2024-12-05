@@ -15061,9 +15061,9 @@ p {
     height: 41.25rem;
 }
 
-.inventory-sarch-ber input:focus + .search-btn {
+/* .inventory-sarch-ber input:focus + .search-btn {
     display: none;
-}
+} */
 
 /* .inventory-sarch-ber input {
     border: 1px solid #038FFC !important;
