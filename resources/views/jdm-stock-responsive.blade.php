@@ -108,7 +108,8 @@
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                            
+                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
                                                                 <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
                                                                     <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
@@ -153,10 +154,15 @@
                                                                     <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                                 </div>
                                                             
-                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                                <!-- <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
                                                                     value="{{ request('year', $minYear) }}" 
                                                                     class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
+                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">     -->
+
+                                                                <input id="ex3" type="text" name="price_range_scale" 
+                                                                    data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
+                                                                    value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                    data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>   
                                                             </div>
 
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
@@ -264,7 +270,8 @@
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                            
+                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
                                                                 <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
                                                                     <span class="slider-label m-0" id="minYearLabel">{{$minPrice}}</span>
                                                                     <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span>  
