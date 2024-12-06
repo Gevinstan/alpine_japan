@@ -48,22 +48,7 @@
 
                                     <div class="container" style="padding:0px">
                                         <div class="row">
-                                        <div class="col-md-6">
-                                                <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Commission')." ( $ )" }} * </label>
-                                                        <input class="crancy__item-input" type="text" name="commission" id="commission">
-                                                        @error('commission')
-                                                            <div style="color: red;">{{ $message }}</div>
-                                                        @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <div class="" style="padding-top:10px">
-                                                    <button class="crancy-btn mg-top-25" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-5 d-flex justify-content-end align-items-center">
+                                            <div class="col-12 d-flex justify-content-end align-items-start">
                                                 <div>
                                                     <button class="crancy-btn delete_danger_btn" id="delete-model">Delete</button>  
                                                 </div>
@@ -71,7 +56,7 @@
                                         </div>
 
                                         <div class="row" style="margin-top:40px">
-                                            <!-- <div class="col-md-4">
+                                            <div class="col-md-4">
                                                 <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Commission')." ( $ )" }} * </label>
                                                         <input class="crancy__item-input" type="text" name="commission" id="commission">
@@ -79,40 +64,29 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                 </div>
-                                            </div> -->
-<!-- 
+                                            </div>
+
                                             <div class="col-md-1">
                                                 <div class="" style="padding-top:10px">
                                                     <button class="crancy-btn mg-top-25" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
                                                 </div>
-                                            </div> -->
+                                            </div>
 
-                                            <!-- <div class="col-md-1">
+                                            <div class="col-md-1">
 
-                                            </div> -->
+                                            </div>
 
-                                            <div class="col-md-10">
+                                            <div class="col-md-4">
                                                 <form style="padding-top:5px" action="{{ route('admin.commission') }}" method="GET" id="importedListForm" novalidate>
-                                                   <div class="row"> <div class="col-lg-4">
+                                                    <div class="">
                                                         <label class="crancy__item-label">{{ __('translate.Year Of Made') }}</label>
-                                                        <input class="crancy__item-input" type="text" name="year" id="year" value="{{ request('year', '') }}">
+                                                        <input class="crancy__item-input" type="text" name="year" id="year">
                                                         
                                                     </div>
-                                                    <div class="col-lg-4">
-                                                        <label class="crancy__item-label">{{ __('translate.Make') }}</label>
-                                                        <input class="crancy__item-input" type="text" name="make" id="make" value="{{ request('make', '') }}">
-                                                        
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label class="crancy__item-label">{{ __('translate.Model') }}</label>
-                                                        <input class="crancy__item-input" type="text" name="model" id="model" value="{{ request('model', '') }}">
-                                                        
-                                                    </div>
-</div>
                                                 </form>
                                             </div>
 
-                                            <div class="col-md-1" style="padding-top:12px;margin-right:-5px">
+                                            <div class="col-md-2" style="padding-top:12px;margin-right:-5px">
                                                 <button  class="crancy-btn mg-top-25" style="margin-left:10px;" type="submit" id="yearBtn">{{ __('translate.Search') }}</button>
                                             </div>
                                         </div>
