@@ -17508,3 +17508,34 @@ input:not(:placeholder-shown) + .input-placeholder {
     display: none;
 }
 
+.img_heart {
+    width: 19px !important;
+    height: 16px !important;
+    z-index: 999 !important;
+    
+}
+
+.heart_absolute {
+    left: 91% !important;
+    top: -5%;
+    z-index: 999 !important;
+}
+
+.image_1 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.image_2 {
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
+
+
+
+
+
+

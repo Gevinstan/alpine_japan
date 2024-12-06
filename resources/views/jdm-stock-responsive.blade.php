@@ -330,9 +330,7 @@
                                     <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-home" type="button" role="tab"
-                                                aria-controls="pills-home" aria-selected="true">
-
+                                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
                                                 <span>
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -346,7 +344,8 @@
                                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-profile" type="button" role="tab"
                                                 aria-controls="pills-profile" aria-selected="false"><i
-                                                    class="fa-solid fa-list"></i></button>
+                                                    class="fa-solid fa-list"></i>
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -357,17 +356,17 @@
                             <div class="d-flex align-items-center flex-wrap gap-3">
                             @if(request('brand') && count(request('brand')) > 0)
                             @foreach(request('brand') as $index => $brandSlug)
-                                <p class="position-relative filter-text px-3 py-1">
-                                    <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                            <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                <!-- <p class="position-relative filter-text px-3 py-1">
+                                    <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                            <span class="position-absolute top-0 start-100 translate-middle rounded-circle" style="z-index: 10;">
                                                 <span class="alert-close">
-                                                    <img src="{{ asset('japan_home/close (2).png') }}" alt="close" />
+                                                    <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                                 </span>
                                             </span> 
                                     </span>              
-                                </p>
+                                </p> -->
 
-                                
+        
                                 @endforeach
                                 @endif
                             @if(request('model') && count(request('model')) > 0)
@@ -409,13 +408,18 @@
                                         <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
                                                 data-aos-delay="50">
                                             <div class="brand-car-item">
-                                                <div class="brand-car-item-img">
+                                                <div class="brand-car-item-img ">
                                                     <div class="">
-                                                        <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
+                                                        <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">  
                                                     </div>
                                                 </div>
+                                                
+                                                <div class="brand-car-inner position-relative">
+                                                        <div class="position-absolute heart_absolute parent">
+                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/>         
+                                                        </div>
 
-                                                <div class="brand-car-inner">
                                                     <div class="brand-car-inner-item">
                                                         <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="{{ $car['make'] }}">
                                                             @if(session('front_lang')=='en')
