@@ -1064,7 +1064,8 @@
                 // }) 
 
                 $(".popular-search").on('change',function(e){
-                    e.preventDefault();   
+                    e.preventDefault();
+                    clear_price_slider();   
                     form.submit();
                 })
                 
