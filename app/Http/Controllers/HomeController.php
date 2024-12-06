@@ -895,6 +895,7 @@ class HomeController extends Controller
         // ->orderByDesc('count')
         // ->get();
 
+        // DB::enableQueryLog();
         $results = \DB::table($tableName) 
             ->join('models_cars as mc', function($join) use ($tableName) {
                 $join->on($tableName . '.category', '=', 'mc.category')
@@ -902,11 +903,13 @@ class HomeController extends Controller
             })
             ->whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
             ->where($tableName . '.is_active', 1)
-            ->whereNull($tableName . '.deleted_at')
+            // ->whereNull($tableName . '.deleted_at')
+            ->whereRaw('REGEXP_REPLACE(' . $tableName . '.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
             ->select($tableName . '.model', \DB::raw('COUNT(*) as count'))
             ->groupBy($tableName . '.model')
             ->orderByDesc('count')
             ->get();
+        // dd(DB::getQueryLog());    
 
     
     // Sum up all the model counts to get the total
@@ -1013,7 +1016,6 @@ class HomeController extends Controller
 
      
 
-        // DB::enableQueryLog();
         $yearRange = Cars::where('is_active', '1')
                 ->selectRaw('
                 MIN(YEAR(
@@ -1060,6 +1062,7 @@ class HomeController extends Controller
       
 
         if($type == 'car'){
+            // DB::enableQueryLog();
         
             $carsQuery =Cars::join('models_cars as mc', function($join) {
                 $join->on('blog.category', '=', 'mc.category')
@@ -1069,6 +1072,7 @@ class HomeController extends Controller
             ->where('is_active','1')
             ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
             ->select('blog.*');
+        // dd(DB::getQueryLog());    
             
         } else if($type == 'heavy'){
             $carsQuery = Heavy::join('models_cars as mc', 'mc.model', '=', 'heavy.model')
@@ -1131,7 +1135,12 @@ class HomeController extends Controller
             if ($model_arr) {
                 // echo "one";die();
                 if($type== 'car'){
-                    $carsQuery->whereIn('blog.model', $model_arr); 
+                    $carsQuery->where(function ($query) use ($model_arr) {
+                        foreach ($model_arr as $model) {
+                            $query->orWhereRaw('TRIM(blog.model) = ?', [$model]);
+                        }
+                    });
+                    // $carsQuery->whereIn('blog.model', $model_arr); 
                   }  else if($type == 'heavy'){
                       $carsQuery->whereIn('heavy.model', $model_arr);
                   } else if($type =='small_heavy'){
@@ -1378,6 +1387,8 @@ class HomeController extends Controller
         $price_range=$this->SelectedJdmRange($type,$priceRanges,$slug,
         $hasPriceRangeScale,$startValue,$endValue);
 
+
+        // echo json_encode($brand_list);die();
       
          
     
