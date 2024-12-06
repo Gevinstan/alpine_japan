@@ -7,7 +7,6 @@
 
 @php
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 @endphp
 
 @section('body-content')
@@ -244,13 +243,6 @@ use Illuminate\Support\Str;
                                         <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
-                                            <!-- <div class="top-slider-container">
-                                                <div class="top-slider">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3">
-                                                </div>
-                                            </div> -->
                                                 <div class="brand-car-item-img">
                                                     <div class="">
                                                         <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
@@ -385,7 +377,7 @@ use Illuminate\Support\Str;
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
                                                             <span class="brand-location">
-                                                            {{ isset($parsed_data['vehicle  location']) ? trim(Str::limit($parsed_data['vehicle  location'], 10, '...')) : '--' }}
+                                                            {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
                                                             </span>
                                                         </p>
                                                         <div class="d-flex flex-column">
@@ -534,7 +526,7 @@ use Illuminate\Support\Str;
                                                             </span>
                                                         </div>
                                                         <span>
-                                                            {{$car->kms}}
+                                                            --
                                                         </span>
                                                     </div>
                                                     <p>.</p>
@@ -596,9 +588,9 @@ use Illuminate\Support\Str;
                                                         $carbonInstance = Carbon::parse($car->created_at);
                                                         @endphp
 
-                                                        <p> 
+                                                        <p>
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                            <span class="brand-location">{{Str::limit($car->location, 10, '...')}}</span>
+                                                            <span class="brand-location">{{$car->location}}</span>
                                                         </p>
                                                         <div class="d-flex flex-column">
                                                             <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
@@ -851,7 +843,7 @@ use Illuminate\Support\Str;
                                             @endphp
                                             <p>
                                                 <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                <span class="brand-location"> {{ isset($parsed_data['vehicle  location']) ? trim(Str::limit($parsed_data['vehicle  location'], 10, '...')) : '--' }}</span>
+                                                <span class="brand-location"> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>
                                             </p>
                                             <div class="d-flex flex-column">
                                                 <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
@@ -1305,19 +1297,6 @@ $("#searchBtn").on('click',function(){
         $(this).addClass("active");
       });
     });
-
-    $(document).ready(function () {
-      const $slider = $('.top-slider');
-
-      $('.top-slider-container').mouseenter(function () {
-        $slider.addClass('active');
-      });
-
-      $('.top-slider-container').mouseleave(function () {
-        $slider.removeClass('active');
-      });
-    });
-    
     </script>
 @endpush
 
