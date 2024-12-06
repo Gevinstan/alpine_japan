@@ -2445,6 +2445,7 @@ public function getBrandsWithModels($keywhere,$database_name): array
             })
             ->groupBy(DB::raw('LOWER(company_en)'), 'model_name_en') // Group by brand and model
             ->distinct()
+            ->where('active_status','1')
             ->orderBy('company_en')
             ->chunk(1000, function($models) use (&$result) {
                 foreach ($models as $model) {
@@ -2817,7 +2818,6 @@ public function car_listing(Request $request){
             '$200000 - $300000' => ['min' => 200001, 'max' => 300000],
             'Above $300000' => ['min' => 300001, 'max' => PHP_INT_MAX],
         ];
-            // DB::enableQueryLog();
 
         // foreach ($price_ranges as $label => $range) {
         //     // Clone the base query to avoid modifying the original
@@ -2884,6 +2884,7 @@ public function car_listing(Request $request){
                 ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
                 ->where('bt.lang_code',Session::get('front_lang'))
+                ->where('active_status','1')
                 ->when($param == 'top-selling',function($query){
                     return $query->where('top_sell',1);
                 })
@@ -2908,7 +2909,8 @@ public function car_listing(Request $request){
                 $query =DB::table('auct_lots_xml_jp_op as t') // Alias the table dynamically
                 ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
-                ->where('bt.lang_code',Session::get('front_lang'))      
+                ->where('bt.lang_code',Session::get('front_lang'))   
+                ->where('active_status','1')   
                 ->when($param == 'top-selling',function($query){
                     return $query->where('top_sell',1);
                 })
@@ -3288,8 +3290,8 @@ public function car_listing(Request $request){
         $startValue = $minPrice;
         $endValue = $maxPrice;
 
-        DB::enableQueryLog();
-        $carsQuery = CarDataJpOp::query();
+        // DB::enableQueryLog();
+        // $carsQuery = CarDataJpOp::query();
 
         $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
