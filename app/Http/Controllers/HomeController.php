@@ -2894,19 +2894,20 @@ public function car_listing(Request $request){
                 })
                 ->where(function ($q) use ($startValue, $endValue) {
                     // Apply the budget filter on start_price_num and end_price_num
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                      ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
+                    //   ->orWhereBetween('end_price_num', [$startValue, $endValue]);
                 });
                                   
                 $count = $query->where(function ($q) use ($range) {
-                    $q->whereBetween('start_price_num', [$range['min'], $range['max']])
-                      ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
+                    $q->whereBetween('start_price_num', [$range['min'], $range['max']]);
+                    //   ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
                 })->count();
                 // Store the count for the current range
                 $priceCount[$label] = $count;
             }
         } else {
             foreach ($price_ranges as $label => $range) {    
+                // DB::enableQueryLog();
                 $query =DB::table('auct_lots_xml_jp_op as t') // Alias the table dynamically
                 ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -2919,9 +2920,10 @@ public function car_listing(Request $request){
                     return $query->where('new_arrival', 1);
                 });            
                 $count = $query->where(function ($q) use ($range) {
-                    $q->whereBetween('start_price_num', [$range['min'], $range['max']])
-                      ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
+                    $q->whereBetween('start_price_num', [$range['min'], $range['max']]);
+                    //   ->orWhereBetween('end_price_num', [$range['min'], $range['max']]);
                 })->count();
+                // dd(DB::getQueryLog());
                 // Store the count for the current range
                 $priceCount[$label] = $count;
             }
