@@ -51,7 +51,7 @@
    <section class="roro-section">
     <div class="container">
       <div class="content-section p-5 d-flex justify-content-center align-items-center flex-column gap-4">
-        <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3 pt-3">
+        <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3">
           <h4>RORO</h4>
           <p class="px-5">Each unit is driven straight into the Vessel carefully, all units are shipped under
             deck so that you receive the units in immaculate condition just as described at the
@@ -79,7 +79,7 @@
    <section class="containers-section bg-light-grey">
     <div class="container">
       <div class="content-section p-5 d-flex justify-content-center align-items-center flex-column gap-4">
-        <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3 pt-3">
+        <div class="d-flex justify-content-center align-items-center flex-column gap-4 px-3">
           <h4>Container</h4>
           <p class="px-5">We understand that Freight Cost saving plays a major role in any business,
              Thus we have provision of Container shipment on CKD (complete knock down) basis, Our Highly
@@ -107,7 +107,7 @@
   <!-- Inspection section start -->
     <section class="quality-compliance Inspection-section">
             <div class="container text-center">
-                <div class="px-5 d-flex flex-column align-items-center pt-3">
+                <div class="px-5 d-flex flex-column align-items-center">
                   <h4 class="section-title pb-4">Inspection</h4>
                   <p class="section-subtitle px-5">
                     Every country has different quality compliance procedures, Our operation team take care of that by arranging suitable third party 
@@ -153,7 +153,7 @@
 
   <!-- Our Business section Start -->
     <section class="help bg-light-grey py-5">
-      <div class="container pt-3">
+      <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 align-items-center d-flex flex-column">
             <div class="help-box">

@@ -244,13 +244,6 @@ use Illuminate\Support\Str;
                                         <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
-                                            <!-- <div class="top-slider-container">
-                                                <div class="top-slider">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3">
-                                                </div>
-                                            </div> -->
                                                 <div class="brand-car-item-img">
                                                     <div class="">
                                                         <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
@@ -1305,19 +1298,6 @@ $("#searchBtn").on('click',function(){
         $(this).addClass("active");
       });
     });
-
-    $(document).ready(function () {
-      const $slider = $('.top-slider');
-
-      $('.top-slider-container').mouseenter(function () {
-        $slider.addClass('active');
-      });
-
-      $('.top-slider-container').mouseleave(function () {
-        $slider.removeClass('active');
-      });
-    });
-    
     </script>
 @endpush
 
