@@ -960,7 +960,42 @@
 
        
 
+        // function auct_logout(){
+        //     Swal.fire({
+        //         title: "{{__('Login or Register to access this page ?')}}",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: "{{__('Yes, Ok')}}",
+        //         cancelButtonText: "{{__('Cancel')}}",
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $.noConflict();
+        //             $.ajax({
+        //                 url:"{{route('auct-sess-creation')}}",
+        //                 type:'POST',
+        //                 data:{'key':'acut_sess'},
+        //                 success:function(data){
+        //                     window.location.href = "{{ url('/user/dashboard') }}";
+        //                 }    
+        //             })
+        //             // $("#remove_car_"+id).submit();
+        //         }
 
+        //     })
+        // }
+
+
+        $(document).ready(function () {
+      $(".nav_texthead .nav-item a").click(function () {
+        // Remove 'active' class from all <li>
+        $(".nav_texthead .nav-item a").removeClass("active");
+
+        // Add 'active' class to the clicked <li>
+        $(this).addClass("active");
+      });
+    });
 
 
     </script>

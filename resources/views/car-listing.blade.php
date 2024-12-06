@@ -590,7 +590,7 @@
                                                     @endphp
                                                     <p>
                                                         <i class="bi bi-geo-alt-fill"></i>
-                                                        <span class="brand-location ">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>
+                                                        {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
                                                     </p>
                                                     <div class="d-flex flex-column">
                                                     <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
@@ -1217,10 +1217,6 @@
                 window.location.href = url.toString();
             });
         });
-        window.addEventListener("load", function() {
-            document.getElementById("pageLoader").classList.add("hidden");
-        });
-
         // closeButtonsModel.forEach(button => {
         //     button.addEventListener('click', function(event) {
         //         // Prevent default behavior
