@@ -2881,7 +2881,7 @@ public function car_listing(Request $request){
         if($hasRangeFilter){
             foreach ($price_ranges as $label => $range) {    
                 $query =DB::table('auct_lots_xml_jp_op as t') // Alias the table dynamically
-                ->join('brands as b', DB::raw('LOWER(T.company_en)'), '=', 'b.slug')
+                ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
                 ->where('bt.lang_code',Session::get('front_lang'))
                 ->when($param == 'top-selling',function($query){
