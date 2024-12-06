@@ -63,8 +63,6 @@ class HomeController extends Controller
 
     public function index(Request $request){      
 
-
-        echo "onetest";die();
         $setting = Setting::select('selected_theme')->first();
         Session::put('selected_theme', 'theme_three');
         $seo_setting = SeoSetting::where('id', 1)->first();
