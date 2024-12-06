@@ -286,7 +286,7 @@
   'Top Selling'=>'Top Selling',
   'JDM'=>'JDM',
   'New'=>'New',
-  'Arrivals'=>'Arrivals',
+  'Arrivals'=>'Arrival',
   'Cars'=>'Cars',
   'Brands'=>'Brands',
   'Categories' => 'Categories',

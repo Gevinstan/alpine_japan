@@ -1469,6 +1469,24 @@
     height: 318px;
 }
 
+.testimonial .brand-car-position-img{
+    position: absolute;
+    /* top: -184px; */
+    right: -150px;
+    z-index: -1;
+    background: url(../assets/images/thumb/categories-car.png) no-repeat;
+    width: 720px;
+    height: 318px;
+}
+.cust-global-text {
+    font-weight: 600 !important;
+    color: #757676 !important;
+}
+
+.text-case-change {
+    text-transform: none !important;
+}
+
 .brand-car .taitel .taitel-img {
     position: absolute;
     bottom: -16px;
@@ -1823,7 +1841,7 @@
     /* align-items: center; */
     justify-content: space-between;
     gap: 15px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     margin-top: 19px;
 }
 
@@ -8154,6 +8172,8 @@ p {
     background-color: var(--white-color);
     /* padding: 4px 0; */
     margin-top: 7px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
 }
 
 .header .menu-bg .nav-main {
@@ -13216,10 +13236,11 @@ h5.preloader-text::after {
     .testimonial-slick-top
     .testimonial-slick-top-txt
     h4 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 30px;
     letter-spacing: -0.03em;
+    color: #173055;
 }
 
 .testimonial
@@ -13228,10 +13249,10 @@ h5.preloader-text::after {
     .testimonial-slick-top
     .testimonial-slick-top-txt
     p {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 27px;
-    color: var(--paragraph-color);
+    font-size: .8rem;
+    font-weight: 400;
+    line-height: 22px;
+    color: #727373;
 }
 
 .testimonial .testimonial-position-img {
@@ -14019,7 +14040,7 @@ p {
 
 .banner-slick-thumb-overlay .banner-slick-thumb-txt-two h4 {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 28px;
     color: var(--white-color);
     text-align: start;
@@ -14040,10 +14061,10 @@ p {
 }
 
 .banner-slick-thumb-overlay-icon-main .banner-slick-thumb-overlay-txt {
-    font-size: 14px;
+    font-size: .85rem;
     font-weight: 400;
     line-height: 14px;
-    color: var(--white-color);
+    color: #9EA3AD;
     padding-top: 12px;
 }
 
@@ -14433,18 +14454,20 @@ p {
 
 .compliance-item {
     position: relative;
-    background-color: #fff;
     border-radius: 50%;
     width: 200px;
     height: 200px;
     margin: 0 auto;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* This aligns content to the bottom */
+    justify-content: flex-end;
     align-items: center;
     transition: transform 0.3s ease;
+    border: 7px solid #FFFFFF;
+    background: #F5F5F5;
+    box-shadow: 0px 2px 4px 0px #00000040;
+
 }
 
 .compliance-item:hover {
@@ -17156,10 +17179,28 @@ select:focus {
 
 .testimonial-p {
     font-family: "Poppins", sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     font-style: normal;
-    color: #757676;
+    color: #9D9E9E;
     font-size: 12px;
+    line-height: 23px !important;
+}
+
+.testimonial-verify-text {
+    color: #43C640;
+    padding-left: 5px;
+    margin-left: 5px;
+    position: relative;
+}
+
+.testimonial-verify-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    height: 9px; 
+    width: 1px; 
+    background-color: #717272; 
 }
 
 .testi_name {
@@ -17574,5 +17615,16 @@ input:not(:placeholder-shown) + .input-placeholder {
 
 .email-icon {
     bottom: 6px;
+}
+
+.truncate-card-text {
+    width: 40px; 
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.card-text-center {
+    text-align: center !important;
 }
 
