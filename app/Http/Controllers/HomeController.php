@@ -2885,6 +2885,7 @@ public function car_listing(Request $request){
                 ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
                 ->where('bt.lang_code',Session::get('front_lang'))
+                ->where('active_status','1')
                 ->when($param == 'top-selling',function($query){
                     return $query->where('top_sell',1);
                 })
@@ -2909,7 +2910,8 @@ public function car_listing(Request $request){
                 $query =DB::table('auct_lots_xml_jp_op as t') // Alias the table dynamically
                 ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
-                ->where('bt.lang_code',Session::get('front_lang'))      
+                ->where('bt.lang_code',Session::get('front_lang')) 
+                ->where('active_status','1')     
                 ->when($param == 'top-selling',function($query){
                     return $query->where('top_sell',1);
                 })
