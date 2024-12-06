@@ -3361,8 +3361,8 @@ public function car_listing(Request $request){
                     if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
                         // Group the conditions for this range
                         $query->orWhere(function ($subQuery) use ($result) {
-                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                                     ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                                    //  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
                         });
                     }
                 }
