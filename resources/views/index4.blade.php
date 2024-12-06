@@ -7,6 +7,7 @@
 
 @php
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 @endphp
 
 @section('body-content')
@@ -377,7 +378,8 @@ use Carbon\Carbon;
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
                                                             <span class="brand-location">
-                                                            {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
+                                                          {{ isset($parsed_data['vehicle  location']) ? trim(Str::limit($parsed_data['vehicle  location'], 10, '...')) : '--' }}
+
                                                             </span>
                                                         </p>
                                                         <div class="d-flex flex-column">
