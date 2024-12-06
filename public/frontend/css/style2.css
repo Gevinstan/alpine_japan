@@ -14267,6 +14267,7 @@ p {
     font-size: 1.75rem !important;
     padding: 0 !important;
     font-weight: 700 !important;
+    color: #2b343d !important;
 }
 
 .car-poster {
@@ -14307,7 +14308,7 @@ p {
 .buy-container h1 {
     text-align: center;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .disc {
@@ -14316,8 +14317,8 @@ p {
 .step-circle {
     background-color: white;
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 154px;
+    height: 154px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14345,14 +14346,15 @@ p {
     text-align: center;
     /* font-weight: bold; */
     margin-bottom: 10px;
-    font-weight: 600;
-    font-size: 16px !important;
+    font-weight: 700;
+    font-size: 1.2rem !important;
     line-height: 24px !important;
+    text-wrap: nowrap;
 }
 .step-description {
     text-align: center;
-    font-size: 0.7rem;
-    line-height: 1.7;
+    font-size: 0.975rem;
+    line-height: 1.5;
 }
 
 .buy-text-white {
@@ -14377,12 +14379,13 @@ p {
     position: absolute;
     width: 125px;
     height: 125px;
-    background-color: #f8f9fa;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    box-shadow: 2px 2px 4px 0px #90A4AEBF;
+    border: 2px solid #ffffff;
+    background: linear-gradient(90deg, #CCD1DA -0.01%, #FFFFFF 88%);
 }
 
 /* Responsive Layout */

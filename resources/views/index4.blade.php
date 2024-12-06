@@ -1172,8 +1172,8 @@
                     <p class="text-center disc buy-text-white d-flex justify-content-center">Adding smiles to your miles. Car buying made simpler</p>
                 </div>
 
-                <div class="row d-flex justify-content-between px-5">
-                    <div class="col-md-3">
+                <div class="d-flex gap-5 flex-column flex-lg-row flex-md-column flex-sm-column gap-5 gap-lg-4 px-5">
+                    <div>
                         <div class="step-circle">
                             <div class="inner-card">
                                 <img src="{{asset('japan_home/car_search.svg')}}" alt="search"/>
@@ -1182,7 +1182,7 @@
                         <h5 class="step-title buy-text-white">Find the perfect car</h5>
                         <p class="step-description buy-text-white">Seamlessly browse thousands of MRL Certified cars</p>
                     </div>
-                    <div class="col-md-3 my-sm-4 my-md-0">
+                    <div>
                         <div class="step-circle">
                             <div class="inner-card">
                                 <img src="{{asset('japan_home/file.svg')}}" alt="search"/>
@@ -1191,7 +1191,7 @@
                         <h5 class="step-title buy-text-white">Send Enquiry to Alpine Japan</h5>
                         <p class="step-description buy-text-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                     </div>
-                    <div class="col-md-3">
+                    <div>
                         <div class="step-circle">
                             <div class="inner-card">
                                 <img src="{{asset('japan_home/dollar.svg')}}" alt="search"/>
