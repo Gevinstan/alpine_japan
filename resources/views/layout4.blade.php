@@ -911,7 +911,7 @@
              // back to top start
     // top to bottom start
    
-    $(document).ready(function () {
+ $(document).ready(function () {
         // Back to Top Button
         $(".back-to-top").on("click", function () {
             $("html, body").animate(
