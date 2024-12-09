@@ -1165,8 +1165,18 @@ class HomeController extends Controller
                     });
                     // $carsQuery->whereIn('blog.model', $model_arr); 
                   }  else if($type == 'heavy'){
-                      $carsQuery->whereIn('heavy.model', $model_arr);
+                    $carsQuery->where(function ($query) use ($model_arr) {
+                        foreach ($model_arr as $model) {
+                            $query->orWhereRaw('TRIM(heavy.model) = ?', [$model]);
+                        }
+                    });
+                    //   $carsQuery->whereIn('heavy.model', $model_arr);
                   } else if($type =='small_heavy'){
+                    $carsQuery->where(function ($query) use ($model_arr) {
+                        foreach ($model_arr as $model) {
+                            $query->orWhereRaw('TRIM(small_heavy.model) = ?', [$model]);
+                        }
+                    });
                       $carsQuery->whereIn('small_heavy.model', $model_arr);
                   }
             }
