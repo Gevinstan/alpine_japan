@@ -232,13 +232,13 @@
 
                             </div>
 
-                            @if($google_recaptcha->status==1)
+                            {{--<!-- @if($google_recaptcha->status==1)
                                 <div class="get-in-touch-form-item">
                                     <div class="get-in-touch-form-inner">
                                         <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
                                     </div>
                                 </div>
-                            @endif
+                            @endif --> --}}
 
                             <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
                         </form>

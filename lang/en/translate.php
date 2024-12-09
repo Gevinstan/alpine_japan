@@ -334,7 +334,7 @@
   'Live Chat' => 'Live Chat',
   'Wait time of ~10 minutes.' => 'Wait time of ~10 minutes.',
   'Email Us' => 'Email Us',
-  'Get in Touch' => 'Get in Touch',
+  'Get in Touch' => 'Get In Touch',
   'Phone number' => 'Phone number',
   'Subject' => 'Subject',
   'Message' => 'Message',

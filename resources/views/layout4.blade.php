@@ -556,7 +556,7 @@
 
         <div class="container overflow-hidden px-sm-2 px-md-5">
             <div class="footer-bb d-md-flex d-sm-flex    align-items-center">
-                <div class="col-lg-5 col-p-0 p-0" data-aos="fade-right" data-aos-delay="50">
+                <div class="col-lg-5 col-p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
                         {{ __('translate.Join Our') }} <span>{{ __('translate.Newsletter') }}</span> &
                         {{ __('translate.Get updated.') }}
@@ -938,12 +938,12 @@
         <div class="copyright px-sm-2 px-md-5">
             <div class="container">
                 <div class="row ">
-                    <div class="col-lg-6 col-sm-6 col-md-6 p-0 d-flex">
+                    <div class="col-lg-6 col-sm-6 col-md-6 d-flex">
                         <div class="copyright-text d-flex align-self-center">
                             <p class="text-white heading-fs-14">{{ $setting->copyright }}</p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6  col-md-6 p-0">
+                    <div class="col-lg-6 col-sm-6  col-md-6">
                         <div class="copyright-item gap-0">
                             <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">{{ $setting->developed_by}}</a>
                             <a href="{{ route('terms-conditions') }}" class="d-flex gap-3">
