@@ -28,7 +28,7 @@ use Modules\City\Entities\City;
 use Modules\Language\Entities\Language;
 use App\Models\User;
 use App\Models\AdsBanner;
-use App\Models\Review;
+use App\Models\Review;  
 use App\Models\VehicleEnquiry;
 use App\Models\Auct_lots_xml_jp;
 use Modules\ContactMessage\Http\Requests\ContactMessageRequest;
@@ -71,13 +71,21 @@ class HomeController extends Controller
 
         $brands = Brand::where('status', 'enable')->get();
 
-        $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(12);
+        
 
-      
-
+        // $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(12);
+        $top_sells = CarDataJpOp::query()
+            ->select('auct_lots_xml_jp_op.*')
+            ->join('brands as b', function($join) {
+                $join->on(DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug');
+            })
+            ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+            ->where('bt.lang_code', Session::get('front_lang'))
+            ->where('auct_lots_xml_jp_op.top_sell', '1')
+            ->where('auct_lots_xml_jp_op.active_status', '1')
+            ->orderBy('auct_lots_xml_jp_op.id', 'desc')
+            ->get()->take(12);
        
- 
-
         $used_cars = Car::with('dealer', 'brand')->where(function ($query) {
             $query->where('expired_date', null)
                 ->orWhere('expired_date', '>=', date('Y-m-d'));
@@ -178,8 +186,20 @@ class HomeController extends Controller
            
             }
             $current_year=Date('Y');
-            $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->
-            orderBy('id','desc')->get()->take(5);
+            // $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->
+            // orderBy('id','desc')->get()->take(5);
+    
+            $new_arrivals = CarDataJpOp::query()
+            ->select('auct_lots_xml_jp_op.*')
+            ->join('brands as b', function($join) {
+                $join->on(DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug');
+            })
+            ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+            ->where('bt.lang_code', Session::get('front_lang'))
+            ->where('auct_lots_xml_jp_op.new_arrival', '1')
+            ->where('auct_lots_xml_jp_op.active_status', '1')
+            ->orderBy('auct_lots_xml_jp_op.id', 'desc')
+            ->get()->take(5);
     
             foreach($new_arrivals as $cars){
                 $last_image=$this->last_image($cars->pictures);
@@ -899,16 +919,19 @@ class HomeController extends Controller
         $results = \DB::table($tableName) 
             ->join('models_cars as mc', function($join) use ($tableName) {
                 $join->on($tableName . '.category', '=', 'mc.category')
-                    ->on($tableName . '.model', '=', 'mc.model');
+                ->on(DB::raw('TRIM(' . $tableName . '.model)'), '=', DB::raw('TRIM(mc.model)'));
+                    // ->on($tableName . '.model', '=', 'mc.model');
             })
             ->whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
             ->where($tableName . '.is_active', 1)
             // ->whereNull($tableName . '.deleted_at')
             ->whereRaw('REGEXP_REPLACE(' . $tableName . '.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
-            ->select($tableName . '.model', \DB::raw('COUNT(*) as count'))
+            ->select(DB::raw('TRIM(' . $tableName . '.model) as model'), \DB::raw('COUNT(*) as count'))
             ->groupBy($tableName . '.model')
             ->orderByDesc('count')
             ->get();
+
+            // echo json_encode($results);die();
         // dd(DB::getQueryLog());    
 
     
