@@ -53,7 +53,7 @@
                                                                             {{$brand_label->name}}
                                                                             </label>
                                                                         </div>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                        <div id="collapseOne" class="accordion-collapse collapse {{ request('brand',[]) ? 'show' : '' }} w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                             <div class="accordion-body">
                                                                                 <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                                         @foreach ($brand_arr as $brand)

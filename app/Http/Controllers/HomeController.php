@@ -2706,7 +2706,6 @@ public function car_listing(Request $request){
     // ->orderBy('id','desc')y
     // ->paginate(12);
     $cars = $carsQuery->orderBy('id', 'desc')
-    ->where('active_status','1')
     ->select('auct_lots_xml_jp_op.*')->paginate(12);
 
 
