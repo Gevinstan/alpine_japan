@@ -1039,15 +1039,8 @@
 
 
     <!--   Testimonial-part-start -->
-    <section class=" testimonial py-5 my-4 overflow-hidden px-lg-5">
+    <section class=" testimonial testimonial-padding py-5 overflow-hidden px-lg-5">
         <div class="container px-2 px-sm-3 px-lg-5">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="brand-car-position-img">
-
-                    </div>
-                </div>
-            </div>
             <div class="row px-5">
                 <div class="col-lg-5">
 
@@ -1183,7 +1176,7 @@
                     <p class="text-center disc buy-text-white d-flex justify-content-center">Adding smiles to your miles. Car buying made simpler</p>
                 </div>
 
-                <div class="d-flex gap-5 flex-column flex-lg-row flex-md-column flex-sm-column gap-5 gap-lg-4 px-5">
+                <div class="d-flex gap-5 flex-column flex-lg-row flex-md-column flex-sm-column gap-5 gap-lg-4 px-5 justify-content-center">
                     <div>
                         <div class="step-circle">
                             <div class="inner-card">
