@@ -1022,7 +1022,7 @@
                 
                 $(".popular-search").on('change',function(e){
                     e.preventDefault();   
-                    clear_price_slider();
+                    // clear_price_slider();
                     form.submit();
                 })
 

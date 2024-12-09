@@ -742,7 +742,7 @@
                                                         @else
                                                             {{ $car['company_en'] }}
                                                         @endif
-                                                    </span>
+                                                    </span>     
                                                     <p class="listcar_price pt-3 pe-4">
                                                        @if(session('front_lang')=='en')
                                                         {{ '$'.$car['start_price_num'] }}
@@ -1065,7 +1065,7 @@
 
                 $(".popular-search").on('change',function(e){
                     e.preventDefault();
-                    clear_price_slider();   
+                    // clear_price_slider();   
                     form.submit();
                 })
                 
