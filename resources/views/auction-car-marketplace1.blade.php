@@ -395,7 +395,7 @@
                                                         </div>
                                                 <div class="brand-car-inner-item">
 
-                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="{{ $car['company'] }}">
+                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="{{ $car['company_en'] }}">
                                                         @if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                         @else
@@ -414,7 +414,7 @@
 
                                                 </div>
 
-                                                <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name']) }}">
+                                                <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name_en']) }}">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
