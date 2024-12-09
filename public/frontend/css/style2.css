@@ -1474,7 +1474,7 @@
     /* top: -184px; */
     right: -150px;
     z-index: -1;
-    background: url(../assets/images/thumb/categories-car.png) no-repeat;
+    background: url(../../japan_home/testimonial_car.png) no-repeat;
     width: 720px;
     height: 318px;
 }
@@ -13273,13 +13273,23 @@ h5.preloader-text::after {
 
 .testimonial .testimonial-position-img .testimonial-position-img-right {
     position: absolute;
-    bottom: -120px;
-    right: -370px;
+    bottom: -157px;
+    right: -120px;
     z-index: -1;
-    /* background: url(../assets/images/thumb/testimonial-pos-right.png) no-repeat
-        center; */
-    width: 721.37px;
-    height: 318.51px;
+    background: url(../../japan_home/testimonial_car.png) no-repeat
+        center;
+    width: 376px;
+    height: 236px;
+}
+
+@media (max-width: 768px) {
+    .testimonial .testimonial-position-img .testimonial-position-img-right {
+        display: none;
+    }
+}
+
+.testimonial-padding {
+    padding-bottom: 116px !important;
 }
 
 .testimonial.two .feature-slick-next {
