@@ -1314,5 +1314,13 @@ window.addEventListener("load", function() {
             $j('#ex3').slider();
         });
 
+    // Newly added script code
+
+        AOS.init({  
+             
+        duration: 500, // Animation duration in milliseconds
+        once: true, // Animation happens only once on page load        
+        delay: 0, // Delay before animation starts
+    });
     </script>
 @endpush

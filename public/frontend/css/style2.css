@@ -1469,6 +1469,24 @@
     height: 318px;
 }
 
+.testimonial .brand-car-position-img{
+    position: absolute;
+    /* top: -184px; */
+    right: -150px;
+    z-index: -1;
+    background: url(../../japan_home/testimonial_car.png) no-repeat;
+    width: 720px;
+    height: 318px;
+}
+.cust-global-text {
+    font-weight: 600 !important;
+    color: #757676 !important;
+}
+
+.text-case-change {
+    text-transform: none !important;
+}
+
 .brand-car .taitel .taitel-img {
     position: absolute;
     bottom: -16px;
@@ -1823,7 +1841,7 @@
     /* align-items: center; */
     justify-content: space-between;
     gap: 15px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     margin-top: 19px;
 }
 
@@ -7467,7 +7485,7 @@ p {
 
 .footer .newsletter-sarch-box-main-item .form-label {
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 28px;
     color: var(--white-color);
     padding-top: 12px;
@@ -7525,7 +7543,7 @@ p {
 }
 
 .footer .footer-icon .text h5 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: var(--regular);
     color: var(--white-color);
     font-family: var(--roboto);
@@ -7552,7 +7570,7 @@ p {
 }
 
 .footer .footer-item-text {
-    padding-bottom: 16px;
+    padding-bottom: 5px;
 }
 
 .footer .footer-item-text h3 {
@@ -8154,6 +8172,8 @@ p {
     background-color: var(--white-color);
     /* padding: 4px 0; */
     margin-top: 7px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
 }
 
 .header .menu-bg .nav-main {
@@ -13216,10 +13236,11 @@ h5.preloader-text::after {
     .testimonial-slick-top
     .testimonial-slick-top-txt
     h4 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 30px;
     letter-spacing: -0.03em;
+    color: #173055;
 }
 
 .testimonial
@@ -13228,10 +13249,10 @@ h5.preloader-text::after {
     .testimonial-slick-top
     .testimonial-slick-top-txt
     p {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 27px;
-    color: var(--paragraph-color);
+    font-size: .8rem;
+    font-weight: 400;
+    line-height: 22px;
+    color: #727373;
 }
 
 .testimonial .testimonial-position-img {
@@ -13242,7 +13263,7 @@ h5.preloader-text::after {
 .testimonial .testimonial-position-img .testimonial-position-img-left {
     position: absolute;
     bottom: -30px;
-    left: -224px;
+    left: -238px;
     z-index: -1;
     background: url(../assets/images/thumb/testimonial-pos-left.png) no-repeat
         center;
@@ -13252,13 +13273,23 @@ h5.preloader-text::after {
 
 .testimonial .testimonial-position-img .testimonial-position-img-right {
     position: absolute;
-    bottom: -120px;
-    right: -370px;
+    bottom: -157px;
+    right: -120px;
     z-index: -1;
-    /* background: url(../assets/images/thumb/testimonial-pos-right.png) no-repeat
-        center; */
-    width: 721.37px;
-    height: 318.51px;
+    background: url(../../japan_home/testimonial_car.png) no-repeat
+        center;
+    width: 376px;
+    height: 236px;
+}
+
+@media (max-width: 768px) {
+    .testimonial .testimonial-position-img .testimonial-position-img-right {
+        display: none;
+    }
+}
+
+.testimonial-padding {
+    padding-bottom: 116px !important;
 }
 
 .testimonial.two .feature-slick-next {
@@ -14019,7 +14050,7 @@ p {
 
 .banner-slick-thumb-overlay .banner-slick-thumb-txt-two h4 {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 28px;
     color: var(--white-color);
     text-align: start;
@@ -14040,10 +14071,10 @@ p {
 }
 
 .banner-slick-thumb-overlay-icon-main .banner-slick-thumb-overlay-txt {
-    font-size: 14px;
+    font-size: .85rem;
     font-weight: 400;
     line-height: 14px;
-    color: var(--white-color);
+    color: #9EA3AD;
     padding-top: 12px;
 }
 
@@ -14203,7 +14234,7 @@ p {
 .highlight {
     color: #005bac !important;
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
 }
 
@@ -14267,6 +14298,7 @@ p {
     font-size: 1.75rem !important;
     padding: 0 !important;
     font-weight: 700 !important;
+    color: #2b343d !important;
 }
 
 .car-poster {
@@ -14286,8 +14318,9 @@ p {
 }
 
 .video-content h2 {
-    font-size: 2rem;
-    line-height: 45px !important;
+    font-size: 1.7rem;
+    line-height: 40px !important;
+    font-weight: 500;
 }
 
 /**********  Car Buy section Start  *********/
@@ -14306,7 +14339,7 @@ p {
 .buy-container h1 {
     text-align: center;
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .disc {
@@ -14315,8 +14348,8 @@ p {
 .step-circle {
     background-color: white;
     border-radius: 50%;
-    width: 150px;
-    height: 150px;
+    width: 154px;
+    height: 154px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14344,14 +14377,15 @@ p {
     text-align: center;
     /* font-weight: bold; */
     margin-bottom: 10px;
-    font-weight: 600;
-    font-size: 16px !important;
+    font-weight: 700;
+    font-size: 1.2rem !important;
     line-height: 24px !important;
+    text-wrap: nowrap;
 }
 .step-description {
     text-align: center;
-    font-size: 0.7rem;
-    line-height: 1.7;
+    font-size: 0.975rem;
+    line-height: 1.5;
 }
 
 .buy-text-white {
@@ -14376,12 +14410,13 @@ p {
     position: absolute;
     width: 125px;
     height: 125px;
-    background-color: #f8f9fa;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1); /* Inner shadow */
+    box-shadow: 2px 2px 4px 0px #90A4AEBF;
+    border: 2px solid #ffffff;
+    background: linear-gradient(90deg, #CCD1DA -0.01%, #FFFFFF 88%);
 }
 
 /* Responsive Layout */
@@ -14402,7 +14437,7 @@ p {
 
 .quality-compliance .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
 }
@@ -14412,6 +14447,7 @@ p {
     font-family: "Poppins", serif;
     font-weight: 700;
     font-style: normal;
+    color: #2B343D !important;
 }
 
 .section-title .highlight {
@@ -14428,18 +14464,20 @@ p {
 
 .compliance-item {
     position: relative;
-    background-color: #fff;
     border-radius: 50%;
     width: 200px;
     height: 200px;
     margin: 0 auto;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* This aligns content to the bottom */
+    justify-content: flex-end;
     align-items: center;
     transition: transform 0.3s ease;
+    border: 7px solid #FFFFFF;
+    background: #F5F5F5;
+    box-shadow: 0px 2px 4px 0px #00000040;
+
 }
 
 .compliance-item:hover {
@@ -14593,6 +14631,7 @@ p {
     padding: 10px 15px !important;
     background-color: #2e326c !important;
     color: var(--white-color) !important;
+    padding-left: 25px !important;
 }
 
 .email-btn {
@@ -14961,7 +15000,7 @@ p {
     font-size: 12px !important;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,.dropdown-item.active {
     text-decoration: underline;
     text-decoration-color: #038ffc;
     text-underline-offset: 4px;
@@ -15061,9 +15100,9 @@ p {
     height: 41.25rem;
 }
 
-.inventory-sarch-ber input:focus + .search-btn {
+/* .inventory-sarch-ber input:focus + .search-btn {
     display: none;
-}
+} */
 
 /* .inventory-sarch-ber input {
     border: 1px solid #038FFC !important;
@@ -15677,6 +15716,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     color: #818181;
     font-size: 0.8rem;
     line-height: 20px !important;
+    font-weight: 500;
 }
 
 .about-section p:nth-child(1) {
@@ -15926,7 +15966,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .about-section .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -15943,7 +15983,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .feature .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -15958,7 +15998,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .brand-car .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -15972,7 +16012,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 .categories .highlight {
     font-family: "Poppins", serif;
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
     font-size: 1.75rem;
     color: #005bac;
@@ -17095,7 +17135,7 @@ select:focus {
 }
 
 .dropdown-toggle::after {
-    color: #6e6e6e; /* Grey color for the arrow */
+    color: var(--white-color); 
 }
 
 .main_wid_aboutus {
@@ -17165,10 +17205,28 @@ select:focus {
 
 .testimonial-p {
     font-family: "Poppins", sans-serif;
-    font-weight: 600;
+    font-weight: 400;
     font-style: normal;
-    color: #757676;
+    color: #9D9E9E;
     font-size: 12px;
+    line-height: 23px !important;
+}
+
+.testimonial-verify-text {
+    color: #43C640;
+    padding-left: 5px;
+    margin-left: 5px;
+    position: relative;
+}
+
+.testimonial-verify-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    height: 9px; 
+    width: 1px; 
+    background-color: #717272; 
 }
 
 .testi_name {
@@ -17525,6 +17583,31 @@ input:not(:placeholder-shown) + .input-placeholder {
     display: none;
 }
 
+.img_heart {
+    width: 19px !important;
+    height: 16px !important;
+    z-index: 999 !important;
+    
+}
+
+.heart_absolute {
+    left: 91% !important;
+    top: -5%;
+    z-index: 999 !important;
+}
+
+.image_1 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.image_2 {
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
 .contact-text-black {
     color: #2B343D !important;
 }
@@ -17565,4 +17648,34 @@ input:not(:placeholder-shown) + .input-placeholder {
   .top-slider.active {
     animation: slide 6s infinite;
   }
+
+  .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.nav-item .dropdown-menu {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.email-icon {
+    bottom: 6px;
+}
+
+.truncate-card-text {
+    width: 40px; 
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.card-text-center {
+    text-align: center !important;
+}
 

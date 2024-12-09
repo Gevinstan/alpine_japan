@@ -868,6 +868,8 @@ endRange.addEventListener('input', () => {
         // });
     });
 })(jQuery);
+
+
 </script>   <!------- Range ------->
 <!-- <script> -->
         

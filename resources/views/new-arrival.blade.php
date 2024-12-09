@@ -776,6 +776,10 @@ endRange.addEventListener('input', () => {
         // });
     });
 })(jQuery);
+
+// Newly added script code
+
+ 
 </script>   <!------- Range ------->
 <!-- <script> -->
         

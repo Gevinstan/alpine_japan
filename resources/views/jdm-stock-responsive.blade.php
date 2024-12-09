@@ -24,8 +24,7 @@
                 </nav>
                 <div class="row">
                     <div class="col-lg-3">
-                        <form action="" id="search_form">
-                            
+                        <form action="" id="search_form">                       
                             <!-- Select Your Brand Start-->
                                 <div class="inventory-main-box mb-2">
                                     <!-- Select Your Brand  -->
@@ -43,7 +42,7 @@
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box border-0 px-2">
                                                     
-                                                                <div class="accordion" id="accordionExample">
+                                                            <div class="accordion" id="accordionExample">
                                                                 <div class="accordion-item">
                                                                     <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                         <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -70,11 +69,11 @@
                                                                                 </span>
                                                                             </div>
                                                                         </div>
-                                                            </span>
-                                                        </div>
-                                                        </div> 
+                                                                    </span>
+                                                                </div>
+                                                            </div> 
                                         
-                                                </span>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,9 +138,9 @@
 
                                 </div>
                             <!-- Select Your Year End -->
-                        
+
                             <!-- Select Your Budget Start -->
-                                <!-- <div class="inventory-main-box my-2">   
+                           <!-- <div class="inventory-main-box my-2">   
                                     
                                     <div class="accordion" id="accordionPanelsStayOpenExample4" class="accordion_dd">
                                         <div class="accordion-item ps-3">
@@ -288,7 +287,7 @@
 
                                         <span class="search-btn" style="cursor: pointer;">
 
-                                        <a href="javascript:void(0);" id="outside_form_btn"><i class="bi bi-search search_icon"></i></a>
+                                            <a href="javascript:void(0);" id="outside_form_btn"><i class="bi bi-search search_icon"></i></a>
                                         
                                         </span>
                                         
@@ -328,9 +327,7 @@
                                     <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-home" type="button" role="tab"
-                                                aria-controls="pills-home" aria-selected="true">
-
+                                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
                                                 <span>
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -344,7 +341,8 @@
                                             <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-profile" type="button" role="tab"
                                                 aria-controls="pills-profile" aria-selected="false"><i
-                                                    class="fa-solid fa-list"></i></button>
+                                                    class="fa-solid fa-list"></i>
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>
@@ -354,17 +352,17 @@
                         <div class="filtered-section d-flex justify-content-between align-content-center gap-2 px-3 mb-3">
                             <div class="d-flex align-items-center flex-wrap gap-3">
                             {{--@if(request('brand') && count(request('brand')) > 0)
-                        @foreach(request('brand') as $index => $brandSlug)
-                            <p class="position-relative filter-text px-3 py-1">
-                                <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
-                                            <span class="alert-close">
-                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
-                                            </span>
-                                        </span> 
-                                </span>              
-                            </p>
-                            @endforeach
+                                 @foreach(request('brand') as $index => $brandSlug)
+                                    <p class="position-relative filter-text px-3 py-1">
+                                        <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                                <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                                    <span class="alert-close">
+                                                        <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
+                                                    </span>
+                                                </span> 
+                                        </span>              
+                                    </p>
+                                @endforeach
                             @endif --}}
                             @if(request('model') && count(request('model')) > 0)
                             @foreach(request('model') as $index => $brandSlug)
@@ -405,7 +403,7 @@
                                         <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
                                                 data-aos-delay="50">
                                             <div class="brand-car-item">
-                                                <div class="brand-car-item-img">
+                                                <div class="brand-car-item-img ">
                                                     <div class="">
                                                     <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
                                                                 asset('Cars/' .  $car['picture']) : 
@@ -413,8 +411,13 @@
                                                         alt="thumb" class="card_image">
                                                     </div>
                                                 </div>
+                                                
+                                                <div class="brand-car-inner position-relative">
+                                                        <div class="position-absolute heart_absolute parent">
+                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/>         
+                                                        </div>
 
-                                                <div class="brand-car-inner">
                                                     <div class="brand-car-inner-item">
                                                         <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
                                                         title="@if(session('front_lang')=='en')
