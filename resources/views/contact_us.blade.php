@@ -16,7 +16,7 @@
                     <div>
                         <!-- <h2 class="contact_us" >Contact</h2> 
                         <h2 class="contact_us contact-us-color">Us</h2> -->
-                        <h2 class="section-heading">Contact <span class="highlight"> Us<span></h2>
+                        <h2 class="section-heading contact-text-black">Contact <span class="highlight"> Us<span></h2>
                     </div>
                 </div>
             </div>

@@ -8,7 +8,8 @@
     .dealer .dealer-img img {
         left: 124px;
     }
-    .brand-car .brand-car-position-img {
+    .brand-car .brand-car-position-img,
+    .testimonial .brand-car-position-img {
         right: 0;
         width: 572px;
     }
@@ -865,7 +866,8 @@
         bottom: 70px;
         right: 180px;
     }
-    .brand-car .brand-car-position-img {
+    .brand-car .brand-car-position-img,
+    .testimonial .brand-car-position-img {
         display: none;
     }
     .actions-btn-item {
@@ -1479,7 +1481,8 @@
         bottom: 70px;
         right: 100px;
     }
-    .brand-car .brand-car-position-img {
+    .brand-car .brand-car-position-img,
+    .testimonial.brand-car-position-img {
         display: none;
     }
     .car-images
@@ -2593,7 +2596,8 @@
     .form-check {
         display: block;
     }
-    .brand-car .brand-car-position-img {
+    .brand-car .brand-car-position-img,
+    .testimonial .brand-car-position-img {
         display: none;
     }
     .feature .feature-position-img {
