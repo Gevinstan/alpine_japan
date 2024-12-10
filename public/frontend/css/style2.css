@@ -10161,7 +10161,7 @@ p {
 }
 
 .inventory-details .auto-sales-item {
-    padding: 0px 30px;
+    /* padding: 0px 30px; */
     border-radius: 10px;
     background-color: #f9faff;
 }
