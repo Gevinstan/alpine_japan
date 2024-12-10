@@ -14260,6 +14260,7 @@ p {
     color: var(--primary-color-1) !important;
     text-decoration: none;
     font-weight: 600;
+    background: #ffffff !important;
 }
 
 /************ NAV-BAR DROPDOWN STYLE END **************/
