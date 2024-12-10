@@ -38,9 +38,9 @@
                                         </div>
                                     </div>
                                     <div class="image-zoom-container">
-        <img class="main-image" src="{{ asset($gallery) }}" alt="img">
-        <div class="zoom-lens"></div>
-    </div>
+                                        <img class="main-image" src="{{ asset($gallery) }}" alt="img">
+                                        <div class="zoom-lens"></div>
+                                    </div>
                                     <!-- <a href="#"><img class="main-image" src="{{ asset($gallery) }}" alt="img"></a> -->
                                 </div>
                             @endforeach

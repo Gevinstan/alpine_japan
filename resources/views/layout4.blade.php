@@ -188,7 +188,7 @@
                                         <li class="nav-item">
                                         
                                             @if(Auth::guard('web')->check())
-                                                    <a class="nav-link mx-2 {{ Route::is('auction-car-marketplace') ? 'active' : '' }}" href="{{ route('auction-car-marketplace-responsive') }}">
+                                                    <a class="nav-link mx-2 {{ Route::is('auction-car-marketplace') ? 'active' : '' }}" href="{{ route('auction-car-marketplace') }}">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @else 
