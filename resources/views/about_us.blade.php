@@ -373,7 +373,7 @@
     <!---- Our Vision ends ---->
     <!--   Testimonial-part-start -->
 
-    <section class=" testimonial testimonial-top px-2 px-sm-3 px-lg-5 mt-5">
+    <!-- <section class=" testimonial testimonial-top px-2 px-sm-3 px-lg-5 mt-5">
         <div class="container ">
             <div class="row ps-5">
                 <div class="col-lg-5 ps-5">
@@ -381,19 +381,10 @@
                     <div class="sm-df ps-5">
                         <div class="t-df-sm">
                             <div class="taitel two">
-                                <!-- <div class="taitel-img">
-                                    <span>
-                                        <svg width="154" height="6" viewBox="0 0 154 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 5C21.777 1.98151 81.2647 -2.24439 153 5" stroke="#038ffc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                </div>
-                                <span>
-                                    {{ __('translate.Our Testimonial') }}
-                                </span> -->
+                               
                             </div>
 
-                            <!-- <h2 class="testimonial-taitel">{{ __('translate.Customer Say About Our Services') }}</h2> -->
+                           
                              <h3 class="cus_our_services">Customer Say About</h3>
                              <h3 class="our_services">Our Services</h3>
                             <p class="testimonial-p py-2">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
@@ -456,6 +447,131 @@
                                         </div>
 
                                         <div class="testimonial-btm-item-txt-item">
+
+                                            <ul>
+                                                <li>
+                                                    <span>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </span>
+                                                </li>
+                                                <li>
+                                                    <span>
+                                                        <i class="fa-solid fa-star"></i>
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="testimonial-position-img">
+                        <div class="testimonial-position-img-left">
+
+                        </div>
+                        <div class="testimonial-position-img-right">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class=" testimonial testimonial-padding py-5 overflow-hidden px-lg-5">
+        <div class="container px-2 px-sm-3 px-lg-5">
+            <div class="row px-5">
+                <div class="col-lg-5">
+
+                    <div class="sm-df">
+                        <div class="t-df-sm">
+
+                            <h2 class="section-heading">Customer Say About </br><span class="highlight">Our Services</span></h2>
+                            <p class="testimonial-p cust-global-text">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
+                        </div>
+
+                        <div class="t-df-item">
+                            <div class="testimonial-slick-btn">
+                                <div class="feature-slick-prev testimonial-slick-prve">
+                                    <span>
+                                        <svg width="23" height="16" viewBox="0 0 23 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 1L1 8M1 8L8 15M1 8L22 8" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="feature-slick-next testimonial-slick-next">
+                                    <span>
+                                        <svg width="23" height="16" viewBox="0 0 23 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15 15L22 8M22 8L15 0.999999M22 8L1 8" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-6">
+                    <div class="testimonial-slick-main">
+                        <div class="testimonial-slick">
+
+                            @foreach ($testimonials as $index => $testimonial)
+                                <div class="testimonial-slick-top-main">
+                                    <div class="testimonial-slick-top">
+                                        <div class="testimonial-slick-top-thumb">
+                                            <img src="{{ asset($testimonial->image) }}"
+                                                alt="thumb">
+                                        </div>
+
+                                        <div class="testimonial-slick-top-txt">
+                                            <h4>{{ $testimonial->name }}</h4>
+                                            <p>
+                                                <span>Hyogo, Japan  -   Jun 07, 2024 &nbsp;</span>
+                                                <span class="testimonial-verify-text"> &nbsp; Verified Buyer</span>
+                                            </p>
+                                            <!-- <p>{{ $testimonial->designation }}</p> -->
+                                        </div>
+                                    </div>
+                                    <p class="testimonial-p">{{ $testimonial->comment }}</p>
+
+
+                                    <div class="testimonial-btm-item">
+                                        <div class="testimonial-btm-item-thumb">
+                                            <span>
+                                                <svg width="54" height="40" viewBox="0 0 54 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M49.5406 4.06287C47.1408 1.36698 44.2282 0 40.8838 0C37.8781 0 35.33 1.07033 33.3098 3.18112C31.3024 5.27842 30.2845 7.88345 30.2845 10.924C30.2845 13.7974 31.3127 16.3578 33.3404 18.5344C35.129 20.4545 37.3822 21.6759 40.0496 22.1736C39.5831 25.7101 36.4568 28.9111 30.7387 31.7003L29.709 32.2026L33.9307 39.9964L34.8837 39.5134C46.976 33.3839 53.1072 24.7214 53.1072 13.7664C53.1072 9.98687 51.9073 6.72226 49.5406 4.06287ZM34.8388 37.062L32.7236 33.1576C39.0843 29.8246 42.3069 25.8181 42.3069 21.2372V20.2564L41.3324 20.146C38.7077 19.849 36.6191 18.8322 34.9474 17.0374C33.2877 15.2557 32.4808 13.2562 32.4808 10.924C32.4808 8.43381 33.2711 6.39791 34.8964 4.69953C36.5086 3.01495 38.4672 2.19605 40.8839 2.19605C43.6124 2.19605 45.9074 3.28432 47.9 5.5229C49.9262 7.79943 50.9111 10.4958 50.9111 13.7663C50.9111 18.7872 49.4973 23.3202 46.7091 27.2392C44.0485 30.9785 40.0582 34.2797 34.8388 37.062Z" fill="#038FFC"/>
+                                                    <path d="M19.7738 4.0579C17.3473 1.36532 14.4226 0 11.0807 0C8.07213 0 5.53555 1.0723 3.54187 3.18703C1.5653 5.2835 0.563015 7.88657 0.563015 10.924C0.563015 13.7973 1.59113 16.3577 3.61863 18.5344C5.40351 20.4504 7.62964 21.6706 10.2474 22.1706C9.78658 25.7098 6.68627 28.9124 1.01401 31.7021L0 32.2006L4.1166 40L5.07906 39.5144C17.2262 33.3852 23.3853 24.7223 23.3853 13.7663C23.3852 9.98387 22.17 6.71749 19.7738 4.0579ZM5.04711 37.0583L2.98964 33.1599C9.30416 29.8257 12.5037 25.8182 12.5037 21.2371V20.2585L11.5314 20.1463C8.96052 19.8496 6.89766 18.8327 5.22542 17.0373C3.56573 15.2558 2.75906 13.2561 2.75906 10.924C2.75906 8.4306 3.53782 6.39252 5.13964 4.69362C6.72402 3.01308 8.6675 2.19605 11.0807 2.19605C13.8119 2.19605 16.122 3.28588 18.1422 5.52798C20.1925 7.80328 21.1892 10.4981 21.1892 13.7663C21.1892 18.7864 19.7692 23.3188 16.9683 27.2374C14.2963 30.9756 10.2888 34.2763 5.04711 37.0583Z" fill="#038FFC"/>
+                                                    </svg>
+
+                                            </span>
+                                        </div>
+
+                                        <div class="testimonial-btm-item-txt-item">
                                             <!-- <h6>{{ __('translate.Quality Service') }}</h6> -->
 
                                             <ul>
@@ -489,6 +605,7 @@
                                     </div>
                                 </div>
                             @endforeach
+
                         </div>
                     </div>
                 </div>
