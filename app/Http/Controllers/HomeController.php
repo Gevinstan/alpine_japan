@@ -43,6 +43,7 @@ use Modules\Models\Entities\ModelsCars;
 use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
 use Cache;
+use Carbon\Carbon;  
 
 
 use App\Helpers\MailHelper;
@@ -2568,7 +2569,10 @@ public function car_listing(Request $request){
 
 
         $minYear = $yearRange->min_year;
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = Carbon::now()->year;
+       
+
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
