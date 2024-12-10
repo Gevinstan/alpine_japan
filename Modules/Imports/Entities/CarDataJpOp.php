@@ -17,4 +17,6 @@ class CarDataJpOp extends Model
     protected $table = 'auct_lots_xml_jp_op';
     protected $dates=['deleted_at'];
 
+    
+
 }

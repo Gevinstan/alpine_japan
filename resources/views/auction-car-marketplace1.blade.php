@@ -280,7 +280,7 @@
                                                                 @if(request('price_range_scale'))
                                                                     <button class="clear-button" id="clear-budget">Clear</button>
                                                                 @endif 
-                                                                <button class="go-button" type="button" id="budget_search">Go</button>v
+                                                                <button class="go-button" type="button" id="budget_search">Go</button>
                                                             </div>
                                                         </div>
                                                         <div class="row budget-space">
