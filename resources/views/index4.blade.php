@@ -29,7 +29,7 @@ use Carbon\Carbon;
                         <span>{{ $homepage->home3_intro_short_title }}</span>
                         <h1 class="banner-h1">Simplifying Your Car </br>
                         <span class="banner-h1">Buying Experience</span></h1>
-                        <p>We are committed to helping you find the perfect car with confidence and ease. 
+                        <p>We're committed to helping you find the perfect car with confidence and ease. 
                         Start your simplified car buying experience with us today!</p>
                     </div>
                     <div class="banner-search-bar">
