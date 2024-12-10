@@ -189,6 +189,7 @@ class HomeController extends Controller
             // $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->
             // orderBy('id','desc')->get()->take(5);
     
+         
             $new_arrivals = CarDataJpOp::query()
             ->select('auct_lots_xml_jp_op.*')
             ->join('brands as b', function($join) {
@@ -200,6 +201,7 @@ class HomeController extends Controller
             ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
             ->get()->take(5);
+          
     
             foreach($new_arrivals as $cars){
                 $last_image=$this->last_image($cars->pictures);
@@ -2544,24 +2546,13 @@ public function getJdmBrandsWithModels(): array
 }
 public function car_listing(Request $request){
 
-    
-
-    // echo json_encode($request->all());die();
 
         $seo_setting = SeoSetting::where('id', 1)->first();
-
-   
-
-        // $brands = Brand::where('status', 'enable')->get();
-
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
         ->where('bt.lang_code',Session::get('front_lang'))
         ->select('b.slug','bt.name as name')
         ->distinct('b.slug')->get();
-
-        // echo json_encode($brands);die();
-
 
         $keyWhere ="";
         $tableName='1';
@@ -2630,10 +2621,19 @@ public function car_listing(Request $request){
     }
 
     if($request->model){
-        $model_arr = array_filter($request->model); // Filter out any empty values
-        if ($model_arr) {
-            $carsQuery->whereIn('model_name_en', $model_arr); 
+        $model_arr = [];
+        foreach ($request->model as $brandSlug => $models) {
+            if (is_array($models)) {
+                $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+            }
         }
+        if ($model_arr) {
+            $carsQuery->whereIn('model_name_en', $model_arr);
+        }
+        // $model_arr = array_filter($request->model); // Filter out any empty values
+        // if ($model_arr) {
+        //     $carsQuery->whereIn('model_name_en', $model_arr); 
+        // }
     }
 
 
