@@ -57,6 +57,12 @@ class ImportsController extends Controller
         if($request->year){
             $commissions=$cars->where('model_year_en',$request->year);
         }
+        if($request->make){
+            $commissions=$cars->where(DB::raw('LOWER(company_en)'), $request->make);
+        }
+        if($request->model){
+            $commissions=$cars->where('model_name_en',$request->model);
+        }
 
         $commissions = $cars->where('active_status', 1)
         ->orderBy('updated_at', 'desc')

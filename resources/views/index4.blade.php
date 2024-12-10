@@ -5,19 +5,31 @@
     <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
 @endsection
 
+@php
+use Carbon\Carbon;
+@endphp
+
 @section('body-content')
 <main class="w-100 main_wid">
+    <div id="pageLoader">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+  </div>
     <!-- banner-part-start  -->
 
     <section class="banner mb-5 background_image">
         <div class="container">
-            <div class="row align-items-center px-2 px-lg-5 pb-5">
+
+            <!-- <div class="row align-items-center px-2 px-lg-5 pb-5"> -->
+            <div class="row align-items-center px-5  pb-5 pt-2">
+
                 <div class="col-lg-12 col-xl-8">
                     <div class="banner-taitel">
                         <span>{{ $homepage->home3_intro_short_title }}</span>
                         <h1 class="banner-h1">Simplifying Your Car </br>
                         <span class="banner-h1">Buying Experience</span></h1>
-                        <p>We're committed to helping you find the perfect car with confidence and ease. 
+                        <p>We are committed to helping you find the perfect car with confidence and ease. 
                         Start your simplified car buying experience with us today!</p>
                     </div>
                     <div class="banner-search-bar">
@@ -35,11 +47,13 @@
                             </ul>
                         </div>
                         <div>
-                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all-resposive')}}">
+                            <!-- <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}"> -->
+                            <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('fixed-car-marketplace')}}">
                                 <ul class="nav nav-tabs custom-tabs mb-3 rounded-0">
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" id="jdm_brand" name="jdm_brand">
+                                            <!-- <select class="aj-dropdown" id="jdm_brand" name="jdm_brand[]"> -->
+                                            <select class="aj-dropdown" id="jdm_brand" name="brand[]">
                                             <option selected value="">Brand</option>
                                             @foreach($jdm_core_brand as $brand)
                                             <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</option>
@@ -49,14 +63,14 @@
                                     </li>
                                     <li class="nav-item"> 
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" name="jdm_model" id="jdm_model">
+                                            <select class="aj-dropdown" name="model[]" id="jdm_model">
                                             <option selected value="">Model</option>
                                             </select>
                                         </div>
                                     </li>
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
-                                            <select class="aj-dropdown" class="jdm_year" id="jdm_year">
+                                            <select class="aj-dropdown" class="jdm_year" id="jdm_year" name="year">
                                             <option selected value="">Year</option>
                                             </select>
                                         </div>
@@ -78,6 +92,7 @@
                         @foreach (array_slice($top_sells, 0, 3) as $index => $car)
                                 <div class="banner-slick-thumb">
                                     <img src="{{ asset($car['picture']) }}" alt="thumb" >
+                                     
 
                                     <div class="banner-slick-thumb-overlay">
                                         <div class="banner-slick-thumb-txt">
@@ -87,8 +102,8 @@
                                             </h6>
                                         </div>
                                         <div class="banner-slick-thumb-txt-two">
-                                            <a href="{{ route('car_listing_details', $car['id']) }}">
-                                                <h4>2019  Volvo Camry Hybr..</h4>
+                                            <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}">
+                                                <h4>{{ html_decode($car['model_name_en']) }}</h4>
                                             </a>
                                         </div>
                                         <div class="banner-slick-thumb-overlay-icon-main">
@@ -122,7 +137,7 @@
                                                 <h5 class="banner-slick-thumb-overlay-txt">Automatic</h5>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>      
                                 </div>
                             @endforeach
                         </div>
@@ -157,7 +172,7 @@
                 @foreach ($brands->take(6) as $index => $brand)
                     <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                         <div class="categories-logo">
-                            <a href="{{ route('jdm-stock-responsive',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
+                            <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                             <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                             </a>
                         </div>
@@ -203,31 +218,9 @@
                                         <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
-                                            <!-- <div class="top-slider-container">
-                                                <div class="top-slider">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+1" alt="Image 1">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+2" alt="Image 2">
-                                                    <img src="https://via.placeholder.com/800x400?text=Image+3" alt="Image 3">
-                                                </div>
-                                            </div> -->
                                                 <div class="brand-car-item-img">
-
                                                     <div class="">
                                                         <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
-                                                    </div>
-
-                                                
-                                                 
-
-                                                    <div class="brand-car-item-img-text justify-content-end ">
-                                                        <div class="icon-main">
-                                                            @guest('web')
-                                                            @else
-                                                                
-                                                            @endif
-                                                        </div>
-
-
                                                     </div>
                                                 </div>
 
@@ -251,7 +244,7 @@
 
                                                     </div>
 
-                                                     <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                     <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                         <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                             @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -275,9 +268,9 @@
 
                                                             <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                                 @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) }}
+                                                                {{ html_decode($car['mileage_en']) . ',000' }}
                                                                 @else
-                                                                {{ html_decode($car['mileage']) }}
+                                                                {{ html_decode($car['mileage']) . ',000'}}
                                                                 @endif
                                                             </span>
                                                         </div>
@@ -343,22 +336,28 @@
 
                                                             <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                             @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['transmission']) }}
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                                 @else
-                                                                {{ html_decode($car['transmission_en']) }}
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                                 @endif
                                                             </span>
                                                         </div>
                                                     </div>
 
                                                     <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                        @php
+                                                         $parsed_data=parseCustomFormat($car['parsed_data']);
+                                                         $carbonInstance = Carbon::parse($car['datetime']);
+                                                        @endphp
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                            <span class="brand-location">Hyogo, Japan</span>
+                                                            <span class="brand-location">
+                                                            {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
+                                                            </span>
                                                         </p>
                                                         <div class="d-flex flex-column">
-                                                            <span class="brand-date fw-light">2024-05-24</span>
-                                                            <span class="brand-date fw-light">18:01:00</span>
+                                                            <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                            <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -369,6 +368,7 @@
 
                                 </div>
                             </div>
+                     
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab">
 
@@ -521,7 +521,7 @@
                         </div>
                         <div class="d-flex align-items-center justify-content-center pt-5">
                         <div class="categories-three-view-btn">
-                            <a href="{{ route('top-selling_responsive') }}" class="thm-btn">SEE ALL</a>
+                            <a href="{{ route('top-selling') }}" class="thm-btn">SEE ALL</a>
                         </div>
                     </div>
                     </div>
@@ -582,7 +582,11 @@
                                                 <!-- <img src="{{ asset($car->thumb_image) }}" alt="thumb"> -->
 
                                                 <div class="">
-                                                    <img src="{{ asset('Cars/' . $car->image) }}" alt="lthumb" class="card_image">
+                                                    <img src="{{ file_exists(public_path('Cars/' . $car->image)) ? 
+                                                                asset('Cars/' . $car->image) : 
+                                                                asset('uploads/website-images/no-image.jpg') }}" 
+                                                        alt="thumb" class="card_image">
+
                                                 </div>
                                                 
 
@@ -619,12 +623,12 @@
 
                                             
 
-                                                <a href="{{ route('jdm-stock-responsive', [$car->make, 'car']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('jdm-stock-listing', [$car->id, 'car']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
-                                                            {{ $car->model }}
+                                                            {{!empty($car->model) ? $car->model  : '--'}}
                                                         @else
-                                                            {{ $car->model }}
+                                                            {{!empty($car->model) ?  $car->model : '--'}}
                                                         @endif     
                                                         <!-- <div class="py-1">
                                                             &nbsp;&nbsp;&nbsp;
@@ -704,13 +708,17 @@
                                                 </div>
 
                                                     <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                        @php
+                                                        $carbonInstance = Carbon::parse($car->created_at);
+                                                        @endphp
+
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                            <span class="brand-location">Hyogo, Japan</span>
+                                                            <span class="brand-location">{{$car->location}}</span>
                                                         </p>
                                                         <div class="d-flex flex-column">
-                                                            <span class="brand-date fw-light">2024-05-24</span>
-                                                            <span class="brand-date fw-light">18:01:00</span>
+                                                            <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                            <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                         </div>
                                                     </div>
                                             </div>
@@ -740,7 +748,8 @@
 
 
     <!--  Car-Poster-part-start -->
-    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 px-2 px-sm-3 px-lg-5">
+    <!-- <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 px-2 px-sm-3 px-lg-5"> -->
+    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5  px-sm-2 px-md-5">
         <div class="col-md-auto">
             <a href="#">
                 <img src="{{ asset('japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -854,12 +863,12 @@
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('car_listing_details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                             <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                 @if(session('front_lang')=='en')
-                                                    {{ html_decode($car['model_name_en']) }}
+                                                    {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
                                                 @else
-                                                    {{ html_decode($car['model_name']) }}
+                                                    {{ html_decode(!empty($car['model_name']) ? $car['model_name'] : '') }}
                                                 @endif
                                             </h3>
                                         </a>
@@ -879,9 +888,9 @@
 
                                                 <span class="fw-light spez_text truncate-card-text card-text-center">
                                                 @if(session('front_lang')=='en')
-                                                {{ html_decode($car['mileage']) }}
+                                                {{ html_decode($car['mileage']) .',000' }}
                                                 @else
-                                                    {{ html_decode($car['mileage_en']) }}   
+                                                    {{ html_decode($car['mileage_en'])  .',000'}}   
                                                 @endif
                                                 </span>
                                             </div>
@@ -943,22 +952,26 @@
 
                                                 <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                     @if(session('front_lang')=='en')
-                                                    {{ html_decode($car['transmission_en']) }}
-                                                    @else
-                                                        {{ html_decode($car['transmission']) }}   
+                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        @else
+                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                     @endif
                                                 </span>
                                             </div>
                                         </div>
 
                                         <div class="brand-car-btm-txt-btm py-2 px-3">
+                                            @php
+                                            $carbonInstance = Carbon::parse($car['datetime']);
+                                             $parsed_data=parseCustomFormat($car['parsed_data']);
+                                            @endphp
                                             <p>
                                                 <i class="bi bi-geo-alt-fill fs-6"></i>
-                                                <span class="brand-location">Hyogo, Japan</span>
+                                                <span class="brand-location"> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>
                                             </p>
                                             <div class="d-flex flex-column">
-                                                <span class="brand-date fw-light">2024-05-24</span>
-                                                <span class="brand-date fw-light">18:01:00</span>
+                                                <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -989,7 +1002,7 @@
             </div>
 
             <div class="d-flex align-items-center justify-content-center pt-5">
-                <a href="{{ route('new-arrival-responsive') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
+                <a href="{{ route('new-arrivals') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
     </section>
@@ -997,7 +1010,8 @@
 
 
     <!--  vedio-part-start -->
-    <section class="vedio px-2 px-sm-3 px-lg-5">
+    <!-- <section class="vedio px-2 px-sm-3 px-lg-5"> -->
+    <section class="vedio px-2 px-sm-2 px-md-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
@@ -1039,15 +1053,8 @@
 
 
     <!--   Testimonial-part-start -->
-    <section class=" testimonial py-5 my-4 overflow-hidden px-lg-5">
+    <section class=" testimonial testimonial-padding py-5 overflow-hidden px-lg-5">
         <div class="container px-2 px-sm-3 px-lg-5">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="brand-car-position-img">
-
-                    </div>
-                </div>
-            </div>
             <div class="row px-5">
                 <div class="col-lg-5">
 
@@ -1183,7 +1190,7 @@
                     <p class="text-center disc buy-text-white d-flex justify-content-center">Adding smiles to your miles. Car buying made simpler</p>
                 </div>
 
-                <div class="d-flex gap-5 flex-column flex-lg-row flex-md-column flex-sm-column gap-5 gap-lg-4 px-5">
+                <div class="d-flex gap-5 flex-column flex-lg-row flex-md-column flex-sm-column gap-5 gap-lg-4 px-5 justify-content-center">
                     <div>
                         <div class="step-circle">
                             <div class="inner-card">
@@ -1254,9 +1261,11 @@
 
 
     <!-- Quality section start -->
-        <section class="quality-compliance py-5 ">
-            <div class="container text-center px-2 px-sm-3 px-lg-5">
-                <div class="px-md-5 px-sm-2">
+        <!-- <section class="quality-compliance py-5 "> -->
+        <section class="quality-compliance px-sm-2 px-md-5 py-5 ">
+            <!-- <div class="container text-center px-2 px-sm-3 px-lg-5"> -->
+            <!-- <div class="container text-center px-5"> -->
+            <div class="container text-center">
                 <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
                 <p class="section-subtitle px-md-5 px-sm-2">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
                 </div>
@@ -1310,6 +1319,10 @@
          });
          });
 
+         window.addEventListener("load", function() {
+            document.getElementById("pageLoader").classList.add("hidden");
+        });
+
 
 function getModel(selectedModel){
     document.getElementById('dropdownMenuClickableOutside').innerText = selectedModel; 
@@ -1349,20 +1362,20 @@ $(()=>{
                 console.log("loading")
             },
             success:function(data){
-                console.log(data.response);
+                $("#jdm_model").empty();
+                $("#jdm_model").append(
+                        `<option value="">Model</option>`);
                 var brands=data.response;
                 for (let index = 0; index < brands.length; index++) {
                     const element = brands[index];
                     $("#jdm_model").append(
-                        `<option value='${element.model}'>${element.model}</option>`);
+                        `<option value='${element}'>${element}</option>`);
                     }
-
-            }
+                }
         })  
     })
 
     $("#jdm_model").on('change',function(){
-        alert("ne")
         $.ajax({
         url:"get-model-year",
         type:"POST",
@@ -1373,11 +1386,14 @@ $(()=>{
             console.log("loading")
         },
         success:function(data){
+            $("#jdm_year").empty();
+            $("#jdm_year").append(`
+            <option  value=""}>Year</option>`);
              var brands=data.response;
             for (let index = 0; index < brands.length; index++) {
                 const element = brands[index];
                 $("#jdm_year").append(`
-                <option  value=${element.yom}>${element.yom}</option>`);
+                <option  value=${element.model_year_en}>${element.model_year_en}</option>`);
             }
 
         }
@@ -1406,19 +1422,6 @@ $("#searchBtn").on('click',function(){
         $(this).addClass("active");
       });
     });
-
-    $(document).ready(function () {
-      const $slider = $('.top-slider');
-
-      $('.top-slider-container').mouseenter(function () {
-        $slider.addClass('active');
-      });
-
-      $('.top-slider-container').mouseleave(function () {
-        $slider.removeClass('active');
-      });
-    });
-    
     </script>
 @endpush
 

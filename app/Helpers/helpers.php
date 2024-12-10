@@ -144,3 +144,51 @@ function generateLang($path = ''){
     file_put_contents('lang/en/translate.php', "<?php\n return {$modifiedData};\n ?>");
 
 }
+
+if (!function_exists('hasCheckedModels')) {
+    function hasCheckedModels($brandSlug, $brand_arr, $selectedModels) {
+        if (!array_key_exists($brandSlug, $brand_arr) || empty($selectedModels)) {
+            return false;
+        }
+        
+        foreach ($brand_arr[$brandSlug] as $model) {
+            if (in_array(trim($model['model']), array_map('trim', (array) $selectedModels))) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
+
+
+function parseCustomFormat($string)
+{
+    // Remove CDATA wrapper if present
+    $string = preg_replace('/<!\[CDATA\[(.*?)\]\]>/s', '$1', $string);
+    
+    // Remove outer curly braces if present
+    $string = trim($string, '{}');
+    
+    // Split the string into key-value pairs
+    $pairs = preg_split('/","|,(?=[^:]+:)/', $string);
+    
+    $result = [];
+    foreach ($pairs as $pair) {
+        // Split each pair into key and value
+        list($key, $value) = array_pad(explode(':', $pair, 2), 2, null);
+        
+        // Clean up key and value
+        $key = trim($key, '" ');
+        $value = trim($value, '" ');
+        
+        // Unescape special characters
+        $value = stripcslashes($value);
+        
+        $result[$key] = $value;
+    }
+ 
+    // vehicle  location
+    
+    return $result;
+}

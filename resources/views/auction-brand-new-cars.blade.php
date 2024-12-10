@@ -7,26 +7,7 @@
 
 @section('body-content')
 <main class="main_wid">
-    <!-- banner-part-start  -->
-
-    <!-- <section class="inner-banner">
-        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="inner-banner-df">
-                    <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- banner-part-end -->
-
+   
     <!-- Inventory-part-start -->
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">
@@ -34,7 +15,7 @@
             <nav aria-label="breadcrumb" class="pt-3">
                 <ol class="breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Brand New Cars') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -53,7 +34,7 @@
                                                 Brand
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -69,7 +50,7 @@
                                                                             {{ $brand->name }}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
@@ -112,7 +93,7 @@
                                             Year
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
@@ -198,7 +179,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse"
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
                                                 <div class="d-flex flex-column align-content-between col-sm-9">

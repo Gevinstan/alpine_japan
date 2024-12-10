@@ -54,7 +54,7 @@
                                                 Brand
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                             <span class="select-Brand-box border-0 px-2">
@@ -70,7 +70,7 @@
                                                                             {{ $brand->brand_name }}
                                                                         </label>
                                                                     </div>
-                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse show w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                    <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
@@ -115,7 +115,7 @@
                                             Year
                                         </button>
                                     </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
                                         aria-labelledby="panelsStayOpen-headingtwo">
                                         <div class="accordion-body">
                                             <span class="select-Brand-box two four p-0 border-0">
@@ -165,7 +165,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show"
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse"
                                             aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body mt-3 row">
                                                 <div class="d-flex flex-column align-content-between col-sm-9">
@@ -339,7 +339,11 @@
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
-                                                <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb">
+                                                <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
+                                                                asset('Cars/' .  $car['picture']) : 
+                                                                asset('uploads/website-images/no-image.jpg') }}" 
+                                                        alt="thumb" class="card_image">
+                                                <!-- <img src="{{ asset('Cars/' . $car['picture']) }}" alt="thumb"> -->
                                                 </div>
                                             </div>
 

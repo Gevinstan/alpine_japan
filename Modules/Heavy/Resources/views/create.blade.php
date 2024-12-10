@@ -286,6 +286,17 @@
                                                 
                                             </div>
                                             <div class="row mg-top-30">
+                                                 <div class="col-4">
+                                                    <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Location') }}  </label>
+                                                        <input class="crancy__item-input" type="text" name="location" id="location">
+                                                        @error('price_yen')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div> 
+                                            </div> 
+                                            <div class="row mg-top-30">
                                                 
                                                 <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">

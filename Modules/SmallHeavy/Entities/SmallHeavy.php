@@ -42,7 +42,8 @@ class SmallHeavy extends Model
         'outrigger',
         'commission_value',
         'new_arrival',
-        'deleted_at'
+        'deleted_at',
+        'location'
       ];
       protected $dates=['deleted_at'];
 }

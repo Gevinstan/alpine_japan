@@ -9,6 +9,12 @@
 
 <main class="bg-light-grey">
 
+<div id="pageLoader">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
     <!-- Inventory Details-part-start -->
 
 
@@ -449,7 +455,12 @@
 
                                                         {{ __('translate.Mileage') }}
                                                     </span>
-                                                    {{ html_decode($car->mileage_en) }}
+                                                    @if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car->mileage_en) ? $car->mileage_en .',000': '') }}
+                                                            @else
+                                                            {{ html_decode(!empty($car->mileage_en) ? $car->mileage_en. ',000' : '') }}
+                                                            @endif
+                                                    <!-- {{ html_decode($car->mileage_en) }} -->
                                                 </li>
 
                                             
@@ -946,6 +957,10 @@
                 $("#delivery_charge").text('$'+user_info[0].rate);
              }
         })
+
+        window.addEventListener("load", function() {
+             document.getElementById("pageLoader").classList.add("hidden");
+        });
 
 
     </script>

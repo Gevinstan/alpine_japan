@@ -70,7 +70,7 @@ class CarsController extends Controller
         } else {
               $notification= trans('translate.Model Not Found');
               $notification=array('messege'=>$notification,'alert-type'=>'error');
-              return redirect()->route('admin.car.index',)->with($notification); 
+              return redirect()->route('admin.cars.index',)->with($notification); 
         }
         $brand=Brand::whereId($request->brand)->value('slug');
         if(!empty($brand)){
@@ -78,13 +78,14 @@ class CarsController extends Controller
         } else {
             $notification= trans('translate.Brand Not Found');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
-            return redirect()->route('admin.car.index',)->with($notification); 
+            return redirect()->route('admin.cars.index',)->with($notification); 
         }
         $cars->grade=$request->grade;
         $cars->color=$request->color;
         $cars->int_col=$request->interial_color;
         $cars->year_of_reg=$request->year_of_registration;
         $cars->chassis=$request->chassis_number;
+        $cars->location=$request->location;
         // $cars->score=$request->score;
         $cars->yom=$request->year_of_made;
         $cars->kms=$request->kilometers;
@@ -153,7 +154,7 @@ if($request->hasFile('cover_image')) {
 
         $notification= trans('translate.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.car.index',)->with($notification);
+        return redirect()->route('admin.cars.index',)->with($notification);
     }
 
     public function storeCarComission(Request $request){
@@ -227,7 +228,7 @@ if($request->hasFile('cover_image')) {
           } else {
               $notification= trans('translate.Model Not Found');
               $notification=array('messege'=>$notification,'alert-type'=>'error');
-              return redirect()->route('admin.car.index',)->with($notification); 
+              return redirect()->route('admin.cars.index',)->with($notification); 
           }
         $brand=Brand::whereId($request->brand)->value('slug');
         if(!empty($brand)){
@@ -235,7 +236,7 @@ if($request->hasFile('cover_image')) {
         } else {
             $notification= trans('translate.Brand Not Found');
             $notification=array('messege'=>$notification,'alert-type'=>'error');
-            return redirect()->route('admin.car.index',)->with($notification); 
+            return redirect()->route('admin.cars.index',)->with($notification); 
         }
         $cars->grade=$request->grade;
         $cars->color=$request->color;
@@ -271,7 +272,7 @@ if($request->hasFile('cover_image')) {
         $cars->save();
         $notification= trans('translate.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
-        return redirect()->route('admin.car.index',)->with($notification);
+        return redirect()->route('admin.cars.index',)->with($notification);
     }
 
     /**

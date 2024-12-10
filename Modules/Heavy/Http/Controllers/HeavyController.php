@@ -112,6 +112,7 @@ class HeavyController extends Controller
         $Heavy->price=$request->price_dollar;
         $Heavy->price_ru=$request->price_rupees;
         $Heavy->price_jpy=$request->price_yen;
+        $Heavy->location=$request->location;
         $Heavy->sell_points=$request->sell_points;
         $Heavy->remarks=$request->remarks;
         $Heavy->is_active=$request->active == 'on' ? '1' : '0';
@@ -204,6 +205,7 @@ class HeavyController extends Controller
         $Heavy->price=$request->price_dollar;
         $Heavy->price_ru=$request->price_rupees;
         $Heavy->price_jpy=$request->price_yen;
+        $Heavy->location=$request->location;
         $Heavy->sell_points=$request->sell_points;
         $Heavy->remarks=$request->remarks;
         $Heavy->is_active=$request->active == 'on' ? '1' : '0';

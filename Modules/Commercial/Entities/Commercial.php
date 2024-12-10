@@ -34,6 +34,7 @@ class Commercial extends Model
         'is_active',
         'is_ru_market',
         'is_na_market',
-        'new_arrival'
+        'new_arrival',
+        'location'
       ];
 }
