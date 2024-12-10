@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end px-3">
-                        <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Pictures Downloaded')}} <span class="ps-2"><i class="fa-solid fa-download ml-3"></i> <span></button>
+                        <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Download Car Pictures')}} <span class="ps-2"><i class="fa-solid fa-download ml-3"></i> <span></button>
                     </div>
                 </div>
 

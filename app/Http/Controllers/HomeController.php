@@ -2548,6 +2548,9 @@ public function getJdmBrandsWithModels(): array
 public function car_listing(Request $request){
 
 
+    //  echo json_encode($request->model);die();
+
+
         $seo_setting = SeoSetting::where('id', 1)->first();
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -2603,8 +2606,9 @@ public function car_listing(Request $request){
             $startValue = trim($parts[0]);
             $endValue = trim($parts[1]);
             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                $q->whereBetween('start_price_num', [$startValue, $endValue])
-                ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                $q->whereBetween('start_price_num', [$startValue, $endValue]);
+                // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
             });
         }
     }
@@ -2667,8 +2671,9 @@ public function car_listing(Request $request){
                 if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
                     // Group the conditions for this range
                     $query->orWhere(function ($subQuery) use ($result) {
-                        $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                                 ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        // $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                        //          ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
                     });
                 }
             }
@@ -3421,8 +3426,9 @@ public function car_listing(Request $request){
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
                 });
             }
         }

@@ -1319,6 +1319,18 @@ use Carbon\Carbon;
          });
          });
 
+         $('#jdm_stock_form').submit(function(e) {
+            e.preventDefault();
+  
+            var brand=$("#jdm_brand").val();
+
+            var model = $("#jdm_model");
+            // Change the name attribute correctly
+            model.attr('name', 'model[' + brand + '][]');
+            this.submit();  
+
+         });   
+
          window.addEventListener("load", function() {
             document.getElementById("pageLoader").classList.add("hidden");
         });

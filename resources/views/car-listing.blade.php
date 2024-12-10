@@ -42,7 +42,7 @@
                                                 Brand & Model
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -106,7 +106,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }} pt-3"
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
 
@@ -347,6 +347,7 @@
                         @if(request('model') && count(request('model')) > 0)
                         @foreach(request('model') as $brandSlug => $models)
                             @foreach($models as $model)
+                               @if($model!="")
                                 <p class="position-relative filter-text px-3 py-1">
                                     <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
                                             <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
@@ -357,6 +358,7 @@
                                     </span>              
                                 </p>
                                 @php $request_check++;@endphp
+                                @endif
                             @endforeach
                             @endforeach
                             @endif 
