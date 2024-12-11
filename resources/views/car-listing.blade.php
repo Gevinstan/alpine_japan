@@ -67,8 +67,7 @@
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
                                                                                             <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
-                                                                                                    value="{{ $model['model'] }}"
-                                                                                                   
+                                                                                                    value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
                                                                                                     {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
                                                                                             <label class="form-check-label brand_name">
                                                                                                  {{ $model['model'] . ' (' . $model['count'] . ')' }}
@@ -164,12 +163,12 @@
                                         <div class="accordion-item ps-3">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                    data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsetwo">
                                                     Model Year
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
                                                 aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
@@ -244,9 +243,6 @@
                                     </div>
                                 </div> -->
                         <!-- Select Your Year End -->
-
-                    </form> 
-                    
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
                             <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -907,6 +903,7 @@
                     </div>
                     
                 </div>
+                </form> 
                  
             </div>
         </div>
@@ -1412,6 +1409,7 @@ document.querySelectorAll('.alert-close-model').forEach(button => {
 
         // Update the URL in the browser
         window.history.pushState({}, '', url.toString());
+        window.location.reload();
     });
 });
 
