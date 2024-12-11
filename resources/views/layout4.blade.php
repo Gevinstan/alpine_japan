@@ -234,7 +234,11 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <a href="{{ route('user.select-car-purpose') }}" class="thm-btn ms-3">Login</a> 
+                                    @if(Auth::guard('web')->check())
+                                    <a href="{{ route('logout') }}" class="thm-btn ms-3">Logout</a>
+                                    @else
+                                    <a href="{{ route('user.select-car-purpose') }}" class="thm-btn ms-3">Login</a>
+                                    @endif
                             </div>
                         </div>
                     </div>

@@ -434,6 +434,7 @@
   'Accept' => 'Accept',
   'Please login first' => 'Please login first',
   'Car Listing' => 'Car Listing',
+  'Download Car Pictures'=>'Download Car Pictures',
   'Location' => 'Location',
   'Select Location' => 'Select Location',
   'Features' => 'Features',

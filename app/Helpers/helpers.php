@@ -161,6 +161,29 @@ if (!function_exists('hasCheckedModels')) {
     }
 }
 
+if (!function_exists('hasCheckedModelsCar')) {
+    function hasCheckedModelsCar($brandSlug, $brand_arr, $selectedModels) {
+        // Ensure the brand exists in the provided brand array
+        if (!array_key_exists($brandSlug, $brand_arr) || empty($selectedModels)) {
+            return false;
+        }
+
+        // Check if models for this brand exist in the selected models
+        if (!array_key_exists($brandSlug, $selectedModels) || empty($selectedModels[$brandSlug])) {
+            return false;
+        }
+
+        // Iterate through the brand's models and compare with selected models for this brand
+        foreach ($brand_arr[$brandSlug] as $model) {
+            if (in_array(trim($model['model']), array_map('trim', (array) $selectedModels[$brandSlug]))) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
 
 function parseCustomFormat($string)
 {

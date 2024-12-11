@@ -41,7 +41,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.JDM Stock Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Car MarketPlace') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -77,15 +77,15 @@
                                                                                 {{ $brand->name }}
                                                                             </label>
                                                                         </div>
-                                                                        <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100 {{ hasCheckedModels($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                        <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                             <div class="accordion-body">
                                                                                 <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                                 @if(array_key_exists($brand->slug, $brand_arr))
                                                                                         @foreach ($brand_arr[$brand->slug] as $model)
                                                                                             <span class="form-check">
-                                                                                                <input name="model[]" class="form-check-input model-search" type="checkbox"
-                                                                                                        value="{{ $model['model'] }}"
-                                                                                                        {{ in_array(trim($model['model']), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                                <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
+                                                                                                        value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
+                                                                                                        {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
                                                                                                 <label class="form-check-label brand_name">
                                                                                                     {{ $model['model'] . ' (' . $model['count'] . ')' }}
                                                                                                 </label>
@@ -107,8 +107,7 @@
 
                                 </div>
                             </div>
-                        <!-- Select Your Brand End-->
-                       
+                        <!-- Select Your Brand End--> 
                         <!-- Select Your Budget Start -->
                             <div class="inventory-main-box my-2">
                                 <!-- Budget -->
@@ -121,7 +120,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse pt-3 {{ request('price_range_scale') || request('price_range') ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
 
@@ -130,8 +129,8 @@
 
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
                                                         <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                            <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
-                                                            <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
+                                                            <span class="slider-label m-0" id="minYearLabel">{{$minPrice}}</span>
+                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
                                                         </div>
 
                                                         <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
@@ -139,16 +138,13 @@
 
                                                     </div>
                                                      
-                                                    <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                        @if($request_check !=0)
+                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4 go_clear">
+                                                        @if(request('price_range_scale'))
                                                             <button class="clear-button" id="clear-budget">Clear</button>
                                                         @endif    
                                                         <button class="go-button" type="button" id="budget_search">Go</button>
                                                     </div>
-                                                    
                                                 </div>
-                                                
-
                                                 <div class="row budget-space">
                                                     <h6 class="pt-2 price_range">Price Range</h6>
 
@@ -168,23 +164,23 @@
                                         </div>
                                     </div>
 
-                                </div> 
+                                </div>
                             </div>
                         <!-- Select Your Budget End -->
 
-                        <!-- Select Your Year Start -->
-                            <div class="inventory-main-box my-2">
+                          <!-- Select Your Year Start -->
+                          <div class="inventory-main-box my-2">
                                     <div class="accordion" id="accordionPanelsStayOpenExample1">
                                         <div class="accordion-item ps-3">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
-                                                    aria-controls="panelsStayOpen-collapsetwo">
-                                                    Model & Year
+                                                    data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
+                                                    aria-controls="panelsStayOpen-collapsethree">
+                                                     Model & Year
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
-                                                aria-labelledby="panelsStayOpen-headingtwo">
+                                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                                aria-labelledby="panelsStayOpen-collapsethree">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
@@ -212,56 +208,8 @@
                                         </div>
                                     </div>
                             </div>
-                            <!-- Select Your Budget  -->
-                                <!-- <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                    <div class="accordion-item  ps-3">
-                                        <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                            <button class="accordion-button p-0  year-heading" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
-                                                aria-controls="panelsStayOpen-collapsetwo">
-                                                Year
-                                            </button>
-                                        </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
-                                            aria-labelledby="panelsStayOpen-headingtwo">
-                                            <div class="accordion-body">
-                                                <span class="select-Brand-box two four p-0 border-0">
-                                                    <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                        
-                                                        <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                                    <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
-                                                                </div>
-                                                            
-                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
-                                                                    value="{{ request('year', $minYear) }}" 
-                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
-                                                            </div>
-
-                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                                @if($request_check !=0)
-                                                                <button class="clear-button" id="clear-year">Clear</button>
-                                                                @endif
-                                                            <button type="button" id="year_search" class="go-button">Go</button>
-                                                        </div>
-                                                        </div>
-
-                                                    
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div> -->
-
                         <!-- Select Your Year End -->
-
-
-                    </form> 
+                    
                     
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
@@ -291,7 +239,16 @@
                                      <p class="sort-text">Sort By:</p>
                                      <div class="dropdown sort-dropdown pe-4">
                                         <button class="btn btn-secondary recently_added dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Recently Added
+                                        @switch(request('sort_by'))
+                                                @case('price_low_high')
+                                                    Low to High
+                                                    @break
+                                                @case('price_high_low')
+                                                    High to Low
+                                                    @break
+                                                @default
+                                                    Recently Added
+                                            @endswitch
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
                                             <li><a data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
@@ -351,8 +308,10 @@
                             @endif --}}
                         @if(request('model') && count(request('model')) > 0)
                         @foreach(request('model') as $index => $brandSlug)
+                        @foreach($models as $model)
+                               @if($model!="")
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                <span class="model-item" data-brand="{{ $index }}">{{ $model }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -361,6 +320,8 @@
                                 </span>              
                             </p>
                             @php $request_check++;@endphp
+                            @endif
+                            @endforeach
                             @endforeach
                             @endif
                             @if(request('year'))
@@ -913,6 +874,7 @@
                     </div>
 
                 </div>
+                </form> 
             
             </div>
         </div>
@@ -951,6 +913,7 @@
                     if (dropdownButton) {
                         dropdownButton.innerText = $(this).data('text');
                         $("#sort_by_field").val($(this).data('brand'));
+                        clear_price_slider();  
                         $('#search_form').submit();
                     } else {
                         console.error('Dropdown button not found');
@@ -1062,95 +1025,95 @@
             });
         })(jQuery);
 
-        document.querySelectorAll('.alert-close-model').forEach(button => {
-        button.addEventListener('click', function(event) {
-        event.preventDefault();
+//         document.querySelectorAll('.alert-close-model').forEach(button => {
+//         button.addEventListener('click', function(event) {
+//         event.preventDefault();
         
-        // Get relevant elements
-        const modelItem = event.target.closest('.model-item');
-        const modelValue = modelItem.textContent.trim(); // Get model value from the text content
-        const filterText = modelItem.closest('.filter-text');
+//         // Get relevant elements
+//         const modelItem = event.target.closest('.model-item');
+//         const modelValue = modelItem.textContent.trim(); // Get model value from the text content
+//         const filterText = modelItem.closest('.filter-text');
         
-        // Find corresponding checkboxes
-        const modelCheckboxes = document.querySelectorAll(`input[value="${modelValue}"].model-search`);
-        let brandSlug = '';
+//         // Find corresponding checkboxes
+//         const modelCheckboxes = document.querySelectorAll(`input[value="${modelValue}"].model-search`);
+//         let brandSlug = '';
         
-        // Find the brand checkbox by looking through model checkboxes' parent accordions
-        modelCheckboxes.forEach(checkbox => {
-            const accordionItem = checkbox.closest('.accordion-item');
-            if (accordionItem) {
-                const brandCheckbox = accordionItem.querySelector('.brand-search');
-                if (brandCheckbox) {
-                    brandSlug = brandCheckbox.value;
-                }
-            }
-        });
+//         // Find the brand checkbox by looking through model checkboxes' parent accordions
+//         modelCheckboxes.forEach(checkbox => {
+//             const accordionItem = checkbox.closest('.accordion-item');
+//             if (accordionItem) {
+//                 const brandCheckbox = accordionItem.querySelector('.brand-search');
+//                 if (brandCheckbox) {
+//                     brandSlug = brandCheckbox.value;
+//                 }
+//             }
+//         });
         
-        // Update URL parameters
-        const url = new URL(window.location.href);
+//         // Update URL parameters
+//         const url = new URL(window.location.href);
         
-        // Get all current model parameters
-        let models = url.searchParams.getAll('model[]');
-        if (models.length === 0) {
-            models = url.searchParams.getAll('model');
-        }
+//         // Get all current model parameters
+//         let models = url.searchParams.getAll('model[]');
+//         if (models.length === 0) {
+//             models = url.searchParams.getAll('model');
+//         }
         
-        // Remove the clicked model
-        models = models.filter(model => model !== modelValue);
+//         // Remove the clicked model
+//         models = models.filter(model => model !== modelValue);
         
-        // Clear and update model parameters
-        url.searchParams.delete('model[]');
-        url.searchParams.delete('model');
-        models.forEach(model => {
-            url.searchParams.append('model[]', model);
-        });
+//         // Clear and update model parameters
+//         url.searchParams.delete('model[]');
+//         url.searchParams.delete('model');
+//         models.forEach(model => {
+//             url.searchParams.append('model[]', model);
+//         });
         
-        if (brandSlug) {
-            // Find all checked models for this brand in the accordion
-            const brandAccordion = document.querySelector(`input[value="${brandSlug}"].brand-search`)
-                ?.closest('.accordion-item');
+//         if (brandSlug) {
+//             // Find all checked models for this brand in the accordion
+//             const brandAccordion = document.querySelector(`input[value="${brandSlug}"].brand-search`)
+//                 ?.closest('.accordion-item');
             
-            if (brandAccordion) {
-                // Get all model checkboxes within this brand's accordion
-                const brandModelCheckboxes = brandAccordion.querySelectorAll('.model-search');
-                const remainingCheckedModels = Array.from(brandModelCheckboxes)
-                    .filter(checkbox => checkbox.checked && checkbox.value !== modelValue);
+//             if (brandAccordion) {
+//                 // Get all model checkboxes within this brand's accordion
+//                 const brandModelCheckboxes = brandAccordion.querySelectorAll('.model-search');
+//                 const remainingCheckedModels = Array.from(brandModelCheckboxes)
+//                     .filter(checkbox => checkbox.checked && checkbox.value !== modelValue);
                 
-                // Only uncheck brand and remove from URL if no models remain checked
-                if (remainingCheckedModels.length === 0) {
-                    const brandCheckbox = brandAccordion.querySelector('.brand-search');
-                    if (brandCheckbox) {
-                        brandCheckbox.checked = false;
+//                 // Only uncheck brand and remove from URL if no models remain checked
+//                 if (remainingCheckedModels.length === 0) {
+//                     const brandCheckbox = brandAccordion.querySelector('.brand-search');
+//                     if (brandCheckbox) {
+//                         brandCheckbox.checked = false;
                         
-                        let brands = url.searchParams.getAll('brand[]');
-                        if (brands.length === 0) {
-                            brands = url.searchParams.getAll('brand');
-                        }
+//                         let brands = url.searchParams.getAll('brand[]');
+//                         if (brands.length === 0) {
+//                             brands = url.searchParams.getAll('brand');
+//                         }
                         
-                        brands = brands.filter(brand => brand !== brandSlug);
+//                         brands = brands.filter(brand => brand !== brandSlug);
                         
-                        url.searchParams.delete('brand[]');
-                        url.searchParams.delete('brand');
-                        brands.forEach(brand => {
-                            url.searchParams.append('brand[]', brand);
-                        });
-                    }
-                }
-            }
-        }
+//                         url.searchParams.delete('brand[]');
+//                         url.searchParams.delete('brand');
+//                         brands.forEach(brand => {
+//                             url.searchParams.append('brand[]', brand);
+//                         });
+//                     }
+//                 }
+//             }
+//         }
         
-        // Uncheck model checkboxes
-        modelCheckboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
+//         // Uncheck model checkboxes
+//         modelCheckboxes.forEach(checkbox => {
+//             checkbox.checked = false;
+//         });
         
-        // Remove the filter tag from UI
-        filterText.remove();
+//         // Remove the filter tag from UI
+//         filterText.remove();
         
-        // Navigate to updated URL
-        window.location.href = url.toString();
-    });
-});
+//         // Navigate to updated URL
+//         window.location.href = url.toString();
+//     });
+// });
 
 
 
@@ -1253,6 +1216,61 @@
         //year slider work
        
     });
+
+    document.querySelectorAll('.alert-close-model').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Get the relevant elements
+        const modelItem = event.target.closest('.model-item');
+        const modelValue = modelItem.textContent.trim(); // Get model value
+        const brandSlug = modelItem.dataset.brand; // Get associated brand from data attribute
+        const filterText = modelItem.closest('.filter-text');
+
+        // Parse the current URL
+        const url = new URL(window.location.href);
+
+        // Get all model parameters for the specific brand
+        let brandModels = url.searchParams.getAll(`model[${brandSlug}][]`);
+        if (brandModels.length === 0) {
+            brandModels = url.searchParams.getAll(`model[${brandSlug}]`);
+        }
+
+        // Remove the specific model
+        brandModels = brandModels.filter(model => model !== modelValue);
+
+        // Clear and update the models for this brand
+        url.searchParams.delete(`model[${brandSlug}][]`);
+        url.searchParams.delete(`model[${brandSlug}]`);
+        brandModels.forEach(model => {
+            url.searchParams.append(`model[${brandSlug}][]`, model);
+        });
+
+        // If no models remain for this brand, optionally remove the brand itself
+        if (brandModels.length === 0) {
+            const brands = url.searchParams.getAll('brand[]');
+            const updatedBrands = brands.filter(brand => brand !== brandSlug);
+            url.searchParams.delete('brand[]');
+            updatedBrands.forEach(brand => {
+                url.searchParams.append('brand[]', brand);
+            });
+        }
+
+        // Uncheck the model checkbox in the DOM
+        const modelCheckbox = document.querySelector(`input[value="${modelValue}"][data-brand="${brandSlug}"]`);
+        if (modelCheckbox) {
+            modelCheckbox.checked = false;
+        }
+
+        // Remove the filter tag from the UI
+        filterText.remove();
+
+        // Update the URL in the browser
+        window.history.pushState({}, '', url.toString());
+        window.location.reload();
+    });
+});
+
 
     function updateButtonText(selectedBrand,selectedText) {
     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;

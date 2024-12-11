@@ -43,6 +43,7 @@ use Modules\Models\Entities\ModelsCars;
 use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
 use Cache;
+use Carbon\Carbon;  
 
 
 use App\Helpers\MailHelper;
@@ -189,6 +190,7 @@ class HomeController extends Controller
             // $new_arrivals=CarDataJpOp::where('model_year_en',$current_year)->
             // orderBy('id','desc')->get()->take(5);
     
+         
             $new_arrivals = CarDataJpOp::query()
             ->select('auct_lots_xml_jp_op.*')
             ->join('brands as b', function($join) {
@@ -200,6 +202,7 @@ class HomeController extends Controller
             ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
             ->get()->take(5);
+          
     
             foreach($new_arrivals as $cars){
                 $last_image=$this->last_image($cars->pictures);
@@ -2543,25 +2546,12 @@ public function getJdmBrandsWithModels(): array
     })->all();
 }
 public function car_listing(Request $request){
-
-    
-
-    // echo json_encode($request->all());die();
-
         $seo_setting = SeoSetting::where('id', 1)->first();
-
-   
-
-        // $brands = Brand::where('status', 'enable')->get();
-
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
         ->where('bt.lang_code',Session::get('front_lang'))
         ->select('b.slug','bt.name as name')
         ->distinct('b.slug')->get();
-
-        // echo json_encode($brands);die();
-
 
         $keyWhere ="";
         $tableName='1';
@@ -2577,7 +2567,10 @@ public function car_listing(Request $request){
 
 
         $minYear = $yearRange->min_year;
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = Carbon::now()->year;
+       
+
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
@@ -2608,8 +2601,9 @@ public function car_listing(Request $request){
             $startValue = trim($parts[0]);
             $endValue = trim($parts[1]);
             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                $q->whereBetween('start_price_num', [$startValue, $endValue])
-                ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                $q->whereBetween('start_price_num', [$startValue, $endValue]);
+                // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
             });
         }
     }
@@ -2630,10 +2624,19 @@ public function car_listing(Request $request){
     }
 
     if($request->model){
-        $model_arr = array_filter($request->model); // Filter out any empty values
-        if ($model_arr) {
-            $carsQuery->whereIn('model_name_en', $model_arr); 
+        $model_arr = [];
+        foreach ($request->model as $brandSlug => $models) {
+            if (is_array($models)) {
+                $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+            }
         }
+        if ($model_arr) {
+            $carsQuery->whereIn('model_name_en', $model_arr);
+        }
+        // $model_arr = array_filter($request->model); // Filter out any empty values
+        // if ($model_arr) {
+        //     $carsQuery->whereIn('model_name_en', $model_arr); 
+        // }
     }
 
 
@@ -2663,8 +2666,9 @@ public function car_listing(Request $request){
                 if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
                     // Group the conditions for this range
                     $query->orWhere(function ($subQuery) use ($result) {
-                        $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                                 ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        // $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                        //          ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
                     });
                 }
             }
@@ -2710,13 +2714,13 @@ public function car_listing(Request $request){
     if ($request->sort_by) {
         switch ($request->sort_by) {
             case 'price_low_high':
-                $carsQuery->orderBy('start_price_num', 'asc');
+                $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'asc');
                 break;
             case 'price_high_low':
-                $carsQuery->orderBy('start_price_num', 'desc');
+                $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                 break;
             case 'recent':
-                $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                 ->limit(100)
                 ->pluck('auct_lots_xml_jp_op.id');
             
@@ -2746,8 +2750,11 @@ public function car_listing(Request $request){
     // $price_range = $this->getPriceRangeCounts();
     // ->orderBy('id','desc')y
     // ->paginate(12);
-    $cars = $carsQuery->orderBy('id', 'desc')
-    ->where('auct_lots_xml_jp_op.active_status','1')
+    
+    if(!$request->sort_by){
+        $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc');
+    }
+    $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
     ->select('auct_lots_xml_jp_op.*')->paginate(12);
 
 
@@ -3354,6 +3361,8 @@ public function car_listing(Request $request){
     }
     public function top_selling1(Request $request){
 
+      
+       
         $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = Brand::where('status', 'enable')->get();
         $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
@@ -3378,7 +3387,8 @@ public function car_listing(Request $request){
         ->selectRaw('MIN(start_price_num) as min_sal, MAX(start_price_num) as max_sal')
         ->first();
         $minYear = $yearRange->min_year;
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = Carbon::now()->year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
@@ -3417,8 +3427,9 @@ public function car_listing(Request $request){
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
                 });
             }
         }
@@ -3546,10 +3557,19 @@ public function car_listing(Request $request){
     }
 
     if($request->model){
-        $model_arr = array_filter($request->model); // Filter out any empty values
+        $model_arr = [];
+        foreach ($request->model as $brandSlug => $models) {
+            if (is_array($models)) {
+                $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+            }
+        }
         if ($model_arr) {
             $carsQuery->whereIn('model_name_en', $model_arr);
-        }    
+        }
+        // $model_arr = array_filter($request->model); // Filter out any empty values
+        // if ($model_arr) {
+        //     $carsQuery->whereIn('model_name_en', $model_arr);
+        // }    
         // $carsQuery->where('model_name_en', $request->model); 
     }
     $carsQuery->where('top_sell','1')->where('active_status','1');
@@ -3565,13 +3585,13 @@ public function car_listing(Request $request){
     if ($request->sort_by) {
         switch ($request->sort_by) {
             case 'price_low_high':
-                $carsQuery->orderBy('start_price_num', 'asc');
+                $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'asc');
                 break;
             case 'price_high_low':
-                $carsQuery->orderBy('start_price_num', 'desc');
+                $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                 break;
             case 'recent':  
-                $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                 ->limit(100)
                 ->pluck('auct_lots_xml_jp_op.id');
             
@@ -3585,9 +3605,12 @@ public function car_listing(Request $request){
 
 
     
+    if(!$request->sort_by){
+        $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc');
+    }
 
         // Pagination
-        $cars = $carsQuery->orderBy('id', 'desc')->select('auct_lots_xml_jp_op.*')->paginate(12);
+        $cars = $carsQuery->select('auct_lots_xml_jp_op.*')->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -4006,10 +4029,19 @@ public function car_listing(Request $request){
         }
     
         if($request->model){
-            $model_arr = array_filter($request->model); // Filter out any empty values
-            if ($model_arr) {
-                $carsQuery->whereIn('model_name_en', $model_arr); 
+            $model_arr = [];
+            foreach ($request->model as $brandSlug => $models) {
+                if (is_array($models)) {
+                    $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+                }
             }
+            if ($model_arr) {
+                $carsQuery->whereIn('model_name_en', $model_arr);
+            }
+            // $model_arr = array_filter($request->model); // Filter out any empty values
+            // if ($model_arr) {
+            //     $carsQuery->whereIn('model_name_en', $model_arr); 
+            // }
             // $carsQuery->where('model_name_en', $request->model); 
         }
 
@@ -4049,26 +4081,39 @@ public function car_listing(Request $request){
                 "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
             ];
 
+            $carsQuery->where(function ($query) use ($request, $priceRanges) {
+                foreach ($request->price_range as $range) {
+                    $result = $this->getPriceRangestart($range, $priceRanges);
+        
+                    if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
+                        // Group the conditions for this range
+                        $query->orWhere(function ($subQuery) use ($result) {
+                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                                    //  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        });
+                    }
+                }
+            }); 
 
 
-            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+            // $result = $this->getPriceRangestart($request->price_range, $priceRanges);
 
         
 
     
-            if (is_null($result['end_price_num'])) {
-                // Count for "Above" range
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
-                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
-                });
-            } else {
-                // Count for other ranges
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-                });
-            }  
+            // if (is_null($result['end_price_num'])) {
+            //     // Count for "Above" range
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+            //           ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+            //     });
+            // } else {
+            //     // Count for other ranges
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+            //         ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+            //     });
+            // }  
         }
 
         if ($request->scores_en) {
@@ -4103,8 +4148,9 @@ public function car_listing(Request $request){
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
                 });
             }
         }
@@ -4130,13 +4176,13 @@ public function car_listing(Request $request){
         if ($request->sort_by) {
             switch ($request->sort_by) {
                 case 'price_low_high':
-                    $carsQuery->orderBy('start_price_num', 'asc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'asc');
                     break;
                 case 'price_high_low':
-                    $carsQuery->orderBy('start_price_num', 'desc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'desc');
                     break;
                 case 'recent':
-                    $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                    $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc')
                     ->limit(100)
                     ->pluck('auct_lots_xml_jp.id');
                 
@@ -4149,12 +4195,15 @@ public function car_listing(Request $request){
 
     
       
+        if(!$request->sort_by){
+            $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
+        }
        
 
         // Pagination
         $cars = $carsQuery
-        ->orderBy('id', 'desc')
         ->select('auct_lots_xml_jp.*')->paginate(12);
+
         $price_range_counts = $this->getAuctionPriceRangeCounts(
             $carsQuery, 
             $hasPriceRangeScale, 
@@ -4861,7 +4910,8 @@ public function car_listing(Request $request){
 
     // Get min and max years
         $minYear = $yearRange->min_year;
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = Carbon::now()->year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
@@ -4900,11 +4950,20 @@ public function car_listing(Request $request){
         }
     
         if($request->model){
-            $model_arr = array_filter($request->model); // Filter out any empty values
-            if ($model_arr) {
-                $carsQuery->whereIn('model_name_en', $model_arr); 
-            // $carsQuery->where('model_name_en', $request->model); 
+            $model_arr = [];
+            foreach ($request->model as $brandSlug => $models) {
+                if (is_array($models)) {
+                    $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+                }
             }
+            if ($model_arr) {
+                $carsQuery->whereIn('model_name_en', $model_arr);
+            }
+            // $model_arr = array_filter($request->model); // Filter out any empty values
+            // if ($model_arr) {
+            //     $carsQuery->whereIn('model_name_en', $model_arr); 
+            // // $carsQuery->where('model_name_en', $request->model); 
+            // }
         }
 
         if($request->price_range_scale){
@@ -4914,8 +4973,9 @@ public function car_listing(Request $request){
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
                 });
             }
         }
@@ -4956,8 +5016,9 @@ public function car_listing(Request $request){
                     if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
                         // Group the conditions for this range
                         $query->orWhere(function ($subQuery) use ($result) {
-                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                                     ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                            // $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+                            //          ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
                         });
                     }
                 }
@@ -5028,13 +5089,13 @@ public function car_listing(Request $request){
         if ($request->sort_by) {
             switch ($request->sort_by) {
                 case 'price_low_high':
-                    $carsQuery->orderBy('start_price_num', 'asc');
+                    $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'asc');
                     break;
                 case 'price_high_low':
-                    $carsQuery->orderBy('start_price_num', 'desc');
+                    $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                     break;
                 case 'recent':  
-                    $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                    $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                     ->limit(100)
                     ->pluck('auct_lots_xml_jp_op.id');
                 
@@ -5050,12 +5111,14 @@ public function car_listing(Request $request){
         // $carsQuery->get();
         // dd(DB::getQueryLog());
 
+        if(!$request->sort_by){
+            $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc');
+        }
         // Pagination
         $date=date('Y');
         $cars = $carsQuery->where('auct_lots_xml_jp_op.new_arrival','1')
         ->select('auct_lots_xml_jp_op.*')
         ->where('active_status','1')
-        ->orderBy('id','desc')
         ->paginate(12);
 
         // Transform cars into an array for the view

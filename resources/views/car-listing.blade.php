@@ -23,7 +23,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.JDM Stock Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -42,7 +42,7 @@
                                                 Brand & Model
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -59,16 +59,16 @@
                                                                         </label>
                                                                     </div>
                                                                     <div id="collapseOne{{$index}}" 
-                                                                        class="accordion-collapse collapse  w-100 {{ hasCheckedModels($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" 
+                                                                        class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" 
                                                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
                                                                             <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr)) 
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
-                                                                                            <input name="model[]" class="form-check-input model-search" type="checkbox"
-                                                                                                    value="{{ $model['model'] }}"
-                                                                                                    {{ in_array(trim($model['model']), (array) request('model', [])) ? 'checked' : '' }}>
+                                                                                            <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
+                                                                                                    value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
+                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
                                                                                             <label class="form-check-label brand_name">
                                                                                                  {{ $model['model'] . ' (' . $model['count'] . ')' }}
                                                                                             </label>
@@ -105,7 +105,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse show pt-3"
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }} pt-3"
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
 
@@ -122,12 +122,11 @@
                                                                 data-slider-max="{{$maxPrice}}" 
                                                                 value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
                                                                 data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
-                                                                />
-                                                 
+                                                    />
                                                   </div>
                                                   <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                     @if($request_check !=0)
-                                                                    <button class="clear-button" id="clear-budget">CLEAR</button>
+                                                     @if(request('price_range_scale'))
+                                                        <button class="clear-button" id="clear-budget">CLEAR</button>
                                                     @endif    
                                                         <button class="go-button" type="button" id="budget_search">GO</button>
                                                   </div>
@@ -163,12 +162,12 @@
                                         <div class="accordion-item ps-3">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                    data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsetwo">
                                                     Model Year
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
                                                 aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
@@ -243,9 +242,6 @@
                                     </div>
                                 </div> -->
                         <!-- Select Your Year End -->
-
-                    </form> 
-                    
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
                             <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -303,8 +299,8 @@
                             <div class="inventory-ber-right-btn sort_by_button">
                                 <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                            data-bs-target="#pills-home" type="button" role="tab"
+                                        <button class="nav-link  active listing-view" id="pills-home-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-home" data-view="list" type="button" role="tab"
                                             aria-controls="pills-home" aria-selected="true">
 
                                             <span>
@@ -317,11 +313,12 @@
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                        <button class="nav-link  listing-view" id="pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-profile" type="button" role="tab"
-                                            aria-controls="pills-profile" aria-selected="false"><i
+                                            aria-controls="pills-profile" data-view="grid" aria-selected="false"><i
                                                 class="fa-solid fa-list"></i></button>
                                     </li>
+                                    <input type="hidden" name="view" id='list_view_id'>
                                 </ul>
                             </div>
                         </div>
@@ -343,19 +340,23 @@
                             @endforeach
                             @endif --}}
                         @if(request('model') && count(request('model')) > 0)
-                        @foreach(request('model') as $index => $brandSlug)
-                            <p class="position-relative filter-text px-3 py-1">
-                                <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
-                                            <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
-                                            </span>
-                                        </span> 
-                                </span>              
-                            </p>
-                            @php $request_check++;@endphp
+                        @foreach(request('model') as $brandSlug => $models)
+                            @foreach($models as $model)
+                               @if($model!="")
+                                <p class="position-relative filter-text px-3 py-1">
+                                    <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
+                                            <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                                <span class="alert-close-model">
+                                                    <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
+                                                </span>
+                                            </span> 
+                                    </span>              
+                                </p>
+                                @php $request_check++;@endphp
+                                @endif
                             @endforeach
-                            @endif
+                            @endforeach
+                            @endif 
                             @if(request('year'))
                             <p class="position-relative filter-text px-3 py-1">
                                 <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
@@ -924,6 +925,7 @@
                     </div>
                     
                 </div>
+                </form> 
                  
             </div>
         </div>
@@ -944,6 +946,63 @@
         (function($) {
             const initialMinPrice = $('#ex2').data('slider-min');
             const initialMaxPrice = $('#ex2').data('slider-max');
+
+             //make default list view make active
+            //  let params = new URLSearchParams(window.location.search);
+            //     let viewParam = params.get('view');
+            //     if (viewParam) {
+            //         $(`.listing-view[data-view="${viewParam}"]`).addClass('active');
+            //     } else {
+            //         // Optionally set a default view
+            //         $('.listing-view').first().addClass('active');
+            //     }
+
+
+            // document.addEventListener('DOMContentLoaded', function () {
+            //     let url = new URL(window.location.href);
+            //     let params = url.searchParams;
+            //     let viewParam = params.get('view');
+
+            //     // Remove 'active' class from all view buttons
+            //     document.querySelectorAll('.listing-view').forEach(el => el.classList.remove('active'));
+
+            //     if (viewParam) {
+                
+            //         // Activate the button with the matching data-view
+            //         let activeButton = document.querySelector(`.listing-view[data-view="${viewParam}"]`);
+            //         if (activeButton) {
+                       
+            //             // activeButton.classList.add('active');
+            //             activeButton.click(); // Ensure the UI changes or any event is triggered
+            //         }
+            //     } else {
+                    
+            //         // Default to the first button if no viewParam
+            //         let defaultButton = document.querySelector('.listing-view[data-view="list"]');
+            //         if (defaultButton) {
+            //             defaultButton.classList.add('active');
+            //         }
+            //     }
+            // });
+
+
+        //     $(".listing-view").on('click',function(){
+        //         // let url = new URL(window.location.href);
+        //         // let params = url.searchParams;
+        //         // let view_data = $(this).data('view');
+        //         $("#list_view_id").val($(this).data('view'));
+                
+        //         // Always set the new view value
+        //         // params.set('view', view_data);
+                
+        //         // let newUrl = url.origin + url.pathname + '?' + params.toString();
+        //         // history.replaceState(null, null, newUrl);
+        //         // $('.listing-view').removeClass('active');
+        //         // $(this).addClass('active');
+        //         clear_price_slider();    
+        //         $('#search_form').submit();
+        //    })
+
             function clear_price_slider(){
                     let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
                     let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
@@ -965,6 +1024,7 @@
                 // Update the URL without reloading the page
                 let newUrl = url.origin + url.pathname + '?' + params.toString();
                 history.replaceState(null, null, newUrl);
+                
             }
             "use strict"
             $(document).ready(function () {
@@ -1099,6 +1159,8 @@
                     const brandCheckbox = accordionItem.querySelector('.brand-search');
                     const modelCheckboxes = accordionItem.querySelectorAll('.model-search');
 
+                    console.log(brandCheckbox)
+
                     
                     // Check if all model checkboxes are checked
                     // const allChecked = Array.from(modelCheckboxes).every(checkbox => checkbox.checked);
@@ -1127,7 +1189,7 @@
 
 
     document.addEventListener('DOMContentLoaded', function () {
-            // Attach event listeners to all close buttons
+            // Attach event listeners to all close buttonsmodel
             const closeButtons = document.querySelectorAll('.alert-close img');
             const closeButtonsModel = document.querySelectorAll('.alert-close-model img');
             const closeButtonsYear = document.querySelectorAll('.alert-close-year img');
@@ -1230,95 +1292,149 @@
        
     });
 
-    document.querySelectorAll('.alert-close-model').forEach(button => {
-        button.addEventListener('click', function(event) {
-        event.preventDefault();
+//     document.querySelectorAll('.alert-close-model').forEach(button => {
+//         button.addEventListener('click', function(event) {
+//         event.preventDefault();
         
-        // Get relevant elements
-        const modelItem = event.target.closest('.model-item');
-        const modelValue = modelItem.textContent.trim(); // Get model value from the text content
-        const filterText = modelItem.closest('.filter-text');
+//         // Get relevant elements
+//         const modelItem = event.target.closest('.model-item');
+//         const modelValue = modelItem.textContent.trim(); // Get model value from the text content
+//         const filterText = modelItem.closest('.filter-text');
         
-        // Find corresponding checkboxes
-        const modelCheckboxes = document.querySelectorAll(`input[value="${modelValue}"].model-search`);
-        let brandSlug = '';
+//         // Find corresponding checkboxes
+//         const modelCheckboxes = document.querySelectorAll(`input[value="${modelValue}"].model-search`);
+//         let brandSlug = '';
         
-        // Find the brand checkbox by looking through model checkboxes' parent accordions
-        modelCheckboxes.forEach(checkbox => {
-            const accordionItem = checkbox.closest('.accordion-item');
-            if (accordionItem) {
-                const brandCheckbox = accordionItem.querySelector('.brand-search');
-                if (brandCheckbox) {
-                    brandSlug = brandCheckbox.value;
-                }
-            }
-        });
+//         // Find the brand checkbox by looking through model checkboxes' parent accordions
+//         modelCheckboxes.forEach(checkbox => {
+//             const accordionItem = checkbox.closest('.accordion-item');
+//             if (accordionItem) {
+//                 const brandCheckbox = accordionItem.querySelector('.brand-search');
+//                 if (brandCheckbox) {
+//                     brandSlug = brandCheckbox.value;
+//                 }
+//             }
+//         });
         
-        // Update URL parameters
-        const url = new URL(window.location.href);
+//         // Update URL parameters
+//         const url = new URL(window.location.href);
         
-        // Get all current model parameters
-        let models = url.searchParams.getAll('model[]');
-        if (models.length === 0) {
-            models = url.searchParams.getAll('model');
-        }
+//         // Get all current model parameters
+//         let models = url.searchParams.getAll('model[]');
+//         if (models.length === 0) {
+//             models = url.searchParams.getAll('model');
+//         }
         
-        // Remove the clicked model
-        models = models.filter(model => model !== modelValue);
+//         // Remove the clicked model
+//         models = models.filter(model => model !== modelValue);
         
-        // Clear and update model parameters
-        url.searchParams.delete('model[]');
-        url.searchParams.delete('model');
-        models.forEach(model => {
-            url.searchParams.append('model[]', model);
-        });
+//         // Clear and update model parameters
+//         url.searchParams.delete('model[]');
+//         url.searchParams.delete('model');
+//         models.forEach(model => {
+//             url.searchParams.append('model[]', model);
+//         });
         
-        if (brandSlug) {
-            // Find all checked models for this brand in the accordion
-            const brandAccordion = document.querySelector(`input[value="${brandSlug}"].brand-search`)
-                ?.closest('.accordion-item');
+//         if (brandSlug) {
+//             // Find all checked models for this brand in the accordion
+//             const brandAccordion = document.querySelector(`input[value="${brandSlug}"].brand-search`)
+//                 ?.closest('.accordion-item');
             
-            if (brandAccordion) {
-                // Get all model checkboxes within this brand's accordion
-                const brandModelCheckboxes = brandAccordion.querySelectorAll('.model-search');
-                const remainingCheckedModels = Array.from(brandModelCheckboxes)
-                    .filter(checkbox => checkbox.checked && checkbox.value !== modelValue);
+//             if (brandAccordion) {
+//                 // Get all model checkboxes within this brand's accordion
+//                 const brandModelCheckboxes = brandAccordion.querySelectorAll('.model-search');
+//                 const remainingCheckedModels = Array.from(brandModelCheckboxes)
+//                     .filter(checkbox => checkbox.checked && checkbox.value !== modelValue);
                 
-                // Only uncheck brand and remove from URL if no models remain checked
-                if (remainingCheckedModels.length === 0) {
-                    const brandCheckbox = brandAccordion.querySelector('.brand-search');
-                    if (brandCheckbox) {
-                        brandCheckbox.checked = false;
+//                 // Only uncheck brand and remove from URL if no models remain checked
+//                 if (remainingCheckedModels.length === 0) {
+//                     const brandCheckbox = brandAccordion.querySelector('.brand-search');
+//                     if (brandCheckbox) {
+//                         brandCheckbox.checked = false;
                         
-                        let brands = url.searchParams.getAll('brand[]');
-                        if (brands.length === 0) {
-                            brands = url.searchParams.getAll('brand');
-                        }
+//                         let brands = url.searchParams.getAll('brand[]');
+//                         if (brands.length === 0) {
+//                             brands = url.searchParams.getAll('brand');
+//                         }
                         
-                        brands = brands.filter(brand => brand !== brandSlug);
+//                         brands = brands.filter(brand => brand !== brandSlug);
                         
-                        url.searchParams.delete('brand[]');
-                        url.searchParams.delete('brand');
-                        brands.forEach(brand => {
-                            url.searchParams.append('brand[]', brand);
-                        });
-                    }
-                }
-            }
+//                         url.searchParams.delete('brand[]');
+//                         url.searchParams.delete('brand');
+//                         brands.forEach(brand => {
+//                             url.searchParams.append('brand[]', brand);
+//                         });
+//                     }
+//                 }
+//             }
+//         }
+        
+//         // Uncheck model checkboxes
+//         modelCheckboxes.forEach(checkbox => {
+//             checkbox.checked = false;
+//         });
+        
+//         // Remove the filter tag from UI
+//         filterText.remove();
+        
+//         // Navigate to updated URL
+//         window.location.href = url.toString();
+//     });
+// });
+document.querySelectorAll('.alert-close-model').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Get the relevant elements
+        const modelItem = event.target.closest('.model-item');
+        const modelValue = modelItem.textContent.trim(); // Get model value
+        const brandSlug = modelItem.dataset.brand; // Get associated brand from data attribute
+        const filterText = modelItem.closest('.filter-text');
+
+        // Parse the current URL
+        const url = new URL(window.location.href);
+
+        // Get all model parameters for the specific brand
+        let brandModels = url.searchParams.getAll(`model[${brandSlug}][]`);
+        if (brandModels.length === 0) {
+            brandModels = url.searchParams.getAll(`model[${brandSlug}]`);
         }
-        
-        // Uncheck model checkboxes
-        modelCheckboxes.forEach(checkbox => {
-            checkbox.checked = false;
+
+        // Remove the specific model
+        brandModels = brandModels.filter(model => model !== modelValue);
+
+        // Clear and update the models for this brand
+        url.searchParams.delete(`model[${brandSlug}][]`);
+        url.searchParams.delete(`model[${brandSlug}]`);
+        brandModels.forEach(model => {
+            url.searchParams.append(`model[${brandSlug}][]`, model);
         });
-        
-        // Remove the filter tag from UI
+
+        // If no models remain for this brand, optionally remove the brand itself
+        if (brandModels.length === 0) {
+            const brands = url.searchParams.getAll('brand[]');
+            const updatedBrands = brands.filter(brand => brand !== brandSlug);
+            url.searchParams.delete('brand[]');
+            updatedBrands.forEach(brand => {
+                url.searchParams.append('brand[]', brand);
+            });
+        }
+
+        // Uncheck the model checkbox in the DOM
+        const modelCheckbox = document.querySelector(`input[value="${modelValue}"][data-brand="${brandSlug}"]`);
+        if (modelCheckbox) {
+            modelCheckbox.checked = false;
+        }
+
+        // Remove the filter tag from the UI
         filterText.remove();
-        
-        // Navigate to updated URL
-        window.location.href = url.toString();
+
+        // Update the URL in the browser
+        window.history.pushState({}, '', url.toString());
+        window.location.reload();
     });
 });
+
 
    
 
