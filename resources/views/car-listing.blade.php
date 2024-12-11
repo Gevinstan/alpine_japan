@@ -122,12 +122,11 @@
                                                                 data-slider-max="{{$maxPrice}}" 
                                                                 value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
                                                                 data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
-                                                                />
-                                                 
+                                                    />
                                                   </div>
                                                   <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                     @if($request_check !=0)
-                                                                    <button class="clear-button" id="clear-budget">CLEAR</button>
+                                                     @if(request('price_range_scale'))
+                                                        <button class="clear-button" id="clear-budget">CLEAR</button>
                                                     @endif    
                                                         <button class="go-button" type="button" id="budget_search">GO</button>
                                                   </div>

@@ -4029,10 +4029,19 @@ public function car_listing(Request $request){
         }
     
         if($request->model){
-            $model_arr = array_filter($request->model); // Filter out any empty values
-            if ($model_arr) {
-                $carsQuery->whereIn('model_name_en', $model_arr); 
+            $model_arr = [];
+            foreach ($request->model as $brandSlug => $models) {
+                if (is_array($models)) {
+                    $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+                }
             }
+            if ($model_arr) {
+                $carsQuery->whereIn('model_name_en', $model_arr);
+            }
+            // $model_arr = array_filter($request->model); // Filter out any empty values
+            // if ($model_arr) {
+            //     $carsQuery->whereIn('model_name_en', $model_arr); 
+            // }
             // $carsQuery->where('model_name_en', $request->model); 
         }
 
@@ -4072,26 +4081,39 @@ public function car_listing(Request $request){
                 "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
             ];
 
+            $carsQuery->where(function ($query) use ($request, $priceRanges) {
+                foreach ($request->price_range as $range) {
+                    $result = $this->getPriceRangestart($range, $priceRanges);
+        
+                    if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
+                        // Group the conditions for this range
+                        $query->orWhere(function ($subQuery) use ($result) {
+                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                                    //  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        });
+                    }
+                }
+            }); 
 
 
-            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
+            // $result = $this->getPriceRangestart($request->price_range, $priceRanges);
 
         
 
     
-            if (is_null($result['end_price_num'])) {
-                // Count for "Above" range
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
-                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
-                });
-            } else {
-                // Count for other ranges
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-                });
-            }  
+            // if (is_null($result['end_price_num'])) {
+            //     // Count for "Above" range
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
+            //           ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
+            //     });
+            // } else {
+            //     // Count for other ranges
+            //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
+            //         $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
+            //         ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+            //     });
+            // }  
         }
 
         if ($request->scores_en) {
@@ -4126,8 +4148,9 @@ public function car_listing(Request $request){
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
                 });
             }
         }
@@ -4153,13 +4176,13 @@ public function car_listing(Request $request){
         if ($request->sort_by) {
             switch ($request->sort_by) {
                 case 'price_low_high':
-                    $carsQuery->orderBy('start_price_num', 'asc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'asc');
                     break;
                 case 'price_high_low':
-                    $carsQuery->orderBy('start_price_num', 'desc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'desc');
                     break;
                 case 'recent':
-                    $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                    $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc')
                     ->limit(100)
                     ->pluck('auct_lots_xml_jp.id');
                 
@@ -4172,12 +4195,15 @@ public function car_listing(Request $request){
 
     
       
+        if(!$request->sort_by){
+            $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
+        }
        
 
         // Pagination
         $cars = $carsQuery
-        ->orderBy('id', 'desc')
         ->select('auct_lots_xml_jp.*')->paginate(12);
+
         $price_range_counts = $this->getAuctionPriceRangeCounts(
             $carsQuery, 
             $hasPriceRangeScale, 

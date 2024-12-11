@@ -167,7 +167,7 @@
                                                     Budget
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }}"
+                                            <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse pt-3 {{ request('price_range_scale') || request('price_range') ? 'show' : '' }}"
                                                  aria-labelledby="panelsStayOpen-headingfive">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
