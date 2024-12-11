@@ -377,7 +377,7 @@
                         <div class="d-flex align-items-center flex-wrap gap-3">
                         {{--@if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
-                            <p class="position-relative filter-text px-3 py-1">
+                            <!-- <p class="position-relative filter-text px-3 py-1">
                                 <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle" style="z-index: 10;">
                                             <span class="alert-close">
@@ -385,7 +385,7 @@
                                             </span>
                                         </span> 
                                 </span>              
-                            </p>
+                            </p> -->
                             @endforeach
                             @endif --}}
                         @if(request('model') && count(request('model')) > 0)
@@ -721,40 +721,59 @@
                             aria-labelledby="pills-profile-tab">
                             <div class="row g-5 brand-car-two">
                                 @forelse ($cars_array as $index => $car)
-                                    <div class=" col-xxl-6  col-xl-12  col-lg-12  col-sm-12 ">
+                                    <div class=" col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                             <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
 
                                             </div>
 
-                                            <div class="brand-car-inner">
-                                                <div class="brand-car-inner-item">
-                                                <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
-                                                 title="@if(session('front_lang')=='en')
-                                                            {{ $car['company_en'] }}
-                                                        @else
-                                                            {{ $car['company'] }}
-                                                        @endif">
+                                            <div class="">
+                                                <div class="pt-2">
+
+                                                    <p class="listcar_price ps-1 pe-4">
                                                         @if(session('front_lang')=='en')
-                                                                {{ $car['company_en'] }}
-                                                        @else
-                                                            {{ $car['company'] }}
-                                                        @endif
-                                                    </span>
-                                                    <p class="listcar_price pt-3 pe-4">
-                                                       @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price_num'] }}
-                                                        @else
-                                                            {{ '$'.$car['start_price'] }}
-                                                        @endif
+                                                            {{ '$'.$car['start_price_num'] }}
+                                                            @else
+                                                                {{ '$'.$car['start_price'] }}
+                                                            @endif
                                                     </p>
+                                                    <div class="text-truncate_list1 car-name ps-1" data-bs-toggle="tooltip" 
+                                                            title="@if(session('front_lang')=='en')
+                                                                {{ $car['company_en'] }}
+                                                            @else
+                                                                {{ $car['company'] }}
+                                                            @endif">
+                                                            @if(session('front_lang')=='en')
+                                                                    {{ $car['company_en'] }}
+                                                            @else
+                                                                {{ $car['company'] }}
+                                                            @endif
+                                                    </div>
+
+                                                    <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip" title="
+                                                            @if(session('front_lang')=='en')
+                                                                    {{ $car['model_name_en'] }}
+                                                                @else
+                                                                    {{ $car['model_name'] }}
+                                                                @endif  
+                                                            ">
+                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2"> 
+                                                                @if(session('front_lang')=='en')
+                                                                    {{ html_decode($car['model_name_en']) }}
+                                                                @else
+                                                                    {{ html_decode($car['model_name']) }}
+                                                                @endif    
+                                                        </a>
+                                                    </div>
+
+                                                    
                                                 </div>
 
                                            
 
                                                 <div class="brand-car-inner-item-main">
-                                                    <div class="brand-car-inner-item-two">
+                                                    <div class="brand-car-inner-item-two ps-3">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
                                                                 <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -764,13 +783,17 @@
 
                                                             </span>
                                                         </div>
-                                                        <span>
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'] .',000': '') }}
+                                                            @else
+                                                            {{ html_decode(!empty($car['mileage']) ? $car['mileage']. ',000' : '') }}
+                                                            @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'] .',000': '') }}
                                                             @else
                                                             {{ html_decode(!empty($car['mileage']) ? $car['mileage']. ',000' : '') }}
                                                             @endif
-                                                        </span>
+                                                        </p>
 
                                                     
                                                     </div>
@@ -784,17 +807,21 @@
 
                                                             </span>
                                                         </div>
-                                                        <span>
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['year_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['year']) }}
+                                                            @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['year']) }}
                                                             @endif
-                                                        </span>
+                                                        </p>
 
                                                        
                                                     </div>
-                                                    <div class="brand-car-inner-item-two">
+                                                    <div class="brand-car-inner-item-two pe-3">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
                                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -803,39 +830,35 @@
 
                                                             </span>
                                                         </div>
-                                                        <span>
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                            @else
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                            @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @endif
-                                                        </span>
-
-                                                        
+                                                        </p>   
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-btm-txt-btm">
-                                                <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
-                                                        <h3 class="text-truncate car-fullname pt-3 ps-3" 
-                                                        title="
-                                                        @if(session('front_lang')=='en')
-                                                                {{ $car['model_name_en'] }}
-                                                            @else
-                                                                {{ $car['model_name'] }}
-                                                            @endif  
-                                                        "> 
-                                                            @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['model_name_en']) }}
-                                                            @else
-                                                                {{ html_decode($car['model_name']) }}
-                                                            @endif
-                                                        </h3>
-                                                    </a>
-
-
+                                                <div class="px-3 d-flex flex-row">
+                                                    @php
+                                                         $parsed_data=parseCustomFormat($car['parsed_data']);
+                                                         $carbonInstance = Carbon::parse($car['datetime']);
+                                                    @endphp    
+                                                    <p>
+                                                        <i class="bi bi-geo-alt-fill"></i><span class="">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   
+                                                    </p>
+                                                    <div class="d-flex flex-column list_date ps-5">
+                                                        <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                        <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
+                                                    </div>
                                                 </div>
 
+                                                
 
 
                                             </div>
