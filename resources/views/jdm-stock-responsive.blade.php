@@ -482,7 +482,7 @@
                                                             
                                                             </span>
                                                         </div>
-                                                        <p class="align-content-end pt-3">.</p>
+                                                        <!-- <p class="align-content-end pt-3">.</p> -->
                                                         <div class="brand-car-inner-item-two ">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
@@ -535,7 +535,7 @@
                                                                 @endif
                                                             </span>
                                                         </div>
-                                                        <p class="align-content-end pt-3">.</p>
+                                                        <!-- <p class="align-content-end pt-3">.</p> -->
                                                         <div class="brand-car-inner-item-two pe-4">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
