@@ -1220,6 +1220,9 @@
     .inner-banner {
         padding: 70px 0 70px 0;
     }
+    .login-banner {
+        padding: 0 !important;
+    }
     .about .about-img img {
         height: 100%;
         width: 100%;
@@ -1431,7 +1434,7 @@
         padding-left: 0;
     }
     .login {
-        padding: 70px 0;
+        /* padding: 70px 0; */
     }
     .error .error-img img {
         width: 100%;
@@ -2702,7 +2705,7 @@
         margin-top: 50px;
     }
     .login {
-        padding: 60px 0;
+        /* padding: 60px 0; */
     }
     .login-bg {
         border-radius: 0;

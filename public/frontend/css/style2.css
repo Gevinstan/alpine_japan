@@ -536,7 +536,7 @@
 }
 
 .form-label span {
-    color: var(--primary-color-2);
+    color: red;
 }
 
 .form-label.two {
@@ -11258,7 +11258,7 @@ p {
     position: relative;
     z-index: 1;
     background-color: var(--white-color);
-    padding: 120px 0;
+    /* padding: 120px 0; */
 }
 
 .login .thm-btn-two {
@@ -17714,4 +17714,11 @@ input:not(:placeholder-shown) + .input-placeholder {
     border-bottom: none;
     text-decoration: none;
 }
+
+/***** Login Style Start  *****/
+
+.login-banner {
+    padding: 104px 0 0 0 !important;
+}
+/***** Login Style End  *****/
 
