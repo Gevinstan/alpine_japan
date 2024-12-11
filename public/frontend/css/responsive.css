@@ -295,6 +295,11 @@
     .dashboard {
         padding: 80px 0;
     }
+
+    .dashboard-pd-none {
+        padding: 0 !important;
+    }
+
     .dashboard .dashboard-side-ber {
         margin-right: 0;
         padding: 35px 15px;
@@ -835,6 +840,11 @@
     .dashboard {
         padding: 80px 0;
     }
+
+    .dashboard-pd-none {
+        padding: 0 !important;
+    }
+
     .dashboard .dashboard-side-ber {
         margin-right: 0;
         padding: 35px 15px;
@@ -1220,6 +1230,11 @@
     .inner-banner {
         padding: 70px 0 70px 0;
     }
+
+    .dashboard-inner-banner {
+        padding: 0 !important;
+    }
+
     .login-banner {
         padding: 0 !important;
     }
@@ -1472,6 +1487,10 @@
     }
     .dashboard {
         padding: 60px 0;
+    }
+
+    .dashboard-pd-none {
+        padding: 0 !important;
     }
     .dashboard .dashboard-side-ber {
         margin-right: 0px;
@@ -2209,6 +2228,11 @@
     .inner-banner {
         padding: 50px 0 50px 0;
     }
+
+    .dashboard-inner-banner {
+        padding: 0 !important;
+    }
+    
     .about .about-img img {
         height: 100%;
         width: 100%;
@@ -2793,6 +2817,11 @@
     .dashboard {
         padding: 60px 0;
     }
+
+    .dashboard-pd-none {
+        padding: 0 !important;
+    }
+
     .dashboard
         .car-images
         .car-images-inner
