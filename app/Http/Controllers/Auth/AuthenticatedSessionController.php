@@ -183,6 +183,7 @@ class AuthenticatedSessionController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
+        Session::forget('auct_id');
         Auth::guard('web')->logout();
 
         $notification= trans('translate.Logout Successfully');
