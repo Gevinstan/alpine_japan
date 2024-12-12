@@ -737,12 +737,25 @@ endRange.addEventListener('input', () => {
             e.preventDefault();
             form.submit();
         })
-        $(".brand-search").on('change',function(e){
-            e.preventDefault();   
-            $(".model-search").val("")
-            form.submit();
-           
-        }) 
+        document.addEventListener('DOMContentLoaded', function () {
+                // Listen for changes on all brand-search checkboxes
+                document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                    brandCheckbox.addEventListener('change', function () {
+                        // Get the associated brand slug
+                        const brandSlug = this.value;
+
+                        // Find all model-search checkboxes associated with this brand
+                        const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
+
+                        // Set their checked state based on the brand checkbox
+                        modelCheckboxes.forEach(modelCheckbox => {
+                            modelCheckbox.checked = this.checked;
+                        });
+                        clear_price_slider();
+                        $('#search_form').submit();
+                    });
+                });
+            });
         $(".model-search").on('change',function(e){
             e.preventDefault();   
             form.submit();    

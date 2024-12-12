@@ -1217,19 +1217,25 @@
         window.location.reload();
     });
 });
+            document.addEventListener('DOMContentLoaded', function () {
+                // Listen for changes on all brand-search checkboxes
                 document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
-                    brandCheckbox.addEventListener('change', function() {
+                    brandCheckbox.addEventListener('change', function () {
+                        // Get the associated brand slug
+                        const brandSlug = this.value;
 
-                        const brandId = this.getAttribute('data-brand-id');
-                        const accordionItem = this.closest('.accordion-item');
-                        const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
-                        // modelCheckboxes.forEach(modelCheckbox => {
-                        //     modelCheckbox.checked = this.checked;
-                        // });
+                        // Find all model-search checkboxes associated with this brand
+                        const modelCheckboxes = document.querySelectorAll(`.model-searchs[data-brand="${brandSlug}"]`);
+
+                        // Set their checked state based on the brand checkbox
+                        modelCheckboxes.forEach(modelCheckbox => {
+                            modelCheckbox.checked = this.checked;
+                        });
                         clear_price_slider();
                         $('#search_form').submit();
                     });
                 });
+            });
                 document.querySelectorAll('.model-search').forEach(modelCheckbox => {
                     modelCheckbox.addEventListener('change', function() {
                     // Find the parent accordion item and its brand checkbox

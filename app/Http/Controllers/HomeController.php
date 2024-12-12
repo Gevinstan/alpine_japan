@@ -44,6 +44,7 @@ use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
 use Cache;
 use Carbon\Carbon;  
+use App\Models\Wishlist;
 
 
 use App\Helpers\MailHelper;
@@ -57,8 +58,18 @@ class HomeController extends Controller
 
     public function getNumberFromUrl($url) {
         $parsed_url = parse_url($url);
-        parse_str($parsed_url['query'], $query_params);
-        return isset($query_params['number']) ? (int)$query_params['number'] : null;
+         // Check if the query key exists
+            if (!isset($parsed_url['query'])) {
+                return null; // Return null if there's no query string
+            }
+
+            // Parse the query string
+            parse_str($parsed_url['query'], $query_params);
+
+            // Return the number if it exists, or null otherwise
+            return isset($query_params['number']) ? (int)$query_params['number'] : null;
+        // parse_str($parsed_url['query'], $query_params);
+        // return isset($query_params['number']) ? (int)$query_params['number'] : null;
     }
 
 
@@ -2579,11 +2590,12 @@ public function car_listing(Request $request){
         $endValue = $maxPrice;
 
 
-    // DB::enableQueryLog();
+    DB::enableQueryLog();
 
     // Initialize the query for cars
 
 
+    // echo json_encode($request->model);die();
     
     $carsQuery = CarDataJpOp::query();
 
@@ -2759,6 +2771,7 @@ public function car_listing(Request $request){
 
 
     
+
 
 
     // Transform cars into an array for the view
@@ -3360,7 +3373,16 @@ public function car_listing(Request $request){
         ]);
     }
     public function top_selling1(Request $request){
-
+        $wishlists=[];
+        if(Auth::guard('web')->check()){
+            $userId = $userId ?? auth()->id();
+            $wishlists=CarDataJpOp::join('wishlists as w', 'auct_lots_xml_jp_op.id', '=', 'w.car_id')
+            // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+                ->where('w.table_id', '1')
+                ->pluck('w.car_id')
+                ->toArray();
+        }
+       
       
        
         $seo_setting = SeoSetting::where('id', 1)->first();
@@ -3704,7 +3726,8 @@ public function car_listing(Request $request){
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'wishlists'=>$wishlists
         ]);
     }
     public function auctionCar(Request $request){
@@ -7410,6 +7433,40 @@ public function getJDMPriceRange()
 
     }
 
+    public function addWishList(Request $request){
+        // echo json_encode($request->id);die();
+        $userId = Auth::id();
+    $carId = $request->id;
+    $tableId = $request->type;
+
+    // Check if the record exists in the wishlist
+    $wishlistEntry = Wishlist::where('user_id', $userId)
+        ->where('car_id', $carId)
+        ->first();
+
+    if ($wishlistEntry) {
+        // If the record exists, delete it
+        $wishlistEntry->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The car has been removed from your wishlist.',
+        ], 200);
+    }
+
+    // If the record does not exist, create a new one
+    Wishlist::create([
+        'user_id' => $userId,
+        'car_id' => $carId,
+        'table_id' => $tableId,
+    ]);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'The car has been added to your wishlist.',
+    ], 201);
+        return response()->json(['status'=>true,'response'=>'Added Successfully']);
+    }
 
 
 
