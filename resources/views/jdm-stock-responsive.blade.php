@@ -693,7 +693,7 @@
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                                 aria-labelledby="pills-profile-tab">
                                 <div class="row g-5 brand-car-two">
-                                    @forelse ($cars as $index => $car)
+                                    @forelse ($cars_array as $index => $car)
                                         <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
@@ -702,7 +702,7 @@
                                                                 asset('uploads/website-images/no-image.jpg') }}" 
                                                         alt="thumb" class="card_image">
 
-                                                 
+    
                                                 </div>
 
                                                 <div class="">
@@ -727,11 +727,21 @@
                                                             @endif
                                                         </div>
 
-                                                        <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip" 
-                                                                title="">
-                                                            <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
-                                                            </a>    
-                                                        </div>
+                                                        <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip"
+                                                                title="
+                                                                @if(session('front_lang')=='en')
+                                                                    {{ $car['model_name'] }}
+                                                                @else
+                                                                    {{ $car['model_name'] }}
+                                                                @endif">
+                                                                <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}" class="text-truncate_list2">
+                                                                    @if(session('front_lang')=='en')
+                                                                        {{ html_decode($car['model_name']) }}
+                                                                    @else
+                                                                        {{ html_decode($car['model_name']) }}
+                                                                    @endif
+                                                                </a>
+                                                            </div>
                                                     </div>
 
                                                     <div class="brand-car-inner-item-main">
@@ -746,8 +756,17 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                                                {{ html_decode($car->mileage) }}
+                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" 
+                                                            title="@if(session('front_lang')=='en')
+                                                                    {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
+                                                                @else
+                                                                {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
+                                                                @endif">
+                                                                @if(session('front_lang')=='en')
+                                                                    {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
+                                                                @else
+                                                                {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
+                                                                @endif
                                                             </p>
                                                         </div>
                                                         <div class="brand-car-inner-item-two">
@@ -760,8 +779,17 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                                                {{ html_decode($car->fuel_type) }}
+                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top"
+                                                             title="@if(session('front_lang')=='en')
+                                                                    {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
+                                                                    @else
+                                                                    {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
+                                                                    @endif">
+                                                                @if(session('front_lang')=='en')
+                                                                    {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
+                                                                @else
+                                                                {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
+                                                                @endif
                                                             </p>
                                                         </div>
                                                         <div class="brand-car-inner-item-two pe-3">
@@ -775,15 +803,14 @@
                                                             </div>
 
                                                             <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                                                {{ html_decode($car->engine_size) }}
+                                                             
                                                             </p>
                                                         </div>
                                                     </div>
 
                                                     <div class="px-3 d-flex flex-row">
                                                         @php
-                                                            $parsed_data=parseCustomFormat($car['parsed_data']);
-                                                            $carbonInstance = Carbon::parse($car['datetime']);
+                                                            $carbonInstance = Carbon::parse($car['created_at']);
                                                         @endphp    
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill"></i><span class="brand-location">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   

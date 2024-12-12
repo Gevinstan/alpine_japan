@@ -101,6 +101,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/listing/{slug}', 'listing')->name('listing');
             Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');  
             Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
+            Route::post('/addWishList', 'addWishList')->name('add-user-wishlist');
             // Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
             // ->middleware('auth:web');
             Route::get('/auction-car-marketplace', 'auctionCar1')->name('auction-car-marketplace')

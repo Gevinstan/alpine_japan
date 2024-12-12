@@ -44,6 +44,7 @@ use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
 use Cache;
 use Carbon\Carbon;  
+use App\Models\Wishlist;
 
 
 use App\Helpers\MailHelper;
@@ -57,8 +58,18 @@ class HomeController extends Controller
 
     public function getNumberFromUrl($url) {
         $parsed_url = parse_url($url);
-        parse_str($parsed_url['query'], $query_params);
-        return isset($query_params['number']) ? (int)$query_params['number'] : null;
+         // Check if the query key exists
+            if (!isset($parsed_url['query'])) {
+                return null; // Return null if there's no query string
+            }
+
+            // Parse the query string
+            parse_str($parsed_url['query'], $query_params);
+
+            // Return the number if it exists, or null otherwise
+            return isset($query_params['number']) ? (int)$query_params['number'] : null;
+        // parse_str($parsed_url['query'], $query_params);
+        // return isset($query_params['number']) ? (int)$query_params['number'] : null;
     }
 
 
@@ -2579,11 +2590,12 @@ public function car_listing(Request $request){
         $endValue = $maxPrice;
 
 
-    // DB::enableQueryLog();
+    DB::enableQueryLog();
 
     // Initialize the query for cars
 
 
+    // echo json_encode($request->model);die();
     
     $carsQuery = CarDataJpOp::query();
 
@@ -2761,6 +2773,7 @@ public function car_listing(Request $request){
     
 
 
+
     // Transform cars into an array for the view
     $cars_array = $cars->map(function ($car) {
     $car_image=$this->last_image($car->pictures);
@@ -2835,6 +2848,16 @@ public function car_listing(Request $request){
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
+    $wishlists=[];
+    if(Auth::guard('web')->check()){
+        $userId = $userId ?? auth()->id();
+        $wishlists=CarDataJpOp::join('wishlists as w', 'auct_lots_xml_jp_op.id', '=', 'w.car_id')
+        // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+            ->where('w.table_id', '1')
+            ->pluck('w.car_id')
+            ->toArray();
+    }
+
 
     return view('car-listing', [
         'seo_setting' => $seo_setting,
@@ -2855,7 +2878,8 @@ public function car_listing(Request $request){
         'minYear'=>$minYear,
         'maxYear'=>$maxYear,
         'minPrice'=>$minPrice,
-        'maxPrice'=>$maxPrice
+        'maxPrice'=>$maxPrice,
+        'wishlists'=>$wishlists
         // 'jdm_legend_heavy'=>$jdm_legend_heavy,
         // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
     ]);
@@ -2991,7 +3015,7 @@ public function car_listing(Request $request){
         // return $counts;
     }
     
-    public function getAuctionPriceRangeCounts($baseQuery, $hasRangeFilter = false, $startValue = null, $endValue = null) {
+    public function getAuctionPriceRangeCounts($baseQuery, $hasRangeFilter = false, $startValue = null, $endValue = null,$param) {
         $price_ranges = [
             'Under $5000' => ['min' => 0, 'max' => 5000],
             '$5000 - $50000' => ['min' => 5001, 'max' => 50000],
@@ -3053,7 +3077,10 @@ public function car_listing(Request $request){
                 ->where(function ($q) use ($startValue, $endValue) {
                     // Apply the budget filter on start_price_num and end_price_num
                     $q->whereBetween(DB::raw('COALESCE(t.start_price_num, 0)'), [$startValue, $endValue]);
-                });
+                })
+                ->when($param == 'auction-brand-new', function($query) {
+                    return $query->whereBetween('model_year_en', [now()->subYear()->year,now()->year]);;
+                }); 
                 $count = $query->where(function ($q) use ($range) {
                     // Apply the price range filter using COALESCE for null handling
                     $q->whereBetween(DB::raw('COALESCE(t.start_price_num, 0)'), [$range['min'], $range['max']]);
@@ -3073,7 +3100,10 @@ public function car_listing(Request $request){
                 $query =DB::table('auct_lots_xml_jp as t') // Alias the table dynamically
                 ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 ->join('brand_translations as bt','bt.brand_id','=','b.id')
-                ->where('bt.lang_code',Session::get('front_lang'));   
+                ->where('bt.lang_code',Session::get('front_lang'))
+                ->when($param == 'auction-brand-new', function($query) {
+                    return $query->whereBetween('model_year_en', [now()->subYear()->year,now()->year]);;
+                }); 
 
                 $count = $query->where(function ($q) use ($range) {
                     $q->whereBetween(DB::raw('COALESCE(t.start_price_num, 0)'), [$range['min'], $range['max']]);
@@ -3360,7 +3390,16 @@ public function car_listing(Request $request){
         ]);
     }
     public function top_selling1(Request $request){
-
+        $wishlists=[];
+        if(Auth::guard('web')->check()){
+            $userId = $userId ?? auth()->id();
+            $wishlists=CarDataJpOp::join('wishlists as w', 'auct_lots_xml_jp_op.id', '=', 'w.car_id')
+            // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+                ->where('w.table_id', '1')
+                ->pluck('w.car_id')
+                ->toArray();
+        }
+       
       
        
         $seo_setting = SeoSetting::where('id', 1)->first();
@@ -3704,7 +3743,8 @@ public function car_listing(Request $request){
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'wishlists'=>$wishlists
         ]);
     }
     public function auctionCar(Request $request){
@@ -3993,7 +4033,8 @@ public function car_listing(Request $request){
         $priceRange = Auct_lots_xml_jp::selectRaw('MIN(start_price_num) as min_sal, MAX(start_price_num) as max_sal')
         ->first();
         $minYear = $yearRange->min_year;
-        $maxYear = $yearRange->max_year;
+        // $maxYear = $yearRange->max_year;
+        $maxYear = Carbon::now()->year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
@@ -4003,7 +4044,7 @@ public function car_listing(Request $request){
 
         // Initialize the query for cars
 
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
         $carsQuery = Auct_lots_xml_jp::query();
 
         $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
@@ -4209,6 +4250,7 @@ public function car_listing(Request $request){
             $hasPriceRangeScale, 
             $startValue, 
             $endValue,
+            ''
         );
 
        
@@ -4289,6 +4331,16 @@ public function car_listing(Request $request){
 
     // echo json_encode($models);die();
 
+    $wishlists=[];
+    if(Auth::guard('web')->check()){
+        $userId = $userId ?? auth()->id();
+        $wishlists=Auct_lots_xml_jp::join('wishlists as w', 'auct_lots_xml_jp.id', '=', 'w.car_id')
+        // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+            ->where('w.table_id', '2')
+            ->pluck('w.car_id')
+            ->toArray();
+    }
+
         return view('auction-car-marketplace1', [
             'seo_setting' => $seo_setting,
             'brands' => $brands,
@@ -4308,7 +4360,8 @@ public function car_listing(Request $request){
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'wishlists'=>$wishlists
         ]);
     }
     public function auctionBrandNewCar(Request $request){
@@ -4327,7 +4380,6 @@ public function car_listing(Request $request){
         $models=[];
 
 
-        DB::enableQueryLog();
         $yearRange = CarDataJpOp::where('active_status', '1')
         ->selectRaw('MIN(model_year_en) as min_year, MAX(model_year_en) as max_year')
         ->first();
@@ -4338,8 +4390,18 @@ public function car_listing(Request $request){
         $maxYear = $yearRange->max_year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
+        
+        $hasPriceRangeScale = false;
+        $startValue = $minPrice;
+        $endValue = $maxPrice;
+        DB::enableQueryLog();
+
         // Initialize the query for cars
         $carsQuery = Auct_lots_xml_jp::query();
+
+        $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->where('bt.lang_code', Session::get('front_lang'));
 
         // Apply filters based on request parameters
         if ($request->location) {
@@ -4351,7 +4413,7 @@ public function car_listing(Request $request){
             if ($brand_arr) {
                 $carsQuery->whereIn('company_en', $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
-                $models = \DB::table('auct_lots_xml_jp_op')
+                $models = \DB::table('auct_lots_xml_jp')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
                 ->groupBy('model_name_en') 
                 ->select('model_name_en')
@@ -4405,24 +4467,20 @@ public function car_listing(Request $request){
 
 
 
-            $result = $this->getPriceRangestart($request->price_range, $priceRanges);
-
+            $carsQuery->where(function ($query) use ($request, $priceRanges) {
+                foreach ($request->price_range as $range) {
+                    $result = $this->getPriceRangestart($range, $priceRanges);
         
-
-    
-            if (is_null($result['end_price_num'])) {
-                // Count for "Above" range
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->where('start_price_num', '>', $result['start_price_num'])  // Greater than start price
-                      ->orWhere('end_price_num', '>', $result['start_price_num']); // Greater than end price
-                });
-            } else {
-                // Count for other ranges
-                $carsQuery = $carsQuery->where(function ($q) use ($result) {
-                    $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                    ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-                });
-            }  
+                    if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
+                        // Group the conditions for this range
+                        $query->orWhere(function ($subQuery) use ($result) {
+                            $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$result['start_price_num'],$result['end_price_num']]);
+                            // $subQuery->whereBetween('start_price_num', [$startValue, $endValue]);
+                                    //  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                        });
+                    }
+                }
+            }); 
         }
 
         if ($request->scores_en) {
@@ -4452,14 +4510,18 @@ public function car_listing(Request $request){
 
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
+                $hasPriceRangeScale = true;
                 $parts = explode(',', $request->price_range_scale);
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                    $q->whereBetween('start_price_num', [$startValue, $endValue])
-                    ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$startValue, $endValue]);
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue]);
                 });
             }
+            
         }
 
         if ($request->price_filter) {
@@ -4479,18 +4541,18 @@ public function car_listing(Request $request){
         if ($request->sort_by) {
             switch ($request->sort_by) {
                 case 'price_low_high':
-                    $carsQuery->orderBy('start_price_num', 'asc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'asc');
                     break;
                 case 'price_high_low':
-                    $carsQuery->orderBy('start_price_num', 'desc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'desc');
                     break;
                 case 'recent':
-                    $recentCarIds = $carsQuery->orderBy('id', 'desc')
+                    $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc')
                     ->limit(100)
-                    ->pluck('id');
+                    ->pluck('auct_lots_xml_jp.id');
                 
                 // Then reset the query and use these IDs
-                $carsQuery = $carsQuery->whereIn('id', $recentCarIds);
+                $carsQuery = $carsQuery->whereIn('auct_lots_xml_jp.id', $recentCarIds);
                     break;
             }
         }
@@ -4499,9 +4561,17 @@ public function car_listing(Request $request){
         $previousYear = now()->subYear()->year;
         $carsQuery->whereBetween('model_year_en', [$previousYear,$currentYear]); 
        
+        if(!$request->sort_by){
+            $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
+        }
+       
+
+    //   dd(DB::getQueryLog($carsQuery->get()));
 
         // Pagination
-        $cars = $carsQuery->paginate(12);
+        $cars = $carsQuery
+        ->select('auct_lots_xml_jp.*')->paginate(12);
+        // $cars = $carsQuery->paginate(12);
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
@@ -4522,7 +4592,9 @@ public function car_listing(Request $request){
                 'year'=>$car->model_year,
                 'year_en'=>$car->model_year_en,
                 'transmission'=>$car->transmission,
-                'transmission_en'=>$car->transmission_en
+                'transmission_en'=>$car->transmission_en,
+                'parsed_data'=>$car->parsed_data_en,
+                'datetime'=>$car->datetime 
             ];
         });
 
@@ -4549,7 +4621,15 @@ public function car_listing(Request $request){
             ->having('count', '>', 1)
             ->get();
 
-        $price_range = $this->getPriceRange();
+        // $price_range = $this->getPriceRange();
+        $price_range_counts = $this->getAuctionPriceRangeCounts(
+            $carsQuery, 
+            $hasPriceRangeScale, 
+            $startValue, 
+            $endValue,
+            'auction-brand-new'
+        );
+
 
         $jdm_legend = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -4575,6 +4655,16 @@ public function car_listing(Request $request){
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
+    $wishlists=[];
+    if(Auth::guard('web')->check()){
+        $userId = $userId ?? auth()->id();
+        $wishlists=Auct_lots_xml_jp::join('wishlists as w', 'auct_lots_xml_jp.id', '=', 'w.car_id')
+        // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+            ->where('w.table_id', '2')
+            ->pluck('w.car_id')
+            ->toArray();
+    }
+
     // echo json_encode($models);die();
 
         return view('auction-brand-new-cars', [
@@ -4586,7 +4676,7 @@ public function car_listing(Request $request){
             'listing_ads' => $listing_ads,
             'cars' => $cars,
             // 'brand_count' => $brand_count,
-            'price_range' => $price_range,
+            'price_range' => $price_range_counts,
             'transmission' => $transmission,
             'scores' => $scores,
             'jdm_legend'=>$jdm_brand,
@@ -4596,7 +4686,8 @@ public function car_listing(Request $request){
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'wishlists'=>$wishlists
         ]);
     }
     public function new_arrival(Request $request){
@@ -5199,6 +5290,15 @@ public function car_listing(Request $request){
     $jdm_brand['car']=$jdm_legend;
     $jdm_brand['heavy']=$jdm_legend_heavy;
     $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+    $wishlists=[];
+    if(Auth::guard('web')->check()){
+        $userId = $userId ?? auth()->id();
+        $wishlists=CarDataJpOp::join('wishlists as w', 'auct_lots_xml_jp_op.id', '=', 'w.car_id')
+        // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+            ->where('w.table_id', '1')
+            ->pluck('w.car_id')
+            ->toArray();
+    }
 
         return view('new-arrival1', [
             'seo_setting' => $seo_setting,
@@ -5219,7 +5319,8 @@ public function car_listing(Request $request){
             'minYear'=>$minYear,
             'maxYear'=>$maxYear,
             'minPrice'=>$minPrice,
-            'maxPrice'=>$maxPrice
+            'maxPrice'=>$maxPrice,
+            'wishlists'=>$wishlists
         ]);
     }
   
@@ -5288,11 +5389,47 @@ public function car_listing(Request $request){
         
     }
 
+    public function SelectedJdmRangeNew($price_ranges,$slug,
+    $hasPriceRangeScale,$startValue,$endValue){
+            $tableName = "blog";         
+        $priceCount = [];
+    
+        // Loop through each price range and count the records in that range
+        foreach ($price_ranges as $label => $range) {
+            // DB::enableQueryLog();
+            $query = DB::table($tableName . ' as t') // Alias the table dynamically
+            ->join('models_cars as mc', function($join) {
+                $join->on('t.category', '=', 'mc.category')  
+                     ->on('t.model', '=', 'mc.model');       
+            })
+            ->where(DB::raw('LOWER(t.make)'), $slug)      
+            ->where('t.is_active', 1)                     
+            ->whereNull('t.deleted_at')   
+            ->whereRaw('REGEXP_REPLACE(t.price, "[,\\s]", "") REGEXP "^[0-9]+$"');                
+            if ($hasPriceRangeScale) {
+                $query->whereRaw("REGEXP_REPLACE(t.price, '[^0-9]', '') BETWEEN ? AND ?", [$startValue, $endValue]);
+            }
+        
+            // Add the condition for the current price range
+            $query->whereRaw("REGEXP_REPLACE(t.price, '[^0-9]', '') BETWEEN ? AND ?", [$range['start'], $range['end']]);
+        
+            // Get the count
+            $count = $query->count();
+            // dd(DB::getQueryLog());
+    
+        
+            // Store the count for the current range
+            $priceCount[$label] = $count;
+        }
+        return $priceCount;
+            
+    }    
+
 public function SelectedJdmRange($type,$price_ranges,$slug,
 $hasPriceRangeScale,$startValue,$endValue){
     if ($type == 'car') {
         $tableName = "blog";   
-    } else if ($type == 'heavy') {
+    } else if ($type == 'heavy') {  
         $tableName = "heavy";
     } else if ($type == 'small_heavy') {
         $tableName = "small_heavy";
@@ -6730,7 +6867,12 @@ public function getJDMPriceRange()
         // $maxYear = $yearRange->max_year;
         $maxYear = $currentYear;
         $minPrice = $priceRange->min_sal;
-        $maxPrice = $priceRange->max_sal;   
+        $maxPrice = $priceRange->max_sal; 
+        
+        
+        $hasPriceRangeScale = false;
+        $startValue = $minPrice;
+        $endValue = $maxPrice;
 
 
         $priceRanges = [
@@ -7045,6 +7187,8 @@ public function getJDMPriceRange()
 
     // $price_range = $this->getPriceRange();
     $price_range = $this->getJDMPriceRange();
+    // $price_range=$this->SelectedJdmRange($type,$priceRanges,$slug,
+    // $hasPriceRangeScale,$startValue,$endValue);
     $jdm_legend = Brand::where('status', 'enable')->get();
 
  
@@ -7410,6 +7554,40 @@ public function getJDMPriceRange()
 
     }
 
+    public function addWishList(Request $request){
+        // echo json_encode($request->id);die();
+        $userId = Auth::id();
+    $carId = $request->id;
+    $tableId = $request->type;
+
+    // Check if the record exists in the wishlist
+    $wishlistEntry = Wishlist::where('user_id', $userId)
+        ->where('car_id', $carId)
+        ->first();
+
+    if ($wishlistEntry) {
+        // If the record exists, delete it
+        $wishlistEntry->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'The car has been removed from your wishlist.',
+        ], 200);
+    }
+
+    // If the record does not exist, create a new one
+    Wishlist::create([
+        'user_id' => $userId,
+        'car_id' => $carId,
+        'table_id' => $tableId,
+    ]);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'The car has been added to your wishlist.',
+    ], 201);
+        return response()->json(['status'=>true,'response'=>'Added Successfully']);
+    }
 
 
 

@@ -42,7 +42,7 @@
                                                 Brand & Model
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3  {{ request('model', []) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
@@ -122,7 +122,8 @@
                                                                 data-slider-max="{{$maxPrice}}" 
                                                                 value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
                                                                 data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
-                                                    />
+                                                                />
+                                                 
                                                   </div>
                                                   <div class="d-flex align-content-between flex-column gap-4 go_clear">
                                                      @if(request('price_range_scale'))
@@ -394,8 +395,16 @@
 
                                             <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
-                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
-                                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/>         
+                                                        @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car['id'], $wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif            
                                                         </div>
 
                                                 <div class="brand-car-inner-item">
@@ -1138,19 +1147,45 @@
 
                 // Optionally, you can also update your server-side query here
                 });
-                document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
-                    brandCheckbox.addEventListener('change', function() {
+                // document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                //     brandCheckbox.addEventListener('change', function() {
 
-                        const brandId = this.getAttribute('data-brand-id');
-                        const accordionItem = this.closest('.accordion-item');
-                        const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+                //         const brandId = this.getAttribute('data-brand-id');
+                //         const accordionItem = this.closest('.accordion-item');
+                //         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+                //         // modelCheckboxes.forEach(modelCheckbox => {
+                //         //     modelCheckbox.checked = this.checked;
+                //         // });
+                //         clear_price_slider();
+                //         $('#search_form').submit();
+                //     });
+                // });
+                document.addEventListener('DOMContentLoaded', function () {
+                // Listen for changes on all brand-search checkboxes
+                document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                    brandCheckbox.addEventListener('change', function () {
+                        // Get the associated brand slug
+                        const brandSlug = this.value;
+
+                        // Find all model-search checkboxes associated with this brand
+                        const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
+
+                        // Set their checked state based on the brand checkbox
                         // modelCheckboxes.forEach(modelCheckbox => {
                         //     modelCheckbox.checked = this.checked;
                         // });
+                        if (!this.checked) {
+                            // Uncheck all associated model checkboxes
+                            modelCheckboxes.forEach(modelCheckbox => {
+                                modelCheckbox.checked = false;
+                            });
+                        }
                         clear_price_slider();
                         $('#search_form').submit();
                     });
                 });
+            });
+
                 document.querySelectorAll('.model-search').forEach(modelCheckbox => {
                 modelCheckbox.addEventListener('change', function() {
                     // Find the parent accordion item and its brand checkbox
@@ -1184,6 +1219,23 @@
                     this.style.display = 'none';
                 });
             });
+            $(".after_auth_wishlist").on('click',function(){
+                 console.log($(this).data('car-id'))
+                 $.ajax({
+                    type: "POST",
+                    url:"{{route('add-user-wishlist')}}",
+                    data:{'id': $(this).data('car-id'),
+                        'type': 1,
+                    },
+                    beforeSend:function(data){
+                        console.log('loading');
+                    },
+                    success:function(response){
+                        console.log(response);
+                        window.location.reload();
+                    }
+                 })
+            })
         })(jQuery);
 
 
@@ -1231,10 +1283,25 @@
                 window.location.href = url.toString();
             });
         });
+        // window.addEventListener("load", function() {
+        //     document.getElementById("pageLoader").classList.add("hidden");
+        // });
+
         window.addEventListener("load", function() {
-            document.getElementById("pageLoader").classList.add("hidden");
+        // Hide the loader when the page is fully loaded
+        document.getElementById("pageLoader").classList.add("hidden");
         });
 
+        // Ensure the loader is visible when the page is reloaded or submitted
+        window.addEventListener("beforeunload", function() {
+            // Show the loader before the page unloads (optional: depends on your needs)
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
+            
+        $('form').on('submit', function() {
+        // Show the loader when the form is being submitted
+        document.getElementById("pageLoader").classList.remove("hidden");
+        });
         // closeButtonsModel.forEach(button => {
         //     button.addEventListener('click', function(event) {
         //         // Prevent default behavior

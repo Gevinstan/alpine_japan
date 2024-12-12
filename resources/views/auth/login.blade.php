@@ -8,7 +8,7 @@
 <main>
     <!-- banner-part-start  -->
 
-    <section class="inner-banner">
+    <section class="inner-banner login-banner">
     <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;">
         <div class="container">
             <div class="col-lg-12">
@@ -88,13 +88,13 @@
                             </div>
                         </div>
 
-                        @if($google_recaptcha->status==1)
+                        {{-- @if($google_recaptcha->status==1)
                             <div class="login-form-item three">
                                 <div class="login-form-inner">
                                     <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
 
                         <div class="login-form-item two">
                             <button type="submit" class="thm-btn-two">{{ __('translate.Sign In') }}</button>
