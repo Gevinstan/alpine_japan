@@ -310,7 +310,7 @@
                                                     <span class="car_model_spec">
                                                         {{ __('translate.Inspection') }}
                                                     </span>
-                                                    {{ html_decode($car->inspection) }}
+                                                    {{ html_decode($car->inspection_en) }}
                                                 </li>
                                             </ul>
                                         </div>

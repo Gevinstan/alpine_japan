@@ -400,11 +400,11 @@
                             @endforeach
                             @endif --}}
                         @if(request('model') && count(request('model')) > 0)
-                        @foreach(request('model') as $index => $brandSlug)
-                            @foreach($models as $model)
+                                @foreach(request('model') as $brandSlug => $models)
+                                @foreach($models as $model)
                                @if($model!="")
                                 <p class="position-relative filter-text px-3 py-1">
-                                    <span class="model-item" data-brand="{{ $index }}">{{ $model }}
+                                    <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
                                             <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                                 <span class="alert-close-model">
                                                     <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -452,7 +452,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="brand-car-inner position-relative sdf">
+                                            <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
                                                          @if(Auth::guard('web')->check()) 
                                                              @if(in_array($car['id'], $wishlists))
@@ -1286,9 +1286,12 @@
                         const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
 
                         // Set their checked state based on the brand checkbox
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        if (!this.checked) {
+                            // Uncheck all associated model checkboxes
+                            modelCheckboxes.forEach(modelCheckbox => {
+                                modelCheckbox.checked = false;
+                            });
+                        }
                         clear_price_slider();
                         $('#search_form').submit();
                     });

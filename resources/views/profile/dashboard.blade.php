@@ -26,7 +26,7 @@
     <!-- banner-part-end -->
 
     <!-- dashboard-part-start -->
-    <!-- <section class="dashboard">
+    <section class="dashboard">
         <div class="container">
             <div class="row">
                 @include('profile.sidebar')
@@ -224,11 +224,11 @@
             </div>
         </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- dashboard-part-end -->
 
-    <div class="container-fluid py-5">
+    {{--<div class="container-fluid py-5">
         <div class="row">
             <!-- Sidebar -->
             <nav class="col-md-3 col-lg-2 dashboard-sidebar d-md-block d-none py-3">
@@ -319,7 +319,7 @@
                 </div>
             </main>
         </div>
-    </div>
+    </div> --}}
 
     @include('profile.logout')
 

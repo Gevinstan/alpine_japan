@@ -303,11 +303,11 @@
                             @endforeach
                             @endif --}}
                         @if(request('model') && count(request('model')) > 0)
-                        @foreach(request('model') as $index => $brandSlug)
-                        @foreach($models as $model)
+                            @foreach(request('model') as $brandSlug => $models)
+                            @foreach($models as $model)
                                @if($model!="")
                             <p class="position-relative filter-text px-3 py-1">
-                                <span class="model-item" data-brand="{{ $index }}">{{ $model }}
+                                <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
                                         <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -358,8 +358,16 @@
 
                                             <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
-                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
-                                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/>         
+                                                        @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car['id'], $wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void();" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif         
                                                         </div>
                                                 <div class="brand-car-inner-item">
                                                     <span class="text-truncate car-name pt-3 ps-3" 
@@ -942,18 +950,27 @@
                 $('#search_form').submit();
            });
 
-            document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
-                    brandCheckbox.addEventListener('change', function() {
+           document.addEventListener('DOMContentLoaded', function () {
+                // Listen for changes on all brand-search checkboxes
+                document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                    brandCheckbox.addEventListener('change', function () {
+                        // Get the associated brand slug
+                        const brandSlug = this.value;
 
-                        const brandId = this.getAttribute('data-brand-id');
-                        const accordionItem = this.closest('.accordion-item');
-                        const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        // Find all model-search checkboxes associated with this brand
+                        const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
+
+                        // Set their checked state based on the brand checkbox
+                        if (!this.checked) {
+                            // Uncheck all associated model checkboxes
+                            modelCheckboxes.forEach(modelCheckbox => {
+                                modelCheckbox.checked = false;
+                            });
+                        }
                         clear_price_slider();
                         $('#search_form').submit();
                     });
+                });
             });
             document.querySelectorAll('.model-search').forEach(modelCheckbox => {
                 modelCheckbox.addEventListener('change', function() {
@@ -988,6 +1005,22 @@
 
             // Optionally, you can also update your server-side query here
             });
+            $(".after_auth_wishlist").on('click',function(){
+                 $.ajax({
+                    type: "POST",
+                    url:"{{route('add-user-wishlist')}}",
+                    data:{'id': $(this).data('car-id'),
+                        'type': 2,
+                    },
+                    beforeSend:function(data){
+                        console.log('loading');
+                    },
+                    success:function(response){
+                        console.log(response);
+                        window.location.reload();
+                    }
+                 })
+            })
         })(jQuery);
 
 //         document.querySelectorAll('.alert-close-model').forEach(button => {
