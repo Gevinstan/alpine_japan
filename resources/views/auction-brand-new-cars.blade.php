@@ -4,31 +4,13 @@
     <meta name="title" content="{{ $seo_setting->seo_title }}">
     <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
 @endsection
-
-@section('body-content')
-<main class="overflow_jdm">
-    <!-- banner-part-start  -->
-
-    <!-- <section class="inner-banner">
-        <div class="inner-banner-img" style=" background-image: url({{ asset($breadcrumb) }}) ;"></div>
-        <div class="container">
-            <div class="col-lg-12">
-                <div class="inner-banner-df">
-                    <h1 class="inner-banner-taitel">{{ __('translate.Car Listing') }}</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Listing') }}</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-    @php
+@php
         $request_check=0;
         use Carbon\Carbon;
     @endphp
+@section('body-content')
+<main class="overflow_jdm">
+    
 
     <!-- Inventory-part-start -->
 

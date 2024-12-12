@@ -42,36 +42,43 @@
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box border-0 px-2">
                                                     
+                                                    @foreach ($brands as $index=> $brand)
                                                             <div class="accordion" id="accordionExample">
-                                                                <div class="accordion-item">
-                                                                    <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                        <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                            <input name="brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                            >
-                                                                            <label class="form-check-label brand_name">
-                                                                            {{$brand_label->name}}
-                                                                            </label>
+                                                            <div class="accordion-item">
+                                                                <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
+                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <input name="brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                             value="{{ $brand->slug }}"
+                                                                            {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
+                                                                        <label class="form-check-label brand_name" for="flexCheckDefault-{{ $brand->id }}">
+                                                                            {{ $brand->name }}
+                                                                        </label>
+                                                                    </div>
+                                                                    <div id="collapseOne{{$index}}" 
+                                                                        class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" 
+                                                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                        <div class="accordion-body">
+                                                                            <span class="select-Brand-box p-0 px-2 border-0 brand-body">
+                                                                            @if(array_key_exists($brand->slug, $brand_arr)) 
+                                                                                    @foreach ($brand_arr[$brand->slug] as $model)
+                                                                                        <span class="form-check">
+                                                                                            <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
+                                                                                                    value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
+                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
+                                                                                            <label class="form-check-label brand_name">
+                                                                                                 {{ $model['model'] . ' (' . $model['count'] . ')' }}
+                                                                                            </label>
+                                                                                        </span>
+                                                                                    @endforeach
+                                                                            @endif
+                                                                            </span>
                                                                         </div>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse {{ request('brand',[]) ? 'show' : '' }} w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body">
-                                                                                <span class="select-Brand-box p-0 px-2 border-0 brand-body">
-                                                                                        @foreach ($brand_arr as $brand)
-                                                                                            <span class="form-check">
-                                                                                                <input name="model[]" class="form-check-input brand-search" type="checkbox"
-                                                                                                        value="{{ trim($brand->model) }}"
-                                                                                                        {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
-                                                                                                <label class="form-check-label brand_name ps-2">
-                                                                                                    {{ trim($brand->model) . ' (' . $brand->count . ')' }}
-                                                                                                </label>    
-                                                                                            </span>
-                                                                                        @endforeach
-                                                                        
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </span>
-                                                                </div>
-                                                            </div> 
+                                                                    </div>
+                                                        </span>
+                                                    </div>
+                                                    </div> 
+                                                    @endforeach
+                                                    
                                         
                                                     </span>
                                                 </div>
@@ -160,7 +167,7 @@
                                                     Budget
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('price_range_scale') || request('price_range') ? 'show' : '' }}"
+                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('price_range_scale') ? 'show' : '' }}"
                                                 aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
                                                     
@@ -182,7 +189,7 @@
                                                             </div>
 
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                                @if($request_check !=0)
+                                                                @if(request('price_range_scale'))
                                                                     <button class="clear-button" id="clear-budget">CLEAR</button>
                                                                 @endif    
                                                                     <button class="go-button" type="button" id="budget_search">GO</button>
@@ -220,15 +227,15 @@
                                     <!-- Select Your Budget  -->
                                     <div class="accordion" id="accordionPanelsStayOpenExample1">
                                         <div class="accordion-item ps-3">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingthree">
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                    data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsetwo">
                                                     Model Year
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
-                                                aria-labelledby="panelsStayOpen-headingtwo">
+                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('price_range_scale') ? 'show' : '' }} "
+                                                aria-labelledby="panelsStayOpen-headingthree">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
@@ -254,8 +261,8 @@
 
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
                                                                 @if(request('year'))
-                                                                <button class="clear-button" id="clear-year">CLEAR</button>
-                                                                @endif
+                                                                    <button class="clear-button" id="clear-year">CLEAR</button>
+                                                                @endif    
                                                                 <button type="button" id="year_search" class="go-button">GO</button>
                                                             </div>
 
@@ -273,7 +280,7 @@
                             <!-- Select Your Year End -->
 
 
-                        </form> 
+                       
                         @if ($listing_ads->status == 'enable')
                             <div class="inventory-main-box-thumb">
                                 <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -366,9 +373,11 @@
                                 @endforeach
                             @endif --}}
                             @if(request('model') && count(request('model')) > 0)
-                            @foreach(request('model') as $index => $brandSlug)
+                        @foreach(request('model') as $brandSlug => $models)
+                            @foreach($models as $model)
+                               @if($model!="")
                                 <p class="position-relative filter-text px-3 py-1">
-                                    <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                    <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
                                             <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                                 <span class="alert-close-model">
                                                     <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -376,8 +385,11 @@
                                             </span> 
                                     </span>              
                                 </p>
-                                @endforeach
+                                @php $request_check++;@endphp
                                 @endif
+                            @endforeach
+                            @endforeach
+                            @endif
                                 @if(request('year'))
                                 <p class="position-relative filter-text px-3 py-1">
                                     <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
@@ -388,10 +400,13 @@
                                             </span> 
                                     </span>              
                                 </p>
+                                @php $request_check++;@endphp
                                 @endif
                             </div>
                             <div>
+                                @if($request_check !=0 || request('price_range'))
                                 <button class="btn search-clear-btn clear-url">clear</button>
+                                @endif
                             </div>
                         </div>
 
@@ -415,16 +430,16 @@
                                                 
                                                 <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
-                                                            @if(Auth::guard('web')->check()) 
-                                                                @if(in_array($car['id'], $wishlists))
-                                                                    <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
-                                                                    <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
-                                                                @else
-                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
-                                                                @endif
-                                                            @else 
-                                                            <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
-                                                            @endif          
+                                                        @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car['id'], $wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif         
                                                         </div>
 
                                                     <div class="brand-car-inner-item">
@@ -449,7 +464,7 @@
                                                         </p>
                                                     </div>
 
-                                                    <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                    <a href="{{ route('jdm-stock-listing',[$car['id'], 'car']) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                         <h3 class="text-truncate car-fullname pt-3 ps-3"  title="
                                                                 @if(session('front_lang')=='en')
                                                                     {{ $car['model_name'] }}
@@ -742,7 +757,7 @@
                                                                 @else
                                                                     {{ $car['model_name'] }}
                                                                 @endif">
-                                                                <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}" class="text-truncate_list2">
+                                                                <a href="{{ route('jdm-stock-listing',[$car['id'], 'car']) }}" class="text-truncate_list2">
                                                                     @if(session('front_lang')=='en')
                                                                         {{ html_decode($car['model_name']) }}
                                                                     @else
@@ -962,6 +977,7 @@
                         
 
                     </div>
+                    </form> 
                    
                 </div>
             </div>
@@ -1063,18 +1079,30 @@
                     // Update the input values
                     $('#ex2').val(`${minYear},${maxYear}`);
                 });
+                document.addEventListener('DOMContentLoaded', function () {
+                // Listen for changes on all brand-search checkboxes
                 document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
-                    brandCheckbox.addEventListener('change', function() {
+                    brandCheckbox.addEventListener('change', function () {
+                        // Get the associated brand slug
+                        const brandSlug = this.value;
 
-                        const brandId = this.getAttribute('data-brand-id');
-                        const accordionItem = this.closest('.accordion-item');
-                        const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+                        // Find all model-search checkboxes associated with this brand
+                        const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
+
+                        // Set their checked state based on the brand checkbox
                         // modelCheckboxes.forEach(modelCheckbox => {
                         //     modelCheckbox.checked = this.checked;
                         // });
+                        if (!this.checked) {
+                            // Uncheck all associated model checkboxes
+                            modelCheckboxes.forEach(modelCheckbox => {
+                                modelCheckbox.checked = false;
+                            });
+                        }
                         clear_price_slider();
                         $('#search_form').submit();
                     });
+                });
             });
             document.querySelectorAll('.model-search').forEach(modelCheckbox => {
                 modelCheckbox.addEventListener('change', function() {
@@ -1089,19 +1117,12 @@
                 });
             });
             $(".after_auth_wishlist").on('click',function(){
-                var type=@json($type);
-                 if(type =='car'){
-                     var type_id='3';
-                 } else if(type =='heavy'){
-                    var type_id='4';
-                 } else if(type == 'small_heavy'){
-                    var type_id='5';
-                 } 
+                 console.log($(this).data('car-id'))
                  $.ajax({
                     type: "POST",
                     url:"{{route('add-user-wishlist')}}",
                     data:{'id': $(this).data('car-id'),
-                        'type': type_id,
+                        'type': 3,
                     },
                     beforeSend:function(data){
                         console.log('loading');
