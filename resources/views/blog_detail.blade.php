@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ $blog->seo_title }}</title>
     <meta name="title" content="{{ $blog->seo_title }}">
