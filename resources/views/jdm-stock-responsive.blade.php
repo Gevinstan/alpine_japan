@@ -289,9 +289,7 @@
                                         <input type="text" class="form-control" id="outside_form_search" name="search" placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
 
                                         <span class="search-btn" style="cursor: pointer;">
-
-                                            <a href="javascript:void(0);" id="outside_form_btn"><i class="bi bi-search search_icon"></i></a>
-                                        
+                                            <a href="javascript:void(0);" id="outside_form_btn"><i class="bi bi-search search_icon"></i></a>  
                                         </span>
                                         
                                     </div>
@@ -356,7 +354,7 @@
                             <div class="d-flex align-items-center flex-wrap gap-3">
                             {{--@if(request('brand') && count(request('brand')) > 0)
                                  @foreach(request('brand') as $index => $brandSlug)
-                                    <p class="position-relative filter-text px-3 py-1">
+                                    <!-- <p class="position-relative filter-text px-3 py-1">
                                         <span class="model-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
                                                 <span class="position-absolute top-0 start-100 translate-middle rounded-circle" style="z-index: 10;">
                                                     <span class="alert-close">
@@ -364,7 +362,7 @@
                                                     </span>
                                                 </span> 
                                         </span>              
-                                    </p>
+                                    </p> -->
                                 @endforeach
                             @endif --}}
                             @if(request('model') && count(request('model')) > 0)
@@ -484,7 +482,7 @@
                                                             
                                                             </span>
                                                         </div>
-                                                        <p class="align-content-end pt-3">.</p>
+                                                        <!-- <p class="align-content-end pt-3">.</p> -->
                                                         <div class="brand-car-inner-item-two ">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
@@ -537,7 +535,7 @@
                                                                 @endif
                                                             </span>
                                                         </div>
-                                                        <p class="align-content-end pt-3">.</p>
+                                                        <!-- <p class="align-content-end pt-3">.</p> -->
                                                         <div class="brand-car-inner-item-two pe-4">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="icon-card1">
@@ -696,7 +694,7 @@
                                 aria-labelledby="pills-profile-tab">
                                 <div class="row g-5 brand-car-two">
                                     @forelse ($cars as $index => $car)
-                                        <div class=" col-xxl-6  col-xl-12  col-lg-12  col-sm-12 ">
+                                        <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
                                                 <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
@@ -707,21 +705,9 @@
                                                  
                                                 </div>
 
-                                                <div class="brand-car-inner">
-                                                    <div class="brand-car-inner-item">
-                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
-                                                 title=" @if(session('front_lang')=='en')
-                                                            {{ $car['make'] }}
-                                                        @else
-                                                            {{ $car['make'] }}
-                                                        @endif">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['make'] }}
-                                                        @else
-                                                            {{ $car['make'] }}
-                                                        @endif
-                                                    </span>
-                                                        <p class="listcar_price pt-3 pe-4">
+                                                <div class="">
+                                                    <div class="pt-2">
+                                                        <p class="listcar_price_list ps-1 pe-4">
                                                         @if(session('front_lang')=='en')
                                                         {{ '$'.$car['start_price'] }}
                                                         @else
@@ -729,14 +715,27 @@
                                                         @endif
                                                         </p>
 
-                                                        
+                                                        <div class="text-truncate_list1 car-name ps-1" data-bs-toggle="tooltip" title=" @if(session('front_lang')=='en')
+                                                                {{ $car['make'] }}
+                                                            @else
+                                                                {{ $car['make'] }}
+                                                            @endif">
+                                                            @if(session('front_lang')=='en')
+                                                                {{ $car['make'] }}
+                                                            @else
+                                                                {{ $car['make'] }}
+                                                            @endif
+                                                        </div>
 
+                                                        <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip" 
+                                                                title="">
+                                                            <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
+                                                            </a>    
+                                                        </div>
                                                     </div>
 
-                                            
-
                                                     <div class="brand-car-inner-item-main">
-                                                        <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-two ps-3">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
                                                                     <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -747,9 +746,9 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                                 {{ html_decode($car->mileage) }}
-                                                            </span>
+                                                            </p>
                                                         </div>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
@@ -762,11 +761,11 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                                 {{ html_decode($car->fuel_type) }}
-                                                            </span>
+                                                            </p>
                                                         </div>
-                                                        <div class="brand-car-inner-item-two">
+                                                        <div class="brand-car-inner-item-two pe-3">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
                                                                     <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -776,23 +775,29 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                                 {{ html_decode($car->engine_size) }}
-                                                            </span>
+                                                            </p>
                                                         </div>
                                                     </div>
 
-                                                    <div class="brand-car-btm-txt-btm">
-                                                        <h6 class="brand-car-btm-txt">{{ __('translate.Listed by') }} :</span> {{ html_decode($car?->dealer?->name) }}
-                                                        </h6>
-
-
+                                                    <div class="px-3 d-flex flex-row">
+                                                        @php
+                                                            $parsed_data=parseCustomFormat($car['parsed_data']);
+                                                            $carbonInstance = Carbon::parse($car['datetime']);
+                                                        @endphp    
+                                                        <p>
+                                                            <i class="bi bi-geo-alt-fill"></i><span class="">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   
+                                                        </p>
+                                                        <div class="d-flex flex-column list_date ps-5">
+                                                            <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                            <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
+                                                        </div>
                                                     </div>
 
 
 
                                                 </div>
-
                                             </div>
                                         </div>
                                     @empty

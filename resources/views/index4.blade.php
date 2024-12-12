@@ -319,7 +319,11 @@ use Carbon\Carbon;
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['mileage_en']) . ',000' }}
+                                                                @else
+                                                                {{ html_decode($car['mileage']) . ',000'}}
+                                                                @endif">
                                                                 @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['mileage_en']) . ',000' }}
                                                                 @else
@@ -368,7 +372,11 @@ use Carbon\Carbon;
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car['year_en']) }}">
+                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['year_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['year']) }}
+                                                                @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
@@ -387,7 +395,11 @@ use Carbon\Carbon;
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                                @else
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                                @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                                 @else
@@ -524,7 +536,7 @@ use Carbon\Carbon;
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->mileage) }}">
                                                             {{ html_decode($car->mileage) }}
                                                         </span>
                                                     </div>
@@ -539,7 +551,7 @@ use Carbon\Carbon;
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->fuel_type) }}">
                                                             {{ html_decode($car->fuel_type) }}
                                                         </span>
                                                     </div>
@@ -553,7 +565,7 @@ use Carbon\Carbon;
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->engine_size) }}">
                                                             {{ html_decode($car->engine_size) }}
                                                         </span>
                                                     </div>
@@ -654,7 +666,11 @@ use Carbon\Carbon;
 
                                             <div class="brand-car-inner">
                                                 <div class="brand-car-inner-item">
-                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
+                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
+                                                                {{ $car->make }}
+                                                            @else
+                                                            {{ $car->make }}
+                                                            @endif">
                                     
                                                             @if(session('front_lang')=='en')
                                                                 {{ $car->make }}
@@ -676,7 +692,11 @@ use Carbon\Carbon;
 
                                             
 
-                                                <a href="{{ route('jdm-stock-listing', [$car->id, 'car']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('jdm-stock-listing', [$car->id, 'car']) }}"data-bs-toggle="tooltip" title=" @if(session('front_lang')=='en')
+                                                            {{!empty($car->model) ? $car->model  : '--'}}
+                                                        @else
+                                                            {{!empty($car->model) ?  $car->model : '--'}}
+                                                        @endif">
                                                     <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{!empty($car->model) ? $car->model  : '--'}}
@@ -741,7 +761,7 @@ use Carbon\Carbon;
                                                                     </svg> 
                                                             </span>
                                                         </div>
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{$car->yom}}">
                                                             {{$car->yom}}
                                                         </span>
                                                     </div>
@@ -754,7 +774,7 @@ use Carbon\Carbon;
                                                                 </svg>
                                                             </span>
                                                         </div>  
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{$car->transmission}}">
                                                             {{$car->transmission}}
                                                         </span>
                                                     </div>
@@ -900,7 +920,11 @@ use Carbon\Carbon;
 
                                     <div class="brand-car-inner">
                                         <div class="brand-car-inner-item">
-                                             <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="FORWARD">
+                                             <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
+                                                {{ $car['company_en'] }}
+                                            @else
+                                                {{ $car['company'] }}
+                                            @endif">
                                             @if(session('front_lang')=='en')
                                                 {{ $car['company_en'] }}
                                             @else
@@ -916,7 +940,11 @@ use Carbon\Carbon;
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
+                                                    {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
+                                                @else
+                                                    {{ html_decode(!empty($car['model_name']) ? $car['model_name'] : '') }}
+                                                @endif">
                                             <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                 @if(session('front_lang')=='en')
                                                     {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
@@ -984,7 +1012,11 @@ use Carbon\Carbon;
                                                     </span>
                                                 </div>
 
-                                                <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                    {{ html_decode($car['year_en']) }}
+                                                    @else
+                                                        {{ html_decode($car['year']) }}   
+                                                    @endif">
                                                     @if(session('front_lang')=='en')
                                                     {{ html_decode($car['year_en']) }}
                                                     @else
@@ -1003,7 +1035,12 @@ use Carbon\Carbon;
                                                     </span>
                                                 </div>
 
-                                                <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" 
+                                                title="@if(session('front_lang')=='en')
+                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        @else
+                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                    @endif">
                                                     @if(session('front_lang')=='en')
                                                         {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                         @else

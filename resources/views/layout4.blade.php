@@ -149,7 +149,7 @@
                                         </li>
 
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle hide-down-arow text-nowrap {{ Route::is('jdm-stock') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
+                                            <a class="nav-link mx-2 dropdown-toggle hide-down-arow text-nowrap jdm-stock-nav {{ Route::is('jdm-stock') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
                                                 {{ __('translate.JDM Stock') }}
                                             </a>
                                             <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
@@ -200,20 +200,20 @@
                                         </li>
                                         
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap {{ Route::is('auction-brand-new-car') || Route::is('jdm_brand_new') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap brand-car-nav {{ Route::is('auction-brand-new-car') || Route::is('jdm_brand_new') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
                                                 {{ __('translate.Brand New Cars') }}
                                             </a>
-                                            <ul class="dropdown-menu dropdown_bg" aria-labelledby="navbarDropdown">
+                                            <ul class="dropdown-menu brand-car-ul" aria-labelledby="navbarDropdown">
                                                 <div class="p-3">
-                                                    <div class="row">
-                                                        <div class="col-md-4 nav-dropdown-list">
+                                                    <div class="d-flex">
+                                                        <div>
                                                         <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Auction')}}</h6>
+                                                            {{__('translate.Auction')}}
                                                         </a>   
                                                         </div>
-                                                        <div class="col-md-4 nav-dropdown-list">
+                                                        <div>
                                                         <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
-                                                            <h6 class="dropdown-header nav-dropdown-header text-nowrap">{{__('translate.Market Price')}}</h6>
+                                                            {{__('translate.Market Price')}}
                                                         </a> 
                                                         </div>
                                                     </div>
