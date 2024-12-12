@@ -331,7 +331,6 @@ use Carbon\Carbon;
                                                                 @endif
                                                             </span>
                                                         </div>
-                                                        <p class="align-content-end pt-3">.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span class="fs-6">
@@ -384,7 +383,6 @@ use Carbon\Carbon;
                                                                 @endif
                                                             </span>
                                                         </div>
-                                                        <p class="align-content-end pt-3">.</p>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -726,7 +724,6 @@ use Carbon\Carbon;
                                                             --
                                                         </span>
                                                     </div>
-                                                    <p class="align-content-end pt-3">.</p>
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -765,7 +762,6 @@ use Carbon\Carbon;
                                                             {{$car->yom}}
                                                         </span>
                                                     </div>
-                                                    <p class="align-content-end pt-3">.</p>
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -975,7 +971,6 @@ use Carbon\Carbon;
                                                 @endif
                                                 </span>
                                             </div>
-                                            <p class="align-content-end pt-3">.</p>
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -1024,7 +1019,6 @@ use Carbon\Carbon;
                                                     @endif
                                                 </span>
                                             </div>
-                                            <p class="align-content-end pt-3">.</p>
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
