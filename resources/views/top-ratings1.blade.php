@@ -757,7 +757,7 @@
                                                             {{ $car['model_name'] }}
                                                         @endif">
 
-                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
+                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" >
                                                         
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['model_name_en']) }}
