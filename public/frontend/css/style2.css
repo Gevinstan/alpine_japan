@@ -2697,7 +2697,7 @@
 }
 
 .blogs-details .share ul li a:hover {
-    background-color: var(--primary-color-2);
+    background-color: var(--primary-color-1);
 }
 
 .blogs-details .share ul li a:hover span svg {
@@ -17814,4 +17814,12 @@ input:not(:placeholder-shown) + .input-placeholder {
     }
   }
 /***** Dashboard Style End  *****/
+
+.blogs-details .blog-details-prot .blog-details-prot-item .blog-details-prot-item-inner .blog-details-prot-item-text a {
+    color: #038FFC !important;
+}
+
+.insta-blog {
+    color: #038FFC !important;
+}
 

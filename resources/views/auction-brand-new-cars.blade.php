@@ -35,7 +35,7 @@
                                             <button class="accordion-button brand-heading p-0" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapseOne">
-                                                Brand
+                                                Brand & Model
                                             </button>
                                         </h2>
                                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
@@ -85,109 +85,159 @@
 
                                 </div>
                             </div>
-                        <!-- Select Your Brand End--> 
+                        <!-- Select Your Brand End-->
+                        
                         <!-- Select Your Budget Start -->
                             <div class="inventory-main-box my-2">
                                 <!-- Budget -->
-                                <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                <div class="accordion" id="accordionPanelsStayOpenExample4">
                                     <div class="accordion-item ps-3">
-                                        <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingfive">
                                             <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
-                                                aria-controls="panelsStayOpen-collapsetwo">
+                                                data-bs-target="#panelsStayOpen-collapsefive" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapsefive">
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse pt-3 {{ request('price_range_scale') || request('price_range') ? 'show' : '' }}"
-                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                        <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse pt-3 {{ request('price_range_scale') || request('price_range') ? 'show' : '' }}"
+                                            aria-labelledby="panelsStayOpen-headingfive">
                                             <div class="accordion-body">
+                                                <span class="select-Brand-box two four p-0 border-0">
+                                                    <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                        <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
+                                                            <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                                <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
+                                                                <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
+                                                            </div>
 
-                                              <span class="select-Brand-box two four p-0 border-0">
-                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                            <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
+                                                                        data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                                        />
 
-                                                    <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
-                                                        <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                            <span class="slider-label m-0" id="minYearLabel">{{$minPrice}}</span>
-                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
+                                                        </div> 
+
+                                                        <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                            @if(request('price_range_scale'))
+                                                            <button class="clear-button" id="clear-budget">Clear</button>
+                                                            @endif
+                                                            <button class="go-button" type="button" id="budget_search">Go</button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row budget-space">
+                                                        <h6 class="pt-2 price_range">Price Range</h6>
+
+                                                        @foreach($price_range as $key=>$range)
+                                                        <div class="d-flex align-items-center pb-2">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
+                                                                    {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
+                                                                    
+                                                                    <label class="form-check-label">
+                                                                        <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
+                                                                    </label>
+                                                                </div>
                                                         </div>
 
-                                                        <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
-                                                        value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>   
-
+                                                        @endforeach
                                                     </div>
-                                                     
-                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4 go_clear">
-                                                        @if(request('price_range_scale'))
-                                                            <button class="clear-button" id="clear-budget">Clear</button>
-                                                        @endif    
-                                                        <button class="go-button" type="button" id="budget_search">Go</button>
-                                                    </div>
-                                                </div>
-                                                <div class="row budget-space">
-                                                    <h6 class="pt-2 price_range">Price Range</h6>
-
-                                                    @foreach($price_range as $key=>$range)
-                                                    <div class="d-flex align-items-center">
-                                                            <div class="form-check">
-                                                                <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
-                                                                    {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
-                                                                <label class="form-check-label">
-                                                                    <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
-                                                                </label>
-                                                            </div>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
+
                             </div>
                         <!-- Select Your Budget End -->
 
-                          <!-- Select Your Year Start -->
-                          <div class="inventory-main-box my-2">
-                                    <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                        <div class="accordion-item ps-3">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                                <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
-                                                    aria-controls="panelsStayOpen-collapsethree">
-                                                    Year
-                                                </button>
-                                            </h2>
-                                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
-                                                aria-labelledby="panelsStayOpen-collapsethree">
-                                                <div class="accordion-body">
-                                                    <span class="select-Brand-box two four p-0 border-0">
-                                                        <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 ">
-                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                                    <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>
-                                                                </div>
-                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}"
-                                                                    value="{{ request('year', $minYear) }}"
-                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
-                                                            </div>
-                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                            @if(request('year'))
-                                                            <button class="clear-button" id="clear-year">Clear</button>
-                                                            @endif
-                                                            <button type="button" id="year_search" class="go-button">Go</button>
-                                                            </div>
-                                                        </div>
-                                                    </span>
+                        <!-- Select Your Year Start -->
+                        <div class="inventory-main-box my-2">
+
+                            <!-- Select Your Budget  -->
+                            <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                <div class="accordion-item ps-3">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                        <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                            aria-controls="panelsStayOpen-collapsetwo">
+                                            Model Year
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                        aria-labelledby="panelsStayOpen-headingtwo">
+                                        <div class="accordion-body">
+                                          <span class="select-Brand-box two four p-0 border-0">
+                                            <div class="slider-container d-flex align-items-center m-0 gap-3">
+
+                                                <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                
+                                                    <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                        <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                         <output name="age_output" id="age_output" for="start" ></output>
+                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                    </div>
+
+                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                    <input type="hidden" id="start_year" name="year">
                                                 </div>
+
+                                                <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                    @if(request('year'))
+                                                    <button class="clear-button" id="clear-year">Clear</button>
+                                                    @endif
+                                                    <button type="button" id="year_search" class="go-button">Go</button>
+                                                </div>
+                                                <!-- <button class="clear-button">Clear</button>
+                                                <button class="go-button">Go</button> -->
                                             </div>
+
+                                                <!-- @if (request()->has('condition'))
+                                                    @php
+                                                        $condition_arr = request()->get('condition');
+                                                    @endphp
+
+                                                    <span class="form-check">
+                                                        <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
+                                                            id="new_condition" name="condition[]">
+                                                        <label class="form-check-label" for="new_condition">
+                                                            {{ __('translate.New') }}
+                                                        </label>
+                                                    </span>
+                                                    <span class="form-check">
+                                                        <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
+                                                            id="used_condition" name="condition[]">
+                                                        <label class="form-check-label" for="used_condition">
+                                                            {{ __('translate.Used') }}
+                                                        </label>
+                                                    </span>
+
+                                                @else
+                                                    <span class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="New"
+                                                            id="new_condition" name="condition[]">
+                                                        <label class="form-check-label" for="new_condition">
+                                                            {{ __('translate.New') }}
+                                                        </label>
+                                                    </span>
+                                                    <span class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="Used"
+                                                            id="used_condition" name="condition[]">
+                                                        <label class="form-check-label" for="used_condition">
+                                                            {{ __('translate.Used') }}
+                                                        </label>
+                                                    </span>
+                                                @endif -->
+
+                                          </span>
                                         </div>
                                     </div>
+                                </div>
                             </div>
+                        </div>
                         <!-- Select Your Year End -->
-                    
+
+
                     
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
@@ -245,7 +295,7 @@
                             <div class="inventory-ber-right-btn sort_by_button">
                                 <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                        <button class="nav-link active listing-view" id="pills-home-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-home" type="button" role="tab"
                                             aria-controls="pills-home" aria-selected="true">
 
@@ -259,7 +309,7 @@
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                        <button class="nav-link listing-view" id="pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-profile" type="button" role="tab"
                                             aria-controls="pills-profile" aria-selected="false"><i
                                                 class="fa-solid fa-list"></i></button>
@@ -329,13 +379,13 @@
                             @if(count($cars_array) > 0)  
                                  @foreach ($cars_array as $index => $car)
                                     <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
-                                                data-aos-delay="50">
+                                            data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
-                                                    <img src="{{asset($car['picture']) }}" alt="thumb">
+                                                    <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
-                                                </div>
+                                                </div> 
                                             </div>
 
                                             <div class="brand-car-inner position-relative">
@@ -401,17 +451,22 @@
                                                         @endif
                                                         </span>
                                                     </div>
-                                                    <!-- <p>.</p> -->
+                                                    
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
                                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                         <path d="M19.5 4H16.5V2.5C16.5 2.36739 16.4473 2.24021 16.3536 2.14645C16.2598 2.05268 16.1326 2 16 2C15.8674 2 15.7402 2.05268 15.6464 2.14645C15.5527 2.24021 15.5 2.36739 15.5 2.5V4H8.5V2.5C8.5 2.36739 8.44732 2.24021 8.35355 2.14645C8.25979 2.05268 8.13261 2 8 2C7.86739 2 7.74021 2.05268 7.64645 2.14645C7.55268 2.24021 7.5 2.36739 7.5 2.5V4H4.5C3.8372 4.00079 3.20178 4.26444 2.73311 4.73311C2.26444 5.20178 2.00079 5.8372 2 6.5V19.5C2.00079 20.1628 2.26444 20.7982 2.73311 21.2669C3.20178 21.7356 3.8372 21.9992 4.5 22H19.5C20.163 22 20.7989 21.7366 21.2678 21.2678C21.7366 20.7989 22 20.163 22 19.5V6.5C22 5.83696 21.7366 5.20107 21.2678 4.73223C20.7989 4.26339 20.163 4 19.5 4ZM21 19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V11H21V19.5ZM21 10H3V6.5C3 5.672 3.67 5 4.5 5H7.5V6.5C7.5 6.63261 7.55268 6.75979 7.64645 6.85355C7.74021 6.94732 7.86739 7 8 7C8.13261 7 8.25979 6.94732 8.35355 6.85355C8.44732 6.75979 8.5 6.63261 8.5 6.5V5H15.5V6.5C15.5 6.63261 15.5527 6.75979 15.6464 6.85355C15.7402 6.94732 15.8674 7 16 7C16.1326 7 16.2598 6.94732 16.3536 6.85355C16.4473 6.75979 16.5 6.63261 16.5 6.5V5H19.5C19.8978 5 20.2794 5.15804 20.5607 5.43934C20.842 5.72064 21 6.10218 21 6.5V10Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.5"/>
-                                                                </svg>
+                                                                    </svg>
+
                                                             </span>
                                                         </div>
 
-                                                        <span>
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                            {{ html_decode($car['year_en']) }}
+                                                            @else
+                                                            {{ html_decode($car['year']) }}
+                                                            @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                             @else
@@ -419,18 +474,22 @@
                                                             @endif
                                                         </span>
                                                     </div>
-                                                    <!-- <p>.</p> -->
+                                                    =
                                                     <div class="brand-car-inner-item-two pe-4">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
-                                                                <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <svg width="24" height="24" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M17.9167 8.23819H17.2833C17.0314 8.23819 16.7897 8.3586 16.6116 8.57293C16.4334 8.78726 16.3333 9.07795 16.3333 9.38106V9.76202H15.7V7.85723C15.7 7.55412 15.5999 7.26343 15.4218 7.0491C15.2436 6.83477 15.002 6.71436 14.75 6.71436H13.8C13.716 6.71436 13.6355 6.67422 13.5761 6.60278C13.5167 6.53134 13.4833 6.43444 13.4833 6.3334V5.57149C13.4833 5.26838 13.3832 4.97769 13.2051 4.76336C13.0269 4.54903 12.7853 4.42862 12.5333 4.42862H11.2667V3.28574H12.85C13.102 3.28574 13.3436 3.16533 13.5218 2.951C13.6999 2.73667 13.8 2.44598 13.8 2.14287C13.8 1.83976 13.6999 1.54907 13.5218 1.33474C13.3436 1.12041 13.102 1 12.85 1H6.51667C6.26471 1 6.02307 1.12041 5.84491 1.33474C5.66676 1.54907 5.56667 1.83976 5.56667 2.14287C5.56667 2.44598 5.66676 2.73667 5.84491 2.951C6.02307 3.16533 6.26471 3.28574 6.51667 3.28574H8.1V4.42862H6.51667C6.26471 4.42862 6.02307 4.54903 5.84491 4.76336C5.66676 4.97769 5.56667 5.26838 5.56667 5.57149C5.56667 5.67252 5.5333 5.76942 5.47392 5.84087C5.41453 5.91231 5.33399 5.95245 5.25 5.95245H4.3C4.04804 5.95245 3.80641 6.07285 3.62825 6.28719C3.45009 6.50152 3.35 6.79221 3.35 7.09532V8.61915H2.4V7.09532C2.4 6.79221 2.29991 6.50152 2.12175 6.28719C1.94359 6.07285 1.70196 5.95245 1.45 5.95245C1.19804 5.95245 0.956408 6.07285 0.778249 6.28719C0.600089 6.50152 0.5 6.79221 0.5 7.09532L0.5 13.1906C0.5 13.4937 0.600089 13.7844 0.778249 13.9988C0.956408 14.2131 1.19804 14.3335 1.45 14.3335C1.70196 14.3335 1.94359 14.2131 2.12175 13.9988C2.29991 13.7844 2.4 13.4937 2.4 13.1906V11.6668H3.35V13.5716C3.35 13.8747 3.45009 14.1654 3.62825 14.3797C3.80641 14.5941 4.04804 14.7145 4.3 14.7145H5.62113C5.70511 14.7145 5.78564 14.7546 5.84502 14.8261L7.37388 16.6653C7.46185 16.7719 7.56651 16.8563 7.68181 16.9138C7.7971 16.9713 7.92073 17.0006 8.04553 17.0002H14.75C15.002 17.0002 15.2436 16.8798 15.4218 16.6655C15.5999 16.4511 15.7 16.1604 15.7 15.8573V14.3335H16.3333V14.7145C16.3333 15.0176 16.4334 15.3083 16.6116 15.5226C16.7897 15.7369 17.0314 15.8573 17.2833 15.8573H17.9167C18.3364 15.8567 18.7389 15.6559 19.0357 15.2988C19.3325 14.9417 19.4995 14.4575 19.5 13.9526V10.143C19.4995 9.63798 19.3325 9.15384 19.0357 8.79676C18.7389 8.43967 18.3364 8.23879 17.9167 8.23819ZM6.2 2.14287C6.2 2.04184 6.23336 1.94494 6.29275 1.87349C6.35214 1.80205 6.43268 1.76191 6.51667 1.76191H12.85C12.934 1.76191 13.0145 1.80205 13.0739 1.87349C13.1333 1.94494 13.1667 2.04184 13.1667 2.14287C13.1667 2.24391 13.1333 2.34081 13.0739 2.41225C13.0145 2.48369 12.934 2.52383 12.85 2.52383H6.51667C6.43268 2.52383 6.35214 2.48369 6.29275 2.41225C6.23336 2.34081 6.2 2.24391 6.2 2.14287ZM8.73333 3.28574H10.6333V4.42862H8.73333V3.28574ZM1.76667 13.1906C1.76667 13.2917 1.7333 13.3886 1.67392 13.46C1.61453 13.5315 1.53399 13.5716 1.45 13.5716C1.36601 13.5716 1.28547 13.5315 1.22608 13.46C1.1667 13.3886 1.13333 13.2917 1.13333 13.1906V7.09532C1.13333 6.99428 1.1667 6.89738 1.22608 6.82594C1.28547 6.7545 1.36601 6.71436 1.45 6.71436C1.53399 6.71436 1.61453 6.7545 1.67392 6.82594C1.7333 6.89738 1.76667 6.99428 1.76667 7.09532V13.1906ZM2.4 10.9049V9.38106H3.35V10.9049H2.4ZM15.0667 15.8573C15.0667 15.9584 15.0333 16.0553 14.9739 16.1267C14.9145 16.1982 14.834 16.2383 14.75 16.2383H8.04553C7.96155 16.2383 7.88102 16.1981 7.82165 16.1267L6.29278 14.2874C6.20478 14.181 6.1001 14.0966 5.98482 14.0391C5.86954 13.9816 5.74593 13.9522 5.62113 13.9526H4.3C4.21601 13.9526 4.13547 13.9124 4.07608 13.841C4.0167 13.7695 3.98333 13.6726 3.98333 13.5716V7.09532C3.98333 6.99428 4.0167 6.89738 4.07608 6.82594C4.13547 6.7545 4.21601 6.71436 4.3 6.71436H5.25C5.50196 6.71436 5.74359 6.59395 5.92175 6.37962C6.09991 6.16529 6.2 5.8746 6.2 5.57149C6.2 5.47045 6.23336 5.37355 6.29275 5.30211C6.35214 5.23067 6.43268 5.19053 6.51667 5.19053H12.5333C12.6173 5.19053 12.6979 5.23067 12.7573 5.30211C12.8166 5.37355 12.85 5.47045 12.85 5.57149V6.3334C12.85 6.63651 12.9501 6.92721 13.1282 7.14154C13.3064 7.35587 13.548 7.47627 13.8 7.47628H14.75C14.834 7.47628 14.9145 7.51641 14.9739 7.58785C15.0333 7.6593 15.0667 7.7562 15.0667 7.85723V15.8573ZM15.7 13.5716V10.5239H16.3333V13.5716H15.7ZM18.8667 13.9526C18.8667 14.2557 18.7666 14.5464 18.5884 14.7607C18.4103 14.975 18.1686 15.0954 17.9167 15.0954H17.2833C17.1993 15.0954 17.1188 15.0553 17.0594 14.9838C17 14.9124 16.9667 14.8155 16.9667 14.7145V9.38106C16.9667 9.28003 17 9.18313 17.0594 9.11168C17.1188 9.04024 17.1993 9.0001 17.2833 9.0001H17.9167C18.1686 9.0001 18.4103 9.12051 18.5884 9.33484C18.7666 9.54917 18.8667 9.83987 18.8667 10.143V13.9526Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                 </svg>
 
                                                             </span>
                                                         </div>
 
-                                                        <span>
+                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['transmission_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['transmission']) }}
+                                                            @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
@@ -452,7 +511,8 @@
                                                     @endphp  
                                                     <p>
                                                         <i class="bi bi-geo-alt-fill"></i>
-                                                        {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
+                                                        <span class="brand-location">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   
+                                                        
                                                     </p>
                                                     <div class="d-flex flex-column">
                                                         <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
@@ -583,40 +643,69 @@
                             aria-labelledby="pills-profile-tab">
                             <div class="row g-5 brand-car-two">
                                 @forelse ($cars_array as $index => $car)
-                                    <div class=" col-xxl-6  col-xl-12  col-lg-12  col-sm-12 ">
+                                    <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                            <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                <img src="{{ asset($car->thumb_image) }}" alt="thumb" class="card_image">
 
+                                                <!-- <div class="brand-car-item-img-text">
+                                                    <div class="text-df">
+                                                        @if ($car->offer_price)
+                                                            <p class="text">{{ calculate_percentage($car->regular_price, $car->offer_price) }}% {{ __('translate.Off') }}</p>
+                                                        @endif
+                                                        @if ($car->condition == 'New')
+                                                                <p class="text text-two ">{{ __('translate.New') }}</p>
+                                                            @else
+                                                                <p class="text text-two ">{{ __('translate.Used') }}</p>
+                                                            @endif
+                                                    </div>
+                                                </div> -->
                                             </div>
 
-                                            <div class="brand-car-inner">
-                                                <div class="brand-car-inner-item">
-                                                <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
-                                                 title=" @if(session('front_lang')=='en')
-                                                            {{ $car['company_en'] }}
-                                                        @else
-                                                            {{ $car['company'] }}
-                                                        @endif">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ $car['company_en'] }}
-                                                        @else
-                                                            {{ $car['company'] }}
-                                                        @endif
-                                                    </span>
-                                                    <p class="listcar_price pt-3 pe-4">
+                                            <div class="">
+                                                <div class="pt-2">
+                                                    <p class="listcar_price_list ps-1 pe-4">
                                                         @if(session('front_lang')=='en')
                                                             {{ '$'.$car['start_price_num'] }}
                                                         @else
                                                             {{ '$'.$car['start_price'] }}
                                                         @endif
                                                     </p>
+
+                                                    <div class="text-truncate_list1 car-name ps-1" data-bs-toggle="tooltip" 
+                                                        title=" @if(session('front_lang')=='en')
+                                                            {{ $car['company_en'] }}
+                                                        @else
+                                                            {{ $car['company'] }}
+                                                        @endif">
+                                                       
+                                                        @if(session('front_lang')=='en')
+                                                            {{ $car['company_en'] }}
+                                                        @else
+                                                            {{ $car['company'] }}
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip" 
+                                                        title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['model_name_en']) }}
+                                                            @else
+                                                                {{ html_decode($car['model_name']) }}
+                                                            @endif">
+
+                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode($car['model_name_en']) }}
+                                                            @else
+                                                                {{ html_decode($car['model_name']) }}
+                                                            @endif
+                                                        </a>
+                                                    </div>
                                                 </div>
-
-                                           
-
+                                            </div>
+                                                
                                                 <div class="brand-car-inner-item-main">
-                                                    <div class="brand-car-inner-item-two">
+                                                    <div class="brand-car-inner-item-two ps-3">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
                                                                 <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -626,37 +715,47 @@
 
                                                             </span>
                                                         </div>
-                                                        <span>
-                                                        @if(session('front_lang')=='en')
+
+                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['mileage_en']) }}
+                                                            @else
+                                                                {{ html_decode($car['mileage']) }}
+                                                            @endif">
+                                                            @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['mileage_en']) }}
                                                             @else
                                                                 {{ html_decode($car['mileage']) }}
                                                             @endif
-                                                        </span>
+                                                        </p>
+                                                       
 
                                                     
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
-                                                                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M15.8901 3.09765L14.3901 1.76431C14.2436 1.63409 14.0063 1.63409 13.8598 1.76431C13.7133 1.89453 13.7133 2.10547 13.8598 2.23565L15.0947 3.33331L13.8598 4.43096C13.7895 4.49346 13.75 4.57809 13.75 4.66665V5.66665C13.75 6.40202 14.4227 6.99999 15.25 6.99999V12.6666C15.25 12.8505 15.0819 13 14.875 13C14.6681 13 14.5 12.8506 14.5 12.6666V12C14.5 11.4485 13.9953 11 13.375 11H13V2.33334C13 1.59797 12.3273 1 11.5 1H4.00001C3.17275 1 2.50001 1.59797 2.50001 2.33334V14.3333C1.67275 14.3333 1 14.9313 1 15.6667V16.6667C1 16.8509 1.16773 17 1.37501 17H14.125C14.3323 17 14.5 16.8509 14.5 16.6667V15.6667C14.5 14.9313 13.8273 14.3333 13 14.3333V11.6667H13.375C13.5819 11.6667 13.75 11.8161 13.75 12V12.6667C13.75 13.2181 14.2546 13.6667 14.875 13.6667C15.4954 13.6667 16 13.2181 16 12.6667V3.33334C16 3.24478 15.9604 3.16015 15.8901 3.09765ZM3.25003 2.33334C3.25003 1.96584 3.58658 1.66669 4.00001 1.66669H11.5C11.9134 1.66669 12.25 1.96584 12.25 2.33334V14.3333H3.24999L3.25003 2.33334ZM13.75 15.6666V16.3333H1.75002V15.6666C1.75002 15.2991 2.08657 15 2.50001 15H13C13.4134 15 13.75 15.2991 13.75 15.6666ZM15.25 6.33333C14.8365 6.33333 14.5 6.03418 14.5 5.66668V4.80468L15.25 4.13803V6.33333Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                    <path d="M11.041 2.52344H4.29103C4.08375 2.52344 3.91602 2.66929 3.91602 2.84954V6.76876C3.91602 6.94901 4.08375 7.09487 4.29103 7.09487H11.041C11.2483 7.09487 11.416 6.94901 11.416 6.76876V2.84951C11.416 2.66929 11.2483 2.52344 11.041 2.52344ZM10.666 6.44265H4.666V3.17562H10.666V6.44265Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                <svg width="21" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M19.5 4H16.5V2.5C16.5 2.36739 16.4473 2.24021 16.3536 2.14645C16.2598 2.05268 16.1326 2 16 2C15.8674 2 15.7402 2.05268 15.6464 2.14645C15.5527 2.24021 15.5 2.36739 15.5 2.5V4H8.5V2.5C8.5 2.36739 8.44732 2.24021 8.35355 2.14645C8.25979 2.05268 8.13261 2 8 2C7.86739 2 7.74021 2.05268 7.64645 2.14645C7.55268 2.24021 7.5 2.36739 7.5 2.5V4H4.5C3.8372 4.00079 3.20178 4.26444 2.73311 4.73311C2.26444 5.20178 2.00079 5.8372 2 6.5V19.5C2.00079 20.1628 2.26444 20.7982 2.73311 21.2669C3.20178 21.7356 3.8372 21.9992 4.5 22H19.5C20.163 22 20.7989 21.7366 21.2678 21.2678C21.7366 20.7989 22 20.163 22 19.5V6.5C22 5.83696 21.7366 5.20107 21.2678 4.73223C20.7989 4.26339 20.163 4 19.5 4ZM21 19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V11H21V19.5ZM21 10H3V6.5C3 5.672 3.67 5 4.5 5H7.5V6.5C7.5 6.63261 7.55268 6.75979 7.64645 6.85355C7.74021 6.94732 7.86739 7 8 7C8.13261 7 8.25979 6.94732 8.35355 6.85355C8.44732 6.75979 8.5 6.63261 8.5 6.5V5H15.5V6.5C15.5 6.63261 15.5527 6.75979 15.6464 6.85355C15.7402 6.94732 15.8674 7 16 7C16.1326 7 16.2598 6.94732 16.3536 6.85355C16.4473 6.75979 16.5 6.63261 16.5 6.5V5H19.5C19.8978 5 20.2794 5.15804 20.5607 5.43934C20.842 5.72064 21 6.10218 21 6.5V10Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.5"/>
                                                                     </svg>
-
                                                             </span>
                                                         </div>
-                                                        <span>
-                                                        @if(session('front_lang')=='en')
+
+                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode($car['year_en']) }}
+                                                                @else
+                                                                {{ html_decode($car['year']) }}
+                                                            @endif">
+                                                            @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['year']) }}
                                                             @endif
-                                                        </span>
+                                                        </p>
+                                                        
 
                                                        
                                                     </div>
-                                                    <div class="brand-car-inner-item-two">
+                                                    <div class="brand-car-inner-item-two pe-3">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
                                                                 <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -666,36 +765,39 @@
                                                             </span>
                                                         </div>
 
-                                                        <span>
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                            @else
+                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                            @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @endif
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="px-3 d-flex flex-row">
+                                                    @php
+                                                         $parsed_data=parseCustomFormat($car['parsed_data']);
+                                                         $carbonInstance = Carbon::parse($car['datetime']);
+                                                    @endphp    
+                                                    <p>
+                                                        <i class="bi bi-geo-alt-fill"></i><span class="brand-location">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   
+                                                    </p>
+                                                    <div class="d-flex flex-column list_date ps-5">
+                                                        <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                        <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
+                                                    </div>
+                                                        <span>
+                                                            
                                                         </span>
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-btm-txt-btm">
-                                                <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
-                                                        <h3 class="text-truncate car-fullname pt-3 ps-3" 
-                                                        title="
-                                                        @if(session('front_lang')=='en')
-                                                                {{ $car['model_name_en'] }}
-                                                            @else
-                                                                {{ $car['model_name'] }}
-                                                            @endif  
-                                                        "> 
-                                                            @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['model_name_en']) }}
-                                                            @else
-                                                                {{ html_decode($car['model_name']) }}
-                                                            @endif
-                                                        </h3>
-                                                    </a>
-
-
-                                                </div>
+                                                
 
 
 
