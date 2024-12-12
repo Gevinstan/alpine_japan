@@ -389,11 +389,11 @@
                             @endforeach
                             @endif --}}
                             @if(request('model') && count(request('model')) > 0)
-                                @foreach(request('model') as $index => $brandSlug)
-                                    @foreach($models as $model)
+                                @foreach(request('model') as $brandSlug => $models)
+                                @foreach($models as $model)
                                         @if($model!="")
                                             <p class="position-relative filter-text px-3 py-1">
-                                            <span class="model-item" data-brand="{{ $index }}">{{ $model }}
+                                            <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
                                                 <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                                     <span class="alert-close-model">
                                                         <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
@@ -443,8 +443,16 @@
 
                                             <div class="brand-car-inner position-relative">
                                                     <div class="position-absolute heart_absolute parent">
-                                                        <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
-                                                        <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/>         
+                                                    @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car['id'], $wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif          
                                                     </div>
                                                 <div class="brand-car-inner-item">
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="
@@ -1251,9 +1259,12 @@
                         const modelCheckboxes = document.querySelectorAll(`.model-searchs[data-brand="${brandSlug}"]`);
 
                         // Set their checked state based on the brand checkbox
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        if (!this.checked) {
+                            // Uncheck all associated model checkboxes
+                            modelCheckboxes.forEach(modelCheckbox => {
+                                modelCheckbox.checked = false;
+                            });
+                        }
                         clear_price_slider();
                         $('#search_form').submit();
                     });
@@ -1271,6 +1282,23 @@
                     $('#search_form').submit();
                     });
                 });
+                $(".after_auth_wishlist").on('click',function(){
+                 console.log($(this).data('car-id'))
+                 $.ajax({
+                    type: "POST",
+                    url:"{{route('add-user-wishlist')}}",
+                    data:{'id': $(this).data('car-id'),
+                        'type': 1,
+                    },
+                    beforeSend:function(data){
+                        console.log('loading');
+                    },
+                    success:function(response){
+                        console.log(response);
+                        window.location.reload();
+                    }
+                 })
+            })
 
 })(jQuery);
 

@@ -395,10 +395,15 @@
 
                                             <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
-                                                        @if(Auth::guard('web')->check())
-                                                        <a href="javascript:void();" class="before_auth_wishlist"><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
-                                                        @else 
-                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                        @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car['id'], $wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
                                                         @endif            
                                                         </div>
 
@@ -1167,9 +1172,15 @@
                         const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
 
                         // Set their checked state based on the brand checkbox
-                        modelCheckboxes.forEach(modelCheckbox => {
-                            modelCheckbox.checked = this.checked;
-                        });
+                        // modelCheckboxes.forEach(modelCheckbox => {
+                        //     modelCheckbox.checked = this.checked;
+                        // });
+                        if (!this.checked) {
+                            // Uncheck all associated model checkboxes
+                            modelCheckboxes.forEach(modelCheckbox => {
+                                modelCheckbox.checked = false;
+                            });
+                        }
                         clear_price_slider();
                         $('#search_form').submit();
                     });
@@ -1209,6 +1220,23 @@
                     this.style.display = 'none';
                 });
             });
+            $(".after_auth_wishlist").on('click',function(){
+                 console.log($(this).data('car-id'))
+                 $.ajax({
+                    type: "POST",
+                    url:"{{route('add-user-wishlist')}}",
+                    data:{'id': $(this).data('car-id'),
+                        'type': 1,
+                    },
+                    beforeSend:function(data){
+                        console.log('loading');
+                    },
+                    success:function(response){
+                        console.log(response);
+                        window.location.reload();
+                    }
+                 })
+            })
         })(jQuery);
 
 
@@ -1256,10 +1284,25 @@
                 window.location.href = url.toString();
             });
         });
+        // window.addEventListener("load", function() {
+        //     document.getElementById("pageLoader").classList.add("hidden");
+        // });
+
         window.addEventListener("load", function() {
-            document.getElementById("pageLoader").classList.add("hidden");
+        // Hide the loader when the page is fully loaded
+        document.getElementById("pageLoader").classList.add("hidden");
         });
 
+        // Ensure the loader is visible when the page is reloaded or submitted
+        window.addEventListener("beforeunload", function() {
+            // Show the loader before the page unloads (optional: depends on your needs)
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
+            
+        $('form').on('submit', function() {
+        // Show the loader when the form is being submitted
+        document.getElementById("pageLoader").classList.remove("hidden");
+        });
         // closeButtonsModel.forEach(button => {
         //     button.addEventListener('click', function(event) {
         //         // Prevent default behavior
