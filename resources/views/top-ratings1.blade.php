@@ -723,8 +723,7 @@
                                     <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                            <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
-
+                                                <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                             </div>
 
                                             <div class="">
