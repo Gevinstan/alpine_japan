@@ -933,8 +933,8 @@ class HomeController extends Controller
         $results = \DB::table($tableName) 
             ->join('models_cars as mc', function($join) use ($tableName) {
                 $join->on($tableName . '.category', '=', 'mc.category')
-                ->on(DB::raw('TRIM(' . $tableName . '.model)'), '=', DB::raw('TRIM(mc.model)'));
-                    // ->on($tableName . '.model', '=', 'mc.model');
+                // ->on(DB::raw('TRIM(' . $tableName . '.model)'), '=', DB::raw('TRIM(mc.model)'));
+                    ->on($tableName . '.model', '=', 'mc.model');
             })
             ->whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
             ->where($tableName . '.is_active', 1)
@@ -4129,7 +4129,7 @@ public function car_listing(Request $request){
                     if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
                         // Group the conditions for this range
                         $query->orWhere(function ($subQuery) use ($result) {
-                            $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
+                            $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$result['start_price_num'], $result['end_price_num']]);
                                     //  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
                         });
                     }
@@ -4191,7 +4191,7 @@ public function car_listing(Request $request){
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
                     // $q->whereBetween('start_price_num', [$startValue, $endValue])
                     // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
-                    $q->whereBetween('start_price_num', [$startValue, $endValue]);
+                    $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$startValue, $endValue]);
                 });
             }
         }
