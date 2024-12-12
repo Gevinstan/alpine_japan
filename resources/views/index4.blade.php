@@ -267,9 +267,13 @@ use Carbon\Carbon;
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-inner">
-                                                    <div class="brand-car-inner-item">
-
+                                                
+                                                    <div class="brand-car-inner position-relative">
+                                                        <div class="position-absolute heart_absolute parent">
+                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1">
+                                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                                        </div>
+                                                        <div class="brand-car-inner-item">
                                                         <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
                                                             title="@if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
@@ -506,7 +510,11 @@ use Carbon\Carbon;
                                                 </div>
                                             </div>
 
-                                            <div class="brand-car-inner">
+                                            <div class="brand-car-inner position-relative">
+                                                <div class="position-absolute heart_absolute parent">
+                                                    <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1">
+                                                    <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                                </div>
                                                 <div class="brand-car-inner-item">
                                                     <span>{{ $car?->brand?->name }}</span>
                                                     <p>
@@ -662,7 +670,11 @@ use Carbon\Carbon;
                                                 </div>
                                             </div>
 
-                                            <div class="brand-car-inner">
+                                            <div class="brand-car-inner position-relative">
+                                                    <div class="position-absolute heart_absolute parent">
+                                                        <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1">
+                                                        <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                                    </div>
                                                 <div class="brand-car-inner-item">
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
                                                                 {{ $car->make }}
@@ -914,7 +926,11 @@ use Carbon\Carbon;
 
                                     </div>
 
-                                    <div class="brand-car-inner">
+                                    <div class="brand-car-inner position-relative">
+                                        <div class="position-absolute heart_absolute parent">
+                                            <!-- <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"> -->
+                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                        </div>
                                         <div class="brand-car-inner-item">
                                              <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
                                                 {{ $car['company_en'] }}
