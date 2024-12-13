@@ -21,7 +21,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Car MarketPlace') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Brand New Cars') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -180,7 +180,7 @@
                                                         <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                     </div>
 
-                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{ request('year', $minYear) }}"  class="slider-input mx-0 my-2" id="modelYearSlider">
                                                     <input type="hidden" id="start_year" name="year">
                                                 </div>
 
@@ -1003,6 +1003,11 @@
             });
             $("#year_search").on('click',function(e){
                 e.preventDefault();   
+                const year = $("#start_year").val();
+                if(year ==""){
+                    $("#start_year").val(@json($minYear))
+                } 
+                // console.log(year);
                 clear_price_slider();    
                 $('#search_form').submit();
            });

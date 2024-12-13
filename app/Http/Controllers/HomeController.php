@@ -1087,6 +1087,8 @@ class HomeController extends Controller
 
     
     public function jdm_stock_responsive(Request $request,$slug,$type){
+
+        // echo json_encode($request->all());die();
         $priceRanges = [
             "Under $5000" => ["start" => 0, "end" => 5000],
             "$5000 - $50000" => ["start" => 5000, "end" => 50000],
@@ -1315,20 +1317,26 @@ class HomeController extends Controller
             switch ($request->sort_by) {
                 case 'price_low_high':
                     if($type == 'car'){
-                        $carsQuery->orderBy('blog.price', 'asc');    
+                        // $carsQuery->orderBy('blog.price', 'asc');  
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(blog.price, '[^0-9]', '') AS UNSIGNED) ASC");  
                        } else if($type == 'heavy'){
-                        $carsQuery->orderBy('heavy.price', 'asc');
+                        // $carsQuery->orderBy('heavy.price', 'asc');
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) ASC");  
                        } else if($type =='small_heavy'){
-                           $carsQuery->orderBy('small_heavy.price', 'asc');
-                       }
+                        // $carsQuery->orderBy('small_heavy.price', 'asc');
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') AS UNSIGNED) ASC");  
+                       }    
                     break;
                 case 'price_high_low':
                    if($type == 'car'){
-                        $carsQuery->orderBy('blog.price', 'desc');    
+                        // $carsQuery->orderBy('blog.price', 'desc');    
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(blog.price, '[^0-9]', '') AS UNSIGNED) desc");  
                        } else if($type == 'heavy'){
-                        $carsQuery->orderBy('heavy.price', 'desc');
+                        // $carsQuery->orderBy('heavy.price', 'desc');
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) desc");  
                        } else if($type =='small_heavy'){
-                           $carsQuery->orderBy('small_heavy.price', 'desc');
+                        //    $carsQuery->orderBy('small_heavy.price', 'desc');
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') AS UNSIGNED) desc");  
                        }
                     break;
                 case 'recent':  
@@ -4496,10 +4504,11 @@ public function car_listing(Request $request){
         $priceRange = CarDataJpOp::where('active_status', '1')
         ->selectRaw('MIN(start_price_num) as min_sal, MAX(start_price_num) as max_sal')
         ->first();
-        $minYear = $yearRange->min_year;
-        $maxYear = $yearRange->max_year;
+        $minYear = now()->subYear()->year;
+        $maxYear = now()->year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
+
         
         $hasPriceRangeScale = false;
         $startValue = $minPrice;
@@ -4677,9 +4686,9 @@ public function car_listing(Request $request){
             }
         }
 
-        $currentYear = now()->year;
-        $previousYear = now()->subYear()->year;
-        $carsQuery->whereBetween('model_year_en', [$previousYear,$currentYear]); 
+        // $currentYear = now()->year;
+        // $previousYear = now()->subYear()->year;
+        $carsQuery->whereBetween('model_year_en', [$minYear,$maxYear]); 
        
         if(!$request->sort_by){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
