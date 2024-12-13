@@ -9158,10 +9158,10 @@ p {
     gap: 20px;
 }
 
-/* .inventory .brand-car-two .brand-car-item .brand-car-item-img {
+.inventory .brand-car-two .brand-car-item .brand-car-item-img {
     width: 185px;
     height: 203px;
-} */
+}
 
 .inventory .brand-car-two .brand-car-item .brand-car-item-img img {
     width: 100% !important;
