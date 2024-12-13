@@ -16991,7 +16991,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-size: 1.25rem !important;
         line-height: 15px !important;
         font-family: "Poppins", serif;
-        font-weight: 500;
+        font-weight: 100;
         font-style: normal;
     }
 }
@@ -17821,5 +17821,10 @@ input:not(:placeholder-shown) + .input-placeholder {
 
 .insta-blog {
     color: #038FFC !important;
+}
+
+.faq .accordion-body p {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
