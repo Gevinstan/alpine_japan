@@ -270,8 +270,16 @@ use Carbon\Carbon;
                                                 
                                                     <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
-                                                            <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1">
-                                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                                        @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car['id'], $one_price_wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}' data-table-id='1'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}' data-table-id='1'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif          
                                                         </div>
                                                         <div class="brand-car-inner-item">
                                                         <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
@@ -481,8 +489,7 @@ use Carbon\Carbon;
 
                                             <div class="brand-car-inner position-relative">
                                                 <div class="position-absolute heart_absolute parent">
-                                                    <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1">
-                                                    <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                                      
                                                 </div>
                                                 <div class="brand-car-inner-item">
                                                     <span>{{ $car?->brand?->name }}</span>
@@ -641,8 +648,16 @@ use Carbon\Carbon;
 
                                             <div class="brand-car-inner position-relative">
                                                     <div class="position-absolute heart_absolute parent">
-                                                        <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1">
-                                                        <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                                    @if(Auth::guard('web')->check()) 
+                                                             @if(in_array($car->id, $jdm_wishlists))
+                                                                <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car->id}}' data-table-id='3'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                              @else
+                                                              <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car->id}}' data-table-id='3'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                             @endif
+                                                         @else 
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif           
                                                     </div>
                                                 <div class="brand-car-inner-item">
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
@@ -871,8 +886,17 @@ use Carbon\Carbon;
 
                                     <div class="brand-car-inner position-relative">
                                         <div class="position-absolute heart_absolute parent">
-                                            <!-- <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"> -->
-                                            <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2">         
+                                            @if(Auth::guard('web')->check()) 
+                                                @if(in_array($car['id'], $one_price_wishlists))
+                                                    <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
+                                                    <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}' data-table-id='1'>
+                                                        <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                @else
+                                                <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}' data-table-id='1'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                @endif
+                                            @else 
+                                            <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                            @endif             
                                         </div>
                                         <div class="brand-car-inner-item">
                                              <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
@@ -1334,6 +1358,26 @@ use Carbon\Carbon;
             }
          });
          });
+
+         $(".after_auth_wishlist").on('click',function(){
+                 console.log($(this).data('car-id'))
+                 var type=$(this).data('table-id');
+                 console.log($(this).data('table-id'));
+                 $.ajax({
+                    type: "POST",
+                    url:"{{route('add-user-wishlist')}}",
+                    data:{'id': $(this).data('car-id'),
+                        'type': type,
+                    },
+                    beforeSend:function(data){
+                        console.log('loading');
+                    },
+                    success:function(response){
+                        console.log(response);
+                        window.location.reload();
+                    }
+                 })
+            })
 
          $('#jdm_stock_form').submit(function(e) {
             e.preventDefault();

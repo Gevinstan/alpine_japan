@@ -646,20 +646,7 @@
                                     <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car->thumb_image) }}" alt="thumb" class="card_image">
-
-                                                <!-- <div class="brand-car-item-img-text">
-                                                    <div class="text-df">
-                                                        @if ($car->offer_price)
-                                                            <p class="text">{{ calculate_percentage($car->regular_price, $car->offer_price) }}% {{ __('translate.Off') }}</p>
-                                                        @endif
-                                                        @if ($car->condition == 'New')
-                                                                <p class="text text-two ">{{ __('translate.New') }}</p>
-                                                            @else
-                                                                <p class="text text-two ">{{ __('translate.Used') }}</p>
-                                                            @endif
-                                                    </div>
-                                                </div> -->
+                                            <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                             </div>
 
                                             <div class="">

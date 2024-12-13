@@ -272,10 +272,26 @@ class HomeController extends Controller
             $jdm_brand['heavy']=$jdm_legend_heavy;
             $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
-            // echo json_encode($jdm_car_listings);die();
+            $userId = $userId ?? auth()->id();
+            $one_price_wishlists= DB::table('wishlists as um')
+            ->join('auct_lots_xml_jp_op as auct', 'um.car_id', '=', 'auct.id')
+            ->where('um.table_id', 1)
+            ->where('um.user_id', $userId)
+            ->pluck('auct.id')->toArray();
+            
+
+            $jdm_wishlists= DB::table('wishlists as um')
+                ->join('blog as b', 'um.car_id', '=', 'b.id')
+                ->where('um.table_id', 3)
+                ->where('um.user_id', $userId)
+                ->pluck('b.id')->toArray();
+
+
 
         
             return view('index4', [
+                'one_price_wishlists'=>$one_price_wishlists,
+                'jdm_wishlists'=>$jdm_wishlists,
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
                 'brands' => $brands,
@@ -1168,6 +1184,7 @@ class HomeController extends Controller
                 $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
                 // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
                     ->where('w.table_id', '3')
+                    ->where('w.user_id', $userId)
                     ->pluck('w.car_id')
                     ->toArray();
             }
@@ -1346,10 +1363,12 @@ class HomeController extends Controller
                 // });
                 if($type=='car')
                 {
+                    $startValue = (int)trim(str_replace('"', '', $parts[0]));
+                    $endValue = (int)trim(str_replace('"', '', $parts[1]));
                     $carsQuery->whereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                        $startValue,
-                        $endValue
-                ]);
+                                    $startValue,
+                                    $endValue
+                            ]);
                 } else if($type == 'heavy'){
                     $carsQuery->whereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
                         $startValue,
@@ -4510,9 +4529,18 @@ public function car_listing(Request $request){
         }
     
         if($request->model){
-            $model_arr = array_filter($request->model); // Filter out any empty values
+            // $model_arr = array_filter($request->model); // Filter out any empty values
+            // if ($model_arr) {
+            //     $carsQuery->whereIn('model_name_en', $model_arr); 
+            // }
+            $model_arr = [];
+            foreach ($request->model as $brandSlug => $models) {
+                if (is_array($models)) {
+                    $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+                }
+            }
             if ($model_arr) {
-                $carsQuery->whereIn('model_name_en', $model_arr); 
+                $carsQuery->whereIn('model_name_en', $model_arr);
             }
             // $carsQuery->where('model_name_en', $request->model); 
         }
@@ -5384,6 +5412,7 @@ public function car_listing(Request $request){
         $wishlists=CarDataJpOp::join('wishlists as w', 'auct_lots_xml_jp_op.id', '=', 'w.car_id')
         // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
             ->where('w.table_id', '1')
+            ->where('w.user_id',$userId)
             ->pluck('w.car_id')
             ->toArray();
     }
@@ -7754,6 +7783,7 @@ public function getJDMPriceRange()
             $userId = $userId ?? auth()->id();
             $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
                 ->where('w.table_id', '3')
+                ->where('w.user_id', $userId)
                 ->pluck('w.car_id')
                 ->toArray();
         }
