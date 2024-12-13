@@ -280,13 +280,13 @@
                         @endforelse
                     </div> -->
                     <div class="row g-5">
-                        @forelse ($cars as $index => $car)
+                        @forelse ($combined_arr as $index => $car)
                                         <div class="col-lg-4 col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
                                                     <div class="">
-                                                        <img src="{{ asset($car->thumb_image) }}" alt="thumb" class="card_image">
+                                                        <img src="{{ asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     </div>
                                                 </div>
 
@@ -298,23 +298,19 @@
                                                     </div>
                                                     <div class="brand-car-inner-item">
                                                     <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
-                                                        title="{{ $car?->brand?->name }}">
-                                                        Honda
+                                                        title="{{ $car['company_name']}}">
+                                                        {{ $car['company_name']}}
                                                     </span>
                                                     <p class="listcar_price pt-3 pe-4">
-                                                        @if ($car->offer_price)
-                                                            {{ currency($car->offer_price) }}
-                                                        @else
-                                                            {{ currency($car->regular_price) }}
-                                                        @endif
+                                                        {{ $car['price']}}
                                                     </p>
 
                                                 </div>
 
-                                                     <a href="{{ route('listing', $car->slug) }}"data-bs-toggle="tooltip" 
-                                                        title="{{ html_decode($car->title) }}">
+                                                     <a href="{{$car['url']}}"data-bs-toggle="tooltip" 
+                                                        title="{{ html_decode( $car['model_en']) }}">
                                                         <h3 class="text-truncate car-fullname pt-3 ps-3"> 
-                                                            {{ html_decode($car->title) }}
+                                                            {{ html_decode( $car['model_en']) }}
                                                         </h3>
                                                     </a>
 
@@ -330,8 +326,8 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->mileage) }}">
-                                                                {{ html_decode($car->mileage) }}
+                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ $car['mileage'] }}">
+                                                                {{ $car['mileage'] }}
                                                             </span>
                                                         </div>
                                                         <div class="brand-car-inner-item-two">
@@ -343,8 +339,9 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="2024">2024
-                                                            </span>
+                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title=" {{ html_decode($car['year']) }}">
+                                                            {{ html_decode($car['year']) }}
+                                                        </span>
                                                         </div>
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
@@ -356,8 +353,8 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->engine_size) }}">
-                                                            {{ html_decode($car->engine_size) }}
+                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car['engine']) }}">
+                                                            {{ html_decode($car['engine']) }}
                                                             </span>
                                                         </div>
                                                     </div>

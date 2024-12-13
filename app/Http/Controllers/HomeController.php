@@ -272,10 +272,26 @@ class HomeController extends Controller
             $jdm_brand['heavy']=$jdm_legend_heavy;
             $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
 
-            // echo json_encode($jdm_car_listings);die();
+            $userId = $userId ?? auth()->id();
+            $one_price_wishlists= DB::table('wishlists as um')
+            ->join('auct_lots_xml_jp_op as auct', 'um.car_id', '=', 'auct.id')
+            ->where('um.table_id', 1)
+            ->where('um.user_id', $userId)
+            ->pluck('auct.id')->toArray();
+            
+
+            $jdm_wishlists= DB::table('wishlists as um')
+                ->join('blog as b', 'um.car_id', '=', 'b.id')
+                ->where('um.table_id', 3)
+                ->where('um.user_id', $userId)
+                ->pluck('b.id')->toArray();
+
+
 
         
             return view('index4', [
+                'one_price_wishlists'=>$one_price_wishlists,
+                'jdm_wishlists'=>$jdm_wishlists,
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
                 'brands' => $brands,
@@ -1168,6 +1184,7 @@ class HomeController extends Controller
                 $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
                 // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
                     ->where('w.table_id', '3')
+                    ->where('w.user_id', $userId)
                     ->pluck('w.car_id')
                     ->toArray();
             }
@@ -1346,10 +1363,12 @@ class HomeController extends Controller
                 // });
                 if($type=='car')
                 {
+                    $startValue = (int)trim(str_replace('"', '', $parts[0]));
+                    $endValue = (int)trim(str_replace('"', '', $parts[1]));
                     $carsQuery->whereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                        $startValue,
-                        $endValue
-                ]);
+                                    $startValue,
+                                    $endValue
+                            ]);
                 } else if($type == 'heavy'){
                     $carsQuery->whereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
                         $startValue,
@@ -2522,7 +2541,7 @@ class HomeController extends Controller
     }
 
 
-public function getBrandsWithModels($keywhere,$database_name): array
+public function getBrandsWithModels($keywhere,$database_name,$brand_new): array
 {    
    
     
@@ -2583,6 +2602,9 @@ public function getBrandsWithModels($keywhere,$database_name): array
             })
             ->when($tableName == 'auct_lots_xml_jp_op', function($query) {
                 return $query->where('active_status', '1');
+            })
+            ->when($brand_new == 'brand-new', function($query) {
+                return $query->whereBetween('model_year_en', [now()->subYear()->year,now()->year]);
             })
             ->groupBy(DB::raw('LOWER(company_en)'), 'model_name_en') // Group by brand and model
             ->distinct()
@@ -2654,7 +2676,7 @@ public function car_listing(Request $request){
 
         $keyWhere ="";
         $tableName='1';
-        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'');
         $models=[];
 
         $yearRange = CarDataJpOp::where('active_status', '1')
@@ -3501,7 +3523,7 @@ public function car_listing(Request $request){
         $models=[];
         $keyWhere="top-sell";
         $tableName='1';
-        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'');
        
         // Initialize the query for cars
       
@@ -4112,7 +4134,7 @@ public function car_listing(Request $request){
 
         $keyWhere ="";
         $tableName='2';
-        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'');
         $models=[];
 
 
@@ -4464,7 +4486,7 @@ public function car_listing(Request $request){
 
         $keyWhere ="";
         $tableName='2';
-        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'brand-new');
         $models=[];
 
 
@@ -4482,7 +4504,7 @@ public function car_listing(Request $request){
         $hasPriceRangeScale = false;
         $startValue = $minPrice;
         $endValue = $maxPrice;
-        DB::enableQueryLog();
+        // DB::enableQueryLog();
 
         // Initialize the query for cars
         $carsQuery = Auct_lots_xml_jp::query();
@@ -4510,9 +4532,19 @@ public function car_listing(Request $request){
         }
     
         if($request->model){
-            $model_arr = array_filter($request->model); // Filter out any empty values
+            // $model_arr = array_filter($request->model); // Filter out any empty values
+            // if ($model_arr) {
+            //     $carsQuery->whereIn('model_name_en', $model_arr); 
+            // }
+            $model_arr = [];
+            foreach ($request->model as $brandSlug => $models) {
+                if (is_array($models)) {
+                    $model_arr = array_merge($model_arr, array_filter($models)); // Flatten the nested array
+                }
+            }
+            // echo json_encode($model_arr);die();
             if ($model_arr) {
-                $carsQuery->whereIn('model_name_en', $model_arr); 
+                $carsQuery->whereIn('model_name_en', $model_arr);
             }
             // $carsQuery->where('model_name_en', $request->model); 
         }
@@ -4653,8 +4685,10 @@ public function car_listing(Request $request){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
         }
        
+        $cars = $carsQuery
+        ->select('auct_lots_xml_jp.*')->get();
 
-    //   dd(DB::getQueryLog($carsQuery->get()));
+    //   dd(DB::getQueryLog($cars));
 
         // Pagination
         $cars = $carsQuery
@@ -4792,7 +4826,7 @@ public function car_listing(Request $request){
         ->distinct('b.slug')->get();
         $keyWhere="new-arrival";
         $tableName='1';
-        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'');
 
         // Initialize the query for cars
         $carsQuery = CarDataJpOp::query();
@@ -5076,7 +5110,7 @@ public function car_listing(Request $request){
         $keyWhere="new-arrival";
 
         $tableName='1';
-        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName);
+        $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'');
         $yearRange = CarDataJpOp::where('active_status', '1')
         ->selectRaw('MIN(model_year_en) as min_year, MAX(model_year_en) as max_year')
         ->first();
@@ -5384,6 +5418,7 @@ public function car_listing(Request $request){
         $wishlists=CarDataJpOp::join('wishlists as w', 'auct_lots_xml_jp_op.id', '=', 'w.car_id')
         // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
             ->where('w.table_id', '1')
+            ->where('w.user_id',$userId)
             ->pluck('w.car_id')
             ->toArray();
     }
@@ -7754,6 +7789,7 @@ public function getJDMPriceRange()
             $userId = $userId ?? auth()->id();
             $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
                 ->where('w.table_id', '3')
+                ->where('w.user_id', $userId)
                 ->pluck('w.car_id')
                 ->toArray();
         }

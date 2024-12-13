@@ -418,7 +418,8 @@
                                                             @if(Auth::guard('web')->check()) 
                                                                 @if(in_array($car['id'], $wishlists))
                                                                     <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/>
-                                                                    <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
+                                                                    <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'>
+                                                                    <img src="{{ asset('japan_home/heart.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
                                                                 @else
                                                                 <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
                                                                 @endif
