@@ -15639,7 +15639,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 /***** Contact Us Workk Responsive *****/
 
-.contact_us_header {
+.contact_us_header, .about_us_header {
     padding: 104px 0 0px 0 !important;
 }
 
@@ -15654,6 +15654,12 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 @media (max-width: 768px) {
     .contact_us_header {
+        padding: 0px 0 0px 0 !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .about_us_header {
         padding: 0px 0 0px 0 !important;
     }
 }
@@ -15849,7 +15855,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     position: relative;
     background-color: #005bac;
     padding-top: 50px;
-    padding-bottom: 200px !important;
+    padding-bottom: 80px !important;
 }
 
 .tar_cus_img {
@@ -17613,7 +17619,7 @@ input:not(:placeholder-shown) + .input-placeholder {
   left: 0;
 }
 
-.contact-text-black {
+.contact-text-black, .about-text-black {
     color: #2B343D !important;
 }
 
@@ -17826,5 +17832,41 @@ input:not(:placeholder-shown) + .input-placeholder {
 .faq .accordion-body p {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.our_vision_card {
+    width: 95%;
+    background: #ffffff;
+    box-shadow: 7px 3px 19.5px 0px #00000024;
+    margin-top: -80px;
+}
+
+.our_vision_img {
+    width: 100% !important;
+}
+
+.our_vision_bg {
+    background: #005bac;
+    border: none;
+    outline: none;
+    margin-top: -2px;
+}
+
+.vision-outer-circule {
+    background-color: #038FFC45;
+    border-radius: 50%;
+    width: 180px !important;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    top: 40%;
+    left: 40%;
+}
+
+.vision-inner-circule {
+    background-color: var(--primary-color-1);
+    border-radius: 50%;
+    width: 154px;
+    height: 154px;
 }
 
