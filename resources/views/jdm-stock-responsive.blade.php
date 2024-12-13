@@ -572,10 +572,9 @@
                                                         @php
                                                             $carbonInstance = Carbon::parse($car['created_at']);
                                                         @endphp
-                                                        <p>
-                                                            <i class="bi bi-geo-alt-fill"></i>
-                                                            <span class="brand-location ">{{ isset($car['location']) ? $car['location'] : '--' }} </span>
-                                                        </p>
+
+                                                        <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($car['location']) ? $car['location'] : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($car['location']) ? $car['location'] : '--' }} </p>
+
                                                         <div class="d-flex flex-column">
                                                             <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                             <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
@@ -719,11 +718,11 @@
                                                 <div class="">
                                                     <div class="pt-2">
                                                         <p class="listcar_price_list ps-1 pe-4">
-                                                        @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price'] }}
-                                                        @else
+                                                            @if(session('front_lang')=='en')
                                                             {{ '$'.$car['start_price'] }}
-                                                        @endif
+                                                            @else
+                                                                {{ '$'.$car['start_price'] }}
+                                                            @endif
                                                         </p>
 
                                                         <div class="text-truncate_list1 car-name ps-1" data-bs-toggle="tooltip" title=" @if(session('front_lang')=='en')
@@ -752,7 +751,7 @@
                                                                         {{ html_decode($car['model_name']) }}
                                                                     @endif
                                                                 </a>
-                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="brand-car-inner-item-main">
@@ -768,7 +767,7 @@
                                                             </div>
 
                                                             <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" 
-                                                            title="@if(session('front_lang')=='en')
+                                                                title="@if(session('front_lang')=='en')
                                                                     {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
                                                                 @else
                                                                 {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
@@ -823,12 +822,12 @@
                                                         @php
                                                             $carbonInstance = Carbon::parse($car['created_at']);
                                                         @endphp    
-                                                        <p>
-                                                            <i class="bi bi-geo-alt-fill"></i><span class="brand-location">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   
-                                                        </p>
+                                                        
+                                                        <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>   
+                                                        
                                                         <div class="d-flex flex-column list_date ps-5">
-                                                            <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
-                                                            <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
+                                                            <span class="ps-4 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                            <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                         </div>
                                                     </div>
 

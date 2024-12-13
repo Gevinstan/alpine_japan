@@ -14587,6 +14587,11 @@ p {
     font-weight: normal !important;
     font-style: normal;
     color: #0d274e !important;
+    width: 40px !important;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    
 }
 
 .brand-date {
@@ -14599,6 +14604,7 @@ p {
 
 .bi-geo-alt-fill {
     font-size: 0.625rem;
+    color: #868B96 !important;
 }
 .custom-tabs li a {
     height: 44px;
@@ -17678,6 +17684,12 @@ input:not(:placeholder-shown) + .input-placeholder {
     white-space: nowrap;
     overflow: hidden; 
     text-overflow: ellipsis; 
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal; 
+   color: #9EA3AD;
+   font-size: 10px !important;
+
 }
 
 .card-text-center {
@@ -17828,4 +17840,7 @@ input:not(:placeholder-shown) + .input-placeholder {
     padding-bottom: 10px;
 }
 
+.recently_added::after {
+    color: #6E6E6E;
+}
 

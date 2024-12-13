@@ -572,12 +572,9 @@
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
                                                     @endphp
-                                                    <p>
-                                                        <i class="bi bi-geo-alt-fill"></i>
-                                                        <span class="brand-location ">
-                                                        {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}
-                                                        </span>
-                                                    </p>
+
+                                                    <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
+
                                                     <div class="d-flex flex-column">
                                                         <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                         <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
@@ -834,12 +831,12 @@
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
                                                     @endphp    
-                                                    <p>
-                                                        <i class="bi bi-geo-alt-fill"></i><span class="brand-location ">{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}</span>   
-                                                    </p>
+
+                                                    <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
+
                                                     <div class="d-flex flex-column list_date ps-5">
-                                                        <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
-                                                        <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
+                                                        <span class="ps-4 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                        <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>
                                                 </div>
 
