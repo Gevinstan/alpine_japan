@@ -544,6 +544,7 @@
                                                                 @endif
                                                             </span>
                                                         </div>
+                                                    
                                                         <!-- <p class="align-content-end pt-3">.</p> -->
                                                         <div class="brand-car-inner-item-two pe-4">
                                                             <div class="brand-car-inner-item-thumb">
@@ -706,7 +707,7 @@
                                         <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
-                                                <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
+                                                    <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
                                                                 asset('Cars/' .  $car['picture']) : 
                                                                 asset('uploads/website-images/no-image.jpg') }}" 
                                                         alt="thumb" class="card_image">
