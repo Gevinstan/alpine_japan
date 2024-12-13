@@ -431,6 +431,125 @@ class ProfileController extends Controller
         foreach($wishlists as $wishlist){
             $wishlist_arr [] = $wishlist->car_id;
         }
+        $one_price_wishlists= DB::table('wishlists as um')
+        ->join('auct_lots_xml_jp_op as auct', 'um.car_id', '=', 'auct.id')
+        ->where('um.table_id', 1)
+        ->where('um.user_id', $user->id)
+        ->select('auct.*')->get();
+        $one_price_arr=[];
+        foreach($one_price_wishlists as $price){
+            $car_image=$this->last_image($price->pictures);
+            $one_price_arr [] = array(
+                'company_name'=>Session::get('front_lang')=='en' ? $price->company_en : $price_company,
+                'price'=>Session::get('front_lang')=='en' ? $price->start_price_num : $price->start_price,
+                'model_en'=>Session::get('front_lang')=='en'? $price->model_name_en : $price->model_name,
+                'mileage'=>Session::get('front_lang')=='en'? $price->mileage_en : $price->mileage,
+                'year'=>Session::get('front_lang')=='en'? $price->model_year_en : $price->model_year,
+                'engine'=>$price->model_details_en,
+                'picture'=>$car_image[0],
+                'url' => route('fixed-car-marketplace-details', [$price->id]),
+            );
+        }
+
+
+        $auction_wishlists= DB::table('wishlists as um')
+        ->join('auct_lots_xml_jp as auct', 'um.car_id', '=', 'auct.id')
+        ->where('um.table_id', 2)
+        ->where('um.user_id', $user->id)
+        ->select('auct.*')->get();
+        $auction_arr =[];
+        foreach($auction_wishlists as $price){
+            $car_image=$this->last_image($price->pictures);
+            $auction_arr [] = array(
+                'company_name'=>Session::get('front_lang')=='en' ? $price->company_en : $price_company,
+                'price'=>Session::get('front_lang')=='en' ? $price->start_price_num : $price->start_price,
+                'model_en'=>Session::get('front_lang')=='en'? $price->model_name_en : $price->model_name,
+                'mileage'=>Session::get('front_lang')=='en'? $price->mileage_en : $price->mileage,
+                'year'=>Session::get('front_lang')=='en'? $price->model_year_en : $price->model_year,
+                'engine'=>$price->model_details_en,
+                'picture'=>$car_image[0],
+                'url' => route('auction_listing', [$price->id]),
+            );
+        }
+
+
+        $jdm_wishlists= DB::table('wishlists as um')
+        ->join('blog as b', 'um.car_id', '=', 'b.id')
+        ->where('um.table_id', 3)
+        ->where('um.user_id', $user->id)
+        ->select('b.*')->get();
+
+        $blog_arr =[];
+        foreach($jdm_wishlists as $price){
+            $image = file_exists(public_path('Cars/' . $price->image)) 
+            ? 'Cars/' . $price->image 
+            : 'uploads/website-images/no-image.jpg';
+            $blog_arr [] = array(
+                'company_name'=>$price->make,
+                'price'=>$price->price,
+                'model_en'=>$price->model,
+                'mileage'=>$price->kms,
+                'year'=>$price->yom,
+                'engine'=>'--',
+                'picture'=>$image,
+                'url' => route('jdm-stock-listing', [$price->id, 'car']),
+            );
+        }
+
+        $heavy_wishlists= DB::table('wishlists as um')
+        ->join('heavy as b', 'um.car_id', '=', 'b.id')
+        ->where('um.table_id', 4)
+        ->where('um.user_id', $user->id)
+        ->select('b.*')->get();
+
+        $heavy_arr =[];
+        foreach($heavy_wishlists as $price){
+            $image = file_exists(public_path('Cars/' . $price->image)) 
+            ? 'Cars/' . $price->image
+            : 'uploads/website-images/no-image.jpg';
+            $heavy_arr [] = array(
+                'company_name'=>$price->make,
+                'price'=>$price->price,
+                'model_en'=>$price->model,
+                'mileage'=>$price->kms,
+                'year'=>$price->yom,
+                'engine'=>'--',
+                'picture'=>$image,
+                'url' => route('jdm-stock-listing', [$price->id, 'heavy']),
+            );
+        }
+
+        $small_wishlists= DB::table('wishlists as um')
+        ->join('small_heavy as b', 'um.car_id', '=', 'b.id')
+        ->where('um.table_id', 5)
+        ->where('um.user_id', $user->id)
+        ->select('b.*')->get();
+
+        $small_heavy_arr =[];
+        foreach($small_wishlists as $price){
+            $image = file_exists(public_path('Cars/' . $price->image)) 
+            ? 'Cars/' . $price->image 
+            : 'uploads/website-images/no-image.jpg';
+            $small_heavy_arr [] = array(
+                'company_name'=>$price->make,
+                'price'=>$price->price,
+                'model_en'=>$price->model,
+                'mileage'=>$price->kms,
+                'year'=>$price->yom,
+                'engine'=>'--',
+                'picture'=>$image,
+                'url' => route('jdm-stock-listing', [$price->id, 'small_heavy']),
+            );
+        }
+        $combined_arr = array_merge($auction_arr, $blog_arr, $heavy_arr, $small_heavy_arr);
+
+        // echo json_encode($combined_arr);die();
+    //    foreach($combined_arr as $arr){
+    //     echo json_encode($arr['mileage']);
+    //    }
+    //    die();
+
+
 
         $cars = Car::with('dealer', 'brand')->where(function ($query) {
             $query->where('expired_date', null)
@@ -440,10 +559,46 @@ class ProfileController extends Controller
 
         return view('profile.wishlists', ['cars' => $cars,
         'jdm_legend'=>$jdm_brand,
-        'jdm_core_brand'=>$jdm_core_brand
+        'jdm_core_brand'=>$jdm_core_brand,
+        'combined_arr'=>$combined_arr
         ]);
 
     }
+
+    public function last_image($picture){
+        $picture_array = explode("#",$picture);
+                if(count($picture_array) > 0){
+                    $image_array = [];
+                    foreach ($picture_array as $picture) {
+                        $image_array[] = [
+                            'url' => $picture,
+                            'number' =>$this->getNumberFromUrl($picture)
+                        ];
+                    }
+                    usort($image_array, function($a, $b) {
+                        return $b['number'] - $a['number'];
+                    });
+                    $sorted_image_array = array_column($image_array, 'url');
+                    return $sorted_image_array;
+                }    
+    }
+
+    public function getNumberFromUrl($url) {
+        $parsed_url = parse_url($url);
+         // Check if the query key exists
+            if (!isset($parsed_url['query'])) {
+                return null; // Return null if there's no query string
+            }
+
+            // Parse the query string
+            parse_str($parsed_url['query'], $query_params);
+
+            // Return the number if it exists, or null otherwise
+            return isset($query_params['number']) ? (int)$query_params['number'] : null;
+        // parse_str($parsed_url['query'], $query_params);
+        // return isset($query_params['number']) ? (int)$query_params['number'] : null;
+    }
+
 
     public function remove_wishlist($id){
 

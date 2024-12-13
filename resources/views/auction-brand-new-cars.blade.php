@@ -11,8 +11,9 @@
     @endphp
 
 @section('body-content')
-<main class="main_wid overflow_jdm">
-   
+<main class="overflow_jdm">
+    
+
     <!-- Inventory-part-start -->
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">
@@ -769,7 +770,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="px-3 d-flex flex-row">
+                                                    <div class="px-3 d-flex flex-row ">
                                                         @php
                                                             $parsed_data=parseCustomFormat($car['parsed_data']);
                                                             $carbonInstance = Carbon::parse($car['datetime']);
@@ -780,13 +781,9 @@
                                                         <div class="d-flex flex-column list_date ps-5">
                                                             <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                             <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
-                                                        </div>
-                                                        
-                                                        
+                                                        </div>   
                                                     </div>
-                                                </div>
-                      
-                                                
+                                                </div>     
                                             </div>                                        
                                     </div>
                                 @empty

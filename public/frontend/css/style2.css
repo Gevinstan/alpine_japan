@@ -15101,8 +15101,8 @@ p {
 }
 
 .inventory-main-box-thumb img {
-    width: 28.5rem;
-    height: 41.25rem;
+    width: 28.5rem !important;
+    height: 41.25rem !important;
 }
 
 /* .inventory-sarch-ber input:focus + .search-btn {
@@ -17827,4 +17827,5 @@ input:not(:placeholder-shown) + .input-placeholder {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 
