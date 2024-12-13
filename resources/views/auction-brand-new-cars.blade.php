@@ -11,8 +11,9 @@
     @endphp
 
 @section('body-content')
-<main class="main_wid overflow_jdm">
-   
+<main class="overflow_jdm">
+    
+
     <!-- Inventory-part-start -->
 
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">

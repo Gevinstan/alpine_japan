@@ -46,7 +46,7 @@
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
-                                                @foreach ($brands as $index=> $brand)
+                                                    @foreach ($brands as $index=> $brand)
                                                             <div class="accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
@@ -105,7 +105,7 @@
                                                 Budget
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse {{ request('price_range_scale') ? 'show' : '' }} pt-3"
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse pt-3 {{ request('price_range_scale') || request('price_range') ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
 
