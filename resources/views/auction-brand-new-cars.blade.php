@@ -114,9 +114,19 @@
                                                                 <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
                                                             </div>
 
-                                                            <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                        data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
-                                                                        />
+                                                            <!-- <input id="ex2" type="text" 
+                                                            name="price_range_scale" 
+                                                            data-slider-min="{{$minPrice}}"
+                                                            data-slider-max="{{$maxPrice}}"
+                                                            data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                            /> -->
+                                                                        
+                                                            <input id="ex2" type="text"
+                                                            name="price_range_scale" 
+                                                            data-slider-min="{{$minPrice}}" 
+                                                            data-slider-max="{{$maxPrice}}" 
+                                                            value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}"
+                                                             data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>
 
                                                         </div> 
 

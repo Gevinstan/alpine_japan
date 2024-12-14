@@ -4489,6 +4489,7 @@ public function car_listing(Request $request){
         $brands = Auct_lots_xml_jp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
         ->join('brand_translations as bt','bt.brand_id','=','b.id')
         ->where('bt.lang_code',Session::get('front_lang'))
+        ->whereBetween('model_year_en', [now()->subYear()->year,now()->year])
         ->select('b.slug','bt.name as name')
         ->distinct('b.slug')->get();
 
@@ -4663,7 +4664,11 @@ public function car_listing(Request $request){
 
         if ($request->search) {
             if($request->search!=""){
-                $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+                $carsQuery->where(function($query) use ($request) {
+                    $query->where('model_name_en', 'like', '%' . $request->search . '%')
+                          ->orWhere('company_en', 'like', '%' . $request->search . '%');
+                });
+                // $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
             }
         }
 
