@@ -4309,7 +4309,7 @@ public function car_listing(Request $request){
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
                     // $q->whereBetween('start_price_num', [$startValue, $endValue])
                     // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
-                    $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$startValue, $endValue]);
+                    $q->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$startValue, $endValue]);
                 });
             }
         }
@@ -4668,7 +4668,7 @@ public function car_listing(Request $request){
                     $query->where('model_name_en', 'like', '%' . $request->search . '%')
                           ->orWhere('company_en', 'like', '%' . $request->search . '%');
                 });
-                // $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
+                $carsQuery->where('model_name_en', 'like', '%' . $request->search . '%');
             }
         }
 
