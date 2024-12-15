@@ -949,7 +949,7 @@
                 if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                     $('input[name="price_range_scale"]').val('');
                 } 
-                $('#ex2').prop('disabled', true);
+                // $('#ex2').prop('disabled', true);
                 }
 
             $(document).ready(function () {

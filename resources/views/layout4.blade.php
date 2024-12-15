@@ -212,7 +212,8 @@
                                                         </a>   
                                                         </div>
                                                         <div>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
+                                                        {{--<a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">--}}
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('fixed-car-marketplace-brand-new-cars')}}">
                                                             {{__('translate.Market Price')}}
                                                         </a> 
                                                         </div>

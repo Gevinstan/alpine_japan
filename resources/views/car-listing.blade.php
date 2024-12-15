@@ -1235,6 +1235,10 @@
                     }
                  })
             })
+            $('form').on('submit', function() {
+             // Show the loader when the form is being submitted
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
         })(jQuery);
 
 
@@ -1282,9 +1286,9 @@
                 window.location.href = url.toString();
             });
         });
-        // window.addEventListener("load", function() {
-        //     document.getElementById("pageLoader").classList.add("hidden");
-        // });
+        window.addEventListener("load", function() {
+            document.getElementById("pageLoader").classList.add("hidden");
+        });
 
         window.addEventListener("load", function() {
         // Hide the loader when the page is fully loaded
@@ -1297,10 +1301,7 @@
             document.getElementById("pageLoader").classList.remove("hidden");
         });
             
-        $('form').on('submit', function() {
-        // Show the loader when the form is being submitted
-        document.getElementById("pageLoader").classList.remove("hidden");
-        });
+      
         // closeButtonsModel.forEach(button => {
         //     button.addEventListener('click', function(event) {
         //         // Prevent default behavior

@@ -6,21 +6,24 @@
 @endsection
 
 @section('body-content')
-   @php
-        $request_check=0;
-        use Carbon\Carbon;
-
-    @endphp
+@php
+    $request_check=0;
+    use Carbon\Carbon;
+@endphp
 <main class="overflow_jdm">
-    
+    <!-- <div id="pageLoader">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div> -->
     <!-- Inventory-part-start -->
 
-    <section class="inventory feature-two listing-breadcrumb bg-light-grey">
+    <section class="inventory feature-two listing-breadcrumb bg-light-grey ">
         <div class="container px-2 px-sm-3 px-lg-5">
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Car MarketPlace') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -39,56 +42,59 @@
                                                 Brand & Model
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
+                                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3  {{ request('model', []) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
                                                 <span class="select-Brand-box border-0 px-2">
-                                                
                                                     @foreach ($brands as $index=> $brand)
-                                                                <div class="accordion" id="accordionExample">
-                                                                <div class="accordion-item">
-                                                                    <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                        <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
-                                                                            <input name="brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                                value="{{ $brand->slug }}"
-                                                                                {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
-                                                                            <label class="form-check-label brand_name" for="flexCheckDefault-{{ $brand->id }}">
-                                                                                {{ $brand->name }}
-                                                                            </label>
+                                                            <div class="accordion" id="accordionExample">
+                                                            <div class="accordion-item">
+                                                                <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
+                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <input name="brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                             value="{{ $brand->slug }}"
+                                                                            {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
+                                                                        <label class="form-check-label brand_name" for="flexCheckDefault-{{ $brand->id }}">
+                                                                            {{ $brand->name }}
+                                                                        </label>
+                                                                    </div>
+                                                                    <div id="collapseOne{{$index}}" 
+                                                                        class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" 
+                                                                        aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                        <div class="accordion-body">
+                                                                            <span class="select-Brand-box p-0 px-2 border-0 brand-body">
+                                                                            @if(array_key_exists($brand->slug, $brand_arr)) 
+                                                                                    @foreach ($brand_arr[$brand->slug] as $model)
+                                                                                        <span class="form-check">
+                                                                                            <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
+                                                                                                    value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
+                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
+                                                                                            <label class="form-check-label brand_name">
+                                                                                                 {{ $model['model'] . ' (' . $model['count'] . ')' }}
+                                                                                            </label>
+                                                                                        </span>
+                                                                                    @endforeach
+                                                                            @endif
+                                                                            </span>
                                                                         </div>
-                                                                        <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body">
-                                                                                <span class="select-Brand-box p-0 px-2 border-0 brand-body">
-                                                                                @if(array_key_exists($brand->slug, $brand_arr))
-                                                                                        @foreach ($brand_arr[$brand->slug] as $model)
-                                                                                            <span class="form-check">
-                                                                                                <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
-                                                                                                        value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
-                                                                                                        {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
-                                                                                                <label class="form-check-label brand_name">
-                                                                                                    {{ $model['model'] . ' (' . $model['count'] . ')' }}
-                                                                                                </label>
-                                                                                            </span>
-                                                                                        @endforeach
-                                                                                @endif
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                            </span>
-                                                        </div>
-                                                        </div> 
+                                                                    </div>
+                                                        </span>
+                                                    </div>
+                                                    </div> 
                                                     @endforeach
+                                                           
                                     
-                                             </span>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                        <!-- Select Your Brand End--> 
+                        <!-- Select Your Brand End-->
+                       
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box my-2">   
                                 <!-- Budget -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample1">
                                     <div class="accordion-item ps-3">
@@ -106,64 +112,68 @@
                                               <span class="select-Brand-box two four p-0 border-0">
                                                 <div class="slider-container d-flex align-items-center m-0 gap-3">
 
-                                                    <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
-                                                        <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                            <span class="slider-label m-0" id="minYearLabel">{{$minPrice}}</span>
-                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
-                                                        </div>
-
-                                                        <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
-                                                        value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>   
-
+                                                  <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
+                                                    <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                        <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
+                                                        <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
                                                     </div>
-                                                     
-                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4 go_clear">
-                                                        @if(request('price_range_scale'))
-                                                            <button class="clear-button" id="clear-budget">Clear</button>
-                                                        @endif    
-                                                        <button class="go-button" type="button" id="budget_search">Go</button>
-                                                    </div>
+
+                                                    <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
+                                                                data-slider-max="{{$maxPrice}}" 
+                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
+                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
+                                                                />
+                                                 
+                                                  </div>
+                                                  <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                     @if(request('price_range_scale'))
+                                                        <button class="clear-button" id="clear-budget">CLEAR</button>
+                                                    @endif    
+                                                        <button class="go-button" type="button" id="budget_search">GO</button>
+                                                  </div>
                                                 </div>
+
                                                 <div class="row budget-space">
-                                                    <h6 class="pt-2 price_range">Price Range</h6>
+                                                   <h6 class="pt-2 price_range">Price Range</h6>
 
                                                     @foreach($price_range as $key=>$range)
-                                                    <div class="d-flex align-items-center">
+                                                    <div class="d-flex align-items-center pb-2">
                                                             <div class="form-check">
                                                                 <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
-                                                                    {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
+                                                                {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
                                                                 <label class="form-check-label">
-                                                                    <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
+                                                                        <span class="budget_price">{{$key}} <span class="budget_count">({{$range}})</span></span>
                                                                 </label>
                                                             </div>
                                                     </div>
                                                     @endforeach
                                                 </div>
+                                              </span>
                                             </div>
-                                        </div>
+                                     </div>
                                     </div>
-
                                 </div>
+
                             </div>
                         <!-- Select Your Budget End -->
 
-                          <!-- Select Your Year Start -->
-                          <div class="inventory-main-box my-2">
+                        <!-- Select Your Year Start -->
+                            <div class="inventory-main-box my-2">
                                     <div class="accordion" id="accordionPanelsStayOpenExample1">
                                         <div class="accordion-item ps-3">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
-                                                    aria-controls="panelsStayOpen-collapsethree">
-                                                     Model & Year
+                                                    aria-controls="panelsStayOpen-collapsetwo">
+                                                    Model Year
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
-                                                aria-labelledby="panelsStayOpen-collapsethree">
+                                                aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
                                                         <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
                                                                 <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
                                                                     <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
@@ -175,10 +185,10 @@
                                                                 <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
                                                             </div>
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                            @if(request('year'))
-                                                            <button class="clear-button" id="clear-year">Clear</button>
-                                                            @endif
-                                                            <button type="button" id="year_search" class="go-button">Go</button>
+                                                                @if(request('year'))
+                                                                <button class="clear-button" id="clear-year">CLEAR</button>
+                                                                @endif
+                                                                <button type="button" id="year_search" class="go-button">GO</button>
                                                             </div>
                                                         </div>
                                                     </span>
@@ -187,9 +197,52 @@
                                         </div>
                                     </div>
                             </div>
+                            <!-- Select Your Budget  -->
+                                <!-- <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                    <div class="accordion-item  ps-3">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                            <button class="accordion-button p-0  year-heading" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapsetwo">
+                                                Year
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
+                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                            <div class="accordion-body">
+                                                <span class="select-Brand-box two four p-0 border-0">
+                                                    <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                        
+                                                        <div class="d-flex flex-column align-items-center mt-32px w-100">
+                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                    <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
+                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                                </div>
+                                                            
+                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                                    value="{{ request('year', $minYear) }}" 
+                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
+                                                            </div>
+
+                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                                @if($request_check !=0)
+                                                                <button class="clear-button" id="clear-year">Clear</button>
+                                                                @endif
+                                                            <button type="button" id="year_search" class="go-button">Go</button>
+                                                        </div>
+                                                        </div>
+
+                                                    
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div> -->
                         <!-- Select Your Year End -->
-                    
-                    
                     @if ($listing_ads->status == 'enable')
                         <div class="inventory-main-box-thumb">
                             <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -202,6 +255,7 @@
                         <div class="inventory-ber-left">
                             <div class="inventory-sarch-ber-item flex-row">
                                 <div class="inventory-sarch-ber px-1">
+
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
 
@@ -218,7 +272,7 @@
                                      <p class="sort-text">Sort By:</p>
                                      <div class="dropdown sort-dropdown pe-4">
                                         <button class="btn btn-secondary recently_added dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        @switch(request('sort_by'))
+                                            @switch(request('sort_by'))
                                                 @case('price_low_high')
                                                     Low to High
                                                     @break
@@ -246,8 +300,8 @@
                             <div class="inventory-ber-right-btn sort_by_button">
                                 <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                            data-bs-target="#pills-home" type="button" role="tab"
+                                        <button class="nav-link  active listing-view" id="pills-home-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-home" data-view="list" type="button" role="tab"
                                             aria-controls="pills-home" aria-selected="true">
 
                                             <span>
@@ -260,11 +314,12 @@
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                        <button class="nav-link  listing-view" id="pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-profile" type="button" role="tab"
-                                            aria-controls="pills-profile" aria-selected="false"><i
+                                            aria-controls="pills-profile" data-view="grid" aria-selected="false"><i
                                                 class="fa-solid fa-list"></i></button>
                                     </li>
+                                    <input type="hidden" name="view" id='list_view_id'>
                                 </ul>
                             </div>
                         </div>
@@ -275,8 +330,8 @@
                         {{--@if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
                             <!-- <p class="position-relative filter-text px-3 py-1">
-                                <span class="position-relative brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
+                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
                                             <span class="alert-close">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
@@ -287,22 +342,22 @@
                             @endif --}}
                         @if(request('model') && count(request('model')) > 0)
                         @foreach(request('model') as $brandSlug => $models)
-                                @foreach($models as $model)
+                            @foreach($models as $model)
                                @if($model!="")
-                            <p class="position-relative filter-text px-3 py-1">
-                                <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
-                                            <span class="alert-close-model">
-                                                <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
-                                            </span>
-                                        </span> 
-                                </span>              
-                            </p>
-                            @php $request_check++;@endphp
-                            @endif
+                                <p class="position-relative filter-text px-3 py-1">
+                                    <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
+                                            <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                                <span class="alert-close-model">
+                                                    <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
+                                                </span>
+                                            </span> 
+                                    </span>              
+                                </p>
+                                @php $request_check++;@endphp
+                                @endif
                             @endforeach
                             @endforeach
-                            @endif
+                            @endif 
                             @if(request('year'))
                             <p class="position-relative filter-text px-3 py-1">
                                 <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
@@ -329,13 +384,12 @@
                             <div class="row g-5">
                             @if(count($cars_array) > 0)  
                                  @foreach ($cars_array as $index => $car)
-                                    <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
-                                                data-aos-delay="50">
+                                    <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
+                                            data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
-                                                    <img src="{{asset($car['picture']) }}" alt="thumb">
-                                                    <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
+                                                    <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                 </div>
                                             </div>
 
@@ -349,12 +403,13 @@
                                                               <a href="javascript:void(0);" class="after_auth_wishlist" data-car-id='{{$car['id']}}'><img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart heart-img image_2"/></a>
                                                              @endif
                                                          @else 
-                                                        <a href="javascript:void();" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
-                                                        @endif        
+                                                        <a href="javascript:void(0);" class="before_auth_wishlist"> <img src="{{ asset('japan_home/heart_bg.svg') }}" alt="close" class="img_heart image_1"/></a>
+                                                        @endif            
                                                         </div>
+
                                                 <div class="brand-car-inner-item">
-                                                    <span class="text-truncate car-name pt-3 ps-3" 
-                                                    data-bs-toggle="tooltip"  title="@if(session('front_lang')=='en')
+                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
+                                                    title="@if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                         @else
                                                             {{ $car['company'] }}
@@ -374,8 +429,15 @@
                                                     </p>
                                                 </div>
 
-                                                <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name_en']) }}">
-                                                    <h3 class="text-truncate car-fullname pt-3 ps-3"> 
+                                                <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                    <h3 class="text-truncate car-fullname pt-3 ps-3" 
+                                                    title="
+                                                    @if(session('front_lang')=='en')
+                                                            {{ $car['model_name_en'] }}
+                                                        @else
+                                                            {{ $car['model_name'] }}
+                                                        @endif  
+                                                    "> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
                                                         @else
@@ -387,26 +449,29 @@
                                                 <div class="brand-car-inner-item-main px-4">
                                                     <div class="brand-car-inner-item-two ps-4">
                                                         <div class="brand-car-inner-item-thumb">
-                                                            <span>
+                                                            <span class="icon-card1">
                                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                            <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
-                                                                    </svg>
+                                                                    <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                    <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
+                                                                </svg>
+
                                                             </span>
                                                         </div>
+
                                                         <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage_en']) }}
+                                                            {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                         @else
-                                                            {{ html_decode($car['mileage']) }}
+                                                        {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
                                                         @endif">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['mileage_en']) }}
+                                                         @if(session('front_lang')=='en')
+                                                            {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                         @else
-                                                            {{ html_decode($car['mileage']) }}
+                                                        {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
                                                         @endif
+
                                                         </span>
                                                     </div>
-                                                    <!-- <p>.</p> -->
+                                                    <!-- <p class="align-content-end pt-3">.</p> -->
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
@@ -418,24 +483,23 @@
 
                                                         <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
-                                                            @else
+                                                                @else
                                                                 {{ html_decode($car['year']) }}
                                                             @endif">
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
-                                                            @else
+                                                                @else
                                                                 {{ html_decode($car['year']) }}
                                                             @endif
                                                         </span>
                                                     </div>
-                                                    <!-- <p>.</p> -->
+                                                    <!-- <p class="align-content-end pt-3">.</p> -->
                                                     <div class="brand-car-inner-item-two pe-4">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
                                                                 <svg width="24" height="24" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M17.9167 8.23819H17.2833C17.0314 8.23819 16.7897 8.3586 16.6116 8.57293C16.4334 8.78726 16.3333 9.07795 16.3333 9.38106V9.76202H15.7V7.85723C15.7 7.55412 15.5999 7.26343 15.4218 7.0491C15.2436 6.83477 15.002 6.71436 14.75 6.71436H13.8C13.716 6.71436 13.6355 6.67422 13.5761 6.60278C13.5167 6.53134 13.4833 6.43444 13.4833 6.3334V5.57149C13.4833 5.26838 13.3832 4.97769 13.2051 4.76336C13.0269 4.54903 12.7853 4.42862 12.5333 4.42862H11.2667V3.28574H12.85C13.102 3.28574 13.3436 3.16533 13.5218 2.951C13.6999 2.73667 13.8 2.44598 13.8 2.14287C13.8 1.83976 13.6999 1.54907 13.5218 1.33474C13.3436 1.12041 13.102 1 12.85 1H6.51667C6.26471 1 6.02307 1.12041 5.84491 1.33474C5.66676 1.54907 5.56667 1.83976 5.56667 2.14287C5.56667 2.44598 5.66676 2.73667 5.84491 2.951C6.02307 3.16533 6.26471 3.28574 6.51667 3.28574H8.1V4.42862H6.51667C6.26471 4.42862 6.02307 4.54903 5.84491 4.76336C5.66676 4.97769 5.56667 5.26838 5.56667 5.57149C5.56667 5.67252 5.5333 5.76942 5.47392 5.84087C5.41453 5.91231 5.33399 5.95245 5.25 5.95245H4.3C4.04804 5.95245 3.80641 6.07285 3.62825 6.28719C3.45009 6.50152 3.35 6.79221 3.35 7.09532V8.61915H2.4V7.09532C2.4 6.79221 2.29991 6.50152 2.12175 6.28719C1.94359 6.07285 1.70196 5.95245 1.45 5.95245C1.19804 5.95245 0.956408 6.07285 0.778249 6.28719C0.600089 6.50152 0.5 6.79221 0.5 7.09532L0.5 13.1906C0.5 13.4937 0.600089 13.7844 0.778249 13.9988C0.956408 14.2131 1.19804 14.3335 1.45 14.3335C1.70196 14.3335 1.94359 14.2131 2.12175 13.9988C2.29991 13.7844 2.4 13.4937 2.4 13.1906V11.6668H3.35V13.5716C3.35 13.8747 3.45009 14.1654 3.62825 14.3797C3.80641 14.5941 4.04804 14.7145 4.3 14.7145H5.62113C5.70511 14.7145 5.78564 14.7546 5.84502 14.8261L7.37388 16.6653C7.46185 16.7719 7.56651 16.8563 7.68181 16.9138C7.7971 16.9713 7.92073 17.0006 8.04553 17.0002H14.75C15.002 17.0002 15.2436 16.8798 15.4218 16.6655C15.5999 16.4511 15.7 16.1604 15.7 15.8573V14.3335H16.3333V14.7145C16.3333 15.0176 16.4334 15.3083 16.6116 15.5226C16.7897 15.7369 17.0314 15.8573 17.2833 15.8573H17.9167C18.3364 15.8567 18.7389 15.6559 19.0357 15.2988C19.3325 14.9417 19.4995 14.4575 19.5 13.9526V10.143C19.4995 9.63798 19.3325 9.15384 19.0357 8.79676C18.7389 8.43967 18.3364 8.23879 17.9167 8.23819ZM6.2 2.14287C6.2 2.04184 6.23336 1.94494 6.29275 1.87349C6.35214 1.80205 6.43268 1.76191 6.51667 1.76191H12.85C12.934 1.76191 13.0145 1.80205 13.0739 1.87349C13.1333 1.94494 13.1667 2.04184 13.1667 2.14287C13.1667 2.24391 13.1333 2.34081 13.0739 2.41225C13.0145 2.48369 12.934 2.52383 12.85 2.52383H6.51667C6.43268 2.52383 6.35214 2.48369 6.29275 2.41225C6.23336 2.34081 6.2 2.24391 6.2 2.14287ZM8.73333 3.28574H10.6333V4.42862H8.73333V3.28574ZM1.76667 13.1906C1.76667 13.2917 1.7333 13.3886 1.67392 13.46C1.61453 13.5315 1.53399 13.5716 1.45 13.5716C1.36601 13.5716 1.28547 13.5315 1.22608 13.46C1.1667 13.3886 1.13333 13.2917 1.13333 13.1906V7.09532C1.13333 6.99428 1.1667 6.89738 1.22608 6.82594C1.28547 6.7545 1.36601 6.71436 1.45 6.71436C1.53399 6.71436 1.61453 6.7545 1.67392 6.82594C1.7333 6.89738 1.76667 6.99428 1.76667 7.09532V13.1906ZM2.4 10.9049V9.38106H3.35V10.9049H2.4ZM15.0667 15.8573C15.0667 15.9584 15.0333 16.0553 14.9739 16.1267C14.9145 16.1982 14.834 16.2383 14.75 16.2383H8.04553C7.96155 16.2383 7.88102 16.1981 7.82165 16.1267L6.29278 14.2874C6.20478 14.181 6.1001 14.0966 5.98482 14.0391C5.86954 13.9816 5.74593 13.9522 5.62113 13.9526H4.3C4.21601 13.9526 4.13547 13.9124 4.07608 13.841C4.0167 13.7695 3.98333 13.6726 3.98333 13.5716V7.09532C3.98333 6.99428 4.0167 6.89738 4.07608 6.82594C4.13547 6.7545 4.21601 6.71436 4.3 6.71436H5.25C5.50196 6.71436 5.74359 6.59395 5.92175 6.37962C6.09991 6.16529 6.2 5.8746 6.2 5.57149C6.2 5.47045 6.23336 5.37355 6.29275 5.30211C6.35214 5.23067 6.43268 5.19053 6.51667 5.19053H12.5333C12.6173 5.19053 12.6979 5.23067 12.7573 5.30211C12.8166 5.37355 12.85 5.47045 12.85 5.57149V6.3334C12.85 6.63651 12.9501 6.92721 13.1282 7.14154C13.3064 7.35587 13.548 7.47627 13.8 7.47628H14.75C14.834 7.47628 14.9145 7.51641 14.9739 7.58785C15.0333 7.6593 15.0667 7.7562 15.0667 7.85723V15.8573ZM15.7 13.5716V10.5239H16.3333V13.5716H15.7ZM18.8667 13.9526C18.8667 14.2557 18.7666 14.5464 18.5884 14.7607C18.4103 14.975 18.1686 15.0954 17.9167 15.0954H17.2833C17.1993 15.0954 17.1188 15.0553 17.0594 14.9838C17 14.9124 16.9667 14.8155 16.9667 14.7145V9.38106C16.9667 9.28003 17 9.18313 17.0594 9.11168C17.1188 9.04024 17.1993 9.0001 17.2833 9.0001H17.9167C18.1686 9.0001 18.4103 9.12051 18.5884 9.33484C18.7666 9.54917 18.8667 9.83987 18.8667 10.143V13.9526Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                 </svg>
-
                                                             </span>
                                                         </div>
 
@@ -444,7 +508,7 @@
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @endif">
-                                                            @if(session('front_lang')=='en')
+                                                        @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
@@ -462,13 +526,13 @@
                                                     @php
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
-                                                    @endphp  
+                                                    @endphp
 
                                                     <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
-                                                        
+                                                    
                                                     <div class="d-flex flex-column">
-                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
-                                                        <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
+                                                    <span class="brand-date fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
+                                                    <span class="brand-date fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -598,21 +662,22 @@
                                     <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                               <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                            <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
 
                                             </div>
 
                                             <div class="">
                                                 <div class="pt-2">
                                                     <p class="listcar_price_list ps-1 pe-4">
-                                                        @if(session('front_lang')=='en')
-                                                            {{ '$'.$car['start_price_num'] }}
+                                                       @if(session('front_lang')=='en')
+                                                        {{ '$'.$car['start_price_num'] }}
                                                         @else
                                                             {{ '$'.$car['start_price'] }}
                                                         @endif
                                                     </p>
+
                                                     <div class="text-truncate_list1 car-name ps-1" data-bs-toggle="tooltip" 
-                                                        title=" @if(session('front_lang')=='en')
+                                                        title="@if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                         @else
                                                             {{ $car['company'] }}
@@ -623,23 +688,25 @@
                                                             {{ $car['company'] }}
                                                         @endif
                                                     </div>
+                                                    
+                                                </div>
 
-                                                    <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip" 
-                                                        title=" @if(session('front_lang')=='en')
-                                                            {{ $car['model_name_en'] }}
-                                                        @else
-                                                            {{ $car['model_name'] }}
-                                                        @endif">
-                    
-                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2"> 
+                                                <div class="text-truncate_list2 ps-1" data-bs-toggle="tooltip" 
+                                                        title="@if(session('front_lang')=='en')
+                                                                {{ $car['model_name_en'] }}
+                                                            @else
+                                                                {{ $car['model_name'] }}
+                                                            @endif  
+                                                        ">
+                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
+                                                    
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['model_name_en']) }}
                                                             @else
                                                                 {{ html_decode($car['model_name']) }}
                                                             @endif
                                                         </a>
-                                                    </div> 
-                                                </div>       
+                                                </div>
 
                                                 <div class="brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two ps-3">
@@ -652,20 +719,22 @@
 
                                                             </span>
                                                         </div>
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) }}
+                                                        
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                             @else
-                                                                {{ html_decode($car['mileage']) }}
+                                                            {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
                                                             @endif">
-                                                        @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) }}
+                                                            @if(session('front_lang')=='en')
+                                                                {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                             @else
-                                                                {{ html_decode($car['mileage']) }}
+                                                            {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
                                                             @endif
                                                         </p>
 
                                                     
                                                     </div>
+                                                    
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -675,7 +744,7 @@
 
                                                             </span>
                                                         </div>
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['year']) }}
@@ -689,6 +758,7 @@
 
                                                        
                                                     </div>
+                                                    
                                                     <div class="brand-car-inner-item-two pe-3">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -698,9 +768,7 @@
 
                                                             </span>
                                                         </div>
-
-                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="
-                                                                 @if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
@@ -711,8 +779,12 @@
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @endif
                                                         </p>
+
+                                                        
                                                     </div>
                                                 </div>
+
+                                            
 
                                                 <div class="px-3 d-flex flex-row">
                                                     @php
@@ -727,7 +799,11 @@
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>
                                                 </div>
+
+
+
                                             </div>
+
                                         </div>
                                     </div>
                                 @empty
@@ -854,10 +930,10 @@
                         {{ $cars->appends(request()->query())->links() }}
                         @endif
                     </div>
-
+                    
                 </div>
                 </form> 
-            
+                 
             </div>
         </div>
     </section>
@@ -873,50 +949,120 @@
 @push('js_section')
 
     <script>
+          
         (function($) {
-            "use strict"
-
             const initialMinPrice = $('#ex2').data('slider-min');
             const initialMaxPrice = $('#ex2').data('slider-max');
-                function clear_price_slider(){
-                let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
-                let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
-                if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
-                    $('input[name="price_range_scale"]').val('');
-                } 
-                // $('#ex2').prop('disabled', true);
-                }
 
+             //make default list view make active
+            //  let params = new URLSearchParams(window.location.search);
+            //     let viewParam = params.get('view');
+            //     if (viewParam) {
+            //         $(`.listing-view[data-view="${viewParam}"]`).addClass('active');
+            //     } else {
+            //         // Optionally set a default view
+            //         $('.listing-view').first().addClass('active');
+            //     }
+
+
+            // document.addEventListener('DOMContentLoaded', function () {
+            //     let url = new URL(window.location.href);
+            //     let params = url.searchParams;
+            //     let viewParam = params.get('view');
+
+            //     // Remove 'active' class from all view buttons
+            //     document.querySelectorAll('.listing-view').forEach(el => el.classList.remove('active'));
+
+            //     if (viewParam) {
+                
+            //         // Activate the button with the matching data-view
+            //         let activeButton = document.querySelector(`.listing-view[data-view="${viewParam}"]`);
+            //         if (activeButton) {
+                       
+            //             // activeButton.classList.add('active');
+            //             activeButton.click(); // Ensure the UI changes or any event is triggered
+            //         }
+            //     } else {
+                    
+            //         // Default to the first button if no viewParam
+            //         let defaultButton = document.querySelector('.listing-view[data-view="list"]');
+            //         if (defaultButton) {
+            //             defaultButton.classList.add('active');
+            //         }
+            //     }
+            // });
+
+
+        //     $(".listing-view").on('click',function(){
+        //         // let url = new URL(window.location.href);
+        //         // let params = url.searchParams;
+        //         // let view_data = $(this).data('view');
+        //         $("#list_view_id").val($(this).data('view'));
+                
+        //         // Always set the new view value
+        //         // params.set('view', view_data);
+                
+        //         // let newUrl = url.origin + url.pathname + '?' + params.toString();
+        //         // history.replaceState(null, null, newUrl);
+        //         // $('.listing-view').removeClass('active');
+        //         // $(this).addClass('active');
+        //         clear_price_slider();    
+        //         $('#search_form').submit();
+        //    })
+
+            function clear_price_slider(){
+                    let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
+                    let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                    if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
+                        $('input[name="price_range_scale"]').val('');
+                    } 
+              
+                }
+            function clearPriceRangeParams() {
+                // Get the current URL
+                let url = new URL(window.location.href);
+
+                // Get the search parameters
+                let params = url.searchParams;
+
+                // Loop through the keys and delete all 'price_range' parameters
+                params.delete('price_range');
+
+                // Update the URL without reloading the page
+                let newUrl = url.origin + url.pathname + '?' + params.toString();
+                history.replaceState(null, null, newUrl);
+                
+            }
+            "use strict"
             $(document).ready(function () {
                 const form = $('#search_form');
-
+                
                 $(".dropdown-click").on('click',function(){
                     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
                     if (dropdownButton) {
                         dropdownButton.innerText = $(this).data('text');
                         $("#sort_by_field").val($(this).data('brand'));
-                        clear_price_slider();  
+                        clear_price_slider();    
                         $('#search_form').submit();
                     } else {
                         console.error('Dropdown button not found');
                     }
                 })
 
-                $("#clear-year").on('click',function(e){
-                    $("#modelYearSlider").val("");
-                    $("#start_year").val("");
-                    $("#search_form").submit();
-                })
-                $("#clear-budget").on('click',function(e){  
-                    $('input[name="price_range_scale"]').val('')
-                    $("#search_form").submit();
-                })
-                
-
-                $("#outside_form_btn").on("click",function(e){
-                    clear_price_slider();
-                    $("#search_form").submit();
-                })
+                $("#year_search").on('click',function(e){
+                    e.preventDefault();   
+                    clear_price_slider();    
+                    $('#search_form').submit();
+                });
+                $("#budget_search").on('click',function(e){
+                    e.preventDefault();     
+                    document.querySelectorAll('.popular-search').forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
+                    clearPriceRangeParams();
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                });
 
                 $(".popular-search").on('change',function(e){
                     e.preventDefault();   
@@ -924,19 +1070,35 @@
                     form.submit();
                 })
 
-                // $(".brand-search").on('change',function(e){
-                //     e.preventDefault();   
-                //     clear_price_slider();
-                //     $(".model-search").val("")
-                //     form.submit();
-                // }) 
+                let initialMinPrice = $('#ex2').data('slider-min');
+                let initialMaxPrice = $('#ex2').data('slider-max');
+
+                $("#outside_form_btn").on("click",function(e){
+                    clear_price_slider();
+                    $("#search_form").submit();
+                })
+                $("#clear-year").on('click',function(e){
+                    $("#modelYearSlider").val({{$minYear}});
+                    $("#start_year").val("");
+                    clear_price_slider();   
+                    $("#search_form").submit();
+                })
+                $("#clear-budget").on('click',function(e){  
+                    e.preventDefault(); 
+                    $('input[name="price_range_scale"]').val("");
+                    document.querySelectorAll('.popular-search').forEach(checkbox => {
+                        checkbox.checked = false;
+                    });  
+                    clear_price_slider();   
+                    $("#search_form").submit();
+                })
+
+               
                 $("#modelYearSlider").on('input',function(e){
                     $("#age_output").val(parseInt($(this).val()))
                     $("#start_year").val(parseInt($(this).val()));
                     // form.submit();
                 })
-              
-
                 $(".clear-url").on('click',function(e){
                     e.preventDefault();
                     const urlObject = new URL(window.location.href);
@@ -944,22 +1106,64 @@
                     window.location.replace(baseUrl);
                         // Combine origin and pathname
                 })
-            });
-            $("#year_search").on('click',function(e){
-                e.preventDefault();   
-                clear_price_slider();    
-                $('#search_form').submit();
-           });
-           $("#budget_search").on('click',function(e){
-                e.preventDefault(); 
-                document.querySelectorAll('.popular-search').forEach(checkbox => {
-                        checkbox.checked = false;
-                });    
-                     
-                $('#search_form').submit();
-           });
 
-           document.addEventListener('DOMContentLoaded', function () {
+            //     function updateButtonText(selectedBrand,selectedText) {
+            //     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
+            //     if (dropdownButton) {
+            //         dropdownButton.innerText = selectedText;
+            //         $("#sort_by_field").val(selectedBrand);
+            //         $('#search_form').submit();
+            //     } else {
+            //         console.error('Dropdown button not found');
+            //     }
+            // }
+
+            });
+            // document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+            //     brandCheckbox.addEventListener('change', function() {
+
+            //         const brandId = this.getAttribute('data-brand-id');
+            //         console.log(brandId)
+            //         const accordionItem = this.closest('.accordion-item');
+            //         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+            //         // const modelCheckboxes = accordionItem.querySelectorAll(`.model-search[data-parent-brand]`);
+
+            //         // console.log(modelCheckboxes);
+            //         // console.log(accordionItem.querySelectorAll(`.model-search[data-parent-brand]`));
+                    
+            //         // Check/uncheck only models belonging to this brand
+            //         modelCheckboxes.forEach(modelCheckbox => {
+            //             modelCheckbox.checked = this.checked;
+            //         });
+            //         clear_price_slider();
+            //         $('#search_form').submit();
+            //     });
+            // });
+            $('#ex2').on('slide', function(slideEvt) {
+                // Get the current min and max values from the slider
+                var minYear = slideEvt.value[0];
+                var maxYear = slideEvt.value[1];
+
+                console.log(`${minYear},${maxYear}`)
+                // Update the input values
+                $('#ex2').val(`${minYear},${maxYear}`);
+
+                // Optionally, you can also update your server-side query here
+                });
+                // document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
+                //     brandCheckbox.addEventListener('change', function() {
+
+                //         const brandId = this.getAttribute('data-brand-id');
+                //         const accordionItem = this.closest('.accordion-item');
+                //         const modelCheckboxes = accordionItem.querySelectorAll('input[name="model[]"]');
+                //         // modelCheckboxes.forEach(modelCheckbox => {
+                //         //     modelCheckbox.checked = this.checked;
+                //         // });
+                //         clear_price_slider();
+                //         $('#search_form').submit();
+                //     });
+                // });
+                document.addEventListener('DOMContentLoaded', function () {
                 // Listen for changes on all brand-search checkboxes
                 document.querySelectorAll('.brand-search').forEach(brandCheckbox => {
                     brandCheckbox.addEventListener('change', function () {
@@ -970,6 +1174,9 @@
                         const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
 
                         // Set their checked state based on the brand checkbox
+                        // modelCheckboxes.forEach(modelCheckbox => {
+                        //     modelCheckbox.checked = this.checked;
+                        // });
                         if (!this.checked) {
                             // Uncheck all associated model checkboxes
                             modelCheckboxes.forEach(modelCheckbox => {
@@ -981,38 +1188,39 @@
                     });
                 });
             });
-            document.querySelectorAll('.model-search').forEach(modelCheckbox => {
+
+                document.querySelectorAll('.model-search').forEach(modelCheckbox => {
                 modelCheckbox.addEventListener('change', function() {
                     // Find the parent accordion item and its brand checkbox
                     const accordionItem = this.closest('.accordion-item');
                     const brandCheckbox = accordionItem.querySelector('.brand-search');
-                    const modelCheckboxes = accordionItem.querySelectorAll('.model-search');  
+                    const modelCheckboxes = accordionItem.querySelectorAll('.model-search');
+
+                    console.log(brandCheckbox)
+
+                    
+                    // Check if all model checkboxes are checked
+                    // const allChecked = Array.from(modelCheckboxes).every(checkbox => checkbox.checked);
+                    
+                    
                     // Update brand checkbox accordingly
-                    if (this.checked) {
-                        // When checking a model, always check the parent brand
-                        brandCheckbox.checked = true;
-                    } else {
-                        // When unchecking a model, check if any other models are still checked
-                        const anyModelChecked = Array.from(modelCheckboxes).some(checkbox => checkbox.checked);
-                        // If no models are checked, uncheck the parent brand
-                        if (!anyModelChecked) {
-                            brandCheckbox.checked = false;
-                        }
-                    } 
+                    brandCheckbox.checked = true;
                     clear_price_slider();
                     $('#search_form').submit();
                 });
             });
-            $('#ex2').on('slide', function(slideEvt) {
-            // Get the current min and max values from the slider
-            var minYear = slideEvt.value[0];
-            var maxYear = slideEvt.value[1];
 
-            console.log(`${minYear},${maxYear}`)
-            // Update the input values
-            $('#ex2').val(`${minYear},${maxYear}`);
-
-            // Optionally, you can also update your server-side query here
+            document.getElementById('show-more-filters')?.addEventListener('click', function() {
+                fetch('{{ route("load.more.filters") }}?show_all=true', {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('filters-container').innerHTML = html;
+                    this.style.display = 'none';
+                });
             });
             $(".after_auth_wishlist").on('click',function(){
                  console.log($(this).data('car-id'))
@@ -1020,7 +1228,7 @@
                     type: "POST",
                     url:"{{route('add-user-wishlist')}}",
                     data:{'id': $(this).data('car-id'),
-                        'type': 2,
+                        'type': 1,
                     },
                     beforeSend:function(data){
                         console.log('loading');
@@ -1031,102 +1239,15 @@
                     }
                  })
             })
+        //     $('form').on('submit', function() {
+        // // Show the loader when the form is being submitted
+        //     document.getElementById("pageLoader").classList.remove("hidden");
+        // });
         })(jQuery);
-
-//         document.querySelectorAll('.alert-close-model').forEach(button => {
-//         button.addEventListener('click', function(event) {
-//         event.preventDefault();
-        
-//         // Get relevant elements
-//         const modelItem = event.target.closest('.model-item');
-//         const modelValue = modelItem.textContent.trim(); // Get model value from the text content
-//         const filterText = modelItem.closest('.filter-text');
-        
-//         // Find corresponding checkboxes
-//         const modelCheckboxes = document.querySelectorAll(`input[value="${modelValue}"].model-search`);
-//         let brandSlug = '';
-        
-//         // Find the brand checkbox by looking through model checkboxes' parent accordions
-//         modelCheckboxes.forEach(checkbox => {
-//             const accordionItem = checkbox.closest('.accordion-item');
-//             if (accordionItem) {
-//                 const brandCheckbox = accordionItem.querySelector('.brand-search');
-//                 if (brandCheckbox) {
-//                     brandSlug = brandCheckbox.value;
-//                 }
-//             }
-//         });
-        
-//         // Update URL parameters
-//         const url = new URL(window.location.href);
-        
-//         // Get all current model parameters
-//         let models = url.searchParams.getAll('model[]');
-//         if (models.length === 0) {
-//             models = url.searchParams.getAll('model');
-//         }
-        
-//         // Remove the clicked model
-//         models = models.filter(model => model !== modelValue);
-        
-//         // Clear and update model parameters
-//         url.searchParams.delete('model[]');
-//         url.searchParams.delete('model');
-//         models.forEach(model => {
-//             url.searchParams.append('model[]', model);
-//         });
-        
-//         if (brandSlug) {
-//             // Find all checked models for this brand in the accordion
-//             const brandAccordion = document.querySelector(`input[value="${brandSlug}"].brand-search`)
-//                 ?.closest('.accordion-item');
-            
-//             if (brandAccordion) {
-//                 // Get all model checkboxes within this brand's accordion
-//                 const brandModelCheckboxes = brandAccordion.querySelectorAll('.model-search');
-//                 const remainingCheckedModels = Array.from(brandModelCheckboxes)
-//                     .filter(checkbox => checkbox.checked && checkbox.value !== modelValue);
-                
-//                 // Only uncheck brand and remove from URL if no models remain checked
-//                 if (remainingCheckedModels.length === 0) {
-//                     const brandCheckbox = brandAccordion.querySelector('.brand-search');
-//                     if (brandCheckbox) {
-//                         brandCheckbox.checked = false;
-                        
-//                         let brands = url.searchParams.getAll('brand[]');
-//                         if (brands.length === 0) {
-//                             brands = url.searchParams.getAll('brand');
-//                         }
-                        
-//                         brands = brands.filter(brand => brand !== brandSlug);
-                        
-//                         url.searchParams.delete('brand[]');
-//                         url.searchParams.delete('brand');
-//                         brands.forEach(brand => {
-//                             url.searchParams.append('brand[]', brand);
-//                         });
-//                     }
-//                 }
-//             }
-//         }
-        
-//         // Uncheck model checkboxes
-//         modelCheckboxes.forEach(checkbox => {
-//             checkbox.checked = false;
-//         });
-        
-//         // Remove the filter tag from UI
-//         filterText.remove();
-        
-//         // Navigate to updated URL
-//         window.location.href = url.toString();
-//     });
-// });
-
 
 
     document.addEventListener('DOMContentLoaded', function () {
-            // Attach event listeners to all close buttons
+            // Attach event listeners to all close buttonsmodel
             const closeButtons = document.querySelectorAll('.alert-close img');
             const closeButtonsModel = document.querySelectorAll('.alert-close-model img');
             const closeButtonsYear = document.querySelectorAll('.alert-close-year img');
@@ -1169,45 +1290,23 @@
                 window.location.href = url.toString();
             });
         });
-        // closeButtonsModel.forEach(button => {
-        //     button.addEventListener('click', function(event) {
-        //         // Prevent default behavior
-        //         event.preventDefault();
-                
-        //         // Get the brand slug that is associated with this close button
-        //         const brandItem = event.target.closest('.model-item');
-        //         const brandSlug = brandItem.getAttribute('data-brand');
-                
-        //         // Get the current URL with the query string
-        //         const url = new URL(window.location.href);
-                
-        //         // Get all current brand parameters
-        //         let brands = url.searchParams.getAll('model[]'); // Note the change here to 'brand[]'
-                
-        //         // If no brands found with 'brand[]', try with 'brand'
-        //         if (brands.length === 0) {
-        //             brands = url.searchParams.getAll('model');
-        //         }
-                
-        //         // Remove the clicked brand from the brands array
-        //         brands = brands.filter(slug => slug !== brandSlug);
-                
-        //         // Remove all brand parameters
-        //         url.searchParams.delete('model[]');
-        //         url.searchParams.delete('model');
-                
-        //         // Add the updated brands back
-        //         brands.forEach(slug => {
-        //             url.searchParams.append('model[]', slug);
-        //         });
-                
-        //         // Remove the brand item from the DOM
-        //         brandItem.closest('.filter-text').remove();
-                
-        //         // Navigate to the new URL
-        //         window.location.href = url.toString();
-        //     });
+        // window.addEventListener("load", function() {
+        //     document.getElementById("pageLoader").classList.add("hidden");
         // });
+
+        // window.addEventListener("load", function() {
+        // // Hide the loader when the page is fully loaded
+        // document.getElementById("pageLoader").classList.add("hidden");
+        // });
+
+        // Ensure the loader is visible when the page is reloaded or submitted
+        window.addEventListener("beforeunload", function() {
+            // Show the loader before the page unloads (optional: depends on your needs)
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
+            
+     
+       
         closeButtonsYear.forEach(button => {
             button.addEventListener('click', function(event) {
                 // Prevent default behavior
@@ -1225,7 +1324,8 @@
        
     });
 
-    document.querySelectorAll('.alert-close-model').forEach(button => {
+
+document.querySelectorAll('.alert-close-model').forEach(button => {
     button.addEventListener('click', function (event) {
         event.preventDefault();
 
@@ -1280,22 +1380,10 @@
 });
 
 
-    function updateButtonText(selectedBrand,selectedText) {
-    const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
-    if (dropdownButton) {
-        dropdownButton.innerText = selectedText;
-        $("#sort_by_field").val(selectedBrand);
-        $('#search_form').submit();
-    } else {
-        console.error('Dropdown button not found');
-    }
-}
+   
 
 
 
-window.addEventListener("load", function() {
-    document.getElementById("pageLoader").classList.add("hidden");
-});
 
     var $j = jQuery.noConflict();
         $j(document).ready(function() {
@@ -1311,5 +1399,6 @@ window.addEventListener("load", function() {
         once: true, // Animation happens only once on page load        
         delay: 0, // Delay before animation starts
     });
+
     </script>
 @endpush
