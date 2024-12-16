@@ -115,12 +115,12 @@
                         </li>
                         <li class="text-white heading-fs-14 px-3">
                             <img src="{{asset('japan_home/mob.png')}}" />
-                            {{ $setting->phone }}
+                            {{ $setting->phone }}   
                         </li>
                         <li>
-                            <img src="{{asset('japan_home/insta.png')}}" />
-                            <img src="{{asset('japan_home/facebook.png')}}" />
-                            <img src="{{asset('japan_home/youtube.png')}}" />
+                            <a href="{{$setting->instagram}}"><img src="{{asset('japan_home/insta.png')}}" /></a>
+                            <a href="{{$setting->facebook}}"><img src="{{asset('japan_home/facebook.png')}}" /></a>
+                            <a href="{{$setting->youtube}}"><img src="{{asset('japan_home/youtube.png')}}" /></a>
                         </li>
                     </ul>
                 </div>
@@ -212,7 +212,8 @@
                                                         </a>   
                                                         </div>
                                                         <div>
-                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">
+                                                        {{--<a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">--}}
+                                                        <a class="dropdown-item nav-dropdown-item" href="{{route('fixed-car-marketplace-brand-new-cars')}}">
                                                             {{__('translate.Market Price')}}
                                                         </a> 
                                                         </div>
@@ -631,7 +632,7 @@
                                                     </svg></span> {{ __('translate.Our Stocks') }}
                                             </a>
                                         </li>
-                                        <li>
+                                        {{--<li>
                                             <a href="{{ route('custom-page', 'useful-links') }}" class="{{Route::is('custom-page') && request()->segment(2) == 'useful-links' ? 'active' : '' }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -640,7 +641,7 @@
                                                             stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg></span> {{ __('translate.Useful Links') }}
                                             </a>
-                                        </li>
+                                        </li>--}}
 
 
                                 </ul>

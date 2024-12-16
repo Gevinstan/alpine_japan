@@ -21,7 +21,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Car MarketPlace') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Brand New Cars') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -114,9 +114,19 @@
                                                                 <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
                                                             </div>
 
-                                                            <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                        data-slider-max="{{$maxPrice}}" data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
-                                                                        />
+                                                            <!-- <input id="ex2" type="text" 
+                                                            name="price_range_scale" 
+                                                            data-slider-min="{{$minPrice}}"
+                                                            data-slider-max="{{$maxPrice}}"
+                                                            data-slider-value="[{{ $minPrice }}, {{ $maxPrice }}]"sli
+                                                            /> -->
+                                                                        
+                                                            <input id="ex2" type="text"
+                                                            name="price_range_scale" 
+                                                            data-slider-min="{{$minPrice}}" 
+                                                            data-slider-max="{{$maxPrice}}" 
+                                                            value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}"
+                                                             data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>
 
                                                         </div> 
 
@@ -182,7 +192,7 @@
                                                         <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
                                                     </div>
 
-                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{$minYear}}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{ request('year', $minYear) }}"  class="slider-input mx-0 my-2" id="modelYearSlider">
                                                     <input type="hidden" id="start_year" name="year">
                                                 </div>
 
@@ -939,7 +949,7 @@
                 if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                     $('input[name="price_range_scale"]').val('');
                 } 
-                $('#ex2').prop('disabled', true);
+                // $('#ex2').prop('disabled', true);
                 }
 
             $(document).ready(function () {
@@ -969,6 +979,7 @@
                 
 
                 $("#outside_form_btn").on("click",function(e){
+                    e.preventDefault();
                     clear_price_slider();
                     $("#search_form").submit();
                 })
@@ -1002,6 +1013,11 @@
             });
             $("#year_search").on('click',function(e){
                 e.preventDefault();   
+                const year = $("#start_year").val();
+                if(year ==""){
+                    $("#start_year").val(@json($minYear))
+                } 
+                // console.log(year);
                 clear_price_slider();    
                 $('#search_form').submit();
            });

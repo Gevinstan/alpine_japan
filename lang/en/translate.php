@@ -1019,6 +1019,7 @@
   'Auction'=>'Auction',
   'Accessories'=>'Accessories',
   'JDM Stock Listing'=>'JDM Stock Listing',
+  'Fixed Car Marketplace Brand New Cars'=>'Fixed Car Marketplace Brand New Cars',
   'Auction Brand New Cars'=>'Auction Brand New Cars',
   'Auction Listing'=>'Auction Listing',
   'Top Selling Listing'=>'Top Selling Listing',

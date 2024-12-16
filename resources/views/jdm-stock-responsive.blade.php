@@ -19,7 +19,7 @@
                 <nav aria-label="breadcrumb" class="">
                     <ol class="breadcrumb breadcrumb-list px-3">
                         <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                        <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                        <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.JDM Stock Listing') }}</li>
                     </ol>
                 </nav>
                 <div class="row">
@@ -46,8 +46,9 @@
                                                                 <div class="accordion-item">
                                                                     <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                         <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                            <input name="brand[]" class="form-check-input brand-search" type="checkbox"
-                                                                            >
+                                                                            <!-- <input name="brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                            > -->
+                                                                            <input type="hidden" name="brand[]">
                                                                             <label class="form-check-label brand_name">
                                                                             {{$brand_label->name}}
                                                                             </label>
@@ -57,7 +58,7 @@
                                                                                 <span class="select-Brand-box p-0 px-2 border-0 brand-body">
                                                                                         @foreach ($brand_arr as $brand)
                                                                                             <span class="form-check">
-                                                                                                <input name="model[]" class="form-check-input brand-search" type="checkbox"
+                                                                                                <input name="model[]" class="form-check-input model-search" type="checkbox"
                                                                                                         value="{{ trim($brand->model) }}"
                                                                                                         {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}> &nbsp;
                                                                                                 <!-- <label class="form-check-label brand_name ps-2">
@@ -186,7 +187,7 @@
                                                             </div>
 
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                                @if($request_check !=0)
+                                                                @if(request('price_range_scale'))
                                                                     <button class="clear-button" id="clear-budget">CLEAR</button>
                                                                 @endif    
                                                                     <button class="go-button" type="button" id="budget_search">GO</button>
@@ -224,14 +225,14 @@
                                     <!-- Select Your Budget  -->
                                     <div class="accordion" id="accordionPanelsStayOpenExample1">
                                         <div class="accordion-item ps-3">
-                                            <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                            <h2 class="accordion-header" id="panelsStayOpen-headingthree">
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                    data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsetwo">
                                                     Model Year
                                                 </button>
                                             </h2>
-                                            <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                            <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
                                                 aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
                                                     <span class="select-Brand-box two four p-0 border-0">
@@ -277,7 +278,7 @@
                             <!-- Select Your Year End -->
 
 
-                        </form> 
+                    
                         @if ($listing_ads->status == 'enable')
                             <div class="inventory-main-box-thumb">
                                 <a href="{{ $listing_ads->link }}" target="_blank"> <img src="{{ asset('japan_home/Ads.svg') }}" class="img-fluid" alt="Poster 1"/></a>
@@ -966,6 +967,7 @@
                         
 
                     </div>
+                    </form> 
                    
                 </div>
             </div>
@@ -1084,10 +1086,10 @@
                 modelCheckbox.addEventListener('change', function() {
                     // Find the parent accordion item and its brand checkbox
                     const accordionItem = this.closest('.accordion-item');
-                    const brandCheckbox = accordionItem.querySelector('.brand-search');
+                    // const brandCheckbox = accordionItem.querySelector('.brand-search');
                     const modelCheckboxes = accordionItem.querySelectorAll('.model-search');  
                     // Update brand checkbox accordingly
-                    brandCheckbox.checked = true;
+                    // brandCheckbox.checked = true;
                     clear_price_slider();
                     $('#search_form').submit();
                 });

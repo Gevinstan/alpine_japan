@@ -79,6 +79,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             // Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock')->name('jdm-stock');
             Route::get('/jdm-stock/{slug}/{type}', 'jdm_stock_responsive')->name('jdm-stock');
             Route::get('/jdm_brand_new','jdm_brand_new')->name('jdm_brand_new');
+            Route::get('/fixed-car-marketplace-brand-new-cars','carListingBrandNew')->name('fixed-car-marketplace-brand-new-cars');
             Route::get('/jdm-stock-listing/{slug}/{type}', 'jdm_stock_listing')->name('jdm-stock-listing');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');

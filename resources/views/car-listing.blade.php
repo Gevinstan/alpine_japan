@@ -23,7 +23,7 @@
             <nav aria-label="breadcrumb" class="">
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Fixed Car Price Marketplace') }}</li>
                 </ol>
             </nav>
             <div class="row">
@@ -1241,6 +1241,10 @@
                     }
                  })
             })
+            $('form').on('submit', function() {
+             // Show the loader when the form is being submitted
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
         })(jQuery);
 
 
@@ -1288,9 +1292,9 @@
                 window.location.href = url.toString();
             });
         });
-        // window.addEventListener("load", function() {
-        //     document.getElementById("pageLoader").classList.add("hidden");
-        // });
+        window.addEventListener("load", function() {
+            document.getElementById("pageLoader").classList.add("hidden");
+        });
 
         window.addEventListener("load", function() {
         // Hide the loader when the page is fully loaded
@@ -1303,10 +1307,7 @@
             document.getElementById("pageLoader").classList.remove("hidden");
         });
             
-        $('form').on('submit', function() {
-        // Show the loader when the form is being submitted
-        document.getElementById("pageLoader").classList.remove("hidden");
-        });
+      
         // closeButtonsModel.forEach(button => {
         //     button.addEventListener('click', function(event) {
         //         // Prevent default behavior
