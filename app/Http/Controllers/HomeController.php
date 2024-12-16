@@ -4930,7 +4930,7 @@ public function car_listing(Request $request){
                 "$50000 - $100000" => ["start" => 50000, "end" => 100000],
                 "$100000 - $200000" => ["start" => 100000, "end" => 200000],
                 "$200000 - $300000" => ["start" => 200000, "end" => 300000],
-                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+                "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
             ];
 
 
@@ -4938,11 +4938,16 @@ public function car_listing(Request $request){
             $carsQuery->where(function ($query) use ($request, $priceRanges) {
                 foreach ($request->price_range as $range) {
                     $result = $this->getPriceRangestart($range, $priceRanges);
+                    $startValue = (int)trim(str_replace('"', '', $result['start_price_num'],));
+                    $endValue = (int)trim(str_replace('"', '', $result['end_price_num']));
+              
+
         
                     if ($result['start_price_num'] !== null && $result['end_price_num'] !== null) {
                         // Group the conditions for this range
-                        $query->orWhere(function ($subQuery) use ($result) {
-                            $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$result['start_price_num'],$result['end_price_num']]);
+                        $query->orWhere(function ($subQuery) use ($result,$startValue,$endValue) {
+                            // $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$result['start_price_num'],$result['end_price_num']]);
+                            $subQuery->whereBetween(DB::raw('COALESCE(start_price_num, 0)'), [$startValue,$endValue]);
                             // $subQuery->whereBetween('start_price_num', [$startValue, $endValue]);
                                     //  ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
                         });
@@ -5036,9 +5041,11 @@ public function car_listing(Request $request){
         if(!$request->sort_by){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
         }
-       
-        $cars = $carsQuery
-        ->select('auct_lots_xml_jp.*')->get();
+        
+        // DB::enableQueryLog();
+        // $cars = $carsQuery
+        // ->select('auct_lots_xml_jp.*')->get();
+        // dd(DB::getQueryLog());
 
     //   dd(DB::getQueryLog($cars));
 

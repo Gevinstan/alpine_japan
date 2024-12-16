@@ -979,6 +979,7 @@
                 
 
                 $("#outside_form_btn").on("click",function(e){
+                    e.preventDefault();
                     clear_price_slider();
                     $("#search_form").submit();
                 })

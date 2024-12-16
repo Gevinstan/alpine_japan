@@ -183,7 +183,7 @@
                                                             </div>
 
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                                @if($request_check !=0)
+                                                                @if(request('price_range_scale'))
                                                                     <button class="clear-button" id="clear-budget">CLEAR</button>
                                                                 @endif    
                                                                     <button class="go-button" type="button" id="budget_search">GO</button>

@@ -22,7 +22,7 @@
             <nav aria-label="breadcrumb" class="px-4">
                 <ol class="breadcrumb breadcrumb-list mb-4">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Car Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ $car->model_name_en }}</li>
                     
                 </ol>
             </nav>

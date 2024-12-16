@@ -115,12 +115,12 @@
                         </li>
                         <li class="text-white heading-fs-14 px-3">
                             <img src="{{asset('japan_home/mob.png')}}" />
-                            {{ $setting->phone }}
+                            {{ $setting->phone }}   
                         </li>
                         <li>
-                            <img src="{{asset('japan_home/insta.png')}}" />
-                            <img src="{{asset('japan_home/facebook.png')}}" />
-                            <img src="{{asset('japan_home/youtube.png')}}" />
+                            <a href="{{$setting->instagram}}"><img src="{{asset('japan_home/insta.png')}}" /></a>
+                            <a href="{{$setting->facebook}}"><img src="{{asset('japan_home/facebook.png')}}" /></a>
+                            <a href="{{$setting->youtube}}"><img src="{{asset('japan_home/youtube.png')}}" /></a>
                         </li>
                     </ul>
                 </div>
