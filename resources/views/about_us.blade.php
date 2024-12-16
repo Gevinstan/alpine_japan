@@ -361,18 +361,20 @@
         </div> -->
         <p class="p-5 our_vision_bg"></p>
         <div class="our_vision_card p-5 mb-3">
-            <div class="row position-relative">
+            <div class="row vision_relative position-relative">
                 <div class="col-12 col-lg-6">
                     <div class=" pe-lg-5 pe-0">
                         <img src="{{ asset('japan_home/Vision1.svg') }}" class="img-fluid our_vision_img" alt="delete">
                     </div>
                 </div>
+                
                 <div class=" d-none d-lg-block vision-outer-circule position-absolute d-flex align-content-center justify-content-center">
-                    <div class="vision-inner-circule d-flex flex-column align-items-center justify-content-center">
-                        <p>Our</p>
-                        <p>Vision</p>
+                    <div class="vision-inner-circule d-flex flex-column align-items-center justify-content-center our_vision_name">
+                        <p>OUR</p>
+                        <p>VISION</p>
                     </div>
                 </div>
+
                 <div class="col-12 col-lg-6 pt-3 pt-lg-0">
                     <div class=" ps-lg-5 ps-0">
                         <h2 class=" about_us">Our <span class="about-us-color">Vision<span></h2>
@@ -533,7 +535,7 @@
                     <div class="sm-df">
                         <div class="t-df-sm">
 
-                            <h2 class="section-heading">Customer Say About </br><span class="highlight">Our Services</span></h2>
+                            <h2 class="section-heading">Customer Say About </br><span class="highlight-about ">Our Services</span></h2>
                             <p class="testimonial-p cust-global-text">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
                         </div>
 

@@ -143,7 +143,7 @@
                                                                 </div>
                                                         </div>
 
-                                                        @endforeach
+                                                        @endforeach 
                                                     </div>
                                                 </span>
                                             </div>

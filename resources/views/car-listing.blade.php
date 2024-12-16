@@ -68,10 +68,16 @@
                                                                                         <span class="form-check">
                                                                                             <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
                                                                                                     value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
-                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
-                                                                                            <label class="form-check-label brand_name">
+                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}> &nbsp;
+
+                                                                                            <!-- <label class="form-check-label brand_name">
                                                                                                  {{ $model['model'] . ' (' . $model['count'] . ')' }}
-                                                                                            </label>
+                                                                                            </label> -->
+
+                                                                                                <label class="form-check-label">
+                                                                                                    <span class="budget_price"> {{ $model['model'] }} <span class="budget_count"> ({{ $model['count'] }})</span></span>
+                                                                                                </label>
+
                                                                                         </span>
                                                                                     @endforeach
                                                                             @endif

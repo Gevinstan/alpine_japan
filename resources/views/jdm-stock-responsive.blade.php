@@ -59,10 +59,14 @@
                                                                                             <span class="form-check">
                                                                                                 <input name="model[]" class="form-check-input brand-search" type="checkbox"
                                                                                                         value="{{ trim($brand->model) }}"
-                                                                                                        {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}>
-                                                                                                <label class="form-check-label brand_name ps-2">
+                                                                                                        {{ in_array(trim($brand->model), (array) request('model', [])) ? 'checked' : '' }}> &nbsp;
+                                                                                                <!-- <label class="form-check-label brand_name ps-2">
                                                                                                     {{ trim($brand->model) . ' (' . $brand->count . ')' }}
-                                                                                                </label>    
+                                                                                                </label>     -->
+
+                                                                                                <label class="form-check-label">
+                                                                                                    <span class="budget_price"> {{ trim($brand->model) }} <span class="budget_count"> ({{ $brand->count }}) </span></span>
+                                                                                                </label>
                                                                                             </span>
                                                                                         @endforeach
                                                                         

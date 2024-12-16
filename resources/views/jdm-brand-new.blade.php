@@ -83,10 +83,14 @@
                                                                                                     value="{{ $model }}"  data-parent-brand="{{ $brand->slug }}"
                                                                                                         data-model-name="{{ $model }}"
                                                                                                     {{ in_array(trim($model), (array) request('jdm_model', [])) && 
-                                                                                                        in_array(trim($brand->slug), (array) request('jdm_brand', [])) ? 'checked' : '' }}>
-                                                                                            <label class="form-check-label brand_name">
+                                                                                                        in_array(trim($brand->slug), (array) request('jdm_brand', [])) ? 'checked' : '' }}> &nbsp;
+
+                                                                                            <!-- <label class="form-check-label brand_name">
                                                                                                 {{ $model }}
-                                                                                            </label>
+                                                                                            </label> -->
+                                                                                                <label class="form-check-label">
+                                                                                                    <span class="budget_price"> {{ $model }} <span class="budget_count"> </span></span>
+                                                                                                </label>
                                                                                         </span>
                                                                                     @endforeach
                                                                             @endif
