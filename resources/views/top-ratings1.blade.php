@@ -68,7 +68,7 @@
                                                                                         <span class="form-check">
                                                                                             <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
                                                                                                     value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
-                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>
+                                                                                                    {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}> &nbsp;
                                                                                             <label class="form-check-label brand_name">
                                                                                                  {{ $model['model'] . ' (' . $model['count'] . ')' }}
                                                                                             </label>

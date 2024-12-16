@@ -331,7 +331,7 @@
             </div>
         </div>
 
-        <div class="py-5 _bg">
+        <!-- <div class="py-5 _bg">
             <div class="card card_vision px-2 px-sm-3 px-lg-5">
                 <div class="container">
                     <div class="row">
@@ -355,6 +355,34 @@
                                     business has made its easy for us to Foray into new markets.</h6>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <p class="p-5 our_vision_bg"></p>
+        <div class="our_vision_card p-5 mb-3">
+            <div class="row position-relative">
+                <div class="col-12 col-lg-6">
+                    <div class=" pe-lg-5 pe-0">
+                        <img src="{{ asset('japan_home/Vision1.svg') }}" class="img-fluid our_vision_img" alt="delete">
+                    </div>
+                </div>
+                <div class=" d-none d-lg-block vision-outer-circule position-absolute d-flex align-content-center justify-content-center">
+                    <div class="vision-inner-circule d-flex flex-column align-items-center justify-content-center">
+                        <p>Our</p>
+                        <p>Vision</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 pt-3 pt-lg-0">
+                    <div class=" ps-lg-5 ps-0">
+                        <h2 class=" about_us">Our <span class="about-us-color">Vision<span></h2>
+
+                        <h6 class="about-us-content-heading">Working together with our partners, we strive to provide the best support and service to our customers.</h6>
+                        
+                        <h6 class="about-us-content"> <b>“Client Satisfaction"</b> is the prime Business Policy and deeply incorporated within the organization.</h6>
+                        
+                        <h6 class="about-us-content">This is the unchanging commitment we at Alpine Japan have had over many years, Our Straightforward style of doing 
+                            business has made its easy for us to Foray into new markets.</h6>
                     </div>
                 </div>
             </div>
@@ -704,4 +732,32 @@
     <!---- Our Office endss---->
 
 </main>
+
+{{--<main>
+    <section class="inner-banner about_us_header about_us_bg">
+        <div class="container  px-3 px-md-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="section-heading about-text-black">About <span class="highlight"> Us</span></h2>
+                </div>
+                <div class="col-12 col-md-6">
+                    <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid about_image">
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="taitel_two">
+                        <span class="about_us_title">{{ $about_us->header }}</span>
+                    </div>
+                    
+                    <div class="about-taitel py-2">
+                        <p>{{ $about_us->title }}</p>
+                    </div>
+
+                    <div class="about_description">
+                        <p>{!! clean($about_us->description) !!}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>--}}
 @endsection
