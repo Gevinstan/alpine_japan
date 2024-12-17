@@ -694,7 +694,7 @@
             </div>
         </div> -->
         <div class="container">
-            <div class="row mt-5 pt-3">
+            <div class="row pt-3">
                 <div class=" mb-4">
                     <h2 class="section-heading-about text-center">Our <span class="highlight_about">Office<span></h2>
                 </div>
