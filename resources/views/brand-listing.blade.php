@@ -31,8 +31,8 @@
     </div>
 </div>
     <section class="categories  pb-120px">
-        <div class="container-fluid">
-            <div class="row align-items-end">
+        <div class="container-fluid pt-lg-5 px-5">
+            <div class="row align-items-end mt-lg-5 pt-lg-4">
                 <div class="col-lg-8 col-sm-8 col-md-12  ">
                     <div class="taitel">
                         <div class="taitel-img">
@@ -47,8 +47,7 @@
                     </div>
 
                     <div>
-                        <h2 style="display: inline;">Popular</h2> 
-                        <h2 style="display: inline; color: #038ffc;">Brands</h2>
+                        <h2 class="page-heading">Popular <span class="page-heading-highlight">Brands</span></h2>
                     </div>
                 </div>
 

@@ -645,9 +645,9 @@
                         <div class="testimonial-position-img-left">
 
                         </div>
-                        <div class="testimonial-position-img-right">
+                        <!-- <div class="testimonial-position-img-right">
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -695,7 +695,7 @@
             </div>
         </div> -->
         <div class="container">
-            <div class="row mt-5 pt-3">
+            <div class="row pt-3">
                 <div class=" mb-4">
                     <h2 class="section-heading-about text-center">Our <span class="highlight-about">Office<span></h2>
                 </div>
