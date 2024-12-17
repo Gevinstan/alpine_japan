@@ -464,7 +464,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                             {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                         @else
                                                         {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
@@ -487,7 +487,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['year']) }}
@@ -509,7 +509,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
@@ -726,7 +726,7 @@
                                                             </span>
                                                         </div>
                                                         
-                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text list_engine_font card-text-center pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['mileage_en']) ? $car['mileage_en'].',000' : '') }}
                                                             @else
                                                             {{ html_decode(!empty($car['mileage']) ? $car['mileage'].',000' : '') }}
@@ -750,7 +750,7 @@
 
                                                             </span>
                                                         </div>
-                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text list_engine_font card-text-center pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['year']) }}
@@ -774,7 +774,7 @@
 
                                                             </span>
                                                         </div>
-                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text list_engine_font card-text-center pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
@@ -800,7 +800,7 @@
 
                                                     <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
 
-                                                    <div class="d-flex flex-column list_date ps-5">
+                                                    <div class="d-flex flex-column list_date ps-4">
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>

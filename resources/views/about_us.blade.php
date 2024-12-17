@@ -71,7 +71,7 @@
                         <div class="pb-2 breadcrum_about">
                             <!-- <h2 class="contact_us" >Contact</h2> 
                             <h2 class="contact_us contact-us-color">Us</h2> -->
-                            <h2 class="section-heading_about">About <span class="highlight-about"> Us<span></h2>
+                            <h2 class="section-heading_about">About <span class="highlight-aboutus"> Us<span></h2>
                         </div>
                     </div>
                 </div>
@@ -377,7 +377,7 @@
 
                 <div class="col-12 col-lg-6 pt-3 pt-lg-0">
                     <div class=" ps-lg-5 ps-0">
-                        <h2 class=" about_us">Our <span class="about-us-color">Vision<span></h2>
+                        <h2 class="about_us">Our <span class="about-us-color">Vision<span></h2>
 
                         <h6 class="about-us-content-heading">Working together with our partners, we strive to provide the best support and service to our customers.</h6>
                         
@@ -534,9 +534,8 @@
 
                     <div class="sm-df">
                         <div class="t-df-sm">
-
-                            <h2 class="section-heading">Customer Say About </br><span class="highlight-about ">Our Services</span></h2>
-                            <p class="testimonial-p cust-global-text">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
+                            <h3 class="section-heading">Customer Say About </br><span class="highlight-about pt-1">Our Services</span></h3>
+                            <p class="testimonial-p cust-global-text pt-2">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
                         </div>
 
                         <div class="t-df-item">
@@ -645,9 +644,9 @@
                         <div class="testimonial-position-img-left">
 
                         </div>
-                        <div class="testimonial-position-img-right">
+                        <!-- <div class="testimonial-position-img-right">
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -697,7 +696,7 @@
         <div class="container">
             <div class="row mt-5 pt-3">
                 <div class=" mb-4">
-                    <h2 class="section-heading-about text-center">Our <span class="highlight-about">Office<span></h2>
+                    <h2 class="section-heading-about text-center">Our <span class="highlight_about">Office<span></h2>
                 </div>
 
                 <div class="row mb-4">

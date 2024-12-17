@@ -166,89 +166,88 @@
                         <!-- Select Your Budget End -->
 
                         <!-- Select Your Year Start -->
-                        <div class="inventory-main-box my-2">
+                            <div class="inventory-main-box my-2">
+                                <!-- Select Your Budget  -->
+                                <div class="accordion" id="accordionPanelsStayOpenExample1">
+                                    <div class="accordion-item ps-3">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
+                                            <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
+                                                aria-controls="panelsStayOpen-collapsetwo">
+                                                Model Year
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
+                                            aria-labelledby="panelsStayOpen-headingtwo">
+                                            <div class="accordion-body">
+                                            <span class="select-Brand-box two four p-0 border-0">
+                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
 
-                            <!-- Select Your Budget  -->
-                            <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                <div class="accordion-item ps-3">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                        <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
-                                            aria-controls="panelsStayOpen-collapsetwo">
-                                            Model Year
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
-                                        aria-labelledby="panelsStayOpen-headingtwo">
-                                        <div class="accordion-body">
-                                          <span class="select-Brand-box two four p-0 border-0">
-                                            <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                    <div class="d-flex flex-column align-items-center mt-32px w-100 ">
+                                                    
+                                                        <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
+                                                            <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                            <output name="age_output" id="age_output" for="start" ></output>
+                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                        </div>
 
-                                                <div class="d-flex flex-column align-items-center mt-32px w-100 ">
-                                                
-                                                    <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                        <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
-                                                         <output name="age_output" id="age_output" for="start" ></output>
-                                                        <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{ request('year', $minYear) }}" class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="year">
                                                     </div>
 
-                                                    <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{ request('year', $minYear) }}"  class="slider-input mx-0 my-2" id="modelYearSlider">
-                                                    <input type="hidden" id="start_year" name="year">
+                                                    <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                        @if(request('year'))
+                                                        <button class="clear-button" id="clear-year">Clear</button>
+                                                        @endif
+                                                        <button type="button" id="year_search" class="go-button">Go</button>
+                                                    </div>
+                                                    <!-- <button class="clear-button">Clear</button>
+                                                    <button class="go-button">Go</button> -->
                                                 </div>
 
-                                                <div class="d-flex align-content-between flex-column gap-4 go_clear">
-                                                    @if(request('year'))
-                                                    <button class="clear-button" id="clear-year">Clear</button>
-                                                    @endif
-                                                    <button type="button" id="year_search" class="go-button">Go</button>
-                                                </div>
-                                                <!-- <button class="clear-button">Clear</button>
-                                                <button class="go-button">Go</button> -->
+                                                    <!-- @if (request()->has('condition'))
+                                                        @php
+                                                            $condition_arr = request()->get('condition');
+                                                        @endphp
+
+                                                        <span class="form-check">
+                                                            <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
+                                                                id="new_condition" name="condition[]">
+                                                            <label class="form-check-label" for="new_condition">
+                                                                {{ __('translate.New') }}
+                                                            </label>
+                                                        </span>
+                                                        <span class="form-check">
+                                                            <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
+                                                                id="used_condition" name="condition[]">
+                                                            <label class="form-check-label" for="used_condition">
+                                                                {{ __('translate.Used') }}
+                                                            </label>
+                                                        </span>
+
+                                                    @else
+                                                        <span class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="New"
+                                                                id="new_condition" name="condition[]">
+                                                            <label class="form-check-label" for="new_condition">
+                                                                {{ __('translate.New') }}
+                                                            </label>
+                                                        </span>
+                                                        <span class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="Used"
+                                                                id="used_condition" name="condition[]">
+                                                            <label class="form-check-label" for="used_condition">
+                                                                {{ __('translate.Used') }}
+                                                            </label>
+                                                        </span>
+                                                    @endif -->
+
+                                            </span>
                                             </div>
-
-                                                <!-- @if (request()->has('condition'))
-                                                    @php
-                                                        $condition_arr = request()->get('condition');
-                                                    @endphp
-
-                                                    <span class="form-check">
-                                                        <input {{ in_array('New', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="New"
-                                                            id="new_condition" name="condition[]">
-                                                        <label class="form-check-label" for="new_condition">
-                                                            {{ __('translate.New') }}
-                                                        </label>
-                                                    </span>
-                                                    <span class="form-check">
-                                                        <input  {{ in_array('Used', $condition_arr) ? 'checked' : '' }} class="form-check-input" type="checkbox" value="Used"
-                                                            id="used_condition" name="condition[]">
-                                                        <label class="form-check-label" for="used_condition">
-                                                            {{ __('translate.Used') }}
-                                                        </label>
-                                                    </span>
-
-                                                @else
-                                                    <span class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="New"
-                                                            id="new_condition" name="condition[]">
-                                                        <label class="form-check-label" for="new_condition">
-                                                            {{ __('translate.New') }}
-                                                        </label>
-                                                    </span>
-                                                    <span class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="Used"
-                                                            id="used_condition" name="condition[]">
-                                                        <label class="form-check-label" for="used_condition">
-                                                            {{ __('translate.Used') }}
-                                                        </label>
-                                                    </span>
-                                                @endif -->
-
-                                          </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <!-- Select Your Year End -->
 
 
@@ -455,7 +454,7 @@
                                                                     </svg>
                                                             </span>
                                                         </div>
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title=" @if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title=" @if(session('front_lang')=='en')
                                                             {{ html_decode($car['mileage_en']) }}
                                                         @else
                                                             {{ html_decode($car['mileage']) }}
@@ -478,7 +477,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                             {{ html_decode($car['year_en']) }}
                                                             @else
                                                             {{ html_decode($car['year']) }}
@@ -501,7 +500,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['transmission_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['transmission']) }}
@@ -718,7 +717,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                            <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                     {{ html_decode($car['mileage_en']) }}
                                                                 @else
                                                                     {{ html_decode($car['mileage']) }}
@@ -742,7 +741,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                            <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                     {{ html_decode($car['year_en']) }}
                                                                     @else
                                                                     {{ html_decode($car['year']) }}
@@ -765,7 +764,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                            <p class="truncate-card-text list_engine_font card-text-center pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                     {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                                 @else
                                                                     {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
@@ -787,7 +786,7 @@
                                                         
 
                                                         <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
-                                                        <div class="d-flex flex-column list_date ps-5">
+                                                        <div class="d-flex flex-column list_date ps-4">
                                                             <span class="ps-4 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                             <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                         </div>   

@@ -422,7 +422,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="">
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="">
                                                             
                                                         </span>
                                                     </div>
@@ -437,7 +437,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="">
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="">
                                                             
                                                         </span>
                                                     </div>
@@ -451,7 +451,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="">
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="">
                                                             
                                                         </span>
                                                     </div>
@@ -624,7 +624,7 @@
                                                     </p>
                                                     
                                                     <div class="text-truncate_list1 car-name ps-1" data-bs-toggle="tooltip" 
-                                                        title=" ">
+                                                        title="">
                                                         
                                                     </div> 
 
@@ -670,7 +670,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="">
+                                                        <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->mileage) }}">
                                                             {{ html_decode($car->mileage) }}
                                                         </p>
                                                     </div>
@@ -684,7 +684,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="">
+                                                        <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->fuel_type) }}">
                                                             {{ html_decode($car->fuel_type) }}
                                                         </p>
                                                     </div>
@@ -699,7 +699,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="">
+                                                        <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->engine_size) }}">
                                                             {{ html_decode($car->engine_size) }}
                                                         </p>
                                                     </div>
@@ -713,7 +713,7 @@
 
                                                     <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
 
-                                                    <div class="d-flex flex-column list_date ps-5">
+                                                    <div class="d-flex flex-column list_date ps-4">
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>

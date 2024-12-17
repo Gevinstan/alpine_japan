@@ -159,7 +159,7 @@
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsethree">
-                                                     Model & Year
+                                                     Model Year
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
@@ -398,7 +398,7 @@
                                                                     </svg>
                                                             </span>
                                                         </div>
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                             {{ html_decode($car['mileage_en']) }}
                                                         @else
                                                             {{ html_decode($car['mileage']) }}
@@ -420,7 +420,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                             @else
                                                                 {{ html_decode($car['year']) }}
@@ -443,7 +443,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
@@ -656,7 +656,7 @@
 
                                                             </span>
                                                         </div>
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['mileage_en']) }}
                                                             @else
                                                                 {{ html_decode($car['mileage']) }}
@@ -679,7 +679,7 @@
 
                                                             </span>
                                                         </div>
-                                                        <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                        <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                 {{ html_decode($car['year_en']) }}
                                                                 @else
                                                                 {{ html_decode($car['year']) }}
@@ -703,7 +703,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <p class="truncate-card-text list_engine_font card-text-center" data-toggle="tooltip" data-placement="top" title="
+                                                        <p class="truncate-card-text list_engine_font card-text-center pe-2" data-toggle="tooltip" data-placement="top" title="
                                                                  @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
                                                             @else
@@ -726,7 +726,7 @@
 
                                                     <p class="brand-location" data-toggle="tooltip" data-placement="top" title="{{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }}"> <i class="bi bi-geo-alt-fill"></i> {{ isset($parsed_data['vehicle  location']) ? trim($parsed_data['vehicle  location']) : '--' }} </p>
 
-                                                    <div class="d-flex flex-column list_date ps-5">
+                                                    <div class="d-flex flex-column list_date ps-4">
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                         <span class="ps-4 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                     </div>

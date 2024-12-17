@@ -13131,7 +13131,7 @@ h5.preloader-text::after {
 .testimonial .testimonial-slick-main {
     padding: 25px 30px 18px 30px;
     background-color: var(--white-color);
-    box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 22px 37.8px 0px #0000001C;
     border-radius: 8px;
     position: relative;
     z-index: 1;
@@ -14300,7 +14300,7 @@ p {
 }
 
 .section-heading {
-    font-size: 1.75rem !important;
+    font-size: 2rem !important;
     padding: 0 !important;
     font-weight: 700 !important;
     color: #2b343d !important;
@@ -16675,7 +16675,7 @@ input:not(:placeholder-shown) + .placeholder-text {
         padding-top: 0.5rem;
         line-height: 1.512rem;
     }
-
+    
     .about-us-content {
         font-family: "Poppins", serif !important;
         font-weight: 500 !important;
@@ -17268,7 +17268,7 @@ select:focus {
     color: #2b343d;
 }
 
-.highlight-about {
+.highlight_about {
     font-family: "Poppins", serif;
     font-weight: 600;
     font-style: normal;
@@ -17300,7 +17300,7 @@ select:focus {
     color: #2b343d;
 }
 
-.highlight-about {
+.highlight-aboutus{
     font-family: "Poppins", serif;
     font-weight: 500;
     font-style: normal;
@@ -18056,11 +18056,10 @@ input:not(:placeholder-shown) + .input-placeholder {
 
  }
 
- 
  .highlight-about {
     color: #038FFC;
-    font-size: 1.75rem !important;
-    font-weight: 700 !important;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
     font-family: "Poppins", serif !important;
  }
 
