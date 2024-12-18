@@ -64,7 +64,24 @@
                     </div> -->
 
                     <div class="accordion" id="accordionExample">
-                        @foreach ($faqs as $index => $faq)
+                        <!-- @foreach ($faqs as $index => $faq)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne-{{ $index }}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne-{{ $index }}" aria-expanded="false" aria-controls="collapseOne-{{ $index }}">
+                                        {{ $faq->question }}
+                                    </button>
+                                </h2>
+                                
+                                <div id="collapseOne-{{ $index }}" class="accordion-collapse collapse"
+                                    aria-labelledby="headingOne-{{ $index }}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body faq_answer">
+                                        {!! clean($faq->answer) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach -->
+                        @foreach($faqs->reverse() as $index => $faq)
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne-{{ $index }}">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -81,6 +98,7 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                     
                 </div>
