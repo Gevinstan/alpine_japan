@@ -164,7 +164,7 @@
                                                 <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsetwo">
-                                                    Budget
+                                                    Budget1
                                                 </button>
                                             </h2>
                                             <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3 {{ request('price_range_scale') ? 'show' : '' }}"
@@ -491,7 +491,7 @@
                                                                             </svg>
                                                                 </span>
                                                             </div>
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title=" @if(session('front_lang')=='en')
+                                                            <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title=" @if(session('front_lang')=='en')
                                                                 {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
                                                             @else
                                                             {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
@@ -546,7 +546,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
+                                                            <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
                                                                     {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
                                                                 @else
                                                                 {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
@@ -569,7 +569,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <span class="truncate-card-text card-text-center ps-1" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                             
                                                             </span>
                                                         </div>
@@ -779,7 +779,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" 
+                                                            <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" 
                                                             title="@if(session('front_lang')=='en')
                                                                     {{ html_decode(!empty($car['kms']) ? $car['kms'] : '') }}
                                                                 @else
@@ -803,7 +803,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top"
+                                                            <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top"
                                                              title="@if(session('front_lang')=='en')
                                                                     {{ html_decode(!empty($car['yor']) ? $car['yor'] : '') }}
                                                                     @else
@@ -826,7 +826,7 @@
                                                                 </span>
                                                             </div>
 
-                                                            <p class="truncate-card-text card-text-center list_engine_font" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                                                            <p class="truncate-card-text card-text-center list_engine_font pe-2" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                                              
                                                             </p>
                                                         </div>
@@ -839,7 +839,7 @@
                                                         <p>
                                                             <i class="bi bi-geo-alt-fill"></i><span class="">{{ isset($car['location']) ? $car['location'] : '--' }}</span>   
                                                         </p>
-                                                        <div class="d-flex flex-column list_date ps-5">
+                                                        <div class="d-flex flex-column list_date ps-4">
                                                             <span class="ps-5 fw-light">{{ $carbonInstance->format('Y-m-d') }}</span>
                                                             <span class="ps-5 fw-light">{{ $carbonInstance->format('H:i:s') }}</span>
                                                         </div>

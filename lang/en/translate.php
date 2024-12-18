@@ -4,6 +4,7 @@
   'Home' => 'Home',
   'Explore Popular Brand' => 'Explore Popular Brand',
   'Contact Us' => 'Contact US',
+  'Contact Info' => 'Contact Info',
   'Our Testimonial' => 'Our Testimonial',
   'Customer Say About Our Services' => 'Customer Say About Our Services',
   'We have 15m+ Global and Local Happy Customers' => 'We have 15m+ Global and Local Happy Customers',

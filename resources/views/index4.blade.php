@@ -1211,7 +1211,7 @@ use Carbon\Carbon;
                         <div class="testimonial-position-img-left">
 
                         </div>
-                        <div class="testimonial-position-img-right">
+                        <div class="testimonial-position-img-right d-none d-lg-block">
 
                         </div>
                     </div>

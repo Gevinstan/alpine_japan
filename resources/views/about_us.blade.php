@@ -71,7 +71,7 @@
                         <div class="pb-2 breadcrum_about">
                             <!-- <h2 class="contact_us" >Contact</h2> 
                             <h2 class="contact_us contact-us-color">Us</h2> -->
-                            <h2 class="section-heading_about">About <span class="highlight-about"> Us<span></h2>
+                            <h2 class="section-heading_about">About <span class="highlight-aboutus"> Us<span></h2>
                         </div>
                     </div>
                 </div>
@@ -331,7 +331,7 @@
             </div>
         </div>
 
-        <div class="py-5 _bg">
+        <!-- <div class="py-5 _bg">
             <div class="card card_vision px-2 px-sm-3 px-lg-5">
                 <div class="container">
                     <div class="row">
@@ -355,6 +355,36 @@
                                     business has made its easy for us to Foray into new markets.</h6>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <p class="p-5 our_vision_bg"></p>
+        <div class="our_vision_card p-5 mb-3">
+            <div class="row vision_relative position-relative">
+                <div class="col-12 col-lg-6">
+                    <div class=" pe-lg-5 pe-0">
+                        <img src="{{ asset('japan_home/Vision1.svg') }}" class="img-fluid our_vision_img" alt="delete">
+                    </div>
+                </div>
+                
+                <div class=" d-none d-lg-block vision-outer-circule position-absolute d-flex align-content-center justify-content-center">
+                    <div class="vision-inner-circule d-flex flex-column align-items-center justify-content-center our_vision_name">
+                        <p>OUR</p>
+                        <p>VISION</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 pt-3 pt-lg-0">
+                    <div class=" ps-lg-5 ps-0">
+                        <h2 class="about_us">Our <span class="about-us-color">Vision<span></h2>
+
+                        <h6 class="about-us-content-heading">Working together with our partners, we strive to provide the best support and service to our customers.</h6>
+                        
+                        <h6 class="about-us-content"> <b>“Client Satisfaction"</b> is the prime Business Policy and deeply incorporated within the organization.</h6>
+                        
+                        <h6 class="about-us-content">This is the unchanging commitment we at Alpine Japan have had over many years, Our Straightforward style of doing 
+                            business has made its easy for us to Foray into new markets.</h6>
                     </div>
                 </div>
             </div>
@@ -504,9 +534,8 @@
 
                     <div class="sm-df">
                         <div class="t-df-sm">
-
-                            <h2 class="section-heading">Customer Say About </br><span class="highlight">Our Services</span></h2>
-                            <p class="testimonial-p cust-global-text">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
+                            <h3 class="section-heading">Customer Say About </br><span class="highlight-about pt-1">Our Services</span></h3>
+                            <p class="testimonial-p cust-global-text pt-2">{{ __('translate.We have 15m+ Global and Local Happy Customers') }}</p>
                         </div>
 
                         <div class="t-df-item">
@@ -615,9 +644,9 @@
                         <div class="testimonial-position-img-left">
 
                         </div>
-                        <div class="testimonial-position-img-right">
+                        <!-- <div class="testimonial-position-img-right">
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -665,9 +694,9 @@
             </div>
         </div> -->
         <div class="container">
-            <div class="row mt-5 pt-3">
+            <div class="row pt-3">
                 <div class=" mb-4">
-                    <h2 class="section-heading-about text-center">Our <span class="highlight-about">Office<span></h2>
+                    <h2 class="section-heading-about text-center">Our <span class="highlight_about">Office<span></h2>
                 </div>
 
                 <div class="row mb-4">
@@ -704,4 +733,32 @@
     <!---- Our Office endss---->
 
 </main>
+
+{{--<main>
+    <section class="inner-banner about_us_header about_us_bg">
+        <div class="container  px-3 px-md-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="section-heading about-text-black">About <span class="highlight"> Us</span></h2>
+                </div>
+                <div class="col-12 col-md-6">
+                    <img src="{{ asset('japan_home/aboutus_image.svg') }}" alt="about us" class="img-fluid about_image">
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="taitel_two">
+                        <span class="about_us_title">{{ $about_us->header }}</span>
+                    </div>
+                    
+                    <div class="about-taitel py-2">
+                        <p>{{ $about_us->title }}</p>
+                    </div>
+
+                    <div class="about_description">
+                        <p>{!! clean($about_us->description) !!}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>--}}
 @endsection

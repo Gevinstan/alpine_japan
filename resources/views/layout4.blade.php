@@ -651,7 +651,7 @@
 
                             <div class="footer-item-text-link two mb-3">
                                 <div class="footer-item-text">
-                                    <h3>{{ __('translate.Contact Us') }}</h3>
+                                    <h3>{{ __('translate.Contact Info') }}</h3>
                                 </div>
 
                                 <ul>
