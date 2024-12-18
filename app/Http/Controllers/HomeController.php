@@ -124,7 +124,18 @@ class HomeController extends Controller
         $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
         $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
         $home3_ads = AdsBanner::where('position_key', 'home_new_arrivals')->first();
-        $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
+        // $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
+        $jdm_car_listings = $carsQuery =Cars::join('models_cars as mc', function($join) {
+            $join->on('blog.category', '=', 'mc.category')
+                 ->on('blog.model', '=', 'mc.model');
+                })
+        ->where('is_active','1')
+        ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+        ->select('blog.*')
+        ->orderBy('id','desc')->take(8)->get();
+     
+
+
 
         $brands = Brand::where('status', 'enable')->get();
 
@@ -1705,11 +1716,12 @@ class HomeController extends Controller
         $jdm_brand['heavy']=$jdm_legend_heavy;
         $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
         $jdm_core_brand = Brand::where('status', 'enable')->get();
-
+        $seo_setting = SeoSetting::where('id', 1)->first();
 
 
         return view('jdm-stock-listing', [
             'car' => $car,
+            'seo_setting' => $seo_setting,
             'listing_ads' => $listing_ads,
             'delivery_charges'=>$delivery_charges,
             'jdm_legend'=>$jdm_brand,

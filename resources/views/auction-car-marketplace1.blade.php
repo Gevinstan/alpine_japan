@@ -1026,7 +1026,7 @@
                         console.log('loading');
                     },
                     success:function(response){
-                        console.log(response);
+                        toastr.success(response.message);
                         window.location.reload();
                     }
                  })

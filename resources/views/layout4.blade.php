@@ -200,7 +200,7 @@
                                         </li>
                                         
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap brand-car-nav {{ Route::is('auction-brand-new-car') || Route::is('jdm_brand_new') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
+                                            <a class="nav-link mx-2 dropdown-toggle text-nowrap brand-car-nav {{ Route::is('auction-brand-new-car') || Route::is('fixed-car-marketplace-brand-new-cars') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button">
                                                 {{ __('translate.Brand New Cars') }}
                                             </a>
                                             <ul class="dropdown-menu brand-car-ul" aria-labelledby="navbarDropdown">
