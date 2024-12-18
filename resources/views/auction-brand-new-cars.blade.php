@@ -978,9 +978,12 @@
                 
 
                 $("#outside_form_btn").on("click",function(e){
-                    e.preventDefault();
-                    clear_price_slider();
-                    $("#search_form").submit();
+                    e.preventDefault();   
+                    if($(this).val() !=""){
+                        clear_price_slider();
+                        $("#search_form").submit();
+                    }
+                   
                 })
 
                 $(".popular-search").on('change',function(e){
@@ -1095,7 +1098,7 @@
                         console.log('loading');
                     },
                     success:function(response){
-                        console.log(response);
+                        toastr.success(response.message);
                         window.location.reload();
                     }
                  })

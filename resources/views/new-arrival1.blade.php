@@ -1250,7 +1250,6 @@
                     });
                 });
                 $(".after_auth_wishlist").on('click',function(){
-                 console.log($(this).data('car-id'))
                  $.ajax({
                     type: "POST",
                     url:"{{route('add-user-wishlist')}}",
@@ -1261,7 +1260,7 @@
                         console.log('loading');
                     },
                     success:function(response){
-                        console.log(response);
+                        toastr.success(response.message);
                         window.location.reload();
                     }
                  })

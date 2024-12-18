@@ -1,8 +1,8 @@
 @extends('layout4')
 @section('title')
-    <title>{{ html_decode($car->seo_title) }}</title>
-    <meta name="title" content="{{ html_decode($car->seo_title) }}">
-    <meta name="description" content="{{ html_decode($car->seo_description) }}">
+    <title>{{ html_decode($seo_setting->seo_title) }}</title>
+    <meta name="title" content="{{ html_decode($seo_setting->seo_title) }}">
+    <meta name="description" content="{!! strip_tags(clean($seo_setting->seo_description)) !!}">
 @endsection
 
 @section('body-content')
@@ -22,7 +22,7 @@
             <nav aria-label="breadcrumb" class="px-4">
                 <ol class="breadcrumb breadcrumb-list mb-4">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.JDM Stock Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page"><a href="{{ route('jdm-stock',[$car->make, $type]) }}">{{ __('translate.JDM Stock Listing') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ $car->model}}</li>
                 </ol>
             </nav>

@@ -189,6 +189,84 @@ class ProcessSqlFile implements ShouldQueue
         ];
     }
 
+//     private function processSqlFile($sqlContent, $cloum_name)
+// {
+//     // Use a regular expression to extract only the INSERT statements
+//     preg_match_all('/INSERT INTO `(\w+)` VALUES\s*\((.*?)\);/s', $sqlContent, $matches);
+    
+//     $id_array = [];
+//     $queries = [];
+    
+//     // Loop through each match found
+//     foreach ($matches[1] as $key => $tableName) {
+//         $insertValues = $matches[2][$key]; // Values in the INSERT query
+        
+//         // Define the table's column names (You can dynamically fetch these from the database schema)
+//         $columnNames = $cloum_name; // Replace or fetch dynamically if needed
+        
+//         // Extract each set of values within the INSERT statement
+//         $valuesArray = explode("),(", trim($insertValues, "()"));
+
+//         // Loop through each value set and convert it to an INSERT ... ON DUPLICATE KEY UPDATE query
+//         foreach ($valuesArray as $valueSet) {
+//             // Split the values by commas
+//             $values = explode(",", $valueSet);
+
+//             // Initialize an array for building both INSERT and UPDATE parts
+//             $insertColumns = [];
+//             $insertValues = [];
+//             $updateClauses = [];
+
+//             // Loop through the column names and their corresponding values
+//             foreach ($columnNames as $index => $columnName) {
+//                 if (isset($values[$index])) {
+//                     $value = trim($values[$index]);
+
+//                     // Handle NULL or empty values properly
+//                     if (strtolower($value) === "null" || empty($value)) {
+//                         $insertValues[] = "NULL";
+//                     } else {
+//                         // For non-NULL values, ensure they are properly quoted
+//                         $value = "'".addslashes($value)."'";  // Add slashes to escape any quotes in the value
+//                         $insertValues[] = $value;
+//                     }
+
+//                     // Build the columns list for the INSERT query
+//                     $insertColumns[] = "`$columnName`";
+
+//                     if ($index > 0) {
+//                         // Build the SET clause for UPDATE part (excluding the primary key)
+//                         $updateClauses[] = "`$columnName` = VALUES(`$columnName`)";
+//                     }
+//                 }
+//             }
+
+//             // Combine the columns and values for the INSERT query
+//             $insertColumnsStr = implode(", ", $insertColumns);
+//             $insertValuesStr = implode(", ", $insertValues);
+
+//             // Combine the SET clause for the ON DUPLICATE KEY UPDATE part
+//             $updateClauseStr = implode(", ", $updateClauses);
+
+//             // Final query: INSERT with ON DUPLICATE KEY UPDATE
+//             $query = "INSERT INTO `$tableName` ($insertColumnsStr) VALUES ($insertValuesStr) ON DUPLICATE KEY UPDATE $updateClauseStr;";
+//             $queries[] = $query;
+//         }
+//     }
+    
+//     // Output all the queries
+//     foreach ($queries as $query) {
+//         // Optionally, you can output or store these queries
+//         // echo $query . PHP_EOL;
+//     }
+
+//     return [
+//         "queries" => $queries,
+//         "id_array" => $id_array
+//     ];
+// }
+
+
     // Execute queries
     private function executeQueries($queries, $id_array)
     {   
