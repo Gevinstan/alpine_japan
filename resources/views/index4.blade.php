@@ -626,7 +626,6 @@ use Carbon\Carbon;
                                         data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <!-- <img src="{{ asset($car->thumb_image) }}" alt="thumb"> -->
 
                                                 <div class="">
                                                     <img src="{{ file_exists(public_path('Cars/' . $car->image)) ? 

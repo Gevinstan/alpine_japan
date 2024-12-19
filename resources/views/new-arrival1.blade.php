@@ -334,14 +334,23 @@
                                      <p class="sort-text">Sort By:</p>
                                      <div class="dropdown sort-dropdown pe-4">
                                         <button class="btn btn-secondary recently_added dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Recently Added
+                                        @switch(request('sort_by'))
+                                            @case('price_low_high')
+                                                Low to High
+                                                @break
+                                            @case('price_high_low')
+                                                High to Low
+                                                @break
+                                            @default
+                                                Recently Added
+                                        @endswitch
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
                                             <li><a data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
                                             <li><a data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
                                             <li><a data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
-                                        <input type="hidden" name="sort_by" id="sort_by_field">
+                                        <input type="hidden" name="sort_by" id="sort_by_field" value="{{ request('sort_by', '') }}">
                                      </div>
                                 </div>
 
@@ -1010,6 +1019,7 @@
                     if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                         $('input[name="price_range_scale"]').val('');
                     } 
+                    // $('#ex2').prop('disabled', true);
               
                 }
             "use strict"
@@ -1053,8 +1063,9 @@
                 })
             });
             $("#clear-year").on('click',function(e){
-                    $("#modelYearSlider").val("");
+                    $("#modelYearSlider").val({{$minYear}});
                     $("#start_year").val("");
+                    clear_price_slider();   
                     $("#search_form").submit();
                 })
                 $("#clear-budget").on('click',function(e){  

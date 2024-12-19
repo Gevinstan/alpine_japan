@@ -27,7 +27,7 @@
 
         <!-- Privacy and Policy-part start  -->
 
-        <section class="privacy px-2 px-sm-3 px-lg-5">
+        <section class="privacy px-sm-2 px-md-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">

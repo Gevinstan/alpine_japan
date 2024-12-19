@@ -288,7 +288,7 @@
                                             <li><a data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
                                             <li><a data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
-                                        <input type="hidden" name="sort_by" id="sort_by_field">
+                                        <input type="hidden" name="sort_by" id="sort_by_field" value="{{ request('sort_by', '') }}">
                                      </div>
                                 </div>
 

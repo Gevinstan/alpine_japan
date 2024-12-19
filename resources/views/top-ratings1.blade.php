@@ -182,11 +182,10 @@
                                                                     <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
                                                                     <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span>  
                                                                 </div>
-                                                                <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
-                                                                data-slider-max="{{$maxPrice}}"
-                                                                value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}" 
-                                                                data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli
-                                                                /> 
+                                                                <input id="ex2" type="text" name="price_range_scale"
+                                                                    data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}"
+                                                                    value="{{ request('price_range_scale', '') ? request('price_range_scale') : '' }}"
+                                                                    data-slider-value="[{{ request('price_range_scale', '') ? request('price_range_scale') : $minPrice . ',' . $maxPrice }}]"sli/>  
                                                             </div>
                                                             <div class="d-flex align-content-between flex-column gap-4 go_clear">
                                                                 @if(request('price_range_scale'))
@@ -354,7 +353,7 @@
                                             <li><a data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
                                             <li><a data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
                                         </ul>
-                                        <input type="hidden" name="sort_by" id="sort_by_field">
+                                        <input type="hidden" name="sort_by" id="sort_by_field" value="{{ request('sort_by', '') }}">
                                      </div>
                                 </div>
 
@@ -1174,7 +1173,7 @@
             if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                 $('input[name="price_range_scale"]').val('');
             } 
-             $('#ex2').prop('disabled', true);
+            //  $('#ex2').prop('disabled', true);
             }
             $(document).ready(function () {
                 const form = $('#search_form');
@@ -1214,8 +1213,9 @@
                     $("#search_form").submit();
                 })
                 $("#clear-year").on('click',function(e){
-                    $("#modelYearSlider").val("");
+                    $("#modelYearSlider").val({{$minYear}});
                     $("#start_year").val("");
+                    clear_price_slider();   
                     $("#search_form").submit();
                 })
                 $("#clear-budget").on('click',function(e){  
