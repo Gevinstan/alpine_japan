@@ -124,15 +124,21 @@ class HomeController extends Controller
         $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
         $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
         $home3_ads = AdsBanner::where('position_key', 'home_new_arrivals')->first();
-        // $jdm_car_listings = Cars::where('is_active', '1')->orderBy('id','desc')->take(8)->get();
-        $jdm_car_listings = $carsQuery =Cars::join('models_cars as mc', function($join) {
-            $join->on('blog.category', '=', 'mc.category')
-                 ->on('blog.model', '=', 'mc.model');
-                })
-        ->where('is_active','1')
+
+        $jdm_car_listings = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)'))
+        ->join('models_cars as mc', function ($join) {
+            $join->on('blog.model', '=', 'mc.model')
+                ->on('blog.category', '=', 'mc.category'); // Match model and category
+        })
+        ->where('blog.is_active','1')
+        ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
         ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
         ->select('blog.*')
         ->orderBy('id','desc')->take(8)->get();
+
+   
      
 
 
