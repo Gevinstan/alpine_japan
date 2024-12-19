@@ -56,7 +56,7 @@
 
             <div class="row g-3  mt-30px ">
                 @foreach ($brands as $index => $brand)
-                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
+                <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6">
                     <div class="categories-logo">
                         <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                             <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
