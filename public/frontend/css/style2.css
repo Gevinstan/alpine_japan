@@ -17149,6 +17149,7 @@ select:focus {
     font-weight: 600;
     font-size: 1.8rem;
     color: #0f2850;
+    text-align: center;
 }
 
 .icon-card1 {
