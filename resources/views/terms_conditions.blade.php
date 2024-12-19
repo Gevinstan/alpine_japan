@@ -7,10 +7,21 @@
 
 @section('body-content')
 
-    <main class="px-sm-2 px-md-5">
+    <main class="">
         <!-- banner-part-start  -->
 
-        <section class="inner-banner">
+        <section class="privacy_policy_header pt-5">
+            <div class="container pt-5">
+                <div class="row pt-5 px-sm-2 px-md-5 banner_color">
+                    <div class="col-lg-12">
+                        <div class="pb-2 pt-3">
+                            <!-- <h2 class="contact_us" >Contact</h2> 
+                            <h2 class="contact_us contact-us-color">Us</h2> -->
+                            <h2 class="section-heading">Terms & <span class="highlight"> Conditions<span></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- banner-part-end -->
 
@@ -19,7 +30,7 @@
 
         <section class="privacy">
             <div class="container">
-                <div class="row">
+                <div class="row px-sm-2 px-md-5">
                     <div class="col-lg-12">
 
                         <div class="privacy-text-item">

@@ -384,7 +384,7 @@
                             <div id="sell-points-collapsefive" class="accordion-collapse collapse show" aria-labelledby="sell-points">
                                 <div class="accordion-body">
                                     <div class="py-2 d-flex gap-3 flex-wrap">
-                                    <span class="accessories-text px-3 h-100">
+                                    <span class="accessories-text1 px-3 h-100">
                                             {{ isset($car->sell_points) ? $car->sell_points : '--' }}
                                         </span>
                                        
@@ -410,7 +410,7 @@
                             <div id="remarks-accordion-collapsefive" class="accordion-collapse collapse show" aria-labelledby="remarks-accordion">
                                 <div class="accordion-body">
                                     <div class="py-2 d-flex gap-3 flex-wrap">
-                                    <span class="accessories-text px-3 h-100">
+                                    <span class="accessories-text1 px-3 h-100">
                                             {{ isset($car->remarks) ? $car->remarks : '--' }}
                                         </span>
                                        
@@ -437,7 +437,7 @@
                                 <div class="accordion-body d-flex flex-row gap-3 ">
                                     @foreach($accesories as $value)
                                         <div class="py-2 gap-3">
-                                            <span class="accessories-text  px-3 py-1 h-100">
+                                            <span class="accessories-text px-3 py-1 h-100">
                                                 {{ isset($value) ? $value : '--' }}
                                             </span> 
                                         </div>

@@ -344,7 +344,7 @@
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
                                 <div class="accordion-body">
                                     <div class="py-2 d-flex gap-3 flex-wrap">
-                                    <span class="accessories-text px-3 h-100">
+                                    <span class="accessories-text1 px-3 h-100">
                                             {{ isset($process_data_en['Condition']) ? $process_data_en['Condition'] : '--' }}
                                         </span>
                                        
