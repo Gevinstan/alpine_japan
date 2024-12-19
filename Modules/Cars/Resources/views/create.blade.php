@@ -294,6 +294,19 @@
                                                
                                                 <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Cover Image') }}  </label>
+                                                        <div  class="dropzone" id="myDropzone">
+                                                        @error('remarks')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="row mg-top-30">                                  
+                                               
+                                                <div class="col-12">
+                                                    <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Remarks') }}  </label>
                                                         <!-- <textarea name="remarks" id="remarks" class='crancy__item-input'></textarea> -->
                                                         <textarea class="crancy__item-input crancy__item-textarea summernote"  name="remarks" id="remarks">
@@ -500,6 +513,59 @@
                     let slug = inputValue.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
                     $("#slug").val(slug);
                 })
+
+             // Initialize Dropzone
+        Dropzone.autoDiscover = false;
+var myDropzone = new Dropzone("#myDropzone", {
+    url: "adminBannerUpload", // Specify your upload URL here
+    autoProcessQueue: false, // We'll handle file upload manually
+    addRemoveLinks: true, // Show remove links on uploaded files
+    maxFilesize: 10, // Maximum file size in MB
+    acceptedFiles: ".jpg, .jpeg, .png, .gif", // Accepted file types
+    parallelUploads: 3, // Number of parallel uploads
+    uploadMultiple: false ,// Disable multiple file upload,
+    
+   
+    init: function() {
+    var myDrop = this;
+    var existingFiles = banner_images;
+    if (existingFiles) {
+        for (var i = 0; i < existingFiles.length; i++) {
+            var fileUrl = "{{ asset('/') }}"+ existingFiles[i];
+            var mockFile = { 
+                name: existingFiles[i], 
+                type: 'image/jpeg', 
+                status: myDrop.ADDED, 
+                accepted: true
+            };
+            // Call the default addedfile event handler
+            myDrop.emit("addedfile", mockFile);
+
+            // Emit the thumbnail event to trigger Dropzone thumbnail creation
+            myDrop.emit("thumbnail", mockFile, fileUrl);
+
+            // Call the complete event to mark the file as complete
+            myDrop.emit("complete", mockFile);
+
+            // Push the mockFile to the files array
+            myDrop.files.push(mockFile);
+        }
+    }    
+    this.on("thumbnail", function(file) {
+        // Add style to the thumbnail image
+        file.previewElement.querySelector("[data-dz-thumbnail]").style.maxWidth = "100%";
+        file.previewElement.querySelector("[data-dz-thumbnail]").style.maxHeight = "100%";
+    });
+}
+
+});
+
+
+
+
+
+
+
 
                 tinymce.init({
                     selector: '.summernote',

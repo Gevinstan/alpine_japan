@@ -27,8 +27,7 @@
 		<link rel="stylesheet" href="{{ asset('backend/css/overview.css') }}">
 		<link rel="stylesheet" href="{{ asset('backend/css/dev.css') }}">
         <link rel="stylesheet" href="{{ asset('global/toastr/toastr.min.css') }}">
-
-
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
         @stack('style_section')
 
 	</head>
@@ -207,6 +206,7 @@
 		<script src="{{ asset('backend/js/main.js') }}"></script>
         <script src="{{ asset('global/toastr/toastr.min.js') }}"></script>
 		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 
 
 
