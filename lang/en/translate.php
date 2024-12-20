@@ -480,6 +480,7 @@
   'Cancel' => 'Cancel',
   'View All' => 'View All',
   'Wishlist' => 'Wishlist',
+  'Enquiry' => 'Enquiry',
   'Recently Added Cars' => 'Recently Added Cars',
   'Featured' => 'Featured',
   'Actions' => 'Actions',

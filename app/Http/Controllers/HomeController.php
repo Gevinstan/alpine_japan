@@ -1166,7 +1166,7 @@ class HomeController extends Controller
         ->select('b.slug', 'bt.name as brand_name') // Select slug and name
         ->distinct('b.slug') // Ensure distinct slugs
         ->get()
-        ->map(function($item) {
+        ->map(function($item) { 
             return [
                 'slug' => $item->slug,
                 'brand_name' => $item->brand_name
@@ -1258,9 +1258,6 @@ class HomeController extends Controller
         $wishlists=[];
  
 
-
-
-      
 
         if($type == 'car'){
        
@@ -1607,7 +1604,7 @@ class HomeController extends Controller
                 'id' => $car->id,
                 'make'=>$car->make,
                 'kms'=>$car->kms,
-                'yor'=>$car->year_of_reg,
+                'yor'=>$car->yom,
                 'location'=>$car->location,
                 'created_at'=>$car->created_at,
             ];
@@ -8648,6 +8645,8 @@ public function getJDMPriceRange()
         return $jdm_brand;    
       
     }
+
+
 
 
 
