@@ -21,6 +21,7 @@ use Modules\Heavy\Entities\Heavy;
 use Modules\SmallHeavy\Entities\SmallHeavy;
 use Modules\Brand\Entities\Brand;
 use DB;
+use App\Models\VehicleEnquiry;
 
 class ProfileController extends Controller
 {
@@ -609,5 +610,130 @@ class ProfileController extends Controller
         $notification = array('messege'=>$notification,'alert-type'=>'success');
         return redirect()->back()->with($notification);
     }
+
+    public function VehicleEnquiry(Request $request){
+        $filters = [
+            'start_year' => null,
+            'end_year' => null,
+            'make'=>null,
+            'model'=>null
+        ];
+
+        $brands = VehicleEnquiry::join('brands as b', DB::raw('LOWER(vehicle_enquiries.make)'), '=', 'b.slug')
+                         ->join('brand_translations as bt','bt.brand_id','=','b.id')
+                         ->where('bt.lang_code',Session::get('front_lang'))
+            ->select('b.slug','bt.name as brand_name')
+            ->distinct('b.slug')->get();
+
+
+
+            
+        // DB::enableQueryLog();
+        $query = VehicleEnquiry::query();
+        
+        // Filter by start date
+        if ($request->filled('start_year')) {
+            $filters['start_year'] = $request->start_year;
+            $startDate = Carbon::parse($request->start_year)->startOfDay();
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+
+        if ($request->filled('end_year')) {
+            $filters['end_year'] = $request->end_year;
+            $endDate = Carbon::parse($request->end_year)->endOfDay();
+            $query->whereDate('created_at', '<=', $endDate);
+        }
+        
+        if ($request->filled('make')) {
+            $filters['make'] = $request->make;
+            $query->where( DB::raw('LOWER(make)'),$request->make);
+        }
+        
+        if ($request->filled('model')) {
+            $filters['model'] = $request->model;
+            $query->where('model',$request->model);
+        }
+        
+        // Fetch results
+        $vehicle_enquiry = $query->orderBy('id', 'desc')
+                           ->where('user_id',Auth::user()->id)->get();
+
+        $jdm_legend=$this->jdm_brands();
+        // echo json_encode($jdm_brand);die();
+
+        // $vehicle_enquiry = VehicleEnquiry::orderBy('id','desc')->latest()->get();
+        return view('user-enquiry', compact('vehicle_enquiry','filters','brands',
+        'jdm_legend'));
+
+    }
+    function jdm_brands(){
+        $jdm_legend = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
+        ->join('models_cars as mc', function ($join) {
+            $join->on('blog.model', '=', 'mc.model')
+                ->on('blog.category', '=', 'mc.category'); // Match model and category
+        })
+        ->where('blog.is_active','1')
+        ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
+        ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+        ->select('b.slug', 'bt.name as brand_name') // Select slug and name
+        ->distinct('b.slug') // Ensure distinct slugs
+        ->get()
+        ->map(function($item) {
+            return [
+                'slug' => $item->slug,
+                'brand_name' => $item->brand_name
+            ];
+        })
+        ->toArray();
+        $jdm_legend_heavy = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->join('heavy as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
+        ->join('models_cars as mc', function ($join) {
+            $join->on('blog.model', '=', 'mc.model')
+                ->on('blog.category', '=', 'mc.category'); // Match model and category
+        })
+        ->where('blog.is_active','1')
+        ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
+        ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+        ->select('b.slug', 'bt.name as brand_name') // Select slug and name
+        ->distinct('b.slug') // Ensure distinct slugs
+        ->get()
+        ->map(function($item) {
+            return [
+                'slug' => $item->slug,
+                'brand_name' => $item->brand_name
+            ];
+        })
+        ->toArray();
+
+        $jdm_legend_small_heavy = DB::table('brands as b')
+        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+        ->join('small_heavy as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
+        ->join('models_cars as mc', function ($join) {
+            $join->on('blog.model', '=', 'mc.model')
+                ->on('blog.category', '=', 'mc.category'); // Match model and category
+        })
+        ->where('blog.is_active','1')
+        ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
+        ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+        ->select('b.slug', 'bt.name as brand_name') // Select slug and name
+        ->distinct('b.slug') // Ensure distinct slugs
+        ->get()
+        ->map(function($item) {
+            return [
+                'slug' => $item->slug,
+                'brand_name' => $item->brand_name
+            ];
+        })
+        ->toArray();
+        $jdm_brand['car']=$jdm_legend;
+        $jdm_brand['heavy']=$jdm_legend_heavy;
+        $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+        return $jdm_brand;    
+      
+    }
+
 
 }

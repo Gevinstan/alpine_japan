@@ -1166,7 +1166,7 @@ class HomeController extends Controller
         ->select('b.slug', 'bt.name as brand_name') // Select slug and name
         ->distinct('b.slug') // Ensure distinct slugs
         ->get()
-        ->map(function($item) {
+        ->map(function($item) { 
             return [
                 'slug' => $item->slug,
                 'brand_name' => $item->brand_name
@@ -1259,9 +1259,6 @@ class HomeController extends Controller
  
 
 
-
-      
-        // DB::enableQueryLog();
         if($type == 'car'){
        
             if(Auth::guard('web')->check()){
@@ -8648,6 +8645,8 @@ public function getJDMPriceRange()
         return $jdm_brand;    
       
     }
+
+
 
 
 
