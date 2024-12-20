@@ -18231,3 +18231,19 @@ input:not(:placeholder-shown) + .input-placeholder {
 
 /* Mobile View Dropdown container Style End*/
 
+.table-blue {
+    background: #0f1350;
+    color: var(--white-color);
+}
+.dt-info {
+    padding: 1rem 0 0 0 !important;
+}
+
+.dt-paging {
+    padding-top: .5rem !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+}
