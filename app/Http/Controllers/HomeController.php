@@ -1261,7 +1261,7 @@ class HomeController extends Controller
 
 
       
-
+        // DB::enableQueryLog();
         if($type == 'car'){
        
             if(Auth::guard('web')->check()){
@@ -1607,7 +1607,7 @@ class HomeController extends Controller
                 'id' => $car->id,
                 'make'=>$car->make,
                 'kms'=>$car->kms,
-                'yor'=>$car->year_of_reg,
+                'yor'=>$car->yom,
                 'location'=>$car->location,
                 'created_at'=>$car->created_at,
             ];
