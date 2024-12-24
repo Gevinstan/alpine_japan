@@ -1166,7 +1166,7 @@ class HomeController extends Controller
         ->select('b.slug', 'bt.name as brand_name') // Select slug and name
         ->distinct('b.slug') // Ensure distinct slugs
         ->get()
-        ->map(function($item) {
+        ->map(function($item) { 
             return [
                 'slug' => $item->slug,
                 'brand_name' => $item->brand_name
@@ -1259,9 +1259,6 @@ class HomeController extends Controller
  
 
 
-
-      
-
         if($type == 'car'){
        
             if(Auth::guard('web')->check()){
@@ -1348,11 +1345,22 @@ class HomeController extends Controller
             if($request->year !="")
             {
                 if($type== 'car'){
-                    $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
+                    // $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
+                    $carsQuery->whereRaw("REGEXP_SUBSTR(blog.yom, '[0-9]{4}') = ?", [
+                        $request->year 
+                    ]);
+                    
+                    
                   }  else if($type == 'heavy'){
-                    $carsQuery->where('heavy.yom', 'like', '%' . $request->year . '%'); 
+                    // $carsQuery->where('heavy.yom', 'like', '%' . $request->year . '%'); 
+                    $carsQuery->whereRaw("REGEXP_SUBSTR(heavy.yom, '[0-9]{4}') = ?", [
+                        $request->year 
+                    ]);
                   } else if($type =='small_heavy'){
-                    $carsQuery->where('small_heavy.yom', 'like', '%' . $request->year . '%'); 
+                    // $carsQuery->where('small_heavy.yom', 'like', '%' . $request->year . '%'); 
+                    $carsQuery->whereRaw("REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') = ?", [
+                        $request->year 
+                    ]);
                   }
             }
         }
@@ -1596,7 +1604,7 @@ class HomeController extends Controller
                 'id' => $car->id,
                 'make'=>$car->make,
                 'kms'=>$car->kms,
-                'yor'=>$car->year_of_reg,
+                'yor'=>$car->yom,
                 'location'=>$car->location,
                 'created_at'=>$car->created_at,
             ];
@@ -1747,7 +1755,7 @@ class HomeController extends Controller
             $image_folder='heavy_photos';   
         } else if($type == 'small_heavy'){
             $car = SmallHeavy::where('id',$slug)->firstOrFail();
-            $car_images=SmallHeavy::Join('add_small_heavy_image  as pi','pi.category','=','small_heavy.id')
+            $car_images=SmallHeavy::Join('add_small_heavy_images  as pi','pi.category','=','small_heavy.id')
             ->where('pi.category')
             ->select('pi.image')->get();
             $image_folder='small_heavy';
@@ -8637,6 +8645,8 @@ public function getJDMPriceRange()
         return $jdm_brand;    
       
     }
+
+
 
 
 

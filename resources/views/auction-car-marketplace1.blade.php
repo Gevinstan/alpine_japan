@@ -907,8 +907,10 @@
                 })
 
                 $("#clear-year").on('click',function(e){
-                    $("#modelYearSlider").val("");
+                    var minYear=@json($minYear);
+                    $("#modelYearSlider").val(minYear);
                     $("#start_year").val("");
+                    clear_price_slider();
                     $("#search_form").submit();
                 })
                 $("#clear-budget").on('click',function(e){  

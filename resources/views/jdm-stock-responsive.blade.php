@@ -381,6 +381,7 @@
                                             </span> 
                                     </span>              
                                 </p>
+                                @php $request_check++;@endphp   
                                 @endforeach
                                 @endif
                                 @if(request('year'))
@@ -393,10 +394,13 @@
                                             </span> 
                                     </span>              
                                 </p>
+                                @php $request_check++;@endphp   
                                 @endif
                             </div>
                             <div>
+                            @if($request_check !=0)
                                 <button class="btn search-clear-btn clear-url">clear</button>
+                            @endif   
                             </div>
                         </div>
 
@@ -1029,8 +1033,10 @@
                     $("#search_form").submit();
                 })
                 $("#clear-year").on('click',function(e){
-                    $("#modelYearSlider").val("");
+                    var minYear=@json($minYear);
+                    $("#modelYearSlider").val(minYear);
                     $("#start_year").val("");
+                    clear_price_slider();
                     $("#search_form").submit();
                 })
                 $("#clear-budget").on('click',function(e){  
