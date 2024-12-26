@@ -93,7 +93,7 @@
                                                                                 <div class="row">
                                                                                     <div class="col-12">
                                                                                         <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('App Name')}} </label>
+                                                                                            <label class="crancy__item-label">{{__('App Name')}} *</label>
                                                                                             <input class="crancy__item-input" type="text" value="{{ $general_setting->app_name }}" name="app_name">
                                                                                         </div>
                                                                                     </div>
@@ -103,7 +103,7 @@
 
                                                                                     <div class="col-12">
                                                                                         <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Contact Message Receiver Email')}} </label>
+                                                                                            <label class="crancy__item-label">{{__('Contact Message Receiver Email')}} *</label>
                                                                                             <input class="crancy__item-input" type="text" value="{{ $general_setting->contact_message_mail }}" name="contact_message_mail">
                                                                                         </div>
                                                                                     </div>
@@ -695,14 +695,14 @@
 
                                                                                     <div class="col-12">
                                                                                         <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Captcha Site Key')}} </label>
+                                                                                            <label class="crancy__item-label">{{__('Captcha Site Key')}}* </label>
                                                                                             <input class="crancy__item-input" type="text" name="site_key" value="{{ $google_recaptcha_setting->site_key }}">
                                                                                         </div>
                                                                                     </div>
 
                                                                                     <div class="col-12">
                                                                                         <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Captcha Secret Key')}} </label>
+                                                                                            <label class="crancy__item-label">{{__('Captcha Secret Key')}} *</label>
                                                                                             <input class="crancy__item-input" type="text" name="secret_key" value="{{ $google_recaptcha_setting->secret_key }}">
                                                                                         </div>
                                                                                     </div>
@@ -749,7 +749,7 @@
 
                                                                                     <div class="col-12">
                                                                                         <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Analytic Id')}} </label>
+                                                                                            <label class="crancy__item-label">{{__('Analytic Id')}} *</label>
                                                                                             <input class="crancy__item-input" type="text" name="analytic_id" value="{{ $google_analytic_setting->analytic_id }}">
                                                                                         </div>
                                                                                     </div>
@@ -794,7 +794,7 @@
 
                                                                                     <div class="col-12">
                                                                                         <div class="crancy__item-form--group mg-top-form-20">
-                                                                                            <label class="crancy__item-label">{{__('Pixel App Id')}} </label>
+                                                                                            <label class="crancy__item-label">{{__('Pixel App Id')}}* </label>
                                                                                             <input class="crancy__item-input" type="text" name="app_id" value="{{ $facebook_pixel_setting->app_id }}">
                                                                                         </div>
                                                                                     </div>

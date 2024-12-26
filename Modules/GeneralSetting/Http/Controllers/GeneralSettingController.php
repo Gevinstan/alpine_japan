@@ -110,6 +110,13 @@ class GeneralSettingController extends Controller
     }
 
     public function update_logo_favicon(Request $request){
+        $rules = [  
+            'logo'=>[
+                'nullable',
+                Rule::when(request('logo'),
+                ['required','image','mimes:jpeg,png,jpg','max:2048'])
+            ],
+        ];
 
         $logo_setting = Setting::first();
         if($request->logo){
