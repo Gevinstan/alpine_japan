@@ -14,6 +14,134 @@
     </div>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Centered & Large Size -->
+    <div class="modal-content">
+      <div class="modal-body position-relative">
+        <span class="close-btn" data-bs-dismiss="modal">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="30px" height="30px"><path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/><path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"/><path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"/></svg>
+        </span>
+        <h2 class="section-heading text-center mb-3 modal-heading">Get a Free <span class="highlight"> &nbsp; Quotation<span></h2>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-3 border rounded-3">
+                <div class="inventory-details-slick-for m-0">
+                    @foreach ($galleries as $gallery)
+                        <div class="inventory-details-slick-img">
+                            <div class="inventory-details-slick-img-tag">
+                                <div class="icon-main">
+                                    
+                                </div>
+                            </div>
+                            <div class="image-zoom-container">
+                                <img class="main-image" src="{{ asset($gallery) }}" alt="img">
+                                <div class="zoom-lens"></div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-12">
+                <div class="d-flex flex-column gap-3 car-listing-details">
+                    <p class="brand-text fw-bolder">{{$car->company_en}}</p>
+                    <h3>{{$car->model_name_en}}</h3>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="amount-text" id="price_value">Price <span class="price-text">
+                            @if(session('front_lang')=='en')
+                                ${{$car->start_price_num}}
+                                @else
+                                {{$car->start_price}}
+                            @endif 
+                        </span></p>
+                        <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                        ${{$car->commission_value}}
+                        </span></p>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown location-dropdown w-100">
+                            <select class="form-select form-select location-select"
+                                aria-label=".form-select example" name="location" id="location">
+                                <option class="" selected value="">
+                                    {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                </option>
+                                
+                                @foreach ($delivery_charges as $charges)
+                                <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="w-100 bg-white">
+                            <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
+                                Delivery Charge 
+                            </button> 
+                        </div>
+                    </div>
+                    <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
+                    <div class="d-flex align-content-center total-price-container mt-3">
+                        <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                        <p class="" id="total_price"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form px-1 py-3">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                            <div class="textarea-wrapper">
+                                <input type="text" class="form-control p-3" id="exampleFormControlInput3"
+                                    placeholder="" name="name" value="{{ old('name') }}">
+                                <span class="placeholder-text">Name <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                        <div class="textarea-wrapper">
+                                <input type="email" class="form-control p-3" id="exampleFormControlInput4"
+                                    placeholder="" name="email" value="{{ old('email') }}">
+                                <span class="placeholder-text">Email <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                            <div class="textarea-wrapper">
+                                <input type="text" class="form-control p-3" id="exampleFormControlInput5"
+                                    placeholder="" name="phone" value="{{ old('phone') }}">
+                                <span class="placeholder-text">Phone <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                            <div class="textarea-wrapper">
+                                <input type="text" class="form-control p-3" id="exampleFormControlInpu6"
+                                    placeholder="" value="{{ old('subject') }}" name="subject">
+                                <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-12  mb-2">
+                            <div class="textarea-wrapper">
+                                <textarea class="form-control p-3" id="exampleFormControlTextarea11" rows="3"
+                                    placeholder="" name="message">{{ old('message') }}</textarea>
+                                <span class="placeholder-text">Message <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-12 row p-0">
+                            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
+                                <button type="button" class="btn btn-secondary cancel-btn w-full h-full" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 col-12">
+                                <button type="submit" class="thm-btn-two w-full">INQUIERY NOW</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <!-- Inventory Details-part-start -->
 
 
@@ -170,6 +298,11 @@
                                                 <input type="hidden" name="url_link" value="{{$url_link}}">
 
                                                 <button type="submit" class="thm-btn-two">INQUIERY NOW</button>
+                                                
+<!-- Button to Open Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+  Open Modal
+</button>
                                 </div>
                             </form>
 
@@ -807,6 +940,13 @@
 
     <script>
         "use strict";
+
+        document.getElementById("openModalBtn").addEventListener("click", function () {
+            let myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+            myModal.show();
+        });
+        
+
 
         function carReview(rating){
             $(".car_rat").each(function(){

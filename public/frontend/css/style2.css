@@ -18231,3 +18231,44 @@ input:not(:placeholder-shown) + .input-placeholder {
 
 /* Mobile View Dropdown container Style End*/
 
+
+.cancel-btn {
+    padding: 14px 30px;
+}
+@media (min-width: 576px) {  /* For small screens */
+    .modal-dialog {
+      max-width: 90%; /* Adjust width */
+    }
+}
+
+@media (min-width: 768px) {  /* For medium screens */
+    .modal-dialog {
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 1300px) {  /* For medium screens */
+    .modal-dialog {
+        max-width: 55%;
+    }
+}
+.modal-content {
+    min-height: 50vh; /* Adjust modal height */
+}
+
+.modal-heading {
+    font-size: 22px !important;
+}
+
+/* .image-zoom-container {
+    border: 1px solid gray !important;
+    border-radius: 5px;
+} */
+
+.close-btn{
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+
