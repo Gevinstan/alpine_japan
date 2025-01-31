@@ -68,7 +68,7 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="amount-text" id="price_value">Price <span class="price-text">
                                     @if(session('front_lang')=='en')
-                                        ${{$car->start_price_num}}
+                                        ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
                                         @else
                                         {{$car->start_price}}
                                     @endif 
@@ -170,6 +170,7 @@
                                                 <input type="hidden" name="url_link" value="{{$url_link}}">
 
                                                 <button type="submit" class="thm-btn-two">INQUIERY NOW</button>
+                                                <button type="submit" class="thm-btn-two">BUY NOW</button>
                                 </div>
                             </form>
 

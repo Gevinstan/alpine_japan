@@ -56,7 +56,8 @@ use Carbon\Carbon;
                                             <select class="aj-dropdown" id="jdm_brand" name="brand[]">
                                             <option selected value="">Brand</option>
                                             @foreach($jdm_core_brand as $brand)
-                                            <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</option>
+                                            <!-- <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->name) }}</option> -->
+                                            <option value="{{ $brand->slug }}"  onchange="updateButtonText('{{ $brand->slug }}')">{{ html_decode($brand->company_en) }}</option>
                                             @endforeach
                                             </select>
                                         </div>

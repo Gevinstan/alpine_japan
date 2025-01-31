@@ -12,7 +12,6 @@
 
 @section('body-content')
 <main class="overflow_jdm">
-    
 
     <!-- Inventory-part-start -->
 
@@ -22,6 +21,7 @@
                 <ol class="breadcrumb breadcrumb-list px-3">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Brand New Cars') }}</li>
+                    
                 </ol>
             </nav>
             <div class="row">
@@ -427,9 +427,9 @@
                                                     </span>
                                                     <p class="listcar_price pt-4 pe-4">
                                                        @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price_num'] }}
+                                                        {{ '$'.$car['price_in_usd'] }}
                                                         @else
-                                                            {{ '$'.$car['start_price'] }}
+                                                            {{ '$'.$car['price_in_usd'] }}
                                                         @endif
                                                     </p>
                                                 </div>
