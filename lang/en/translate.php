@@ -1010,6 +1010,7 @@
   'SQL Import Is In Progress' => 'SQL file import is in progress.',
   'SQL Imported' => 'SQL Imported',
   'Commission' => 'Commission',
+  'Shipping' =>'Shipping',
   'Commission List' => 'Commission List',
   'Manage Commission' => 'Manage Commission',
   'Date' => 'Date',

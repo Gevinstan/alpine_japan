@@ -6192,6 +6192,8 @@ public function getJDMPriceRange()
         $delivery_charges = DeliveryCharge::all();
         $jdm_core_brand = Brand::where('status', 'enable')->get();
 
+
+
         return view('car-listing-details', [
             'car' => $car,
             'galleries' => $images,
@@ -8223,13 +8225,10 @@ public function getJDMPriceRange()
     }
 
     public function send_message_to_company(ContactMessageRequest $request){
- 
         $setting = Setting::first();
-       
-    
-    
         // MailHelper::setMailConfig();
         $template = EmailTemplate::find(2);
+        
 
         $message = $template->description;
         $subject = $template->subject;
@@ -8238,6 +8237,10 @@ public function getJDMPriceRange()
         $message = str_replace('{{user_phone}}',$request->phone,$message);
         $message = str_replace('{{message_subject}}',$request->subject,$message);
         $message = str_replace('{{message}}',$request->message,$message);
+        $message = str_replace('{{commission}}',$request->commission,$message);
+        $message = str_replace('{{delivery_charge}}',$request->delivery,$message);
+        $message = str_replace('{{shipping}}',$request->shipping,$message);
+        $message = str_replace('{{total}}',$request->total_car_price,$message);
         $message = str_replace('{{message_url}}',$request->url_link,$message);
 
 
@@ -8256,7 +8259,7 @@ public function getJDMPriceRange()
         $Enquiry->make=$request->vehicle_brand;
         $Enquiry->model=$request->vehicle_model;
         $Enquiry->commission=$request->commission;
-        $Enquiry->delivery_charge=$request->delivery_charge;
+        $Enquiry->delivery_charge=$request->delivery;
         $Enquiry->total_car_price=$request->total_car_price;
         $Enquiry->message=$request->message;
         $Enquiry->url_link=$request->url_link;

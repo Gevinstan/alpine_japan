@@ -9,6 +9,9 @@ use Modules\Models\Entities\ModelsCars;
 use Modules\Categories\Entities\ProductCategories;
 use Modules\Models\Http\Requests\ModelRequest;
 use File;
+use Modules\Brand\Entities\Brand;
+use Modules\Brand\Entities\BrandTranslation;
+use Session;
 
 class ModelsController extends Controller
 {
@@ -18,7 +21,8 @@ class ModelsController extends Controller
      */
     public function index()
     {
-        $ModelsCars=ModelsCars::all();
+        $ModelsCars=ModelsCars::with('getBrand')->
+        orderBy('id','DESC')->get();
         return view('models::index')->with('models_cars',$ModelsCars);
     }
 
@@ -27,9 +31,13 @@ class ModelsController extends Controller
      * @return Renderable
      */
     public function create()
-    {
-        $category=ProductCategories::get();
-        return view('models::create')->with('category',$category);
+    {   
+        // $category=ProductCategories::get();
+        $brands = Brand::with(['getBrands' => function($query) {
+            $query->where('lang_code', Session::get('front_lang'))
+                  ->select('brand_translations.brand_id', 'brand_translations.name'); // Select columns from the BrandTranslation table
+        }])->get();
+        return view('models::create')->with('brands',$brands);
     }
 
     /**
@@ -52,7 +60,8 @@ class ModelsController extends Controller
             $image_name = '';
         }
        $model->image=$image_name;
-       $model->category=$request->category;
+    //    $model->category=$request->category;
+       $model->brand_id=$request->brand;
        $model->model=$request->model;
        $model->save();
        $notification= trans('translate.Created Successfully');
@@ -77,9 +86,15 @@ class ModelsController extends Controller
      */
     public function edit($id)
     {
-        $models=ModelsCars::find($id);
-        $categories=ProductCategories::get();
-        return view('models::edit',compact('models','categories'));
+        // $models=ModelsCars::find($id);
+        $models=ModelsCars::with(['getBrand'=>function($query){
+            $query->where('brand_translations.lang_code',Session::get('front_lang'));
+        }])->
+        orderBy('id','DESC')->find($id);
+        
+        // $categories=ProductCategories::get();
+        $brand=BrandTranslation::where('brand_translations.lang_code', Session::get('front_lang'))->get();
+        return view('models::edit',compact('models','brand'));
     }
 
     /**
@@ -101,7 +116,7 @@ class ModelsController extends Controller
           $model_image->move($org_path, $image_name);
           $model->image=$image_name;
         }
-       $model->category=$request->category;
+       $model->brand_id=$request->brand;
        $model->model=$request->model;
        $model->save();
         $notification= trans('translate.Updated Successfully');

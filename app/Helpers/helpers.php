@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon; 
+use App\Models\JPYRate;
 function html_decode($text){
     $after_decode =  htmlspecialchars_decode($text, ENT_QUOTES);
     return $after_decode;
@@ -233,18 +234,21 @@ function getConversionRate(){
         
         
         // Initialize CURL:
-        $ch = curl_init('https://api.currencylayer.com/'.$endpoint.'?access_key='.$access_key.'&from='.$from.'&to='.$to.'&amount='.$amount);
+        // $ch = curl_init('https://api.currencylayer.com/'.$endpoint.'?access_key='.$access_key.'&from='.$from.'&to='.$to.'&amount='.$amount);
         
-        // Set CURL options:
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
+        // // Set CURL options:
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
         
-        // Execute the request and store the response
-        $json = curl_exec($ch);
-        if ($json) {
-            curl_close($ch);
-            $conversionResult = json_decode($json, true);
+        // // Execute the request and store the response
+        // $json = curl_exec($ch);
+        $json=JPYRate::first();
+
+
+        if (!empty($json)) {
+            // curl_close($ch);
+            // $conversionResult = json_decode($json, true);
             // Get the exchange rate for USD to JPY
-            $rate = number_format($conversionResult['result'], 2);
+            $rate = number_format($json->yen_rate, 2);
             $expiry_date=Carbon::tomorrow()->startOfDay();
 
             // Store the conversion rate in cache for 24 hours

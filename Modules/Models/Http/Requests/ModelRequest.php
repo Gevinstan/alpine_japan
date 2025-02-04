@@ -23,7 +23,7 @@ class ModelRequest extends FormRequest
     {
         if ($this->isMethod('post')) {
             $rules = [
-                'category'=>'required',
+                'brand'=>'required',
                 'image'=>'required',
                 'model'=>'required'
             ];
@@ -31,7 +31,7 @@ class ModelRequest extends FormRequest
 
         if ($this->isMethod('put')) {
             $rules = [
-                'category'=>'required',
+                'brand'=>'required',
                 'model'=>'required'
             ];
         }
