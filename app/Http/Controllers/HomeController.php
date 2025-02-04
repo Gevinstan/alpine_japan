@@ -5261,7 +5261,7 @@ public function car_listing(Request $request){
         $rate = strval($rate);
         
         // Perform the division with BCMath for higher precision
-        $result = bcDiv($amount, $rate, 10); // Increased internal precision
+        $result = bcdiv($amount, $rate, 10); // Increased internal precision
     
         // First round to 4 decimal places to match Google's internal precision
         $result = round((float)$result, 4);
