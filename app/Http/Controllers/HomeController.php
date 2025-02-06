@@ -5635,7 +5635,7 @@ public function car_listing(Request $request){
         if ($request->brand) {
             $brand_arr = array_filter($request->brand); // Filter out any empty values
             if ($brand_arr) {
-                $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
+                $carsQuery->whereIn(DB::raw('LOWER(company_en)'), $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp_op')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
