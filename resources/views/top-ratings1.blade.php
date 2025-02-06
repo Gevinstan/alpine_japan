@@ -53,7 +53,7 @@
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <input name="brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                        <input name="brand[]" style="display:none" class="form-check-input brand-search" type="checkbox"
                                                                              value="{{ $brand->slug }}"
                                                                             {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
                                                                         <label class="form-check-label brand_name" for="flexCheckDefault-{{ $brand->id }}">

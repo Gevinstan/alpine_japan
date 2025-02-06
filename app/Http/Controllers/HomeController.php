@@ -2793,6 +2793,7 @@ public function getJdmBrandsWithModels(): array
     })->all();
 }
 public function car_listing(Request $request){
+    // dd($request->all());
         $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         // ->join('brand_translations as bt','bt.brand_id','=','b.id')
@@ -2871,7 +2872,7 @@ public function car_listing(Request $request){
     if ($request->brand) {
         $brand_arr = array_filter($request->brand); // Filter out any empty values
         if ($brand_arr) {
-            $carsQuery->whereIn('company_en', $brand_arr); 
+            $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
             // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
             $models = \DB::table('auct_lots_xml_jp_op')
             ->whereIn(DB::raw('LOWER(company_en)'), $request->brand)
@@ -3012,6 +3013,12 @@ public function car_listing(Request $request){
     if(!$request->sort_by){
         $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc');
     }
+
+    // $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
+    // ->select('auct_lots_xml_jp_op.*')->get();
+
+    // dd(DB::getQueryLog());
+
     $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
     ->select('auct_lots_xml_jp_op.*')->paginate(12);
 
@@ -3022,7 +3029,16 @@ public function car_listing(Request $request){
 
     // Transform cars into an array for the view
     $cars_array = $cars->map(function ($car) {
-    $car_image=$this->last_image($car->pictures);
+    // $car_image=$this->last_image($car->pictures);
+    $car_image=$car_image =$this->last_image($car->pictures);
+    $imageUrl='uploads/website-images/no-image.jpg';
+    if(count($car_image)> 0){
+        if ($this->isImageAvailable($car_image[0])) {
+            $imageUrl= $car_image[0];
+        } else {
+            $imageUrl='uploads/website-images/no-image.jpg';
+        }
+    }
         return [
             'company_en' => $car->company_en,
             'company' => $car->company,
@@ -3032,7 +3048,7 @@ public function car_listing(Request $request){
             'start_price_num' => $this->convertCurrency($car->start_price_num, $this->usdRate),
             'end_price' => $car->end_price,
             'end_price_num' => $this->convertCurrency($car->end_price_num, $this->usdRate),
-            'picture' =>$car_image[0],
+            'picture' =>$imageUrl,
             'id' => $car->id,
             'mileage' => $car->mileage,
             'mileage_en' => $car->mileage_en,
@@ -3206,7 +3222,7 @@ public function car_listing(Request $request){
     if ($request->brand) {
         $brand_arr = array_filter($request->brand); // Filter out any empty values
         if ($brand_arr) {
-            $carsQuery->whereIn('company_en', $brand_arr); 
+            $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
             // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
             $models = \DB::table('auct_lots_xml_jp_op')
             ->whereIn(DB::raw('LOWER(company_en)'), $request->brand)
@@ -4160,7 +4176,16 @@ public function car_listing(Request $request){
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
-        $car_image=$this->last_image($car->pictures);
+        // $car_image=$this->last_image($car->pictures);
+        $car_image=$car_image =$this->last_image($car->pictures);
+        $imageUrl='uploads/website-images/no-image.jpg';
+        if(count($car_image)> 0){
+            if ($this->isImageAvailable($car_image[0])) {
+                $imageUrl= $car_image[0];
+            } else {
+                $imageUrl='uploads/website-images/no-image.jpg';
+            }
+        }
             return [
                 'company_en' => $car->company_en,
                 'company' => $car->company,
@@ -4170,7 +4195,7 @@ public function car_listing(Request $request){
                 'start_price_num' => $this->convertCurrency($car->start_price_num, $this->usdRate),
                 'end_price' => $car->end_price,
                 'end_price_num' => $this->convertCurrency($car->end_price_num, $this->usdRate),
-                'picture' =>$car_image[0],
+                'picture' =>$imageUrl,
                 'id' => $car->id,
                 'mileage' => $car->mileage,
                 'mileage_en' => $car->mileage_en,
@@ -4328,12 +4353,12 @@ public function car_listing(Request $request){
         if($request->price_range){
 
             $priceRanges = [
-                "Under $5000" => ["start" => 0, "end" => 5000],
-                "$5000 - $50000" => ["start" => 5000, "end" => 50000],
-                "$50000 - $100000" => ["start" => 50000, "end" => 100000],
-                "$100000 - $200000" => ["start" => 100000, "end" => 200000],
-                "$200000 - $300000" => ["start" => 200000, "end" => 300000],
-                "Above $300000" => ["start" => 300000, "end" => null] // Use PHP_INT_MAX for "Above"
+                "Under $5000" => ["start" => 0, "end" => (5000 * $this->usdRate)],
+                "$5000 - $50000" => ["start" => (5001 * $this->usdRate), "end" => (50000 * $this->usdRate)],
+                "$50000 - $100000" => ["start" => (50001 * $this->usdRate), "end" => (100000 * $this->usdRate)],
+                "$100000 - $200000" => ["start" => (100001 * $this->usdRate), "end" =>  (200000 * $this->usdRate)],
+                "$200000 - $300000" => ["start" => (200001 * $this->usdRate), "end" => (300000 * $this->usdRate)],
+                "Above $300000" => ["start" => (300001 * $this->usdRate), "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
             ];
 
 
@@ -4386,8 +4411,8 @@ public function car_listing(Request $request){
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
                 $parts = explode('-', $request->price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
+                $startValue = (trim($parts[0]) *  $this->usdRate);
+                $endValue = (trim($parts[1]) *  $this->usdRate);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
                     $q->whereBetween('start_price_num', [$startValue, $endValue])
                     ->orWhereBetween('end_price_num', [$startValue, $endValue]);
@@ -4565,9 +4590,6 @@ public function car_listing(Request $request){
         // DB::enableQueryLog();
         $carsQuery = Auct_lots_xml_jp::query();
 
-        $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp.company_en)'), '=', 'b.slug')
-        ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
-        ->where('bt.lang_code', Session::get('front_lang'));
 
         // Apply filters based on request parameters
         if ($request->location) {
@@ -4577,7 +4599,7 @@ public function car_listing(Request $request){
         if ($request->brand) {
             $brand_arr = array_filter($request->brand); // Filter out any empty values
             if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
+                $carsQuery->whereIn(DB::raw('LOWER(company_en)'), $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
@@ -4608,19 +4630,7 @@ public function car_listing(Request $request){
             $year = date('Y'); 
              $carsQuery->where('model_year_en', 'LIKE', $year . '%');    
         }
-
-        // if ($request->brand) {
-        //     $brand_arr = array_filter($request->brand); // Filter out any empty values
-        //     if ($brand_arr) {
-        //         $carsQuery->whereIn('company_en', $brand_arr); 
-        //     }    
-        // }
-        if ($request->tranmission) {
-            $transmission_arr = array_filter($request->transmission_arr); // Filter out any empty values
-            if ($transmission_arr) {
-                $carsQuery->whereIn('transmission_en', $transmission_arr); 
-            }    
-        }
+     
 
         if($request->year){
             if($request->year !="")
@@ -4632,12 +4642,12 @@ public function car_listing(Request $request){
         if($request->price_range){
 
             $priceRanges = [
-                "Under $5000" => ["start" => 0, "end" => 5000],
-                "$5000 - $50000" => ["start" => 5001, "end" => 50000],
-                "$50000 - $100000" => ["start" => 50001, "end" => 100000],
-                "$100000 - $200000" => ["start" => 100001, "end" => 200000],
-                "$200000 - $300000" => ["start" => 200001, "end" => 300000],
-                "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
+                "Under $5000" => ["start" => 0, "end" => (5000 * $this->usdRate)],
+                "$5000 - $50000" => ["start" => (5001 * $this->usdRate), "end" => (50000 * $this->usdRate)],
+                "$50000 - $100000" => ["start" => (50001 * $this->usdRate), "end" => (100000 * $this->usdRate)],
+                "$100000 - $200000" => ["start" => (100001 * $this->usdRate), "end" => (200000 * $this->usdRate)],
+                "$200000 - $300000" => ["start" => (200001 * $this->usdRate), "end" => (300000 * $this->usdRate)],
+                "Above $300000" => ["start" => (300001 * $this->usdRate), "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
             ];
 
             $carsQuery->where(function ($query) use ($request, $priceRanges) {
@@ -4675,37 +4685,19 @@ public function car_listing(Request $request){
             // }  
         }
 
-        if ($request->scores_en) {
-            $score_arr = array_filter($request->scores_en); // Filter out any empty values
-            if ($score_arr) {
-                $carsQuery->whereIn('scores_en', $score_arr); 
-            }
-        }
+  
 
 
 
-        if ($request->condition) {
-            $carsQuery->whereIn('condition', $request->condition);
-        }
-
-        if ($request->purpose) {
-            $purpose_arr = array_filter($request->purpose);
-            if ($purpose_arr) {
-                $carsQuery->whereIn('purpose', $purpose_arr);
-            }
-        }
-
-        if ($request->features) {
-            $carsQuery->whereJsonContains('features', $request->features);
-        }
+       
 
 
         if($request->price_range_scale){
             if($request->price_range_scale !=""){  
                 $hasPriceRangeScale = true;
                 $parts = explode(',', $request->price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
+                $startValue = (trim($parts[0]) *  $this->usdRate);
+                $endValue = (trim($parts[1]) *  $this->usdRate);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
                     // $q->whereBetween('start_price_num', [$startValue, $endValue])
                     // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
@@ -4758,7 +4750,9 @@ public function car_listing(Request $request){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
         }
        
+        $carsQuery->select('auct_lots_xml_jp.*')->get();
 
+       
         // Pagination
         $cars = $carsQuery
         ->select('auct_lots_xml_jp.*')->paginate(12);
@@ -4775,7 +4769,15 @@ public function car_listing(Request $request){
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
-        $car_image=$this->last_image($car->pictures);
+            $car_image=$car_image =$this->last_image($car->pictures);
+            $imageUrl='uploads/website-images/no-image.jpg';
+            if(count($car_image)> 0){
+                if ($this->isImageAvailable($car_image[0])) {
+                    $imageUrl= $car_image[0];
+                } else {
+                    $imageUrl='uploads/website-images/no-image.jpg';
+                }
+            }
             return [
                 'company_en' => $car->company_en,
                 'company' => $car->company,
@@ -4785,7 +4787,7 @@ public function car_listing(Request $request){
                 'start_price_num' => $car->start_price_num,
                 'end_price' => $car->end_price,
                 'end_price_num' => $car->end_price_num,
-                'picture' =>$car_image[0],
+                'picture' =>$imageUrl,
                 'id' => $car->id,
                 'mileage' => $car->mileage,
                 'mileage_en' => $car->mileage_en,
@@ -4945,7 +4947,7 @@ public function car_listing(Request $request){
         if ($request->brand) {
             $brand_arr = array_filter($request->brand); // Filter out any empty values
             if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
+                $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
@@ -5061,8 +5063,8 @@ public function car_listing(Request $request){
             if($request->price_range_scale !=""){  
                 $hasPriceRangeScale = true;
                 $parts = explode(',', $request->price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
+                $startValue = (trim($parts[0]) *  $this->usdRate);
+                $endValue = (trim($parts[1]) *  $this->usdRate);
                 $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
                     // $q->whereBetween('start_price_num', [$startValue, $endValue])
                     // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
@@ -5136,6 +5138,14 @@ public function car_listing(Request $request){
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) use ($usdRate) {
         $car_image=$this->last_image($car->pictures);
+        $imageUrl='uploads/website-images/no-image.jpg';
+        if(count($car_image)> 0){
+            if ($this->isImageAvailable($car_image[0])) {
+                $imageUrl= $car_image[0];
+            } else {
+                $imageUrl='uploads/website-images/no-image.jpg';
+            }
+        }
         $priceInUSD = bcdiv($car->start_price_num, $usdRate, 5);
             return [
                 'company_en' => $car->company_en,
@@ -5146,7 +5156,7 @@ public function car_listing(Request $request){
                 'start_price_num' => $car->start_price_num,
                 'end_price' => $car->end_price,
                 'end_price_num' => $car->end_price_num,
-                'picture' =>$car_image[0],
+                'picture' =>$imageUrl,
                 'id' => $car->id,
                 'mileage' => $car->mileage,
                 'mileage_en' => $car->mileage_en,
@@ -5625,7 +5635,7 @@ public function car_listing(Request $request){
         if ($request->brand) {
             $brand_arr = array_filter($request->brand); // Filter out any empty values
             if ($brand_arr) {
-                $carsQuery->whereIn('company_en', $brand_arr); 
+                $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp_op')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
@@ -5753,7 +5763,15 @@ public function car_listing(Request $request){
 
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
-        $car_image=$this->last_image($car->pictures);
+            $car_image=$car_image =$this->last_image($car->pictures);
+            $imageUrl='uploads/website-images/no-image.jpg';
+            if(count($car_image)> 0){
+                if ($this->isImageAvailable($car_image[0])) {
+                    $imageUrl= $car_image[0];
+                } else {
+                    $imageUrl='uploads/website-images/no-image.jpg';
+                }
+            }
             return [
                 'company_en' => $car->company_en,
                 'company' => $car->company,
@@ -5765,7 +5783,7 @@ public function car_listing(Request $request){
                 'end_price' => $car->end_price,
                 // 'end_price_num' => $car->end_price_num,
                 'end_price_num' => $this->convertCurrency($car->end_price_num, $this->usdRate),
-                'picture' =>$car_image[0],
+                'picture' =>$imageUrl,
                 'id' => $car->id,
                 'mileage' => $car->mileage,
                 'mileage_en' => $car->mileage_en,

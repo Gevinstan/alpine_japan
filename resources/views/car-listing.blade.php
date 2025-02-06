@@ -51,9 +51,14 @@
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
                                                                     <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
-                                                                        <input name="brand[]" class="form-check-input brand-search" type="checkbox"
+                                                                        <input name="brand[]" style="display:none;" class="form-check-input brand-search" type="checkbox"
                                                                              value="{{ $brand->slug }}"
                                                                             {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
+
+                                                                            <!-- <input type="hidden" name="brand[]" value="{{ $brand->slug }}"
+                                                                                {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}> -->
+
+                                                                            <!-- <input type="hidden" name="brand[]"> -->
                                                                         <label class="form-check-label brand_name" for="flexCheckDefault-{{ $brand->id }}">
                                                                             {{ $brand->name }}
                                                                         </label>
@@ -1172,6 +1177,7 @@
                         // Get the associated brand slug
                         const brandSlug = this.value;
 
+
                         // Find all model-search checkboxes associated with this brand
                         const modelCheckboxes = document.querySelectorAll(`.model-search[data-brand="${brandSlug}"]`);
 
@@ -1198,7 +1204,8 @@
                     const brandCheckbox = accordionItem.querySelector('.brand-search');
                     const modelCheckboxes = accordionItem.querySelectorAll('.model-search');
 
-                    console.log(brandCheckbox)
+                    // const brandSlug = this.getAttribute('data-brand')
+                    // console.log(brandSlug)
 
                     
                     // Check if all model checkboxes are checked
@@ -1206,7 +1213,7 @@
                     
                     
                     // Update brand checkbox accordingly
-                    brandCheckbox.checked = true;
+                    // brandCheckbox.checked = true;
                     clear_price_slider();
                     $('#search_form').submit();
                 });
