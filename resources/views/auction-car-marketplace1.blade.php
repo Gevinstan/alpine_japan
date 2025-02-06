@@ -1299,9 +1299,9 @@
 
 
 
-window.addEventListener("load", function() {
-    document.getElementById("pageLoader").classList.add("hidden");
-});
+//window.addEventListener("load", function() {
+   // document.getElementById("pageLoader").classList.add("hidden");
+//});
 
     var $j = jQuery.noConflict();
         $j(document).ready(function() {
