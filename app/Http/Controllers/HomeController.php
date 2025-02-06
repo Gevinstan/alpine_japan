@@ -4751,7 +4751,7 @@ public function car_listing(Request $request){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
         }
        
-        $carsQuery->select('auct_lots_xml_jp.*')->get();
+        // $carsQuery->select('auct_lots_xml_jp.*')->get();
 
        
         // Pagination
