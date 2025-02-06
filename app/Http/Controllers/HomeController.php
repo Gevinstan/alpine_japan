@@ -1736,7 +1736,6 @@ class HomeController extends Controller
             $image_folder='Cars';
         } else if($type=='heavy'){
             $car = Heavy::where('id',$slug)->firstOrFail(); 
-           
             $car_images=Heavy::Join('add_heavy_images as pi','pi.category','=','heavy.id')
             ->where('pi.category',$slug)
             ->select('pi.image')->get();  

@@ -51,11 +51,11 @@
                     <h3>{{$car->model_name_en}}</h3>
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="amount-text" id="price_value1">Price <span class="price-text">
-                            @if(session('front_lang')=='en')
-                                 ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
+                        @if(session('front_lang')=='en')
+                                ${{$car->price}}
                                 @else
-                                {{$car->start_price}}
-                            @endif 
+                                {{$car->price}}
+                        @endif 
                         </span></p>
                         <p style="display:none;" id="commission_value1">${{$car->commission_value}}</p>
                         <!-- <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
@@ -819,6 +819,14 @@
              }
         })
 
+        $("#location1").on('change',function(){
+             var locations=@json($delivery_charges);
+             var user_info=locations.filter(p=>p.id==$(this).val());
+             if(user_info!=""){
+                $("#delivery_charge1").text('$'+user_info[0].rate);
+             }
+        })
+
         $('.download-gallery').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -866,9 +874,9 @@
             }, images.length * 1000);
             });
 
-            window.addEventListener("load", function() {
-             document.getElementById("pageLoader").classList.add("hidden");
-            });
+            // window.addEventListener("load", function() {
+            //  document.getElementById("pageLoader").classList.add("hidden");
+            // });
 
 
             const locationSelect = document.getElementById("location");
