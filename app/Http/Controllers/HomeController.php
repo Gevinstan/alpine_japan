@@ -1809,7 +1809,8 @@ class HomeController extends Controller
             'car_images'=>$car_images,
             'slug'=>$slug,
             'image_folder'=>$image_folder,
-            'accesories'=>$accesories
+            'accesories'=>$accesories,
+            'usd_rate'=>$this->usdRate
         ]);
     }
 
@@ -4947,7 +4948,7 @@ public function car_listing(Request $request){
         if ($request->brand) {
             $brand_arr = array_filter($request->brand); // Filter out any empty values
             if ($brand_arr) {
-                $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
+                $carsQuery->whereIn(DB::raw('LOWER(company_en)'), $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
                 $models = \DB::table('auct_lots_xml_jp')
                 ->where(DB::raw('LOWER(company_en)'), $request->brand)
