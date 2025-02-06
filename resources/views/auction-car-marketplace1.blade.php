@@ -608,7 +608,7 @@
 
                                             <div class="">
                                                 <div class="pt-2">
-                                                    <p class="listcar_price_list ps-1 pe-4">
+                                                    <p class="listcar_price_list ps-1 pe-4 SDF">
                                                         @if(session('front_lang')=='en')
                                                             {{ '$'.$car['start_price_num'] }}
                                                         @else

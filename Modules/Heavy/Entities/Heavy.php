@@ -41,6 +41,7 @@ class Heavy extends Model
         'jib',
         'outrigger',
         'commision_value',
+        'shipping_value',
         'new_arrival',
         'deleted_at'
       ];

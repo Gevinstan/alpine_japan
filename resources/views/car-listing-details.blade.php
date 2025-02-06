@@ -832,9 +832,7 @@
            }
          })
          $("#calculate_total_price1").on('click',function(){
-           alert("one")
            if($("#location1").val() != ""){
-            alert("two")
              var start_price = $("#price_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
              var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
              var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price

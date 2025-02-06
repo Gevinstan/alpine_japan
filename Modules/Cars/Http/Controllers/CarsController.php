@@ -168,9 +168,25 @@ if($request->hasFile('cover_image')) {
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
+
+    public function storeShippingIdWise(Request $request){
+        Cars::where('is_active', 1)
+        ->whereIn('id',$request->selectedIds)
+        ->update(['shipping_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
     public function storeAllCarComission(Request $request){
         Cars::where('is_active', 1)
         ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function storeAllCarShipping(Request $request){
+        Cars::where('is_active', 1)
+        ->update(['shipping_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);

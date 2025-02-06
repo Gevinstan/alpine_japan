@@ -9,6 +9,7 @@
 @endsection
 
 @section('body-content')
+
     <!-- crancy Dashboard -->
     <section class="crancy-adashboard crancy-show">
         <div class="container container__bscreen">
@@ -30,6 +31,12 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror   
                                                         <button class="crancy-btn" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>   
+                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Shipping')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input w-25" type="text" name="shipping" id="shipping">
+                                                        @error('shipping')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button>   
                                             <a href="{{ route('admin.cars.create') }}" class="crancy-btn text-nowrap"><span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                     <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -311,7 +318,27 @@
 
                 }   
             })
+
+            
+        $("#shippingBtn").on('click', function() {
+                var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+                const selectedIds = Array.from(rowCheckboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.getAttribute('data-id')); 
+                    
+                if($("#masterCheckbox").is(':checked')){
+                    updateAllShipping();
+                } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                    updateSelectedShipping(selectedIds);
+                } else {
+                    toastr.error("Error", "Please check the Checkbox.");
+                }    
+       
+   });
+
+            
 });
+
 
 function updateAllCommission(){
     swal({
@@ -332,7 +359,7 @@ function updateAllCommission(){
                     success: function(response) {
                         if(response.success == true) {
                             toastr.success("Success", response.message);
-                            location.reload();
+                            // location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
@@ -382,6 +409,74 @@ function DeleteUser(selectedIds){
    
 }
 
+function updateAllCommission(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All commission value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{route('admin.store-all-comission')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        commission: $("#commission").val(),
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }
+
+    function updateAllShipping(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All Shipping value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "{{route('admin.store-all-car-shipping')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        commission: $("#shipping").val(),
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }   
+
+
+
 function updateSelectedComission(selectedIds){
      $.ajax({
             url: "{{route('admin.store-car-comission')}}",
@@ -389,6 +484,27 @@ function updateSelectedComission(selectedIds){
             data: {
                 selectedIds: selectedIds,
                 commission: $("#commission").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+}
+function updateSelectedShipping(selectedIds){
+     $.ajax({
+            url: "{{route('admin.store-car-shipping-id')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#shipping").val(),
                 _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
             },
             success: function(response) {
