@@ -1016,6 +1016,10 @@
             function clear_price_slider(){
                     let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
                     let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                    console.log(currentMinPrice+"current")
+                    console.log(currentMaxPrice+'current')
+                    console.log(initialMinPrice+'inital')
+                    console.log(initialMaxPrice+'initial')
                     if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                         $('input[name="price_range_scale"]').val('');
                     } 
@@ -1257,7 +1261,7 @@
                     // Update brand checkbox accordingly
                     brandCheckbox.checked = true;
                     clear_price_slider();
-                    $('#search_form').submit();
+                    // $('#search_form').submit();
                     });
                 });
                 $(".after_auth_wishlist").on('click',function(){
