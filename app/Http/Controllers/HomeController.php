@@ -3185,7 +3185,8 @@ public function car_listing(Request $request){
 
        
 
-        $minPrice = $priceRange->min_sal;
+        // $minPrice = $priceRange->min_sal;
+        $minPrice = $this->convertCurrency($priceRange->min_sal, $this->usdRate);
         // $maxPrice = $priceRange->max_sal;
         $maxPrice = $this->convertCurrency($priceRange->max_sal, $this->usdRate);
 
@@ -3223,7 +3224,7 @@ public function car_listing(Request $request){
     if ($request->brand) {
         $brand_arr = array_filter($request->brand); // Filter out any empty values
         if ($brand_arr) {
-            $carsQuery->whereIn('LOWER(company_en)', $brand_arr); 
+            $carsQuery->whereIn(DB::raw('LOWER(company_en)'), $brand_arr); 
             // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
             $models = \DB::table('auct_lots_xml_jp_op')
             ->whereIn(DB::raw('LOWER(company_en)'), $request->brand)
