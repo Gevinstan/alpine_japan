@@ -25,7 +25,7 @@
                                         <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box  d-flex  justify-between">
                                             <h4 class="crancy-product-card__title text-nowrap">{{ __('translate.Car Stock List') }}</h4>
                                             <div class="align-items-center d-flex gap-2 justify-content-end">
-                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
+                                            <!-- <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
                                                         <input class="crancy__item-input w-25" type="text" name="commission" id="commission">
                                                         @error('commission')
                                                             <div style="color: red;">{{ $message }}</div>
@@ -36,7 +36,7 @@
                                                         @error('shipping')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror   
-                                                        <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button>   
+                                                        <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button>    -->
                                             <a href="{{ route('admin.cars.create') }}" class="crancy-btn text-nowrap"><span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                     <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -46,6 +46,30 @@
                                             <button class="crancy-btn delete_danger_btn" id="delete-model">Delete</button>  
                                             </div>  
                                         </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between gap-4">
+
+                                    <div class="d-flex  items-center flex-column gap-2">
+                                    <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
+                                    <div class="d-flex items-center gap-3">
+                                                        <input class="crancy__item-input" type="text" name="commission" id="commission">
+                                                        @error('commission')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
+                                                        </div>
+                                    </div>
+                                    <div class="d-flex  items-center flex-column gap-2">
+                                    <label class="crancy__item-label text-nowrap">{{ __('translate.Shipping')." ( $ )" }} * </label>
+                                    <div class="d-flex items-center gap-3">
+                                                        <input class="crancy__item-input" type="text" name="shipping" id="shipping">
+                                                        @error('shipping')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button> 
+</dv>
+                                    </div>
+
                                     </div>
                                 </div>
 
