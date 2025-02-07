@@ -4925,7 +4925,8 @@ public function car_listing(Request $request){
         ->first();
         $minYear = now()->subYear()->year;
         $maxYear = now()->year;
-        $minPrice = $priceRange->min_sal;
+        // $minPrice = $priceRange->min_sal;
+        $minPrice = $this->convertCurrency($priceRange->min_sal, $usdRate);
         // $maxPrice = $priceRange->max_sal;
         $maxPrice = $this->convertCurrency($priceRange->max_sal, $usdRate);
 
