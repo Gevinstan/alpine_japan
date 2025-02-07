@@ -4,8 +4,8 @@
 @endsection
 
 @section('body-header')
-    <h3 class="crancy-header__title m-0">{{ __('translate.Create Categories') }}</h3>
-    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Categories') }} >> {{ __('translate.Create Categories') }}</p></a>
+    <h3 class="crancy-header__title m-0">{{ __('translate.Today JPY') }}</h3>
+    <a href="{{route('admin.dashboard')}}"><p class="crancy-header__text">{{ __('translate.Today JPY') }} >> {{ __('translate.Today JPY') }}</p></a>
 @endsection
 
 @section('body-content')
@@ -28,7 +28,6 @@
                                             <div class="create_new_btn_inline_box">
                                                 <h4 class="crancy-product-card__title">JPY</h4>
 
-                                                <a href="" class="crancy-btn "><i class="fa fa-list"></i> {{ __('translate.Categories List') }}</a>
                                             </div>
 
 

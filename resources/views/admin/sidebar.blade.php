@@ -255,6 +255,19 @@
 
                 </a>
             </li>
+            <li class="{{ Route::is('admin.usd_setup') || Route::is('admin.usd_setup') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.usd_setup') }}">
+                <span class="menu-bar__text">
+                    <span class="crancy-menu-icon crancy-svg-icon__v1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M6 21H18C20.2091 21 22 19.2091 22 17V7C22 4.79086 20.2091 3 18 3H6C3.79086 3 2 4.79086 2 7V17C2 19.2091 3.79086 21 6 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+
+                    </span>
+                    <span class="menu-bar__name">{{ __('translate.Today JPY') }}</span>   
+                </span>
+
+                </a>
+            </li>
             <li class="{{ Route::is('admin.general-setting') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.general-setting') }}"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
