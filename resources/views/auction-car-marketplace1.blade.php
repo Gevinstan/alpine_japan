@@ -112,8 +112,8 @@
 
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
                                                         <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                            <span class="slider-label m-0" id="minYearLabel">{{$minPrice}}</span>
-                                                            <span class="slider-value m-0" id="modelYearValue">{{$maxPrice}}</span> 
+                                                            <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
+                                                            <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
                                                         </div>
 
                                                         <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 

@@ -1224,9 +1224,25 @@ class HomeController extends Controller
         ->whereNotNull('yom')
         ->first();     
         
-        $priceRange = Cars::where('is_active', '1')
-        ->selectRaw('MIN(CAST(price AS DECIMAL)) as min_sal, MAX(CAST(price AS DECIMAL)) as max_sal')
+        // $priceRange = Cars::where('is_active', '1')
+        // ->selectRaw('MIN(CAST(price AS DECIMAL)) as min_sal, MAX(CAST(price AS DECIMAL)) as max_sal')
+        // ->first();
+
+        // DB::enableQueryLog();
+        $priceRange = Cars::join('models_cars as mc', function($join) {
+            $join->on('blog.category', '=', 'mc.category')
+                 ->on('blog.model', '=', 'mc.model');
+        })
+        ->where(DB::raw('LOWER(blog.make)'), $slug)
+        ->where('blog.is_active', '1')
+        ->whereRaw("REGEXP_REPLACE(REGEXP_REPLACE(blog.price, '[,]', ''), '[\s]', '') REGEXP '^[0-9]+$'")
+        ->selectRaw("
+            MIN(CAST(REGEXP_REPLACE(REGEXP_REPLACE(blog.price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as min_sal,
+            MAX(CAST(REGEXP_REPLACE(REGEXP_REPLACE(blog.price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as max_sal
+        ")
         ->first();
+        // dd(DB::getQueryLog());
+    
     
     
         // echo json_encode($priceRange);die();
@@ -1236,7 +1252,7 @@ class HomeController extends Controller
         $minYear = 1950;
 
         // $maxYear = $yearRange->max_year;
-        $maxYear = 2024;
+        $maxYear = Carbon::now()->year;
         $minPrice = $priceRange->min_sal;
         $maxPrice = $priceRange->max_sal;
 
@@ -2794,13 +2810,12 @@ public function getJdmBrandsWithModels(): array
 }
 public function car_listing(Request $request){
     // dd($request->all());
-        $seo_setting = SeoSetting::where('id', 1)->first();
         // $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
         // ->join('brand_translations as bt','bt.brand_id','=','b.id')
         // ->where('bt.lang_code',Session::get('front_lang'))
         // ->select('b.slug','bt.name as name')
         // ->distinct('b.slug')->get();
-
+        $seo_setting = SeoSetting::where('id', 1)->first();
         $brands=CarDataJpOp::select(
             'company_en as name',
             \DB::raw('LOWER(company_en) as slug')
