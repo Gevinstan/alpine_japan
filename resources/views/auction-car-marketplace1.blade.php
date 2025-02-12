@@ -12,6 +12,11 @@
 
     @endphp
 <main class="overflow_jdm">
+    <div id="pageLoader">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     
     <!-- Inventory-part-start -->
 
@@ -112,7 +117,7 @@
 
                                                     <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
                                                         <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                            <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
+                                                            <span class="slider-label m-0" id="minYearLabel">${{round($minPrice)}}</span>
                                                             <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
                                                         </div>
 
@@ -876,8 +881,20 @@
 
 @push('js_section')
 
+
     <script>
+         window.addEventListener("load", function() {
+        // Hide the loader when the page is fully loaded
+        document.getElementById("pageLoader").classList.add("hidden");  
+        });
+
+        // Ensure the loader is visible when the page is reloaded or submitted
+        window.addEventListener("beforeunload", function() {
+            // Show the loader before the page unloads (optional: depends on your needs)
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
         (function($) {
+            document.getElementById("pageLoader").classList.remove("hidden");
             "use strict"
 
             const initialMinPrice = $('#ex2').data('slider-min');
@@ -920,6 +937,7 @@
                 
 
                 $("#outside_form_btn").on("click",function(e){
+                    e.preventDefault();
                     clear_price_slider();
                     $("#search_form").submit();
                 })

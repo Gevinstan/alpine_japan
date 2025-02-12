@@ -13,6 +13,11 @@
 @endphp
 
 <main class="overflow_jdm">
+    <div id="pageLoader">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
         
         <section class="inventory feature-two listing-breadcrumb bg-light-grey ">
             <div class="container px-2 px-sm-3 px-lg-5">
@@ -987,7 +992,18 @@
 @push('js_section')
 
     <script>
+         window.addEventListener("load", function() {
+        // Hide the loader when the page is fully loaded
+        document.getElementById("pageLoader").classList.add("hidden");  
+        });
+
+        // Ensure the loader is visible when the page is reloaded or submitted
+        window.addEventListener("beforeunload", function() {
+            // Show the loader before the page unloads (optional: depends on your needs)
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
         (function($) {
+            document.getElementById("pageLoader").classList.remove("hidden");
             const initialMinPrice = $('#ex2').data('slider-min');
             const initialMaxPrice = $('#ex2').data('slider-max');
             $(".dropdown-click").on('click',function(){

@@ -1213,7 +1213,7 @@
                     
                     
                     // Update brand checkbox accordingly
-                    // brandCheckbox.checked = true;
+                    brandCheckbox.checked = true;
                     clear_price_slider();
                     $('#search_form').submit();
                 });

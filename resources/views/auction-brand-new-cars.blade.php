@@ -12,6 +12,11 @@
 
 @section('body-content')
 <main class="overflow_jdm">
+<div id="pageLoader">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
 
     <!-- Inventory-part-start -->
 
@@ -936,9 +941,20 @@
 @push('js_section')
 
     <script>
+         window.addEventListener("load", function() {
+        // Hide the loader when the page is fully loaded
+        document.getElementById("pageLoader").classList.add("hidden");  
+        });
+
+        // Ensure the loader is visible when the page is reloaded or submitted
+        window.addEventListener("beforeunload", function() {
+            // Show the loader before the page unloads (optional: depends on your needs)
+            document.getElementById("pageLoader").classList.remove("hidden");
+        });
         (function($) {
             "use strict"
 
+            document.getElementById("pageLoader").classList.remove("hidden");
             const initialMinPrice = $('#ex2').data('slider-min');
             const initialMaxPrice = $('#ex2').data('slider-max');
                 function clear_price_slider(){
@@ -979,11 +995,10 @@
 
                 $("#outside_form_btn").on("click",function(e){
                     e.preventDefault();   
-                    if($(this).val() !=""){
+                    if($("#outside_form_search").val() !=""){
                         clear_price_slider();
                         $("#search_form").submit();
                     }
-                   
                 })
 
                 $(".popular-search").on('change',function(e){

@@ -248,7 +248,7 @@ function getConversionRate(){
             // curl_close($ch);
             // $conversionResult = json_decode($json, true);
             // Get the exchange rate for USD to JPY
-            $rate = number_format($json->yen_rate, 2);
+            $rate = round($json->yen_rate);
             $expiry_date=Carbon::tomorrow()->startOfDay();
 
             // Store the conversion rate in cache for 24 hours
