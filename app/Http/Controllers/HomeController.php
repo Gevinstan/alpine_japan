@@ -138,7 +138,7 @@ class HomeController extends Controller
 
             foreach($top_sells as $cars){
                   $car_image=$this->last_image($cars->pictures);
-                  $imageUrl='uploads/website-images/no-image.jpg';
+                //   $imageUrl='uploads/website-images/no-image.jpg';
                 //   if(count($car_image)> 0){
                 //       if ($this->isImageAvailable($car_image[0])) {
                 //           $imageUrl= $car_image[0];
@@ -146,6 +146,11 @@ class HomeController extends Controller
                 //           $imageUrl='uploads/website-images/no-image.jpg';
                 //       }
                 //   }
+                $imageUrl = 'uploads/website-images/no-image.jpg';
+                $car_images = $this->last_image($cars->pictures);
+                if (!empty($car_images) && $this->isImageAvailable($car_images[0])) {
+                    $imageUrl = $car_images[0];
+                }
                     $top_cars[]=array(
                         'company_en'=>$cars->company_en,
                         'company'=>$cars->company,
