@@ -139,13 +139,13 @@ class HomeController extends Controller
             foreach($top_sells as $cars){
                   $car_image=$this->last_image($cars->pictures);
                   $imageUrl='uploads/website-images/no-image.jpg';
-                  if(count($car_image)> 0){
-                      if ($this->isImageAvailable($car_image[0])) {
-                          $imageUrl= $car_image[0];
-                      } else {
-                          $imageUrl='uploads/website-images/no-image.jpg';
-                      }
-                  }
+                //   if(count($car_image)> 0){
+                //       if ($this->isImageAvailable($car_image[0])) {
+                //           $imageUrl= $car_image[0];
+                //       } else {
+                //           $imageUrl='uploads/website-images/no-image.jpg';
+                //       }
+                //   }
                     $top_cars[]=array(
                         'company_en'=>$cars->company_en,
                         'company'=>$cars->company,
