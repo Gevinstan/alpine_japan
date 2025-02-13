@@ -93,7 +93,8 @@ class HomeController extends Controller
             ->where('auct_lots_xml_jp_op.top_sell', '1')
             ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
-            ->get()->limit(12);
+            ->limit(12)
+            ->get();
        
   
 
@@ -114,7 +115,7 @@ class HomeController extends Controller
         ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
         // ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
         ->select('blog.*')
-        ->orderBy('id','desc')->take(8)->get();
+        ->orderBy('id','desc')->limit(8)->get();
 
 
         $jdm_car_listings = $jdm_car_listings->map(function ($car) {
@@ -175,7 +176,8 @@ class HomeController extends Controller
             ->where('auct_lots_xml_jp_op.new_arrival', '1')
             ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
-            ->get()->limit(5);
+            ->limit(5)
+            ->get();
 
           
           
