@@ -1161,44 +1161,14 @@ class HomeController extends Controller
             ')
             ->whereNotNull('yom')
             ->first();  
-            // dd(DB::getQueryLog());
-        // $yearRange = Cars::where('is_active', '1')
-        //         ->selectRaw('
-        //         MIN(YEAR(
-        //             IF(
-        //                 STR_TO_DATE(yom, "%M %Y") IS NOT NULL, 
-        //                 STR_TO_DATE(yom, "%M %Y"), 
-        //                 CONCAT(CAST(yom AS CHAR), "-01-01")
-        //             )
-        //         )) AS min_year, 
-        //         MAX(YEAR(
-        //             IF(
-        //                 STR_TO_DATE(yom, "%M %Y") IS NOT NULL, 
-        //                 STR_TO_DATE(yom, "%M %Y"), 
-        //                 CONCAT(CAST(yom AS CHAR), "-01-01")
-        //             )
-        //         )) AS max_year
-        //     ')
-        // // ->selectRaw('MIN(YEAR(STR_TO_DATE(yom, "%M %Y"))) as min_year, MAX(YEAR(STR_TO_DATE(yom, "%M %Y"))) as max_year')
-        // ->whereNotNull('yom')
-        // ->first();     
-        
-        // $priceRange = Cars::where('is_active', '1')
-        // ->selectRaw('MIN(CAST(price AS DECIMAL)) as min_sal, MAX(CAST(price AS DECIMAL)) as max_sal')
-        // ->first();
 
-        // DB::enableQueryLog();
-        $priceRange = Cars::
-        // ::join('models_cars as mc', function($join) {
-        //     // $join->on('blog.category', '=', 'mc.category')
-        //          $join->on('blog.model', '=', 'mc.model');
-        // })
-        where(DB::raw('LOWER(blog.make)'), $slug)
-        ->where('blog.is_active', '1')
-        ->whereRaw("REGEXP_REPLACE(REGEXP_REPLACE(blog.price, '[,]', ''), '[\s]', '') REGEXP '^[0-9]+$'")
+        $priceRange = $model::
+        where(DB::raw('LOWER(' . $joinTable . '.make)'), $slug)
+        ->where($joinTable . '.is_active', '1')
+        ->whereRaw("REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') REGEXP '^[0-9]+$'")
         ->selectRaw("
-            MIN(CAST(REGEXP_REPLACE(REGEXP_REPLACE(blog.price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as min_sal,
-            MAX(CAST(REGEXP_REPLACE(REGEXP_REPLACE(blog.price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as max_sal
+            MIN(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as min_sal,
+            MAX(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as max_sal
         ")
         ->first();
         // dd(DB::getQueryLog());
