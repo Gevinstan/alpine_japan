@@ -267,8 +267,6 @@ use Carbon\Carbon;
                                                         <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     </div>
                                                 </div>
-
-                                                
                                                     <div class="brand-car-inner position-relative">
                                                         <div class="position-absolute heart_absolute parent">
                                                         @if(Auth::guard('web')->check()) 
@@ -307,15 +305,15 @@ use Carbon\Carbon;
 
                                                      <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" 
                                                         title="@if(session('front_lang')=='en')
-                                                            {{ html_decode($car['model_name_en']) }}
+                                                            {{ $car['model_name_en'] }}
                                                             @else
-                                                                {{ html_decode($car['model_name']) }}
+                                                                {{ $car['model_name'] }}
                                                             @endif">
                                                         <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                             @if(session('front_lang')=='en')
-                                                            {{ html_decode($car['model_name_en']) }}
+                                                            {{ $car['model_name_en'] }}
                                                             @else
-                                                                {{ html_decode($car['model_name']) }}
+                                                                {{ $car['model_name'] }}
                                                             @endif
                                                         </h3>
                                                     </a>
@@ -333,14 +331,14 @@ use Carbon\Carbon;
                                                             </div>
 
                                                             <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) . ',000' }}
+                                                                {{ $car['mileage_en'] . ',000' }}
                                                                 @else
-                                                                {{ html_decode($car['mileage']) . ',000'}}
+                                                                {{ $car['mileage'] . ',000'}}
                                                                 @endif">
                                                                 @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['mileage_en']) . ',000' }}
+                                                                {{ $car['mileage_en'] . ',000' }}
                                                                 @else
-                                                                {{ html_decode($car['mileage']) . ',000'}}
+                                                                {{ $car['mileage'] . ',000'}}
                                                                 @endif
                                                             </span>
                                                         </div>
@@ -354,14 +352,14 @@ use Carbon\Carbon;
                                                             </div>
 
                                                             <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
-                                                                {{ html_decode($car['year_en']) }}
+                                                                {{ $car['year_en']) }}
                                                                 @else
-                                                                {{ html_decode($car['year']) }}
+                                                                {{ $car['year']}}
                                                                 @endif">
                                                             @if(session('front_lang')=='en')
-                                                                {{ html_decode($car['year_en']) }}
+                                                                {{ $car['year_en'] }}
                                                                 @else
-                                                                {{ html_decode($car['year']) }}
+                                                                {{ $car['year'] }}
                                                                 @endif
                                                             </span>
                                                         </div>
@@ -376,14 +374,14 @@ use Carbon\Carbon;
                                                             </div>
 
                                                             <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
-                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                                {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                                 @else
-                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                                {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                                 @endif">
                                                             @if(session('front_lang')=='en')
-                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                                {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                                 @else
-                                                                {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                                {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                                 @endif
                                                             </span>
                                                         </div>
@@ -520,7 +518,7 @@ use Carbon\Carbon;
                                                         </div>
 
                                                         <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->mileage) }}">
-                                                            {{ html_decode($car->mileage) }}
+                                                            {{ $car->mileage }}
                                                         </span>
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
@@ -535,7 +533,7 @@ use Carbon\Carbon;
                                                         </div>
 
                                                         <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->fuel_type) }}">
-                                                            {{ html_decode($car->fuel_type) }}
+                                                            {{ $car->fuel_type }}
                                                         </span>
                                                     </div>
                                                     <div class="brand-car-inner-item-two">
@@ -549,7 +547,7 @@ use Carbon\Carbon;
                                                         </div>
 
                                                         <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="{{ html_decode($car->engine_size) }}">
-                                                            {{ html_decode($car->engine_size) }}
+                                                            {{ $car->engine_size }}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -920,15 +918,15 @@ use Carbon\Carbon;
                                         </div>
 
                                         <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
-                                                    {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
+                                                    {{ !empty($car['model_name_en']) ? $car['model_name_en'] : '' }}
                                                 @else
-                                                    {{ html_decode(!empty($car['model_name']) ? $car['model_name'] : '') }}
+                                                    {{ !empty($car['model_name']) ? $car['model_name'] : '' }}
                                                 @endif">
                                             <h3 class="text-truncate car-fullname pt-3 ps-3"> 
                                                 @if(session('front_lang')=='en')
-                                                    {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
+                                                    {{ !empty($car['model_name_en']) ? $car['model_name_en'] : '' }}
                                                 @else
-                                                    {{ html_decode(!empty($car['model_name']) ? $car['model_name'] : '') }}
+                                                    {{ !empty($car['model_name']) ? $car['model_name'] : '' }}
                                                 @endif
                                             </h3>
                                         </a>
@@ -948,9 +946,9 @@ use Carbon\Carbon;
 
                                                 <span class="fw-light spez_text truncate-card-text card-text-center">
                                                 @if(session('front_lang')=='en')
-                                                {{ html_decode($car['mileage']) .',000' }}
+                                                {{ $car['mileage'] .',000' }}
                                                 @else
-                                                    {{ html_decode($car['mileage_en'])  .',000'}}   
+                                                    {{ $car['mileage_en']  .',000'}}   
                                                 @endif
                                                 </span>
                                             </div>
@@ -964,14 +962,14 @@ use Carbon\Carbon;
                                                 </div>
 
                                                 <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" title="@if(session('front_lang')=='en')
-                                                    {{ html_decode($car['year_en']) }}
+                                                    {{ $car['year_en'] }}
                                                     @else
-                                                        {{ html_decode($car['year']) }}   
+                                                        {{ $car['year'] }}   
                                                     @endif">
                                                     @if(session('front_lang')=='en')
-                                                    {{ html_decode($car['year_en']) }}
+                                                    {{ $car['year_en'] }}
                                                     @else
-                                                        {{ html_decode($car['year']) }}   
+                                                        {{ $car['year'] }}   
                                                     @endif
                                                 </span>
                                             </div>
@@ -988,14 +986,14 @@ use Carbon\Carbon;
 
                                                 <span class="truncate-card-text card-text-center" data-toggle="tooltip" data-placement="top" 
                                                 title="@if(session('front_lang')=='en')
-                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                         @else
-                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                     @endif">
                                                     @if(session('front_lang')=='en')
-                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                         @else
-                                                        {{ html_decode(!empty($car['model_details_en']) ? $car['model_details_en'] : '--') }}
+                                                        {{ !empty($car['model_details_en']) ? $car['model_details_en'] : '--' }}
                                                     @endif
                                                 </span>
                                             </div>
