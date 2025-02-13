@@ -1150,15 +1150,16 @@ class HomeController extends Controller
             ->whereNotNull('yom')
             ->first();  
 
-        $priceRange = $model::
-        where(DB::raw('LOWER(' . $joinTable . '.make)'), $slug)
-        ->where($joinTable . '.is_active', '1')
-        ->whereRaw("REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') REGEXP '^[0-9]+$'")
-        ->selectRaw("
-            MIN(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as min_sal,
-            MAX(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') AS UNSIGNED)) as max_sal
-        ")
-        ->first();
+            $priceRange = $model::
+            where(DB::raw('LOWER(' . $joinTable . '.make)'), $slug)
+            ->where($joinTable . '.is_active', '1')
+            ->whereRaw("CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\\s]', '') AS UNSIGNED) REGEXP '^[0-9]+$'")
+            ->selectRaw("
+                MIN(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\\s]', '') AS UNSIGNED)) as min_sal,
+                MAX(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\\s]', '') AS UNSIGNED)) as max_sal
+            ")
+            ->first();
+        
         // dd(DB::getQueryLog());
     
     
