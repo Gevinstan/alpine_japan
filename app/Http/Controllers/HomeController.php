@@ -1128,18 +1128,6 @@ class HomeController extends Controller
         $joinTable = ($type == 'car') ? 'blog' : 'heavy'; 
         // DB::enableQueryLog();
         $yearRange = $model
-        // ::join('models_cars as mc', function($join) use($joinTable) {
-        //     if ($joinTable == 'blog') {
-        //         // $join->on('blog.category', '=', 'mc.category')
-        //         $join->on('blog.model', '=', 'mc.model');
-        //     } else {
-        //         // If it's 'heavy', adjust the join accordingly
-        //         // $join->on('heavy.category', '=', 'mc.category')
-        //         $join->on('heavy.model', '=', 'mc.model');
-        //     }
-        //     // $join->on('blog.category', '=', 'mc.category')
-        //     //      ->on('blog.model', '=', 'mc.model');
-        // })
         ::where(DB::raw('LOWER(' . $joinTable . '.make)'), $slug)
         ->where($joinTable . '.is_active', '1')
         ->whereRaw("REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\s]', '') REGEXP '^[0-9]+$'")
