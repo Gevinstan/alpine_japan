@@ -147,6 +147,7 @@ class HomeController extends Controller
                 //       }
                 //   }
                 $imageUrl = 'uploads/website-images/no-image.jpg';
+                $start_time = microtime(true);
                 $car_images = $this->last_image($cars->pictures);
                 if (!empty($car_images) && $this->isImageAvailable($car_images[0])) {
                     $imageUrl = $car_images[0];
@@ -2922,16 +2923,17 @@ public function car_listing(Request $request){
 
     // Transform cars into an array for the view
     $cars_array = $cars->map(function ($car) {
+        $imageUrl='uploads/website-images/no-image.jpg';
     // $car_image=$this->last_image($car->pictures);
-    $car_image=$car_image =$this->last_image($car->pictures);
-    $imageUrl='uploads/website-images/no-image.jpg';
-    if(count($car_image)> 0){
-        if ($this->isImageAvailable($car_image[0])) {
-            $imageUrl= $car_image[0];
-        } else {
-            $imageUrl='uploads/website-images/no-image.jpg';
-        }
-    }
+    // $car_image=$car_image =$this->last_image($car->pictures);
+    // $imageUrl='uploads/website-images/no-image.jpg';
+    // if(count($car_image)> 0){
+    //     if ($this->isImageAvailable($car_image[0])) {
+    //         $imageUrl= $car_image[0];
+    //     } else {
+    //         $imageUrl='uploads/website-images/no-image.jpg';
+    //     }
+    // }
         return [
             'company_en' => $car->company_en,
             'company' => $car->company,
