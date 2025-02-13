@@ -418,7 +418,7 @@ use Carbon\Carbon;
                                 aria-labelledby="pills-profile-tab">
 
 
-                                <div class="row g-5">
+                                {{--<div class="row g-5">
                                     @foreach ($used_cars as $car)
                                     <div class="col-xl-3 col-lg-4  col-sm-6 col-md-6">
                                         <div class="brand-car-item">
@@ -564,7 +564,7 @@ use Carbon\Carbon;
                                     </div>
                                     @endforeach
 
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-center pt-5">

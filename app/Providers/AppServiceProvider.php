@@ -52,10 +52,6 @@ class AppServiceProvider extends ServiceProvider
             $jdm_legend = DB::table('brands as b')
             ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
             ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
-            // ->join('models_cars as mc', function ($join) {
-            //     $join->on('blog.model', '=', 'mc.model')
-            //         ->on('blog.category', '=', 'mc.category'); // Match model and category
-            // })
             ->where('blog.is_active','1')
             ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
             ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
@@ -73,10 +69,6 @@ class AppServiceProvider extends ServiceProvider
             $jdm_legend_heavy = DB::table('brands as b')
             ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
             ->join('heavy as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
-            // ->join('models_cars as mc', function ($join) {
-            //     $join->on('blog.model', '=', 'mc.model')
-            //         ->on('blog.category', '=', 'mc.category'); // Match model and category
-            // })
             ->where('blog.is_active','1')
             ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
             ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
@@ -94,10 +86,6 @@ class AppServiceProvider extends ServiceProvider
             $jdm_legend_small_heavy = DB::table('brands as b')
             ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
             ->join('small_heavy as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
-            // ->join('models_cars as mc', function ($join) {
-            //     $join->on('blog.model', '=', 'mc.model')
-            //         ->on('blog.category', '=', 'mc.category'); // Match model and category
-            // })
             ->where('blog.is_active','1')
             ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
             ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
@@ -122,7 +110,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('breadcrumb', $setting->breadcrumb_image);
             $view->with('setting', $setting);
             $view->with('language_list', $language_list);
-            $view->with('currency_list', $currency_list);
+            // $view->with('currency_list', $currency_list);
             $view->with('google_recaptcha', $google_recaptcha);
             $view->with('custom_pages', $custom_pages);
             $view->with('google_analytic', $google_analytic);
