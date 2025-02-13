@@ -113,20 +113,20 @@ class HomeController extends Controller
         ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)'))
         ->where('blog.is_active','1')
         ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
-        // ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+        ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
         ->select('blog.*')
         ->orderBy('id','desc')->limit(8)->get();
 
 
-        $jdm_car_listings = $jdm_car_listings->map(function ($car) {
-            // Clean the price by removing spaces and commas
-            $cleanedPrice = preg_replace('/[\s,]/', '', $car->price);
+        // $jdm_car_listings = $jdm_car_listings->map(function ($car) {
+        //     // Clean the price by removing spaces and commas
+        //     $cleanedPrice = preg_replace('/[\s,]/', '', $car->price);
             
-            // Update the car object with the cleaned price
-            $car->cleaned_price = $cleanedPrice;
+        //     // Update the car object with the cleaned price
+        //     $car->cleaned_price = $cleanedPrice;
             
-            return $car;
-        });
+        //     return $car;
+        // });
 
 
      
