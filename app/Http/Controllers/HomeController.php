@@ -87,87 +87,53 @@ class HomeController extends Controller
 
         
 
-        // $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(12);
+
         $top_sells = CarDataJpOp::query()
             ->select('auct_lots_xml_jp_op.*')
             ->where('auct_lots_xml_jp_op.top_sell', '1')
             ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
-            ->get()->take(12);
+            ->get()->limit(12);
        
-        // $used_cars = Car::with('dealer', 'brand')->where(function ($query) {
-        //     $query->where('expired_date', null)
-        //         ->orWhere('expired_date', '>=', date('Y-m-d'));
-        // })->where(['condition' => 'Used', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
-
-        // $new_cars = Car::with('dealer', 'brand')->where(function ($query) {
-        //     $query->where('expired_date', null)
-        //         ->orWhere('expired_date', '>=', date('Y-m-d'));
-        // })->where(['condition' => 'New', 'status' => 'enable', 'approved_by_admin' => 'approved'])->get()->take(8);
+  
 
 
         $testimonials = Testimonial::where('status', 'active')->orderBy('id','desc')->get();
 
-        $blogs = Blog::where('status', 1)->orderBy('id','desc')->get()->take(4);
+        // $blogs = Blog::where('status', 1)->orderBy('id','desc')->get()->take(4);
 
-        $home1_ads = AdsBanner::where('position_key', 'home1_featured_car_sidebar')->first();
-        $home2_ads = AdsBanner::where('position_key', 'home2_brand_sidebar')->first();
-        $home3_ads = AdsBanner::where('position_key', 'home_new_arrivals')->first();
+        $ads = AdsBanner::whereIn('position_key', ['home1_featured_car_sidebar', 'home2_brand_sidebar', 'home_new_arrivals'])->get();
+        $home1_ads = $ads->where('position_key', 'home1_featured_car_sidebar')->first();
+        $home2_ads = $ads->where('position_key', 'home2_brand_sidebar')->first();
+        $home3_ads = $ads->where('position_key', 'home_new_arrivals')->first();
 
         $jdm_car_listings = DB::table('brands as b')
         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
         ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)'))
         ->where('blog.is_active','1')
         ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
-        ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+        // ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
         ->select('blog.*')
         ->orderBy('id','desc')->take(8)->get();
 
 
-        $brands = Brand::where('status', 'enable')->get();
+        $jdm_car_listings = $jdm_car_listings->map(function ($car) {
+            // Clean the price by removing spaces and commas
+            $cleanedPrice = preg_replace('/[\s,]/', '', $car->price);
+            
+            // Update the car object with the cleaned price
+            $car->cleaned_price = $cleanedPrice;
+            
+            return $car;
+        });
 
-        $cities = City::with('translate')->get();
+
+     
+
+        // $cities = City::with('translate')->get();
 
         $selected_theme = Session::get('selected_theme');
 
-        // if ($selected_theme == 'theme_one'){
-        
-        //     return view('index', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-
-        //     ]);
-        // }elseif($selected_theme == 'theme_two'){
-          
-        //     return view('index2', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-        //     ]);
-        // }elseif($selected_theme == 'theme_three'){
             foreach($top_sells as $cars){
                   $car_image=$this->last_image($cars->pictures);
                   $imageUrl='uploads/website-images/no-image.jpg';
@@ -209,9 +175,9 @@ class HomeController extends Controller
             ->where('auct_lots_xml_jp_op.new_arrival', '1')
             ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
-            ->get()->take(5);
+            ->get()->limit(5);
 
-            // echo json_encode(count($new_arrivals));die();
+          
           
     
             foreach($new_arrivals as $cars){
@@ -282,13 +248,13 @@ class HomeController extends Controller
                 'seo_setting' => $seo_setting,
                 'homepage' => $homepage,
                 'brands' => $brands,
-                'cities' => $cities,
+                // 'cities' => $cities,
                 // 'new_cars' => $new_cars,
                 // 'jdm_legend'=>$jdm_brand,
                 'jdm_core_brand'=>$jdm_core_brand,
                 // 'used_cars' => $used_cars,
                 'testimonials' => $testimonials,
-                'blogs' => $blogs,
+                // 'blogs' => $blogs,
                 'home1_ads' => $home1_ads,
                 'home2_ads' => $home2_ads,
                 'home3_ads' => $home3_ads,
