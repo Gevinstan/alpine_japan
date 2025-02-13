@@ -134,78 +134,43 @@ class HomeController extends Controller
         // $cities = City::with('translate')->get();
 
         $selected_theme = Session::get('selected_theme');
+        
 
-
-        $top_cars = $top_sells->map(function ($cars) {
-
-            $imageUrl = 'uploads/website-images/no-image.jpg';
-            $car_images = $this->last_image($cars->pictures);
-            if (!empty($car_images) && $this->isImageAvailable($car_images[0])) {
-                $imageUrl = $car_images[0];
-            }
-            return [
-                'company_en'=>$cars->company_en,
-                'company'=>$cars->company,
-                'model_name'=>$cars->model_name,
-                'model_name_en'=>$cars->model_name_en,
-                'start_price'=>$cars->start_price,
-                'start_price_num'=>$this->convertCurrency($cars->start_price_num, $this->usdRate),
-                'end_price'=>$cars->end_price,
-                'end_price_num'=>$this->convertCurrency($cars->end_price_num, $this->usdRate),
-                'picture'=>$imageUrl,
-                'id'=>$cars->id,
-                'mileage'=>$cars->mileage,
-                'mileage_en'=>$cars->mileage_en,
-                'year'=>$cars->model_year,
-                'year_en'=>$cars->model_year_en,
-                'transmission'=>$cars->transmission,
-                'transmission_en'=>$cars->transmission_en,
-                'model_details'=>$cars->model_details,
-                'model_details_en'=>$cars->model_details_en,
-                'parsed_data'=>$cars->parsed_data_en,
-                'datetime'=>$cars->datetime
-            ];
-
-        });    
-
-
-        // echo json_encode($top_cars);die();
-
-            // foreach($top_sells as $cars){
-            //       $car_image=$this->last_image($cars->pictures);
-            //       $imageUrl='uploads/website-images/no-image.jpg';
-            //       if(count($car_image)> 0){
-            //           if ($this->isImageAvailable($car_image[0])) {
-            //               $imageUrl= $car_image[0];
-            //           } else {
-            //               $imageUrl='uploads/website-images/no-image.jpg';
-            //           }
-            //       }
-            //         $top_cars[]=array(
-            //             'company_en'=>$cars->company_en,
-            //             'company'=>$cars->company,
-            //             'model_name'=>$cars->model_name,
-            //             'model_name_en'=>$cars->model_name_en,
-            //             'start_price'=>$cars->start_price,
-            //             'start_price_num'=>$this->convertCurrency($cars->start_price_num, $this->usdRate),
-            //             'end_price'=>$cars->end_price,
-            //             'end_price_num'=>$this->convertCurrency($cars->end_price_num, $this->usdRate),
-            //             'picture'=>$imageUrl,
-            //             'id'=>$cars->id,
-            //             'mileage'=>$cars->mileage,
-            //             'mileage_en'=>$cars->mileage_en,
-            //             'year'=>$cars->model_year,
-            //             'year_en'=>$cars->model_year_en,
-            //             'transmission'=>$cars->transmission,
-            //             'transmission_en'=>$cars->transmission_en,
-            //             'model_details'=>$cars->model_details,
-            //             'model_details_en'=>$cars->model_details_en,
-            //             'parsed_data'=>$cars->parsed_data_en,
-            //             'datetime'=>$cars->datetime,
-            //         );
-            //     // }
+            foreach($top_sells as $cars){
+                  $car_image=$this->last_image($cars->pictures);
+                  $imageUrl='uploads/website-images/no-image.jpg';
+                  if(count($car_image)> 0){
+                      if ($this->isImageAvailable($car_image[0])) {
+                          $imageUrl= $car_image[0];
+                      } else {
+                          $imageUrl='uploads/website-images/no-image.jpg';
+                      }
+                  }
+                    $top_cars[]=array(
+                        'company_en'=>$cars->company_en,
+                        'company'=>$cars->company,
+                        'model_name'=>$cars->model_name,
+                        'model_name_en'=>$cars->model_name_en,
+                        'start_price'=>$cars->start_price,
+                        'start_price_num'=>$this->convertCurrency($cars->start_price_num, $this->usdRate),
+                        'end_price'=>$cars->end_price,
+                        'end_price_num'=>$this->convertCurrency($cars->end_price_num, $this->usdRate),
+                        'picture'=>$imageUrl,
+                        'id'=>$cars->id,
+                        'mileage'=>$cars->mileage,
+                        'mileage_en'=>$cars->mileage_en,
+                        'year'=>$cars->model_year,
+                        'year_en'=>$cars->model_year_en,
+                        'transmission'=>$cars->transmission,
+                        'transmission_en'=>$cars->transmission_en,
+                        'model_details'=>$cars->model_details,
+                        'model_details_en'=>$cars->model_details_en,
+                        'parsed_data'=>$cars->parsed_data_en,
+                        'datetime'=>$cars->datetime,
+                    );
+                // }
            
-            // }
+            }
            
             $current_year=Date('Y');
             $new_arrivals = CarDataJpOp::query()
