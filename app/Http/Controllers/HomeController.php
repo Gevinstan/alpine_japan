@@ -1346,10 +1346,7 @@ class HomeController extends Controller
                        } else if($type == 'heavy'){
                         // $carsQuery->orderBy('heavy.price', 'asc');
                         $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) ASC");  
-                       } else if($type =='small_heavy'){
-                        // $carsQuery->orderBy('small_heavy.price', 'asc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') AS UNSIGNED) ASC");  
-                       }    
+                       }  
                     break;
                 case 'price_high_low':
                    if($type == 'car'){
@@ -1358,10 +1355,25 @@ class HomeController extends Controller
                        } else if($type == 'heavy'){
                         // $carsQuery->orderBy('heavy.price', 'desc');
                         $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) desc");  
-                       } else if($type =='small_heavy'){
-                        //    $carsQuery->orderBy('small_heavy.price', 'desc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') AS UNSIGNED) desc");  
-                       }
+                       } 
+                    break;
+                case 'old_to_new':
+                   if($type == 'car'){
+                        // $carsQuery->orderBy('blog.price', 'desc');    
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC"); 
+                       } else if($type == 'heavy'){
+                        // $carsQuery->orderBy('heavy.price', 'desc');
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC");
+                       } 
+                    break;
+                case 'new_to_old':
+                   if($type == 'car'){
+                        // $carsQuery->orderBy('blog.price', 'desc');    
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc"); 
+                       } else if($type == 'heavy'){
+                        // $carsQuery->orderBy('heavy.price', 'desc');
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc");
+                       } 
                     break;
                 case 'recent':  
                     if($type == 'car'){   
@@ -1374,12 +1386,7 @@ class HomeController extends Controller
                             ->limit(100)
                             ->pluck('id');
                             $carsQuery = $carsQuery->whereIn('heavy.id', $recentCarIds);
-                       } else if($type =='small_heavy'){
-                            $recentCarIds = $carsQuery->orderBy('small_heavy.id', 'desc')
-                            ->limit(100)
-                            ->pluck('id');
-                            $carsQuery = $carsQuery->whereIn('small_heavy.id', $recentCarIds);
-                       }
+                       } 
                     break;
             }
         }
@@ -2937,6 +2944,12 @@ public function car_listing(Request $request){
             case 'price_high_low':
                 $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                 break;
+            case 'old_to_new':
+                $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                break;
+            case 'new_to_old':
+                $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                break;    
             case 'recent':
                 $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                 ->limit(100)
@@ -3284,6 +3297,12 @@ public function car_listing(Request $request){
             case 'price_high_low':
                 $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                 break;
+            case 'old_to_new':
+                $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                break;
+            case 'new_to_old':
+                $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                break;    
             case 'recent':
                 $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                 ->limit(100)
@@ -4151,6 +4170,12 @@ public function car_listing(Request $request){
             case 'price_high_low':
                 $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                 break;
+            case 'old_to_new':
+                $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                break;
+            case 'new_to_old':
+                $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                break;
             case 'recent':  
                 $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                 ->limit(100)
@@ -4750,6 +4775,12 @@ public function car_listing(Request $request){
                 case 'price_high_low':
                     $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'desc');
                     break;
+                case 'old_to_new':
+                    $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                    break;
+                case 'new_to_old':
+                    $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                    break;
                 case 'recent':
                     $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc')
                     ->limit(100)
@@ -5140,6 +5171,12 @@ public function car_listing(Request $request){
                 case 'price_high_low':
                     $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'desc');
                     break;
+                case 'old_to_new':
+                    $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                    break;
+                case 'new_to_old':
+                    $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                    break;    
                 case 'recent':
                     $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc')
                     ->limit(100)
@@ -5800,6 +5837,12 @@ public function car_listing(Request $request){
                 case 'price_high_low':
                     $carsQuery->orderBy('auct_lots_xml_jp_op.start_price_num', 'desc');
                     break;
+                    case 'old_to_new':
+                        $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                        break;
+                    case 'new_to_old':
+                        $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                        break;
                 case 'recent':  
                     $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc')
                     ->limit(100)

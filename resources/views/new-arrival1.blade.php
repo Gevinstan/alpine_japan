@@ -341,6 +341,12 @@
                                             @case('price_high_low')
                                                 High to Low
                                                 @break
+                                            @case('old_to_new')
+                                                Old Year
+                                                @break
+                                            @case('new_to_old')
+                                                New Year
+                                                @break
                                             @default
                                                 Recently Added
                                         @endswitch
@@ -349,6 +355,8 @@
                                             <li><a data-brand="recent" data-text="Recently Added" class="dropdown-item dropdown-click" href="javascript:void(0)" >Recently Added</a></li>
                                             <li><a data-brand="price_low_high" data-text="Low to High"  class="dropdown-item dropdown-click" href="javascript:void(0)">Low to High</a></li>
                                             <li><a data-brand="price_high_low" data-text="High to Low"  class="dropdown-item dropdown-click" href="javascript:void(0)">High to Low</a></li>
+                                            <li><a data-brand="old_to_new" data-text="Old Year"  class="dropdown-item dropdown-click" href="javascript:void(0)">Old Year</a></li>
+                                            <li><a data-brand="new_to_old" data-text="New Year"  class="dropdown-item dropdown-click" href="javascript:void(0)">New Year</a></li>
                                         </ul>
                                         <input type="hidden" name="sort_by" id="sort_by_field" value="{{ request('sort_by', '') }}">
                                      </div>
