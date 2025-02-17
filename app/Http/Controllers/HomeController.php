@@ -4776,10 +4776,10 @@ public function car_listing(Request $request){
                     $carsQuery->orderBy('auct_lots_xml_jp.start_price_num', 'desc');
                     break;
                 case 'old_to_new':
-                    $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'asc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.model_year_en', 'asc');
                     break;
                 case 'new_to_old':
-                    $carsQuery->orderBy('auct_lots_xml_jp_op.model_year_en', 'desc');
+                    $carsQuery->orderBy('auct_lots_xml_jp.model_year_en', 'desc');
                     break;
                 case 'recent':
                     $recentCarIds = $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc')
