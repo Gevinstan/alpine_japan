@@ -3462,12 +3462,13 @@ public function car_listing(Request $request){
                 // ->join('brands as b', DB::raw('LOWER(t.company_en)'), '=', 'b.slug')
                 // ->join('brand_translations as bt','bt.brand_id','=','b.id')
                 // ->where('bt.lang_code',Session::get('front_lang')) 
+                ->leftJoin('auct_lots_xml_jp_op_other_chargers as oc', 'oc.auct_id', '=','t.id')
                 ->where('active_status','1')     
                 ->when($param == 'top-selling',function($query){
-                    return $query->where('top_sell',1);
+                    return $query->where('oc.top_sell',1);
                 })
                 ->when($param == 'new-arrival', function($query) {
-                    return $query->where('new_arrival', 1);
+                    return $query->where('oc.new_arrival', 1);
                 }) 
                 ->when($param == 'brand-new', function($query) {
                     return $query->whereBetween('model_year_en', [now()->subYear()->year,now()->year]);
