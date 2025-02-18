@@ -10,6 +10,7 @@ use Modules\Testimonial\Entities\Testimonial;
 use Modules\Blog\Entities\Blog;
 use Modules\Blog\Entities\BlogCategory;
 use Modules\Blog\Entities\BlogComment;
+use Modules\Blog\Entities\AuctLotsXmlJpOpOtherChargers;
 use Modules\Car\Entities\Car;
 use Modules\Cars\Entities\Cars;
 use Modules\Car\Entities\CarGallery;
@@ -88,15 +89,16 @@ class HomeController extends Controller
         
 
         // $top_sells=CarDataJpOp::where('top_sell','1')->orderBy('id','desc')->get()->take(12);
-        $top_sells = CarDataJpOp::query()
+        // $top_sells = CarDataJpOp::query()
+        //     ->select('auct_lots_xml_jp_op.*')
+        //     ->where('auct_lots_xml_jp_op.top_sell', '1')
+        //     ->where('auct_lots_xml_jp_op.active_status', '1')
+        //     ->orderBy('auct_lots_xml_jp_op.id', 'desc')
+        //     ->get()->take(12);
+        $top_sells = CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
             ->select('auct_lots_xml_jp_op.*')
-            // ->join('brands as b', function($join) {
-            //     $join->on(DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug');
-            // })
-            // ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
-            // ->where('bt.lang_code', Session::get('front_lang'))
-            ->where('auct_lots_xml_jp_op.top_sell', '1')
-            ->where('auct_lots_xml_jp_op.active_status', '1')
+            ->where('oc.top_sell', '1')
+            // ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
             ->get()->take(12);
        
@@ -122,10 +124,6 @@ class HomeController extends Controller
         $jdm_car_listings = DB::table('brands as b')
         ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
         ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)'))
-        // ->join('models_cars as mc', function ($join) {
-        //     $join->on('blog.model', '=', 'mc.model')
-        //         ->on('blog.category', '=', 'mc.category'); // Match model and category
-        // })
         ->where('blog.is_active','1')
         ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
         ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
@@ -139,44 +137,7 @@ class HomeController extends Controller
 
         $selected_theme = Session::get('selected_theme');
 
-        // if ($selected_theme == 'theme_one'){
         
-        //     return view('index', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-
-        //     ]);
-        // }elseif($selected_theme == 'theme_two'){
-          
-        //     return view('index2', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-        //     ]);
-        // }elseif($selected_theme == 'theme_three'){
             foreach($top_sells as $cars){
                   $car_image=$this->last_image($cars->pictures);
                   $imageUrl='uploads/website-images/no-image.jpg';
@@ -213,21 +174,22 @@ class HomeController extends Controller
            
             }
             $current_year=Date('Y');
-            $new_arrivals = CarDataJpOp::query()
-            ->select('auct_lots_xml_jp_op.*')
-            // ->join('brands as b', function($join) {
-            //     $join->on(DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug');
-            // })
-            // ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
-            // ->where('bt.lang_code', Session::get('front_lang'))
-            ->where('auct_lots_xml_jp_op.new_arrival', '1')
-            ->where('auct_lots_xml_jp_op.active_status', '1')
+            // $new_arrivals = CarDataJpOp::query()
+            // ->select('auct_lots_xml_jp_op.*')
+            // ->where('auct_lots_xml_jp_op.new_arrival', '1')
+            // ->where('auct_lots_xml_jp_op.active_status', '1')
+            // ->orderBy('auct_lots_xml_jp_op.id', 'desc')
+            // ->get()->take(5);
+            $new_arrivals = CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+            ->select('auct_lots_xml_jp_op.*','oc.shipping_value','oc.commission_value')
+            ->where('oc.new_arrival', '1')
+            // ->where('auct_lots_xml_jp_op.active_status', '1')
             ->orderBy('auct_lots_xml_jp_op.id', 'desc')
             ->get()->take(5);
 
-            // echo json_encode(count($new_arrivals));die();
-          
-    
+            // echo json_encode($new_arrivals);die();
+
+         
             foreach($new_arrivals as $cars){
                 $car_image=$this->last_image($cars->pictures);
                 $imageUrl='uploads/website-images/no-image.jpg';
@@ -271,17 +233,7 @@ class HomeController extends Controller
             ->groupBy('company_en')
             ->having('company_record', '>=', 1)
             ->get();
-            // echo json_encode($jdm_core_brand);die();
-        
-
-
-            // $brand_list=CarDataJpOp::select('company_en', \DB::raw('COUNT(*) as company_record'))
-            // ->groupBy('company_en')
-            // ->having('company_record', '>=', 1)
-            // ->get();
            
-
-            // $jdm_brand=$this->jdm_brands();
 
             $userId = $userId ?? auth()->id();
             $one_price_wishlists= DB::table('wishlists as um')
@@ -321,25 +273,6 @@ class HomeController extends Controller
                 'new_arrived_cars'=>$new_arrived_cars,
                 'jdm_car_listings'=>$jdm_car_listings
             ]);
-        // }else{
-        //     return view('index', [
-        //         'seo_setting' => $seo_setting,
-        //         'homepage' => $homepage,
-        //         'brands' => $brands,
-        //         'cities' => $cities,
-        //         'new_cars' => $new_cars,
-        //         'used_cars' => $used_cars,
-        //         'featured_cars' => $featured_cars,
-        //         'dealers' => $dealers,
-        //         'testimonials' => $testimonials,
-        //         'blogs' => $blogs,
-        //         'subscription_plans' => $subscription_plans,
-        //         'home1_ads' => $home1_ads,
-        //         'home2_ads' => $home2_ads,
-        //         'home3_ads' => $home3_ads,
-        //     ]);
-        // }
-
     }
     public function home_page_responsive(Request $request){       
         Artisan::call('optimize:clear');
@@ -1360,19 +1293,19 @@ class HomeController extends Controller
                 case 'old_to_new':
                    if($type == 'car'){
                         // $carsQuery->orderBy('blog.price', 'desc');    
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC"); 
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC"); 
                        } else if($type == 'heavy'){
                         // $carsQuery->orderBy('heavy.price', 'desc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC");
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC");
                        } 
                     break;
                 case 'new_to_old':
                    if($type == 'car'){
                         // $carsQuery->orderBy('blog.price', 'desc');    
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc"); 
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc"); 
                        } else if($type == 'heavy'){
                         // $carsQuery->orderBy('heavy.price', 'desc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.price, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc");
+                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc");
                        } 
                     break;
                 case 'recent':  
@@ -2659,6 +2592,7 @@ public function getBrandsWithModels($keywhere,$database_name,$brand_new): array
         //     });
         // Db::enableQueryLog();
         DB::table($tableName)
+            ->leftJoin('auct_lots_xml_jp_op_other_chargers as oc', 'oc.auct_id', '=', $tableName . '.id')
             // ->join('brands as b', DB::raw('LOWER(company_en)'), '=', 'b.slug') // Add join with brands
             // ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id') 
             ->select(
@@ -2669,14 +2603,14 @@ public function getBrandsWithModels($keywhere,$database_name,$brand_new): array
             // ->where('bt.lang_code', Session::get('front_lang')) 
             ->whereIn(DB::raw('LOWER(company_en)'), $brands->pluck('slug'))
             ->when($keywhere == 'new-arrival', function($query) {
-                return $query->where('new_arrival', '1');
+                return $query->where('oc.new_arrival', '1');
             })
             ->when($keywhere == 'top-sell', function($query) {
-                return $query->where('top_sell', '1');
+                return $query->where('oc.top_sell', '1');  
             })
-            ->when($tableName == 'auct_lots_xml_jp_op', function($query) {
-                return $query->where('active_status', '1');
-            })
+            // ->when($tableName == 'auct_lots_xml_jp_op', function($query) {
+            //     return $query->where('active_status', '1');
+            // })
             ->when($brand_new == 'brand-new', function($query) {
                 return $query->whereBetween('model_year_en', [now()->subYear()->year,now()->year]);
             })
@@ -3955,11 +3889,12 @@ public function car_listing(Request $request){
         // ->select('b.slug','company_en as name')
         // ->where('auct_lots_xml_jp_op.top_sell',1)
         // ->distinct('b.slug')->get();
-        $brands=CarDataJpOp::select(
+        $brands=CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        ->select(
             'company_en as name',
             \DB::raw('LOWER(company_en) as slug')
         )
-        ->where('top_sell',1)
+        ->where('oc.top_sell',1)
         ->groupBy('company_en')
         ->get();
         $models=[];
@@ -3971,12 +3906,14 @@ public function car_listing(Request $request){
       
 
         
-        $yearRange = CarDataJpOp::where('active_status', '1')
-        ->where('top_sell','1')
+        $yearRange = CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        // where('active_status', '1')
+        ->where('oc.top_sell','1')
         ->selectRaw('MIN(model_year_en) as min_year, MAX(model_year_en) as max_year')
         ->first();
-        $priceRange = CarDataJpOp::where('active_status', '1')
-        ->where('top_sell','1')
+        $priceRange = CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        // where('active_status', '1')
+        ->where('oc.top_sell','1')
         ->selectRaw('MIN(start_price_num) as min_sal, MAX(start_price_num) as max_sal')
         ->first();
         $minYear = $yearRange->min_year;
@@ -3998,6 +3935,7 @@ public function car_listing(Request $request){
         // ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
         // ->where('bt.lang_code', Session::get('front_lang'));
 
+        $carsQuery->Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id');
 
       
         // Apply filters based on request parameters
@@ -4124,12 +4062,12 @@ public function car_listing(Request $request){
                 $carsQuery->whereIn('company_en', $brand_arr); 
             // DB::enableQueryLog();
             // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand);    
-            $models = \DB::table('auct_lots_xml_jp_op')
-            ->where(DB::raw('LOWER(company_en)'), $request->brand)
-            ->where('top_sell','1')
-            ->groupBy('model_name_en') 
-            ->select('model_name_en')
-            ->get();
+            // $models = \DB::table('auct_lots_xml_jp_op')
+            // ->where(DB::raw('LOWER(company_en)'), $request->brand)
+            // ->where('top_sell','1')
+            // ->groupBy('model_name_en') 
+            // ->select('model_name_en')
+            // ->get();
             }
 
             // echo json_encode($models);die();
@@ -4151,7 +4089,7 @@ public function car_listing(Request $request){
         // }    
         // $carsQuery->where('model_name_en', $request->model); 
     }
-    $carsQuery->where('top_sell','1')->where('active_status','1');
+    $carsQuery->where('oc.top_sell','1')->where('active_status','1');
 
 
     $price_range_counts = $this->getPriceRangeCounts(
@@ -5655,12 +5593,13 @@ public function car_listing(Request $request){
         // ->where('auct_lots_xml_jp_op.new_arrival',1)    
         // ->distinct('b.slug')->get();
 
-        $brands=CarDataJpOp::select(
+        $brands=CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        ->select(
             'company_en as name',
             \DB::raw('LOWER(company_en) as slug')
         )
-        ->where('new_arrival',1)
-        ->where('active_status', '1')
+        ->where('oc.new_arrival',1)
+        // ->where('active_status', '1')
         ->groupBy('company_en')
         ->get();
 
@@ -5670,14 +5609,16 @@ public function car_listing(Request $request){
 
         $tableName='1';
         $brand_list=$this->getBrandsWithModels($keyWhere,$tableName,'');
+       
 
         // echo json_encode($brand_list);die();
-        $yearRange = CarDataJpOp::where('active_status', '1')
-        ->where('new_arrival',1)
+        $yearRange = CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        ->where('oc.new_arrival',1)
         ->selectRaw('MIN(model_year_en) as min_year, MAX(model_year_en) as max_year')
         ->first();
-        $priceRange = CarDataJpOp::where('active_status', '1')
-        ->where('new_arrival',1)
+        $priceRange = CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        // where('active_status', '1')
+        ->where('oc.new_arrival',1)
         ->selectRaw('MIN(start_price_num) as min_sal, MAX(start_price_num) as max_sal')
         ->first();
 
@@ -5705,6 +5646,12 @@ public function car_listing(Request $request){
         // ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
         // ->where('bt.lang_code', Session::get('front_lang'));
 
+
+        $carsQuery->Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id');
+
+
+    
+
         
         // Apply filters based on request parameters
         // if ($request->location) {
@@ -5717,12 +5664,12 @@ public function car_listing(Request $request){
             if ($brand_arr) {
                 $carsQuery->whereIn(DB::raw('LOWER(company_en)'), $brand_arr); 
                 // $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand); 
-                $models = \DB::table('auct_lots_xml_jp_op')
-                ->where(DB::raw('LOWER(company_en)'), $request->brand)
-                ->where('new_arrival','1')
-                ->groupBy('model_name_en') 
-                ->select('model_name_en')
-                ->get();
+                // $models = \DB::table('auct_lots_xml_jp_op')
+                // ->where(DB::raw('LOWER(company_en)'), $request->brand)
+                // ->where('new_arrival','1')
+                // ->groupBy('model_name_en') 
+                // ->select('model_name_en')
+                // ->get();
             }    
            
         }
@@ -5860,9 +5807,10 @@ public function car_listing(Request $request){
         }
         // Pagination
         $date=date('Y');
-        $cars = $carsQuery->where('auct_lots_xml_jp_op.new_arrival','1')
+        $cars = $carsQuery
+        ->where('oc.new_arrival','1')
         ->select('auct_lots_xml_jp_op.*')
-        ->where('active_status','1')
+        // ->where('active_status','1')
         ->paginate(12);
 
         // Transform cars into an array for the view
@@ -6302,7 +6250,11 @@ public function getJDMPriceRange()
 
     }
     public function car_listing_details($slug){
-        $car = CarDataJpOp::where('id',$slug)->firstOrFail();
+        // $car = CarDataJpOp::where('id',$slug)->firstOrFail();
+        $car=CarDataJpOp::leftjoin('auct_lots_xml_jp_op_other_chargers as oc','auct_lots_xml_jp_op.id','=','oc.auct_id')
+                        ->where('auct_lots_xml_jp_op.id',$slug)
+                        ->select('auct_lots_xml_jp_op.*','oc.commission_value','oc.shipping_value')->first();              
+
         $seo_setting = SeoSetting::where('id', 1)->first();
         $process_data_en = $this->parseCustomFormat($car->parsed_data_en);
         $images=$this->last_image($car->pictures);

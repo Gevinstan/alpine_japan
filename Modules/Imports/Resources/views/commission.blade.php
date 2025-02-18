@@ -674,10 +674,12 @@ newArrivalButtons.forEach(function(topSellButton) {
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('admin.store-all-comission')}}",
+                    // url: "{{route('admin.store-all-comission')}}",
+                    url: "{{route('admin.update-values')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
-                        commission: $("#commission").val(),
+                        value: $("#commission").val(),
+                        type: "commission",
                         _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                     },
                     success: function(response) {
@@ -707,10 +709,12 @@ newArrivalButtons.forEach(function(topSellButton) {
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('admin.store-all-shipping')}}",
+                    // url: "{{route('admin.store-all-shipping')}}",
+                    url: "{{route('admin.update-values')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
-                        commission: $("#shipping").val(),
+                        value: $("#shipping").val(),
+                        type: "shipping",
                         _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                     },
                     success: function(response) {

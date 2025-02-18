@@ -12,6 +12,7 @@ use App\Jobs\ProcessSqlFile;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Modules\Imports\Entities\CarDataJpOp;
+use Modules\Imports\Entities\AuctLotsXmlJpOpOtherChargers;
 
 class ImportsController extends Controller
 {
@@ -36,8 +37,16 @@ class ImportsController extends Controller
     }
 
     public function TopSale(Request $request){
-        CarDataJpOp::where('id',$request->selectedIds)
-        ->update(['top_sell'=>$request->check == 1 ? '1' : '0']);
+        if(AuctLotsXmlJpOpOtherChargers::whereAuctId($request->selectedIds)->Exists()){
+            AuctLotsXmlJpOpOtherChargers::where('auct_id',$request->selectedIds)
+            ->update(['top_sell'=>$request->check == 1 ? '1' : '0']);
+        } else {
+            AuctLotsXmlJpOpOtherChargers::create([
+                    'auct_id'=>$request->selectedIds,
+                    'top_sell'=>$request->check == 1 ? '1' : '0'
+            ]);
+        }
+    
         return response()->json(['status'=>true,'message'=>'status changes successfully']);
     }
 
@@ -54,18 +63,23 @@ class ImportsController extends Controller
 
         $cars=CarDataJpOp::Query();
 
+        $commissions=$cars->leftjoin('auct_lots_xml_jp_op_other_chargers as oc','auct_lots_xml_jp_op.id','=','oc.auct_id');
+
+
         if($request->year){
-            $commissions=$cars->where('model_year_en',$request->year);
+            $commissions=$cars->where('auct_lots_xml_jp_op.model_year_en',$request->year);
         }
         if($request->make){
-            $commissions=$cars->where(DB::raw('LOWER(company_en)'), $request->make);
+            $commissions=$cars->where(DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), $request->make);
         }
         if($request->model){
-            $commissions=$cars->where('model_name_en',$request->model);
+            $commissions=$cars->where('auct_lots_xml_jp_op.model_name_en',$request->model);
         }
 
-        $commissions = $cars->where('active_status', 1)
-        ->orderBy('updated_at', 'desc')
+        $commissions = $cars
+        ->select('auct_lots_xml_jp_op.*','oc.commission_value','oc.shipping_value')
+        // ->where('active_status', 1)
+        ->orderBy('auct_lots_xml_jp_op.updated_at', 'desc')
         ->paginate(10);
        
         foreach($commissions as $key => $value){
@@ -96,7 +110,11 @@ class ImportsController extends Controller
         // $request->validate([
         //     'commission' => 'required|integer',
         // ]);
-        CarDataJpOp::where('active_status', 1)
+        // CarDataJpOp::where('active_status', 1)
+        // ->update(['commission_value' => $request->commission]);
+        // ]);
+
+        AuctLotsXmlJpOpOtherChargers::whereIn('auct_id',$request->selectedIds)
         ->update(['commission_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
@@ -113,29 +131,164 @@ class ImportsController extends Controller
         // return redirect()->route('admin.commission')->with($notification);
     }
     public function storeAllComission(Request $request){
-        CarDataJpOp::where('active_status', 1)
-        ->update(['commission_value' => $request->commission]);
+        // CarDataJpOp::where('active_status', 1)
+        // ->update(['commission_value' => $request->commission]);
+        $commissionValue = $request->commission;
+        $chunkSize = 1000; // Adjust based on your server capacity
+
+        // Get all auction IDs in chunks
+        DB::table('auct_lots_xml_jp_op')
+            ->select('id')
+            ->orderBy('id')
+            ->chunk($chunkSize, function ($auctionLots) use ($commissionValue) {
+                $insertData = $auctionLots->map(function ($lot) use ($commissionValue) {
+                    return [
+                        'auct_id' => $lot->id,
+                        'commission_value' => $commissionValue,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                })->toArray();
+    
+                // Process each chunk with upsert
+                DB::table('auct_lots_xml_jp_op_other_chargers')->upsert(
+                    $insertData,
+                    ['auct_id'],
+                    ['commission_value']
+                );
+            });
+    
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
     public function storeAllShipping(Request $request){
-        CarDataJpOp::where('active_status', 1)
-        ->update(['shipping_value' => $request->commission]);
+        // CarDataJpOp::where('active_status', 1)
+        // ->update(['shipping_value' => $request->commission]);
+
+        $shippingValue = $request->commission;
+        $chunkSize = 1000; // Adjust based on your server capacity
+
+        // Get all auction IDs in chunks
+        DB::statement("
+        UPDATE auct_lots_xml_jp_op_other_chargers
+        SET shipping_value = ?,
+            updated_at = NOW()
+        WHERE auct_id IN (SELECT id FROM auct_lots_xml_jp_op)
+    ", [$shippingValue]);
+
+
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
     public function NewArrival(Request $request){
-    //    DB::enableQueryLog();
-        CarDataJpOp::where('active_status', 1)
-        ->where('id',$request->selectedIds)
-        ->update(['new_arrival' => $request->check]);
-        // dd(DB::getQueryLog());
+        if(AuctLotsXmlJpOpOtherChargers::whereAuctId($request->selectedIds)->Exists()){
+            AuctLotsXmlJpOpOtherChargers::where('auct_id',$request->selectedIds)
+            ->update(['new_arrival'=>$request->check == 1 ? '1' : '0']);
+        } else {
+            AuctLotsXmlJpOpOtherChargers::create([
+                    'auct_id'=>$request->selectedIds,
+                    'new_arrival'=>$request->check == 1 ? '1' : '0'
+            ]);
+        }
+    // //    DB::enableQueryLog();
+    //     CarDataJpOp::where('active_status', 1)
+    //     ->where('id',$request->selectedIds)
+    //     ->update(['new_arrival' => $request->check]);
+    //     // dd(DB::getQueryLog());
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
+
+    public function validateUpdateRequest(Request $request)
+    {
+        return $request->validate([
+            'type' => 'required|in:shipping,commission',
+            'value' => 'required|numeric|min:0',
+        ]);
+    }
+
+
+    public function updateValuesWithValidation(Request $request)
+    {
+    try {
+        // Validate the request
+        $validated = $this->validateUpdateRequest($request);
+        
+        $value = $validated['value'];
+        $type = $validated['type'];
+        
+        // Get count of existing records
+        $existingRecordsCount = DB::table('auct_lots_xml_jp_op_other_chargers')->count();
+        
+        DB::beginTransaction();
+        
+        try {
+            if ($existingRecordsCount === 0) {
+                // No records exist - do initial insert
+                $chunkSize = 1000;
+                
+                DB::table('auct_lots_xml_jp_op')
+                    ->select('id')
+                    ->orderBy('id')
+                    ->chunk($chunkSize, function ($auctionLots) use ($value, $type) {
+                        $insertData = [];
+                        
+                        foreach ($auctionLots as $lot) {
+                            $insertData[] = [
+                                'auct_id' => $lot->id,
+                                $type . '_value' => $value,
+                                'created_at' => now(),
+                                'updated_at' => now(),
+                            ];
+                        }
+
+                        DB::table('auct_lots_xml_jp_op_other_chargers')->insert($insertData);
+                    });
+            } else {
+                // Records exist - do update
+                $affected = DB::statement("
+                    UPDATE auct_lots_xml_jp_op_other_chargers
+                    SET {$type}_value = ?,
+                        updated_at = NOW()
+                    WHERE auct_id IN (SELECT id FROM auct_lots_xml_jp_op)
+                ", [$value]);
+            }
+            
+            DB::commit();
+            
+            return response()->json([
+                'success' => true,
+                'message' => $existingRecordsCount === 0 ? 
+                    'Initial values inserted successfully' : 
+                    'Values updated successfully'
+            ]);
+            
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+        
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Validation failed',
+            'errors' => $e->errors()
+        ], 422);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred while processing your request',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+
+
+
 
     public function bulkDelete(Request $request){
         $ids = $request->input('ids', []);
