@@ -17888,6 +17888,10 @@ input:not(:placeholder-shown) + .input-placeholder {
     margin-top: -2px;
 }
 
+.vision_relative  {
+    position: relative;
+    }
+
 .vision-outer-circule {
     background: rgb(3,143,252);
     background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
@@ -17916,33 +17920,36 @@ input:not(:placeholder-shown) + .input-placeholder {
    color: #FFFFFF !important;
 } */
 
- @media (max-width: 2560px) { 
+/* media quiery start */
+
+   
+
+    @media (max-width: 2560px)   {
+
     .vision_relative  {
     position: relative;
     }
-
+ 
     .vision-outer-circule {
     background: rgb(3,143,252);
     background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
     border-radius: 50%;
-    width: 235px !important;
-    height: 235px;
+    width: 200px !important;
+    height: 200px;
     display: flex;
     position: absolute;
     justify-content: center;
     top: 35%;
-    left: 42.3%;  
-    
+    left: 43.00%;  
     }  
-
+ 
     .vision-inner-circule {
-    
     background-color: var(--primary-color-1);
     border-radius: 50%;
-    width: 210px;
-    height: 210px;
+    width: 175px;
+    height: 175px;
     }
-
+ 
     /* .our_vision_name p{
    font-family: "Poppins", serif !important;
    font-weight: 700 !important;
@@ -17951,37 +17958,113 @@ input:not(:placeholder-shown) + .input-placeholder {
    color: #FFFFFF !important;
    line-height: 46px;
     } */
-  }
+    }
 
+    @media (max-width: 2248px)  { 
 
- @media (max-width: 1920px) {
+        .vision_relative  {
+            position: relative;
+            }
+         
+            .vision-outer-circule {
+            background: rgb(3,143,252);
+            background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
+            border-radius: 50%;
+            width: 200px !important;
+            height: 200px;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            top: 35%;
+            left: 42.10%;  
+            }  
+         
+            .vision-inner-circule {
+            background-color: var(--primary-color-1);
+            border-radius: 50%;
+            width: 175px;
+            height: 175px;
+            }
+         
+            /* .our_vision_name p{
+           font-family: "Poppins", serif !important;
+           font-weight: 700 !important;
+           font-style: normal !important; 
+           font-size: 3rem !important;
+           color: #FFFFFF !important;
+           line-height: 46px;
+            } */
+           
+      }
+ 
+    @media (max-width: 2048px)  { 
 
+        .vision_relative  {
+            position: relative;
+            }
+         
+            .vision-outer-circule {
+            background: rgb(3,143,252);
+            background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
+            border-radius: 50%;
+            width: 200px !important;
+            height: 200px;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            top: 35%;
+            left: 41.10%;  
+            }  
+         
+            .vision-inner-circule {
+            background-color: var(--primary-color-1);
+            border-radius: 50%;
+            width: 175px;
+            height: 175px;
+            }
+         
+            /* .our_vision_name p{
+           font-family: "Poppins", serif !important;
+           font-weight: 700 !important;
+           font-style: normal !important; 
+           font-size: 3rem !important;
+           color: #FFFFFF !important;
+           line-height: 46px;
+            } */
+           
+      }
+ 
+    @media (max-width: 1990px) {
+ 
     .vision_relative  {
     position: relative;
     }
-
+ 
     .vision-outer-circule {
     background: rgb(3,143,252);
     background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
     border-radius: 50%;
-    width: 235px !important;
-    height: 235px;
+    /* width: 235px !important;
+    height: 235px; */
+    width: 180px !important;
+    height: 180px;
     display: flex;
     position: absolute;
     justify-content: center;
     top: 35%;
-    left: 39.77%;  
-    
+    left: 41.35%;  
     }  
-
+ 
     .vision-inner-circule {
     
     background-color: var(--primary-color-1);
     border-radius: 50%;
-    width: 210px;
-    height: 210px;
+    /* width: 210px;
+    height: 210px; */
+    width: 154px;
+    height: 154px;
     }
-
+ 
     /* .our_vision_name p{
    font-family: "Poppins", serif !important;
    font-weight: 700 !important;
@@ -17989,14 +18072,14 @@ input:not(:placeholder-shown) + .input-placeholder {
    font-size: 3rem !important;
    color: #FFFFFF !important;
    line-height: 46px;
-} */
- }
-
-  @media (max-width: 1440px) {
+    } */
+    }
+ 
+    @media (max-width: 1440px) {
     .vision_relative  {
     position: relative;
     }
-
+ 
     .vision-outer-circule {
     background: rgb(3,143,252);
     background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
@@ -18009,7 +18092,7 @@ input:not(:placeholder-shown) + .input-placeholder {
     top: 32%;
     left: 38.2%;  
     }  
-
+ 
     .vision-inner-circule {
     
     background-color: var(--primary-color-1);
@@ -18017,7 +18100,7 @@ input:not(:placeholder-shown) + .input-placeholder {
     width: 154px;
     height: 154px;
     }
-
+ 
     /* .our_vision_name p{
    font-family: "Poppins", serif !important;
    font-weight: 700 !important;
@@ -18025,14 +18108,14 @@ input:not(:placeholder-shown) + .input-placeholder {
    font-size: 2rem !important;
    color: #FFFFFF !important;
    line-height: 36px;
-} */
- }
-
-  @media (max-width: 1366px) {
+ } */
+    }
+ 
+    @media (max-width: 1366px) {
     .vision_relative  {
     position: relative;
     }
-
+ 
     .vision-outer-circule {
     background: rgb(3,143,252);
     background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
@@ -18044,18 +18127,16 @@ input:not(:placeholder-shown) + .input-placeholder {
     justify-content: center;
     align-items: center;
     top: 32%;
-    left: 36.9%; 
-    
+    left: 36.01%;    
     }  
-
-    .vision-inner-circule {
-    
+ 
+    .vision-inner-circule {  
     background-color: var(--primary-color-1);
     border-radius: 50%;
     width: 165px;
     height: 165px;
     }
-
+ 
     /* .our_vision_name p{
    font-family: "Poppins", serif !important;
    font-weight: 700 !important;
@@ -18063,10 +18144,10 @@ input:not(:placeholder-shown) + .input-placeholder {
    font-size: 2rem !important;
    color: #FFFFFF !important;
    line-height: 36px;
-} */
- }
-
- @media (max-width: 1024px) {
+ } */
+    }
+ 
+    @media (max-width: 1024px) {
     .vision-outer-circule {
     background: rgb(3,143,252);
     background: linear-gradient(90deg, rgba(3,143,252,0.27) 0%, rgba(3,143,252,0.27) 50%, rgba(255,255,255,0) 50%);
@@ -18078,7 +18159,7 @@ input:not(:placeholder-shown) + .input-placeholder {
     top: 27%;
     left: 33.6%;  
     }  
-
+ 
     .vision-inner-circule {
     
     background-color: var(--primary-color-1);
@@ -18086,7 +18167,7 @@ input:not(:placeholder-shown) + .input-placeholder {
     width: 140px;
     height: 140px;
     }
-
+ 
     /* .our_vision_name p{
    font-family: "Poppins", serif !important;
    font-weight: 700 !important;
@@ -18094,9 +18175,12 @@ input:not(:placeholder-shown) + .input-placeholder {
    font-size: 1.5rem !important;
    color: #FFFFFF !important;
    line-height: 36px;
-} */
+ } */
+ 
+    }
 
- }
+    /* media quiery end */
+
 
  .highlight-about {
     color: #038FFC;
@@ -18115,7 +18199,7 @@ input:not(:placeholder-shown) + .input-placeholder {
 
 .about-us-content-heading {
     font-weight: 600 !important;
-    font-size: 1.4rem !important;
+    font-size: 1.125rem !important;
     padding-top: 1.5rem;
     color: #787b81 !important;
     line-height: 2.8rem;

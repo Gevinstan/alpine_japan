@@ -580,7 +580,7 @@
                                         <div class="testimonial-slick-top-txt">
                                             <h4>{{ $testimonial->name }}</h4>
                                             <p>
-                                                <span>Hyogo, Japan  -   Jun 07, 2024 &nbsp;</span>
+                                                <span>Hyogo, Japan  - Jun 07, 2024 &nbsp;</span>
                                                 <span class="testimonial-verify-text"> &nbsp; Verified Buyer</span>
                                             </p>
                                             <!-- <p>{{ $testimonial->designation }}</p> -->
