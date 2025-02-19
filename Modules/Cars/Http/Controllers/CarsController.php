@@ -11,7 +11,9 @@ use Modules\Cars\Entities\Cars;
 use File;
 use Modules\Brand\Entities\Brand;
 use Modules\Models\Entities\ModelsCars;
+use Modules\Brand\Entities\BrandTranslation;
 use Modules\Cars\Entities\AddProductImages;
+use Session;
 class CarsController extends Controller
 {
     /**
@@ -29,7 +31,8 @@ class CarsController extends Controller
     public function create()
     {
         $category=ProductCategories::get();
-        $brands=Brand::get();
+        // $brands=Brand::get();
+        $brands=BrandTranslation::where('lang_code',Session::get('front_lang'))->get();
         $models=ModelsCars::get();
         return view('cars::create')->with([
             'category' => $category,
@@ -44,7 +47,7 @@ class CarsController extends Controller
     public function store(Request $request)
     {
         $cars=new Cars();
-        $cars->category=$request->category;
+        // $cars->category=$request->category;
         $model_image=$request->file('image');
         if(!empty($model_image)){
           $org_filename = $model_image->getClientOriginalName();
@@ -165,9 +168,25 @@ if($request->hasFile('cover_image')) {
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
+
+    public function storeShippingIdWise(Request $request){
+        Cars::where('is_active', 1)
+        ->whereIn('id',$request->selectedIds)
+        ->update(['shipping_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
     public function storeAllCarComission(Request $request){
         Cars::where('is_active', 1)
         ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+    public function storeAllCarShipping(Request $request){
+        Cars::where('is_active', 1)
+        ->update(['shipping_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);

@@ -50,6 +50,7 @@ class Cars extends Model
         'inside',
         'outside',
         'commission_value',
+        'shipping_value',
         'new_arrival',
         'deleted_at',
         'location'

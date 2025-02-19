@@ -38,17 +38,17 @@
                                             </div>
 
                                             <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Name') }}</label>
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Name') }}*</label>
                                                 <input class="crancy__item-input" type="text" name="name" value="{{ $admin->name }}">
                                             </div>
 
                                             <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Designation') }}</label>
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Designation') }}*</label>
                                                 <input class="crancy__item-input" type="text" name="designation" value="{{ $admin->designation }}">
                                             </div>
 
                                             <div class="crancy__item-form--group mg-top-25">
-                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Email') }}</label>
+                                                <label class="crancy__item-label crancy__item-label-product">{{ __('translate.Email') }}*</label>
                                                 <input class="crancy__item-input" type="email" name="email" value="{{ $admin->email }}">
                                             </div>
 

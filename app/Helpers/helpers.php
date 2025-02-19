@@ -1,5 +1,8 @@
 <?php
-
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Carbon\Carbon; 
+use App\Models\JPYRate;
 function html_decode($text){
     $after_decode =  htmlspecialchars_decode($text, ENT_QUOTES);
     return $after_decode;
@@ -213,5 +216,65 @@ function parseCustomFormat($string)
  
     // vehicle  location
     
+    return $result;
+}
+
+function getConversionRate(){
+    $rate = Cache::get('usd_to_jpy_rate');
+
+   
+    if (!$rate) {
+        $endpoint = 'convert';
+        $access_key = '0c78261d10091415dceebaaa60077246';  // Your API key
+        
+        // Parameters for conversion
+        $from = 'USD';  // From US Dollar
+        $to = 'JPY';    // To Japanese Yen
+        $amount = 1;    // Amount to convert (we only need the conversion rate, so amount is 1)
+        
+        
+        // Initialize CURL:
+        // $ch = curl_init('https://api.currencylayer.com/'.$endpoint.'?access_key='.$access_key.'&from='.$from.'&to='.$to.'&amount='.$amount);
+        
+        // // Set CURL options:
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string
+        
+        // // Execute the request and store the response
+        // $json = curl_exec($ch);
+        $json=JPYRate::first();
+
+
+        if (!empty($json)) {
+            // curl_close($ch);
+            // $conversionResult = json_decode($json, true);
+            // Get the exchange rate for USD to JPY
+            $rate = round($json->yen_rate);
+            $expiry_date=Carbon::tomorrow()->startOfDay();
+
+            // Store the conversion rate in cache for 24 hours
+            Cache::put('usd_to_jpy_rate', $rate, $expiry_date);
+        } else {
+            // Handle API error gracefully
+            // You can either throw an exception or return a default value
+            $rate = 110;  // Example: Use a fallback rate if API fails
+        }        
+    }    
+    return $rate;
+}
+
+
+function convertCurrency($amount, $rate) {
+    // Convert strings to BCMath strings to maintain precision
+    $amount = strval($amount);
+    $rate = strval($rate);
+    
+    // Perform the division with BCMath for higher precision
+    $result = bcDiv($amount, $rate, 10); // Increased internal precision
+
+    // First round to 4 decimal places to match Google's internal precision
+    $result = round((float)$result, 4);
+    
+    // Then round to final 2 decimal places
+    $result = round($result);
     return $result;
 }

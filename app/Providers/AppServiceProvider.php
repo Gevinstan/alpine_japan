@@ -16,6 +16,8 @@ use Modules\Currency\app\Models\MultiCurrency;
 use Modules\Blog\Entities\Blog;
 use Illuminate\Pagination\Paginator;
 use View;
+use DB;
+
 use Session;
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +48,77 @@ class AppServiceProvider extends ServiceProvider
             $cookie_consent = CookieConsent::first();
             $footer_blogs = Blog::where('status', 1)->orderBy('id','desc')->get()->take(2);
 
+
+            $jdm_legend = DB::table('brands as b')
+            ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+            ->join('blog as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
+            // ->join('models_cars as mc', function ($join) {
+            //     $join->on('blog.model', '=', 'mc.model')
+            //         ->on('blog.category', '=', 'mc.category'); // Match model and category
+            // })
+            ->where('blog.is_active','1')
+            ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
+            ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+            ->select('b.slug', 'bt.name as brand_name') // Select slug and name
+            ->distinct('b.slug') // Ensure distinct slugs
+            ->get()
+            ->map(function($item) {
+                return [
+                    'slug' => $item->slug,
+                    'brand_name' => $item->brand_name
+                ];
+            })
+            ->toArray();
+
+            $jdm_legend_heavy = DB::table('brands as b')
+            ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+            ->join('heavy as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
+            // ->join('models_cars as mc', function ($join) {
+            //     $join->on('blog.model', '=', 'mc.model')
+            //         ->on('blog.category', '=', 'mc.category'); // Match model and category
+            // })
+            ->where('blog.is_active','1')
+            ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
+            ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+            ->select('b.slug', 'bt.name as brand_name') // Select slug and name
+            ->distinct('b.slug') // Ensure distinct slugs
+            ->get()
+            ->map(function($item) {
+                return [
+                    'slug' => $item->slug,
+                    'brand_name' => $item->brand_name
+                ];
+            })
+            ->toArray();
+
+            $jdm_legend_small_heavy = DB::table('brands as b')
+            ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
+            ->join('small_heavy as blog', DB::raw('LOWER(blog.make)'), '=', DB::raw('LOWER(b.slug)')) // Ensure blog.make matches b.slug
+            // ->join('models_cars as mc', function ($join) {
+            //     $join->on('blog.model', '=', 'mc.model')
+            //         ->on('blog.category', '=', 'mc.category'); // Match model and category
+            // })
+            ->where('blog.is_active','1')
+            ->where('bt.lang_code', Session::get('front_lang')) // Filter by language code
+            ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+            ->select('b.slug', 'bt.name as brand_name') // Select slug and name
+            ->distinct('b.slug') // Ensure distinct slugs
+            ->get()
+            ->map(function($item) {
+                return [
+                    'slug' => $item->slug,
+                    'brand_name' => $item->brand_name
+                ];
+            })
+            ->toArray();
+
+            $jdm_brand['car']=$jdm_legend;
+            $jdm_brand['heavy']=$jdm_legend_heavy;
+            $jdm_brand['small_heavy']=$jdm_legend_small_heavy;
+
+
+            $jpy_rate=getConversionRate();
+
             $view->with('breadcrumb', $setting->breadcrumb_image);
             $view->with('setting', $setting);
             $view->with('language_list', $language_list);
@@ -57,6 +130,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('tawk_chat', $tawk_chat);
             $view->with('cookie_consent', $cookie_consent);
             $view->with('footer_blogs', $footer_blogs);
+            $view->with('jdm_legend', $jdm_brand);
         });
         Paginator::useBootstrapFive();
         

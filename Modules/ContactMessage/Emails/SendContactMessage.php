@@ -38,7 +38,6 @@ class SendContactMessage extends Mailable
      */
     public function build()
     {
-
         return $this->subject($this->mail_subject)->view('contactmessage::contact_message_email', ['mail_message' => $this->mail_message]);
     }
 }

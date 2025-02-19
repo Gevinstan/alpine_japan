@@ -34,11 +34,11 @@
                                             <div class="row mg-top-30">
                                                 <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
-                                                        <label class="crancy__item-label">{{ __('translate.Category') }} * </label>
-                                                        <select  name="category" id="category"  class="crancy__item-input">
-                                                            <option value="">Select Catagory</option>
-                                                           @foreach($category as $category)
-                                                              <option value="{{$category->name}}">{{$category->name}}</option>
+                                                        <label class="crancy__item-label">{{ __('translate.Brands') }} * </label>
+                                                        <select  name="brand" id="brand"  class="crancy__item-input">
+                                                            <option value="">Select Brands</option>
+                                                           @foreach($brands as $category)
+                                                              <option value="{{$category->id}}">{{$category->getBrands->name}}</option>
                                                            @endforeach  
                                                         </select>
                                                         @error('category')

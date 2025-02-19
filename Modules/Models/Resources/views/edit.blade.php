@@ -35,10 +35,10 @@
                                                 <div class="col-12">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Category') }} * </label>
-                                                        <select  name="category" id="category"  class="crancy__item-input">
+                                                        <select  name="brand" id="brand"  class="crancy__item-input">
                                                             <option value="">Select Category</option>
-                                                           @foreach($categories as $category)
-                                                              <option value="{{$category->name}}" {{$category->name == $models->category ? 'selected' : ''}}>{{$category->name}}</option>
+                                                           @foreach($brand as $category)
+                                                              <option value="{{$category->brand_id}}" {{$category->brand_id == $models->brand_id ? 'selected' : ''}}>{{$category->name}}</option>
                                                            @endforeach  
                                                         </select>
                                                         @error('category')

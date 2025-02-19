@@ -11,6 +11,7 @@ use App\Models\InfluencerWithdraw;
 use App\Models\RefundRequest;
 use App\Models\User;
 use Modules\Subscription\Entities\SubscriptionHistory;
+use Modules\Blog\Entities\AuctLotsXmlJpOpOtherChargers;
 use Modules\Car\Entities\Car;
 
 use Modules\Service\Entities\Service;
@@ -60,10 +61,12 @@ class DashboardController extends Controller
         // $total_car = Car::count();
         // $awaiting_car = Car::where('approved_by_admin', 'pending')->count();
         // $featured_car = Car::where('is_featured', 'enable')->count();;
-        $new_cars=CarDataJpOp::where('new_arrival','1')->count();
+        $new_cars=CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        ->where('oc.new_arrival','1')->count();
         $total_user = User::where('status', 'enable')->count();
         $enquiry=VehicleEnquiry::count();
-        $enquiry_list=CarDataJpOp::where('new_arrival','1')->paginate(10);
+        $enquiry_list=CarDataJpOp::Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id')
+        ->where('oc.new_arrival','1')->paginate(10);
 
         // $recent_cars = Car::with('translate','dealer')->get()->take(10);
 
