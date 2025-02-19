@@ -142,7 +142,7 @@
                                 <button type="button" class="btn btn-secondary cancel-btn w-full h-full" data-bs-dismiss="modal">Cancel</button>
                             </div>
                             <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
-                                 <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                                 <button type="submit" class="thm-btn-two w-100">BUY NOW</button>  
                             </div>
                           
                         </div>
@@ -263,8 +263,11 @@
                                 <p class="" id="total_price"></p>
                             </div>
                         </div>
-                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
-                                <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                        <div class="d-flex gap-3 mt-3">
+                            <button type="button" class="btn w-100 btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                            <button type="submit" class="thm-btn-two">BUY NOW</button> 
+                        </div>
+                                 
                             <!-- <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form">
                                 @csrf
                                 <div class="auto-sales-form">
@@ -973,6 +976,8 @@
 
     const locationSelect = document.getElementById("location");
     const deliveryChargeButton = document.getElementById("delivery_charge");
+    const locationSelect1 = document.getElementById("location1");
+    const deliveryChargeButton1 = document.getElementById("delivery_charge1");
 
     locationSelect.addEventListener("change", () => {
         if (locationSelect.value) {
@@ -987,6 +992,22 @@
             deliveryChargeButton.style.setProperty("color", "#868b96", "important");
             locationSelect.style.setProperty("color", "#868b96", "important");
             locationSelect.style.setProperty("font-size", "12px", "important");
+        }
+    });
+
+    locationSelect1.addEventListener("change", () => {
+        if (locationSelect1.value) {
+            deliveryChargeButton1.style.setProperty("color", "#0d274e", "important");
+            deliveryChargeButton1.style.setProperty("font-size", "14px", "important");
+            deliveryChargeButton1.style.setProperty("font-weight", "600", "important");
+            locationSelect1.style.setProperty("color", "#0d274e", "important");
+            locationSelect1.style.setProperty("font-size", "14px", "important");
+            locationSelect1.style.setProperty("font-weight", "600", "important");
+        } else {
+            deliveryChargeButton1.style.color = "#868b96";
+            deliveryChargeButton1.style.setProperty("color", "#868b96", "important");
+            locationSelect1.style.setProperty("color", "#868b96", "important");
+            locationSelect1.style.setProperty("font-size", "12px", "important");
         }
     });
 

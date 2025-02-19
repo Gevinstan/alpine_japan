@@ -15467,7 +15467,7 @@ p {
     font-weight: 500 !important;
 }
 
-#total_price {
+#total_price, #total_price1 {
     font-size: 1.2rem !important;
     color: #0d274e !important;
     font-weight: 600 !important;
@@ -18286,6 +18286,10 @@ input:not(:placeholder-shown) + .input-placeholder {
     position: absolute;
     right: 0;
     cursor: pointer;
+}
+
+.compliance-title {
+    color: #121a27 !important;
 }
 
 
