@@ -210,7 +210,6 @@ use Carbon\Carbon;
 
             </div>
 
-
             <div class="row g-5">
                 @foreach ($brands->take(6) as $index => $brand)
                     <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
