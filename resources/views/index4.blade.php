@@ -198,16 +198,16 @@ use Carbon\Carbon;
     <!-- Categories-part-start -->
     <section class="categories px-2 px-sm-3 px-lg-5">
         <div class="container">
-            <div class="row align-items-end">
+            <div class="row align-items-end pb-3">
                 <div class="col-lg-8 col-sm-8 col-md-12  ">
                     <h2 class="section-heading">{{__('translate.Popular')}} <span class="highlight">{{__('translate.Brands')}}<span></h2>
                 </div>
 
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <div class="categories-three-view-btn">
-                    <!-- <a href="{{ route('listings') }}" class="thm-btn">{{ __('translate.View All') }}</a> -->
+                        <a href="{{ route('listings') }}" class="thm-btn">{{ __('translate.View All') }}</a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -606,7 +606,7 @@ use Carbon\Carbon;
 
                     <div class="row align-items-end">
                         <div class="col-lg-6 col-sm-6  col-md-6">
-                            <h2 class="section-heading">{{__('translate.JDM')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
+                            <h2 class="section-heading text-nowrap">{{__('translate.JDM')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
                         </div>
                     </div>        
                 </div>
@@ -1268,7 +1268,7 @@ use Carbon\Carbon;
     <!-- About section Start-->
     <section class="about-section py-5 px-md-5 px-sm-2">
   <div class="container">
-    <h2 class="pb-3 section-heading text-center text-md-start">
+    <h2 class="mb-3 section-heading text-center text-md-start">
       About <span class="highlight">Alpine Japan</span>
     </h2>
     <div class="about-row">
