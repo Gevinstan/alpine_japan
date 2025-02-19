@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Auth, Str, Image, Hash, File;
 
 class ProfileController extends Controller
@@ -26,7 +27,15 @@ class ProfileController extends Controller
             'name'=>'required',
             'designation'=>'required',
             'email'=>'required|unique:admins,email,'.$admin->id,
-
+            'facebook' => 'required|url',
+            'linkedin' => 'required|url',
+            'instagram' => 'required|url',
+            'twitter' => 'required|url',
+            'image'=>[
+                'nullable',
+                Rule::when(request('image'),
+                ['required','image','mimes:jpeg,png,jpg','max:2048'])
+            ],
         ];
         $customMessages = [
             'name.required' => trans('translate.Name is required'),

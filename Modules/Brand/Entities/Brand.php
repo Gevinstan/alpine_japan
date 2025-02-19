@@ -21,6 +21,10 @@ class Brand extends Model
         return $this->hasMany(Car::class, 'brand_id');
     }
 
+    public function getBrands(){
+        return $this->hasOne(BrandTranslation::class, 'brand_id');
+    }
+
     public function getTotalCarAttribute()
     {
         return $this->cars->count();

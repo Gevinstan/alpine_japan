@@ -9,6 +9,8 @@ use Modules\GeneralSetting\Http\Controllers\PaymentMethodController;
 Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO','auth:admin']],function (){
 
     Route::controller(GeneralSettingController::class)->group(function () {
+        Route::get('usd_setup', 'usd_setup')->name('usd_setup');
+        Route::post('store-jpy-rate', 'store_jpy_rate')->name('store-jpy-rate');
 
         Route::group(['prefix' => 'configuration'],function (){
 
@@ -58,6 +60,7 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO
 
 
 
+
         });
 
     });
@@ -92,7 +95,9 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO
 
     });
 
+
 });
+
 
 
 

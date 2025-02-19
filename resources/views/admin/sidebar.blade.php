@@ -255,6 +255,19 @@
 
                 </a>
             </li>
+            <li class="{{ Route::is('admin.usd_setup') || Route::is('admin.usd_setup') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.usd_setup') }}">
+                <span class="menu-bar__text">
+                    <span class="crancy-menu-icon crancy-svg-icon__v1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 8L9.7812 10.5208C11.1248 11.4165 12.8752 11.4165 14.2188 10.5208L18 8M6 21H18C20.2091 21 22 19.2091 22 17V7C22 4.79086 20.2091 3 18 3H6C3.79086 3 2 4.79086 2 7V17C2 19.2091 3.79086 21 6 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+
+                    </span>
+                    <span class="menu-bar__name">{{ __('translate.Today JPY') }}</span>   
+                </span>
+
+                </a>
+            </li>
             <li class="{{ Route::is('admin.general-setting') ? 'active' : '' }}"><a class="collapsed" href="{{ route('admin.general-setting') }}"><span class="menu-bar__text">
                 <span class="crancy-menu-icon crancy-svg-icon__v1">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -270,6 +283,59 @@
         </ul>
     </div>
     <!-- End Nav Menu -->
+</div>
+<div class="crancy-sidebar-padding pb-btm2">
+    <h4 class="admin-menu__title">{{ __('translate.Others') }}</h4>
+    <!-- Nav Menu -->
+    <div class="menu-bar">
+        <ul class="menu-bar__one crancy-dashboard-menu" id="CrancyMenu">
+            <li class="{{ Route::is('admin.subscriber-list') || Route::is('admin.subscriber-email') ? 'active' : '' }}"><a href="#!" class="collapsed" data-bs-toggle="collapse" data-bs-target="#menu-item__apps_newsletter"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 9H12M8 13H16M8 17H16M15.9995 2V5M7.99951 2V5M7 3.5H17C19.2091 3.5 21 5.29086 21 7.5V18C21 20.2091 19.2091 22 17 22H7C4.79086 22 3 20.2091 3 18V7.5C3 5.29086 4.79086 3.5 7 3.5Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Newsletter') }}</span></span> <span class="crancy__toggle"></span></a></span>
+                <!-- Dropdown Menu -->
+                <div class="collapse crancy__dropdown {{ Route::is('admin.subscriber-list') || Route::is('admin.subscriber-email') ? 'show' : '' }}" id="menu-item__apps_newsletter"  data-bs-parent="#CrancyMenu">
+                    <ul class="menu-bar__one-dropdown">
+
+                        <li><a href="{{ route('admin.subscriber-list') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Subscriber List') }}</span></span></a></li>
+
+                        <li><a href="{{ route('admin.subscriber-email') }}"><span class="menu-bar__text"><span class="menu-bar__name">{{ __('translate.Send Mail') }}</span></span></a></li>
+
+                    </ul>
+                </div>
+            </li>
+
+            <li><a class="collapsed" href="{{ route('admin.cache-clear') }}"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.6805 5.42846C21.3463 5.19352 20.8912 5.2823 20.6635 5.62676L19.1708 7.88444C18.783 6.02074 17.8848 4.30822 16.5482 2.92959C14.7168 1.04041 12.2819 0 9.69185 0C7.10188 0 4.66687 1.04041 2.83548 2.92959C-0.945161 6.82953 -0.945161 13.1752 2.83548 17.075C4.72581 19.025 7.20883 20 9.69185 20C12.1749 20 14.6579 19.025 16.5482 17.075C16.834 16.7802 16.834 16.3022 16.5482 16.0073C16.2624 15.7125 15.799 15.7125 15.5133 16.0073C12.3033 19.3185 7.08051 19.3185 3.87061 16.0073C0.660715 12.6962 0.660715 7.30837 3.87061 3.99718C5.42555 2.39328 7.49289 1.50989 9.69195 1.50989C11.891 1.50989 13.9584 2.39328 15.5133 3.99728C16.7134 5.23519 17.4956 6.79068 17.7908 8.47934L15.1929 6.65157C14.859 6.41663 14.4037 6.50541 14.176 6.84987C13.9482 7.19432 14.0343 7.664 14.3682 7.89894L18.2435 10.6255C18.2437 10.6256 18.2439 10.6258 18.2441 10.626C18.3054 10.6691 18.3707 10.7008 18.438 10.7224C18.44 10.7231 18.442 10.7242 18.444 10.7248C18.4554 10.7285 18.467 10.7299 18.4786 10.7329C18.5371 10.748 18.5964 10.7573 18.6558 10.7573C18.8896 10.7573 19.1194 10.6419 19.2611 10.4277L21.8727 6.47763C22.1004 6.13307 22.0144 5.66339 21.6805 5.42846Z" fill="white"></path>
+                    </svg>
+
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Cache Clear') }}</span></span></a>
+            </li>
+
+            <li><a href="javascript:;" onclick="event.preventDefault();
+                document.getElementById('admin-sidebar-logout').submit();" class="collapsed"><span class="menu-bar__text">
+                <span class="crancy-menu-icon crancy-svg-icon__v1">
+                    <svg class="crancy-svg-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="18" viewBox="0 0 22 18" fill="none">
+                        <path d="M19 11L20.2929 9.70711C20.6834 9.31658 20.6834 8.68342 20.2929 8.29289L19 7"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 9H12M5 17C2.79086 17 1 15.2091 1 13V5C1 2.79086 2.79086 1 5 1M5 17C7.20914 17 9 15.2091 9 13V5C9 2.79086 7.20914 1 5 1M5 17H13C15.2091 17 17 15.2091 17 13M5 1H13C15.2091 1 17 2.79086 17 5" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="menu-bar__name">{{ __('translate.Logout') }}</span></span></a>
+            </li>
+
+            <form id="admin-sidebar-logout" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+
+        </ul>
+    </div>
 </div>
 
 

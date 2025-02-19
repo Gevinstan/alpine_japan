@@ -9,4 +9,14 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+    public $usdRate;
+
+    public function __construct(){
+        $this->usdRate = getConversionRate();
+    }
+    
+    public function getJpyRate(){  
+        return $this->usdRate;
+    }
+
 }

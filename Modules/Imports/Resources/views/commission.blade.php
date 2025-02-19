@@ -48,7 +48,7 @@
 
                                     <div class="container" style="padding:0px">
                                         <div class="row">
-                                        <div class="col-md-6">
+                                            <div class="col-md-2">
                                                 <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Commission')." ( $ )" }} * </label>
                                                         <input class="crancy__item-input" type="text" name="commission" id="commission">
@@ -60,6 +60,20 @@
                                             <div class="col-md-1">
                                                 <div class="" style="padding-top:10px">
                                                     <button class="crancy-btn mg-top-25" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 ms-4">
+                                                <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Shipping')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input" type="text" name="shipping" id="shipping">
+                                                        @error('Shipping')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="" style="padding-top:10px">
+                                                    <button class="crancy-btn mg-top-25" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button>
                                                 </div>
                                             </div>
 
@@ -505,6 +519,22 @@
             }    
             
         });
+        $("#shippingBtn").on('click', function() {
+       
+            var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+            const selectedIds = Array.from(rowCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id')); 
+                
+            if($("#masterCheckbox").is(':checked')){
+                updateAllShipping();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedShipping(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }    
+            
+        });
     });
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -634,8 +664,8 @@ newArrivalButtons.forEach(function(topSellButton) {
      });
 
 
-     function updateAllCommission(){
-    swal({
+    function updateAllCommission(){
+        swal({
             title: "Are you sure?",
             text: "This will Change All commission value!",
             icon: "warning",
@@ -644,10 +674,12 @@ newArrivalButtons.forEach(function(topSellButton) {
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('admin.store-all-comission')}}",
+                    // url: "{{route('admin.store-all-comission')}}",
+                    url: "{{route('admin.update-values')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
-                        commission: $("#commission").val(),
+                        value: $("#commission").val(),
+                        type: "commission",
                         _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                     },
                     success: function(response) {
@@ -665,11 +697,45 @@ newArrivalButtons.forEach(function(topSellButton) {
               toastr.info("Your post is safe!");
             }
         });
-   
-}
+    }
 
-function updateSelectedComission(selectedIds){
-     $.ajax({
+    function updateAllShipping(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All Shipping value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    // url: "{{route('admin.store-all-shipping')}}",
+                    url: "{{route('admin.update-values')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        value: $("#shipping").val(),
+                        type: "shipping",
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }   
+
+    function updateSelectedComission(selectedIds){
+        $.ajax({
             url: "{{route('admin.store-car-comission')}}",
             type: "POST", // Use POST for this AJAX call
             data: {
@@ -688,7 +754,29 @@ function updateSelectedComission(selectedIds){
                 toastr.error("Error", "An error occurred while processing your request.");
             }
         });
-}
+    }
+    function updateSelectedShipping(selectedIds){
+    
+        $.ajax({
+            url: "{{route('admin.store-car-shipping')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#shipping").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    // location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+    }
 
 </script>
 @endpush

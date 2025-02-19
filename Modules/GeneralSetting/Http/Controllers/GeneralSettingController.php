@@ -72,6 +72,7 @@ use App\Models\Review;
 use App\Models\Wishlist;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\JPYRate;
 
 
 
@@ -110,6 +111,13 @@ class GeneralSettingController extends Controller
     }
 
     public function update_logo_favicon(Request $request){
+        $rules = [  
+            'logo'=>[
+                'nullable',
+                Rule::when(request('logo'),
+                ['required','image','mimes:jpeg,png,jpg','max:2048'])
+            ],
+        ];
 
         $logo_setting = Setting::first();
         if($request->logo){
@@ -582,4 +590,27 @@ class GeneralSettingController extends Controller
 
     }
 
+    public function usd_setup(){
+        $jpy_rate=JPYRate::first();
+        return view('generalsetting::usd-currency',compact('jpy_rate'));
+    }
+    
+    public function store_jpy_rate(Request $request){
+        $jpy_rate=$request->jpy_rate;
+        $rate = JPYRate::first();
+
+    if ($rate) {
+        // Update existing record
+        $rate->yen_rate = $jpy_rate;
+        $rate->save();
+    } else {
+        // Insert new record
+        JPYRate::create(['yen_rate' => $jpy_rate]);
+    }
+
+    $notification = trans('translate.Your database has been successfully cleared');
+    $notification = array('messege'=>$notification,'alert-type'=>'success');
+    return redirect()->back()->with($notification);
+
+    }
 }

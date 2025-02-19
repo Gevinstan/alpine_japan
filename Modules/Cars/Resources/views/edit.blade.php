@@ -41,7 +41,7 @@
 
 
                                             <div class="row mg-top-30">
-                                                <div class="col-4">
+                                                <!-- <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Category') }} </label>
                                                         <select  name="category" id="category"  class="crancy__item-input">
@@ -54,7 +54,7 @@
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <div class="col-4">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Image') }} </label>
@@ -516,7 +516,7 @@
                 })
                 var models=@json($models);
                 var cars=@json($cars);
-                var user_comments = models.filter(p => p.category == $("#category").val());
+                var user_comments = models.filter(p => p.brand_id == $("#brand").val());
                 $("#model").empty();
                 $("#model").append(
                         '<option value="">Select Model</option>'

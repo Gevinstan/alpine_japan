@@ -15,6 +15,156 @@
     </div> -->
 
     <!-- Inventory Details-part-start -->
+     <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Centered & Large Size -->
+    <div class="modal-content">
+      <div class="modal-body position-relative">
+        <span class="close-btn" data-bs-dismiss="modal">
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="30px" height="30px"><path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/><path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"/><path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"/></svg>
+        </span>
+        <h2 class="section-heading text-center mb-3 modal-heading">Get a Free <span class="highlight"> &nbsp; Quotation<span></h2>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-3 border rounded-3">
+                <div class="inventory-details-slick-for m-0">
+                @foreach ($car_images as $gallery)
+                                <div class="inventory-details-slick-img">
+                                    <div class="inventory-details-slick-img-tag">
+                                        <div class="icon-main">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="image-zoom-container">
+                                        <img src="{{ file_exists(public_path($image_folder.'/'.$slug.'/'. $gallery->image)) ? 
+                                                asset($image_folder.'/'.$slug.'/'. $gallery->image) : 
+                                                asset('uploads/website-images/no-image.jpg') }}" 
+                                            alt="thumb" class="card_image" />
+                                        <div class="zoom-lens"></div>
+                                    </div>
+                                </div>
+                            @endforeach 
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-12">
+                <div class="d-flex flex-column gap-3 car-listing-details">
+                    <p class="brand-text fw-bolder">{{$car->company_en}}</p>
+                    <h3>{{$car->model_name_en}}</h3>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="amount-text" id="price_value1">Price <span class="price-text">
+                        @if(session('front_lang')=='en')
+                                ${{$car->price}}
+                                @else
+                                {{$car->price}}
+                        @endif 
+                        </span></p>
+                        <p style="display:none;" id="commission_value1">${{$car->commission_value}}</p>
+                        <!-- <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                        ${{$car->commission_value}}
+                        </span></p> -->
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown location-dropdown w-100">
+                            <select class="form-select form-select location-select"
+                                aria-label=".form-select example" name="location" id="location1">
+                                <option class="" selected value="">
+                                    {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                </option>
+                                
+                                @foreach ($delivery_charges as $charges)
+                                <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="w-100 bg-white">
+                            <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge1">
+                                Delivery Charge 
+                            </button> 
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="dropdown location-dropdown w-100">
+                            <button class="btn w-100 bg-white charge-btn">
+                                Shipping 
+                            </button> 
+                        </div>
+                        <div class="w-100 bg-white">
+                            <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge1">
+                               {{'$'.round($car->shipping_value)}}
+                            </button> 
+                        </div>
+                    </div>
+                    <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
+                    <div class="d-flex align-content-center total-price-container mt-3">
+                        <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                        <p class="" id="total_price1"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                
+                <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form px-1 py-3">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                            <div class="textarea-wrapper">
+                                <input type="text" class="form-control p-3" id="exampleFormControlInput3"
+                                    placeholder="" name="name" value="{{ old('name') }}">
+                                <span class="placeholder-text">Name <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                        <div class="textarea-wrapper">
+                                <input type="email" class="form-control p-3" id="exampleFormControlInput4"
+                                    placeholder="" name="email" value="{{ old('email') }}">
+                                <span class="placeholder-text">Email <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                            <div class="textarea-wrapper">
+                                <input type="text" class="form-control p-3" id="exampleFormControlInput5"
+                                    placeholder="" name="phone" value="{{ old('phone') }}">
+                                <span class="placeholder-text">Phone <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                            <div class="textarea-wrapper">
+                                <input type="text" class="form-control p-3" id="exampleFormControlInpu6"
+                                    placeholder="" value="{{ old('subject') }}" name="subject">
+                                <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-12  mb-2">
+                            <div class="textarea-wrapper">
+                                <textarea class="form-control p-3" id="exampleFormControlTextarea11" rows="3"
+                                    placeholder="" name="message">{{ old('message') }}</textarea>
+                                <span class="placeholder-text">Message <span class="required">*</span></span>
+                            </div>
+                        </div>
+                        <div class="col-12 row p-0">
+                            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
+                                <button type="button" class="btn btn-secondary cancel-btn w-full h-full" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
+                                 <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                            </div>
+                          
+                        </div>
+                    </div>
+                    <input type="hidden" name="car_id" value="{{$car->id}}">
+                    <input type="hidden" name="commission" value="" id="hidden_commission">
+                    <input type="hidden" name="delivery" value="" id="hidden_delivery_charge">
+                    <input type="hidden" name="shipping" value="" id="hidden_shipping_charge">
+                    <input type="hidden" name="total_car_price" value="" id="hidden_total">
+                    <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
+                    <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
+                    <input type="hidden" name="url_link" value="{{$url_link}}">
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">
@@ -152,21 +302,13 @@
                                         {{$car->price}}
                                     @endif 
                                 </span></p>
-                                <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                                <p style="display:none;" id="commission_value">${{$car->commission_value}}</p>
+                                <!-- <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
                                 ${{$car->commission_value}}
-                                </span></p>
+                                </span></p> -->
                             </div>
                             <div class="d-flex align-items-center gap-3">
                                 <div class="dropdown location-dropdown w-100">
-                                    <!-- <button class="d-flex justify-content-between align-items-center btn w-100 btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Location
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                    </div> -->
-
                                     <select class="form-select form-select location-select"
                                         aria-label=".form-select example" name="location" id="location">
                                         <option selected value="">
@@ -184,6 +326,18 @@
                                     
                                 </div>
                             </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="dropdown location-dropdown w-100">
+                                    <button class="btn w-100 bg-white charge-btn">
+                                        Shipping 
+                                    </button> 
+                                </div>
+                                <div class="w-100 bg-white">
+                                    <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge">
+                                    {{'$'.round($car->shipping_value)}}
+                                    </button> 
+                                </div>
+                            </div>
                             <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
                             <div class="d-flex align-content-center total-price-container mt-3">
                             <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
@@ -191,11 +345,11 @@
                     </div>
 
                         </div>
-                            
+                        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                        <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                        
 
-
-
-                            <form method="POST" action="{{route('send_message_to_company')}}"  class="sales-form">
+                            <!-- <form method="POST" action="{{route('send_message_to_company')}}"  class="sales-form">
                                 @csrf
                                 <div class="auto-sales-form">
 
@@ -248,7 +402,7 @@
 
                                     <button type="submit" class="thm-btn-two">{{ __('translate.Send Message') }}</button>
                                 </div>
-                            </form>
+                            </form> -->
 
 
 
@@ -471,6 +625,10 @@
 
     <script>
         "use strict";
+        document.getElementById("openModalBtn").addEventListener("click", function () {
+            let myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+            myModal.show();
+        });
 
         function carReview(rating){
             $(".car_rat").each(function(){
@@ -548,9 +706,10 @@
         $("#calculate_total_price").on('click',function(){
            
            if($("#location").val() != ""){
-             var start_price = $("#price_value").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
+            var start_price = $("#price_value").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
              var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
              var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var shipping_charge = $("#shipping_charge").text().replace(/[^0-9.-]+/g, ''); 
  
             
  
@@ -558,13 +717,14 @@
              var start_price_num = Number(start_price);
              var comission_price_num = Number(comission_price);
              var delivery_charge_num = Number(delivery_charge);
+             var shipping_charge_num = Number(shipping_charge);
  
              // Check if conversion was successful
-             if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num)) {
-                 console.error("One of the prices is not a valid number.");
+             if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num) || isNaN(shipping_charge_num)) {
+                toastr.error("One of the prices is not a valid number.",'Failed');
              } else {
                  // Calculate total
-                 var total_price = start_price_num + comission_price_num + delivery_charge_num;
+                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num;
  
                  // Display the total price
                  $("#total_price").text('$'+total_price);
@@ -575,6 +735,41 @@
  
              
  
+         })
+
+         $("#calculate_total_price1").on('click',function(){
+           if($("#location1").val() != ""){
+             var start_price = $("#price_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
+             var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+ 
+            
+ 
+             // Convert to numbers
+             var start_price_num = Number(start_price);
+             var comission_price_num = Number(comission_price);
+             var delivery_charge_num = Number(delivery_charge);
+             var shipping_charge_num = Number(shipping_charge);
+ 
+             // Check if conversion was successful
+             if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num) || isNaN(shipping_charge_num)) {
+                toastr.error("One of the prices is not a valid number.",'Failed');
+             } else {
+                
+                 // Calculate total
+                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num;
+ 
+                 $("#hidden_commission").val(comission_price_num);
+                 $("#hidden_delivery_charge").val(delivery_charge_num);
+                 $("#hidden_shipping_charge").val(shipping_charge_num);
+                 $("#hidden_total").val(total_price);
+                 // Display the total price
+                 $("#total_price1").text('$'+total_price);
+             }
+           } else {
+             toastr.error('Select Location','Failed')
+           }
          })
 
         $("#loan_amount").on("keyup", function(e){
@@ -621,6 +816,14 @@
              var user_info=locations.filter(p=>p.id==$(this).val());
              if(user_info!=""){
                 $("#delivery_charge").text('$'+user_info[0].rate);
+             }
+        })
+
+        $("#location1").on('change',function(){
+             var locations=@json($delivery_charges);
+             var user_info=locations.filter(p=>p.id==$(this).val());
+             if(user_info!=""){
+                $("#delivery_charge1").text('$'+user_info[0].rate);
              }
         })
 
@@ -671,9 +874,9 @@
             }, images.length * 1000);
             });
 
-            window.addEventListener("load", function() {
-             document.getElementById("pageLoader").classList.add("hidden");
-            });
+            // window.addEventListener("load", function() {
+            //  document.getElementById("pageLoader").classList.add("hidden");
+            // });
 
 
             const locationSelect = document.getElementById("location");
