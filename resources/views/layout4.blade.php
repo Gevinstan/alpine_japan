@@ -688,7 +688,7 @@
                                                     </svg></span> {{ __('translate.How To Buy') }}
                                             </a>
                                         </li> -->
-                                        <li>
+                                        <!-- <li>
                                             <a href="{{ route('custom-page', 'our-stocks') }}" class="{{ Route::is('custom-page') &&  request()->segment(2) === 'our-stocks' ? 'active' : '' }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -697,7 +697,7 @@
                                                             stroke-linecap="round" stroke-linejoin="round" />
                                                     </svg></span> {{ __('translate.Our Stocks') }}
                                             </a>
-                                        </li>
+                                        </li> -->
                                         {{--<li>
                                             <a href="{{ route('custom-page', 'useful-links') }}" class="{{Route::is('custom-page') && request()->segment(2) == 'useful-links' ? 'active' : '' }}"> <span>
                                             <svg width="13" height="10" viewBox="0 0 13 10" fill="none"
