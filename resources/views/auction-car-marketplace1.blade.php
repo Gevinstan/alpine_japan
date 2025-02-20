@@ -23,7 +23,7 @@
     <section class="inventory feature-two listing-breadcrumb bg-light-grey">
         <div class="container px-2 px-sm-3 px-lg-5">
             <nav aria-label="breadcrumb" class="">
-                <ol class="breadcrumb breadcrumb-list px-3">
+                <ol class="px-3 breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Car MarketPlace') }}</li>
                 </ol>
@@ -33,12 +33,12 @@
                     <form action="" id="search_form">
                         
                         <!-- Select Your Brand Start-->
-                            <div class="inventory-main-box mb-2">
+                            <div class="mb-2 inventory-main-box">
                                 <!-- Select Your Brand  -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item ps-3">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button brand-heading p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="p-0 accordion-button brand-heading" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapseOne">
                                                 Brand & Model
@@ -47,13 +47,13 @@
                                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
-                                                <span class="select-Brand-box border-0 px-2">
+                                                <span class="px-2 border-0 select-Brand-box">
                                                 
                                                     @foreach ($brands as $index=> $brand)
                                                                 <div class="accordion" id="accordionExample">
                                                                 <div class="accordion-item">
                                                                     <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                        <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                        <div class="gap-2 p-0 accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                             <input name="brand[]" style="display:none;" class="form-check-input brand-search" type="checkbox"
                                                                                 value="{{ $brand->slug }}"
                                                                                 {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
@@ -63,7 +63,7 @@
                                                                         </div>
                                                                         <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                             <div class="accordion-body">
-                                                                                <span class="select-Brand-box p-0 px-2 border-0 brand-body">
+                                                                                <span class="p-0 px-2 border-0 select-Brand-box brand-body">
                                                                                 @if(array_key_exists($brand->slug, $brand_arr))
                                                                                         @foreach ($brand_arr[$brand->slug] as $model)
                                                                                             <span class="form-check">
@@ -97,12 +97,12 @@
                             </div>
                         <!-- Select Your Brand End--> 
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box my-2">
+                            <div class="my-2 inventory-main-box">
                                 <!-- Budget -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample1">
                                     <div class="accordion-item ps-3">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                            <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="p-0 accordion-button year-heading" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapsetwo">
                                                 Budget
@@ -112,13 +112,13 @@
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
 
-                                              <span class="select-Brand-box two four p-0 border-0">
-                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                              <span class="p-0 border-0 select-Brand-box two four">
+                                                <div class="gap-3 m-0 slider-container d-flex align-items-center">
 
-                                                    <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
-                                                        <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                            <span class="slider-label m-0" id="minYearLabel">${{round($minPrice)}}</span>
-                                                            <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
+                                                    <div class="px-2 d-flex flex-column align-items-center mt-32px w-100">
+                                                        <div class="pb-3 d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                            <span class="m-0 slider-label" id="minYearLabel">${{round($minPrice)}}</span>
+                                                            <span class="m-0 slider-value" id="modelYearValue">${{$maxPrice}}</span> 
                                                         </div>
 
                                                         <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
@@ -126,7 +126,7 @@
 
                                                     </div>
                                                      
-                                                    <div class="col-sm-3 d-flex align-content-between flex-column gap-4 go_clear">
+                                                    <div class="gap-4 col-sm-3 d-flex align-content-between flex-column go_clear">
                                                         @if(request('price_range_scale'))
                                                             <button class="clear-button" id="clear-budget">Clear</button>
                                                         @endif    
@@ -157,11 +157,11 @@
                         <!-- Select Your Budget End -->
 
                           <!-- Select Your Year Start -->
-                          <div class="inventory-main-box my-2">
+                          <div class="my-2 inventory-main-box">
                                     <div class="accordion" id="accordionPanelsStayOpenExample1">
                                         <div class="accordion-item ps-3">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                                <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                                <button class="p-0 accordion-button year-heading" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsethree">
                                                      Model Year
@@ -170,20 +170,20 @@
                                             <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
                                                 aria-labelledby="panelsStayOpen-collapsethree">
                                                 <div class="accordion-body">
-                                                    <span class="select-Brand-box two four p-0 border-0">
-                                                        <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                    <span class="p-0 border-0 select-Brand-box two four">
+                                                        <div class="gap-3 m-0 slider-container d-flex align-items-center">
                                                             <div class="d-flex flex-column align-items-center mt-32px w-100 ">
-                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                <div class="pb-3 d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                                    <span class="m-0 slider-label" id="minYearLabel">{{$minYear}}</span>
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>
+                                                                    <span class="m-0 slider-value" id="modelYearValue">{{$maxYear}}</span>
                                                                 </div>
                                                                 <input type="range" min="{{$minYear}}" max="{{$maxYear}}"
                                                                     value="{{ request('year', $minYear) }}"
-                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                                    class="mx-0 my-2 slider-input" id="modelYearSlider">
                                                                 <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
                                                             </div>
-                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                            <div class="gap-4 d-flex align-content-between flex-column go_clear">
                                                             @if(request('year'))
                                                             <button class="clear-button" id="clear-year">Clear</button>
                                                             @endif
@@ -207,10 +207,10 @@
                 </div>
 
                 <div class="col-lg-9">
-                    <div class="inventory-ber mb-2 px-2">
+                    <div class="px-2 mb-2 inventory-ber">
                         <div class="inventory-ber-left">
-                            <div class="inventory-sarch-ber-item flex-row">
-                                <div class="inventory-sarch-ber px-1">
+                            <div class="flex-row inventory-sarch-ber-item">
+                                <div class="px-1 inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
 
@@ -287,13 +287,13 @@
                         </div>
                     </div>
 
-                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 px-3 mb-3">
-                        <div class="d-flex align-items-center flex-wrap gap-3">
+                    <div class="gap-2 px-3 mb-3 filtered-section d-flex justify-content-between align-content-center">
+                        <div class="flex-wrap gap-3 d-flex align-items-center">
                         {{--@if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
-                            <!-- <p class="position-relative filter-text px-3 py-1">
+                            <!-- <p class="px-3 py-1 position-relative filter-text">
                                 <span class="position-relative brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                        <span class="top-0 position-absolute start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
@@ -306,9 +306,9 @@
                         @foreach(request('model') as $brandSlug => $models)
                                 @foreach($models as $model)
                                @if($model!="")
-                            <p class="position-relative filter-text px-3 py-1">
+                            <p class="px-3 py-1 position-relative filter-text">
                                 <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                        <span class="top-0 position-absolute start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-model">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
@@ -321,9 +321,9 @@
                             @endforeach
                             @endif
                             @if(request('year'))
-                            <p class="position-relative filter-text px-3 py-1">
+                            <p class="px-3 py-1 position-relative filter-text">
                                 <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                        <span class="top-0 position-absolute start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
@@ -346,7 +346,7 @@
                             <div class="row g-5">
                             @if(count($cars_array) > 0)  
                                  @foreach ($cars_array as $index => $car)
-                                    <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-up"
+                                    <div class="col-lg-4 col-sm-6 col-md-6" data-aos="fade-up"
                                                 data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
@@ -370,7 +370,7 @@
                                                         @endif        
                                                         </div>
                                                 <div class="brand-car-inner-item">
-                                                    <span class="text-truncate car-name pt-3 ps-3" 
+                                                    <span class="pt-3 text-truncate car-name ps-3" 
                                                     data-bs-toggle="tooltip"  title="@if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                         @else
@@ -382,7 +382,7 @@
                                                             {{ $car['company'] }}
                                                         @endif
                                                     </span>
-                                                    <p class="listcar_price pt-4 pe-4">
+                                                    <p class="pt-4 listcar_price pe-4">
                                                        @if(session('front_lang')=='en')
                                                         {{ '$'.$car['start_price_num'] }}
                                                         @else
@@ -392,7 +392,7 @@
                                                 </div>
 
                                                 <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name_en']) }}">
-                                                    <h3 class="text-truncate car-fullname pt-3 ps-3"> 
+                                                    <h3 class="pt-3 text-truncate car-fullname ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
                                                         @else
@@ -401,11 +401,11 @@
                                                     </h3>
                                                 </a>
 
-                                                <div class="brand-car-inner-item-main px-4">
+                                                <div class="px-4 brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
-                                                                        <svg width="20" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                             <path d="M20 10.2935C20 7.75456 18.9535 5.45057 17.2608 3.77159C17.2476 3.7544 17.2335 3.73758 17.2175 3.72192C17.2015 3.70626 17.1843 3.69249 17.1668 3.67963C15.4505 2.02368 13.0953 1 10.5 1C7.90472 1 5.54953 2.02374 3.83318 3.67963C3.81561 3.69255 3.79848 3.70632 3.78247 3.72192C3.76646 3.73758 3.75238 3.75434 3.73918 3.77159C2.0465 5.45057 1 7.75456 1 10.2935C1 12.7755 1.98794 15.1089 3.78179 16.8642C3.78204 16.8644 3.78229 16.8647 3.78253 16.865C3.78272 16.8651 3.78285 16.8653 3.78303 16.8654C3.78328 16.8656 3.78353 16.8659 3.78378 16.8661C3.87498 16.9553 3.99452 16.9999 4.11407 16.9999C4.23368 16.9999 4.35328 16.9553 4.44448 16.866C4.45227 16.8584 4.45931 16.8503 4.46641 16.8422L5.90617 15.4337C6.08864 15.2552 6.08864 14.9658 5.90617 14.7873C5.72371 14.6089 5.42787 14.6089 5.24547 14.7873L4.12192 15.8864C2.81179 14.4602 2.05173 12.6653 1.9472 10.7505H3.53616C3.79418 10.7505 4.00337 10.546 4.00337 10.2935C4.00337 10.041 3.79418 9.83642 3.53616 9.83642H1.94732C2.05596 7.86974 2.86107 6.08137 4.12497 4.70343L5.24547 5.79958C5.33667 5.88879 5.45628 5.9334 5.57582 5.9334C5.69537 5.9334 5.81497 5.88879 5.90617 5.79958C6.08864 5.62102 6.08864 5.33167 5.90617 5.15318L4.78573 4.05697C6.19435 2.82055 8.0224 2.03295 10.0328 1.92673V3.48108C10.0328 3.73356 10.242 3.93814 10.5 3.93814C10.758 3.93814 10.9672 3.73356 10.9672 3.48108V1.92673C12.9776 2.03295 14.8056 2.82061 16.2143 4.05703L15.0938 5.15318C14.9113 5.33173 14.9113 5.62108 15.0938 5.79958C15.185 5.88879 15.3046 5.9334 15.4241 5.9334C15.5437 5.9334 15.6633 5.88879 15.7545 5.79958L16.875 4.70343C18.1389 6.08143 18.944 7.86974 19.0526 9.83642H17.4637C17.2057 9.83642 16.9965 10.041 16.9965 10.2935C16.9965 10.546 17.2057 10.7505 17.4637 10.7505H19.0527C18.9481 12.6653 18.1881 14.4603 16.878 15.8865L15.7545 14.7873C15.5721 14.6089 15.2762 14.6089 15.0938 14.7873C14.9113 14.9659 14.9113 15.2552 15.0938 15.4337L16.5568 16.8649C16.648 16.9541 16.7676 16.9987 16.8871 16.9987C16.9469 16.9987 17.0067 16.9876 17.0629 16.9653C17.1192 16.943 17.1719 16.9095 17.2175 16.8649C19.0118 15.1096 20 12.7758 20 10.2935Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                             <path d="M12.6465 5.05246C12.4068 4.95855 12.135 5.07238 12.039 5.30676L10.6889 8.60366C10.626 8.59708 10.5631 8.59257 10.5001 8.59257C9.8425 8.59257 9.24852 8.94889 8.94981 9.52246C8.63759 10.1221 8.71758 10.8385 9.16361 11.4387C9.20921 11.5001 9.26652 11.5562 9.32969 11.6012C9.69206 11.8589 10.0968 11.9951 10.5001 11.9951C11.1577 11.9951 11.7517 11.6388 12.0504 11.0652C12.3626 10.4656 12.2826 9.74922 11.8369 9.14938C11.7913 9.08783 11.7338 9.03152 11.6705 8.98643C11.6364 8.96217 11.6016 8.94005 11.5668 8.91799L12.9064 5.64663C13.0024 5.41237 12.886 5.1463 12.6465 5.05246ZM11.2177 10.6502C11.0793 10.9159 10.8043 11.0809 10.5 11.0809C10.3004 11.0809 10.0995 11.0127 9.90268 10.8782C9.67842 10.5631 9.63437 10.2216 9.78245 9.93735C9.92075 9.67171 10.1957 9.50668 10.5001 9.50668C10.5971 9.50668 10.6944 9.52313 10.7915 9.55513C10.7947 9.55641 10.7976 9.55805 10.8008 9.55933C10.8111 9.56329 10.8213 9.56652 10.8316 9.56975C10.9207 9.60321 11.0094 9.64928 11.0974 9.70937C11.3216 10.0244 11.3657 10.3659 11.2177 10.6502Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                         </svg>
@@ -427,8 +427,8 @@
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
-                                                                    <svg width="21" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path d="M19.5 4H16.5V2.5C16.5 2.36739 16.4473 2.24021 16.3536 2.14645C16.2598 2.05268 16.1326 2 16 2C15.8674 2 15.7402 2.05268 15.6464 2.14645C15.5527 2.24021 15.5 2.36739 15.5 2.5V4H8.5V2.5C8.5 2.36739 8.44732 2.24021 8.35355 2.14645C8.25979 2.05268 8.13261 2 8 2C7.86739 2 7.74021 2.05268 7.64645 2.14645C7.55268 2.24021 7.5 2.36739 7.5 2.5V4H4.5C3.8372 4.00079 3.20178 4.26444 2.73311 4.73311C2.26444 5.20178 2.00079 5.8372 2 6.5V19.5C2.00079 20.1628 2.26444 20.7982 2.73311 21.2669C3.20178 21.7356 3.8372 21.9992 4.5 22H19.5C20.163 22 20.7989 21.7366 21.2678 21.2678C21.7366 20.7989 22 20.163 22 19.5V6.5C22 5.83696 21.7366 5.20107 21.2678 4.73223C20.7989 4.26339 20.163 4 19.5 4ZM21 19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V11H21V19.5ZM21 10H3V6.5C3 5.672 3.67 5 4.5 5H7.5V6.5C7.5 6.63261 7.55268 6.75979 7.64645 6.85355C7.74021 6.94732 7.86739 7 8 7C8.13261 7 8.25979 6.94732 8.35355 6.85355C8.44732 6.75979 8.5 6.63261 8.5 6.5V5H15.5V6.5C15.5 6.63261 15.5527 6.75979 15.6464 6.85355C15.7402 6.94732 15.8674 7 16 7C16.1326 7 16.2598 6.94732 16.3536 6.85355C16.4473 6.75979 16.5 6.63261 16.5 6.5V5H19.5C19.8978 5 20.2794 5.15804 20.5607 5.43934C20.842 5.72064 21 6.10218 21 6.5V10Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.5"/>
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M19.5 4H16.5V2.5C16.5 2.36739 16.4473 2.24021 16.3536 2.14645C16.2598 2.05268 16.1326 2 16 2C15.8674 2 15.7402 2.05268 15.6464 2.14645C15.5527 2.24021 15.5 2.36739 15.5 2.5V4H8.5V2.5C8.5 2.36739 8.44732 2.24021 8.35355 2.14645C8.25979 2.05268 8.13261 2 8 2C7.86739 2 7.74021 2.05268 7.64645 2.14645C7.55268 2.24021 7.5 2.36739 7.5 2.5V4H4.5C3.8372 4.00079 3.20178 4.26444 2.73311 4.73311C2.26444 5.20178 2.00079 5.8372 2 6.5V19.5C2.00079 20.1628 2.26444 20.7982 2.73311 21.2669C3.20178 21.7356 3.8372 21.9992 4.5 22H19.5C20.163 22 20.7989 21.7366 21.2678 21.2678C21.7366 20.7989 22 20.163 22 19.5V6.5C22 5.83696 21.7366 5.20107 21.2678 4.73223C20.7989 4.26339 20.163 4 19.5 4ZM21 19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V11H21V19.5ZM21 10H3V6.5C3 5.672 3.67 5 4.5 5H7.5V6.5C7.5 6.63261 7.55268 6.75979 7.64645 6.85355C7.74021 6.94732 7.86739 7 8 7C8.13261 7 8.25979 6.94732 8.35355 6.85355C8.44732 6.75979 8.5 6.63261 8.5 6.5V5H15.5V6.5C15.5 6.63261 15.5527 6.75979 15.6464 6.85355C15.7402 6.94732 15.8674 7 16 7C16.1326 7 16.2598 6.94732 16.3536 6.85355C16.4473 6.75979 16.5 6.63261 16.5 6.5V5H19.5C19.8978 5 20.2794 5.15804 20.5607 5.43934C20.842 5.72064 21 6.10218 21 6.5V10Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.5"/>
                                                                     </svg>
                                                             </span>
                                                         </div>
@@ -449,8 +449,8 @@
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
-                                                                    <svg width="21" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M17 11.5H17.5V11V7.5H18.5V12.5H13H12.5V13V16.5H11.5V13V12.5H11H7H6.5V13V16.5H5.5V7.5H6.5V11V11.5H7H11H11.5V11V7.5H12.5V11V11.5H13H17ZM7.5 4.5H4.5V2.5H7.5V4.5ZM7.5 19.5V21.5H4.5V19.5H7.5ZM10.5 4.5V2.5H13.5V4.5H10.5ZM13.5 19.5V21.5H10.5V19.5H13.5ZM19.5 4.5H16.5V2.5H19.5V4.5Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.5"/>
+                                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M17 11.5H17.5V11V7.5H18.5V12.5H13H12.5V13V16.5H11.5V13V12.5H11H7H6.5V13V16.5H5.5V7.5H6.5V11V11.5H7H11H11.5V11V7.5H12.5V11V11.5H13H17ZM7.5 4.5H4.5V2.5H7.5V4.5ZM7.5 19.5V21.5H4.5V19.5H7.5ZM10.5 4.5V2.5H13.5V4.5H10.5ZM13.5 19.5V21.5H10.5V19.5H13.5ZM19.5 4.5H16.5V2.5H19.5V4.5Z" fill="#0D274E" stroke="#0D274E" stroke-width="0.2"/>
                                                                     </svg>
 
                                                             </span>
@@ -475,7 +475,7 @@
                                                     </h6>
                                                 </div> -->
 
-                                                <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                <div class="px-3 py-2 brand-car-btm-txt-btm">
                                                     @php
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
@@ -612,7 +612,7 @@
                             aria-labelledby="pills-profile-tab">
                             <div class="row g-5 brand-car-two">
                                 @forelse ($cars_array as $index => $car)
-                                    <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
@@ -730,7 +730,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="px-3 d-flex flex-row">
+                                                <div class="flex-row px-3 d-flex">
                                                     @php
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
