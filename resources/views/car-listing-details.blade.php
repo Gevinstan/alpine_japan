@@ -142,7 +142,7 @@
                                 <button type="button" class="btn btn-secondary cancel-btn w-full h-full" data-bs-dismiss="modal">Cancel</button>
                             </div>
                             <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
-                                 <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                                 <button type="submit" class="thm-btn-two w-100">BUY NOW</button>  
                             </div>
                           
                         </div>
@@ -212,115 +212,64 @@
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
                     <div class="p-sticky">
-                    <div class="auto-sales-item form-section">
-                        <div class="d-flex flex-column gap-2 car-listing-details">
-                            <p class="brand-text fw-bolder">{{$car->company_en}}</p>
-                            <h3>{{$car->model_name_en}}</h3>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <p class="amount-text" id="price_value">Price <span class="price-text">
-                                    @if(session('front_lang')=='en')
-                                        ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
-                                        @else
-                                        {{$car->start_price}}
-                                    @endif 
-                                </span></p>
-                                <p style="display:none;" id="commission_value">${{$car->commission_value}}</p>
-                            </div>
-                            
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="dropdown location-dropdown w-100">
-                                    <select class="form-select form-select location-select"
-                                        aria-label=".form-select example" name="location" id="location">
-                                        <option class="" selected value="">Select Location<i class="bi bi-caret-down"></i>
-                                        </option>
-                                        
-                                        @foreach ($delivery_charges as $charges)
-                                        <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="w-100 bg-white">
-                                    <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
-                                        Delivery Charge 
-                                    </button> 
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="dropdown location-dropdown w-100">
-                                    <button class="btn w-100 bg-white charge-btn">
-                                        Shipping 
-                                    </button> 
-                                </div>
-                                <div class="w-100 bg-white">
-                                    <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge">
-                                    {{'$'.round($car->shipping_value)}}
-                                    </button> 
-                                </div>
-                            </div>
-                            <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                            <div class="d-flex align-content-center total-price-container mt-3">
-                                <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
-                                <p class="" id="total_price"></p>
-                            </div>
-                        </div>
-                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
-                                <button type="submit" class="thm-btn-two">BUY NOW</button>  
-                            <!-- <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form">
+                        <div class="auto-sales-item form-section">
+                            <form method="POST" action="{{ route('post.fixed.marketplace', ['id' => request()->segment(2)]) }}" class="sales-form">
                                 @csrf
-                                <div class="auto-sales-form">
-                                    <div class="auto-sales-form-item">
-                                        <div class="textarea-wrapper">
-                                            <input type="text" class="form-control" id="exampleFormControlInput3"
-                                                placeholder="" name="name" value="{{ old('name') }}">
-                                            <span class="placeholder-text">Name <span class="required">*</span></span>
+                                <div class="d-flex flex-column gap-2 car-listing-details">
+                                    <p class="brand-text fw-bolder">{{$car->company_en}}</p>
+                                    <h3>{{$car->model_name_en}}</h3>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="amount-text" id="price_value">Price 
+                                            <span class="price-text">
+                                                @if(session('front_lang')=='en')
+                                                    ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
+                                                    @else
+                                                    {{$car->start_price}}
+                                                @endif 
+                                            </span>
+                                        </p>
+                                        <p style="display:none;" id="commission_value">${{$car->commission_value}}</p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="dropdown location-dropdown w-100">
+                                            <select class="form-select form-select location-select"
+                                                aria-label=".form-select example" name="location" id="location">
+                                                <option class="" selected value="">Select Location<i class="bi bi-caret-down"></i>
+                                                </option>
+                                                
+                                                @foreach ($delivery_charges as $charges)
+                                                <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="w-100 bg-white">
+                                            <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
+                                                Delivery Charge 
+                                            </button> 
                                         </div>
                                     </div>
-                                    <div class="auto-sales-form-item">
-                                        <div class="textarea-wrapper">
-                                            <input type="email" class="form-control" id="exampleFormControlInput4"
-                                                placeholder="" name="email" value="{{ old('email') }}">
-                                            <span class="placeholder-text">Email <span class="required">*</span></span>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="dropdown location-dropdown w-100">
+                                            <button class="btn w-100 bg-white charge-btn">
+                                                Shipping 
+                                            </button> 
+                                        </div>
+                                        <div class="w-100 bg-white">
+                                            <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge">
+                                            {{'$'.round($car->shipping_value)}}
+                                            </button> 
                                         </div>
                                     </div>
-                                    <div class="auto-sales-form-item">
-                                        <div class="textarea-wrapper">
-                                            <input type="text" class="form-control" id="exampleFormControlInput5"
-                                                placeholder="" name="phone" value="{{ old('phone') }}">
-                                            <span class="placeholder-text">Phone <span class="required">*</span></span>
-                                        </div>
+                                    <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
+                                    <div class="d-flex align-content-center total-price-container mt-3">
+                                        <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                                        <p class="" id="total_price"></p>
                                     </div>
-                                    <div class="auto-sales-form-item">
-                                        <div class="textarea-wrapper">
-                                            <input type="text" class="form-control" id="exampleFormControlInpu6"
-                                                placeholder="" value="{{ old('subject') }}" name="subject">
-                                            <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="auto-sales-form-item">
-                                        <div class="textarea-wrapper">
-                                            <textarea class="form-control" id="exampleFormControlTextarea11" rows="3"
-                                                placeholder="" name="message">{{ old('message') }}</textarea>
-                                            <span class="placeholder-text">Message <span class="required">*</span></span>
-                                        </div>
-                                    </div>
-
-                                    {{-- @if($google_recaptcha->status==1)
-                                        <div class="auto-sales-form-item">
-                                            <div class="g-recaptcha" data-sitekey="{{ $google_recaptcha->site_key }}"></div>
-                                        </div>
-                                    @endif --}}
-                                    <input type="hidden" name="car_id" value="{{$car->id}}">
-                                    <input type="hidden" name="commission" value="" id="hidden_commission">
-                                    <input type="hidden" name="delivery_charge" value="" id="hidden_delivery_charge">
-                                    <input type="hidden" name="total_car_price" value="" id="hidden_total">
-                                    <input type="hidden" name="vehicle_brand" value="{{$car->company_en}}">
-                                    <input type="hidden" name="vehicle_model" value="{{$car->model_name_en}}">
-                                    <input type="hidden" name="url_link" value="{{$url_link}}">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
-                                    <button type="submit" class="thm-btn-two">BUY NOW</button>         
-                            </form> -->
-                        </div>
-
+                                </div>
+                                    <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                                    <button type="submit" class="thm-btn-two" id="fixed_car_btn">BUY NOW</button>  
+                            </form>         
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -905,6 +854,8 @@
 
         })
 
+        
+
         $("#location").on('change',function(){
              var locations=@json($delivery_charges);
              var user_info=locations.filter(p=>p.id==$(this).val());
@@ -973,6 +924,8 @@
 
     const locationSelect = document.getElementById("location");
     const deliveryChargeButton = document.getElementById("delivery_charge");
+    const locationSelect1 = document.getElementById("location1");
+    const deliveryChargeButton1 = document.getElementById("delivery_charge1");
 
     locationSelect.addEventListener("change", () => {
         if (locationSelect.value) {
@@ -987,6 +940,22 @@
             deliveryChargeButton.style.setProperty("color", "#868b96", "important");
             locationSelect.style.setProperty("color", "#868b96", "important");
             locationSelect.style.setProperty("font-size", "12px", "important");
+        }
+    });
+
+    locationSelect1.addEventListener("change", () => {
+        if (locationSelect1.value) {
+            deliveryChargeButton1.style.setProperty("color", "#0d274e", "important");
+            deliveryChargeButton1.style.setProperty("font-size", "14px", "important");
+            deliveryChargeButton1.style.setProperty("font-weight", "600", "important");
+            locationSelect1.style.setProperty("color", "#0d274e", "important");
+            locationSelect1.style.setProperty("font-size", "14px", "important");
+            locationSelect1.style.setProperty("font-weight", "600", "important");
+        } else {
+            deliveryChargeButton1.style.color = "#868b96";
+            deliveryChargeButton1.style.setProperty("color", "#868b96", "important");
+            locationSelect1.style.setProperty("color", "#868b96", "important");
+            locationSelect1.style.setProperty("font-size", "12px", "important");
         }
     });
 

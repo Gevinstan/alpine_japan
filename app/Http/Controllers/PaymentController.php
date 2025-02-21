@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Modules\GeneralSetting\Entities\Setting;
+use Modules\Imports\Entities\AuctLotsXmlJpOpOtherChargers;
+use Modules\Imports\Entities\CarDataJpOp;
+use Modules\DeliveryCharges\Entities\DeliveryCharge;
 use Session, Auth, Stripe, Mail, Str, Exception, Redirect;
 use Razorpay\Api\Api;
 use Mollie\Laravel\Facades\Mollie;
@@ -63,6 +66,47 @@ class PaymentController extends Controller
             'instamojo' => $instamojo,
             'bank' => $bank,
         ]);
+    }
+
+    public function store_pricing(Request $request,$id){
+        $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
+        if(!empty($get_charges)){
+            $price=CarDataJpOp::where('id', $id)->value('start_price_num');
+            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            $commission=$get_charges->commission_value;
+            $shipping=$get_charges->shipping_value;
+            $usd=$this->convertCurrency($price, $this->usdRate);
+            $total=($usd+$delivery_charge+$commission+$shipping);
+
+            $paypal = PaypalPayment::first();
+            $stripe = StripePayment::first();
+            $razorpay = RazorpayPayment::first();
+            $flutterwave = Flutterwave::first();
+            $paystack = PaystackAndMollie::first();
+            $mollie = $paystack;
+            $instamojo = InstamojoPayment::first();
+            $bank = BankPayment::first();
+    
+            return view('payment', [
+                'usd' => $usd,
+                'delivery_charge' => $delivery_charge,
+                'commission' => $commission,
+                'shipping' => $shipping,
+                'total' => $total,
+                'stripe' => $stripe,
+                'paypal' => $paypal,
+                'razorpay' => $razorpay,
+                'flutterwave' => $flutterwave,
+                'paystack' => $paystack,
+                'mollie' => $mollie,
+                'instamojo' => $instamojo,
+                'bank' => $bank,
+            ]);
+        }    
+    }
+
+    public function payment_car(Request $request){
+       return view('payment');
     }
 
 

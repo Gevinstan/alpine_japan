@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ __('translate.Purchase History') }}</title>
 @endsection

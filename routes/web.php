@@ -59,6 +59,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('fixed-car-marketplace', 'car_listing')->name('fixed-car-marketplace');
             // Route::get('car_listing_details/{slug}', 'car_listing_details')->name('car_listing_details');
             Route::get('fixed-car-marketplace-details/{slug}', 'car_listing_details')->name('fixed-car-marketplace-details');
+            Route::post('/fixed-car-marketplace-details/{id}',  'store_pricing')->name('post.fixed.marketplace');
+            Route::post('/auction_listing/{id}',  'store_auction_pricing')->name('post.auction');
             Route::get('/about-us', 'about_us')->name('about-us');
             Route::get('/contact-us', 'contact_us')->name('contact-us');
             Route::get('/shipment', 'shipment')->name('shipment');
@@ -82,6 +84,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/jdm_brand_new','jdm_brand_new')->name('jdm_brand_new');
             Route::get('/fixed-car-marketplace-brand-new-cars','carListingBrandNew')->name('fixed-car-marketplace-brand-new-cars');
             Route::get('/jdm-stock-listing/{slug}/{type}', 'jdm_stock_listing')->name('jdm-stock-listing');
+            Route::post('/jdm-stock-listing/{slug}/{type}', 'store_jdm')->name('post.jdm');
             Route::get('/jdm-listing/{slug}/{type}', 'jdm_listing')->name('jdm-listing');
             Route::post('/store-comment', 'store_comment')->name('store-comment');
             Route::post('/auct-sess-creation',function(Request $request){
@@ -143,8 +146,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/response-instamojo', 'instamojo_response')->name('response-instamojo');
 
         });
-
-        Route::get('/pay-via-paypal/{id}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
+        
+        Route::get('/pay-via-paypal/{id}/{id1}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
         Route::get('/paypal-success-payment',[PaypalController::class, 'paypal_success_payment'])->name('paypal-success-payment');
         Route::get('/paypal-faild-payment',[PaypalController::class, 'paypal_faild_payment'])->name('paypal-faild-payment');
   

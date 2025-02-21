@@ -198,16 +198,16 @@ use Carbon\Carbon;
     <!-- Categories-part-start -->
     <section class="categories px-2 px-sm-3 px-lg-5">
         <div class="container">
-            <div class="row align-items-end">
+            <div class="row align-items-end pb-3">
                 <div class="col-lg-8 col-sm-8 col-md-12  ">
                     <h2 class="section-heading">{{__('translate.Popular')}} <span class="highlight">{{__('translate.Brands')}}<span></h2>
                 </div>
 
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <div class="categories-three-view-btn">
-                    <!-- <a href="{{ route('listings') }}" class="thm-btn">{{ __('translate.View All') }}</a> -->
+                        <a href="{{ route('listings') }}" class="thm-btn">{{ __('translate.View All') }}</a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -234,15 +234,9 @@ use Carbon\Carbon;
 
 
     <!--  Brand Car-part-start -->
+       @if(count($top_sells) > 0 )
         <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="brand-car-position-img">
-
-                        </div>
-                    </div>
-                </div>
                 <div class="row align-items-end">
                     <div class="col-lg-6 col-sm-6  col-md-6">
                         <h2 class="section-heading">{{__('translate.Top Selling')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
@@ -575,6 +569,7 @@ use Carbon\Carbon;
                 </div>
             </div>
         </section>
+       @endif 
     <!--  Brand Car-part-end -->
 
 
@@ -605,7 +600,7 @@ use Carbon\Carbon;
 
                     <div class="row align-items-end">
                         <div class="col-lg-6 col-sm-6  col-md-6">
-                            <h2 class="section-heading">{{__('translate.JDM')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
+                            <h2 class="section-heading text-nowrap">{{__('translate.JDM')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
                         </div>
                     </div>        
                 </div>
@@ -837,7 +832,8 @@ use Carbon\Carbon;
 
 
     <!--  Feature-part-start -->
-    <section class="feature py-5 my-5 px-2 px-sm-3 px-lg-5">
+      @if(count($new_arrived_cars) > 0)
+        <section class="feature py-5 my-5 px-2 px-sm-3 px-lg-5">
         <div class="container ">
             <div class="row">
                 <div class="col-lg-9 New_arrival pt-2">
@@ -1045,7 +1041,8 @@ use Carbon\Carbon;
                 <a href="{{ route('new-arrivals') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
-    </section>
+        </section>
+     @endif
     <!--  Feature-part-end -->
 
 
@@ -1267,7 +1264,7 @@ use Carbon\Carbon;
     <!-- About section Start-->
     <section class="about-section py-5 px-md-5 px-sm-2">
   <div class="container">
-    <h2 class="pb-3 section-heading text-center text-md-start">
+    <h2 class="mb-3 section-heading text-center text-md-start">
       About <span class="highlight">Alpine Japan</span>
     </h2>
     <div class="about-row">

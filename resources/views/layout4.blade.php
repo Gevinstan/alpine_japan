@@ -171,14 +171,14 @@
                                                                 @endforeach
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4 nav-dropdown-list">
+                                                        {{--<div class="col-md-4 nav-dropdown-list">
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
                                                                     <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
-                                                        </div>
+                                                        </div>--}}
                                                     </div>
                                                 </div>
                                             </ul>

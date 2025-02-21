@@ -48,7 +48,7 @@
             <div class="col-lg-6 col-sm-12 col-12">
                 <div class="d-flex flex-column gap-3 car-listing-details">
                     <p class="brand-text fw-bolder">{{$car->company_en}}</p>
-                    <h3>{{$car->model_name_en}}</h3>
+                     <h3>{{$car->model_name_en}}</h3>
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="amount-text" id="price_value1">Price <span class="price-text">
                         @if(session('front_lang')=='en')
@@ -93,11 +93,11 @@
                             </button> 
                         </div>
                     </div>
-                    <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
-                    <div class="d-flex align-content-center total-price-container mt-3">
-                        <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
-                        <p class="" id="total_price1"></p>
-                    </div>
+                        <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
+                        <div class="d-flex align-content-center total-price-container mt-3">
+                            <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                            <p class="" id="total_price1"></p>
+                        </div>
                 </div>
             </div>
             <div class="col-12">
@@ -291,62 +291,66 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
                     <div class="p-sticky">
                     <div class="auto-sales-item form-section">
-                        <div class="d-flex flex-column gap-2 car-listing-details">
-                            <p class="brand-text fw-bolder">{{$car->make}}</p>
-                            <h3>{{$car->model}}</h3>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <p class="amount-text" id="price_value">Price <span class="price-text">
-                                    @if(session('front_lang')=='en')
-                                        ${{$car->price}}
-                                        @else
-                                        {{$car->price}}
-                                    @endif 
-                                </span></p>
-                                <p style="display:none;" id="commission_value">${{$car->commission_value}}</p>
-                                <!-- <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
-                                ${{$car->commission_value}}
-                                </span></p> -->
-                            </div>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="dropdown location-dropdown w-100">
-                                    <select class="form-select form-select location-select"
-                                        aria-label=".form-select example" name="location" id="location">
-                                        <option selected value="">
-                                            {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
-                                        </option>
-                                        @foreach ($delivery_charges as $charges)
-                                        <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="w-100 bg-white">
-                                    <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
-                                        Delivery Charge
-                                    </button>
-                                    
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="dropdown location-dropdown w-100">
-                                    <button class="btn w-100 bg-white charge-btn">
-                                        Shipping 
-                                    </button> 
-                                </div>
-                                <div class="w-100 bg-white">
-                                    <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge">
-                                    {{'$'.round($car->shipping_value)}}
-                                    </button> 
-                                </div>
-                            </div>
-                            <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                            <div class="d-flex align-content-center total-price-container mt-3">
-                            <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
-                            <p class="" id="total_price"></p>
-                    </div>
+                    <form method="POST" action="{{ route('post.jdm', ['slug' => request()->segment(2), 'type' => request()->segment(3)]) }}" class="sales-form">
 
-                        </div>
-                        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
-                        <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                            @csrf
+                            <div class="d-flex flex-column gap-2 car-listing-details">
+                                    <p class="brand-text fw-bolder">{{$car->make}}</p>
+                                    <h3>{{$car->model}}</h3>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="amount-text" id="price_value">Price <span class="price-text">
+                                            @if(session('front_lang')=='en')
+                                                ${{$car->price}}
+                                                @else
+                                                {{$car->price}}
+                                            @endif 
+                                        </span></p>
+                                        <p style="display:none;" id="commission_value">${{$car->commission_value}}</p>
+                                        <!-- <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                                        ${{$car->commission_value}}
+                                        </span></p> -->
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="dropdown location-dropdown w-100">
+                                            <select class="form-select form-select location-select"
+                                                aria-label=".form-select example" name="location" id="location">
+                                                <option selected value="">
+                                                    {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                                </option>
+                                                @foreach ($delivery_charges as $charges)
+                                                <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="w-100 bg-white">
+                                            <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
+                                                Delivery Charge
+                                            </button>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="dropdown location-dropdown w-100">
+                                            <button class="btn w-100 bg-white charge-btn">
+                                                Shipping 
+                                            </button> 
+                                        </div>
+                                        <div class="w-100 bg-white">
+                                            <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge">
+                                            {{'$'.round($car->shipping_value)}}
+                                            </button> 
+                                        </div>
+                                    </div>
+                                    <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
+                                    <div class="d-flex align-content-center total-price-container mt-3">
+                                        <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                                        <p class="" id="total_price"></p>
+                                    </div>
+                            </div>
+                            <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                            <button type="submit" class="thm-btn-two">BUY NOW</button>  
+                        </form>   
+
                         
 
                             <!-- <form method="POST" action="{{route('send_message_to_company')}}"  class="sales-form">
