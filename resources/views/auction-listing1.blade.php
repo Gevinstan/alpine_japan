@@ -71,63 +71,65 @@
 
                 <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
                     <div class="p-sticky">
-                    <div class="auto-sales-item form-section">
-                        <div class="d-flex flex-column gap-2 car-listing-details">
-                            <p class="brand-text fw-bolder">
-                                @if(session('front_lang')=='en')
-                                    {{$car->company_en}}
-                                @else
-                                    {{$car->company}}
-                                @endif
-                            </p>
-                            <h3>
-                                @if(session('front_lang')=='en')
-                                    {{$car->model_name_en}} 
-                                @else
-                                {{$car->model_name}}
-                                @endif
-                            </h3>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <p class="amount-text" id="price_value">Price <span class="price-text">
-                                    @if(session('front_lang')=='en')
-                                     ${{convertCurrency($car->start_price_num,$usd_rate)}}
+                        <div class="auto-sales-item form-section">
+                            <form method="POST" action="{{ route('post.auction', ['id' => request()->segment(2)]) }}" class="sales-form">
+                            @csrf
+                                <div class="d-flex flex-column gap-2 car-listing-details">
+                                    <p class="brand-text fw-bolder">
+                                        @if(session('front_lang')=='en')
+                                            {{$car->company_en}}
                                         @else
-                                        {{$car->start_price}}
-                                    @endif 
-                                </span></p>
-                                <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
-                                ${{$car->commission_value}}
-                                </span></p>
-                            </div>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="dropdown location-dropdown w-100">
-                                   
-
-                                    <select class="form-select form-select location-select"
-                                        aria-label=".form-select example" name="location" id="location">
-                                        <option class="" selected value="">
-                                            {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
-                                        </option>
-                                        
-                                        @foreach ($delivery_charges as $charges)
-                                        <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
-                                        @endforeach
-                                    </select>
+                                            {{$car->company}}
+                                        @endif
+                                    </p>
+                                    <h3>
+                                        @if(session('front_lang')=='en')
+                                            {{$car->model_name_en}} 
+                                        @else
+                                        {{$car->model_name}}
+                                        @endif
+                                    </h3>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="amount-text" id="price_value">Price <span class="price-text">
+                                            @if(session('front_lang')=='en')
+                                            ${{convertCurrency($car->start_price_num,$usd_rate)}}
+                                                @else
+                                                {{$car->start_price}}
+                                            @endif 
+                                        </span></p>
+                                        <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                                        ${{$car->commission_value}}
+                                        </span></p>
+                                    </div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="dropdown location-dropdown w-100">
+                                                <select class="form-select form-select location-select"
+                                                    aria-label=".form-select example" name="location" id="location">
+                                                    <option class="" selected value="">
+                                                        {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
+                                                    </option>
+                                                    
+                                                    @foreach ($delivery_charges as $charges)
+                                                    <option value="{{ $charges->id }}"><i class="bi bi-caret-down-fill"></i>{{ $charges->country_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="w-100 bg-white">
+                                                <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
+                                                    Delivery Charge
+                                                </button> 
+                                            </div>
+                                        </div>
+                                        <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
+                                        <div class="d-flex align-content-center total-price-container mt-3">
+                                        <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
+                                        <p class="" id="total_price"></p>
                                 </div>
-                                <div class="w-100 bg-white">
-                                    <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
-                                        Delivery Charge
-                                    </button> 
-                                </div>
-                            </div>
-                            <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                            <div class="d-flex align-content-center total-price-container mt-3">
-                            <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
-                            <p class="" id="total_price"></p>
-                    </div>
-
+                                <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                                    <button type="submit" class="thm-btn-two" id="fixed_car_btn">BUY NOW</button>  
+                            </form>         
                         </div>
-                            <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form">
+                            <!-- <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form">
                                 @csrf
                                 <div class="auto-sales-form">
 
@@ -187,7 +189,7 @@
                                                 <button type="submit" class="thm-btn-two">INQUIERY NOW</button>
                                                 <button type="submit" class="thm-btn-two">BUY NOW</button>
                                 </div>
-                            </form>
+                            </form> -->
 
 
 

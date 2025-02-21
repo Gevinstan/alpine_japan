@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout4')
 @section('title')
     <title>{{ __('translate.Payment') }}</title>
 @endsection
@@ -41,49 +41,14 @@
                         <div class="package-details-table">
                             <table class=" table table-bordered ">
                                 <tr>
-                                    <td>{{ __('translate.Package') }}</td>
-                                    <td>{{ $subscription_plan->plan_name }}</td>
+                                    <td>{{ __('translate.Total Price') }}</td>
+                                    <td>{{ $total }}</td>
                                 </tr>
 
                                 <tr>
-                                    <td>{{ __('translate.Price') }}</td>
-                                    <td>{{ currency($subscription_plan->plan_price) }}</td>
+                                    <td>{{ __('translate.Delivery Charge') }}</td>
+                                    <td>{{ currency($delivery_charge) }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td>{{ __('translate.Expiration') }}</td>
-                                    <td>
-                                        @if ($subscription_plan->expiration_date == 'monthly')
-                                        {{ __('translate.Monthly') }}
-                                        @elseif ($subscription_plan->expiration_date == 'yearly')
-                                        {{ __('translate.Yearly') }}
-                                        @elseif ($subscription_plan->expiration_date == 'lifetime')
-                                        {{ __('translate.Lifetime') }}
-                                        @endif
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>{{ __('translate.Number of Car') }}</td>
-                                    <td>
-                                        {{ $subscription_plan->max_car }}
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>{{ __('translate.Number of Featured Car') }}</td>
-                                    <td>
-                                        {{ $subscription_plan->featured_car }}
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>{{ __('translate.Listing Image') }}</td>
-                                    <td>
-                                        {{ __('translate.Unlimited') }}
-                                    </td>
-                                </tr>
-
                             </table>
                         </div>
                     </div>
@@ -104,7 +69,7 @@
 
 
                             @if ($paypal->status == 1)
-                                <a href="{{ route('pay-via-paypal', $subscription_plan->id) }}" class="payment-inner-item modal-btn">
+                                <a href="{{ route('pay-via-paypal',['id' => $id, 'id1' => $type])}}" class="payment-inner-item modal-btn">
                                     <div class="payment-inner-item-label">
                                         <img src="{{ asset($paypal->image) }}" alt="img">
                                     </div>
@@ -122,9 +87,9 @@
                                 <input type="button" class="payment-inner-item-input">
                             </div>
 
-                            <form action="{{ route('pay-via-razorpay', $subscription_plan->id) }}" method="POST" class="d-none">
+                            {{--<form action="{{ route('pay-via-razorpay', 1) }}" method="POST" class="d-none">
                                 @csrf
-                                @php
+                                 @php
                                     $payable_amount = $subscription_plan->plan_price * $razorpay->currency->currency_rate;
                                     $payable_amount = round($payable_amount, 2);
                                 @endphp
@@ -140,7 +105,7 @@
                                         data-prefill.email=""
                                         data-theme.color="{{ $razorpay->color }}">
                                 </script>
-                            </form>
+                            </form> --}} 
 
                             @endif
 
@@ -166,7 +131,7 @@
 
 
                             @if ($mollie->mollie_status == 1)
-                                <a href="{{ route('pay-via-mollie',$subscription_plan->id) }}" class="payment-inner-item">
+                                <a href="{{ route('pay-via-mollie',1) }}" class="payment-inner-item">
                                     <div class="payment-inner-item-label">
                                         <img src="{{ asset($mollie->mollie_image) }}" alt="img">
                                     </div>
@@ -176,7 +141,7 @@
                             @endif
 
                             @if ($instamojo->status == 1)
-                                <a href="{{ route('pay-via-instamojo',$subscription_plan->id) }}" class="payment-inner-item">
+                                <a href="{{ route('pay-via-instamojo',1) }}" class="payment-inner-item">
                                     <div class="payment-inner-item-label">
                                         <img src="{{ asset($instamojo->image) }}" alt="img">
                                     </div>
@@ -218,10 +183,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="payment-modal-item">
-                        <h4>{{ __('translate.Amount') }}<span>{{ currency($subscription_plan->plan_price) }}</span></h4>
+                        <h4>{{ __('translate.Amount') }}<span></span></h4>
                     </div>
 
-                        <form role="form" action="{{ route('pay-via-stripe', $subscription_plan->id) }}" method="POST" class="require-validation payment-modal-from" data-cc-on-file="false" data-stripe-publishable-key="{{ $stripe->stripe_key }}" id="payment-form">
+                        <form role="form" action="{{ route('pay-via-stripe', 1) }}" method="POST" class="require-validation payment-modal-from" data-cc-on-file="false" data-stripe-publishable-key="{{ $stripe->stripe_key }}" id="payment-form">
                             @csrf
 
                         <div class="payment-modal-from-item">
@@ -272,14 +237,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="payment-modal-item">
-                            <h4>{{ __('translate.Amount') }}<span>{{ currency($subscription_plan->plan_price) }}</span></h4>
+                            <h4>{{ __('translate.Amount') }}<span></span></h4>
                         </div>
 
                         <div class="bank-payment-modal-txt">
                             {!! clean(nl2br($bank->account_info)) !!}
                         </div>
 
-                        <form class="payment-modal-from" action="{{ route('pay-via-bank', $subscription_plan->id) }}" method="POST">
+                        <form class="payment-modal-from" action="{{ route('pay-via-bank', 1) }}" method="POST">
                             @csrf
                             <div class="payment-modal-from-item">
                                 <div class="payment-modal-from-inner">
@@ -363,144 +328,5 @@
         });
     </script>
 
-    {{-- start flutterwave payment --}}
-    @if ($flutterwave->status == 1)
-        <script src="https://checkout.flutterwave.com/v3.js"></script>
-
-        @php
-            $payable_amount = $subscription_plan->plan_price * $flutterwave->currency->currency_rate;
-            $payable_amount = round($payable_amount, 2);
-
-
-        @endphp
-
-        <script>
-            "use strict";
-            $(function() {
-                $("#flutterwavePayment").on("click", function(){
-
-                    var isDemo = "{{ env('APP_MODE') }}"
-                    if(isDemo == 'DEMO'){
-                        toastr.error('This Is Demo Version. You Can Not Change Anything');
-                        return;
-                    }
-
-                    FlutterwaveCheckout({
-                        public_key: "{{ $flutterwave->public_key }}",
-                        tx_ref: "{{ substr(rand(0,time()),0,10) }}",
-                        amount: {{ $payable_amount }},
-                        currency: "{{ $flutterwave->currency->currency_code }}",
-                        country: "{{ $flutterwave->currency->country_code }}",
-                        payment_options: " ",
-                        customer: {
-                        email: "{{ $user->email }}",
-                        phone_number: "{{ $user->phone }}",
-                        name: "{{ $user->name }}",
-                        },
-                        callback: function (data) {
-
-                            var tnx_id = data.transaction_id;
-                            var _token = "{{ csrf_token() }}";
-                            $.ajax({
-                                type: 'post',
-                                data : {tnx_id,_token},
-                                url: "{{ url('pay-via-flutterwave') }}" + "/" + "{{ $subscription_plan->id }}",
-                                success: function (response) {
-
-                                    if(response.status == 'success'){
-                                        toastr.success(response.message);
-                                        window.location.href = "{{ route('user.orders') }}";
-                                    }else{
-                                        toastr.error(response.message);
-                                        window.location.reload();
-                                    }
-                                },
-                                error: function(err) {
-                                    toastr.error("{{ __('translate.Something went wrong, please try again') }}");
-                                    window.location.reload();
-                                }
-                            });
-                        },
-                        customizations: {
-                        title: "{{ $flutterwave->title }}",
-                        logo: "{{ asset($flutterwave->logo) }}",
-                        },
-                    });
-                })
-            });
-        </script>
-
-    @endif
-
-    {{-- end flutterwave payment --}}
-
-    {{-- start paystack payment --}}
-
-    @if ($paystack->paystack_status == 1)
-        <script src="https://js.paystack.co/v1/inline.js"></script>
-
-        @php
-
-            $public_key = $paystack->paystack_public_key;
-            $currency = $paystack->paystack_currency->currency_code;
-            $currency = strtoupper($currency);
-
-            $ngn_amount = $subscription_plan->plan_price * $paystack->paystack_currency->currency_rate;
-            $ngn_amount = $ngn_amount * 100;
-            $ngn_amount = round($ngn_amount);
-
-        @endphp
-
-        <script>
-            "use strict";
-            $(function() {
-                $("#paystackPayment").on("click", function(){
-
-                    var isDemo = "{{ env('APP_MODE') }}"
-                    if(isDemo == 'DEMO'){
-                        toastr.error('This Is Demo Version. You Can Not Change Anything');
-                        return;
-                    }
-
-                    var handler = PaystackPop.setup({
-                                    key: '{{ $public_key }}',
-                                    email: '{{ $user->email }}',
-                                    amount: '{{ $ngn_amount }}',
-                                    currency: "{{ $currency }}",
-                                    callback: function(response){
-                                        let reference = response.reference;
-                                        let tnx_id = response.transaction;
-                                        let _token = "{{ csrf_token() }}";
-                                        $.ajax({
-                                            type: "get",
-                                            data: {reference, tnx_id, _token},
-                                            url: "{{ url('pay-via-paystack') }}" + "/" + "{{ $subscription_plan->id }}",
-                                            success: function(response) {
-                                                if(response.status == 'success'){
-                                                    toastr.success(response.message);
-                                                    window.location.href = "{{ route('user.orders') }}";
-                                                }else{
-                                                    toastr.error(response.message);
-                                                    window.location.reload();
-                                                }
-                                            },
-                                            error: function(response){
-                                                    toastr.error('Server Error');
-                                                    window.location.reload();
-                                            }
-                                        });
-                                    },
-                                    onClose: function(){
-                                        alert('window closed');
-                                    }
-                                });
-                        handler.openIframe();
-
-                })
-            });
-        </script>
-
-    @endif
-
-    {{-- end paystack payment --}}
+   
 @endpush

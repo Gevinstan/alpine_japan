@@ -14,10 +14,33 @@ use Modules\Subscription\Entities\SubscriptionPlan;
 use Modules\Subscription\Entities\SubscriptionHistory;
 use Modules\Currency\app\Models\MultiCurrency;
 use Modules\Car\Entities\Car;
+use Modules\Imports\Entities\AuctLotsXmlJpOpOtherChargers;
+use Modules\Imports\Entities\CarDataJpOp;
+use Modules\DeliveryCharges\Entities\DeliveryCharge;
+use App\Models\Auct_lots_xml_jp;
+use Modules\Cars\Entities\Cars;
+use Modules\Heavy\Entities\Heavy;
 
 class PaypalController extends Controller
 {
-    public function pay_via_paypal(Request $request, $id){
+
+    public function __construct(){
+        parent::__construct();
+    }
+
+    function convertCurrency($amount, $rate) {
+        // Convert strings to BCMath strings to maintain precision
+        $amount = strval($amount);
+        $rate = strval($rate);
+    
+        // Perform high-precision division and directly round to the nearest whole number
+        $result = bcdiv($amount, $rate, 10); // Keep precision high
+        $result = round($result);
+
+        return $result;
+    }
+
+    public function pay_via_paypal(Request $request, $id,$type){
 
         if(env('APP_MODE') == 'DEMO'){
             $notification = trans('translate.This Is Demo Version. You Can Not Change Anything');
@@ -25,13 +48,37 @@ class PaypalController extends Controller
             return redirect()->back()->with($notification);
         }
 
+        $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
+            if($type == '1'){
+                $price=CarDataJpOp::where('id', $id)->value('start_price_num');
+                $usd=$this->convertCurrency($price, $this->usdRate);
+            } else if($type =='2'){
+                $price=Auct_lots_xml_jp::where('id', $id)->value('start_price_num');
+                $usd=$this->convertCurrency($price, $this->usdRate);
+            } else if($type == '3'){
+                $price=Cars::where('id', $id)->value('price');
+                $usd=floatval(str_replace(',', '', $price));
+            } else if($type = '4'){
+                $price=Heavy::where('id', $id)->value('price');
+                $usd=floatval(str_replace(',', '', $price));
+            }
+            else {
+                $price=0;
+                // return redirect('')
+            }
+            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            $commission=!empty($get_charge) ? $get_charges->commission_value : 0;
+            $shipping=!empty($get_charge) ? $get_charges->shipping_value : 0;
+            $total=($usd+$delivery_charge+$commission+$shipping);
+        
         $user = Auth::guard('web')->user();
 
-        $subscription_plan = SubscriptionPlan::where('id', $id)->where('status', 'active')->firstOrFail();
+        // $subscription_plan = SubscriptionPlan::where('id', $id)->where('status', 'active')->firstOrFail();
 
         $paypal_setting = PaypalPayment::first();
 
-        $payable_amount = round($subscription_plan->plan_price * $paypal_setting->currency->currency_rate,2);
+        // $payable_amount = round($subscription_plan->plan_price * $paypal_setting->currency->currency_rate,2);
+        $payable_amount = round($total,2);
 
         config(['paypal.mode' => $paypal_setting->account_mode]);
 
@@ -63,7 +110,7 @@ class PaypalController extends Controller
             ]
         ]);
 
-        Session::put('subscription_plan', $subscription_plan);
+        // Session::put('subscription_plan', $subscription_plan);
 
         if (isset($response['id']) && $response['id'] != null) {
             // redirect to approve href

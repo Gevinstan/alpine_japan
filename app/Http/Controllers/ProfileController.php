@@ -255,7 +255,7 @@ class ProfileController extends Controller
 
         $subscription_plans = SubscriptionPlan::orderBy('serial', 'asc')->where('status', 'active')->get();
 
-        return view('profile.pricing_plan', ['subscription_plans' => $subscription_plans]);
+        return view('pricing_plan', ['subscription_plans' => $subscription_plans]);
     }
 
     public function orders(){
