@@ -8582,10 +8582,12 @@ public function getJDMPriceRange()
         // if(!empty($get_charges)){
             $price=CarDataJpOp::where('id', $id)->value('start_price_num');
             $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
-            $commission=!empty($get_charge) ? $get_charges->commission_value : 0;
-            $shipping=!empty($get_charge) ? $get_charges->shipping_value : 0;
+            $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
+            $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
             $usd=$this->convertCurrency($price, $this->usdRate);
             $total=($usd+$delivery_charge+$commission+$shipping);
+           
+
 
             $paypal = PaypalPayment::first();
             $stripe = StripePayment::first();
@@ -8611,7 +8613,8 @@ public function getJDMPriceRange()
                 'instamojo' => $instamojo,
                 'bank' => $bank,
                 'id'=>$id,
-                'type'=>'1'
+                'type'=>'1',
+                'delievery_charge_id'=>$request->location
             ]);
         // }    
     }
@@ -8620,8 +8623,8 @@ public function getJDMPriceRange()
         // if(!empty($get_charges)){
             $price=Auct_lots_xml_jp::where('id', $id)->value('start_price_num');
             $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
-            $commission=!empty($get_charge) ? $get_charges->commission_value : 0;
-            $shipping=!empty($get_charge) ? $get_charges->shipping_value : 0;
+            $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
+            $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
             $usd=$this->convertCurrency($price, $this->usdRate);
             $total=($usd+$delivery_charge+$commission+$shipping);
 

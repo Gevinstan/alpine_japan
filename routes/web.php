@@ -146,8 +146,8 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/response-instamojo', 'instamojo_response')->name('response-instamojo');
 
         });
-        
-        Route::get('/pay-via-paypal/{id}/{id1}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
+
+        Route::get('/pay-via-paypal/{id}/{id1}/{id2}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
         Route::get('/paypal-success-payment',[PaypalController::class, 'paypal_success_payment'])->name('paypal-success-payment');
         Route::get('/paypal-faild-payment',[PaypalController::class, 'paypal_faild_payment'])->name('paypal-faild-payment');
   

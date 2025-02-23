@@ -40,7 +40,9 @@ class PaypalController extends Controller
         return $result;
     }
 
-    public function pay_via_paypal(Request $request, $id,$type){
+    public function pay_via_paypal(Request $request, $id,$type,$delievery){
+
+    
 
         if(env('APP_MODE') == 'DEMO'){
             $notification = trans('translate.This Is Demo Version. You Can Not Change Anything');
@@ -66,9 +68,9 @@ class PaypalController extends Controller
                 $price=0;
                 // return redirect('')
             }
-            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
-            $commission=!empty($get_charge) ? $get_charges->commission_value : 0;
-            $shipping=!empty($get_charge) ? $get_charges->shipping_value : 0;
+            $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
+            $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
+            $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
             $total=($usd+$delivery_charge+$commission+$shipping);
         
         $user = Auth::guard('web')->user();
@@ -79,6 +81,8 @@ class PaypalController extends Controller
 
         // $payable_amount = round($subscription_plan->plan_price * $paypal_setting->currency->currency_rate,2);
         $payable_amount = round($total,2);
+
+
 
         config(['paypal.mode' => $paypal_setting->account_mode]);
 
