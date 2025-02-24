@@ -8668,11 +8668,15 @@ public function getJDMPriceRange()
                 $type='4';
             }
 
+
             $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
             $commission=$price->commission_value;
             $shipping=$price->shipping_value;
             $usd=$price->price;
             $usd=floatval(str_replace(',', '', $usd));
+
+
+          
         
             $total=($usd+$delivery_charge+$commission+$shipping);
 
