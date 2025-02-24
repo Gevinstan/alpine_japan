@@ -248,6 +248,9 @@
                                             </button> 
                                         </div>
                                     </div>
+                                    @error('location')
+                                        <span style="color: red;">{{ $message }}</span>
+                                    @enderror
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="dropdown location-dropdown w-100">
                                             <button class="btn w-100 bg-white charge-btn">
@@ -261,13 +264,15 @@
                                         </div>
                                     </div>
                                     <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                                    <div class="d-flex align-content-center total-price-container mt-3">
+                                    <div class="d-flex align-content-center total-price-container mt-4">
                                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
                                         <p class="" id="total_price"></p>
                                     </div>
                                 </div>
-                                    <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
-                                    <button type="submit" class="thm-btn-two" id="fixed_car_btn">BUY NOW</button>  
+                                    <div class='d-flex gap-3 mt-4'>
+                                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                                        <button type="submit" class="thm-btn-two h-full m-0" id="fixed_car_btn">BUY NOW</button>
+                                </div> 
                             </form>         
                         </div>   
                     </div>

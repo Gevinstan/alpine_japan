@@ -54,6 +54,7 @@ use App\Models\Flutterwave;
 use App\Models\PaystackAndMollie;
 use App\Models\InstamojoPayment;
 use App\Models\BankPayment;
+use App\Http\Requests\PricingRequest;
 
 
 use App\Helpers\MailHelper;
@@ -8577,7 +8578,7 @@ public function getJDMPriceRange()
       
     // }
 
-    public function store_pricing(Request $request,$id){
+    public function store_pricing(PricingRequest $request,$id){
         $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
         // if(!empty($get_charges)){
             $price=CarDataJpOp::where('id', $id)->value('start_price_num');
@@ -8618,7 +8619,7 @@ public function getJDMPriceRange()
             ]);
         // }    
     }
-    public function store_auction_pricing(Request $request,$id){
+    public function store_auction_pricing(PricingRequest $request,$id){
         $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
         // if(!empty($get_charges)){
             $price=Auct_lots_xml_jp::where('id', $id)->value('start_price_num');
@@ -8657,7 +8658,7 @@ public function getJDMPriceRange()
             ]);
         // }    
     }
-    public function store_jdm(Request $request,$id,$type){
+    public function store_jdm(PricingRequest $request,$id,$type){
         // $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
         // if(!empty($get_charges)){    
             if($type=='car'){
