@@ -8652,7 +8652,8 @@ public function getJDMPriceRange()
                 'instamojo' => $instamojo,
                 'bank' => $bank,
                 'id'=>$id,
-                'type'=>'2'
+                'type'=>'2',
+                'delievery_charge_id'=>$request->location
             ]);
         // }    
     }
@@ -8699,7 +8700,8 @@ public function getJDMPriceRange()
                 'instamojo' => $instamojo,
                 'bank' => $bank,
                 'id'=>$id,
-                'type'=>$type
+                'type'=>$type,
+                'delievery_charge_id'=>$request->location
             ]);
         // }    
     }
