@@ -156,11 +156,11 @@ class PaypalController extends Controller
         $response = $provider->capturePaymentOrder($request['token']);
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 
-            $subscription_plan = Session::get('subscription_plan');
+            // $subscription_plan = Session::get('subscription_plan');
 
             $user = Auth::guard('web')->user();
 
-            $order = $this->create_order($user, $subscription_plan,  'Paypal', 'success', $request->PayerID);
+            // $order = $this->create_order($user, $subscription_plan,  'Paypal', 'success', $request->PayerID);
 
             $notification = trans('translate.Your payment has been made successful. Thanks for your new purchase');
             $notification = array('messege'=>$notification,'alert-type'=>'success');
