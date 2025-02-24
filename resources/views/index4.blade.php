@@ -234,15 +234,9 @@ use Carbon\Carbon;
 
 
     <!--  Brand Car-part-start -->
+       @if(count($top_sells) > 0 )
         <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="brand-car-position-img">
-
-                        </div>
-                    </div>
-                </div>
                 <div class="row align-items-end">
                     <div class="col-lg-6 col-sm-6  col-md-6">
                         <h2 class="section-heading">{{__('translate.Top Selling')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
@@ -575,6 +569,7 @@ use Carbon\Carbon;
                 </div>
             </div>
         </section>
+       @endif 
     <!--  Brand Car-part-end -->
 
 
@@ -837,7 +832,8 @@ use Carbon\Carbon;
 
 
     <!--  Feature-part-start -->
-    <section class="feature py-5 my-5 px-2 px-sm-3 px-lg-5">
+      @if(count($new_arrived_cars) > 0)
+        <section class="feature py-5 my-5 px-2 px-sm-3 px-lg-5">
         <div class="container ">
             <div class="row">
                 <div class="col-lg-9 New_arrival pt-2">
@@ -1045,7 +1041,8 @@ use Carbon\Carbon;
                 <a href="{{ route('new-arrivals') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
-    </section>
+        </section>
+     @endif
     <!--  Feature-part-end -->
 
 

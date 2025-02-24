@@ -10,7 +10,7 @@ use Modules\Testimonial\Entities\Testimonial;
 use Modules\Blog\Entities\Blog;
 use Modules\Blog\Entities\BlogCategory;
 use Modules\Blog\Entities\BlogComment;
-use Modules\Blog\Entities\AuctLotsXmlJpOpOtherChargers;
+use Modules\Imports\Entities\AuctLotsXmlJpOpOtherChargers;
 use Modules\Car\Entities\Car;
 use Modules\Cars\Entities\Cars;
 use Modules\Car\Entities\CarGallery;
@@ -46,6 +46,14 @@ use Modules\SmallHeavy\Entities\SmallHeavy;
 use Cache;
 use Carbon\Carbon;  
 use App\Models\Wishlist;
+
+use App\Models\StripePayment;
+use App\Models\PaypalPayment;
+use App\Models\RazorpayPayment;
+use App\Models\Flutterwave;
+use App\Models\PaystackAndMollie;
+use App\Models\InstamojoPayment;
+use App\Models\BankPayment;
 
 
 use App\Helpers\MailHelper;
@@ -85,6 +93,7 @@ class HomeController extends Controller
         $homepage = HomePage::with('front_translate')->first();
 
         $brands = Brand::where('status', 'enable')->get();
+        $top_cars=[];
 
         
 
@@ -189,6 +198,7 @@ class HomeController extends Controller
 
             // echo json_encode($new_arrivals);die();
 
+            $new_arrived_cars=[];
          
             foreach($new_arrivals as $cars){
                 $car_image=$this->last_image($cars->pictures);
@@ -250,6 +260,7 @@ class HomeController extends Controller
                 ->pluck('b.id')->toArray();
 
 
+           
 
         
             return view('index4', [
@@ -8565,6 +8576,133 @@ public function getJDMPriceRange()
     //     return $jdm_brand;    
       
     // }
+
+    public function store_pricing(Request $request,$id){
+        $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
+        // if(!empty($get_charges)){
+            $price=CarDataJpOp::where('id', $id)->value('start_price_num');
+            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
+            $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
+            $usd=$this->convertCurrency($price, $this->usdRate);
+            $total=($usd+$delivery_charge+$commission+$shipping);
+           
+
+
+            $paypal = PaypalPayment::first();
+            $stripe = StripePayment::first();
+            $razorpay = RazorpayPayment::first();
+            $flutterwave = Flutterwave::first();
+            $paystack = PaystackAndMollie::first();
+            $mollie = $paystack;
+            $instamojo = InstamojoPayment::first();
+            $bank = BankPayment::first();
+    
+            return view('payment', [
+                'usd' => $usd,
+                'delivery_charge' => $delivery_charge,
+                'commission' => $commission,
+                'shipping' => $shipping,
+                'total' => $total,
+                'stripe' => $stripe,
+                'paypal' => $paypal,
+                'razorpay' => $razorpay,
+                'flutterwave' => $flutterwave,
+                'paystack' => $paystack,
+                'mollie' => $mollie,
+                'instamojo' => $instamojo,
+                'bank' => $bank,
+                'id'=>$id,
+                'type'=>'1',
+                'delievery_charge_id'=>$request->location
+            ]);
+        // }    
+    }
+    public function store_auction_pricing(Request $request,$id){
+        $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
+        // if(!empty($get_charges)){
+            $price=Auct_lots_xml_jp::where('id', $id)->value('start_price_num');
+            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
+            $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
+            $usd=$this->convertCurrency($price, $this->usdRate);
+            $total=($usd+$delivery_charge+$commission+$shipping);
+
+            $paypal = PaypalPayment::first();
+            $stripe = StripePayment::first();
+            $razorpay = RazorpayPayment::first();
+            $flutterwave = Flutterwave::first();
+            $paystack = PaystackAndMollie::first();
+            $mollie = $paystack;
+            $instamojo = InstamojoPayment::first();
+            $bank = BankPayment::first();
+    
+            return view('payment', [
+                'usd' => $usd,
+                'delivery_charge' => $delivery_charge,
+                'commission' => $commission,
+                'shipping' => $shipping,
+                'total' => $total,
+                'stripe' => $stripe,
+                'paypal' => $paypal,
+                'razorpay' => $razorpay,
+                'flutterwave' => $flutterwave,
+                'paystack' => $paystack,
+                'mollie' => $mollie,
+                'instamojo' => $instamojo,
+                'bank' => $bank,
+                'id'=>$id,
+                'type'=>'2'
+            ]);
+        // }    
+    }
+    public function store_jdm(Request $request,$id,$type){
+        // $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
+        // if(!empty($get_charges)){    
+            if($type=='car'){
+                $price=Cars::where('id', $id)->first();
+                $type='3';
+            } else {
+                $price=Heavy::where('id', $id)->first();
+                $type='4';
+            }
+
+            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            $commission=$price->commission_value;
+            $shipping=$price->shipping_value;
+            $usd=$price->price;
+            $usd=floatval(str_replace(',', '', $usd));
+        
+            $total=($usd+$delivery_charge+$commission+$shipping);
+
+            $paypal = PaypalPayment::first();
+            $stripe = StripePayment::first();
+            $razorpay = RazorpayPayment::first();
+            $flutterwave = Flutterwave::first();
+            $paystack = PaystackAndMollie::first();
+            $mollie = $paystack;
+            $instamojo = InstamojoPayment::first();
+            $bank = BankPayment::first();
+    
+            return view('payment', [
+                'usd' => $usd,
+                'delivery_charge' => $delivery_charge,
+                'commission' => $commission,
+                'shipping' => $shipping,
+                'total' => $total,
+                'stripe' => $stripe,
+                'paypal' => $paypal,
+                'razorpay' => $razorpay,
+                'flutterwave' => $flutterwave,
+                'paystack' => $paystack,
+                'mollie' => $mollie,
+                'instamojo' => $instamojo,
+                'bank' => $bank,
+                'id'=>$id,
+                'type'=>$type
+            ]);
+        // }    
+    }
 
 
 

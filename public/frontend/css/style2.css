@@ -1465,12 +1465,12 @@
 
 .brand-car .brand-car-position-img {
     position: absolute;
-    top: -184px;
+    /* top: -184px; */
     right: -150px;
     z-index: -1;
     background: url(../assets/images/thumb/categories-car.png) no-repeat;
-    width: 720px;
-    height: 318px;
+    width: 70px;
+    height: 38px;
 }
 
 .testimonial .brand-car-position-img{
@@ -9298,7 +9298,7 @@ p {
 .inventory-main-box .select-Brand-box {
     border-radius: 4px;
     border: 1px solid #ededed;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 20px 0px;
     /* height: 285px;
     overflow-y: scroll; */
     display: inline-block;
@@ -9332,7 +9332,7 @@ p {
 .inventory-main-box .select-Brand-box .form-check {
     display: flex;
     gap: 2px;
-    padding-left: 20px;
+    padding-left: 16px;
     min-height: 0;
 }
 
@@ -14680,7 +14680,9 @@ p {
 
 .email-btn {
     height: 40px !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
+    font-style: var(--DMSans);
+    font-weight: var(--semiBold);
 }
 
 .footer-logo a {
@@ -14861,7 +14863,8 @@ p {
 }
 
 .slider-horizontal {
-    width: 100% !important;
+    width: 94% !important;
+    margin-left: 8px;
 }
 /********* Listing page End ***********/
 
@@ -18358,5 +18361,29 @@ input:not(:placeholder-shown) + .input-placeholder {
 .compliance-title {
     color: #121a27 !important;
 }
+
+.pagination_space {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.rate-us {
+    font-style: var(--DMSans);
+    font-weight: var(--semiBold);
+    font-size: 12px;
+}
+
+/* .image_bigsale {
+    padding-top: 24px;
+    padding-bottom: 27px;
+} */
+
+
+
+
+
+
+
+
 
 

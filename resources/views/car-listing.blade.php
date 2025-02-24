@@ -21,7 +21,7 @@
     <section class="inventory feature-two listing-breadcrumb bg-light-grey ">
         <div class="container px-2 px-sm-3 px-lg-5">
             <nav aria-label="breadcrumb" class="">
-                <ol class="breadcrumb breadcrumb-list px-3">
+                <ol class="px-3 breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Fixed Car Price Marketplace') }}</li>
                 </ol>
@@ -31,12 +31,12 @@
                     <form action="" id="search_form">
                         
                         <!-- Select Your Brand Start-->
-                            <div class="inventory-main-box mb-2">
+                            <div class="mb-2 inventory-main-box">
                                 <!-- Select Your Brand  -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample">
                                     <div class="accordion-item ps-3">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                            <button class="accordion-button brand-heading p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="p-0 accordion-button brand-heading" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapseOne">
                                                 Brand & Model
@@ -45,12 +45,12 @@
                                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3  {{ request('model', []) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
-                                                <span class="select-Brand-box border-0 px-2">
+                                                <span class="border-0 select-Brand-box">
                                                     @foreach ($brands as $index=> $brand)
                                                             <div class="accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <div class="gap-2 p-0 accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="brand[]" style="display:none;" class="form-check-input brand-search" type="checkbox"
                                                                              value="{{ $brand->slug }}"
                                                                             {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
@@ -67,7 +67,7 @@
                                                                         class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" 
                                                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
-                                                                            <span class="select-Brand-box p-0 px-2 border-0 brand-body">
+                                                                            <span class="p-0 px-2 border-0 select-Brand-box brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr)) 
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
@@ -105,12 +105,12 @@
                         <!-- Select Your Brand End-->
                        
                         <!-- Select Your Budget Start -->
-                            <div class="inventory-main-box my-2">   
+                            <div class="my-2 inventory-main-box">   
                                 <!-- Budget -->
                                 <div class="accordion" id="accordionPanelsStayOpenExample1">
                                     <div class="accordion-item ps-3">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                            <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                            <button class="p-0 accordion-button year-heading" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapsetwo">
                                                 Budget
@@ -120,13 +120,13 @@
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
 
-                                              <span class="select-Brand-box two four p-0 border-0">
-                                                <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                              <span class="p-0 border-0 select-Brand-box two four">
+                                                <div class="gap-3 m-0 slider-container d-flex align-items-center">
 
-                                                  <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
-                                                    <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                        <span class="slider-label m-0" id="minYearLabel">${{$minPrice}}</span>
-                                                        <span class="slider-value m-0" id="modelYearValue">${{$maxPrice}}</span> 
+                                                  <div class="d-flex flex-column align-items-center mt-32px w-100">
+                                                    <div class="pb-3 d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                        <span class="m-0 slider-label" id="minYearLabel">${{$minPrice}}</span>
+                                                        <span class="m-0 slider-value" id="modelYearValue">${{$maxPrice}}</span> 
                                                     </div>
 
                                                     <input id="ex2" type="text" name="price_range_scale" data-slider-min="{{$minPrice}}"
@@ -136,7 +136,7 @@
                                                                 />
                                                  
                                                   </div>
-                                                  <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                  <div class="gap-4 d-flex align-content-between flex-column go_clear">
                                                      @if(request('price_range_scale'))
                                                         <button class="clear-button" id="clear-budget">CLEAR</button>
                                                     @endif    
@@ -148,7 +148,7 @@
                                                    <h6 class="pt-2 price_range">Price Range</h6>
 
                                                     @foreach($price_range as $key=>$range)
-                                                    <div class="d-flex align-items-center pb-2">
+                                                    <div class="pb-2 ps-3 d-flex align-items-center">
                                                             <div class="form-check">
                                                                 <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
                                                                 {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
@@ -169,11 +169,11 @@
                         <!-- Select Your Budget End -->
 
                         <!-- Select Your Year Start -->
-                            <div class="inventory-main-box my-2">
+                            <div class="my-2 inventory-main-box">
                                     <div class="accordion" id="accordionPanelsStayOpenExample1">
                                         <div class="accordion-item ps-3">
                                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                                <button class="accordion-button year-heading p-0" type="button" data-bs-toggle="collapse"
+                                                <button class="p-0 accordion-button year-heading" type="button" data-bs-toggle="collapse"
                                                     data-bs-target="#panelsStayOpen-collapsethree" aria-expanded="true"
                                                     aria-controls="panelsStayOpen-collapsetwo">
                                                     Model Year
@@ -182,20 +182,20 @@
                                             <div id="panelsStayOpen-collapsethree" class="accordion-collapse collapse  pt-3 {{ request('year') ? 'show' : '' }}"
                                                 aria-labelledby="panelsStayOpen-headingtwo">
                                                 <div class="accordion-body">
-                                                    <span class="select-Brand-box two four p-0 border-0">
-                                                        <div class="slider-container d-flex align-items-center m-0 gap-3">
-                                                            <div class="d-flex flex-column align-items-center mt-32px w-100 px-2">
-                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                    <span class="p-0 border-0 select-Brand-box two four">
+                                                        <div class="gap-3 m-0 slider-container d-flex align-items-center">
+                                                            <div class="d-flex flex-column align-items-center mt-32px w-100">
+                                                                <div class="pb-3 d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                                    <span class="m-0 slider-label" id="minYearLabel">{{$minYear}}</span>
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>
+                                                                    <span class="m-0 slider-value" id="modelYearValue">{{$maxYear}}</span>
                                                                 </div>
                                                                 <input type="range" min="{{$minYear}}" max="{{$maxYear}}"
                                                                     value="{{ request('year', $minYear) }}"
-                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                                    class="mx-0 my-2 slider-input" id="modelYearSlider">
                                                                 <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
                                                             </div>
-                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                            <div class="gap-4 d-flex align-content-between flex-column go_clear">
                                                                 @if(request('year'))
                                                                 <button class="clear-button" id="clear-year">CLEAR</button>
                                                                 @endif
@@ -210,34 +210,34 @@
                             </div>
                             <!-- Select Your Budget  -->
                                 <!-- <div class="accordion" id="accordionPanelsStayOpenExample1">
-                                    <div class="accordion-item  ps-3">
+                                    <div class="accordion-item ps-3">
                                         <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
-                                            <button class="accordion-button p-0  year-heading" type="button" data-bs-toggle="collapse"
+                                            <button class="p-0 accordion-button year-heading" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapsetwo" aria-expanded="true"
                                                 aria-controls="panelsStayOpen-collapsetwo">
                                                 Year
                                             </button>
                                         </h2>
-                                        <div id="panelsStayOpen-collapsetwo" class="accordion-collapse collapse  pt-3"
+                                        <div id="panelsStayOpen-collapsetwo" class="pt-3 accordion-collapse collapse"
                                             aria-labelledby="panelsStayOpen-headingtwo">
                                             <div class="accordion-body">
-                                                <span class="select-Brand-box two four p-0 border-0">
-                                                    <div class="slider-container d-flex align-items-center m-0 gap-3">
+                                                <span class="p-0 border-0 select-Brand-box two four">
+                                                    <div class="gap-3 m-0 slider-container d-flex align-items-center">
                                                         
                                                         <div class="d-flex flex-column align-items-center mt-32px w-100">
-                                                                <div class="d-flex justify-content-between align-items-center year-slider-text w-100 pb-3">
-                                                                    <span class="slider-label m-0" id="minYearLabel">{{$minYear}}</span>
+                                                                <div class="pb-3 d-flex justify-content-between align-items-center year-slider-text w-100">
+                                                                    <span class="m-0 slider-label" id="minYearLabel">{{$minYear}}</span>
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
-                                                                    <span class="slider-value m-0" id="modelYearValue">{{$maxYear}}</span>  
+                                                                    <span class="m-0 slider-value" id="modelYearValue">{{$maxYear}}</span>  
                                                                 </div>
                                                             
                                                                 <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
                                                                     value="{{ request('year', $minYear) }}" 
-                                                                    class="slider-input mx-0 my-2" id="modelYearSlider">
+                                                                    class="mx-0 my-2 slider-input" id="modelYearSlider">
                                                                 <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
                                                             </div>
 
-                                                            <div class="d-flex align-content-between flex-column gap-4 go_clear">
+                                                            <div class="gap-4 d-flex align-content-between flex-column go_clear">
                                                                 @if($request_check !=0)
                                                                 <button class="clear-button" id="clear-year">Clear</button>
                                                                 @endif
@@ -262,10 +262,10 @@
                 </div>
 
                 <div class="col-lg-9">
-                    <div class="inventory-ber mb-2 px-2">
+                    <div class="px-2 mb-2 inventory-ber">
                         <div class="inventory-ber-left">
-                            <div class="inventory-sarch-ber-item flex-row">
-                                <div class="inventory-sarch-ber px-1">
+                            <div class="flex-row inventory-sarch-ber-item">
+                                <div class="px-1 inventory-sarch-ber">
 
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
@@ -319,7 +319,7 @@
                             <div class="inventory-ber-right-btn sort_by_button">
                                 <ul class="nav nav-pills " id="pills-tab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link  active listing-view" id="pills-home-tab" data-bs-toggle="pill"
+                                        <button class="nav-link active listing-view" id="pills-home-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-home" data-view="list" type="button" role="tab"
                                             aria-controls="pills-home" aria-selected="true">
 
@@ -333,7 +333,7 @@
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link  listing-view" id="pills-profile-tab" data-bs-toggle="pill"
+                                        <button class="nav-link listing-view" id="pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#pills-profile" type="button" role="tab"
                                             aria-controls="pills-profile" data-view="grid" aria-selected="false"><i
                                                 class="fa-solid fa-list"></i></button>
@@ -344,13 +344,13 @@
                         </div>
                     </div>
 
-                    <div class="filtered-section d-flex justify-content-between align-content-center gap-2 px-3 mb-3">
-                        <div class="d-flex align-items-center flex-wrap gap-3">
+                    <div class="gap-2 px-3 mb-3 filtered-section d-flex justify-content-between align-content-center">
+                        <div class="flex-wrap gap-3 d-flex align-items-center">
                         {{--@if(request('brand') && count(request('brand')) > 0)
                         @foreach(request('brand') as $index => $brandSlug)
-                            <!-- <p class="position-relative filter-text px-3 py-1">
+                            <!-- <p class="px-3 py-1 position-relative filter-text">
                                 <span class="brand-item" data-brand="{{ $brandSlug }}">{{ $brandSlug }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle">
+                                        <span class="top-0 position-absolute start-100 translate-middle rounded-circle">
                                             <span class="alert-close">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
@@ -363,9 +363,9 @@
                         @foreach(request('model') as $brandSlug => $models)
                             @foreach($models as $model)
                                @if($model!="")
-                                <p class="position-relative filter-text px-3 py-1">
+                                <p class="px-3 py-1 position-relative filter-text">
                                     <span class="model-item" data-brand="{{ $brandSlug }}">{{ $model }}
-                                            <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                            <span class="top-0 position-absolute start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                                 <span class="alert-close-model">
                                                     <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                                 </span>
@@ -378,9 +378,9 @@
                             @endforeach
                             @endif 
                             @if(request('year'))
-                            <p class="position-relative filter-text px-3 py-1">
+                            <p class="px-3 py-1 position-relative filter-text">
                                 <span class="model-item" data-brand="{{ request('year') }}">{{ request('year') }}
-                                        <span class="position-absolute top-0 start-100 translate-middle rounded-circle"  style="z-index: 10;">
+                                        <span class="top-0 position-absolute start-100 translate-middle rounded-circle"  style="z-index: 10;">
                                             <span class="alert-close-year">
                                                 <img src="{{ asset('japan_home/close.svg') }}" alt="close" />
                                             </span>
@@ -403,7 +403,7 @@
                             <div class="row g-5">
                             @if(count($cars_array) > 0)  
                                  @foreach ($cars_array as $index => $car)
-                                    <div class="col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
+                                    <div class="col-lg-4 col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
@@ -427,7 +427,7 @@
                                                         </div>
 
                                                 <div class="brand-car-inner-item">
-                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
+                                                    <span class="pt-3 text-truncate car-name ps-3" data-bs-toggle="tooltip" 
                                                     title="@if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                         @else
@@ -439,7 +439,7 @@
                                                             {{ $car['company'] }}
                                                         @endif
                                                     </span>
-                                                    <p class="listcar_price pt-4 pe-4">
+                                                    <p class="pt-4 listcar_price pe-4">
                                                        @if(session('front_lang')=='en')
                                                         {{ '$'.$car['start_price_num'] }}
                                                         @else
@@ -449,7 +449,7 @@
                                                 </div>
 
                                                 <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
-                                                    <h3 class="text-truncate car-fullname pt-3 ps-3" 
+                                                    <h3 class="pt-3 text-truncate car-fullname ps-3" 
                                                     title="
                                                     @if(session('front_lang')=='en')
                                                             {{ $car['model_name_en'] }}
@@ -465,7 +465,7 @@
                                                     </h3>
                                                 </a>
 
-                                                <div class="brand-car-inner-item-main px-4">
+                                                <div class="px-4 brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
@@ -490,7 +490,7 @@
 
                                                         </span>
                                                     </div>
-                                                    <!-- <p class="align-content-end pt-3">.</p> -->
+                                                    <!-- <p class="pt-3 align-content-end">.</p> -->
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
@@ -512,7 +512,7 @@
                                                             @endif
                                                         </span>
                                                     </div>
-                                                    <!-- <p class="align-content-end pt-3">.</p> -->
+                                                    <!-- <p class="pt-3 align-content-end">.</p> -->
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span class="icon-card1">
@@ -541,7 +541,7 @@
                                                     </h6>
                                                 </div> -->
 
-                                                <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                <div class="px-3 py-2 brand-car-btm-txt-btm">
                                                     @php
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
@@ -678,7 +678,7 @@
                             aria-labelledby="pills-profile-tab">
                             <div class="row g-5 brand-car-two">
                                 @forelse ($cars_array as $index => $car)
-                                    <div class="col-xxl-6  col-xl-6  col-lg-6  col-sm-6">
+                                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                             <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
@@ -804,7 +804,7 @@
 
                                             
 
-                                                <div class="px-3 d-flex flex-row">
+                                                <div class="flex-row px-3 d-flex">
                                                     @php
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
@@ -943,7 +943,7 @@
                         </div>
                     </div>
 
-                    <div class="py-4">
+                    <div class="py-4 pagination_space">
                         @if ($cars->hasPages())
                         {{ $cars->appends(request()->query())->links() }}
                         @endif

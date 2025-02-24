@@ -72,12 +72,12 @@
     @if (Route::is('home'))
     <header class="header p-0 {{ Session::get('selected_theme') != 'theme_three' ? 'header-two' : ''  }}  {{ Session::get('selected_theme') == 'theme_two' ? 'header-three' : ''  }}">
     @else
-    <header class="header header-two inner-header p-0">
+    <header class="p-0 header header-two inner-header">
     @endif
-        <div class="container header-border py-2 px-5">
+        <div class="container px-5 py-2 header-border">
             <div class="d-flex justify-content-end align-items-center">
                 <div>
-                    <ul class="d-flex gap-5">
+                    <ul class="gap-5 d-flex">
                         <li class="px-5">
                             <div class="dropdown">
                                 <a class=" btn-secondary dropdown-toggle header-dropdown" href="#" role="button"
@@ -109,11 +109,11 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="text-white heading-fs-14 px-3">
+                        <li class="px-3 text-white heading-fs-14">
                             <img src="{{asset('japan_home/email.png')}}" />
                             {{ $setting->email }}
                         </li>
-                        <li class="text-white heading-fs-14 px-3">
+                        <li class="px-3 text-white heading-fs-14">
                             <img src="{{asset('japan_home/mob.png')}}" />
                             {{ $setting->phone }}   
                         </li>
@@ -128,7 +128,7 @@
         </div>
 
 
-        <nav class="menu-bg m-0 px-4">
+        <nav class="px-4 m-0 menu-bg">
             <div class="container ">
                 <div class="row">
                     <div class="col-lg-12 col-p-0">
@@ -171,14 +171,14 @@
                                                                 @endforeach
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4 nav-dropdown-list">
+                                                        {{--<div class="col-md-4 nav-dropdown-list">
                                                             <h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6>
                                                             <div class="d-flex flex-column">
                                                                 @foreach($jdm_legend['small_heavy'] as $jdm)
                                                                     <a class="dropdown-item nav-dropdown-item" href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
                                                                 @endforeach
                                                             </div>
-                                                        </div>
+                                                        </div>--}}
                                                     </div>
                                                 </div>
                                             </ul>
@@ -192,7 +192,7 @@
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @else 
-                                                    <a class="nav-link mx-2 auct_logout" href="#" onclick="auct_logout()">
+                                                    <a class="mx-2 nav-link auct_logout" href="#" onclick="auct_logout()">
                                                     {{ __('translate.Live Auction') }}
                                                     </a>
                                                 @endif 
@@ -362,7 +362,7 @@
                     </div>
 
                     <div class="col-md-12 header-right-item-btn">
-                        <div class="d-flex gap-2">
+                        <div class="gap-2 d-flex">
                             <a href="{{$setting->instagram}}">
                                 <svg width="26" height="25" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M20.6696 39.0599C10.1596 39.0599 1.63965 30.5399 1.63965 20.0299C1.63965 9.51988 10.1596 0.999878 20.6696 0.999878C31.1796 0.999878 39.6996 9.51988 39.6996 20.0299C39.6996 30.5399 31.1796 39.0599 20.6696 39.0599Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10"/>
@@ -476,7 +476,7 @@
     @endif
 
         <div class="container overflow-hidden px-sm-2 px-md-5">
-            <div class="footer-bb d-md-flex d-sm-flex    align-items-center">
+            <div class="footer-bb d-md-flex d-sm-flex align-items-center">
                 <div class="col-lg-5 col-p-0" data-aos="fade-right" data-aos-delay="50">
                     <h2 class="newsletter-txt">
                         {{ __('translate.Join Our') }} <span>{{ __('translate.Newsletter') }}</span> &
@@ -485,13 +485,12 @@
                 </div>
                 <div class="col-lg-7 col-p-0" data-aos="fade-left" data-aos-delay="100">
                     <div class="newsletter-sarch-box-main-item justify-content-md-center justify-content-start">
-                        <div class="newsletter-sarch-box-main pt-3">
+                        <div class="pt-3 newsletter-sarch-box-main">
                             <form action="{{ route('newsletter-request') }}" class="newsletter-sarch-box" method="POST">
                                 @csrf
                                 <div class="newsletter-sarch-box-item position-relative">
-                                    <input type="email" class="form-control email-input" id="newsletter_email"
-                                placeholder="{{ __('translate.Email Address') }}" name="email">
-                                <span class="email-icon position-absolute">
+                                    <input type="email" class="form-control email-input ms-3" id="newsletter_email" placeholder="{{ __('translate.Email Address') }}" name="email">
+                                <span class="email-icon position-absolute ms-3">
                                     <svg width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.25115 8.39878L7.16682 6.57812L1.20703 11.674C1.42384 11.8755 1.71703 11.9983 2.03978 11.9983H16.465C16.7853 11.9983 17.0785 11.873 17.2928 11.674L11.3355 6.57812L9.25115 8.39878Z" fill="white"/>
                                         <path d="M17.2987 0.324328C17.0819 0.122851 16.7911 0 16.4684 0H2.04317C1.72289 0 1.4297 0.125309 1.21289 0.326785L9.25455 7.20155L17.2987 0.324328Z" fill="white"/>
@@ -516,10 +515,10 @@
                 </div>
             </div>
 
-            <hr class="text-white mx-auto">
+            <hr class="mx-auto text-white">
 
             <div class="row footer-mt-75px ">
-                <div class=" col-xl-4 col-lg-6 col-md-12 " data-aos="fade-right" data-aos-delay="100">
+                <div class=" col-xl-4 col-lg-6 col-md-12" data-aos="fade-right" data-aos-delay="100">
                     <div class="footer-logo">
 
 
@@ -546,12 +545,12 @@
                         </div>
 
                         <div class="row">
-                            <button type="button" class="btn btn-primary">RATE US</button>
+                            <button type="button" class="btn btn-primary rate-us">RATE US</button>
                         </div>
                     </div>
                 </div>
 
-                <div class=" col-xl-8 col-lg-12 col-12 col-md-12 ">
+                <div class=" col-xl-8 col-lg-12 col-12 col-md-12">
                     <div class="row footer-ml">
                         <div class="col-xl-4 col-lg-4 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
                             <div class="footer-item-text ">
@@ -713,9 +712,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4   col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                        <div class="col-xl-4 col-lg-4 col-sm-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
 
-                            <div class="footer-item-text-link two mb-3">
+                            <div class="mb-3 footer-item-text-link two">
                                 <div class="footer-item-text">
                                     <h3>{{ __('translate.Contact Info') }}</h3>
                                 </div>
@@ -780,10 +779,10 @@
                             <p class="text-white heading-fs-14">{{ $setting->copyright }}</p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6  col-md-6">
-                        <div class="copyright-item gap-0">
+                    <div class="col-lg-6 col-sm-6 col-md-6">
+                        <div class="gap-0 copyright-item">
                             <a class="border-0 heading-fs-14" href="{{ route('privacy-policy') }}">{{ $setting->developed_by}}</a>
-                            <span class="d-flex gap-3">
+                            <span class="gap-3 d-flex">
                                 <a href="{{$setting->instagram}}" class="p-0 border-0">
                                     <svg width="36" height="35" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20.6696 39.0599C10.1596 39.0599 1.63965 30.5399 1.63965 20.0299C1.63965 9.51988 10.1596 0.999878 20.6696 0.999878C31.1796 0.999878 39.6996 9.51988 39.6996 20.0299C39.6996 30.5399 31.1796 39.0599 20.6696 39.0599Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>

@@ -47,7 +47,7 @@
                                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse  pt-3 {{ request('brand',[]) ? 'show' : '' }}"
                                             aria-labelledby="panelsStayOpen-headingOne">
                                             <div class="accordion-body">
-                                                <span class="px-2 border-0 select-Brand-box">
+                                                <span class="border-0 select-Brand-box">
                                                 
                                                     @foreach ($brands as $index=> $brand)
                                                                 <div class="accordion" id="accordionExample">
@@ -115,7 +115,7 @@
                                               <span class="p-0 border-0 select-Brand-box two four">
                                                 <div class="gap-3 m-0 slider-container d-flex align-items-center">
 
-                                                    <div class="px-2 d-flex flex-column align-items-center mt-32px w-100">
+                                                    <div class="d-flex flex-column align-items-center mt-32px w-100">
                                                         <div class="pb-3 d-flex justify-content-between align-items-center year-slider-text w-100">
                                                             <span class="m-0 slider-label" id="minYearLabel">${{round($minPrice)}}</span>
                                                             <span class="m-0 slider-value" id="modelYearValue">${{$maxPrice}}</span> 
@@ -137,7 +137,7 @@
                                                     <h6 class="pt-2 price_range">Price Range</h6>
 
                                                     @foreach($price_range as $key=>$range)
-                                                    <div class="d-flex align-items-center">
+                                                    <div class="pb-2 ps-3 d-flex align-items-center">
                                                             <div class="form-check">
                                                                 <input class="form-check-input popular-search" type="checkbox" name="price_range[]" value="{{$key}}" 
                                                                     {{ in_array($key, request('price_range', [])) ? 'checked' : '' }}> &nbsp;
@@ -865,7 +865,7 @@
                         </div>
                     </div>
 
-                    <div class="py-4">
+                    <div class="py-4 pagination_space">
                         @if ($cars->hasPages())
                         {{ $cars->appends(request()->query())->links() }}
                         @endif
