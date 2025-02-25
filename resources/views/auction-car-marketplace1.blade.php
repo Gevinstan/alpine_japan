@@ -384,9 +384,11 @@
                                                     </span>
                                                     <p class="pt-4 listcar_price pe-4">
                                                        @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price_num'] }}
+                                                       {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
+                                                        <!-- {{ '$'.$car['start_price_num'] }} -->
                                                         @else
-                                                            {{ '$'.$car['start_price'] }}
+                                                        {{ '$' . number_format($car['start_price'], 0, '.', ',') }}
+                                                            <!-- {{ '$'.$car['start_price'] }} -->
                                                         @endif
                                                     </p>
                                                 </div>
