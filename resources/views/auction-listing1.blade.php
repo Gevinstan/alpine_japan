@@ -77,7 +77,7 @@
                             </button> 
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-3">
+                    {{--<div class="d-flex align-items-center gap-3">
                         <div class="dropdown location-dropdown w-100">
                             <button class="btn w-100 bg-white charge-btn">
                                 Shipping 
@@ -88,7 +88,7 @@
                                {{'$'.round($car->shipping_value)}}
                             </button> 
                         </div>
-                    </div>
+                    </div>--}}
                         <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
                         <div class="d-flex align-content-center total-price-container mt-3">
                             <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
@@ -237,7 +237,7 @@
                                         {{$car->model_name}}
                                         @endif
                                     </h3>
-                                    <div class="d-flex align-items-center justify-content-between">
+                                   <div class="d-flex align-items-center justify-content-between">
                                         <p class="amount-text" id="price_value">Price <span class="price-text">
                                             @if(session('front_lang')=='en')
                                             ${{convertCurrency($car->start_price_num,$usd_rate)}}
@@ -245,9 +245,9 @@
                                                 {{$car->start_price}}
                                             @endif 
                                         </span></p>
-                                        <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
+                                        {{-- <p class="amount-text" id="commission_value">Commission <span class="commission-text"> 
                                         ${{$car->commission_value}}
-                                        </span></p>
+                                        </span></p>--}}
                                     </div>
                                         <div class="d-flex align-items-center gap-3">
                                             <div class="dropdown location-dropdown w-100">
@@ -781,22 +781,22 @@
            
            if($("#location").val() != ""){
              var start_price = $("#price_value").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
-             var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
              var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
  
             
  
              // Convert to numbers
              var start_price_num = Number(start_price);
-             var comission_price_num = Number(comission_price);
+            //  var comission_price_num = Number(comission_price);
              var delivery_charge_num = Number(delivery_charge);
  
              // Check if conversion was successful
-             if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num)) {
+             if (isNaN(start_price_num) ||  isNaN(delivery_charge_num)) {
                  console.error("One of the prices is not a valid number.");
              } else {
                  // Calculate total
-                 var total_price = start_price_num + comission_price_num + delivery_charge_num;
+                 var total_price = start_price_num  + delivery_charge_num;
  
                  // Display the total price
                  $("#total_price").text('$'+total_price);
@@ -809,29 +809,29 @@
          $("#calculate_total_price1").on('click',function(){
            if($("#location1").val() != ""){
              var start_price = $("#price_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
-             var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
              var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
-             var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
  
             
  
              // Convert to numbers
              var start_price_num = Number(start_price);
-             var comission_price_num = Number(comission_price);
+            //  var comission_price_num = Number(comission_price);
              var delivery_charge_num = Number(delivery_charge);
-             var shipping_charge_num = Number(shipping_charge);
+            //  var shipping_charge_num = Number(shipping_charge);
  
              // Check if conversion was successful
-             if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num) || isNaN(shipping_charge_num)) {
+             if (isNaN(start_price_num) || isNaN(delivery_charge_num) ) {
                 toastr.error("One of the prices is not a valid number.",'Failed');
              } else {
                 
                  // Calculate total
-                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num;
+                 var total_price = start_price_num  + delivery_charge_num ;
  
-                 $("#hidden_commission").val(comission_price_num);
+                //  $("#hidden_commission").val(comission_price_num);
                  $("#hidden_delivery_charge").val(delivery_charge_num);
-                 $("#hidden_shipping_charge").val(shipping_charge_num);
+                //  $("#hidden_shipping_charge").val(shipping_charge_num);
                  $("#hidden_total").val(total_price);
                  // Display the total price
                  $("#total_price1").text('$'+total_price);

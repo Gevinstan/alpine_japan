@@ -78,7 +78,7 @@
                             </button> 
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-3">
+                    {{--<div class="d-flex align-items-center gap-3">
                         <div class="dropdown location-dropdown w-100">
                             <button class="btn w-100 bg-white charge-btn">
                                 Shipping 
@@ -89,7 +89,7 @@
                                {{'$'.round($car->shipping_value)}}
                             </button> 
                         </div>
-                    </div>
+                    </div>--}}
                     <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
                     <div class="d-flex align-content-center total-price-container mt-3">
                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
@@ -251,7 +251,7 @@
                                     @error('location')
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
-                                    <div class="d-flex align-items-center gap-3">
+                                    {{--<div class="d-flex align-items-center gap-3">
                                         <div class="dropdown location-dropdown w-100">
                                             <button class="btn w-100 bg-white charge-btn">
                                                 Shipping 
@@ -262,7 +262,7 @@
                                             {{'$'.round($car->shipping_value)}}
                                             </button> 
                                         </div>
-                                    </div>
+                                    </div>--}}
                                     <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
                                     <div class="d-flex align-content-center total-price-container mt-4">
                                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
@@ -759,9 +759,16 @@
            
            if($("#location").val() != ""){
              var start_price = $("#price_value").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
-             var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var comission_price = {{ round($car->commission_value) }}; // Clean the commission price
+            //  var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
              var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
-             var shipping_charge = $("#shipping_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var shipping_charge={{ round($car->shipping_value) }};
+            //  alert(shipping_charge);
+            //  shipping_charge = shipping_charge.replace(/[^0-9.-]+/g, ''); // Clean the commission price
+
+
+            //  var shipping_charge = $("#shipping_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
  
             
  
@@ -788,9 +795,11 @@
          $("#calculate_total_price1").on('click',function(){
            if($("#location1").val() != ""){
              var start_price = $("#price_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
-             var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
              var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
-             var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+             var shipping_charge={{ round($car->shipping_value) }};
+             var comission_price = {{ round($car->commission_value) }};
+             //  var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
  
             
  

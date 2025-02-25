@@ -8658,7 +8658,7 @@ public function getJDMPriceRange()
             ]);
         // }    
     }
-    public function store_jdm(PricingRequest $request,$id,$type){
+    public function store_jdm(Request $request,$id,$type){
         // $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
         // if(!empty($get_charges)){    
             if($type=='car'){
@@ -8670,7 +8670,7 @@ public function getJDMPriceRange()
             }
 
 
-            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            $delivery_charge=0;
             $commission=$price->commission_value;
             $shipping=$price->shipping_value;
             $usd=$price->price;
@@ -8679,7 +8679,7 @@ public function getJDMPriceRange()
 
           
         
-            $total=($usd+$delivery_charge+$commission+$shipping);
+            $total=($usd+$commission+$shipping);
 
             $paypal = PaypalPayment::first();
             $stripe = StripePayment::first();
@@ -8706,7 +8706,7 @@ public function getJDMPriceRange()
                 'bank' => $bank,
                 'id'=>$id,
                 'type'=>$type,
-                'delievery_charge_id'=>$request->location
+                'delievery_charge_id'=>0
             ]);
         // }    
     }

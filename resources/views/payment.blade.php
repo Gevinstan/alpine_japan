@@ -34,20 +34,18 @@
 
             <div class="row">
                 <div class="col-lg-8">
-                <div class="alert alert-danger" role="alert">
-                      {{ __('translate.When you purchase new plan, your previous package features will be destroy') }}
-                    </div>
                     <div class="package-details-item">
                         <div class="package-details-table">
                             <table class=" table table-bordered ">
                                 <tr>
                                     <td>{{ __('translate.Total Price') }}</td>
-                                    <td>{{ $total }}</td>
+                                    <td>{{ '$' . number_format($total, 0, '.', ',') }}</td>
+
                                 </tr>
 
                                 <tr>
                                     <td>{{ __('translate.Delivery Charge') }}</td>
-                                    <td>{{ currency($delivery_charge) }}</td>
+                                    <td>{{ '$' . number_format($delivery_charge, 0, '.', ',') }}</td>
                                 </tr>
                             </table>
                         </div>
