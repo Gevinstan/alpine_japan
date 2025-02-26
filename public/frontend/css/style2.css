@@ -16401,6 +16401,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 .accordion-title {
     font-family: var(--poppins);
     font-size: 1.1rem !important;
+    padding-left: 2.72rem !important;
 }
 
 @media (max-width: 1024px) {
@@ -18376,6 +18377,14 @@ input:not(:placeholder-shown) + .input-placeholder {
     padding-top: 24px;
     padding-bottom: 27px;
 } */
+
+.inquiery_clr {
+    background-color: #038ffc;
+}
+
+.inquiery_clr:hover {
+    background-color: #038ffc;
+}
 
 
 

@@ -7,7 +7,7 @@
 
 @section('body-content')
 
-<main class="bg-light-grey  px-sm-2 px-md-5">
+<main class="bg-light-grey px-sm-2 px-md-5">
 <div id="pageLoader">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -23,10 +23,10 @@
         <span class="close-btn" data-bs-dismiss="modal">
             <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="30px" height="30px"><path fill="#f44336" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"/><path fill="#fff" d="M29.656,15.516l2.828,2.828l-14.14,14.14l-2.828-2.828L29.656,15.516z"/><path fill="#fff" d="M32.484,29.656l-2.828,2.828l-14.14-14.14l2.828-2.828L32.484,29.656z"/></svg>
         </span>
-        <h2 class="section-heading text-center mb-3 modal-heading">Get a Free <span class="highlight"> &nbsp; Quotation<span></h2>
+        <h2 class="mb-3 text-center section-heading modal-heading">Get a Free <span class="highlight"> &nbsp; Quotation<span></h2>
         <div class="row">
-            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-3 border rounded-3">
-                <div class="inventory-details-slick-for m-0">
+            <div class="mb-3 border col-lg-6 col-sm-12 col-12 mb-lg-0 rounded-3">
+                <div class="m-0 inventory-details-slick-for">
                     @foreach ($galleries as $gallery)
                         <div class="inventory-details-slick-img">
                             <div class="inventory-details-slick-img-tag">
@@ -43,11 +43,11 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 col-12">
-                <div class="d-flex flex-column gap-3 car-listing-details">
+                <div class="gap-3 d-flex flex-column car-listing-details">
                     <p class="brand-text fw-bolder">{{$car->company_en}}</p>
                     <h3>{{$car->model_name_en}}</h3>
                     <div class="d-flex align-items-center justify-content-between">
-                        <p class="amount-text" id="price_value1">Price <span class="price-text">
+                        <p class="py-2 amount-text" id="price_value1">Price <span class="price-text">
                             @if(session('front_lang')=='en')
                                  ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
                                 @else
@@ -59,9 +59,9 @@
                         ${{$car->commission_value}}
                         </span></p> -->
                     </div>
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="gap-3 d-flex align-items-center">
                         <div class="dropdown location-dropdown w-100">
-                            <select class="form-select form-select location-select"
+                            <select class="form-select location-select"
                                 aria-label=".form-select example" name="location" id="location1">
                                 <option class="" selected value="">
                                     {{ __('translate.Select Location') }} <i class="bi bi-caret-down"></i>
@@ -72,26 +72,26 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="w-100 bg-white">
-                            <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge1">
+                        <div class="bg-white w-100">
+                            <button class="bg-white btn w-100 charge-btn" type="button" id="delivery_charge1">
                                 Delivery Charge 
                             </button> 
                         </div>
                     </div>
-                    {{--<div class="d-flex align-items-center gap-3">
+                    {{--<div class="gap-3 d-flex align-items-center">
                         <div class="dropdown location-dropdown w-100">
-                            <button class="btn w-100 bg-white charge-btn">
+                            <button class="bg-white btn w-100 charge-btn">
                                 Shipping 
                             </button> 
                         </div>
-                        <div class="w-100 bg-white">
-                            <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge1">
+                        <div class="bg-white w-100">
+                            <button class="bg-white btn w-100 charge-btn" type="button" id="shipping_charge1">
                                {{'$'.round($car->shipping_value)}}
                             </button> 
                         </div>
                     </div>--}}
                     <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
-                    <div class="d-flex align-content-center total-price-container mt-3">
+                    <div class="mt-3 d-flex align-content-center total-price-container">
                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
                         <p class="" id="total_price1"></p>
                     </div>
@@ -99,49 +99,49 @@
             </div>
             <div class="col-12">
                 
-                <form method="POST" action="{{route('send_message_to_company')}}" class="sales-form px-1 py-3">
+                <form method="POST" action="{{route('send_message_to_company')}}" class="px-1 py-3 sales-form">
                     @csrf
                     <div class="row">
-                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                        <div class="mb-2 col-lg-6 col-sm-12 col-12">
                             <div class="textarea-wrapper">
-                                <input type="text" class="form-control p-3" id="exampleFormControlInput3"
+                                <input type="text" class="p-3 form-control" id="exampleFormControlInput3"
                                     placeholder="" name="name" value="{{ old('name') }}">
                                 <span class="placeholder-text">Name <span class="required">*</span></span>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                        <div class="mb-2 col-lg-6 col-sm-12 col-12">
                         <div class="textarea-wrapper">
-                                <input type="email" class="form-control p-3" id="exampleFormControlInput4"
+                                <input type="email" class="p-3 form-control" id="exampleFormControlInput4"
                                     placeholder="" name="email" value="{{ old('email') }}">
                                 <span class="placeholder-text">Email <span class="required">*</span></span>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                        <div class="mb-2 col-lg-6 col-sm-12 col-12">
                             <div class="textarea-wrapper">
-                                <input type="text" class="form-control p-3" id="exampleFormControlInput5"
+                                <input type="text" class="p-3 form-control" id="exampleFormControlInput5"
                                     placeholder="" name="phone" value="{{ old('phone') }}">
                                 <span class="placeholder-text">Phone <span class="required">*</span></span>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12 col-12 mb-2">
+                        <div class="mb-2 col-lg-6 col-sm-12 col-12">
                             <div class="textarea-wrapper">
-                                <input type="text" class="form-control p-3" id="exampleFormControlInpu6"
+                                <input type="text" class="p-3 form-control" id="exampleFormControlInpu6"
                                     placeholder="" value="{{ old('subject') }}" name="subject">
                                 <span class="placeholder-text">Country of Delivery <span class="required">*</span></span>
                             </div>
                         </div>
-                        <div class="col-12  mb-2">
+                        <div class="mb-2 col-12">
                             <div class="textarea-wrapper">
-                                <textarea class="form-control p-3" id="exampleFormControlTextarea11" rows="3"
+                                <textarea class="p-3 form-control" id="exampleFormControlTextarea11" rows="3"
                                     placeholder="" name="message">{{ old('message') }}</textarea>
                                 <span class="placeholder-text">Message <span class="required">*</span></span>
                             </div>
                         </div>
-                        <div class="col-12 row p-0">
-                            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
-                                <button type="button" class="btn btn-secondary cancel-btn w-full h-full" data-bs-dismiss="modal">Cancel</button>
+                        <div class="p-0 col-12 row">
+                            <div class="mb-2 col-lg-6 col-sm-12 col-12 mb-lg-0">
+                                <button type="button" class="w-full h-full btn btn-secondary cancel-btn" data-bs-dismiss="modal">Cancel</button>
                             </div>
-                            <div class="col-lg-6 col-sm-12 col-12 mb-lg-0 mb-2">
+                            <div class="mb-2 col-lg-6 col-sm-12 col-12 mb-lg-0">
                                  <button type="submit" class="thm-btn-two w-100">BUY NOW</button>  
                             </div>
                           
@@ -171,16 +171,16 @@
     <section class="inventory-details py-120px listing-breadcrumb bg-light-grey">   
         <div class="container">
             <nav aria-label="breadcrumb" class="px-4">
-                <ol class="breadcrumb breadcrumb-list mb-4">
+                <ol class="mb-4 breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ $car->model_name_en }}</li>
                     
                 </ol>
             </nav>
             <div class="row">
-                <div class="col-lg-8 col-sm-12 col-12 listing_image px-0">
-                    <div class="row pb-3">
-                        <div class="inventory-details-slick-for m-0">
+                <div class="px-0 col-lg-8 col-sm-12 col-12 listing_image">
+                    <div class="pb-3 row">
+                        <div class="m-0 inventory-details-slick-for">
                             @foreach ($galleries as $gallery)
                                 <div class="inventory-details-slick-img">
                                     <div class="inventory-details-slick-img-tag">
@@ -205,8 +205,8 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end px-3">
-                     <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Download Car Pictures')}} <span class="ps-2"><i class="fa-solid fa-download ml-3"></i> <span></button>
+                    <div class="px-3 d-flex justify-content-end">
+                     <button class="thm-btn-two download-gallery" aria-label="Previous" type="button">{{__('translate.Download Car Pictures')}} <span class="ps-2"><i class="ml-3 fa-solid fa-download"></i> <span></button>
                     </div>
                 </div>
 
@@ -215,11 +215,11 @@
                         <div class="auto-sales-item form-section">
                             <form method="POST" action="{{ route('post.fixed.marketplace', ['id' => request()->segment(2)]) }}" class="sales-form">
                                 @csrf
-                                <div class="d-flex flex-column gap-2 car-listing-details">
+                                <div class="gap-2 d-flex flex-column car-listing-details">
                                     <p class="brand-text fw-bolder">{{$car->company_en}}</p>
                                     <h3>{{$car->model_name_en}}</h3>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <p class="amount-text" id="price_value">Price 
+                                        <p class="py-3 amount-text" id="price_value">Price 
                                             <span class="price-text">
                                                 @if(session('front_lang')=='en')
                                                     ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
@@ -230,9 +230,9 @@
                                         </p>
                                         <p style="display:none;" id="commission_value">${{$car->commission_value}}</p>
                                     </div>
-                                    <div class="d-flex align-items-center gap-3">
+                                    <div class="gap-3 d-flex align-items-center">
                                         <div class="dropdown location-dropdown w-100">
-                                            <select class="form-select form-select location-select"
+                                            <select class="form-select location-select"
                                                 aria-label=".form-select example" name="location" id="location">
                                                 <option class="" selected value="">Select Location<i class="bi bi-caret-down"></i>
                                                 </option>
@@ -242,8 +242,8 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="w-100 bg-white">
-                                            <button class="btn w-100 bg-white charge-btn" type="button" id="delivery_charge">
+                                        <div class="bg-white w-100">
+                                            <button class="bg-white btn w-100 charge-btn" type="button" id="delivery_charge">
                                                 Delivery Charge 
                                             </button> 
                                         </div>
@@ -251,27 +251,27 @@
                                     @error('location')
                                         <span style="color: red;">{{ $message }}</span>
                                     @enderror
-                                    {{--<div class="d-flex align-items-center gap-3">
+                                    {{--<div class="gap-3 d-flex align-items-center">
                                         <div class="dropdown location-dropdown w-100">
-                                            <button class="btn w-100 bg-white charge-btn">
+                                            <button class="bg-white btn w-100 charge-btn">
                                                 Shipping 
                                             </button> 
                                         </div>
-                                        <div class="w-100 bg-white">
-                                            <button class="btn w-100 bg-white charge-btn" type="button" id="shipping_charge">
+                                        <div class="bg-white w-100">
+                                            <button class="bg-white btn w-100 charge-btn" type="button" id="shipping_charge">
                                             {{'$'.round($car->shipping_value)}}
                                             </button> 
                                         </div>
                                     </div>--}}
                                     <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
-                                    <div class="d-flex align-content-center total-price-container mt-4">
+                                    <div class="mt-4 d-flex align-content-center total-price-container">
                                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
                                         <p class="" id="total_price"></p>
                                     </div>
                                 </div>
-                                    <div class='d-flex gap-3 mt-4'>
-                                        <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
-                                        <button type="submit" class="thm-btn-two h-full m-0" id="fixed_car_btn">BUY NOW</button>
+                                    <div class='gap-3 mt-4 d-flex'>
+                                        <button type="button" class="btn btn-primary w-100 inquiery_clr" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                                        <button type="submit" class="h-full m-0 thm-btn-two" id="fixed_car_btn">BUY NOW</button>
                                 </div> 
                             </form>         
                         </div>   
@@ -456,7 +456,7 @@
                 <!-- Car Specifications End  -->
 
                 <!-- Accessories Start -->
-                <div class="col-sm-12 pb-3">
+                <div class="pb-3 col-sm-12">
                     <div class="accordion" id="accordionPanelsStayOpenExample4" data-aos="fade-up" data-aos-delay="300">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingfive">
@@ -468,8 +468,8 @@
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
                                 <div class="accordion-body">
-                                    <div class="py-2 d-flex gap-3 flex-wrap">
-                                    <span class="accessories-text1 px-3 h-100">
+                                    <div class="flex-wrap gap-3 py-2 d-flex">
+                                    <span class="px-3 accessories-text1 h-100 ms-4">
                                             {{ isset($process_data_en['Condition']) ? $process_data_en['Condition'] : '--' }}
                                         </span>
                                        
@@ -494,7 +494,7 @@
 
     <!-- Cars Listing-part-start -->
       {{-- @if ($related_listings->count() > 0)
-            <section class="cars-listing feature-two mt-3 bg-light-grey">
+            <section class="mt-3 cars-listing feature-two bg-light-grey">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -507,7 +507,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mt-56px  ">
+                            <div class="row mt-56px ">
 
                                 @foreach ($related_listings as $related_car)
                                     <div class="col-lg-3">
