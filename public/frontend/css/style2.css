@@ -14535,6 +14535,7 @@ p {
 .compliance-title {
     font-size: 1rem;
     font-weight: 600;
+    color: black;
 }
 
 .compliance-text {
@@ -18358,9 +18359,7 @@ input:not(:placeholder-shown) + .input-placeholder {
     cursor: pointer;
 }
 
-.compliance-title {
-    color: #121a27 !important;
-}
+
 
 .pagination_space {
     padding-left: 12px;

@@ -18,11 +18,11 @@ use Carbon\Carbon;
   </div>
     <!-- banner-part-start  -->
 
-    <section class="banner mb-5 background_image">
+    <section class="mb-5 banner background_image">
         <div class="container">
 
-            <!-- <div class="row align-items-center px-2 px-lg-5 pb-5"> -->
-            <div class="row align-items-center px-5  pb-5 pt-2">
+            <!-- <div class="px-2 pb-5 row align-items-center px-lg-5"> -->
+            <div class="px-5 pt-2 pb-5 row align-items-center">
 
                 <div class="col-lg-12 col-xl-8">
                     <div class="banner-taitel">
@@ -49,7 +49,7 @@ use Carbon\Carbon;
                         <div>
                             <!-- <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('jdm-stock-all')}}"> -->
                             <form class="btn-group btn-dc7" id="jdm_stock_form" action="{{route('fixed-car-marketplace')}}">
-                                <ul class="nav nav-tabs custom-tabs mb-3 rounded-0">
+                                <ul class="mb-3 nav nav-tabs custom-tabs rounded-0">
                                     <li class="nav-item">
                                         <div class="custom-select-wrapper">
                                             <!-- <select class="aj-dropdown" id="jdm_brand" name="jdm_brand[]"> -->
@@ -77,7 +77,7 @@ use Carbon\Carbon;
                                         </div>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn banner-serch d-flex gap-3 thm-btn-search" type="submit"><img src="{{ asset('japan_home/search.svg') }}" height="15" width="15" /> search</button>   
+                                        <button class="gap-3 btn banner-serch d-flex thm-btn-search" type="submit"><img src="{{ asset('japan_home/search.svg') }}" height="15" width="15" /> search</button>   
                                     </li>
                                 </ul>
                             </form>    
@@ -86,7 +86,7 @@ use Carbon\Carbon;
                 </div>
 
 
-                <div class="col-lg-4 pt-5 mt-5">
+                <div class="pt-5 mt-5 col-lg-4">
                     <div class="banner-slick-main">
 
                         <div class="banner-slick">
@@ -196,10 +196,10 @@ use Carbon\Carbon;
 
 
     <!-- Categories-part-start -->
-    <section class="categories px-2 px-sm-3 px-lg-5">
+    <section class="px-2 categories px-sm-3 px-lg-5">
         <div class="container">
-            <div class="row align-items-end pb-3">
-                <div class="col-lg-8 col-sm-8 col-md-12  ">
+            <div class="pb-3 row align-items-end">
+                <div class="col-lg-8 col-sm-8 col-md-12 ">
                     <h2 class="section-heading">{{__('translate.Popular')}} <span class="highlight">{{__('translate.Brands')}}<span></h2>
                 </div>
 
@@ -211,19 +211,19 @@ use Carbon\Carbon;
 
             </div>
 
-            <div class="row g-5">
+            <div class="pt-4 row g-5">
                 @foreach ($brands->take(6) as $index => $brand)
-                    <div class="col-xl-2 col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
+                    <div class="col-xl-2 col-lg-4 col-6 col-md-6" data-aos="fade-right" data-aos-delay="50">
                         <div class="categories-logo">
                             <a href="{{ route('jdm-stock',[$brand->slug, 'car']) }}" class="categories-logo-thumb">
                             <img src="{{ asset('Brand/'.$brand->image) }}" alt="logo">
                             </a>
                         </div>
                     </div>
-                    @endforeach
+                @endforeach
             </div>
 
-            <div class="d-flex align-items-center justify-content-center pt-5">
+            <div class="pt-5 d-flex align-items-center justify-content-center">
                 <div class="categories-three-view-btn">
                     <a href="{{ route('brand-listing') }}" class="thm-btn">SEE ALL</a>
                 </div>
@@ -235,10 +235,10 @@ use Carbon\Carbon;
 
     <!--  Brand Car-part-start -->
        @if(count($top_sells) > 0 )
-        <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
+        <section class="px-2 py-5 my-3 brand-car px-sm-3 px-lg-5">
             <div class="container">
                 <div class="row align-items-end">
-                    <div class="col-lg-6 col-sm-6  col-md-6">
+                    <div class="col-lg-6 col-sm-6 col-md-6">
                         <h2 class="section-heading">{{__('translate.Top Selling')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
                     </div>
                 </div>
@@ -252,7 +252,7 @@ use Carbon\Carbon;
 
                                 <div class="row g-5">
                                     @foreach ($top_sells as $car)
-                                        <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6" data-aos="fade-u p"
+                                        <div class=" col-xl-3 col-lg-4 col-sm-6 col-md-6" data-aos="fade-u p"
                                             data-aos-delay="50">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
@@ -276,7 +276,7 @@ use Carbon\Carbon;
                                                         @endif          
                                                         </div>
                                                         <div class="brand-car-inner-item">
-                                                        <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" 
+                                                        <span class="pt-3 text-truncate car-name ps-3" data-bs-toggle="tooltip" 
                                                             title="@if(session('front_lang')=='en')
                                                             {{ $car['company_en'] }}
                                                             @else
@@ -288,7 +288,7 @@ use Carbon\Carbon;
                                                             {{ $car['company'] }}
                                                             @endif
                                                         </span>
-                                                        <p class="listcar_price pt-3 pe-4">
+                                                        <p class="pt-3 listcar_price pe-4">
                                                             @if(session('front_lang')=='en')
                                                             {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
                                                             @else
@@ -304,7 +304,7 @@ use Carbon\Carbon;
                                                             @else
                                                                 {{ html_decode($car['model_name']) }}
                                                             @endif">
-                                                        <h3 class="text-truncate car-fullname pt-3 ps-3"> 
+                                                        <h3 class="pt-3 text-truncate car-fullname ps-3"> 
                                                             @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
                                                             @else
@@ -313,7 +313,7 @@ use Carbon\Carbon;
                                                         </h3>
                                                     </a>
 
-                                                    <div class="brand-car-inner-item-main pt-2 px-4">
+                                                    <div class="px-4 pt-2 brand-car-inner-item-main">
                                                         <div class="brand-car-inner-item-two">
                                                             <div class="brand-car-inner-item-thumb">
                                                                 <span>
@@ -382,7 +382,7 @@ use Carbon\Carbon;
                                                         </div>
                                                     </div>
 
-                                                    <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                    <div class="px-3 py-2 brand-car-btm-txt-btm">
                                                         @php
                                                          $parsed_data=parseCustomFormat($car['parsed_data']);
                                                          $carbonInstance = Carbon::parse($car['datetime']);
@@ -413,7 +413,7 @@ use Carbon\Carbon;
 
                                 <div class="row g-5">
                                     @foreach ($used_cars as $car)
-                                    <div class="col-xl-3 col-lg-4  col-sm-6 col-md-6">
+                                    <div class="col-xl-3 col-lg-4 col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <img src="{{ asset($car->thumb_image) }}" alt="thumb">
@@ -500,7 +500,7 @@ use Carbon\Carbon;
                                                     <h3 class="px-2">{{ html_decode($car->title) }}</h3>
                                                 </a>
 
-                                                <div class="brand-car-inner-item-main px-2">
+                                                <div class="px-2 brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -547,7 +547,7 @@ use Carbon\Carbon;
                                                     </div>
                                                 </div>
 
-                                                <div class="brand-car-btm-txt-btm px-2 pb-3">
+                                                <div class="px-2 pb-3 brand-car-btm-txt-btm">
                                                     <h6 class="brand-car-btm-txt"><span>{{ __('translate.Listed by') }} :</span>{{ html_decode($car?->dealer?->name) }}
                                                     </h6>
                                                 </div>
@@ -560,7 +560,7 @@ use Carbon\Carbon;
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center pt-5">
+                        <div class="pt-5 d-flex align-items-center justify-content-center">
                         <div class="categories-three-view-btn">
                             <a href="{{ route('top-selling') }}" class="thm-btn">SEE ALL</a>
                         </div>
@@ -575,7 +575,7 @@ use Carbon\Carbon;
 
 
 <!-- JDM Car listing-->
-    <section class="brand-car py-5 my-3 px-2 px-sm-3 px-lg-5">
+    <section class="px-2 py-5 my-3 brand-car px-sm-3 px-lg-5">
         <div class="container">
             <!-- <div class="row">
                 <div class="col-lg-12">
@@ -585,7 +585,7 @@ use Carbon\Carbon;
                 </div>
             </div> -->
             <div class="row align-items-end">
-                <div class="col-lg-6 col-sm-6  col-md-6">
+                <div class="col-lg-6 col-sm-6 col-md-6">
                     <div class="taitel">
                         <div class="taitel-img">
                             <span>
@@ -599,7 +599,7 @@ use Carbon\Carbon;
                     </div>
 
                     <div class="row align-items-end">
-                        <div class="col-lg-6 col-sm-6  col-md-6">
+                        <div class="col-lg-6 col-sm-6 col-md-6">
                             <h2 class="section-heading text-nowrap">{{__('translate.JDM')}} <span class="highlight">{{__('translate.Cars')}}<span></h2>
                         </div>
                     </div>        
@@ -617,7 +617,7 @@ use Carbon\Carbon;
 
                             <div class="row g-5">
                                 @foreach ($jdm_car_listings as $car)
-                                    <div class=" col-xl-3 col-lg-4  col-sm-6 col-md-6 "  data-aos="fade-up"
+                                    <div class=" col-xl-3 col-lg-4 col-sm-6 col-md-6"  data-aos="fade-up"
                                         data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
@@ -654,7 +654,7 @@ use Carbon\Carbon;
                                                         @endif           
                                                     </div>
                                                 <div class="brand-car-inner-item">
-                                                    <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
+                                                    <span class="pt-3 text-truncate car-name ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
                                                                 {{ $car->make }}
                                                             @else
                                                             {{ $car->make }}
@@ -669,7 +669,7 @@ use Carbon\Carbon;
                                                     </span>
 
                     
-                                                    <p class="listcar_price pt-3 pe-4">
+                                                    <p class="pt-3 listcar_price pe-4">
                                                         @if(session('front_lang')=='en')
                                                             {{ '$'.$car->price }}
                                                         @else
@@ -685,7 +685,7 @@ use Carbon\Carbon;
                                                         @else
                                                             {{!empty($car->model) ?  $car->model : '--'}}
                                                         @endif">
-                                                    <h3 class="text-truncate car-fullname pt-3 ps-3"> 
+                                                    <h3 class="pt-3 text-truncate car-fullname ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{!empty($car->model) ? $car->model  : '--'}}
                                                         @else
@@ -699,7 +699,7 @@ use Carbon\Carbon;
                                                 </a>
 
 
-                                                <div class="brand-car-inner-item-main pt-2 px-4">
+                                                <div class="px-4 pt-2 brand-car-inner-item-main">
                                                     <div class="brand-car-inner-item-two">
                                                         <div class="brand-car-inner-item-thumb">
                                                             <span>
@@ -740,7 +740,7 @@ use Carbon\Carbon;
                                                     </div>
                                                 </div>
 
-                                                    <div class="brand-car-btm-txt-btm py-2 px-3">
+                                                    <div class="px-3 py-2 brand-car-btm-txt-btm">
                                                         @php
                                                         $carbonInstance = Carbon::parse($car->created_at);
                                                         @endphp
@@ -768,7 +768,7 @@ use Carbon\Carbon;
                         </div>
                     </div>
 
-                    {{--<div class="d-flex align-items-center justify-content-center pt-5">
+                    {{--<div class="pt-5 d-flex align-items-center justify-content-center">
                         <div class="categories-three-view-btn">
                             <a href="{{ route('listings') }}" class="thm-btn">SEE ALL</a>
                         </div>
@@ -781,8 +781,8 @@ use Carbon\Carbon;
 
 
     <!--  Car-Poster-part-start -->
-    <!-- <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5 px-2 px-sm-3 px-lg-5"> -->
-    <section class="car-poster d-flex flex-wrap justify-content-center gap-2 mb-5  px-sm-2 px-md-5">
+    <!-- <section class="flex-wrap gap-2 px-2 mb-5 car-poster d-flex justify-content-center px-sm-3 px-lg-5"> -->
+    <section class="flex-wrap gap-2 mb-5 car-poster d-flex justify-content-center px-sm-2 px-md-5">
         <div class="col-md-auto">
             <a href="#">
                 <img src="{{ asset('japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -805,7 +805,7 @@ use Carbon\Carbon;
         </div>
     </section>
 
-    <!-- <section class="car-poster d-flex justify-content-center gap-2 mb-5 px-5">
+    <!-- <section class="gap-2 px-5 mb-5 car-poster d-flex justify-content-center">
         <div class="col-12 col-sm-6 col-md-3">
             <a href="#">
             <img src="{{ asset('frontend/japan_home/Poster4.svg') }}" class="img-fluid poster-img" alt="Poster 1"/>
@@ -833,10 +833,10 @@ use Carbon\Carbon;
 
     <!--  Feature-part-start -->
       @if(count($new_arrived_cars) > 0)
-        <section class="feature py-5 my-5 px-2 px-sm-3 px-lg-5">
+        <section class="px-2 py-5 my-5 feature px-sm-3 px-lg-5">
         <div class="container ">
             <div class="row">
-                <div class="col-lg-9 New_arrival pt-2">
+                <div class="pt-2 col-lg-9 New_arrival">
                     <div class="row feature-taitel align-items-end align-items-baseline">
                         <div class="col-lg-8 col-sm-6 col-md-6">
                             <h2 class="section-heading">{{__('translate.New')}} <span class="highlight">{{__('translate.Arrivals')}}</span></h2>
@@ -867,7 +867,7 @@ use Carbon\Carbon;
                         </div>
                     </div>
 
-                    <div class="row mt-56px  feature-slick">
+                    <div class="row mt-56px feature-slick">
                         @foreach ($new_arrived_cars as $index => $car)
                             <div class="col-lg-4">
                                 <div class="brand-car-item">
@@ -894,7 +894,7 @@ use Carbon\Carbon;
                                             @endif             
                                         </div>
                                         <div class="brand-car-inner-item">
-                                             <span class="text-truncate car-name pt-3 ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
+                                             <span class="pt-3 text-truncate car-name ps-3" data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
                                                 {{ $car['company_en'] }}
                                             @else
                                                 {{ $car['company'] }}
@@ -919,7 +919,7 @@ use Carbon\Carbon;
                                                 @else
                                                     {{ html_decode(!empty($car['model_name']) ? $car['model_name'] : '') }}
                                                 @endif">
-                                            <h3 class="text-truncate car-fullname pt-3 ps-3"> 
+                                            <h3 class="pt-3 text-truncate car-fullname ps-3"> 
                                                 @if(session('front_lang')=='en')
                                                     {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
                                                 @else
@@ -929,7 +929,7 @@ use Carbon\Carbon;
                                         </a>
                                         
 
-                                        <div class="brand-car-inner-item-main pt-2 px-4">
+                                        <div class="px-4 pt-2 brand-car-inner-item-main">
                                             <div class="brand-car-inner-item-two">
                                                 <div class="brand-car-inner-item-thumb">
                                                     <span>
@@ -996,7 +996,7 @@ use Carbon\Carbon;
                                             </div>
                                         </div>
 
-                                        <div class="brand-car-btm-txt-btm py-2 px-3">
+                                        <div class="px-3 py-2 brand-car-btm-txt-btm">
                                             @php
                                             $carbonInstance = Carbon::parse($car['datetime']);
                                              $parsed_data=parseCustomFormat($car['parsed_data']);
@@ -1037,7 +1037,7 @@ use Carbon\Carbon;
                 </div>
             </div>
 
-            <div class="d-flex align-items-center justify-content-center pt-5">
+            <div class="pt-5 d-flex align-items-center justify-content-center">
                 <a href="{{ route('new-arrivals') }}" class="thm-btn">{{ __('SEE ALL') }}</a>
             </div>
         </div>
@@ -1047,14 +1047,14 @@ use Carbon\Carbon;
 
 
     <!--  vedio-part-start -->
-    <!-- <section class="vedio px-2 px-sm-3 px-lg-5"> -->
-    <section class="vedio px-2 px-sm-2 px-md-5">
+    <!-- <section class="px-2 vedio px-sm-3 px-lg-5"> -->
+    <section class="px-2 vedio px-sm-2 px-md-5">
         <div class="container vedio-bg"
             style="background: url({{ asset($homepage->video_bg_image) }});">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-sm-6 video-content">
                     <p>Watch The Video</p>
-                    <h2 class="vedio-taitel video-Text py-4">JDM Car From Japan To US, Canada, Australia Completely Legal</h2>
+                    <h2 class="py-4 vedio-taitel video-Text">JDM Car From Japan To US, Canada, Australia Completely Legal</h2>
 
                     <div class="">
                         <a href="{{ route('contact-us') }}" class="thm-btn text-case-change">Contact Us</a>
@@ -1090,9 +1090,9 @@ use Carbon\Carbon;
 
 
     <!--   Testimonial-part-start -->
-    <section class=" testimonial testimonial-padding py-5 overflow-hidden px-lg-5">
+    <section class="py-5 overflow-hidden testimonial testimonial-padding px-lg-5">
         <div class="container px-2 px-sm-3 px-lg-5">
-            <div class="row px-5">
+            <div class="px-5 row">
                 <div class="col-lg-5">
 
                     <div class="sm-df">
@@ -1220,14 +1220,14 @@ use Carbon\Carbon;
 
 
     <!-- Car Buy section Start -->
-        <section class="buy-section steps-section px-sm-2 px-md-5 py-5 gap-5">
+        <section class="gap-5 py-5 buy-section steps-section px-sm-2 px-md-5">
             <div class="buy-container">
                 <div class="pb-5">
                     <h1 class="pb-2">Buy in 3 Easy Steps</h1>
                     <p class="text-center disc buy-text-white d-flex justify-content-center">Adding smiles to your miles. Car buying made simpler</p>
                 </div>
 
-                <div class="d-flex gap-5 flex-column flex-lg-row flex-md-column flex-sm-column gap-5 gap-lg-4 px-5 justify-content-center">
+                <div class="gap-5 px-5 d-flex flex-column flex-lg-row flex-md-column flex-sm-column gap-lg-4 justify-content-center">
                     <div>
                         <div class="step-circle">
                             <div class="inner-card">
@@ -1262,12 +1262,12 @@ use Carbon\Carbon;
 
 
     <!-- About section Start-->
-    <section class="about-section py-5 px-md-5 px-sm-2">
+    <section class="py-5 about-section px-md-5 px-sm-2">
   <div class="container">
-    <h2 class="mb-3 section-heading text-center text-md-start">
+    <h2 class="mb-3 text-center section-heading text-md-start">
       About <span class="highlight">Alpine Japan</span>
     </h2>
-    <div class="about-row">
+    <div class="pt-4 about-row">
       <!-- Image Column -->
       <div class="about-image-container"></div>
 
@@ -1298,17 +1298,17 @@ use Carbon\Carbon;
 
 
     <!-- Quality section start -->
-        <!-- <section class="quality-compliance py-5 "> -->
-        <section class="quality-compliance px-sm-2 px-md-5 py-5 ">
-            <!-- <div class="container text-center px-2 px-sm-3 px-lg-5"> -->
-            <!-- <div class="container text-center px-5"> -->
+        <!-- <section class="py-5 quality-compliance "> -->
+        <section class="py-5 quality-compliance px-sm-2 px-md-5 ">
+            <!-- <div class="container px-2 text-center px-sm-3 px-lg-5"> -->
+            <!-- <div class="container px-5 text-center"> -->
             <div class="container text-center">
                 <h2 class="section-title">Quality <span class="highlight">Compliance</span></h2>
                 <p class="section-subtitle px-md-5 px-sm-2">We arrange third party inspection for quality compliance, as per import regulations of every country worldwide. Here are some of the services we work with:</p>
                 </div>
-                <div class="row justify-content-center px-4">
-                    <div class="col-md-4 col-12 mb-4">
-                        <div class="compliance-item mb-3">
+                <div class="px-4 row justify-content-center">
+                    <div class="mb-4 col-md-4 col-12">
+                        <div class="mb-3 compliance-item">
                             <img src="{{ asset('japan_home/qc_2.svg') }}" alt="QISJ Logo" class="compliance-logo">
                             <div class="compliance-icon"><i class="fas fa-globe"></i></div>
                         </div>
@@ -1318,8 +1318,8 @@ use Carbon\Carbon;
                         </div>
                     </div>
 
-                    <div class="col-md-4 col-12 mb-4">
-                        <div class="compliance-item mb-3">
+                    <div class="mb-4 col-md-4 col-12">
+                        <div class="mb-3 compliance-item">
                             <img src="{{ asset('japan_home/qc_3.svg') }}" alt="Bureau Veritas Logo" class="compliance-logo">
                             <div class="compliance-icon"><i class="fas fa-globe"></i></div>
                         </div>
@@ -1329,8 +1329,8 @@ use Carbon\Carbon;
                         </div>
                     </div>
 
-                    <div class="col-md-4 col-12 mb-4">
-                        <div class="compliance-item mb-3">
+                    <div class="mb-4 col-md-4 col-12">
+                        <div class="mb-3 compliance-item">
                             <img src="{{ asset('japan_home/qc_1.svg') }}" alt="JAAI Logo" class="compliance-logo">
                             <div class="compliance-icon"><i class="fas fa-globe"></i></div>
                         </div>
