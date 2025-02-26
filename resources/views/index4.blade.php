@@ -290,9 +290,9 @@ use Carbon\Carbon;
                                                         </span>
                                                         <p class="pt-3 listcar_price pe-4">
                                                             @if(session('front_lang')=='en')
-                                                            {{'$'.$car['start_price_num'] }}
+                                                            {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
                                                             @else
-                                                            {{'$'.$car['start_price'] }}
+                                                            {{ '$' . number_format($car['start_price'], 0, '.', ',') }}
                                                             @endif
                                                         </p>
 
@@ -905,12 +905,12 @@ use Carbon\Carbon;
                                                 {{ $car['company'] }}
                                             @endif
                                             </span>
-                                            <p class="pt-3 listcar_price pe-4">
-                                            @if(session('front_lang')=='en')
-                                                {{ '$'.$car['start_price_num']}}
-                                            @else
-                                                {{ '$'.$car['start_price'] }}
-                                            @endif
+                                            <p class="listcar_price pt-3 pe-4">
+                                                @if(session('front_lang')=='en')
+                                                {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
+                                                @else
+                                                {{ '$' . number_format($car['start_price'], 0, '.', ',') }}
+                                                @endif
                                             </p>
                                         </div>
 

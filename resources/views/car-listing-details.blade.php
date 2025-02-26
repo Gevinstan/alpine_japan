@@ -49,7 +49,8 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="py-2 amount-text" id="price_value1">Price <span class="price-text">
                             @if(session('front_lang')=='en')
-                                 ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
+                                 <!-- ${{convertCurrency($car->start_price_num,$usd_rate,2)}} -->
+                                 {{ '$' . number_format(convertCurrency($car->start_price_num,$usd_rate,2), 0, '.', ',') }}
                                 @else
                                 {{$car->start_price}}
                             @endif 
@@ -223,6 +224,7 @@
                                             <span class="price-text">
                                                 @if(session('front_lang')=='en')
                                                     ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
+                                                    {{ '$' . number_format(convertCurrency($car->start_price_num,$usd_rate,2), 0, '.', ',') }}
                                                     @else
                                                     {{$car->start_price}}
                                                 @endif 
