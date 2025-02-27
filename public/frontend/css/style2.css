@@ -18378,13 +18378,15 @@ input:not(:placeholder-shown) + .input-placeholder {
     padding-bottom: 27px;
 } */
 
-.inquiry_now_clr {
+.inquiery_clr {
     background-color: #038ffc;
 }
 
-.inquiry_now_clr:hover{
+.inquiery_clr:hover {
     background-color: #038ffc;
 }
+
+
 
 
 

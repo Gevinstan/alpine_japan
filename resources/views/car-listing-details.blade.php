@@ -47,8 +47,7 @@
                     <p class="brand-text fw-bolder">{{$car->company_en}}</p>
                     <h3>{{$car->model_name_en}}</h3>
                     <div class="d-flex align-items-center justify-content-between">
-                        <p class="py-2 amount-text" id="price_value1">Price 
-                        <span class="price-text">
+                        <p class="py-2 amount-text" id="price_value1">Price <span class="price-text">
                             @if(session('front_lang')=='en')
                                  <!-- ${{convertCurrency($car->start_price_num,$usd_rate,2)}} -->
                                  {{ '$' . number_format(convertCurrency($car->start_price_num,$usd_rate,2), 0, '.', ',') }}
@@ -76,7 +75,7 @@
                         </div>
                         <div class="bg-white w-100">
                             <button class="bg-white btn w-100 charge-btn" type="button" id="delivery_charge1">
-                                Delivery Charge
+                                Delivery Charge 
                             </button> 
                         </div>
                     </div>
@@ -273,7 +272,7 @@
                                     </div>
                                 </div>
                                     <div class='gap-3 mt-4 d-flex'>
-                                        <button type="button" class="btn btn-primary w-100 inquiry_now_clr" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                                        <button type="button" class="btn btn-primary w-100 inquiery_clr" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
                                         <button type="submit" class="h-full m-0 thm-btn-two" id="fixed_car_btn">BUY NOW</button>
                                 </div> 
                             </form>         

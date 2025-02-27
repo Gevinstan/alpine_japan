@@ -279,7 +279,7 @@
                                         <p class="" id="total_price"></p>
                                 </div>
                                 <div class='gap-3 mt-4 d-flex'>
-                                        <button type="button" class="btn btn-primary w-100 inquiry_now_clr" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
+                                        <button type="button" class="btn btn-primary w-100 inquiery_clr" data-bs-toggle="modal" data-bs-target="#myModal">INQUIERY NOW</button>
                                         <button type="submit" class="h-full m-0 thm-btn-two" id="fixed_car_btn">BUY NOW</button>
                                 </div> 
                             </form>         
