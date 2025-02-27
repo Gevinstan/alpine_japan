@@ -689,9 +689,9 @@
                                                 <div class="pt-2">
                                                     <p class="listcar_price_list ps-1 pe-4">
                                                        @if(session('front_lang')=='en')
-                                                        {{ '$'.$car['start_price_num'] }}
+                                                         {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
                                                         @else
-                                                            {{ '$'.$car['start_price'] }}
+                                                         {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
                                                         @endif
                                                     </p>
 
