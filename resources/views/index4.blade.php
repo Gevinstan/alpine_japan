@@ -209,6 +209,8 @@ use Carbon\Carbon;
                     </div>
                 </div> -->
 
+                
+
             </div>
 
             <div class="pt-4 row g-5">
@@ -905,7 +907,7 @@ use Carbon\Carbon;
                                                 {{ $car['company'] }}
                                             @endif
                                             </span>
-                                            <p class="listcar_price pt-3 pe-4">
+                                            <p class="pt-3 listcar_price pe-4">
                                                 @if(session('front_lang')=='en')
                                                 {{ '$' . number_format($car['start_price_num'], 0, '.', ',') }}
                                                 @else

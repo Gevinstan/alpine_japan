@@ -2995,6 +2995,7 @@ p {
     background-color: #fff;
     position: relative;
     z-index: 1;
+    
 }
 
 .categories .taitel .taitel-img {
@@ -9251,24 +9252,25 @@ p {
     background-color: var(--white-color);
     border: 1px solid var(--white-color);
 }
+/* .inventory-main-box .accordion-button::before{
+    transform: rotate(-180deg);
+} */
 
 .inventory-main-box .accordion-button::after {
     width: 13px;
     height: 10px;
     background-image: url(../assets/images/icon/down-arrow.png);
     background-size: cover;
-    /* transform: rotate(-180deg); */
-
-    /* content: ''; 
-    display: inline-block;
-    mask: url(../assets/images/icon/down-arrow.svg) no-repeat center;
-    -webkit-mask: url(../assets/images/icon/down-arrow.svg) no-repeat center;
-    background-color: #6E6E6E !important; */
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
 }
 
-/* .inventory-main-box .accordion-button:not(.collapsed)::after {
-    transform: rotate(-360deg);
-} */
+.inventory-main-box .accordion-button.collapsed::after {
+    transform: rotate(180deg); /* Rotate the arrow to close state */
+}
+
+
+
 
 .inventory-main-box .accordion-header {
     padding-top: 0;
