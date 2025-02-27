@@ -222,8 +222,7 @@
                                     <div class="d-flex align-items-center justify-content-between">
                                         <p class="py-3 amount-text" id="price_value">Price 
                                             <span class="price-text">
-                                                @if(session('front_lang')=='en')
-                                                    ${{convertCurrency($car->start_price_num,$usd_rate,2)}}
+                                                @if(session('front_lang')=='en')    
                                                     {{ '$' . number_format(convertCurrency($car->start_price_num,$usd_rate,2), 0, '.', ',') }}
                                                     @else
                                                     {{$car->start_price}}
