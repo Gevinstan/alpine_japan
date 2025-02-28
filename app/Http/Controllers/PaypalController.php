@@ -49,33 +49,36 @@ class PaypalController extends Controller
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
-
+        $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
             if($type == '1'){
                 $price=CarDataJpOp::where('id', $id)->value('start_price_num');
                 $usd=$this->convertCurrency($price, $this->usdRate);
                 $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
                 $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
                 $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
-                $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
             } else if($type =='2'){
                 $price=Auct_lots_xml_jp::where('id', $id)->value('start_price_num');
                 $usd=$this->convertCurrency($price, $this->usdRate);
                 $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
                 $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
                 $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
-                $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
+                // $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
             } else if($type == '3'){
                 $price=Cars::where('id', $id)->select('price','commission_value','shipping_value')->first();
                 $usd=floatval(str_replace(',', '', $price->price));
                 $commission=!empty($price) ? $price->commission_value : 0;
                 $shipping=!empty($price) ? $price->shipping_value : 0;
-                $delivery_charge=0;
+                $comission=0;
+                $shipping=0;
+                // $delivery_charge=0;
             } else if($type = '4'){
                 $price=Heavy::where('id', $id)->select('price','commission_value','shipping_value')->first();
                 $usd=floatval(str_replace(',', '', $price->price));
-                $commission=!empty($price) ? $price->commission_value : 0;
-                $shipping=!empty($price) ? $price->shipping_value : 0;
-                $delivery_charge=0;
+                // $commission=!empty($price) ? $price->commission_value : 0;
+                // $shipping=!empty($price) ? $price->shipping_value : 0;
+                $comission=0;
+                $shipping=0;
+                // $delivery_charge=0;
             }
             else {
                 $price=0;

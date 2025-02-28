@@ -8670,16 +8670,17 @@ public function getJDMPriceRange()
             }
 
 
-            $delivery_charge=0;
-            $commission=$price->commission_value;
-            $shipping=$price->shipping_value;
+            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            // $commission=$price->commission_value;
+            // $shipping=$price->shipping_value;
             $usd=$price->price;
             $usd=floatval(str_replace(',', '', $usd));
 
 
           
         
-            $total=($usd+$commission+$shipping);
+            // $total=($usd+$commission+$shipping);
+            $total=($usd+$delivery_charge);
 
             $paypal = PaypalPayment::first();
             $stripe = StripePayment::first();
@@ -8693,8 +8694,8 @@ public function getJDMPriceRange()
             return view('payment', [
                 'usd' => $usd,
                 'delivery_charge' => $delivery_charge,
-                'commission' => $commission,
-                'shipping' => $shipping,
+                // 'commission' => $commission,
+                // 'shipping' => $shipping,
                 'total' => $total,
                 'stripe' => $stripe,
                 'paypal' => $paypal,
@@ -8706,7 +8707,7 @@ public function getJDMPriceRange()
                 'bank' => $bank,
                 'id'=>$id,
                 'type'=>$type,
-                'delievery_charge_id'=>0
+                'delievery_charge_id'=>$request->location
             ]);
         // }    
     }
