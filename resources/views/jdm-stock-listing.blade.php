@@ -598,14 +598,17 @@
                                 </button>
                             </h2>
                             <div id="accessories-accordion-collapsefive" class="accordion-collapse collapse show" aria-labelledby="accessories-accordion">
-                                <div class="flex-row gap-3 accordion-body d-flex ">
-                                    @foreach($accesories as $value)
-                                        <div class="gap-3 py-2">
-                                            <span class="px-3 py-1 accessories-text h-100 ms-4">
-                                                {{ isset($value) ? $value : '--' }}
-                                            </span> 
-                                        </div>
-                                    @endforeach
+                                <div class=" accordion-body">
+                                    <div class="flex-row gap-1 ps-4 d-flex">                                        
+                                        @foreach($accesories as $value)
+                                            <div class="gap-3 py-2">
+                                                <span class="px-3 py-1 accessories-text h-100">
+                                                    
+                                                    {{ isset($value) ? $value : '--' }}
+                                                </span> 
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                             

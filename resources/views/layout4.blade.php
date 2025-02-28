@@ -1076,6 +1076,13 @@
         }); 
     </script>
 
+    <script>
+        document.querySelector('.accordion-button').addEventListener('click', function() {
+            this.classList.toggle('collapsed');
+        });
+    
+    </script>
+
 </body>
 
 </html>
