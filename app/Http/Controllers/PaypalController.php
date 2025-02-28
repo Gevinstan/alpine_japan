@@ -68,7 +68,7 @@ class PaypalController extends Controller
                 $usd=floatval(str_replace(',', '', $price->price));
                 $commission=!empty($price) ? $price->commission_value : 0;
                 $shipping=!empty($price) ? $price->shipping_value : 0;
-                $comission=0;
+                $commission=0;
                 $shipping=0;
                 // $delivery_charge=0;
             } else if($type = '4'){
@@ -76,7 +76,7 @@ class PaypalController extends Controller
                 $usd=floatval(str_replace(',', '', $price->price));
                 // $commission=!empty($price) ? $price->commission_value : 0;
                 // $shipping=!empty($price) ? $price->shipping_value : 0;
-                $comission=0;
+                $commission=0;
                 $shipping=0;
                 // $delivery_charge=0;
             }
