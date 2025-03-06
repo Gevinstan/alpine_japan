@@ -26,7 +26,6 @@
                 <ol class="px-3 breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Brand New Cars') }}</li>
-                    
                 </ol>
             </nav>
             <div class="row">
@@ -54,7 +53,7 @@
                                                                 <div class="accordion" id="accordionExample">
                                                                     <div class="accordion-item">
                                                                         <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                            <div class="gap-2 p-0 accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                            <div class="gap-2 accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                                 <input name="brand[]"style="display:none;" class="form-check-input brand-search" type="checkbox"
                                                                                     value="{{ $brand->slug }}"
                                                                                     {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
@@ -62,12 +61,12 @@
                                                                                     {{ $brand->name }}
                                                                                 </label>
                                                                             </div>
-                                                                            <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                            <div id="collapseOne{{$index}}" class="accordion-collapse collapse w-100 {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                                 <div class="accordion-body">
-                                                                                    <span class="p-0 px-2 border-0 select-Brand-box brand-body">
-                                                                                    @if(array_key_exists($brand->slug, $brand_arr))
+                                                                                    <span class="px-2 border-0 select-Brand-box brand-body">
+                                                                                        @if(array_key_exists($brand->slug, $brand_arr))
                                                                                             @foreach ($brand_arr[$brand->slug] as $model)
-                                                                                                <span class="form-check">
+                                                                                                <span class="ms-2 form-check">
                                                                                                     <input name="model[{{ $brand->slug }}][]" class="form-check-input model-search" type="checkbox"
                                                                                                             value="{{ $model['model'] }}" data-brand="{{$brand->slug}}"
                                                                                                             {{ in_array(trim($model['model']), (array) (request('model')[$brand->slug] ?? [])) ? 'checked' : '' }}>&nbsp;
@@ -77,8 +76,8 @@
                                                                                                         <span class="budget_price">{{$model['model']}} <span class="budget_count">({{$model['count'] }})</span></span>
                                                                                                     </label>
                                                                                     </span>
-                                                                                            @endforeach
-                                                                                    @endif
+                                                                                         @endforeach
+                                                                                        @endif
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -272,7 +271,7 @@
                 <div class="col-lg-9">
                     <div class="px-2 mb-2 inventory-ber">
                         <div class="inventory-ber-left">
-                            <div class="flex-row inventory-sarch-ber-item">
+                            <div class="d-flex flex-column flex-md-row inventory-sarch-ber-item">
                                 <div class="px-1 inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
@@ -283,7 +282,7 @@
                                     
                                 </div>
 
-                                <div class="align-items-center sort_by d-flex justify-content-end justify-content-md-end justify-content-sm-start">
+                                <div class="align-items-center sort_by d-flex justify-content-md-end justify-content-sm-start">
                                     <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                      <p class="sort-text">Sort By:</p>
                                      <div class="dropdown sort-dropdown pe-4">
