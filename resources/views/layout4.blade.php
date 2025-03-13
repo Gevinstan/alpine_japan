@@ -258,21 +258,28 @@
                         <a href="{{ route('home') }}">
                             @if (Route::is('home'))
                                 @if (Session::get('selected_theme') == 'theme_two')
-                                    <img src="{{ asset($setting->logo) }}" alt="logo">
+                                <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px;">
+
                                 @elseif (Session::get('selected_theme') == 'theme_three')
-                                <img src="{{ asset($setting->logo) }}" alt="logo">
+                                <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px;">
                                 @else
-                                    <img src="{{ asset($setting->logo) }}" alt="logo">
+                                <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px;">
+
                                 @endif
                             @else
-                                <img src="{{ asset($setting->logo) }}" alt="logo">
+                            <img src="{{ asset('japan_home/japan-logo.png') }}" alt="logo" style="width:50px;height:50px; ">
+
                             @endif
 
-                            <p class="text-white fw-bold d-inline nav_mobile_head">Alpine Japan</p>
                         </a>  
                     </div>
                     
                 </div>
+                
+                <div class="p-center">
+                    <p class="text-white fw-bold d-inline nav_mobile_head">Alpine Japan</p>
+                    
+                </div>                                            
 
                 <div class="p-right">
                     <button id="nav-opn-btn">

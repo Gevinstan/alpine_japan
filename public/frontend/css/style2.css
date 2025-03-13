@@ -15951,13 +15951,17 @@ input:not(:placeholder-shown) + .placeholder-text {
     height: 100% !important;
 }
 
+
+
 .nav_mobile_head {
-    padding-left: 4.5rem;
+    padding-left: 0rem;
+    font-size: 2rem !important;
+    font-weight: 600 !important;
 }
 
 @media (max-width: 768px) {
     .nav_mobile_head {
-        padding-left: 14.5rem;
+        padding-left: 0rem;
         font-size: 2rem !important;
         font-weight: 600 !important;
     }
@@ -15965,7 +15969,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 @media (max-width: 425px) {
     .nav_mobile_head {
-        padding-left: 4.5rem;
+        padding-left: 0rem;
         font-size: 1.5rem !important;
         font-weight: 600 !important;
     }
@@ -15977,7 +15981,7 @@ input:not(:placeholder-shown) + .placeholder-text {
 
 @media (max-width: 375px) {
     .nav_mobile_head {
-        padding-left: 3.5rem;
+        padding-left: 0rem;
         font-size: 1.5rem !important;
         font-weight: 600 !important;
     }
