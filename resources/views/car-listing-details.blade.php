@@ -91,6 +91,37 @@
                             </button> 
                         </div>
                     </div>--}}
+                    <div class="d-flex justify-content-between">
+                        <div class="form-check p-0">
+                            <label class="form-check-label" for="marine_insurance">
+                                Shipment 
+                            </label>
+                        </div>
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="shipment" value="1">
+                            <label class="form-check-label ps-2" for="marine_insurance">
+                                RoRo
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="shipment" value="2">
+                            <label class="form-check-label ps-2">
+                                Container 
+                            </label>
+                        </div>  
+                    </div> 
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"  id="marine_insurance" name="marine_insurance">
+                        <label class="form-check-label ps-2" for="marine_insurance">
+                            Marine insurance 
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"  id="inland_inspection" name="inland_inspection">
+                        <label class="form-check-label ps-2" for="inland_inspection">
+                            Inland inspection 
+                        </label>
+                    </div>
                     <button class="w-100 cal-btn" type="button" id="calculate_total_price1">CALCULATE TOTAL PRICE</button>
                     <div class="mt-3 d-flex align-content-center total-price-container">
                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
@@ -173,7 +204,7 @@
         <div class="container">
             <nav aria-label="breadcrumb" class="px-4">
                 <ol class="mb-4 breadcrumb breadcrumb-list">
-                    <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
+                    <li class="breadcrumb-item breadcrumb-link"><a href="{{ route($head_page) }}">{{ __('translate.Home') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ $car->model_name_en }}</li>
                     
                 </ol>
@@ -214,7 +245,7 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 col-12 listing_form">
                     <div class="p-sticky">
                         <div class="auto-sales-item form-section">
-                            <form method="POST" action="{{ route('post.fixed.marketplace', ['id' => request()->segment(2)]) }}" class="sales-form">
+                            <form method="POST" action="{{ route('post.fixed.marketplace', ['id' => request()->segment(3)]) }}" class="sales-form">
                                 @csrf
                                 <div class="gap-2 d-flex flex-column car-listing-details">
                                     <p class="brand-text fw-bolder">{{$car->company_en}}</p>
@@ -264,6 +295,38 @@
                                             </button> 
                                         </div>
                                     </div>--}}
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-check p-0">
+
+                                            <label class="form-check-label" for="marine_insurance">
+                                              Shipment 
+                                            </label>
+                                        </div>
+                                        <div class="form-check ">
+                                            <input class="form-check-input" type="radio" name="shipment" value="1">
+                                            <label class="form-check-label ps-2" for="marine_insurance">
+                                              RoRo
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="shipment" value="2">
+                                            <label class="form-check-label ps-2">
+                                                Container 
+                                            </label>
+                                        </div>  
+                                    </div>    
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"  id="marine_insurance" name="marine_insurance">
+                                        <label class="form-check-label ps-2" for="marine_insurance">
+                                            Marine insurance 
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"  id="inland_inspection" name="inland_inspection">
+                                        <label class="form-check-label ps-2" for="inland_inspection">
+                                            Inland inspection 
+                                        </label>
+                                    </div>
                                     <button class="w-100 cal-btn" type="button" id="calculate_total_price">CALCULATE TOTAL PRICE</button>
                                     <div class="mt-4 d-flex align-content-center total-price-container">
                                         <p class="total-price position-relative">Total Price <span class="position-absolute">-</span></p>
@@ -771,12 +834,41 @@
 
             //  var shipping_charge = $("#shipping_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
  
-            
+            var delivery_location=$("#location").val();
+            var delivery_charges=@json($delivery_charges);
+            var filtered_charge = delivery_charges.filter(function(item) {
+                return item.id == delivery_location;
+            });
+
+            if ($("#marine_insurance").is(':checked')) {
+                var marine_insurance={{ round($car->marine_insurance_value) }}
+            } else {
+                var marine_insurance=0;
+            }
  
+            if ($("#inland_inspection").is(':checked')) {
+                var inland_inspection={{ round($car->inland_inspection_value) }}
+            } else {
+                var inland_inspection=0;
+            }
+            var shipment=0;
+            
+            if(filtered_charge.length > 0){
+                if ($("input[name='shipment']:checked").val() === "1") {
+                    shipment =filtered_charge[0].roro;
+                } else if ($("input[name='shipment']:checked").val() === "2") {
+                    // Container is selected
+                    shipment =filtered_charge[0].container;
+                } else {
+                    toastr.error('Select Shipment','Failed')
+                }
+                }  
+
              // Convert to numbers
              var start_price_num = Number(start_price);
              var comission_price_num = Number(comission_price);
-             var delivery_charge_num = Number(delivery_charge);
+            //  var delivery_charge_num = Number(delivery_charge);
+             var delivery_charge_num = Number(shipment);
              var shipping_charge_num = Number(shipping_charge);
  
              // Check if conversion was successful
@@ -784,7 +876,7 @@
                 toastr.error("One of the prices is not a valid number.",'Failed');
              } else {
                  // Calculate total
-                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num;
+                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num +marine_insurance+inland_inspection;
  
                  // Display the total price
                  $("#total_price").text('$'+total_price);
@@ -797,17 +889,49 @@
            if($("#location1").val() != ""){
              var start_price = $("#price_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
              var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
-             var shipping_charge={{ round($car->shipping_value) }};
+            //  var shipping_charge={{ round($car->shipping_value) }};
              var comission_price = {{ round($car->commission_value) }};
              //  var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
             //  var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
- 
+            var shipping_charge={{ round($car->shipping_value) }};
+
+            var delivery_location=$("#location1").val();
+            var delivery_charges=@json($delivery_charges);
+            var filtered_charge = delivery_charges.filter(function(item) {
+                return item.id == delivery_location;
+            });
             
+            
+            if ($("#marine_insurance").is(':checked')) {
+                // var delivery_charge_num = Number(shipment); 
+                 var marine_insurance={{ round($car->marine_insurance_value) }}
+            } else {
+                var marine_insurance=0;
+            }
  
+            if ($("#inland_inspection").is(':checked')) {
+                var inland_inspection={{ round($car->inland_inspection_value) }}
+            } else {
+                var inland_inspection=0;
+            }
+ 
+            var shipment=0;
+            
+            if(filtered_charge.length > 0){
+                if ($("input[name='shipment']:checked").val() === "1") {
+                    shipment =filtered_charge[0].roro;
+                } else if ($("input[name='shipment']:checked").val() === "2") {
+                    // Container is selected
+                    shipment =filtered_charge[0].container;
+                } else {
+                    toastr.error('Select Shipment','Failed')
+                }   
+            } 
              // Convert to numbers
              var start_price_num = Number(start_price);
              var comission_price_num = Number(comission_price);
-             var delivery_charge_num = Number(delivery_charge);
+            //  var delivery_charge_num = Number(delivery_charge);
+            var delivery_charge_num = Number(shipment);
              var shipping_charge_num = Number(shipping_charge);
  
              // Check if conversion was successful

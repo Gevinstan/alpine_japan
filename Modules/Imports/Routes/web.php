@@ -25,6 +25,8 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO
     Route::post('store-all-comission',[ImportsController::class,'storeAllComission'])->name('store-all-comission');
     Route::post('store-all-shipping',[ImportsController::class,'storeAllShipping'])->name('store-all-shipping');
     Route::post('update-values',[ImportsController::class,'updateValuesWithValidation'])->name('update-values');
+    Route::post('store-car-insurance',[ImportsController::class,'storeCarInsurance'])->name('store-car-insurance');
+    Route::post('store-car-inland',[ImportsController::class,'storeCarInland'])->name('store-car-inland');
     Route::post('import/bulk-delete',[ImportsController::class,'bulkDelete'])->name('import.bulk-delete');
     Route::post('change_top_sell',[ImportsController::class,'TopSale'])->name('change_top_sell');
     Route::post('change_new_arrivals',[ImportsController::class,'NewArrival'])->name('change_new_arrivals');

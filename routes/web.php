@@ -58,7 +58,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('home_page_responsive', 'home_page_responsive')->name('home_page_responsive');
             Route::get('fixed-car-marketplace', 'car_listing')->name('fixed-car-marketplace');
             // Route::get('car_listing_details/{slug}', 'car_listing_details')->name('car_listing_details');
-            Route::get('fixed-car-marketplace-details/{slug}', 'car_listing_details')->name('fixed-car-marketplace-details');
+            Route::get('{category}/fixed-car-marketplace-details/{id}', 'car_listing_details')->name('fixed-car-marketplace-details');
             Route::post('/fixed-car-marketplace-details/{id}',  'store_pricing')->name('post.fixed.marketplace');
             Route::post('/auction_listing/{id}',  'store_auction_pricing')->name('post.auction');
             Route::get('/about-us', 'about_us')->name('about-us');
@@ -104,9 +104,10 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/new-arrivals', 'new_arrival1')->name('new-arrivals');
             Route::post('/get-brand-models', 'getBrandModels')->name('get-brand-models');
             Route::get('/listing/{slug}', 'listing')->name('listing');
-            Route::get('/auction_listing/{slug}', 'auction_listing')->name('auction_listing');  
+            Route::get('/{category}/auction_listing/{slug}', 'auction_listing')->name('auction_listing');  
             Route::get('/jdm-stock-all-listing/{slug}', 'jdm_stock_all_listing')->name('jdm-stock-all-listing');
-            Route::post('/addWishList', 'addWishList')->name('add-user-wishlist');
+            Route::post('/addWishList', 'addWishList')
+            ->name('add-user-wishlist');
             // Route::get('/auction-car-marketplace', 'auctionCar')->name('auction-car-marketplace')
             // ->middleware('auth:web');
             Route::get('/auction-car-marketplace', 'auctionCar1')->name('auction-car-marketplace')
@@ -147,7 +148,7 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
 
         });
 
-        Route::get('/pay-via-paypal/{id}/{id1}/{id2}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
+        Route::get('/pay-via-paypal/{id}/{id1}/{id2}/{id3}/{id4}',[PaypalController::class, 'pay_via_paypal'])->name('pay-via-paypal');
         Route::get('/paypal-success-payment',[PaypalController::class, 'paypal_success_payment'])->name('paypal-success-payment');
         Route::get('/paypal-faild-payment',[PaypalController::class, 'paypal_faild_payment'])->name('paypal-faild-payment');
   

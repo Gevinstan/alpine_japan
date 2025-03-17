@@ -208,13 +208,13 @@
                                                     <div class="d-flex">
                                                         <div>
                                                         <a class="dropdown-item nav-dropdown-item" href="{{route('auction-brand-new-car')}}">
-                                                            {{__('translate.Auction')}}
+                                                            {{__('translate.Auction Car MarketPlace')}}
                                                         </a>   
                                                         </div>
                                                         <div>
                                                         {{--<a class="dropdown-item nav-dropdown-item" href="{{route('jdm_brand_new')}}">--}}
                                                         <a class="dropdown-item nav-dropdown-item" href="{{route('fixed-car-marketplace-brand-new-cars')}}">
-                                                            {{__('translate.Market Price')}}
+                                                            {{__('translate.Fixed Car Price Marketplace')}}
                                                         </a> 
                                                         </div>
                                                     </div>

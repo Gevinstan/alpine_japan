@@ -53,7 +53,9 @@ class Cars extends Model
         'shipping_value',
         'new_arrival',
         'deleted_at',
-        'location'
+        'location',
+        'marine_insurance_value',
+        'inland_inspection_value'
       ];
       protected $dates=['deleted_at'];
 }

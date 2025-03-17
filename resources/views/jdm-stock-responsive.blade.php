@@ -250,11 +250,15 @@
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
                                                                     <span class="m-0 slider-value" id="modelYearValue">{{$maxYear}}</span>  
                                                                 </div>
+                                                                <input id="ex3" type="text" name="year"
+                                                                    data-slider-min="{{$minYear}}"  data-slider-max="{{$maxYear}}"
+                                                                    value="{{ request('year', '') ? request('year') : '' }}"
+                                                                    data-slider-value="[{{ request('year', '') ? request('year') : $minYear . ',' . $maxYear }}]"sli/>
                                                             
-                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
+                                                                {{--<input type="range" min="{{$minYear}}" max="{{$maxYear}}" 
                                                                     value="{{ request('year', $minYear) }}" 
                                                                     class="mx-0 my-2 slider-input" id="modelYearSlider">
-                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">    
+                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">--}}   
 
                                                                 <!-- <input id="ex3" type="text" name="price_range_scale" 
                                                                     data-slider-min="{{$minPrice}}"  data-slider-max="{{$maxPrice}}" 
@@ -428,11 +432,13 @@
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img ">
                                                     <div class="">
-                                                    <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
-                                                                asset('Cars/' .  $car['picture']) : 
-                                                                asset('uploads/website-images/no-image.jpg') }}" 
-                                                        alt="thumb" class="card_image">
-                                                    </div>
+                                                    <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip">
+                                                        <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
+                                                                    asset('Cars/' .  $car['picture']) : 
+                                                                    asset('uploads/website-images/no-image.jpg') }}" 
+                                                            alt="thumb" class="card_image">
+                                                        </div>
+                                                    </a>    
                                                 </div>
                                                 
                                                 <div class="brand-car-inner position-relative">
@@ -727,12 +733,12 @@
                                         <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-6">
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
+                                                <a href="{{ route('jdm-stock-listing',[$car['id'], $type]) }}"data-bs-toggle="tooltip">
                                                     <img src="{{ file_exists(public_path('Cars/' .  $car['picture'])) ? 
                                                                 asset('Cars/' .  $car['picture']) : 
                                                                 asset('uploads/website-images/no-image.jpg') }}" 
                                                         alt="thumb" class="card_image">
-
-    
+                                                </a>        
                                                 </div>
 
                                                 <div class="">

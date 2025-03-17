@@ -11,21 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('auct_lots_xml_jp_op_other_chargers', function (Blueprint $table) {
+        Schema::create('jdm_stock_blog_other_charges', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('auct_id');
-            $table->integer('commission_value');
-            $table->integer('shipping_value');
+            $table->unsignedInteger('jdm_blog_id');
             $table->integer('marine_insurance_value');
             $table->integer('inland_inspection_value');
-            $table->integer('top_sell');
-            $table->integer('new_arrivals');
             $table->timestamps();
-        
-            // Proper foreign key definition
-            $table->foreign('auct_id')
+
+            $table->foreign('jdm_blog_id')
             ->references('id')
-            ->on('auct_lots_xml_jp_op')
+            ->on('blog')
             ->onDelete('cascade');
         });
     }
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('auct_lots_xml_jp_op_other_chargers');
+        Schema::dropIfExists('jdm_stock_blog_other_charges');
     }
 };

@@ -34,12 +34,16 @@ class DeliveryChargesController extends Controller
     {
         $request->validate([
             'country' => 'required|regex:/^[\pL\s]+$/u',
-            'rate' => 'required|integer'
+            'rate' => 'required|integer',
+            'roro' => 'required|integer',
+            'container' => 'required|integer'
         ]);
 
         DeliveryCharge::create([
             'country_name' => $request->country,
-            'rate' => $request->rate
+            'rate' => $request->rate,
+            'roro'=>$request->roro,
+            'container'=>$request->container
         ]);
         $notification= trans('translate.Created Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');
@@ -70,12 +74,16 @@ class DeliveryChargesController extends Controller
     {
         $request->validate([
             'country' => 'required|regex:/^[\pL\s]+$/u',
-            'rate' => 'required|integer'
+            'rate' => 'required|integer',
+            'roro' => 'required|integer',
+            'container' => 'required|integer'
         ]);
 
         DeliveryCharge::where('id',$id)->update([
-            'country_name' => $request->country,
-            'rate' => $request->rate
+            'country_name' => $request->country,    
+            'rate' => $request->rate,
+            'roro'=>$request->roro,
+            'container'=>$request->container
         ]);
         $notification= trans('translate.Updated Successfully');
         $notification=array('messege'=>$notification,'alert-type'=>'success');

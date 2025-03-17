@@ -62,6 +62,8 @@ use App\Helpers\MailHelper;
 use Str, Mail, Hash, Auth, Session,Config,Artisan;
 
 use App\Rules\Captcha;
+use App\Models\JdmStockBlogOtherCharges;
+use App\Models\JdmStockHeavyOtherCharges;
 
 class HomeController extends Controller
 {
@@ -1216,25 +1218,41 @@ class HomeController extends Controller
         }
 
         if($request->year){
+            // if($request->year !=""){  
+            //     $hasPriceRangeScale = true;
+                $parts = explode(',', $request->year);
+                $startYear=trim($parts[0]);
+                $endYear=trim($parts[1]);
+ 
+            //     // $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+            //     //     $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            //     // });
+            // }
             if($request->year !="")
             {
                 if($type== 'car'){
                     // $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
-                    $carsQuery->whereRaw("REGEXP_SUBSTR(blog.yom, '[0-9]{4}') = ?", [
-                        $request->year 
-                    ]);
+                    $carsQuery = $carsQuery->whereRaw("
+                    CAST(REGEXP_SUBSTR(blog.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                    [$startYear, $endYear]
+                );
                     
                     
                   }  else if($type == 'heavy'){
                     // $carsQuery->where('heavy.yom', 'like', '%' . $request->year . '%'); 
-                    $carsQuery->whereRaw("REGEXP_SUBSTR(heavy.yom, '[0-9]{4}') = ?", [
-                        $request->year 
-                    ]);
+                    $carsQuery = $carsQuery->whereRaw("
+                    CAST(REGEXP_SUBSTR(heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                    [$startYear, $endYear]
+                    );
                   } else if($type =='small_heavy'){
                     // $carsQuery->where('small_heavy.yom', 'like', '%' . $request->year . '%'); 
-                    $carsQuery->whereRaw("REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') = ?", [
-                        $request->year 
-                    ]);
+                    $carsQuery = $carsQuery->whereRaw("
+                    CAST(REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                    [$startYear, $endYear]
+                    );
+                    // $carsQuery->whereRaw("REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') = ?", [
+                    //     $request->year 
+                    // ]);
                   }
             }
         }
@@ -1626,12 +1644,14 @@ class HomeController extends Controller
             $car_images=Cars::Join('add_product_images as pi','pi.category','=','blog.id')
             ->where('pi.category',$slug)
             ->select('pi.image')->get();
+            $car_charges=JdmStockBlogOtherCharges::where('jdm_blog_id',$slug)->first();
             $image_folder='Cars';
         } else if($type=='heavy'){
             $car = Heavy::where('id',$slug)->firstOrFail(); 
             $car_images=Heavy::Join('add_heavy_images as pi','pi.category','=','heavy.id')
             ->where('pi.category',$slug)
-            ->select('pi.image')->get();  
+            ->select('pi.image')->get(); 
+            $car_charges=JdmStockHeavyOtherCharges::where('jdm_heavy_id',$slug)->first(); 
             $image_folder='heavy_photos';   
         } else if($type == 'small_heavy'){
             $car = SmallHeavy::where('id',$slug)->firstOrFail();
@@ -1702,7 +1722,8 @@ class HomeController extends Controller
             'slug'=>$slug,
             'image_folder'=>$image_folder,
             'accesories'=>$accesories,
-            'usd_rate'=>$this->usdRate
+            'usd_rate'=>$this->usdRate,
+            'car_charges'=>$car_charges
         ]);
     }
 
@@ -2812,10 +2833,22 @@ public function car_listing(Request $request){
 
 
     if($request->year){
-        if($request->year !="")
-        {
-            $carsQuery->where('model_year_en', $request->year); 
+        if($request->year !=""){  
+            $hasPriceRangeScale = true;
+            $parts = explode(',', $request->year);
+            $startYear=trim($parts[0]);
+            $endYear=trim($parts[1]);
+
+            $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            });
         }
+        // if($request->year !="")
+        // {
+        //     $carsQuery->where('model_year_en', $request->year); 
+        // }
     }
 
     if($request->price_range){
@@ -3187,10 +3220,22 @@ public function car_listing(Request $request){
 
 
     if($request->year){
-        if($request->year !="")
-        {
-            $carsQuery->where('model_year_en', $request->year); 
+        if($request->year !=""){  
+            $hasPriceRangeScale = true;
+            $parts = explode(',', $request->year);
+            $startYear=trim($parts[0]);
+            $endYear=trim($parts[1]);
+
+            $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            });
         }
+        // if($request->year !="")
+        // {
+        //     $carsQuery->where('model_year_en', $request->year); 
+        // }
     }
 
     if($request->price_range){
@@ -4007,14 +4052,26 @@ public function car_listing(Request $request){
         }
 
         if($request->year){
-            if($request->year !="")
-            {
-                $carsQuery->where('model_year_en', $request->year); 
+
+            if($request->year !=""){  
+                $hasPriceRangeScale = true;
+                $parts = explode(',', $request->year);
+                $startYear=trim($parts[0]);
+                $endYear=trim($parts[1]);
+ 
+                $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+                });
             }
+            // if($request->year !="")
+            // {
+            //     $carsQuery->where('model_year_en', $request->year); 
+            // }
         }
 
         if($request->price_range){
-
             $priceRanges = [
                 "Under $5000" => ["start" => 0, "end" => (5000 * $this->usdRate)],
                 "$5000 - $50000" => ["start" => (5001* $this->usdRate), "end" => (50000 * $this->usdRate)],
@@ -4613,10 +4670,22 @@ public function car_listing(Request $request){
      
 
         if($request->year){
-            if($request->year !="")
-            {
-                $carsQuery->where('model_year_en', $request->year); 
+            if($request->year !=""){  
+                $hasPriceRangeScale = true;
+                $parts = explode(',', $request->year);
+                $startYear=trim($parts[0]);
+                $endYear=trim($parts[1]);
+ 
+                $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+                });
             }
+            // if($request->year !="")
+            // {
+            //     $carsQuery->where('model_year_en', $request->year); 
+            // }
         }
 
         if($request->price_range){
@@ -4998,10 +5067,22 @@ public function car_listing(Request $request){
         }
 
         if($request->year){
-            if($request->year !="")
-            {
-                $carsQuery->where('model_year_en', $request->year); 
+            if($request->year !=""){  
+                $hasPriceRangeScale = true;
+                $parts = explode(',', $request->year);
+                $startYear=trim($parts[0]);
+                $endYear=trim($parts[1]);
+ 
+                $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+                });
             }
+            // if($request->year !="")
+            // {
+            //     $carsQuery->where('model_year_en', $request->year); 
+            // }
         }
 
         if($request->price_range){
@@ -5749,10 +5830,22 @@ public function car_listing(Request $request){
         }
 
         if($request->year){
-            if($request->year !="")
-            {
-                $carsQuery->where('model_year_en', $request->year); 
+            if($request->year !=""){  
+                $hasPriceRangeScale = true;
+                $parts = explode(',', $request->year);
+                $startYear=trim($parts[0]);
+                $endYear=trim($parts[1]);
+ 
+                $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                    // $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+                });
             }
+            // if($request->year !="")
+            // {
+            //     $carsQuery->where('model_year_en', $request->year); 
+            // }
         }
 
         if($request->price_range){
@@ -6263,11 +6356,13 @@ public function getJDMPriceRange()
         ]);
 
     }
-    public function car_listing_details($slug){
+    public function car_listing_details($category,$slug){
+     
         // $car = CarDataJpOp::where('id',$slug)->firstOrFail();
         $car=CarDataJpOp::leftjoin('auct_lots_xml_jp_op_other_chargers as oc','auct_lots_xml_jp_op.id','=','oc.auct_id')
                         ->where('auct_lots_xml_jp_op.id',$slug)
-                        ->select('auct_lots_xml_jp_op.*','oc.commission_value','oc.shipping_value')->first();              
+                        ->select('auct_lots_xml_jp_op.*','oc.commission_value','oc.shipping_value',
+                        'oc.marine_insurance_value','oc.inland_inspection_value')->first();              
 
         $seo_setting = SeoSetting::where('id', 1)->first();
         $process_data_en = $this->parseCustomFormat($car->parsed_data_en);
@@ -6295,7 +6390,8 @@ public function getJDMPriceRange()
             'jdm_core_brand'=>$jdm_core_brand,
             'url_link'=>url()->full(),
             'seo_setting'=>$seo_setting,
-            'usd_rate'=>$this->usdRate
+            'usd_rate'=>$this->usdRate,
+            'head_page'=>$category
         ]);
 
     }
@@ -7298,7 +7394,7 @@ public function getJDMPriceRange()
     }
 
 
-    public function auction_listing($slug){
+    public function auction_listing($category,$slug){
         $car = Auct_lots_xml_jp::where('id',$slug)->firstOrFail();
         $process_data_en = $this->parseCustomFormat($car->parsed_data_en);
         $images=$this->last_image($car->pictures);
@@ -7324,7 +7420,8 @@ public function getJDMPriceRange()
             'process_data_en'=>$process_data_en,
             'jdm_core_brand'=>$jdm_core_brand,
             'url_link'=>url()->full(),
-            'usd_rate'=>$this->usdRate
+            'usd_rate'=>$this->usdRate,
+            'head_title'=>$category
         ]);
 
     }
@@ -8582,14 +8679,18 @@ public function getJDMPriceRange()
         $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
         // if(!empty($get_charges)){
             $price=CarDataJpOp::where('id', $id)->value('start_price_num');
-            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
+            if($request->shipment ==1){
+                $delivery_charge=DeliveryCharge::where('id',$request->location)->value('roro');
+            } else{
+                $delivery_charge=DeliveryCharge::where('id',$request->location)->value('container');
+            }
+            // $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
             $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
             $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
             $usd=$this->convertCurrency($price, $this->usdRate);
-            $total=($usd+$delivery_charge+$commission+$shipping);
-           
-
-
+            $marine_insurance=$request->marine_insurance == 'on' ? $get_charges->marine_insurance_value : 0; 
+            $inland_inspection=$request->inland_inspection == 'on' ? $get_charges->inland_inspection_value : 0; 
+            $total=($usd+$delivery_charge+$commission+$shipping+$marine_insurance+$inland_inspection);
             $paypal = PaypalPayment::first();
             $stripe = StripePayment::first();
             $razorpay = RazorpayPayment::first();
@@ -8598,7 +8699,18 @@ public function getJDMPriceRange()
             $mollie = $paystack;
             $instamojo = InstamojoPayment::first();
             $bank = BankPayment::first();
-    
+
+            $status = 0;
+
+            if ($request->marine_insurance=='on' && $request->inland_inspection=='on') {
+                $status = 3; // Both are checked
+            } elseif ($request->marine_insurance == 'on') {
+                $status = 1; // Only marine_insurance is checked
+            } elseif ($request->inland_inspection=='on') {
+                $status = 2; // Only inland_inspection is checked
+            }
+
+           
             return view('payment', [
                 'usd' => $usd,
                 'delivery_charge' => $delivery_charge,
@@ -8615,7 +8727,9 @@ public function getJDMPriceRange()
                 'bank' => $bank,
                 'id'=>$id,
                 'type'=>'1',
-                'delievery_charge_id'=>$request->location
+                'delievery_charge_id'=>$request->location,
+                'shipment'=>$request->shipment,
+                'status'=>$status
             ]);
         // }    
     }
@@ -8637,6 +8751,9 @@ public function getJDMPriceRange()
             $mollie = $paystack;
             $instamojo = InstamojoPayment::first();
             $bank = BankPayment::first();
+
+           
+    
     
             return view('payment', [
                 'usd' => $usd,
@@ -8654,25 +8771,47 @@ public function getJDMPriceRange()
                 'bank' => $bank,
                 'id'=>$id,
                 'type'=>'2',
-                'delievery_charge_id'=>$request->location
+                'delievery_charge_id'=>$request->location,
+                'head_title'=>'auction_listing'
             ]);
         // }    
     }
     public function store_jdm(Request $request,$id,$type){
         // $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
-        // if(!empty($get_charges)){    
+        // if(!empty($get_charges)){  
+            $status = 0;
+  
             if($type=='car'){
                 $price=Cars::where('id', $id)->first();
+                $get_charges=JdmStockBlogOtherCharges::whereJdmBlogId($id)->first();
                 $type='3';
             } else {
                 $price=Heavy::where('id', $id)->first();
+                $get_charges=JdmStockHeavyOtherCharges::whereJdmHeavyId($id)->first();
                 $type='4';
+            }
+            $marine_insurance=0;
+            $inland_insurance=0;
+
+            if ($request->marine_insurance=='on' && $request->inland_inspection=='on') {
+                $status = 3; // Both are checked
+                $marine_insurance=$get_charges->marine_insurance_value;
+                $inland_insurance=$get_charges->inland_inspection_value;
+            } elseif ($request->marine_insurance == 'on') {
+                $status = 1; // Only marine_insurance is checked
+                $marine_insurance=$get_charges->marine_insurance_value;
+            } elseif ($request->inland_inspection=='on') {
+                $status = 2; // Only inland_inspection is checked
+                $inland_insurance=$get_charges->inland_inspection_value;
             }
 
 
-            $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
-            // $commission=$price->commission_value;
-            // $shipping=$price->shipping_value;
+            if($request->shipment ==1){
+                $delivery_charge=DeliveryCharge::where('id',$request->location)->value('roro');
+            } else{
+                $delivery_charge=DeliveryCharge::where('id',$request->location)->value('container');
+            }
+            // $delivery_charge=DeliveryCharge::where('id',$request->location)->value('rate');
             $usd=$price->price;
             $usd=floatval(str_replace(',', '', $usd));
 
@@ -8680,7 +8819,7 @@ public function getJDMPriceRange()
           
         
             // $total=($usd+$commission+$shipping);
-            $total=($usd+$delivery_charge);
+            $total=($usd+$delivery_charge+$marine_insurance+$inland_insurance);
 
             $paypal = PaypalPayment::first();
             $stripe = StripePayment::first();
@@ -8691,6 +8830,10 @@ public function getJDMPriceRange()
             $instamojo = InstamojoPayment::first();
             $bank = BankPayment::first();
     
+        
+         
+      
+            
             return view('payment', [
                 'usd' => $usd,
                 'delivery_charge' => $delivery_charge,
@@ -8707,7 +8850,9 @@ public function getJDMPriceRange()
                 'bank' => $bank,
                 'id'=>$id,
                 'type'=>$type,
-                'delievery_charge_id'=>$request->location
+                'delievery_charge_id'=>$request->location,
+                'shipment'=>$request->shipment,
+                'status'=>$status
             ]);
         // }    
     }
