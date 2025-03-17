@@ -462,7 +462,7 @@
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
-                                                    <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}"data-bs-toggle="tooltip">
+                                                    <a href="{{ route('fixed-car-marketplace-details', ['category' => 'new-arrivals', 'id' => $car['id']]) }}"data-bs-toggle="tooltip">
                                                         <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
                                                     </a>
                                                 </div>
@@ -504,7 +504,7 @@
                                                     </p>
                                                 </div>
 
-                                                <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}"data-bs-toggle="tooltip" 
+                                                <a href="{{ route('fixed-car-marketplace-details', ['category' => 'new-arrivals', 'id' => $car['id']]) }}"data-bs-toggle="tooltip" 
                                                 title="@if(session('front_lang')=='en')
                                                             {{ $car['model_name_en'] }}
                                                         @else

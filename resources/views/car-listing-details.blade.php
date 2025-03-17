@@ -98,27 +98,27 @@
                             </label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="shipment" value="1">
-                            <label class="form-check-label ps-2" for="marine_insurance">
+                            <input class="form-check-input" type="radio" name="shipment1" value="1">
+                            <label class="form-check-label ps-2">
                                 RoRo
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="shipment" value="2">
+                            <input class="form-check-input" type="radio" name="shipment1" value="2">
                             <label class="form-check-label ps-2">
                                 Container 
                             </label>
                         </div>  
                     </div> 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox"  id="marine_insurance" name="marine_insurance">
-                        <label class="form-check-label ps-2" for="marine_insurance">
+                        <input class="form-check-input" type="checkbox"  id="marine_insurance1" name="marine_insurance1">
+                        <label class="form-check-label ps-2" for="marine_insurance1">
                             Marine insurance 
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox"  id="inland_inspection" name="inland_inspection">
-                        <label class="form-check-label ps-2" for="inland_inspection">
+                        <input class="form-check-input" type="checkbox"  id="inland_inspection1" name="inland_inspection1">
+                        <label class="form-check-label ps-2" for="inland_inspection1">
                             Inland inspection 
                         </label>
                     </div>
@@ -840,6 +840,7 @@
                 return item.id == delivery_location;
             });
 
+
             if ($("#marine_insurance").is(':checked')) {
                 var marine_insurance={{ round($car->marine_insurance_value) }}
             } else {
@@ -870,7 +871,6 @@
             //  var delivery_charge_num = Number(delivery_charge);
              var delivery_charge_num = Number(shipment);
              var shipping_charge_num = Number(shipping_charge);
- 
              // Check if conversion was successful
              if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num) || isNaN(shipping_charge_num)) {
                 toastr.error("One of the prices is not a valid number.",'Failed');
@@ -902,14 +902,14 @@
             });
             
             
-            if ($("#marine_insurance").is(':checked')) {
+            if ($("#marine_insurance1").is(':checked')) {
                 // var delivery_charge_num = Number(shipment); 
                  var marine_insurance={{ round($car->marine_insurance_value) }}
             } else {
                 var marine_insurance=0;
             }
  
-            if ($("#inland_inspection").is(':checked')) {
+            if ($("#inland_inspection1").is(':checked')) {
                 var inland_inspection={{ round($car->inland_inspection_value) }}
             } else {
                 var inland_inspection=0;
@@ -918,9 +918,9 @@
             var shipment=0;
             
             if(filtered_charge.length > 0){
-                if ($("input[name='shipment']:checked").val() === "1") {
+                if ($("input[name='shipment1']:checked").val() === "1") {
                     shipment =filtered_charge[0].roro;
-                } else if ($("input[name='shipment']:checked").val() === "2") {
+                } else if ($("input[name='shipment1']:checked").val() === "2") {
                     // Container is selected
                     shipment =filtered_charge[0].container;
                 } else {
@@ -933,6 +933,11 @@
             //  var delivery_charge_num = Number(delivery_charge);
             var delivery_charge_num = Number(shipment);
              var shipping_charge_num = Number(shipping_charge);
+
+
+           
+
+
  
              // Check if conversion was successful
              if (isNaN(start_price_num) || isNaN(comission_price_num) || isNaN(delivery_charge_num) || isNaN(shipping_charge_num)) {
@@ -940,7 +945,7 @@
              } else {
                 
                  // Calculate total
-                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num;
+                 var total_price = start_price_num + comission_price_num + delivery_charge_num +shipping_charge_num +marine_insurance+inland_inspection;
  
                  $("#hidden_commission").val(comission_price_num);
                  $("#hidden_delivery_charge").val(delivery_charge_num);
