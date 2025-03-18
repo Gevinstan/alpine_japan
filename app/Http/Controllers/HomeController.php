@@ -829,43 +829,28 @@ class HomeController extends Controller
         ->select('b.slug', 'bt.name')
         ->get();
 
-        // $result = [];
+        $result = [];
 
-        // if($type == 'car'){
-        //     $tableName="blog";   
-        //     $model=Cars::class;
-        // } else if($type == 'heavy'){
-        //     $model=Heavy::class;
-        //     $tableName="heavy";
-        // } else if($type =='small_heavy') {
-        //     $tableName="small_heavy";
-        // }   
-        // $results =$model::
-        //     whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
-        //     ->where($tableName . '.is_active', 1)
-        //     // ->whereNull($tableName . '.deleted_at')
-        //     ->whereRaw('REGEXP_REPLACE(' . $tableName . '.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
-        //     ->select(DB::raw('TRIM(' . $tableName . '.model) as model'), \DB::raw('COUNT(*) as count'))
-        //     ->groupBy($tableName . '.model')
-        //     ->orderByDesc('count')
-        //     ->get();
-        // return $results;
-    
-        $cacheKey = "jdm_specific_{$type}_{$slug}";
-        $result = Cache::remember($cacheKey, 60, function() use ($type, $slug) {
-        // Your existing query logic...
-        $model = $type == 'car' ? Cars::class : ($type == 'heavy' ? Heavy::class : SmallHeavy::class);
-        $tableName = $type == 'car' ? "blog" : ($type == 'heavy' ? "heavy" : "small_heavy");
-
-        return $model::whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
+        if($type == 'car'){
+            $tableName="blog";   
+            $model=Cars::class;
+        } else if($type == 'heavy'){
+            $model=Heavy::class;
+            $tableName="heavy";
+        } else if($type =='small_heavy') {
+            $tableName="small_heavy";
+        }   
+        $results =$model::
+            whereRaw('LOWER(' . $tableName . '.make) = ?', [$slug])
             ->where($tableName . '.is_active', 1)
+            // ->whereNull($tableName . '.deleted_at')
             ->whereRaw('REGEXP_REPLACE(' . $tableName . '.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
             ->select(DB::raw('TRIM(' . $tableName . '.model) as model'), \DB::raw('COUNT(*) as count'))
             ->groupBy($tableName . '.model')
             ->orderByDesc('count')
             ->get();
-    });
-    return $result;
+        return $results;
+    
        
     }
 
@@ -931,56 +916,33 @@ class HomeController extends Controller
     }
 
     public function getJdmBrands($type,$slug){
-        // if($type == 'car'){
-        //     // DB::enableQueryLog();
-        //     $brands = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
-        //     ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        //     ->where('bt.lang_code',Session::get('front_lang'))
-        //     ->where('blog.make', $slug)
-        //     ->select('blog.model')
-        //     ->distinct('b.slug')->get();  
-        //     // dd(DB::getQueryLog());
-        // } else if($type == 'heavy'){
-        //     $brands = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
-        //     ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        //     ->where('bt.lang_code',Session::get('front_lang'))
-        //     ->where('heavy.make', $slug)
-        //     ->select('heavy.model')
-        //     ->distinct('b.slug')->get();
-        // } else if($type =='small_heavy') {
-        //     $brands = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
-        //     ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        //     ->where('bt.lang_code',Session::get('front_lang'))
-        //     ->where('small_heavy.make',$slug)
-        //     ->select('small_heavy.model')
-        //     ->distinct('b.slug')->get();
-        // }  else{
-        //     $brands=[];
-        // }
-        // return $brands;
-        $cacheKey = "jdm_brands_{$type}_{$slug}";
-        $brands = Cache::remember($cacheKey, 60, function() use ($type, $slug) {
-            if ($type == 'car') {
-                $brands = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
-                    ->join('brand_translations as bt','bt.brand_id','=','b.id')
-                    ->where('bt.lang_code',Session::get('front_lang'))
-                    ->where('blog.make', $slug)
-                    ->select('blog.model')
-                    ->distinct('b.slug')->get();
-            } else if ($type == 'heavy') {
-                $brands = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
-                    ->join('brand_translations as bt','bt.brand_id','=','b.id')
-                    ->where('bt.lang_code',Session::get('front_lang'))
-                    ->where('heavy.make', $slug)
-                    ->select('heavy.model')
-                    ->distinct('b.slug')->get();
-            } else {
-                $brands = [];
-            }
-            return $brands;
-        });
+        if($type == 'car'){
+            // DB::enableQueryLog();
+            $brands = Cars::join('brands as b', DB::raw('LOWER(blog.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->where('blog.make', $slug)
+            ->select('blog.model')
+            ->distinct('b.slug')->get();  
+            // dd(DB::getQueryLog());
+        } else if($type == 'heavy'){
+            $brands = Heavy::join('brands as b', DB::raw('LOWER(heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->where('heavy.make', $slug)
+            ->select('heavy.model')
+            ->distinct('b.slug')->get();
+        } else if($type =='small_heavy') {
+            $brands = SmallHeavy::join('brands as b', DB::raw('LOWER(small_heavy.make)'), '=', 'b.slug')
+            ->join('brand_translations as bt','bt.brand_id','=','b.id')
+            ->where('bt.lang_code',Session::get('front_lang'))
+            ->where('small_heavy.make',$slug)
+            ->select('small_heavy.model')
+            ->distinct('b.slug')->get();
+        }  else{
+            $brands=[];
+        }
         return $brands;
-    
     }
 
     
@@ -1044,6 +1006,12 @@ class HomeController extends Controller
                 MAX(CAST(REGEXP_REPLACE(REGEXP_REPLACE(" . $joinTable . ".price, '[,]', ''), '[\\s]', '') AS UNSIGNED)) as max_sal
             ")
             ->first();
+        
+        // dd(DB::getQueryLog());
+    
+    
+    
+        // echo json_encode($priceRange);die();
     
         // Get min and max years
         $minYear = $yearRange->min_year;
@@ -1059,17 +1027,6 @@ class HomeController extends Controller
         $endValue = $maxPrice;
         $wishlists=[];
  
-        $userId = $userId ?? auth()->id();
-        $wishlists = Cache::remember("wishlists_{$userId}_{$type}", 60, function() use ($userId, $type) {
-            return ($type == 'car') ? Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
-                ->where('w.user_id', $userId)
-                ->where('w.table_id', '3')
-                ->pluck('w.car_id')->toArray()
-                : Heavy::join('wishlists as w', 'heavy.id', '=', 'w.car_id')
-                ->where('w.user_id', $userId)
-                ->where('w.table_id', '4')
-                ->pluck('w.car_id')->toArray();
-        });
 
         // DB::enableQueryLog();
 
@@ -1077,12 +1034,12 @@ class HomeController extends Controller
        
             if(Auth::guard('web')->check()){
                 $userId = $userId ?? auth()->id();
-                // $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
-                // // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
-                //     ->where('w.table_id', '3')
-                //     ->where('w.user_id', $userId)
-                //     ->pluck('w.car_id')
-                //     ->toArray();
+                $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
+                // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+                    ->where('w.table_id', '3')
+                    ->where('w.user_id', $userId)
+                    ->pluck('w.car_id')
+                    ->toArray();
             }
         
              
@@ -1090,24 +1047,22 @@ class HomeController extends Controller
             $carsQuery =Cars::where(DB::raw('LOWER(make)'), $slug)
             ->where('is_active','1')
             ->whereRaw('REGEXP_REPLACE(price, "[,\\s]", "") REGEXP "^[0-9]+$"')
-            ->select('blog.*');
-            // dd(DB::getQueryLog($carsQuery));
-          
-            
+            ->select('blog.*');    
         } else if($type == 'heavy'){
             if(Auth::guard('web')->check()){
                 $userId = $userId ?? auth()->id();
-                // $wishlists=Heavy::join('wishlists as w', 'heavy.id', '=', 'w.car_id')
-                // // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
-                //     ->where('w.table_id', '4')
-                //     ->pluck('w.car_id')
-                //     ->toArray();
+                $wishlists=Heavy::join('wishlists as w', 'heavy.id', '=', 'w.car_id')
+                // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+                    ->where('w.table_id', '4')
+                    ->pluck('w.car_id')
+                    ->toArray();
             }
             $carsQuery = Heavy::
             where('heavy.make', $slug)
             ->where('is_active','1')
             ->whereRaw('REGEXP_REPLACE(heavy.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
             ->select('heavy.*');
+            // dd(DB::getQueryLog()); 
         } 
         
         if($request->search){
@@ -1135,10 +1090,16 @@ class HomeController extends Controller
         }
 
         if($request->year){
+            // if($request->year !=""){  
+            //     $hasPriceRangeScale = true;
                 $parts = explode(',', $request->year);
                 $startYear=trim($parts[0]);
                 $endYear=trim($parts[1]);
  
+            //     // $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+            //     //     $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            //     // });
+            // }
             if($request->year !="")
             {
                 if($type== 'car'){
@@ -1170,6 +1131,8 @@ class HomeController extends Controller
         
         if($request->model){
             $model_arr = array_filter($request->model); 
+            // echo $request->model;
+            // echo json_encode($model_arr);die();
             // Filter out any empty values
             if ($model_arr) {
                 // echo "one";die();
@@ -1196,6 +1159,26 @@ class HomeController extends Controller
                       $carsQuery->whereIn('small_heavy.model', $model_arr);
                   }
             }
+        }
+        if($request->vertical_filter_model){
+            $model_arr = $request->vertical_filter_model; 
+            if ($model_arr) {
+                if($type== 'car'){
+                    $carsQuery->where(function ($query) use ($model_arr) {
+                            $query->orWhereRaw('TRIM(blog.model) = ?', $model_arr);
+                    });
+                    // $carsQuery->whereIn('blog.model', $model_arr); 
+                  }  else {
+                   c(function ($query) use ($model_arr) {
+                            $query->orWhereRaw('TRIM(heavy.model) = ?', $model_arr);
+                    });
+                    //   $carsQuery->whereIn('heavy.model', $model_arr);
+                  }
+            }
+        }
+
+        if($request->chassis_number){
+            $carsQuery->where('chassis',$request->chassis_number);
         }
 
         if($request->brand_new_cars){
@@ -1268,7 +1251,10 @@ class HomeController extends Controller
                 $parts = explode(',', $request->price_range_scale);
                 $startValue = trim($parts[0]);
                 $endValue = trim($parts[1]);
-          
+                // $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                //     $q->whereBetween('start_price_num', [$startValue, $endValue])
+                //     ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                // });
                 if($type=='car')
                 {
                     $startValue = (int)trim(str_replace('"', '', $parts[0]));
@@ -1323,37 +1309,14 @@ class HomeController extends Controller
                 }); 
     
                 
+
+
         }
       
-  
+      
         
         // Pagination
-        $cars = Cache::remember("cars_query_{$slug}_{$type}", 60, function() use ($carsQuery) {
-            return $carsQuery->paginate(12);
-        });
-        
-        $distinctData = Cache::remember("distinct_data_query_{$slug}_{$type}", 60, function() use ($carsQuery) {
-            // Select distinct values for yom, kms, and transmission
-            $results = $carsQuery->select('yom', 'kms', 'transmission','fuel')
-                                 ->groupBy('yom', 'kms', 'transmission','fuel')
-                                 ->get();
-        
-            // Extract the distinct values and remove null/empty values
-            $distinctYears = $results->pluck('yom')->filter()->unique()->values();
-            $distinctMileage = $results->pluck('kms')->filter()->unique()->values();
-            $distinctTransmission = $results->pluck('transmission')->filter()->unique()->values();
-            $distinctFuel = $results->pluck('fuel')->filter()->unique()->values();
-        
-            return [
-                'years' => $distinctYears,
-                'mileage' => $distinctMileage,
-                'transmission' => $distinctTransmission,
-                'fuel' => $distinctFuel,
-            ];
-        });
-        
-     
-        // $cars = $carsQuery->paginate(12);
+        $cars = $carsQuery->paginate(12);
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
         // $car_image=$this->last_image($car->pictures);
@@ -1367,10 +1330,9 @@ class HomeController extends Controller
                 'yor'=>$car->yom,
                 'chassis_number'=>$car->chassis,
                 'location'=>$car->location,
-                'created_at'=>$car->created_at,   
+                'created_at'=>$car->created_at,
             ];
         });
-
 
      
     
@@ -1396,7 +1358,35 @@ class HomeController extends Controller
         // echo json_encode($brand_list);die();
       
          
-    
+        $results = $carsQuery->select('yom', 'kms', 'transmission','fuel')
+        ->groupBy('yom', 'kms', 'transmission','fuel')
+        ->get();
+
+        // Extract the distinct values and remove null/empty values
+        // $distinctYears = $results->pluck('yom')->filter()->unique()->values();
+        $distinctYears = $results->pluck('yom')
+                ->map(function ($year) {
+                    // Attempt to parse the year and format it
+                    try {
+                        return Carbon::parse($year)->format('Y');
+                    } catch (\Exception $e) {
+                        // If parsing fails (e.g., invalid date), return the original value
+                        return $year;
+                    }
+                })
+                ->filter() // Remove null or empty values
+                ->unique() // Remove duplicate years
+                ->values();
+        $distinctMileage = $results->pluck('kms')->filter()->unique()->values();
+        $distinctTransmission = $results->pluck('transmission')->filter()->unique()->values();
+        $distinctFuel = $results->pluck('fuel')->filter()->unique()->values();
+
+        $distinctData= [
+        'years' => $distinctYears,
+        'mileage' => $distinctMileage,
+        'transmission' => $distinctTransmission,
+        'fuel' => $distinctFuel,
+        ];
 
         return view('jdm-stock-client', [
         // return view('jdm-stock-responsive', [

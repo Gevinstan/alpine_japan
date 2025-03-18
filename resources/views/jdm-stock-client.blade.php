@@ -12,6 +12,7 @@
     use Carbon\Carbon;
 @endphp
 
+
 <main class="overflow_jdm">
     <div id="pageLoader">
         <div class="spinner-border text-primary" role="status">
@@ -303,34 +304,40 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Model</option>
+                                        <select class="form-select p-3" name="vertical_filter_model" id="vertical_filter_model">
+                                            <option selected value="">Model</option>
                                             @foreach ($brand_arr as $brand)
-                                                <option  value="{{ trim($brand->model) }}">{{trim($brand->model)}}({{ $brand->count }})</option>
+                                            <option value="{{ trim($brand->model) }}"
+                                                {{ in_array(trim($brand->model), (array) request('vertical_filter_model')) ? 'selected' : '' }}>
+                                                {{ trim($brand->model) }} ({{ $brand->count }})
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Chassis Number</option>
+                                        <select class="form-select p-3" name="chassis_number" id="chassis_number">
+                                            <option selected value="">Chassis Number</option>
                                             @foreach ($cars_array as $index => $car)
-                                              <option>{{$car['chassis_number']}}</option>
+                                                <option value="{{ $car['chassis_number'] }}"
+                                                    {{ in_array($car['chassis_number'], (array) request('chassis_number')) ? 'selected' : '' }}>
+                                                    {{ $car['chassis_number']}}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Year From</option>
-                                            @foreach ($distinctData['years'] as $index => $car)
-                                              <option>{{$car}}</option>
+                                        <select class="form-select p-3" name="vertical_start_year" id="vertical_start_year">
+                                            <option selected value="">Year From</option>
+                                            @foreach ($distinctData['years'] as $index => $years)
+                                            <option>{{$years}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Year To</option>
-                                            @foreach ($distinctData['years'] as $index => $car)
-                                              <option>{{$car}}</option>
+                                        <select class="form-select p-3" name="vertical_end_year" id="vertical_end_year">
+                                            <option selected value="">Year To</option>
+                                            @foreach ($distinctData['years'] as $index => $years)
+                                              <option>{{ $years}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -1130,6 +1137,7 @@
                     e.preventDefault();     
                     $('#search_form').submit();
                 });
+              
 
             
             function clear_price_slider(){
@@ -1162,6 +1170,25 @@
                     $('input[name="price_range_scale"]').val('')
                     $("#search_form").submit();
                 })
+                $("#vertical_filter_model").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                });
+                $("#chassis_number").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                });
+                $("#vertical_start_year").on('change',function(e){
+                     if($("#vertical_start_year").val()!="" && $("#vertical_end_year").val()!=""){
+                          if($("#vertical_start_year").val() > $("#vertical_end_year").val()){
+                            toastr.error("Start year should be less than end year","Failed");
+                          }
+                          $('#search_form').submit(); 
+                     } 
+                });
+                
                 // $(".brand-search").on('change',function(e){
                 //     e.preventDefault();         
                 //     clear_price_slider();          
