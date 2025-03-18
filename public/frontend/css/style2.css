@@ -9497,7 +9497,7 @@ p {
 .inventory-ber .inventory-ber-left .inventory-sarch-ber-item {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 5px;
     width: 100%;
 }
 
