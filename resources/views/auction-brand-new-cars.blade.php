@@ -200,9 +200,13 @@
                                                             <output name="age_output" id="age_output" for="start" ></output>
                                                             <span class="m-0 slider-value" id="modelYearValue">{{$maxYear}}</span>  
                                                         </div>
+                                                        <input id="ex3" type="text" name="year"
+                                                                    data-slider-min="{{$minYear}}"  data-slider-max="{{$maxYear}}"
+                                                                    value="{{ request('year', '') ? request('year') : '' }}"
+                                                                    data-slider-value="[{{ request('year', '') ? request('year') : $minYear . ',' . $maxYear }}]"sli/>
 
-                                                        <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{ request('year', $minYear) }}" class="mx-0 my-2 slider-input" id="modelYearSlider">
-                                                        <input type="hidden" id="start_year" name="year">
+                                                        <!-- <input type="range" min="{{$minYear}}" max="{{$maxYear}}" value="{{ request('year', $minYear) }}" class="mx-0 my-2 slider-input" id="modelYearSlider">
+                                                        <input type="hidden" id="start_year" name="year"> -->
                                                     </div>
 
                                                     <div class="gap-4 d-flex align-content-between flex-column go_clear">
@@ -414,7 +418,9 @@
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
-                                                    <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                    <a href="{{ route('auction_listing', ['category' => 'auction-car-marketplace', 'slug' => $car['id']]) }}" data-bs-toggle="tooltip">
+                                                        <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                    </a>    
                                                     <!-- <img src="{{ asset('japan_home/large_img.jpg') }}" class="card_image" alt="Poster 1"/> -->
                                                 </div> 
                                             </div>
@@ -454,7 +460,7 @@
                                                     </p>
                                                 </div>
 
-                                                <a href="{{ route('auction_listing', $car['id']) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name_en']) }}">
+                                                <a href="{{ route('auction_listing', ['category' => 'auction-car-marketplace', 'slug' => $car['id']]) }}"data-bs-toggle="tooltip" title="{{ html_decode($car['model_name_en']) }}">
                                                     <h3 class="pt-3 text-truncate car-fullname ps-3"> 
                                                         @if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
@@ -714,7 +720,7 @@
                                                                     {{ html_decode($car['model_name']) }}
                                                                 @endif">
 
-                                                            <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
+                                                            <a href="{{ route('auction_listing', ['category' => 'auction-car-marketplace', 'slug' => $car['id']]) }}" class="text-truncate_list2">
                                                                 @if(session('front_lang')=='en')
                                                                     {{ html_decode($car['model_name_en']) }}
                                                                 @else

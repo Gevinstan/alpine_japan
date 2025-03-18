@@ -24,18 +24,7 @@
                                         <div class="crancy-header__form crancy-header__form--customer create_new_btn_inline_box  d-flex  justify-between">
                                             <h4 class="crancy-product-card__title text-nowrap">{{ __('translate.Heavy Stock List') }}</h4>
                                             <div class=" align-items-center d-flex gap-2 justify-content-end">
-                                            <!-- <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
-                                                        <input class="crancy__item-input w-25" type="text" name="commission" id="commission">
-                                                        @error('commission')
-                                                            <div style="color: red;">{{ $message }}</div>
-                                                        @enderror   
-                                                        <button class="crancy-btn" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button> 
-                                                        <label class="crancy__item-label text-nowrap">{{ __('translate.Shipping')." ( $ )" }} * </label>
-                                                        <input class="crancy__item-input w-25" type="text" name="shipping" id="shipping">
-                                                        @error('shipping')
-                                                            <div style="color: red;">{{ $message }}</div>
-                                                        @enderror   
-                                                        <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button>   -->
+
                                             <a href="{{ route('admin.heavy.create') }}" class="crancy-btn text-nowrap"><span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                                                     <path d="M8 1V15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -46,7 +35,7 @@
                                             </div>  
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between gap-4">
+                                    {{--<div class="d-flex justify-content-between gap-4">
                                         <div class="d-flex  items-center flex-column gap-2">
                                             <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
                                             <div class="d-flex items-center gap-3">
@@ -65,6 +54,28 @@
                                                         <div style="color: red;">{{ $message }}</div>
                                                     @enderror   
                                                 <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button>  
+                                            </div>
+                                        </div>
+                                    </div>--}}
+                                    <div class="d-flex justify-content-between gap-4">
+                                        <div class="d-flex  items-center flex-column gap-2">
+                                             <label class="crancy__item-label text-nowrap">{{ __('translate.Marine Insurance')." ( $ )" }} * </label>
+                                                <div class="d-flex items-center gap-3">
+                                                        <input class="crancy__item-input" type="text" name="marine_insurance" id="marine_insurance">
+                                                        @error('marine_insurance')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="MarineInsuranceBtn">{{ __('translate.Submit') }}</button>
+                                                </div>
+                                        </div>
+                                        <div class="d-flex  items-center flex-column gap-2">
+                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Inland Inspection')." ( $ )" }} * </label>
+                                            <div class="d-flex items-center gap-3">
+                                                    <input class="crancy__item-input" type="text" name="inland_inspection" id="inland_inspection">
+                                                    @error('shipping')
+                                                        <div style="color: red;">{{ $message }}</div>
+                                                    @enderror   
+                                                    <button class="crancy-btn" type="button" id="InlandInspectionBtn">{{ __('translate.Submit') }}</button> 
                                             </div>
                                         </div>
                                     </div>
@@ -213,91 +224,41 @@
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
-      });
-    //   initializedTable();
-
-
+        });
     //   add dynamic class for data table
         $("#dataTable").parent().addClass("overflow-auto");
      })
 
-        "use strict"
-        function itemDeleteConfrimation(id){
-            var deleteUrl = "{{ route('admin.heavy.destroy', ':id') }}";
-            deleteUrl = deleteUrl.replace(':id', id);
-            document.getElementById("item_delect_confirmation").setAttribute("action", deleteUrl);
-        }
+    "use strict"
+    function itemDeleteConfrimation(id){
+        var deleteUrl = "{{ route('admin.heavy.destroy', ':id') }}";
+        deleteUrl = deleteUrl.replace(':id', id);
+        document.getElementById("item_delect_confirmation").setAttribute("action", deleteUrl);
+    }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select the master checkbox and the checkboxes in the table rows
+        const masterCheckbox = document.querySelector('#masterCheckbox');
+        const rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+        const deleteButton = document.querySelector('#delete-model');
+        const topSellButtons = document.querySelectorAll('.top-sell-checkbox-class');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Select the master checkbox and the checkboxes in the table rows
-            const masterCheckbox = document.querySelector('#masterCheckbox');
-            const rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
-            const deleteButton = document.querySelector('#delete-model');
-            const topSellButtons = document.querySelectorAll('.top-sell-checkbox-class');
-
-            // Add event listener to the master checkbox
-            masterCheckbox.addEventListener('change', function() {
-                // Set all row checkboxes to the state of the master checkbox
-                rowCheckboxes.forEach(function(checkbox) {
-                    checkbox.checked = masterCheckbox.checked;
-                });
+        // Add event listener to the master checkbox
+        masterCheckbox.addEventListener('change', function() {
+            // Set all row checkboxes to the state of the master checkbox
+            rowCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = masterCheckbox.checked;
             });
+        });
 
-           // Handle delete button click
-    //     deleteButton.addEventListener('click', function() {
-    //     // Gather selected IDs
-    //     const selectedIds = Array.from(rowCheckboxes)
-    //         .filter(checkbox => checkbox.checked)
-    //         .map(checkbox => checkbox.getAttribute('data-id'));
-
-    //     if (selectedIds.length > 0) {
-    //         // Confirm deletion
-    //         if (confirm('Are you sure you want to delete the selected records?')) {
-
-
-    //             //Send AJAX request to delete records
-    //             fetch('/delete-heavy', {
-    //                 method: 'POST',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    //                 },
-    //                 body: JSON.stringify({ ids: selectedIds })
-    //             })
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 // Handle response
-    //                 if (data.success) {
-    //                     // Remove deleted rows from the table
-    //                     rowCheckboxes.forEach(checkbox => {
-    //                         if (checkbox.checked) {
-    //                             checkbox.closest('tr').remove();
-    //                         }
-    //                         $("#masterCheckbox").prop('checked',false);
-    //                     });
-    //                     alert('Selected records deleted successfully.');
-    //                 } else {
-    //                     alert('Error deleting records.');
-    //                 }
-    //             })
-    //             .catch(error => {
-    //                 console.error('Error:', error);
-    //             });
-    //         }
-    //     } else {
-    //         alert('No records selected.');
-    //     }
-    // });
-
-    $("#delete-model").on('click',function(){
+        $("#delete-model").on('click',function(){
                 const selectedIds = Array.from(rowCheckboxes)
                     .filter(checkbox => checkbox.checked)
                     .map(checkbox => checkbox.getAttribute('data-id'));
-               DeleteUser(selectedIds);
-            })
+            DeleteUser(selectedIds);
+        })
 
-    $("#comissionBtn").on('click', function() {
+        $("#comissionBtn").on('click', function() {
             var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
             const selectedIds = Array.from(rowCheckboxes)
                 .filter(checkbox => checkbox.checked)
@@ -310,6 +271,36 @@
                     toastr.error("Error", "Please check the Checkbox.");
                 }
         });
+
+        $("#MarineInsuranceBtn").on('click', function() {
+            var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+            const selectedIds = Array.from(rowCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id')); 
+                
+            if($("#masterCheckbox").is(':checked')){
+                updateAllInsurance();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedInsurance(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }           
+        });
+        
+        $("#InlandInspectionBtn").on('click', function() {
+            var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+            const selectedIds = Array.from(rowCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id')); 
+            if($("#masterCheckbox").is(':checked')){
+                updateAllInland();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedInland(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }    
+        });
+
 
         $("#shippingBtn").on('click', function() {
                 var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
@@ -325,7 +316,6 @@
                     toastr.error("Error", "Please check the Checkbox.");
                 }      
         });
-
 
         topSellButtons.forEach(function(topSellButton) {
                 topSellButton.addEventListener('change', function() {
@@ -355,26 +345,195 @@
                     rowCheckboxes.forEach(function(checkbox) {
                             checkbox.checked = false; // Uncheck each row checkbox
                     });
-
                 }   
-            })
-});
+        })
+    });
 
         
-function updateAllCommission(){
-    swal({
+    function updateAllCommission(){
+        swal({
+                title: "Are you sure?",
+                text: "This will Change All commission value!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "{{route('admin.store-all-heavy-comission')}}",
+                        type: "POST", // Use POST for this AJAX call
+                        data: {
+                            commission: $("#commission").val(),
+                            _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                        },
+                        success: function(response) {
+                            if(response.success == true) {
+                                toastr.success("Success", response.message);
+                                location.reload();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                            toastr.error("Error", "An error occurred while processing your request.");
+                        }
+                });
+                } else {
+                toastr.info("Your post is safe!");
+                }
+            });
+    
+    }
+
+    function updateAllShipping(){
+            swal({
+                title: "Are you sure?",
+                text: "This will Change All Shipping value!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "{{route('admin.store-all-heavy-shipping')}}",
+                        type: "POST", // Use POST for this AJAX call
+                        data: {
+                            commission: $("#shipping").val(),
+                            _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                        },
+                        success: function(response) {
+                            if(response.success == true) {
+                                toastr.success("Success", response.message);
+                                location.reload();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                            toastr.error("Error", "An error occurred while processing your request.");
+                        }
+                });
+                } else {
+                toastr.info("Your post is safe!");
+                }
+            });
+        }   
+
+        function updateSelectedShipping(selectedIds){
+        $.ajax({
+                url: "{{route('admin.store-car-shipping-id')}}",
+                type: "POST", // Use POST for this AJAX call
+                data: {
+                    selectedIds: selectedIds,
+                    commission: $("#shipping").val(),
+                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                },
+                success: function(response) {
+                    if(response.success == true) {
+                        toastr.success("Success", response.message);
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    toastr.error("Error", "An error occurred while processing your request.");
+                }
+            });
+    }
+     
+    function updateSelectedShipping(selectedIds){
+        $.ajax({
+                url: "{{route('admin.store-heavy-shipping-id')}}",
+                type: "POST", // Use POST for this AJAX call
+                data: {
+                    selectedIds: selectedIds,
+                    commission: $("#shipping").val(),
+                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                },
+                success: function(response) {
+                    if(response.success == true) {
+                        toastr.success("Success", response.message);
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    toastr.error("Error", "An error occurred while processing your request.");
+                }
+            });
+    }
+
+    function updateSelectedInsurance(selectedIds){
+        $.ajax({
+            url: "{{route('admin.store-jdm-car-insurance-by-id')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#marine_insurance").val(),
+                type: "marine_insurance",
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+    }
+
+    function DeleteUser(selectedIds){
+        swal({
+                title: "Are you sure?",
+                text: "Want to delete this Heavy Vehicle!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "{{route('delete-heavy')}}",
+                        type: "POST", // Use POST for this AJAX call
+                        data: {
+                            ids: selectedIds,
+                            _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                        },
+                        success: function(response) {
+                            if(response.success == true) {
+                                toastr.success("Success", response.message);
+                                location.reload();
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                            toastr.error("Error", "An error occurred while processing your request.");
+                        }
+                });
+                } else {
+                toastr.info("Your post is safe!");
+                }
+            });
+    
+    }
+
+    function updateAllInsurance(){
+        swal({
             title: "Are you sure?",
-            text: "This will Change All commission value!",
+            text: "This will Change All Shipping value!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('admin.store-all-heavy-comission')}}",
+                    // url: "{{route('admin.store-all-shipping')}}",
+                    url: "{{route('admin.store-all-jdm-heavy-insurance')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
-                        commission: $("#commission").val(),
+                        value: $("#marine_insurance").val(),
+                        type: "marine_insurance",
                         _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                     },
                     success: function(response) {
@@ -392,9 +551,9 @@ function updateAllCommission(){
               toastr.info("Your post is safe!");
             }
         });
-   
-}
-function updateAllShipping(){
+    }
+
+    function updateAllInland(){
         swal({
             title: "Are you sure?",
             text: "This will Change All Shipping value!",
@@ -404,16 +563,17 @@ function updateAllShipping(){
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('admin.store-all-heavy-shipping')}}",
+                    url: "{{route('admin.store-all-jdm-heavy-insurance')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
-                        commission: $("#shipping").val(),
+                        value: $("#inland_inspection").val(),
+                        type: "inland_inspection",
                         _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                     },
                     success: function(response) {
                         if(response.success == true) {
                             toastr.success("Success", response.message);
-                            location.reload();
+                            // location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
@@ -426,14 +586,14 @@ function updateAllShipping(){
             }
         });
     }   
-
-    function updateSelectedShipping(selectedIds){
+    function updateSelectedInland(selectedIds){
      $.ajax({
-            url: "{{route('admin.store-car-shipping-id')}}",
+            url: "{{route('admin.store-jdm-car-insurance-by-id')}}",
             type: "POST", // Use POST for this AJAX call
             data: {
                 selectedIds: selectedIds,
-                commission: $("#shipping").val(),
+                commission: $("#inland_inspection").val(),
+                type:'inland_inspection',
                 _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
             },
             success: function(response) {
@@ -448,63 +608,8 @@ function updateAllShipping(){
             }
         });
 }
-     
+  
 
-function updateSelectedShipping(selectedIds){
-     $.ajax({
-            url: "{{route('admin.store-heavy-shipping-id')}}",
-            type: "POST", // Use POST for this AJAX call
-            data: {
-                selectedIds: selectedIds,
-                commission: $("#shipping").val(),
-                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-            },
-            success: function(response) {
-                if(response.success == true) {
-                    toastr.success("Success", response.message);
-                    location.reload();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                toastr.error("Error", "An error occurred while processing your request.");
-            }
-        });
-}
-
-function DeleteUser(selectedIds){
-    swal({
-            title: "Are you sure?",
-            text: "Want to delete this Heavy Vehicle!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    url: "{{route('delete-heavy')}}",
-                    type: "POST", // Use POST for this AJAX call
-                    data: {
-                        ids: selectedIds,
-                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
-                    },
-                    success: function(response) {
-                        if(response.success == true) {
-                            toastr.success("Success", response.message);
-                            location.reload();
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                        toastr.error("Error", "An error occurred while processing your request.");
-                    }
-            });
-            } else {
-              toastr.info("Your post is safe!");
-            }
-        });
-   
-}
 
     </script>
 @endpush

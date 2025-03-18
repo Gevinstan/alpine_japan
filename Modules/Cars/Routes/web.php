@@ -19,6 +19,8 @@ Route::group(['as'=> 'admin.', 'prefix' => 'admin', 'middleware' => ['XSS','DEMO
     Route::post('store-car-comission', [CarsController::class,'storeCarComission'])->name('store-car-comission');
     Route::post('store-car-shipping-id', [CarsController::class,'storeShippingIdWise'])->name('store-car-shipping-id');
     Route::post('store-all-car-comission', [CarsController::class,'storeAllCarComission'])->name('store-all-car-comission');
+    Route::post('store-all-jdm-car-insurance', [CarsController::class,'storeAllCarInsurance'])->name('store-all-jdm-car-insurance');
+    Route::post('store-jdm-car-insurance-by-id', [CarsController::class,'storeCarInsuranceById'])->name('store-jdm-car-insurance-by-id');
     Route::post('store-all-car-shipping', [CarsController::class,'storeAllCarShipping'])->name('store-all-car-shipping');
     Route::post('blog-new-arrival-cars', [CarsController::class,'newArrivalCars'])->name('blog-new-arrival-cars');
 });

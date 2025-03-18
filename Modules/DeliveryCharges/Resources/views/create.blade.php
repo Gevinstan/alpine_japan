@@ -29,7 +29,7 @@
                                                 <a href="{{ route('admin.delivery-charges.index') }}" class="crancy-btn "><i class="fa fa-list"></i> {{ __('translate.Delivery Charges List') }}</a>
                                             </div>
                                             <div class="row mg-top-30">
-                                                <div class="col-4">
+                                                <div class="col-3">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Country') }} * </label>
                                                         <input class="crancy__item-input" type="text" name="country" id="country">
@@ -38,7 +38,25 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-3">
+                                                    <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.RoRo') }} * </label>
+                                                        <input class="crancy__item-input" type="text" name="roro" id="roro">
+                                                        @error('roro')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Container') }} * </label>
+                                                        <input class="crancy__item-input" type="text" name="container" id="container">
+                                                        @error('container')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Rate') }} * </label>
                                                         <input class="crancy__item-input" type="text" name="rate" id="rate">
