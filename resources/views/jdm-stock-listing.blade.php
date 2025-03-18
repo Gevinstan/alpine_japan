@@ -75,11 +75,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="bg-white w-100">
+                        {{--<div class="bg-white w-100">
                             <button class="bg-white btn w-100 charge-btn" type="button" id="delivery_charge1">
                                 Delivery Charge 
                             </button> 
-                        </div>
+                        </div>--}}
                     </div>
                     {{--<div class="gap-3 d-flex align-items-center">
                         <div class="dropdown location-dropdown w-100">
@@ -353,12 +353,11 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="bg-white w-100">
+                                        {{--<div class="bg-white w-100">
                                             <button class="bg-white btn w-100 charge-btn" type="button" id="delivery_charge">
                                                 Delivery Charge
                                             </button>
-                                            
-                                        </div>
+                                        </div>--}}
                                     </div>
                                     @error('location')
                                         <span style="color: red;">{{ $message }}</span>
@@ -784,7 +783,7 @@
             var start_price = $("#price_value").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
             //  var comission_price = $("#commission_value").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
             // var comission_price = {{ round($car->commission_value) }}; // Clean the commission price
-             var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var delivery_charge = $("#delivery_charge").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
             //  var shipping_charge = $("#shipping_charge").text().replace(/[^0-9.-]+/g, ''); 
             // var shipping_charge={{ round($car->shipping_value) }}; 
 
@@ -853,9 +852,9 @@
          $("#calculate_total_price1").on('click',function(){
            if($("#location1").val() != ""){
              var start_price = $("#price_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the start price
-            //  var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var comission_price = $("#commission_value1").text().replace(/[^0-9.-]+/g,  ''); // Clean the commission price
             // var comission_price = {{ round($car->commission_value) }}; // Clean the commission price
-             var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
+            //  var delivery_charge = $("#delivery_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
             //  var shipping_charge = $("#shipping_charge1").text().replace(/[^0-9.-]+/g, ''); // Clean the commission price
             // var shipping_charge={{ round($car->shipping_value) }}; // Clean the commission price
  

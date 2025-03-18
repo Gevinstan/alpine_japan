@@ -59,7 +59,7 @@
                                                 <div class="col-3">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.RoRo') }} * </label>
-                                                        <input class="crancy__item-input" type="text" name="roro" id="roro">
+                                                        <input class="crancy__item-input" type="text" name="roro" id="roro" value="{{$delivery_charge_data->roro}}">
                                                         @error('roro')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror
@@ -68,7 +68,7 @@
                                                 <div class="col-3">
                                                     <div class="crancy__item-form--group w-100 h-100">
                                                         <label class="crancy__item-label">{{ __('translate.Container') }} * </label>
-                                                        <input class="crancy__item-input" type="text" name="container" id="container">
+                                                        <input class="crancy__item-input" type="text" name="container" id="container" value="{{$delivery_charge_data->container}}">
                                                         @error('container')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror

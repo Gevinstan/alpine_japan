@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between gap-4">
+                                    {{--<div class="d-flex justify-content-between gap-4">
                                         <div class="d-flex  items-center flex-column gap-2">
                                              <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
                                                 <div class="d-flex items-center gap-3">
@@ -90,7 +90,7 @@
                                                     <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button> 
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                 </div>
 
                                 <!-- crancy Table -->
