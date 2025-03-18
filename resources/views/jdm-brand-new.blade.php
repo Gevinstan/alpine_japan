@@ -65,7 +65,7 @@
                                                             <div class="accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                    <div class="accordion-button p-0 gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <div class="accordion-button gap-2" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="jdm_brand[]" class="form-check-input brand-search" type="checkbox"
                                                                              value="{{ $brand->slug }}"  data-brand-id="{{ $brand->slug }}"
                                                                             {{ in_array(trim($brand->slug), (array) request('jdm_brand', [])) ? 'checked' : '' }}>
@@ -75,7 +75,7 @@
                                                                     </div>
                                                                     <div id="collapseOne{{$index}}" class="accordion-collapse collapse  w-100" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
-                                                                            <span class="select-Brand-box p-0 px-2 border-0 brand-body">
+                                                                            <span class="select-Brand-box px-2 border-0 brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
@@ -245,7 +245,7 @@
                 <div class="col-lg-9">
                     <div class="inventory-ber mb-2 px-2">
                         <div class="inventory-ber-left">
-                            <div class="inventory-sarch-ber-item flex-row">
+                            <div class="d-flex flex-column flex-md-row inventory-sarch-ber-item">
                                 <div class="inventory-sarch-ber px-1">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
@@ -254,7 +254,7 @@
                                     </span>
                                 </div>
 
-                                <div class="align-items-center sort_by d-flex justify-content-end justify-content-md-end justify-content-sm-start">
+                                <div class="align-items-center sort_by d-flex justify-content-md-end justify-content-sm-start">
                                     <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                      <p class="sort-text">Sort By:</p>
                                      <div class="dropdown sort-dropdown pe-4">

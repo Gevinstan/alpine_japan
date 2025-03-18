@@ -9276,26 +9276,36 @@ p {
     padding-top: 0;
 }
 
+@media (min-width: 425px) {
+    .brand_model {
+        padding-bottom: 0px;
+    }
+
+
+}
+
 .inventory-main-box .accordion-button {
     font-weight: var(--medium);
     padding: 0;
     line-height: normal;
     font-size: 18px;
-    padding: 20px 0 10px 0;
+    padding: 0px 0px 10px 0px;
     color: var(--headline-color);
     /* color: #6E6E6E !important; */
-}
-
-.inventory-main-box .accordion-button:focus {
-    box-shadow: 0 0 0 0.25rem transparent;
 }
 
 .inventory-main-box .accordion-button:not(.collapsed) {
     color: var(--headline-color);
     background-color: var(--white-color);
     box-shadow: inset 0 -1px 0 transparent;
-    padding: 20px 0 10px 0;
+    padding: 0px 0 10px 0;
 }
+
+.inventory-main-box .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem transparent;
+}
+
+
 
 .inventory-main-box .select-Brand-box {
     border-radius: 4px;
@@ -15973,8 +15983,9 @@ input:not(:placeholder-shown) + .placeholder-text {
         font-size: 1.5rem !important;
         font-weight: 600 !important;
     }
+
     .banner-h1 {
-        font-size: 30px !important;
+        font-size: 2rem !important;
         line-height: 55px !important;
     }
 }
@@ -15991,7 +16002,7 @@ input:not(:placeholder-shown) + .placeholder-text {
     }
 
     .banner-h1 {
-        font-size: 30px !important;
+        font-size: 2rem !important;
         line-height: 55px !important;
     }
 }
@@ -18391,6 +18402,8 @@ input:not(:placeholder-shown) + .input-placeholder {
 .inquiery_clr:hover {
     background-color: #038ffc;
 }
+
+
 
 
 
