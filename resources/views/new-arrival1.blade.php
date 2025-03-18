@@ -51,7 +51,7 @@
                                                             <div class="accordion" id="accordionExample">
                                                             <div class="accordion-item">
                                                                 <span class="form-check d-flex flex-column align-items-start list-dropdown" id="headingOne">
-                                                                    <div class="gap-2 p-0 accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
+                                                                    <div class="gap-2 accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$index}}" aria-expanded="true" aria-controls="collapseOne">
                                                                         <input name="brand[]" style="display:none;" class="form-check-input brand-search" type="checkbox"
                                                                              value="{{ $brand->slug }}"
                                                                             {{ in_array(trim($brand->slug), (array) request('brand', [])) ? 'checked' : '' }}>
@@ -64,7 +64,7 @@
                                                                     {{ hasCheckedModelsCar($brand->slug, $brand_arr, request('model', [])) ? 'show' : '' }}"
                                                                      aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                         <div class="accordion-body">
-                                                                            <span class="p-0 px-2 border-0 select-Brand-box brand-body">
+                                                                            <span class="px-2 border-0 select-Brand-box brand-body">
                                                                             @if(array_key_exists($brand->slug, $brand_arr))
                                                                                     @foreach ($brand_arr[$brand->slug] as $model)
                                                                                         <span class="form-check">
@@ -316,7 +316,7 @@
                 <div class="col-lg-9">
                     <div class="px-2 mb-2 inventory-ber">
                         <div class="inventory-ber-left">
-                            <div class="flex-row inventory-sarch-ber-item">
+                            <div class="d-flex flex-column flex-md-row inventory-sarch-ber-item">
                                 <div class="px-1 inventory-sarch-ber">
                                     <input type="text" class="form-control" id="outside_form_search" name="search"
                                         placeholder="{{ __('translate.Search Car') }}" value="{{ request()->get('search') }}">
@@ -329,7 +329,7 @@
                                     
                                 </div>
 
-                                <div class="align-items-center sort_by d-flex justify-content-end justify-content-md-end justify-content-sm-start">
+                                <div class="align-items-center sort_by d-flex justify-content-md-end justify-content-sm-start">
                                     <!-- <p>{{ __('translate.Switch tab for list or grid view layout') }}</p> -->
                                      <p class="sort-text">Sort By:</p>
                                      <div class="dropdown sort-dropdown pe-4">
@@ -721,8 +721,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                            aria-labelledby="pills-profile-tab">
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div class="row g-5 brand-car-two">
                                 @forelse ($cars_array as $index => $car)
                                     <div class=" col-xxl-6 col-xl-6 col-lg-6 col-sm-6">
@@ -974,8 +973,6 @@
                                     </div>
                                 </div>
                                 @endforelse
-
-
                             </div>
                         </div>
                     </div>
