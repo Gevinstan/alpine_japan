@@ -298,52 +298,88 @@
                             <div class="row g-3">
                                     <div class="col-md-4 col-sm-6">
                                         <select class="form-select p-3">
-                                            <option selected>Brand</option>
+                                            <option>Brand</option>
+                                            <option selected>{{$brand_label->name}}({{ $brand_total }})</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <select class="form-select p-3">
                                             <option selected>Model</option>
+                                            @foreach ($brand_arr as $brand)
+                                                <option  value="{{ trim($brand->model) }}">{{trim($brand->model)}}({{ $brand->count }})</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <select class="form-select p-3">
-                                            <option selected>Budget</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Type</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Steering</option>
+                                            <option selected>Chassis Number</option>
+                                            @foreach ($cars_array as $index => $car)
+                                              <option>{{$car['chassis_number']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
                                         <select class="form-select p-3">
                                             <option selected>Year From</option>
+                                            @foreach ($distinctData['years'] as $index => $car)
+                                              <option>{{$car}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
                                         <select class="form-select p-3">
                                             <option selected>Year To</option>
+                                            @foreach ($distinctData['years'] as $index => $car)
+                                              <option>{{$car}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
+                                        <select class="form-select p-3">
+                                            <option selected>Budget From</option>
+                                            @foreach ($cars_array as $index => $car)
+                                              <option>${{$car['start_price']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
+                                        <select class="form-select p-3">
+                                            <option selected>Budget To</option>
+                                            @foreach ($cars_array as $index => $car)
+                                              <option>${{$car['start_price']}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
+                                        <select class="form-select p-3">
+                                            <option selected>Mileage From</option>
+                                            @foreach ($distinctData['mileage'] as $index => $car)
+                                              <option>${{$car}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-6">
+                                        <select class="form-select p-3">
+                                            <option selected>Mileage To</option>
+                                            @foreach ($distinctData['mileage'] as $index => $car)
+                                              <option>${{$car}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <select class="form-select p-3">
-                                            <option selected>Brand</option>
+                                            <option selected>Transmission</option>
+                                            @foreach ($distinctData['transmission'] as $index => $car)
+                                              <option>{{$car}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
                                         <select class="form-select p-3">
-                                            <option selected>Model</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Budget</option>
+                                            <option selected>Transmission</option>
+                                            @foreach ($distinctData['fuel'] as $index => $car)
+                                              <option>{{$car}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
