@@ -1552,7 +1552,8 @@ class HomeController extends Controller
          
     
 
-        return view('jdm-stock-responsive', [
+        return view('jdm-stock-client', [
+        // return view('jdm-stock-responsive', [
             'seo_setting' => $seo_setting,
             // 'jdm_legend'=>$jdm_brand,
             'jdm_core_brand'=>$jdm_core_brand,
