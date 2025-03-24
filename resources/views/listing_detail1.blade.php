@@ -82,7 +82,7 @@
                                 </h2>
                                 <div id="panelsStayOpen-collapsesix" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingsix">
                                     <div class="accordion-body">
-
+                                                    
                                         @foreach ($reviews as $review)
                                             <div class="reviews">
                                                 <div class="reviews-item">
@@ -565,9 +565,11 @@
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
                                 <div class="accordion-body">
-                                    <div class="py-2 d-flex gap-3 flex-wrap">
-                                        <span class="accessories-text px-3 h-100">ABS equipped</span>
-                                        <span class="accessories-hide-text px-3">ABS equipped</span>
+                                    <div class="ps-4 d-flex flex-lg-row flex-column gap-3"> 
+                                        <div class="py-2 d-flex">
+                                            <span class="px-3 py-1 accessories-text h-100">ABS equipped</span>
+                                            <span class="px-3 py-1 accessories-text h-100">ABS equipped</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

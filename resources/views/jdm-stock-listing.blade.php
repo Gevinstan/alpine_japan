@@ -121,8 +121,8 @@
                         </div>
                         <div class="mb-2 col-lg-6 col-sm-12 col-12">
                             <div class="textarea-wrapper">
-                                <input type="text" class="p-3 form-control" id="exampleFormControlInput5"
-                                    placeholder="" name="phone" value="{{ old('phone') }}">
+                                <input type="tel" class="p-3 form-control" id="exampleFormControlInput5"
+                                    placeholder="" name="phone" value="{{ old('phone') }}" pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/\D/g, '')">
                                 <span class="placeholder-text">Phone <span class="required">*</span></span>
                             </div>
                         </div>
@@ -597,11 +597,24 @@
                                     {{__('translate.Accessories')}}
                                 </button>
                             </h2>
-                            <div id="accessories-accordion-collapsefive" class="accordion-collapse collapse show" aria-labelledby="accessories-accordion">
+                            <!-- <div id="accessories-accordion-collapsefive" class="accordion-collapse collapse show" aria-labelledby="accessories-accordion">
                                 <div class=" accordion-body">
                                     <div class="flex-row gap-1 ps-4 d-flex">                                        
                                         @foreach($accesories as $value)
                                             <div class="gap-3 py-2">
+                                                <span class="px-3 py-1 accessories-text h-100"> 
+                                                    {{ isset($value) ? $value : '--' }}
+                                                </span> 
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div id="accessories-accordion-collapsefive" class="accordion-collapse collapse show" aria-labelledby="accessories-accordion">
+                                <div class="accordion-body">
+                                    <div class="ps-4 d-flex flex-lg-row flex-column gap-3"> 
+                                        @foreach($accesories as $value)
+                                            <div class="py-2 d-flex">
                                                 <span class="px-3 py-1 accessories-text h-100"> 
                                                     {{ isset($value) ? $value : '--' }}
                                                 </span> 

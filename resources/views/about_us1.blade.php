@@ -29,7 +29,7 @@
     </section>
     <!-- banner-part-end -->
 
-
+<div>hi</div>
 
     <!-- about-part-start -->
     <section class="about ">
@@ -295,9 +295,9 @@
 
                 <div class="col-lg-1"></div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6 customer_about">
                     <div class="testimonial-slick-main">
-                        <div class="testimonial-slick">
+                        <div class="testimonial-slick ">
 
                             @foreach ($testimonials as $index => $testimonial)
                                 <div class="testimonial-slick-top-main">

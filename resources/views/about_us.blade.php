@@ -103,6 +103,7 @@
                 </div>
             </div>
         </section> -->
+        
         <section class="about_us_bg px-sm-2 px-lg-5 pb-5">
             <div class="container pb-3">
                 <div class="row align-items-center">
@@ -565,7 +566,7 @@
 
                 <div class="col-lg-1"></div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6 px-0">
                     <div class="testimonial-slick-main">
                         <div class="testimonial-slick">
 

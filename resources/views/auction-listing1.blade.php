@@ -119,7 +119,7 @@
                         <div class="mb-2 col-lg-6 col-sm-12 col-12">
                             <div class="textarea-wrapper">
                                 <input type="text" class="p-3 form-control" id="exampleFormControlInput5"
-                                    placeholder="" name="phone" value="{{ old('phone') }}">
+                                    placeholder="" name="phone" value="{{ old('phone') }}"  pattern="[0-9]*" inputmode="numeric" oninput="this.value = this.value.replace(/\D/g, '')">
                                 <span class="placeholder-text">Phone <span class="required">*</span></span>
                             </div>
                         </div>
@@ -501,12 +501,13 @@
                             </h2>
                             <div id="panelsStayOpen-collapsefive" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingfive">
                                 <div class="accordion-body">
-                                    <div class="flex-wrap gap-1 py-2 ps-4 d-flex">
-                                        <span class="px-3 py-1 accessories-text1 h-100 ms-4">
+                                  <div class="ps-4 d-flex flex-lg-row flex-column gap-3"> 
+                                    <div class="py-2 d-flex">
+                                        <span class="px-3 py-1 accessories-text h-100">
                                             {{ isset($process_data_en['Condition']) ? $process_data_en['Condition'] : '--' }}
-                                        </span>
-                                       
+                                        </span> 
                                     </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
