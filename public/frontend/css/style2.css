@@ -16910,6 +16910,59 @@ input:not(:placeholder-shown) + .placeholder-text {
 /* responsive in faq pages */
 
 /* Medium devices (tablets) */
+@media (min-width: 375px) {
+    .faq-top-left-p {
+        font-size: 15px !important;
+        color: white;
+        font-weight: bolder;
+        display: inline;
+        margin-left: 39px;
+    }
+
+    .faq-top-left-p-from {
+        display: inline;
+        margin-left:125px; 
+        top:30px;
+    }
+
+    .faq-top-left-p1 {
+        font-size: 30px !important;
+        color: white;
+        font-weight: bold;
+        display: inline;
+    }
+
+    .faq-img {
+        padding-top: 40px;
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+
+    .faq-top-left {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        line-height: 0px !important;
+        margin-right: 50px;
+    }
+
+    .faq-bottom-left {
+        position: absolute;
+        bottom: 0px;
+        left: 70px;
+        color: white !important;
+        line-height: 15px !important;
+    }
+
+    .faq-bottom-left-p {
+        color: white;
+        font-size: 10px !important;
+        line-height: 0px !important;
+    }
+}
+
+/* Medium devices (tablets) */
 @media (min-width: 425px) {
     .faq-top-left-p {
         font-size: 15px !important;

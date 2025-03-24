@@ -421,12 +421,12 @@
                                     <a href="{{ route('jdm-stock',[$jdm['slug'], 'heavy']) }}">{{$jdm['brand_name']}}</a>
                                 @endforeach
                             </li>
-                            <li><h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6></li>
+                            <!-- <li><h6 class="dropdown-header nav-dropdown-header text-nowrap">Small Heavy</h6></li>
                             <li class="jdm-options ps-3">
                                 @foreach($jdm_legend['small_heavy'] as $jdm)
                                     <a href="{{ route('jdm-stock',[$jdm['slug'], 'small_heavy']) }}">{{$jdm['brand_name']}}</a>
                                 @endforeach
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -804,7 +804,7 @@
                                         <path d="M17.5899 31.5311H22.2199V19.9311H25.4499L25.7899 16.0511H22.2099V13.8411C22.2099 12.9211 22.3899 12.5611 23.2799 12.5611H25.7899V8.53107H22.5799C19.1299 8.53107 17.5799 10.0511 17.5799 12.9511V16.0511H15.1699V19.9811H17.5799V31.5311H17.5899Z" fill="white"/>
                                     </svg>
                                 </a>
-                                <a href="{{$setting->youtube}}" class="p-0 border-0">
+                                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" class="p-0 border-0">
                                     <svg width="36" height="35" viewBox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M20.6404 39.0599C10.1304 39.0599 1.61035 30.5399 1.61035 20.0299C1.61035 9.51988 10.1304 0.999878 20.6404 0.999878C31.1504 0.999878 39.6704 9.51988 39.6704 20.0299C39.6704 30.5399 31.1504 39.0599 20.6404 39.0599Z" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M30.3444 10.8181C31.4035 11.1011 32.2362 11.9419 32.5192 13.0091C33.0366 14.9414 33.0366 18.9757 33.0366 18.9757C33.0366 18.9757 33.0366 23.01 32.5192 24.9423C32.2362 26.0095 31.4035 26.8504 30.3444 27.1333C28.4283 27.6508 20.7234 27.6508 20.7234 27.6508C20.7234 27.6508 13.0266 27.6508 11.1024 27.1333C10.0433 26.8504 9.21056 26.0095 8.92759 24.9423C8.41016 23.01 8.41016 18.9757 8.41016 18.9757C8.41016 18.9757 8.41016 14.9414 8.92759 13.0091C9.21056 11.9419 10.0433 11.1011 11.1024 10.8181C13.0185 10.3007 20.7234 10.3007 20.7234 10.3007C20.7234 10.3007 28.4202 10.3007 30.3444 10.8181ZM18.2007 15.3124V22.6373L24.6362 18.9748L18.2007 15.3124Z" fill="white"/>

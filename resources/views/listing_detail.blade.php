@@ -209,7 +209,7 @@
 
                 <!-- Car Specifications  -->
                     <div class="accordion" id="accordionPanelsStayOpenExample1" data-aos="fade-up"
-                    data-aos-delay="150">
+                        data-aos-delay="150">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="panelsStayOpen-headingtwo">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"

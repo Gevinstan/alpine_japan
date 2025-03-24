@@ -22,7 +22,7 @@
                             <ol class="breadcrumb" style="padding-right:985px; padding-top:30px;">
                                 <!-- <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ __('translate.Car Details') }}</li> -->
-                                <li>JDM Stock</li>
+                                <li>JDM Stock1</li>
                                 <li><i class="bi bi-arrow-right-short"></i></li>
                                 <li>
                                     {{$car->make}}

@@ -33,10 +33,10 @@
                     <!-- <img src="{{  asset('japan_home/faq_img.svg')  }}" alt="HTML tutorial" class="img-fluid"> -->
 
                     <div class="faq-top-left">
-                        <p class="faq-top-left-p" style="display: inline">How To Buy1</p>
+                        <p class="faq-top-left-p" style="display: inline">How To Buy</p>
                         <p class="faq-top-left-p1" style="display: inline">JDM Car</p>
                         <br>
-                        <p class="faq-top-left-p" style="display: inline;margin-left:180px; top:30px">from</p>
+                        <p class="faq-top-left-p">from</p>
                         <p class="faq-top-left-p1" style="display: inline">Japan</p>
                     </div>
 

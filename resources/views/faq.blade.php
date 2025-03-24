@@ -19,7 +19,7 @@
                         <p class="faq-top-left-p" style="display: inline">How To Buy</p>
                         <p class="faq-top-left-p1" style="display: inline">JDM Car</p>
                         <br>
-                        <p class="faq-top-left-p" style="display: inline;margin-left:180px; top:30px">from</p>
+                        <p class="faq-top-left-p faq-top-left-p-from" style="">from</p>
                         <p class="faq-top-left-p1" style="display: inline">Japan</p>
                     </div>
 

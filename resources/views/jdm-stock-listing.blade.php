@@ -602,8 +602,7 @@
                                     <div class="flex-row gap-1 ps-4 d-flex">                                        
                                         @foreach($accesories as $value)
                                             <div class="gap-3 py-2">
-                                                <span class="px-3 py-1 accessories-text h-100">
-                                                    
+                                                <span class="px-3 py-1 accessories-text h-100"> 
                                                     {{ isset($value) ? $value : '--' }}
                                                 </span> 
                                             </div>
@@ -611,8 +610,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
-
                         </div>
                     </div>
                 </div>
