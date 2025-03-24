@@ -121,6 +121,30 @@ class ImportsController extends Controller
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
         // return redirect()->route('admin.commission')->with($notification);
     }
+    public function storeCarInsurance(Request $request){
+        AuctLotsXmlJpOpOtherChargers::whereIn('auct_id',$request->selectedIds)
+        ->update(['marine_insurance_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+        // return redirect()->route('admin.commission')->with($notification);
+    }
+    public function storeCarInland(Request $request){
+        AuctLotsXmlJpOpOtherChargers::whereIn('auct_id',$request->selectedIds)
+        ->update(['inland_inspection_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+        // return redirect()->route('admin.commission')->with($notification);
+    }
+
+    
+
+
+
+
+
+
     public function shippingStore(Request $request){
         CarDataJpOp::where('active_status', 1)
         ->whereIn('id',$request->selectedIds)
@@ -205,7 +229,7 @@ class ImportsController extends Controller
     public function validateUpdateRequest(Request $request)
     {
         return $request->validate([
-            'type' => 'required|in:shipping,commission',
+            'type' => 'required|in:shipping,commission,inland_inspection,marine_insurance',
             'value' => 'required|numeric|min:0',
         ]);
     }

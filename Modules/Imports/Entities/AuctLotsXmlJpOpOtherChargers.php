@@ -11,6 +11,8 @@ class AuctLotsXmlJpOpOtherChargers extends Model
     protected $fillable = [
         'commission_value',
         'shipping_value',
+        'marine_insurance_value',
+        'inland_inspection_value',
         'top_sell',
         'new_arrival'
     ];

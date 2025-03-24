@@ -14,6 +14,8 @@ use Modules\Models\Entities\ModelsCars;
 use Modules\Brand\Entities\BrandTranslation;
 use Modules\Cars\Entities\AddProductImages;
 use Session;
+use Illuminate\Support\Facades\DB;
+use App\Models\JdmStockBlogOtherCharges;
 class CarsController extends Controller
 {
     /**
@@ -177,9 +179,85 @@ if($request->hasFile('cover_image')) {
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);
     }
+    public function storeCarInsuranceById(Request $request){
+        JdmStockBlogOtherCharges::
+        // where('is_active', 1)
+        whereIn('jdm_blog_id',$request->selectedIds)
+        ->update([$request->type . '_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
     public function storeAllCarComission(Request $request){
         Cars::where('is_active', 1)
         ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+
+    public function validateUpdateRequest(Request $request)
+    {
+        return $request->validate([
+            'type' => 'required|in:shipping,commission,inland_inspection,marine_insurance',
+            'value' => 'required|numeric|min:0',
+        ]);
+    }
+    public function storeAllCarInsurance(Request $request){
+
+        $chunkSize = 1000; // Adjust based on your server capacity
+
+        $validated = $this->validateUpdateRequest($request);
+        
+        $value = $validated['value'];
+        $type = $validated['type'];
+
+
+        // Get all auction IDs in chunks
+        DB::table('blog')
+        ->select('id')
+        ->orderBy('id')
+        ->chunk($chunkSize, function ($auctionLots) use ($value, $type) {
+            $ids = $auctionLots->pluck('id')->toArray();
+            
+            // Split processing based on what exists and what doesn't
+            $existingIds = DB::table('jdm_stock_blog_other_charges')
+                ->whereIn('jdm_blog_id', $ids)
+                ->pluck('jdm_blog_id')
+                ->toArray();
+                
+            $newIds = array_diff($ids, $existingIds);
+            
+            // Handle updates in bulk
+            if (!empty($existingIds)) {
+                $updateData = ['updated_at' => now()];
+                
+                if ($type == 'marine_insurance') {
+                    $updateData['marine_insurance_value'] = (int) $value;
+                } elseif ($type == 'inland_inspection') {
+                    $updateData['inland_inspection_value'] = (int) $value;
+                }
+                
+                DB::table('jdm_stock_blog_other_charges')
+                    ->whereIn('jdm_blog_id', $existingIds)
+                    ->update($updateData);
+            }
+            
+            // Handle inserts in bulk
+            if (!empty($newIds)) {
+                $insertData = collect($newIds)->map(function ($id) use ($value, $type) {
+                    return [
+                        'jdm_blog_id' => $id,
+                        'marine_insurance_value' => ($type == 'marine_insurance') ? (int) $value : 0,
+                        'inland_inspection_value' => ($type == 'inland_inspection') ? (int) $value : 0,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ];
+                })->toArray();
+                
+                DB::table('jdm_stock_blog_other_charges')->insert($insertData);
+            }
+        });
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);

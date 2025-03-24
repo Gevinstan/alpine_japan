@@ -172,7 +172,7 @@
             <nav aria-label="breadcrumb" class="px-4">
                 <ol class="mb-4 breadcrumb breadcrumb-list">
                     <li class="breadcrumb-item breadcrumb-link"><a href="{{ route('home') }}">{{ __('translate.Home') }}</a></li>
-                    <li class="breadcrumb-item breadcrumb-link" aria-current="page">{{ __('translate.Auction Listing') }}</li>
+                    <li class="breadcrumb-item breadcrumb-link" aria-current="page"><a href="{{route($head_title)}}">{{ __('translate.Auction Listing') }}</a></li>
                     <li class="breadcrumb-item breadcrumb-link" aria-current="page">
                         @if(session('front_lang') == 'en')
                             {{ $car->model_name_en }}

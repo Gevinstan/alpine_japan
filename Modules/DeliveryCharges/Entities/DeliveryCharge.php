@@ -11,6 +11,8 @@ class DeliveryCharge extends Model
     protected $fillable=[
       'id',
       'country_name',
-      'rate'
+      'rate',
+      'roro',
+      'container'
     ];
 }

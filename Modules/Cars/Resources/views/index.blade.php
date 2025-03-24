@@ -48,29 +48,49 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between gap-4">
-
-                                    <div class="d-flex  items-center flex-column gap-2">
-                                    <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
-                                    <div class="d-flex items-center gap-3">
+                                        <div class="d-flex  items-center flex-column gap-2">
+                                             <label class="crancy__item-label text-nowrap">{{ __('translate.Marine Insurance')." ( $ )" }} * </label>
+                                                <div class="d-flex items-center gap-3">
+                                                        <input class="crancy__item-input" type="text" name="marine_insurance" id="marine_insurance">
+                                                        @error('marine_insurance')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror   
+                                                        <button class="crancy-btn" type="button" id="MarineInsuranceBtn">{{ __('translate.Submit') }}</button>
+                                                </div>
+                                        </div>
+                                        <div class="d-flex  items-center flex-column gap-2">
+                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Inland Inspection')." ( $ )" }} * </label>
+                                            <div class="d-flex items-center gap-3">
+                                                    <input class="crancy__item-input" type="text" name="inland_inspection" id="inland_inspection">
+                                                    @error('shipping')
+                                                        <div style="color: red;">{{ $message }}</div>
+                                                    @enderror   
+                                                    <button class="crancy-btn" type="button" id="InlandInspectionBtn">{{ __('translate.Submit') }}</button> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{--<div class="d-flex justify-content-between gap-4">
+                                        <div class="d-flex  items-center flex-column gap-2">
+                                             <label class="crancy__item-label text-nowrap">{{ __('translate.Commission')." ( $ )" }} * </label>
+                                                <div class="d-flex items-center gap-3">
                                                         <input class="crancy__item-input" type="text" name="commission" id="commission">
                                                         @error('commission')
                                                             <div style="color: red;">{{ $message }}</div>
                                                         @enderror   
                                                         <button class="crancy-btn" type="button" id="comissionBtn">{{ __('translate.Submit') }}</button>
-                                                        </div>
-                                    </div>
-                                    <div class="d-flex  items-center flex-column gap-2">
-                                    <label class="crancy__item-label text-nowrap">{{ __('translate.Shipping')." ( $ )" }} * </label>
-                                    <div class="d-flex items-center gap-3">
-                                                        <input class="crancy__item-input" type="text" name="shipping" id="shipping">
-                                                        @error('shipping')
-                                                            <div style="color: red;">{{ $message }}</div>
-                                                        @enderror   
-                                                        <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button> 
-</dv>
-                                    </div>
-
-                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="d-flex  items-center flex-column gap-2">
+                                            <label class="crancy__item-label text-nowrap">{{ __('translate.Shipping')." ( $ )" }} * </label>
+                                            <div class="d-flex items-center gap-3">
+                                                    <input class="crancy__item-input" type="text" name="shipping" id="shipping">
+                                                    @error('shipping')
+                                                        <div style="color: red;">{{ $message }}</div>
+                                                    @enderror   
+                                                    <button class="crancy-btn" type="button" id="shippingBtn">{{ __('translate.Submit') }}</button> 
+                                            </div>
+                                        </div>
+                                    </div>--}}
                                 </div>
 
                                 <!-- crancy Table -->
@@ -359,6 +379,39 @@
                 }    
        
    });
+   $("#MarineInsuranceBtn").on('click', function() {
+       
+       var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+       const selectedIds = Array.from(rowCheckboxes)
+           .filter(checkbox => checkbox.checked)
+           .map(checkbox => checkbox.getAttribute('data-id')); 
+           
+       if($("#masterCheckbox").is(':checked')){
+           updateAllInsurance();
+       } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+           updateSelectedInsurance(selectedIds);
+       } else {
+           toastr.error("Error", "Please check the Checkbox.");
+       }    
+       
+   });
+   $("#InlandInspectionBtn").on('click', function() {
+       
+       var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+       const selectedIds = Array.from(rowCheckboxes)
+           .filter(checkbox => checkbox.checked)
+           .map(checkbox => checkbox.getAttribute('data-id')); 
+       if($("#masterCheckbox").is(':checked')){
+           updateAllInland();
+       } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+           updateSelectedInland(selectedIds);
+       } else {
+           toastr.error("Error", "Please check the Checkbox.");
+       }    
+       
+   });
+
+   
 
             
 });
@@ -433,6 +486,75 @@ function DeleteUser(selectedIds){
    
 }
 
+function updateAllInsurance(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All Shipping value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    // url: "{{route('admin.store-all-shipping')}}",
+                    url: "{{route('admin.store-all-jdm-car-insurance')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        value: $("#marine_insurance").val(),
+                        type: "marine_insurance",
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }   
+function updateAllInland(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All Shipping value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                alert("two")
+                $.ajax({
+                    url: "{{route('admin.store-all-jdm-car-insurance')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        value: $("#inland_inspection").val(),
+                        type: "inland_inspection",
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            // location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }   
+
 function updateAllCommission(){
         swal({
             title: "Are you sure?",
@@ -443,7 +565,7 @@ function updateAllCommission(){
         }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "{{route('admin.store-all-comission')}}",
+                    url: "{{route('admin.store-all-car-comission')}}",
                     type: "POST", // Use POST for this AJAX call
                     data: {
                         commission: $("#commission").val(),
@@ -499,6 +621,8 @@ function updateAllCommission(){
         });
     }   
 
+    
+
 
 
 function updateSelectedComission(selectedIds){
@@ -529,6 +653,51 @@ function updateSelectedShipping(selectedIds){
             data: {
                 selectedIds: selectedIds,
                 commission: $("#shipping").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+}
+function updateSelectedInsurance(selectedIds){
+     $.ajax({
+            url: "{{route('admin.store-jdm-car-insurance-by-id')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#marine_insurance").val(),
+                type: "marine_insurance",
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+}
+function updateSelectedInland(selectedIds){
+    alert("d")
+     $.ajax({
+            url: "{{route('admin.store-jdm-car-insurance-by-id')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#inland_inspection").val(),
+                type:'inland_inspection',
                 _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
             },
             success: function(response) {

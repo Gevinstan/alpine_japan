@@ -191,10 +191,14 @@
                                                                     <output name="age_output" id="age_output" for="start">{{ request('year', '') }}</output>
                                                                     <span class="m-0 slider-value" id="modelYearValue">{{$maxYear}}</span>
                                                                 </div>
-                                                                <input type="range" min="{{$minYear}}" max="{{$maxYear}}"
+                                                                <input id="ex3" type="text" name="year"
+                                                                    data-slider-min="{{$minYear}}"  data-slider-max="{{$maxYear}}"
+                                                                    value="{{ request('year', '') ? request('year') : '' }}"
+                                                                    data-slider-value="[{{ request('year', '') ? request('year') : $minYear . ',' . $maxYear }}]"sli/>
+                                                                {{--<input type="range" min="{{$minYear}}" max="{{$maxYear}}"
                                                                     value="{{ request('year', $minYear) }}"
                                                                     class="mx-0 my-2 slider-input" id="modelYearSlider">
-                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">
+                                                                <input type="hidden" id="start_year" name="year" value="{{ request('year', '') }}">--}}
                                                             </div>
                                                             <div class="gap-4 d-flex align-content-between flex-column go_clear">
                                                                 @if(request('year'))
@@ -411,7 +415,9 @@
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
                                                 <div class="">
+                                                <a href="{{ route('fixed-car-marketplace-details', ['category' => 'fixed-car-marketplace', 'id' => $car['id']]) }}" class="text-truncate_list2">
                                                     <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                </a>    
                                                 </div>
                                             </div>
 
@@ -451,7 +457,7 @@
                                                     </p>
                                                 </div>
 
-                                                <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="FORWARD">
+                                                <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}"data-bs-toggle="tooltip" title="FORWARD">
                                                     <h3 class="pt-3 text-truncate car-fullname ps-3" 
                                                     title="
                                                     @if(session('front_lang')=='en')
@@ -684,8 +690,9 @@
                                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-sm-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                            <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
-
+                                            <a href="{{ route('fixed-car-marketplace-details',['category' => 'fixed-car-marketplace-details', 'id' => $car['id']]) }}" class="text-truncate_list2">
+                                                 <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                            </a>     
                                             </div>
 
                                             <div class="">
@@ -720,7 +727,7 @@
                                                                 {{ $car['model_name'] }}
                                                             @endif  
                                                         ">
-                                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}" class="text-truncate_list2">
+                                                        <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}" class="text-truncate_list2">
                                                     
                                                             @if(session('front_lang')=='en')
                                                                 {{ html_decode($car['model_name_en']) }}

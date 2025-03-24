@@ -83,6 +83,42 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Marine Insurance')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input" type="text" name="marine_insurance" id="marine_insurance">
+                                                        @error('marine_insurance')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="" style="padding-top:10px">
+                                                    <button class="crancy-btn mg-top-25" type="button" id="MarineInsuranceBtn">{{ __('translate.Submit') }}</button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 ms-4">
+                                                <div class="crancy__item-form--group w-100 h-100">
+                                                        <label class="crancy__item-label">{{ __('translate.Inland Inspection')." ( $ )" }} * </label>
+                                                        <input class="crancy__item-input" type="text" name="inland_inspection" id="inland_inspection">
+                                                        @error('inland_inspection')
+                                                            <div style="color: red;">{{ $message }}</div>
+                                                        @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="" style="padding-top:10px">
+                                                    <button class="crancy-btn mg-top-25" type="button" id="InlandInspectionBtn">{{ __('translate.Submit') }}</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-5 d-flex justify-content-end align-items-center">
+                                                <div>
+                                                    <button class="crancy-btn delete_danger_btn" id="delete-model">Delete</button>  
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="row" style="margin-top:40px">
                                             <!-- <div class="col-md-4">
@@ -517,7 +553,6 @@
             } else {
                 toastr.error("Error", "Please check the Checkbox.");
             }    
-            
         });
         $("#shippingBtn").on('click', function() {
        
@@ -530,6 +565,36 @@
                 updateAllShipping();
             } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
                 updateSelectedShipping(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }    
+            
+        });
+        $("#MarineInsuranceBtn").on('click', function() {
+       
+            var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+            const selectedIds = Array.from(rowCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id')); 
+                
+            if($("#masterCheckbox").is(':checked')){
+                updateAllInsurance();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedInsurance(selectedIds);
+            } else {
+                toastr.error("Error", "Please check the Checkbox.");
+            }    
+            
+        });
+        $("#InlandInspectionBtn").on('click', function() {
+            var rowCheckboxes = document.querySelectorAll('.td-checkbox-class');
+            const selectedIds = Array.from(rowCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-id')); 
+            if($("#masterCheckbox").is(':checked')){
+                updateAllInland();
+            } else if((!$("#masterCheckbox").is(':checked') && selectedIds.length > 0 )) {
+                updateSelectedInland(selectedIds);
             } else {
                 toastr.error("Error", "Please check the Checkbox.");
             }    
@@ -734,6 +799,75 @@ newArrivalButtons.forEach(function(topSellButton) {
         });
     }   
 
+    function updateAllInsurance(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All Shipping value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    // url: "{{route('admin.store-all-shipping')}}",
+                    url: "{{route('admin.update-values')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        value: $("#marine_insurance").val(),
+                        type: "marine_insurance",
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }   
+    function updateAllInland(){
+        swal({
+            title: "Are you sure?",
+            text: "This will Change All Shipping value!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    // url: "{{route('admin.store-all-shipping')}}",
+                    url: "{{route('admin.update-values')}}",
+                    type: "POST", // Use POST for this AJAX call
+                    data: {
+                        value: $("#inland_inspection").val(),
+                        type: "inland_inspection",
+                        _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    },
+                    success: function(response) {
+                        if(response.success == true) {
+                            toastr.success("Success", response.message);
+                            location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        toastr.error("Error", "An error occurred while processing your request.");
+                    }
+            });
+            } else {
+              toastr.info("Your post is safe!");
+            }
+        });
+    }   
+
     function updateSelectedComission(selectedIds){
         $.ajax({
             url: "{{route('admin.store-car-comission')}}",
@@ -763,6 +897,51 @@ newArrivalButtons.forEach(function(topSellButton) {
             data: {
                 selectedIds: selectedIds,
                 commission: $("#shipping").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    // location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+    }
+    function updateSelectedInsurance(selectedIds){
+    
+        $.ajax({
+            url: "{{route('admin.store-car-insurance')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#marine_insurance").val(),
+                _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+            },
+            success: function(response) {
+                if(response.success == true) {
+                    toastr.success("Success", response.message);
+                    // location.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                toastr.error("Error", "An error occurred while processing your request.");
+            }
+        });
+    }
+
+    function updateSelectedInland(selectedIds){
+    
+        $.ajax({
+            url: "{{route('admin.store-car-inland')}}",
+            type: "POST", // Use POST for this AJAX call
+            data: {
+                selectedIds: selectedIds,
+                commission: $("#inland_inspection").val(),
                 _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
             },
             success: function(response) {

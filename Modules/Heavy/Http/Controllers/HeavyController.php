@@ -10,6 +10,8 @@ use Modules\Heavy\Entities\Heavy;
 use File;
 use Modules\Brand\Entities\Brand;
 use Modules\Models\Entities\ModelsCars;
+use Illuminate\Support\Facades\DB;
+use App\Models\JdmStockHeavyOtherCharges;
 
 class HeavyController extends Controller
 {
@@ -38,6 +40,82 @@ class HeavyController extends Controller
     public function storeHeavyComission(Request $request){
         Heavy::where('is_active', 1)
         ->update(['commission_value' => $request->commission]);
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+
+    public function validateUpdateRequest(Request $request)
+    {
+        return $request->validate([
+            'type' => 'required|in:shipping,commission,inland_inspection,marine_insurance',
+            'value' => 'required|numeric|min:0',
+        ]);
+    }
+
+    public function storeAllHeavyInsurance(Request $request){
+
+        $chunkSize = 1000; // Adjust based on your server capacity
+
+        $validated = $this->validateUpdateRequest($request);
+        
+        $value = $validated['value'];
+        $type = $validated['type'];
+
+
+        // Get all auction IDs in chunks
+        DB::table('heavy')
+        ->select('id')
+        ->orderBy('id')
+        ->chunk($chunkSize, function ($auctionLots) use ($value, $type) {
+            $ids = $auctionLots->pluck('id')->toArray();
+            
+            // Split processing based on what exists and what doesn't
+            $existingIds = DB::table('jdm_stock_heavy_other_charges')
+                ->whereIn('jdm_heavy_id', $ids)
+                ->pluck('jdm_heavy_id')
+                ->toArray();
+                
+            $newIds = array_diff($ids, $existingIds);
+            
+            // Handle updates in bulk
+            if (!empty($existingIds)) {
+                $updateData = ['updated_at' => now()];
+                
+                if ($type == 'marine_insurance') {
+                    $updateData['marine_insurance_value'] = (int) $value;
+                } elseif ($type == 'inland_inspection') {
+                    $updateData['inland_inspection_value'] = (int) $value;
+                }
+                
+                DB::table('jdm_stock_heavy_other_charges')
+                    ->whereIn('jdm_heavy_id', $existingIds)
+                    ->update($updateData);
+            }
+            
+            // Handle inserts in bulk
+            if (!empty($newIds)) {
+                $insertData = collect($newIds)->map(function ($id) use ($value, $type) {
+                    return [
+                        'jdm_heavy_id' => $id,
+                        'marine_insurance_value' => ($type == 'marine_insurance') ? (int) $value : 0,
+                        'inland_inspection_value' => ($type == 'inland_inspection') ? (int) $value : 0,
+                        'created_at' => now(),
+                        'updated_at' => now()
+                    ];
+                })->toArray();
+                
+                DB::table('jdm_stock_heavy_other_charges')->insert($insertData);
+            }
+        });
+        $notification= trans('translate.Success');
+        $notification=array('message'=>$notification,'alert-type'=>'success');
+        return response()->json(['success' => true, 'message' => 'Stored Successfully']);
+    }
+
+    public function storeCarInsuranceById(Request $request){
+        JdmStockHeavyOtherCharges::whereIn('jdm_heavy_id',$request->selectedIds)
+        ->update([$request->type . '_value' => $request->commission]);
         $notification= trans('translate.Success');
         $notification=array('message'=>$notification,'alert-type'=>'success');
         return response()->json(['success' => true, 'message' => 'Stored Successfully']);

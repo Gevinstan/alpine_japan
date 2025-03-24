@@ -92,7 +92,9 @@ use Carbon\Carbon;
                         <div class="banner-slick">
                         @foreach (array_slice($top_sells, 0, 3) as $index => $car)
                                 <div class="banner-slick-thumb">
+                                <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}">
                                     <img src="{{ asset($car['picture']) }}" alt="thumb" >
+                                </a>   
                                      
 
                                     <div class="banner-slick-thumb-overlay">
@@ -103,7 +105,7 @@ use Carbon\Carbon;
                                             </h6>
                                         </div>
                                         <div class="banner-slick-thumb-txt-two">
-                                            <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}">
+                                            <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}">
                                                 <h4>{{ html_decode($car['model_name_en']) }}</h4>
                                             </a>
                                         </div>
@@ -259,7 +261,9 @@ use Carbon\Carbon;
                                             <div class="brand-car-item">
                                                 <div class="brand-car-item-img">
                                                     <div class="">
-                                                        <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                        <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}"data-bs-toggle="tooltip">
+                                                            <img src="{{asset($car['picture']) }}" alt="thumb" class="card_image">
+                                                        </a>
                                                     </div>
                                                 </div>
 
@@ -300,7 +304,7 @@ use Carbon\Carbon;
 
                                                     </div>
 
-                                                     <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" 
+                                                     <a href="{{ route('fixed-car-marketplace-details', ['category' => 'top-selling', 'id' => $car['id']]) }}"data-bs-toggle="tooltip" 
                                                         title="@if(session('front_lang')=='en')
                                                             {{ html_decode($car['model_name_en']) }}
                                                             @else
@@ -418,8 +422,9 @@ use Carbon\Carbon;
                                     <div class="col-xl-3 col-lg-4 col-sm-6 col-md-6">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-                                                <img src="{{ asset($car->thumb_image) }}" alt="thumb">
-
+                                                <a href="{{ route('fixed-car-marketplace-details',  ['category' => 'top-selling', 'id' => $car['id']]) }}"data-bs-toggle="tooltip">
+                                                    <img src="{{ asset($car->thumb_image) }}" alt="thumb">
+                                                </a>    
                                                 <div class="brand-car-item-img-text">
 
                                                     <div class="text-df">
@@ -623,13 +628,13 @@ use Carbon\Carbon;
                                         data-aos-delay="50">
                                         <div class="brand-car-item">
                                             <div class="brand-car-item-img">
-
                                                 <div class="">
-                                                    <img src="{{ file_exists(public_path('Cars/' . $car->image)) ? 
-                                                                asset('Cars/' . $car->image) : 
-                                                                asset('uploads/website-images/no-image.jpg') }}" 
-                                                        alt="thumb" class="card_image">
-
+                                                    <a href="{{ route('jdm-stock-listing', [$car->id, 'car']) }}"data-bs-toggle="tooltip">
+                                                        <img src="{{ file_exists(public_path('Cars/' . $car->image)) ? 
+                                                                    asset('Cars/' . $car->image) : 
+                                                                    asset('uploads/website-images/no-image.jpg') }}" 
+                                                            alt="thumb" class="card_image">
+                                                    </a>        
                                                 </div>
                                                 
 
@@ -874,9 +879,10 @@ use Carbon\Carbon;
                             <div class="col-lg-4">
                                 <div class="brand-car-item">
                                     <div class="brand-car-item-img">
-                                
                                      <div class="">
-                                        <img src="{{ asset($car['picture']) }}" alt="thumb" class="card_image">
+                                        <a href="{{ route('fixed-car-marketplace-details', ['category' => 'new-arrivals', 'id' => $car['id']]) }}"data-bs-toggle="tooltip">
+                                            <img src="{{ asset($car['picture']) }}" alt="thumb" class="card_image">
+                                        </a>
                                     </div>
 
                                     </div>
@@ -916,7 +922,7 @@ use Carbon\Carbon;
                                             </p>
                                         </div>
 
-                                        <a href="{{ route('fixed-car-marketplace-details', $car['id']) }}"data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
+                                        <a href="{{ route('fixed-car-marketplace-details', ['category' => 'new-arrivals', 'id' => $car['id']]) }}"data-bs-toggle="tooltip" title="@if(session('front_lang')=='en')
                                                     {{ html_decode(!empty($car['model_name_en']) ? $car['model_name_en'] : '') }}
                                                 @else
                                                     {{ html_decode(!empty($car['model_name']) ? $car['model_name'] : '') }}

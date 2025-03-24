@@ -20,6 +20,8 @@ use Modules\DeliveryCharges\Entities\DeliveryCharge;
 use App\Models\Auct_lots_xml_jp;
 use Modules\Cars\Entities\Cars;
 use Modules\Heavy\Entities\Heavy;
+use App\Models\JdmStockBlogOtherCharges;
+use App\Models\JdmStockHeavyOtherCharges;
 
 class PaypalController extends Controller
 {
@@ -40,7 +42,7 @@ class PaypalController extends Controller
         return $result;
     }
 
-    public function pay_via_paypal(Request $request, $id,$type,$delievery){
+    public function pay_via_paypal(Request $request, $id,$type,$delievery,$status,$shipment){
 
     
 
@@ -49,11 +51,26 @@ class PaypalController extends Controller
             $notification=array('messege'=>$notification,'alert-type'=>'error');
             return redirect()->back()->with($notification);
         }
-        $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
+        $marine_insurance=0;
+        $inland_inspection=0;
+        if($shipment ==1){
+            $delivery_charge=DeliveryCharge::where('id',$delievery)->value('roro');
+        } else{
+            $delivery_charge=DeliveryCharge::where('id',$delievery)->value('container');
+        }
+        // $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
             if($type == '1'){
                 $price=CarDataJpOp::where('id', $id)->value('start_price_num');
                 $usd=$this->convertCurrency($price, $this->usdRate);
                 $get_charges=AuctLotsXmlJpOpOtherChargers::whereAuctId($id)->first();
+                if ($status==3) {
+                    $marine_insurance=$get_charges->marine_insurance_value;
+                    $inland_inspection=$get_charges->inland_inspection_value;
+                } elseif ($status==1) {
+                    $marine_insurance=$get_charges->marine_insurance_value;
+                } elseif ($status==2) {
+                    $inland_inspection=$get_charges->inland_inspection_value;
+                }
                 $commission=!empty($get_charges) ? $get_charges->commission_value : 0;
                 $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
             } else if($type =='2'){
@@ -64,10 +81,22 @@ class PaypalController extends Controller
                 $shipping=!empty($get_charges) ? $get_charges->shipping_value : 0;
                 // $delivery_charge=DeliveryCharge::where('id',$delievery)->value('rate');
             } else if($type == '3'){
-                $price=Cars::where('id', $id)->select('price','commission_value','shipping_value')->first();
+                $price=Cars::where('id', $id)->select('price')->first();
                 $usd=floatval(str_replace(',', '', $price->price));
-                $commission=!empty($price) ? $price->commission_value : 0;
-                $shipping=!empty($price) ? $price->shipping_value : 0;
+                // $commission=!empty($price) ? $price->commission_value : 0;
+                // $shipping=!empty($price) ? $price->shipping_value : 0;
+                $commission=0;
+                $shipping=0;
+
+                $get_charges=JdmStockBlogOtherCharges::whereJdmBlogId($id)->first();
+                if ($status==3) {
+                    $marine_insurance=$get_charges->marine_insurance_value;
+                    $inland_inspection=$get_charges->inland_inspection_value;
+                } elseif ($status==1) {
+                    $marine_insurance=$get_charges->marine_insurance_value;
+                } elseif ($status==2) {
+                    $inland_inspection=$get_charges->inland_inspection_value;
+                }
                 $commission=0;
                 $shipping=0;
                 // $delivery_charge=0;
@@ -76,6 +105,15 @@ class PaypalController extends Controller
                 $usd=floatval(str_replace(',', '', $price->price));
                 // $commission=!empty($price) ? $price->commission_value : 0;
                 // $shipping=!empty($price) ? $price->shipping_value : 0;
+                $get_charges=JdmStockHeavyOtherCharges::whereJdmHeavyId($id)->first();
+                if ($status==3) {
+                    $marine_insurance=$get_charges->marine_insurance_value;
+                    $inland_inspection=$get_charges->inland_inspection_value;
+                } elseif ($status==1) {
+                    $marine_insurance=$get_charges->marine_insurance_value;
+                } elseif ($status==2) {
+                    $inland_inspection=$get_charges->inland_inspection_value;
+                }
                 $commission=0;
                 $shipping=0;
                 // $delivery_charge=0;
@@ -83,7 +121,8 @@ class PaypalController extends Controller
             else {
                 $price=0;
             }
-            $total=($usd+$delivery_charge+$commission+$shipping);
+            
+            $total=($usd+$delivery_charge+$commission+$shipping+$marine_insurance+$inland_inspection);
         
         $user = Auth::guard('web')->user();
 

@@ -67,7 +67,13 @@
 
 
                             @if ($paypal->status == 1)
-                                <a href="{{ route('pay-via-paypal',['id' => $id, 'id1' => $type,'id2'=>$delievery_charge_id])}}" class="payment-inner-item modal-btn">
+                                <a href="{{ route('pay-via-paypal',
+                                        ['id' => $id, 
+                                         'id1' => $type,
+                                         'id2'=>$delievery_charge_id,
+                                         'id3'=>$status,
+                                         'id4'=>$shipment
+                                         ])}}" class="payment-inner-item modal-btn">
                                     <div class="payment-inner-item-label">
                                         <img src="{{ asset($paypal->image) }}" alt="img">
                                     </div>
