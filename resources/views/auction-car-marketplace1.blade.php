@@ -211,6 +211,81 @@
                 </div>
 
                 <div class="col-lg-9">
+                    <div class="container px-3 mb-3">
+                        <div class="bg-search p-4 rounded">
+                            <h5 class="fw-bold px-2 pb-2">Search Car</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-4 col-sm-6">
+                                        <select class="form-select p-3" id="vertical_brand" name="vertical_brand">
+                                            <option value="">Brand</option>
+                                            @foreach ($brands as $index=> $brand)
+                                            <option value="{{ strtolower($brand->name) }}"
+                                                {{ in_array( strtolower($brand->name) , (array) request('vertical_brand')) ? 'selected' : '' }}>
+                                                {{ $brand->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_filter_model" id="vertical_filter_model">
+                                        <option selected value="">Model</option>
+                                    
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <select class="form-select p-3" name="chassis_number" id="chassis_number">
+                                        <option selected value="">Chassis Number</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_start_year" id="vertical_start_year">
+                                        <option selected value="">Year From</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_end_year" id="vertical_end_year">
+                                        <option selected value="">Year To</option>
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_budget_start" id="vertical_budget_start">
+                                        <option selected value="">Budget From</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_budget_end" id="vertical_budget_end">
+                                        <option selected value="">Budget To</option>  
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <select class="form-select p-3" id="vertical_mileage_from" name="vertical_mileage_from">
+                                        <option selected value="">Mileage From</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 col-sm-6">
+                                    <select class="form-select p-3" id="vertical_mileage_to" name="vertical_mileage_to">
+                                        <option selected value="">Mileage To</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_transmission" id="vertical_transmission">
+                                        <option selected value="">Transmission</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <select class="form-select p-3" name="vertical_fuel" id="vertical_fuel">
+                                        <option selected value="">Fuel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end gap-3 align-items-center mt-3 px-2">
+                                <span class="fw-bold">400 Items Match</span>
+                                <button class="btn btn-primary">SEARCH</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="px-2 mb-2 inventory-ber">
                         <div class="inventory-ber-left">
                             <div class="d-flex flex-column flex-md-row inventory-sarch-ber-item">
@@ -900,6 +975,148 @@
 
 
     <script>
+
+            function getQueryParamValues(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has(param)) {
+                    return urlParams.getAll(param);  // Returns an array of values for the parameter
+                } else {
+                    return "";  // Returns an empty array if the parameter does not exist
+                }
+            }
+
+            function verticalChassis(distinctData,verticalFuel){
+                const selectTransmission = document.getElementById('chassis_number');
+                $("#chassis_number").empty();
+                $("#chassis_number").append('<option value="">Chassis Number</option>')
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.chassis.forEach(chassisNumber => {
+                            const option = document.createElement('option');
+                            option.value = chassisNumber;
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                    if (verticalFuel.includes(chassisNumber)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = chassisNumber;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+
+            function verticalStartYear(distinctData,verticalFuel,yearparam){
+                const selectTransmission = document.getElementById(yearparam);
+                var option_value=yearparam == 'vertical_start_year' ? 'Year From' : 'Year To';
+                $("#"+yearparam).empty().append('<option value="">'+option_value+'</option>');
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.years.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                    if (verticalFuel.includes(year)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }    
+
+            function verticalStartBudget(distinctData,verticalFuel,yearparam){
+                const selectTransmission = document.getElementById(yearparam);
+                var option_value=yearparam == 'vertical_budget_start' ? 'Budget From' : 'Budget To';
+                $("#"+yearparam).empty().append('<option value="">'+option_value+'</option>');
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.price.forEach(year => {
+                            const option = document.createElement('option');
+                            const yearWithoutCommas = year;
+                            option.value = yearWithoutCommas;
+                            // option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                if (verticalFuel.includes(yearWithoutCommas)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = `$${year}`;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+
+            function verticalStartMileage(distinctData,verticalFuel,yearparam){
+                const selectTransmission = document.getElementById(yearparam);
+                var option_value=yearparam == 'vertical_mileage_from' ? 'Mileage From' : 'Mileage To';
+                $("#"+yearparam).empty().append('<option value="">'+option_value+'</option>');
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.mileage.forEach(year => {
+                            const option = document.createElement('option');
+                            const yearWithoutCommas = year;
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                if (verticalFuel.includes(year)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+
+            function verticalTransmission(distinctData,verticalFuel){
+                const selectTransmission = document.getElementById('vertical_transmission');
+                $("#vertical_transmission").empty();
+                $("#vertical_transmission").append('<option value="">Transmission</option>')
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.transmission.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                    if (verticalFuel.includes(year)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+           
          window.addEventListener("load", function() {
         // Hide the loader when the page is fully loaded
         document.getElementById("pageLoader").classList.add("hidden");  
@@ -914,16 +1131,226 @@
             document.getElementById("pageLoader").classList.remove("hidden");
             "use strict"
 
-            const initialMinPrice = $('#ex2').data('slider-min');
-            const initialMaxPrice = $('#ex2').data('slider-max');
+                    const initialMinPrice = $('#ex2').data('slider-min');
+                    const initialMaxPrice = $('#ex2').data('slider-max');
+                    const initialMinYear = $('#ex3').data('slider-min');
+                    const initialMaxYear = $('#ex3').data('slider-max');
+
                 function clear_price_slider(){
                 let currentMinPrice = $('input[name="price_range_scale"]').val().split(',')[0];
                 let currentMaxPrice = $('input[name="price_range_scale"]').val().split(',')[1];
+                let currentMinYear = $('input[name="year"]').val().split(',')[0];
+                let currentMaxYear = $('input[name="year"]').val().split(',')[1];
                 if (currentMinPrice == initialMinPrice && currentMaxPrice == initialMaxPrice) {
                     $('input[name="price_range_scale"]').val('');
                 } 
+                if (currentMinYear == initialMinYear && currentMaxYear == initialMaxYear) {
+                        $('input[name="year"]').val('');
+                    } 
                 // $('#ex2').prop('disabled', true);
                 }
+                var brand_list=@json($brand_arr);
+
+                var vertical_brand=getQueryParamValues('vertical_brand');
+
+                if($("#vertical_brand").val()!=""){
+                    var model_list = brand_list[$("#vertical_brand").val()];
+                    for (let index = 0; index < model_list.length; index++) {
+                        const element = model_list[index];
+                        $("#vertical_filter_model").append('<option value="'+element.model+'">'+element.model+'</option>')   
+                    }
+                }    
+
+                const selectElement = document.getElementById('vertical_filter_model');
+                // // $("#vertical_filter_model").empty().append('<option value="">Model</option>');
+                var vertical_filter_model=getQueryParamValues('vertical_filter_model');
+                // console.log(vertical_filter_model);
+                
+                if(vertical_filter_model!=""){
+                    var model_list = brand_list[$("#vertical_brand").val()];
+                    for (let index = 0; index < model_list.length; index++) {
+                        const element = model_list[index];
+                        const option = document.createElement('option');
+                        option.value = element.model;
+
+                        // Check if the year is in the selected verticalStartYear array
+                        if (vertical_filter_model[0] == element.model) {
+                            option.selected = true;  // If it matches, select it
+                        }
+
+                        // Set the display text for the option
+                        option.textContent = element.model;
+                        // Append the option to the select element
+                        selectElement.appendChild(option);
+                    } 
+                    let auction = JSON.parse(localStorage.getItem('auction'));
+                    console.log(auction)
+                
+                    var fuel_start_year=getQueryParamValues('vertical_start_year');
+                    var fuel_end_year=getQueryParamValues('vertical_end_year');
+                    var fuel_chassis=getQueryParamValues('chassis_number');
+                    var fuel_start_budget=getQueryParamValues('vertical_budget_start');
+                    var fuel_end_budget=getQueryParamValues('vertical_budget_end');
+                    var fuel_start_mileage=getQueryParamValues('vertical_mileage_from');
+                    var fuel_end_mileage=getQueryParamValues('vertical_mileage_to');
+                    var fuel_transmission=getQueryParamValues('vertical_transmission');
+                    verticalChassis(auction,fuel_chassis[0])
+                    verticalStartYear(auction,fuel_start_year[0],"vertical_start_year")
+                    verticalStartYear(auction,fuel_end_year[0],"vertical_end_year")
+                    verticalStartBudget(auction,fuel_start_budget[0],"vertical_budget_start")
+                    verticalStartBudget(auction,fuel_end_budget[0],"vertical_budget_end")
+                    verticalStartMileage(auction,fuel_start_mileage[0],"vertical_mileage_from")
+                    verticalStartMileage(auction,fuel_end_mileage[0],"vertical_mileage_to")
+                    verticalTransmission(auction,fuel_transmission[0])
+                }    
+                else {
+                    if($("#vertical_brand").val()!=""){
+                        for (let index = 0; index < model_list.length; index++) {
+                        const element = model_list[index];
+                        const option = document.createElement('option');
+                        option.value = element.model;
+
+                       
+                        // Set the display text for the option
+                        option.textContent = element.model;
+                        // Append the option to the select element
+                        selectElement.appendChild(option);
+                    } 
+                    }
+               
+                }
+
+                  
+             $('#vertical_brand').on('change',function(e){
+                e.preventDefault();  
+                localStorage.removeItem('auction');
+                 var brand_value=$("#vertical_brand").val();
+                $('#search_form')[0].reset(); 
+                $("#vertical_brand").val(brand_value)
+                history.replaceState({}, '', location.pathname);
+                clear_price_slider();   
+                $("#search_form").submit();
+             });   
+
+            if($("#vertical_filter_model").val()==""){
+                localStorage.removeItem('auction');
+            }
+            let distinctData = JSON.parse(localStorage.getItem('auction'));
+            $("#vertical_filter_model").on('change', function(e) {
+                    var model_value=$("#vertical_filter_model").val();
+                    var brand_value=$("#vertical_brand").val();
+                    var type=""
+                    e.preventDefault();  
+                    if($("#vertical_filter_model").val() !=""){
+                            $.ajax({
+                            type: 'POST',
+                            data: {
+                                'model': $("#vertical_filter_model").val(),
+                                'brand':$("#vertical_brand").val(),
+                            },
+                            datatype: 'JSON',
+                            url: '{{ route("search.filter.auction") }}',
+                            success: function(data) {
+                                console.log(data.response)
+                                localStorage.setItem('auction', JSON.stringify(data.response));  
+                            }
+                            });
+                    }  else {
+                        localStorage.setItem('auction', JSON.stringify({}));
+                    }
+                    let auction = JSON.parse(localStorage.getItem('auction'));
+                    $('#search_form')[0].reset(); 
+                    $("#vertical_filter_model").val(model_value)    
+                    $("#vertical_brand").val(brand_value)
+
+                    clear_price_slider();   
+                    $('#search_form').submit();  
+                });
+
+
+                $("#chassis_number").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                });
+
+                $("#vertical_fuel").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                })
+                $("#vertical_transmission").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                })
+
+
+                $("#vertical_start_year").on('change',function(e){
+                     if($("#vertical_start_year").val()!="" && $("#vertical_end_year").val()!=""){
+                          if($("#vertical_start_year").val() > $("#vertical_end_year").val()){
+                            toastr.error("Start year should be less than end year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                         
+                     } 
+                });
+                $("#vertical_end_year").on('change',function(e){
+                    if($("#vertical_start_year").val()!="" && $("#vertical_end_year").val()!=""){
+                          if($("#vertical_start_year").val() > $("#vertical_end_year").val()){
+                            toastr.error("End year should be greater than start year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                    } 
+                });
+                $("#vertical_budget_start").on('change',function(e){
+                     if($("#vertical_budget_start").val()!="" && $("#vertical_budget_end").val()!=""){
+                          if(parseInt($("#vertical_budget_start").val()) > parseInt($("#vertical_budget_end").val())){
+                            toastr.error("Start year should be less than end year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                         
+                     } 
+                });
+                $("#vertical_budget_end").on('change',function(e){
+                    if($("#vertical_budget_start").val()!="" && $("#vertical_budget_end").val()!=""){
+
+                          if(parseInt($("#vertical_budget_start").val()) > parseInt($("#vertical_budget_end").val())){
+                            toastr.error("End Budget should be greater than start year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                    } 
+                });
+                $("#vertical_mileage_from").on('change',function(e){
+                     if($("#vertical_mileage_from").val()!="" && $("#vertical_mileage_to").val()!=""){
+                          if(parseInt($("#vertical_mileage_from").val()) > parseInt($("#vertical_mileage_to").val())){
+                            toastr.error("From Mileage should be less than To Mileage","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }  
+                     } 
+                });
+                $("#vertical_mileage_to").on('change',function(e){
+                    if($("#vertical_mileage_from").val()!="" && $("#vertical_mileage_to").val()!=""){
+                          if(parseInt($("#vertical_mileage_from").val()) > parseInt($("#vertical_mileage_to").val())){
+                            toastr.error("To Mileage should be greater than start Mileage","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                    } 
+                });
+               
+
 
             $(document).ready(function () {
                 const form = $('#search_form');
