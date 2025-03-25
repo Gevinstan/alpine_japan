@@ -596,6 +596,17 @@
     font-weight: 500;
     border: 1px solid var(--primary-color-1);
 }
+.mobile_login {
+    background-color: var(--primary-color-1) !important;
+    height: 40px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-family: var(--roboto);
+
+
+}
 
 .thm-btn a {
     color: var(--headline-color);

@@ -460,6 +460,10 @@
                 <li>
                     <a class="{{ Route::is('contact-us') ? 'active' : '' }}" href="{{ route('contact-us') }}">{{ __('translate.Contact') }}</a>
                 </li>
+
+                <li class="d-flex align-items-center">
+                    <a href="#" class="btn text-white d-flex justify-content-center mobile_login">LOGIN</a>
+                </li>
             </ul>
         </nav>
     </aside>
