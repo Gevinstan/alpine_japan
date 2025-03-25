@@ -1028,295 +1028,355 @@ class HomeController extends Controller
         $wishlists=[];
  
 
-        // DB::enableQueryLog();
+        DB::enableQueryLog();
 
-        if($type == 'car'){
-       
-            if(Auth::guard('web')->check()){
-                $userId = $userId ?? auth()->id();
-                $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
-                // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
-                    ->where('w.table_id', '3')
-                    ->where('w.user_id', $userId)
-                    ->pluck('w.car_id')
-                    ->toArray();
-            }
-        
-             
-            // DB::enableQueryLog();
-            $carsQuery =Cars::where(DB::raw('LOWER(make)'), $slug)
-            ->where('is_active','1')
-            ->whereRaw('REGEXP_REPLACE(price, "[,\\s]", "") REGEXP "^[0-9]+$"')
-            ->select('blog.*');    
-        } else if($type == 'heavy'){
-            if(Auth::guard('web')->check()){
-                $userId = $userId ?? auth()->id();
-                $wishlists=Heavy::join('wishlists as w', 'heavy.id', '=', 'w.car_id')
-                // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
-                    ->where('w.table_id', '4')
-                    ->pluck('w.car_id')
-                    ->toArray();
-            }
-            $carsQuery = Heavy::
-            where('heavy.make', $slug)
-            ->where('is_active','1')
-            ->whereRaw('REGEXP_REPLACE(heavy.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
-            ->select('heavy.*');
-            // dd(DB::getQueryLog()); 
-        } 
-        
-        if($request->search){
-            if($request->search !=""){
-                if($type == 'car'){
-                    $carsQuery->where(function ($query) use ($request) {
-                        $query->where('blog.title', 'LIKE', $request->search . '%')
-                              ->orWhere('blog.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
-                              ->orWhere('blog.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
-                    }); 
-                }  else if($type == 'heavy'){
-                    $carsQuery->where(function ($query) use ($request) {
-                        $query->where('heavy.title', 'LIKE', $request->search . '%')
-                              ->orWhere('heavy.make', 'LIKE', $request->search . '%')  // Replace 'column2'jdm with the actual column name
-                              ->orWhere('heavy.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
-                    }); 
-                }  else if($type =='small_heavy') {
-                    $carsQuery->where(function ($query) use ($request) {
-                        $query->where('small_heavy.title', 'LIKE', $request->search . '%')
-                              ->orWhere('small_heavy.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
-                              ->orWhere('small_heavy.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
-                    }); 
-                }     
-            }
-        }
-
-        if($request->year){
-            // if($request->year !=""){  
-            //     $hasPriceRangeScale = true;
-                $parts = explode(',', $request->year);
-                $startYear=trim($parts[0]);
-                $endYear=trim($parts[1]);
- 
-            //     // $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
-            //     //     $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
-            //     // });
-            // }
-            if($request->year !="")
-            {
-                if($type== 'car'){
-                    // $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
-                    $carsQuery = $carsQuery->whereRaw("
-                    CAST(REGEXP_SUBSTR(blog.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
-                    [$startYear, $endYear]
-                );
-                    
-                    
-                  }  else if($type == 'heavy'){
-                    // $carsQuery->where('heavy.yom', 'like', '%' . $request->year . '%'); 
-                    $carsQuery = $carsQuery->whereRaw("
-                    CAST(REGEXP_SUBSTR(heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
-                    [$startYear, $endYear]
-                    );
-                  } else if($type =='small_heavy'){
-                    // $carsQuery->where('small_heavy.yom', 'like', '%' . $request->year . '%'); 
-                    $carsQuery = $carsQuery->whereRaw("
-                    CAST(REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
-                    [$startYear, $endYear]
-                    );
-                    // $carsQuery->whereRaw("REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') = ?", [
-                    //     $request->year 
-                    // ]);
-                  }
-            }
-        }
-        
-        if($request->model){
-            $model_arr = array_filter($request->model); 
-            // echo $request->model;
-            // echo json_encode($model_arr);die();
-            // Filter out any empty values
-            if ($model_arr) {
-                // echo "one";die();
-                if($type== 'car'){
-                    $carsQuery->where(function ($query) use ($model_arr) {
-                        foreach ($model_arr as $model) {
-                            $query->orWhereRaw('TRIM(blog.model) = ?', [$model]);
-                        }
-                    });
-                    // $carsQuery->whereIn('blog.model', $model_arr); 
-                  }  else if($type == 'heavy'){
-                    $carsQuery->where(function ($query) use ($model_arr) {
-                        foreach ($model_arr as $model) {
-                            $query->orWhereRaw('TRIM(heavy.model) = ?', [$model]);
-                        }
-                    });
-                    //   $carsQuery->whereIn('heavy.model', $model_arr);
-                  } else if($type =='small_heavy'){
-                    $carsQuery->where(function ($query) use ($model_arr) {
-                        foreach ($model_arr as $model) {
-                            $query->orWhereRaw('TRIM(small_heavy.model) = ?', [$model]);
-                        }
-                    });
-                      $carsQuery->whereIn('small_heavy.model', $model_arr);
-                  }
-            }
-        }
-        if($request->vertical_filter_model){
-            $model_arr = $request->vertical_filter_model; 
-            if ($model_arr) {
-                if($type== 'car'){
-                    $carsQuery->where(function ($query) use ($model_arr) {
-                            $query->orWhereRaw('TRIM(blog.model) = ?', $model_arr);
-                    });
-                    // $carsQuery->whereIn('blog.model', $model_arr); 
-                  }  else {
-                   c(function ($query) use ($model_arr) {
-                            $query->orWhereRaw('TRIM(heavy.model) = ?', $model_arr);
-                    });
-                    //   $carsQuery->whereIn('heavy.model', $model_arr);
-                  }
-            }
-        }
-
-        if($request->chassis_number){
-            $carsQuery->where('chassis',$request->chassis_number);
-        }
-
-        if($request->brand_new_cars){
-            $year = date('Y'); 
             if($type == 'car'){
-             $carsQuery->where('blog.year_of_reg', 'LIKE', $year . '%');    
-            } else if($type == 'heavy'){
-             $carsQuery->where('heavy.year_of_reg', 'LIKE', $year . '%');
-            } else if($type =='small_heavy'){
-                $carsQuery->where('small_heavy.year_of_reg', 'LIKE', $year . '%');
-            }
-        }
+        
+                if(Auth::guard('web')->check()){
+                    $userId = $userId ?? auth()->id();
+                    $wishlists=Cars::join('wishlists as w', 'blog.id', '=', 'w.car_id')
+                    // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+                        ->where('w.table_id', '3')
+                        ->where('w.user_id', $userId)
+                        ->pluck('w.car_id')
+                        ->toArray();
+                }
+            
+                
+                // DB::enableQueryLog();
+                $carsQuery =Cars::where(DB::raw('LOWER(make)'), $slug)
+                ->where('is_active','1')
+                ->whereRaw('REGEXP_REPLACE(price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+                ->select('blog.*');    
 
-        if ($request->sort_by) {
-            switch ($request->sort_by) {
-                case 'price_low_high':
+                $filterQuery=$carsQuery;
+            } else if($type == 'heavy'){
+                if(Auth::guard('web')->check()){
+                    $userId = $userId ?? auth()->id();
+                    $wishlists=Heavy::join('wishlists as w', 'heavy.id', '=', 'w.car_id')
+                    // $wishlistItems = \App\Models\Wishlist::where('user_id', $userId)
+                        ->where('w.table_id', '4')
+                        ->pluck('w.car_id')
+                        ->toArray();
+                }
+                $carsQuery = Heavy::
+                where('heavy.make', $slug)
+                ->where('is_active','1')
+                ->whereRaw('REGEXP_REPLACE(heavy.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+                ->select('heavy.*');
+                  $filterQuery=$carsQuery;
+                // dd(DB::getQueryLog()); 
+            } 
+            
+            if($request->search){
+                if($request->search !=""){
                     if($type == 'car'){
-                        // $carsQuery->orderBy('blog.price', 'asc');  
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(blog.price, '[^0-9]', '') AS UNSIGNED) ASC");  
-                       } else if($type == 'heavy'){
-                        // $carsQuery->orderBy('heavy.price', 'asc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) ASC");  
-                       }  
-                    break;
-                case 'price_high_low':
-                   if($type == 'car'){
-                        // $carsQuery->orderBy('blog.price', 'desc');    
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(blog.price, '[^0-9]', '') AS UNSIGNED) desc");  
-                       } else if($type == 'heavy'){
-                        // $carsQuery->orderBy('heavy.price', 'desc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) desc");  
-                       } 
-                    break;
-                case 'old_to_new':
-                   if($type == 'car'){
-                        // $carsQuery->orderBy('blog.price', 'desc');    
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC"); 
-                       } else if($type == 'heavy'){
-                        // $carsQuery->orderBy('heavy.price', 'desc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC");
-                       } 
-                    break;
-                case 'new_to_old':
-                   if($type == 'car'){
-                        // $carsQuery->orderBy('blog.price', 'desc');    
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc"); 
-                       } else if($type == 'heavy'){
-                        // $carsQuery->orderBy('heavy.price', 'desc');
-                        $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc");
-                       } 
-                    break;
-                case 'recent':  
-                    if($type == 'car'){   
-                        $recentCarIds = $carsQuery->orderBy('blog.id', 'desc')
-                        ->limit(100)
-                        ->pluck('id');
-                        $carsQuery = $carsQuery->whereIn('blog.id', $recentCarIds);
-                       } else if($type == 'heavy'){
-                            $recentCarIds = $carsQuery->orderBy('heavy.id', 'desc')
-                            ->limit(100)
-                            ->pluck('id');
-                            $carsQuery = $carsQuery->whereIn('heavy.id', $recentCarIds);
-                       } 
-                    break;
-            }
-        }
-        if($request->price_range_scale){
-            if($request->price_range_scale !=""){  
-                $hasPriceRangeScale=true;
-                $parts = explode(',', $request->price_range_scale);
-                $startValue = trim($parts[0]);
-                $endValue = trim($parts[1]);
-                // $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
-                //     $q->whereBetween('start_price_num', [$startValue, $endValue])
-                //     ->orWhereBetween('end_price_num', [$startValue, $endValue]);
-                // });
-                if($type=='car')
-                {
-                    $startValue = (int)trim(str_replace('"', '', $parts[0]));
-                    $endValue = (int)trim(str_replace('"', '', $parts[1]));
-                    $carsQuery->whereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                                    $startValue,
-                                    $endValue
-                            ]);
-                } else if($type == 'heavy'){
-                    $carsQuery->whereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                        $startValue,
-                        $endValue
-                ]);
-                } else if($type == 'small_heavy'){
-                    $carsQuery->whereRaw("REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
-                        $startValue,
-                        $endValue
-                ]);
+                        $carsQuery->where(function ($query) use ($request) {
+                            $query->where('blog.title', 'LIKE', $request->search . '%')
+                                ->orWhere('blog.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
+                                ->orWhere('blog.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
+                        }); 
+                    }  else if($type == 'heavy'){
+                        $carsQuery->where(function ($query) use ($request) {
+                            $query->where('heavy.title', 'LIKE', $request->search . '%')
+                                ->orWhere('heavy.make', 'LIKE', $request->search . '%')  // Replace 'column2'jdm with the actual column name
+                                ->orWhere('heavy.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
+                        }); 
+                    }  else if($type =='small_heavy') {
+                        $carsQuery->where(function ($query) use ($request) {
+                            $query->where('small_heavy.title', 'LIKE', $request->search . '%')
+                                ->orWhere('small_heavy.make', 'LIKE', $request->search . '%')  // Replace 'column2' with the actual column name
+                                ->orWhere('small_heavy.model', 'LIKE', $request->search . '%');  // Replace 'column3' with the actual column name
+                        }); 
+                    }     
                 }
             }
-        }
 
-        if($request->price_range){
-            // $carsQuery->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
-                $priceRanges = [
-                    "Under $5000" => ["start" => 0, "end" => 5000],
-                    "$5000 - $50000" => ["start" => 5001, "end" => 50000],
-                    "$50000 - $100000" => ["start" => 50001, "end" => 100000],
-                    "$100000 - $200000" => ["start" => 100001, "end" => 200000],
-                    "$200000 - $300000" => ["start" => 200001, "end" => 300000],
-                    "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
-                ];
-                
+            if($request->year){
+                // if($request->year !=""){  
+                //     $hasPriceRangeScale = true;
+                    $parts = explode(',', $request->year);
+                    $startYear=trim($parts[0]);
+                    $endYear=trim($parts[1]);
+    
+                //     // $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                //     //     $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+                //     // });
+                // }
+                if($request->year !="")
+                {
+                    if($type== 'car'){
+                        // $carsQuery->where('blog.yom', 'like', '%' . $request->year . '%'); 
+                        $carsQuery = $carsQuery->whereRaw("
+                        CAST(REGEXP_SUBSTR(blog.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                        [$startYear, $endYear]
+                    );
+                        
+                        
+                    }  else if($type == 'heavy'){
+                        // $carsQuery->where('heavy.yom', 'like', '%' . $request->year . '%'); 
+                        $carsQuery = $carsQuery->whereRaw("
+                        CAST(REGEXP_SUBSTR(heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                        [$startYear, $endYear]
+                        );
+                    } else if($type =='small_heavy'){
+                        // $carsQuery->where('small_heavy.yom', 'like', '%' . $request->year . '%'); 
+                        $carsQuery = $carsQuery->whereRaw("
+                        CAST(REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                        [$startYear, $endYear]
+                        );
+                        // $carsQuery->whereRaw("REGEXP_SUBSTR(small_heavy.yom, '[0-9]{4}') = ?", [
+                        //     $request->year 
+                        // ]);
+                    }
+                }
+            }
+            
+            if($request->model){
+                $model_arr = array_filter($request->model); 
+                // echo $request->model;
+                // echo json_encode($model_arr);die();
+                // Filter out any empty values
+                if ($model_arr) {
+                    // echo "one";die();
+                    if($type== 'car'){
+                        $carsQuery->where(function ($query) use ($model_arr) {
+                            foreach ($model_arr as $model) {
+                                $query->orWhereRaw('TRIM(blog.model) = ?', [$model]);
+                            }
+                        });
+                        // $carsQuery->whereIn('blog.model', $model_arr); 
+                    }  else if($type == 'heavy'){
+                        $carsQuery->where(function ($query) use ($model_arr) {
+                            foreach ($model_arr as $model) {
+                                $query->orWhereRaw('TRIM(heavy.model) = ?', [$model]);
+                            }
+                        });
+                        //   $carsQuery->whereIn('heavy.model', $model_arr);
+                    } else if($type =='small_heavy'){
+                        $carsQuery->where(function ($query) use ($model_arr) {
+                            foreach ($model_arr as $model) {
+                                $query->orWhereRaw('TRIM(small_heavy.model) = ?', [$model]);
+                            }
+                        });
+                        $carsQuery->whereIn('small_heavy.model', $model_arr);
+                    }
+                }
+            }
+            if($request->vertical_filter_model){
+                $model_arr = $request->vertical_filter_model; 
+                if ($model_arr) {
+                    if($type== 'car'){
+                        $carsQuery->where(function ($query) use ($model_arr) {
+                                $query->WhereRaw('TRIM(blog.model) = ?', $model_arr);
+                        });
+                        // $carsQuery->whereIn('blog.model', $model_arr); 
+                    }  else {
+                        $carsQuery->where(function ($query) use ($model_arr) {
+                            $query->WhereRaw('TRIM(heavy.model) = ?', $model_arr);
+                        });
+                        //   $carsQuery->whereIn('heavy.model', $model_arr);
+                    }
+                }
+            }
+            if($request->vertical_transmission){
+                $vertical_transmission = $request->vertical_transmission; 
+                if ($vertical_transmission) {
+                    if($type== 'car'){
+                        $carsQuery->Where('transmission', $vertical_transmission);
+                        // $carsQuery->whereIn('blog.model', $model_arr); 
+                    }  else {
+                        $carsQuery->Where('transmission', $vertical_transmission);
+                    }
+                }
+            }
+
+            if($request->vertical_start_year || $request->vertical_end_year){
+                $vertical_start=$request->vertical_start_year;
+                $vertical_end=$request->vertical_end_year;
+                if($type== 'car'){
+                    $carsQuery = $carsQuery->whereRaw("
+                        CAST(REGEXP_SUBSTR(blog.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                        [$vertical_start, $vertical_end]
+                    );    
+                }  else {
+                    $carsQuery = $carsQuery->whereRaw("
+                        CAST(REGEXP_SUBSTR(heavy.yom, '[0-9]{4}') AS UNSIGNED) BETWEEN ? AND ?", 
+                        [$vertical_start, $vertical_end]
+                    );
+                } 
+            }
+            if($request->vertical_budget_start || $request->vertical_budget_end){
+                $vertical_budget_start=(int)trim(str_replace('"', '', $request->vertical_budget_start));
+                $vertical_budget_end=(int)trim(str_replace('"', '', $request->vertical_budget_end));
                 if($type=='car')
                 {
-                    $table='blog.price';
+                    $carsQuery->where(function ($query) use ($request, $vertical_budget_start,$vertical_budget_end) {
+                            $query->orWhereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
+                                $vertical_budget_start,
+                                $vertical_budget_end
+                            ]);
+                    }); 
+                } else {
+                    $carsQuery->where(function ($query) use ($request, $vertical_budget_start,$vertical_budget_end) {
+                            $query->orWhereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
+                                $vertical_budget_start,
+                                $vertical_budget_end
+                            ]);
+                    }); 
+                }
+            }    
+            if($request->vertical_mileage_from || $request->vertical_mileage_to){
+                $vertical_mileage_from=(int)trim(str_replace('"', '', $request->vertical_mileage_from));
+                $vertical_mileage_to=(int)trim(str_replace('"', '', $request->vertical_mileage_to));
+                if($type=='car')
+                {
+                    $carsQuery->whereBetween('blog.kms', [$vertical_mileage_from, $vertical_mileage_to]);
+                } else {
+                    $carsQuery->whereBetween('heavy.kms', [$vertical_mileage_from, $vertical_mileage_to]);
+                }
+            }    
+
+            if($request->chassis_number){
+                $carsQuery->where('chassis',$request->chassis_number);
+            }
+
+            if($request->brand_new_cars){
+                $year = date('Y'); 
+                if($type == 'car'){
+                $carsQuery->where('blog.year_of_reg', 'LIKE', $year . '%');    
                 } else if($type == 'heavy'){
-                    $table='heavy.price';
-                } else if($type == 'small_heavy'){
-                    $table='small_heavy.price';
-                }    
+                $carsQuery->where('heavy.year_of_reg', 'LIKE', $year . '%');
+                } else if($type =='small_heavy'){
+                    $carsQuery->where('small_heavy.year_of_reg', 'LIKE', $year . '%');
+                }
+            }
 
-                $carsQuery->where(function ($query) use ($request, $priceRanges,$table) {
-                    foreach ($request->price_range as $range) {
-                        $result = $this->getPriceRangestart($range, $priceRanges);
-            
-                        $query->orWhereRaw("REGEXP_REPLACE($table, '[^0-9]', '') BETWEEN ? AND ?", [
-                            $result['start_price_num'],
-                            $result['end_price_num']
-                        ]);
+            if ($request->sort_by) {
+                switch ($request->sort_by) {
+                    case 'price_low_high':
+                        if($type == 'car'){
+                            // $carsQuery->orderBy('blog.price', 'asc');  
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(blog.price, '[^0-9]', '') AS UNSIGNED) ASC");  
+                        } else if($type == 'heavy'){
+                            // $carsQuery->orderBy('heavy.price', 'asc');
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) ASC");  
+                        }  
+                        break;
+                    case 'price_high_low':
+                    if($type == 'car'){
+                            // $carsQuery->orderBy('blog.price', 'desc');    
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(blog.price, '[^0-9]', '') AS UNSIGNED) desc");  
+                        } else if($type == 'heavy'){
+                            // $carsQuery->orderBy('heavy.price', 'desc');
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(heavy.price, '[^0-9]', '') AS UNSIGNED) desc");  
+                        } 
+                        break;
+                    case 'old_to_new':
+                    if($type == 'car'){
+                            // $carsQuery->orderBy('blog.price', 'desc');    
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC"); 
+                        } else if($type == 'heavy'){
+                            // $carsQuery->orderBy('heavy.price', 'desc');
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) ASC");
+                        } 
+                        break;
+                    case 'new_to_old':
+                    if($type == 'car'){
+                            // $carsQuery->orderBy('blog.price', 'desc');    
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(blog.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc"); 
+                        } else if($type == 'heavy'){
+                            // $carsQuery->orderBy('heavy.price', 'desc');
+                            $carsQuery->orderByRaw("CAST(REGEXP_REPLACE(REGEXP_SUBSTR(heavy.yom, '[0-9]+'), '[^0-9]', '') AS UNSIGNED) desc");
+                        } 
+                        break;
+                    case 'recent':  
+                        if($type == 'car'){   
+                            $recentCarIds = $carsQuery->orderBy('blog.id', 'desc')
+                            ->limit(100)
+                            ->pluck('id');
+                            $carsQuery = $carsQuery->whereIn('blog.id', $recentCarIds);
+                        } else if($type == 'heavy'){
+                                $recentCarIds = $carsQuery->orderBy('heavy.id', 'desc')
+                                ->limit(100)
+                                ->pluck('id');
+                                $carsQuery = $carsQuery->whereIn('heavy.id', $recentCarIds);
+                        } 
+                        break;
+                }
+            }
+            if($request->price_range_scale){
+                if($request->price_range_scale !=""){  
+                    $hasPriceRangeScale=true;
+                    $parts = explode(',', $request->price_range_scale);
+                    $startValue = trim($parts[0]);
+                    $endValue = trim($parts[1]);
+                    // $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                    //     $q->whereBetween('start_price_num', [$startValue, $endValue])
+                    //     ->orWhereBetween('end_price_num', [$startValue, $endValue]);
+                    // });
+                    if($type=='car')
+                    {
+                        $startValue = (int)trim(str_replace('"', '', $parts[0]));
+                        $endValue = (int)trim(str_replace('"', '', $parts[1]));
+                        $carsQuery->whereRaw("REGEXP_REPLACE(blog.price, '[^0-9]', '') BETWEEN ? AND ?", [
+                                        $startValue,
+                                        $endValue
+                                ]);
+                    } else if($type == 'heavy'){
+                        $carsQuery->whereRaw("REGEXP_REPLACE(heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
+                            $startValue,
+                            $endValue
+                    ]);
+                    } else if($type == 'small_heavy'){
+                        $carsQuery->whereRaw("REGEXP_REPLACE(small_heavy.price, '[^0-9]', '') BETWEEN ? AND ?", [
+                            $startValue,
+                            $endValue
+                    ]);
                     }
-                }); 
-    
+                }
+            }
+
+            if($request->price_range){
+                // $carsQuery->whereRaw('REGEXP_REPLACE(price, "[,\\\\s]", "") REGEXP "^[0-9]+$"');
+                    $priceRanges = [
+                        "Under $5000" => ["start" => 0, "end" => 5000],
+                        "$5000 - $50000" => ["start" => 5001, "end" => 50000],
+                        "$50000 - $100000" => ["start" => 50001, "end" => 100000],
+                        "$100000 - $200000" => ["start" => 100001, "end" => 200000],
+                        "$200000 - $300000" => ["start" => 200001, "end" => 300000],
+                        "Above $300000" => ["start" => 300001, "end" => PHP_INT_MAX] // Use PHP_INT_MAX for "Above"
+                    ];
+                    
+                    if($type=='car')
+                    {
+                        $table='blog.price';
+                    } else if($type == 'heavy'){
+                        $table='heavy.price';
+                    } else if($type == 'small_heavy'){
+                        $table='small_heavy.price';
+                    }    
+
+                    $carsQuery->where(function ($query) use ($request, $priceRanges,$table) {
+                        foreach ($request->price_range as $range) {
+                            $result = $this->getPriceRangestart($range, $priceRanges);
                 
-
-
-        }
-      
-      
+                            $query->orWhereRaw("REGEXP_REPLACE($table, '[^0-9]', '') BETWEEN ? AND ?", [
+                                $result['start_price_num'],
+                                $result['end_price_num']
+                            ]);
+                        }
+                    }); 
         
-        // Pagination
-        $cars = $carsQuery->paginate(12);
+                    
+
+
+            }
+     
+        
+            
+            // Pagination
+            $cars = $carsQuery->paginate(12);
         // Transform cars into an array for the view
         $cars_array = $cars->map(function ($car) {
         // $car_image=$this->last_image($car->pictures);
@@ -1355,38 +1415,8 @@ class HomeController extends Controller
         $hasPriceRangeScale,$startValue,$endValue);
 
 
-        // echo json_encode($brand_list);die();
+    
       
-         
-        $results = $carsQuery->select('yom', 'kms', 'transmission','fuel')
-        ->groupBy('yom', 'kms', 'transmission','fuel')
-        ->get();
-
-        // Extract the distinct values and remove null/empty values
-        // $distinctYears = $results->pluck('yom')->filter()->unique()->values();
-        $distinctYears = $results->pluck('yom')
-                ->map(function ($year) {
-                    // Attempt to parse the year and format it
-                    try {
-                        return Carbon::parse($year)->format('Y');
-                    } catch (\Exception $e) {
-                        // If parsing fails (e.g., invalid date), return the original value
-                        return $year;
-                    }
-                })
-                ->filter() // Remove null or empty values
-                ->unique() // Remove duplicate years
-                ->values();
-        $distinctMileage = $results->pluck('kms')->filter()->unique()->values();
-        $distinctTransmission = $results->pluck('transmission')->filter()->unique()->values();
-        $distinctFuel = $results->pluck('fuel')->filter()->unique()->values();
-
-        $distinctData= [
-        'years' => $distinctYears,
-        'mileage' => $distinctMileage,
-        'transmission' => $distinctTransmission,
-        'fuel' => $distinctFuel,
-        ];
 
         return view('jdm-stock-client', [
         // return view('jdm-stock-responsive', [
@@ -1411,12 +1441,246 @@ class HomeController extends Controller
             'brand_label'=>$brand_label,
             'wishlists'=>$wishlists,
             'brand_total'=>$brand_total,
-            'distinctData'=>$distinctData
             // 'jdm_legend_heavy'=>$jdm_legend_heavy,
             // 'jdm_legend_small_heavy'=>$jdm_legend_small_heavy
         ]);
     }
 
+    public function searchFilter(Request $request){
+
+        // echo json_encode($request->all());die();
+            if ($request->type == 'car') {
+                if (Auth::guard('web')->check()) {
+                    $userId = $userId ?? auth()->id();  // Assign user ID if authenticated
+                }
+                // Build the car query
+                $carsQuery = Cars::where(DB::raw('LOWER(blog.make)'), $request->brand)
+                    ->where('is_active', '1')
+                    ->WhereRaw('TRIM(blog.model) = ?', $request->model)
+                    ->whereRaw('REGEXP_REPLACE(blog.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+                    ->select('blog.*');
+            } else if ($request->type == 'heavy') {
+               
+                if (Auth::guard('web')->check()) {
+                    $userId = $userId ?? auth()->id();
+                }
+                // Build the heavy query
+                $carsQuery = Heavy::where(DB::raw('LOWER(heavy.make)'), $request->brand)
+                    ->where('is_active', '1')
+                    ->WhereRaw('TRIM(heavy.model) = ?', $request->model)
+                    ->whereRaw('REGEXP_REPLACE(heavy.price, "[,\\s]", "") REGEXP "^[0-9]+$"')
+                    ->select('heavy.*');
+            }
+
+            // Get the filtered and grouped data
+            $results = $carsQuery->get();
+
+            // dd(DB::getQueryLog());
+
+            
+            // Extract the distinct values and remove null/empty values
+            $distinctYears = $results->pluck('yom')
+            ->map(function ($year) {
+                // Check if the value is already a 4-digit year
+                if (is_numeric($year) && strlen((string)$year) == 4) {
+                    return $year; // Just return it as is
+                }
+                
+                try {
+                    // For other date formats, use Carbon parsing
+                    return Carbon::parse($year)->format('Y');
+                } catch (\Exception $e) {
+                    return $year;
+                }
+            })
+            ->filter()
+            ->unique()
+            ->values();
+
+          
+                // echo json_encode();die();
+
+            $distinctMileage = $results->pluck('kms')->filter()->unique()->values();
+            $distinctTransmission = $results->pluck('transmission')->filter()->unique()->values();
+            $distinctFuel = $results->pluck('fuel')->filter()->unique()->values();
+            $distinctChassis = $results->pluck('chassis')->filter()->unique()->values();
+            $distinctPrice = $results->pluck('price')->filter()->unique()->values();
+            // $distinctYears = $results->pluck('yom')->filter()->unique()->values();
+
+            // Prepare the distinct data for JSON response
+            $distinctData = [
+                'years' => $distinctYears,
+                'mileage' => $distinctMileage,
+                'transmission' => $distinctTransmission,
+                'fuel' => $distinctFuel,
+                'chassis'=>$distinctChassis,
+                'price'=>$distinctPrice,
+                'year'=>$distinctYears
+            ];
+        return response()->json(['status' => true, 'response' => $distinctData]);
+    }
+    public function searchFilterOnePrice(Request $request){
+
+            // DB::enableQueryLog();
+            $carsQuery = CarDataJpOp::query();
+            $carsQuery->Join('auct_lots_xml_jp_op_other_chargers as oc','oc.auct_id','=','auct_lots_xml_jp_op.id');
+            if($request->type == 'new-arrival'){
+                $carsQuery->where('oc.new_arrival','1');
+            } else if($request->type=='top-selling'){
+                $carsQuery->where('oc.top_sell','1');
+            }  else if($request->type=='brand-new'){
+                $minYear = now()->subYear()->year;
+                $maxYear = now()->year;
+                $carsQuery->whereBetween('model_year_en', [$minYear,$maxYear]);
+            }
+            $carsQuery->where(DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), $request->brand);
+            $carsQuery->where('auct_lots_xml_jp_op.model_name_en', $request->model);
+            $carsQuery->select('auct_lots_xml_jp_op.*');
+            $cars=$carsQuery->get();
+            // dd(DB::getQueryLog());
+      
+
+
+            // Extract the distinct values and remove null/empty values
+            $distinctYears = $cars->pluck('model_year_en')
+            ->map(function ($year) {
+                // Check if the value is already a 4-digit year
+                if (is_numeric($year) && strlen((string)$year) == 4) {
+                    return $year; // Just return it as is   
+                }
+                
+                try {
+                    // For other date formats, use Carbon parsing
+                    return Carbon::parse($year)->format('Y');
+                } catch (\Exception $e) {
+                    return $year;
+                }
+            })
+            ->filter()
+            ->unique()
+            ->values();
+
+            $distinctPrice = $cars->pluck('start_price_num')
+            ->map(function ($price) {
+                // Apply the currency conversion logic here
+                try {
+                    // Assuming $this->convertCurrency() method applies the currency conversion
+                    $convertedPrice = $this->convertCurrency($price, $this->usdRate);
+                    
+                    // If the price is in a different format (not a date), convert it
+                    return $convertedPrice;
+                } catch (\Exception $e) {
+                    // If there's an exception (e.g., price is not convertible), return the original value
+                    return $price;
+                }
+            })
+            ->filter()  // Filter out null or false values
+            ->unique()  // Get distinct values
+            ->values(); // Reindex the collection
+        
+        
+
+          
+                // echo json_encode();die();
+
+            $distinctMileage = $cars->pluck('mileage_num')->filter()->unique()->values();
+            $distinctTransmission = $cars->pluck('transmission_en')->filter()->unique()->values();
+            $distinctChassis = $cars->pluck('model_type_en')->filter()->unique()->values();
+            // $distinctPrice = $cars->pluck('start_price_num')->filter()->unique()->values();
+            // $distinctYears = $results->pluck('yom')->filter()->unique()->values();
+
+            // Prepare the distinct data for JSON response
+            $distinctData = [
+                'years' => $distinctYears,
+                'mileage' => $distinctMileage,
+                'transmission' => $distinctTransmission,
+                'chassis'=>$distinctChassis,
+                'price'=>$distinctPrice,
+            ];
+          
+        return response()->json(['status' => true, 'response' => $distinctData]);
+    }
+    public function searchFilterAuction(Request $request){
+
+            // DB::enableQueryLog();
+            $carsQuery = Auct_lots_xml_jp::query();
+            if($request->type=='brand-new'){
+                $minYear = now()->subYear()->year;
+                $maxYear = now()->year;
+                $carsQuery->whereBetween('model_year_en', [$minYear,$maxYear]);
+            }
+            $carsQuery->where(DB::raw('LOWER(company_en)'), $request->brand);
+            $carsQuery->where('model_name_en', $request->model);
+            $cars=$carsQuery->get();
+
+        //  echo json_encode($cars);die();
+
+            // dd(DB::getQueryLog());s
+      
+
+
+            // Extract the distinct values and remove null/empty values
+            $distinctYears = $cars->pluck('model_year_en')
+            ->map(function ($year) {
+                // Check if the value is already a 4-digit year
+                if (is_numeric($year) && strlen((string)$year) == 4) {
+                    return $year; // Just return it as is   
+                }
+                
+                try {
+                    // For other date formats, use Carbon parsing
+                    return Carbon::parse($year)->format('Y');
+                } catch (\Exception $e) {
+                    return $year;
+                }
+            })
+            ->filter()
+            ->unique()
+            ->values();
+
+            $distinctPrice = $cars->pluck('start_price_num')
+            ->map(function ($price) {
+                // Apply the currency conversion logic here
+                try {
+                    // Assuming $this->convertCurrency() method applies the currency conversion
+                    $convertedPrice = $this->convertCurrency($price, $this->usdRate);
+                    
+                    // If the price is in a different format (not a date), convert it
+                    return $convertedPrice;
+                } catch (\Exception $e) {
+                    // If there's an exception (e.g., price is not convertible), return the original value
+                    return $price;
+                }
+            })
+            ->filter()  // Filter out null or false values
+            ->unique()  // Get distinct values
+            ->values(); // Reindex the collection
+        
+        
+
+          
+                // echo json_encode();die();
+
+            $distinctMileage = $cars->pluck('mileage_num')->filter()->unique()->values();
+            $distinctTransmission = $cars->pluck('transmission_en')->filter()->unique()->values();
+            $distinctChassis = $cars->pluck('model_type_en')->filter()->unique()->values();
+            // $distinctPrice = $cars->pluck('start_price_num')->filter()->unique()->values();
+            // $distinctYears = $results->pluck('yom')->filter()->unique()->values();
+
+            // Prepare the distinct data for JSON response
+            $distinctData = [
+                'years' => $distinctYears,
+                'mileage' => $distinctMileage,
+                'transmission' => $distinctTransmission,
+                'chassis'=>$distinctChassis,
+                'price'=>$distinctPrice,
+            ];
+
+          
+        return response()->json(['status' => true, 'response' => $distinctData]);
+    }
+  
+    
 
     public function jdm_listing(Request $request,$slug,$type)
     {
@@ -2547,12 +2811,7 @@ public function getJdmBrandsWithModels(): array
     })->all();
 }
 public function car_listing(Request $request){
-    // dd($request->all());
-        // $brands = CarDataJpOp::join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
-        // ->join('brand_translations as bt','bt.brand_id','=','b.id')
-        // ->where('bt.lang_code',Session::get('front_lang'))
-        // ->select('b.slug','bt.name as name')
-        // ->distinct('b.slug')->get();
+
         $seo_setting = SeoSetting::where('id', 1)->first();
         $brands=CarDataJpOp::select(
             'company_en as name',
@@ -2590,19 +2849,11 @@ public function car_listing(Request $request){
         $startValue = $minPrice;
         $endValue = $maxPrice;
 
-
-    // DB::enableQueryLog();
-
-    // Initialize the query for cars
-
-
-    // echo json_encode($request->model);die();
     
+        // DB::enableQueryLog();
     $carsQuery = CarDataJpOp::query();
 
-    // $carsQuery->join('brands as b', DB::raw('LOWER(auct_lots_xml_jp_op.company_en)'), '=', 'b.slug')
-    // ->join('brand_translations as bt', 'bt.brand_id', '=', 'b.id')
-    // ->where('bt.lang_code', Session::get('front_lang'));
+
 
     // Apply filters based on request parameters
    
@@ -2633,8 +2884,6 @@ public function car_listing(Request $request){
              }  
             $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
                 $q->whereBetween('start_price_num', [$startValue, $endValue]);
-                // $q->whereBetween('start_price_num', [$startValue, $endValue])
-                // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
             });
         }
     }
@@ -2664,10 +2913,7 @@ public function car_listing(Request $request){
         if ($model_arr) {
             $carsQuery->whereIn('model_name_en', $model_arr);
         }
-        // $model_arr = array_filter($request->model); // Filter out any empty values
-        // if ($model_arr) {
-        //     $carsQuery->whereIn('model_name_en', $model_arr); 
-        // }
+     
     }
 
 
@@ -2679,15 +2925,10 @@ public function car_listing(Request $request){
             $endYear=trim($parts[1]);
 
             $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
-                // $q->whereBetween('start_price_num', [$startValue, $endValue])
-                // ->orWhereBetween('end_price_num', [$startValue, $endValue]);
                 $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
             });
         }
-        // if($request->year !="")
-        // {
-        //     $carsQuery->where('model_year_en', $request->year); 
-        // }
+      
     }
 
     if($request->price_range){
@@ -2710,8 +2951,6 @@ public function car_listing(Request $request){
                     // Group the conditions for this range
                     $query->orWhere(function ($subQuery) use ($result) {
                         $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']]);
-                        // $subQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-                        //          ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
                     });
                 }
             }
@@ -2720,26 +2959,7 @@ public function car_listing(Request $request){
 
 
 
-            // foreach($request->price_range as $range){
-            //     $result = $this->getPriceRangestart($range, $priceRanges);
-
-            //     $carsQuery=$carsQuery->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-            //     ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-            //     // if ($result['start_price_num'] === null) {
-            //     //     // Count for "Above" range
-                
-            //     //     $carsQuery = $carsQuery->where('start_price_num', '>', $result['start_price_num'])
-            //     //                    ->orWhere('end_price_num', '>', $result['start_price_num']);
-            //     // } else {
-            //     //     $result['end_price_num']=$result['end_price_num'] == null ? $endValue : $result['end_price_num'];
-            //     //     // Count for other ranges
-            //     //     $carsQuery = $carsQuery->where(function ($q) use ($result) {
-            //     //         $q->whereBetween('start_price_num', [$result['start_price_num'], $result['end_price_num']])
-            //     //           ->orWhereBetween('end_price_num', [$result['start_price_num'], $result['end_price_num']]);
-            //     //     });
-            //     // }  
-                
-            // }  
+ 
     }
 
     
@@ -2779,6 +2999,57 @@ public function car_listing(Request $request){
         }
     }
 
+    if ($request->vertical_brand) {
+        $carsQuery->where(DB::raw('LOWER(company_en)'), $request->vertical_brand); 
+    }
+   
+    if($request->vertical_filter_model){
+        $model_arr = $request->vertical_filter_model;   
+        if ($model_arr) {
+            $carsQuery->where('model_name_en', $model_arr);
+        }
+    }
+
+    if($request->vertical_transmission){
+        $vertical_transmission = $request->vertical_transmission; 
+        if ($vertical_transmission) {
+            if($type== 'car'){
+                $carsQuery->Where('transmission', $vertical_transmission);
+                // $carsQuery->whereIn('blog.model', $model_arr); 
+            }  else {
+                $carsQuery->Where('transmission', $vertical_transmission);
+            }
+        }
+    }
+
+    if($request->vertical_start_year || $request->vertical_end_year){
+        $startYear=$request->vertical_start_year;
+        $endYear=$request->vertical_end_year;
+        $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+            $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+        });
+      
+    }
+
+    if($request->vertical_budget_start || $request->vertical_budget_end){
+        $startValue = ($request->vertical_start_year *  $this->usdRate);
+        $endValue = ($request->vertical_end_year *  $this->usdRate);
+        $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+            $q->whereBetween('start_price_num', [$startValue, $endValue]);
+        });
+    } 
+
+    if($request->vertical_mileage_from || $request->vertical_mileage_to){
+        $vertical_mileage_from=(int)$request->vertical_mileage_from;
+        $vertical_mileage_to=(int)$request->vertical_mileage_to;
+            $carsQuery->whereBetween('mileage_num', [$vertical_mileage_from, $vertical_mileage_to]);
+    }    
+
+    if($request->chassis_number){
+        $carsQuery->where('model_type_en',$request->chassis_number);
+    }
+
+
   
     // Pagination
         $price_range_counts = $this->getPriceRangeCounts(
@@ -2789,33 +3060,16 @@ public function car_listing(Request $request){
             '',
         );
 
-
-
-        // $carsQuery->orderBy('id', 'desc')
-        // ->select('auct_lots_xml_jp_op.*')->get();
-  
-
-    // dd(DB::getQueryLog($carsQuery));
-    // $price_range = $this->getPriceRangeCounts();
-    // ->orderBy('id','desc')y
-    // ->paginate(12);
     
     if(!$request->sort_by){
         $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc');
     }
 
+
+
     // $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
-    // ->select('auct_lots_xml_jp_op.*')->get();
-
-    // dd(DB::getQueryLog());
-
-    $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
-    ->select('auct_lots_xml_jp_op.*')->paginate(12);
-
-
-    
-
-
+    // ->select('auct_lots_xml_jp_op.*')->paginate(12);
+    $cars =$carsQuery->select('auct_lots_xml_jp_op.*')->paginate(12);
 
     // Transform cars into an array for the view
     $cars_array = $cars->map(function ($car) {
@@ -3160,8 +3414,60 @@ public function car_listing(Request $request){
         $carsQuery->orderBy('auct_lots_xml_jp_op.id', 'desc');
     }
 
-    $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
-    ->select('auct_lots_xml_jp_op.*')->paginate(12);
+    if ($request->vertical_brand) {
+        $carsQuery->where(DB::raw('LOWER(company_en)'), $request->vertical_brand); 
+    }
+   
+    if($request->vertical_filter_model){
+        $model_arr = $request->vertical_filter_model;   
+        if ($model_arr) {
+            $carsQuery->where('model_name_en', $model_arr);
+        }
+    }
+
+    if($request->vertical_transmission){
+        $vertical_transmission = $request->vertical_transmission; 
+        if ($vertical_transmission) {
+            if($type== 'car'){
+                $carsQuery->Where('transmission', $vertical_transmission);
+                // $carsQuery->whereIn('blog.model', $model_arr); 
+            }  else {
+                $carsQuery->Where('transmission', $vertical_transmission);
+            }
+        }
+    }
+
+    if($request->vertical_start_year || $request->vertical_end_year){
+        $startYear=$request->vertical_start_year;
+        $endYear=$request->vertical_end_year;
+        $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+            $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+        });
+      
+    }
+
+    if($request->vertical_budget_start || $request->vertical_budget_end){
+        $startValue = ($request->vertical_start_year *  $this->usdRate);
+        $endValue = ($request->vertical_end_year *  $this->usdRate);
+        $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+            $q->whereBetween('start_price_num', [$startValue, $endValue]);
+        });
+    } 
+
+    if($request->vertical_mileage_from || $request->vertical_mileage_to){
+        $vertical_mileage_from=(int)$request->vertical_mileage_from;
+        $vertical_mileage_to=(int)$request->vertical_mileage_to;
+            $carsQuery->whereBetween('mileage_num', [$vertical_mileage_from, $vertical_mileage_to]);
+    }    
+
+    if($request->chassis_number){
+        $carsQuery->where('model_type_en',$request->chassis_number);
+    }
+
+
+
+    // $cars =$carsQuery->where('auct_lots_xml_jp_op.active_status','1')
+    $cars =$carsQuery->select('auct_lots_xml_jp_op.*')->paginate(12);
 
     // Transform cars into an array for the view
     $cars_array = $cars->map(function ($car) {
@@ -4034,6 +4340,53 @@ public function car_listing(Request $request){
                 break;
         }
     }
+    if ($request->vertical_brand) {
+        $carsQuery->where('company_en', $request->vertical_brand); 
+    }
+
+    if($request->vertical_filter_model){
+        $model_arr = $request->vertical_filter_model; 
+        if ($model_arr) {
+            $carsQuery->where('model_name_en', $model_arr);
+        }
+    }
+    if($request->vertical_transmission){
+        $vertical_transmission = $request->vertical_transmission; 
+        if ($vertical_transmission) {
+            if($type== 'car'){
+                $carsQuery->Where('transmission', $vertical_transmission);
+                // $carsQuery->whereIn('blog.model', $model_arr); 
+            }  else {
+                $carsQuery->Where('transmission', $vertical_transmission);
+            }
+        }
+    }
+
+    if($request->vertical_start_year || $request->vertical_end_year){
+        $startYear=$request->vertical_start_year;
+        $endYear=$request->vertical_end_year;
+        $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+            $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+        });
+      
+    }
+    if($request->vertical_budget_start || $request->vertical_budget_end){
+        $startValue = ($request->vertical_start_year *  $this->usdRate);
+        $endValue = ($request->vertical_end_year *  $this->usdRate);
+        $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+            $q->whereBetween('start_price_num', [$startValue, $endValue]);
+        });
+    }    
+    if($request->vertical_mileage_from || $request->vertical_mileage_to){
+        $vertical_mileage_from=(int)$request->vertical_mileage_from;
+        $vertical_mileage_to=(int)$request->vertical_mileage_to;
+            $carsQuery->whereBetween('mileage_num', [$vertical_mileage_from, $vertical_mileage_to]);
+    }    
+
+    if($request->chassis_number){
+        $carsQuery->where('model_type_en',$request->chassis_number);
+    }
+
 
     // dd(DB::getQueryLog($carsQuery->get()));
 
@@ -4324,6 +4677,7 @@ public function car_listing(Request $request){
                     break;
             }
         }
+        
 
         $cars = $carsQuery->orderBy('id', 'desc')
         ->where('auct_lots_xml_jp.active_status','1')
@@ -4658,9 +5012,64 @@ public function car_listing(Request $request){
         if(!$request->sort_by){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
         }
+
+        if ($request->vertical_brand) {
+            $carsQuery->where(DB::raw('LOWER(company_en)'), $request->vertical_brand); 
+        }
+       
+        if($request->vertical_filter_model){
+            $model_arr = $request->vertical_filter_model;   
+            if ($model_arr) {
+                $carsQuery->where('model_name_en', $model_arr);
+            }
+        }
+    
+        if($request->vertical_transmission){
+            $vertical_transmission = $request->vertical_transmission; 
+            if ($vertical_transmission) {
+                if($type== 'car'){
+                    $carsQuery->Where('transmission', $vertical_transmission);
+                    // $carsQuery->whereIn('blog.model', $model_arr); 
+                }  else {
+                    $carsQuery->Where('transmission', $vertical_transmission);
+                }
+            }
+        }
+    
+        if($request->vertical_start_year || $request->vertical_end_year){
+            $startYear=$request->vertical_start_year;
+            $endYear=$request->vertical_end_year;
+            $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            });
+          
+        }
+    
+        if($request->vertical_budget_start || $request->vertical_budget_end){
+            $startValue = ($request->vertical_start_year *  $this->usdRate);
+            $endValue = ($request->vertical_end_year *  $this->usdRate);
+            $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                $q->whereBetween('start_price_num', [$startValue, $endValue]);
+            });
+        } 
+    
+        if($request->vertical_mileage_from || $request->vertical_mileage_to){
+            $vertical_mileage_from=(int)$request->vertical_mileage_from;
+            $vertical_mileage_to=(int)$request->vertical_mileage_to;
+                $carsQuery->whereBetween('mileage_num', [$vertical_mileage_from, $vertical_mileage_to]);
+        }    
+    
+        if($request->chassis_number){
+            $carsQuery->where('model_type_en',$request->chassis_number);
+        }
+    
+    
+    
        
         // $carsQuery->select('auct_lots_xml_jp.*')->get();
         // dd(DB::getQueryLog());
+
+        
 
        
         // Pagination
@@ -5067,6 +5476,57 @@ public function car_listing(Request $request){
         if(!$request->sort_by){
             $carsQuery->orderBy('auct_lots_xml_jp.id', 'desc');
         }
+
+        if ($request->vertical_brand) {
+            $carsQuery->where(DB::raw('LOWER(company_en)'), $request->vertical_brand); 
+        }
+       
+        if($request->vertical_filter_model){
+            $model_arr = $request->vertical_filter_model;   
+            if ($model_arr) {
+                $carsQuery->where('model_name_en', $model_arr);
+            }
+        }
+    
+        if($request->vertical_transmission){
+            $vertical_transmission = $request->vertical_transmission; 
+            if ($vertical_transmission) {
+                if($type== 'car'){
+                    $carsQuery->Where('transmission', $vertical_transmission);
+                    // $carsQuery->whereIn('blog.model', $model_arr); 
+                }  else {
+                    $carsQuery->Where('transmission', $vertical_transmission);
+                }
+            }
+        }
+    
+        if($request->vertical_start_year || $request->vertical_end_year){
+            $startYear=$request->vertical_start_year;
+            $endYear=$request->vertical_end_year;
+            $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            });
+          
+        }
+    
+        if($request->vertical_budget_start || $request->vertical_budget_end){
+            $startValue = ($request->vertical_start_year *  $this->usdRate);
+            $endValue = ($request->vertical_end_year *  $this->usdRate);
+            $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                $q->whereBetween('start_price_num', [$startValue, $endValue]);
+            });
+        } 
+    
+        if($request->vertical_mileage_from || $request->vertical_mileage_to){
+            $vertical_mileage_from=(int)$request->vertical_mileage_from;
+            $vertical_mileage_to=(int)$request->vertical_mileage_to;
+                $carsQuery->whereBetween('mileage_num', [$vertical_mileage_from, $vertical_mileage_to]);
+        }    
+    
+        if($request->chassis_number){
+            $carsQuery->where('model_type_en',$request->chassis_number);
+        }
+    
         
         // DB::enableQueryLog();
         // $cars = $carsQuery
@@ -5745,6 +6205,51 @@ public function car_listing(Request $request){
                 $carsQuery = $carsQuery->whereIn('auct_lots_xml_jp_op.id', $recentCarIds);
                     break;
             }
+        }
+        if ($request->vertical_brand) {
+            $carsQuery->where('company_en', $request->vertical_brand); 
+        }
+        if($request->vertical_filter_model){
+            $model_arr = $request->vertical_filter_model; 
+            if ($model_arr) {
+                $carsQuery->where('model_name_en', $model_arr);
+            }
+        }
+        if($request->vertical_transmission){
+            $vertical_transmission = $request->vertical_transmission; 
+            if ($vertical_transmission) {
+                if($type== 'car'){
+                    $carsQuery->Where('transmission', $vertical_transmission);
+                    // $carsQuery->whereIn('blog.model', $model_arr); 
+                }  else {
+                    $carsQuery->Where('transmission', $vertical_transmission);
+                }
+            }
+        }
+
+        if($request->vertical_start_year || $request->vertical_end_year){
+            $startYear=$request->vertical_start_year;
+            $endYear=$request->vertical_end_year;
+            $carsQuery = $carsQuery->where(function ($q) use ($startYear,$endYear) {
+                $q->whereBetween('model_year_en', [($startYear), ($endYear)]);
+            });
+          
+        }
+        if($request->vertical_budget_start || $request->vertical_budget_end){
+            $startValue = ($request->vertical_start_year *  $this->usdRate);
+            $endValue = ($request->vertical_end_year *  $this->usdRate);
+            $carsQuery = $carsQuery->where(function ($q) use ($startValue,$endValue) {
+                $q->whereBetween('start_price_num', [$startValue, $endValue]);
+            });
+        }    
+        if($request->vertical_mileage_from || $request->vertical_mileage_to){
+            $vertical_mileage_from=(int)$request->vertical_mileage_from;
+            $vertical_mileage_to=(int)$request->vertical_mileage_to;
+                $carsQuery->whereBetween('mileage_num', [$vertical_mileage_from, $vertical_mileage_to]);
+        }    
+
+        if($request->chassis_number){
+            $carsQuery->where('model_type_en',$request->chassis_number);
         }
 
 

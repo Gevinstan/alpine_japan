@@ -298,9 +298,9 @@
                             <h5 class="fw-bold px-2 pb-2">Search Car</h5>
                             <div class="row g-3">
                                     <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option>Brand</option>
-                                            <option selected>{{$brand_label->name}}({{ $brand_total }})</option>
+                                        <select class="form-select p-3" id="vertical_brand" name="vertical_brand">
+                                            <option value="">Brand</option>
+                                            <option selected value="{{$brand_label->name}}">{{$brand_label->name}}({{ $brand_total }})</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
@@ -317,76 +317,58 @@
                                     <div class="col-md-4 col-sm-6">
                                         <select class="form-select p-3" name="chassis_number" id="chassis_number">
                                             <option selected value="">Chassis Number</option>
-                                            @foreach ($cars_array as $index => $car)
-                                                <option value="{{ $car['chassis_number'] }}"
-                                                    {{ in_array($car['chassis_number'], (array) request('chassis_number')) ? 'selected' : '' }}>
-                                                    {{ $car['chassis_number']}}
-                                                </option>
-                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
                                         <select class="form-select p-3" name="vertical_start_year" id="vertical_start_year">
                                             <option selected value="">Year From</option>
-                                            @foreach ($distinctData['years'] as $index => $years)
-                                            <option>{{$years}}</option>
-                                            @endforeach
+                                           {{-- @foreach ($distinctData['years'] as $index => $years)
+                                            <option value="{{ str_replace(',', '', $years) }}"
+                                                    {{ in_array(str_replace(',', '', $years), (array) request('vertical_start_year')) ? 'selected' : '' }}>
+                                                    {{ $years }}
+                                            </option>
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
                                         <select class="form-select p-3" name="vertical_end_year" id="vertical_end_year">
                                             <option selected value="">Year To</option>
-                                            @foreach ($distinctData['years'] as $index => $years)
-                                              <option>{{ $years}}</option>
-                                            @endforeach
+                                           {{-- @foreach ($distinctData['years'] as $index => $years)
+                                            <option value="{{ str_replace(',', '', $years) }}"
+                                                    {{ in_array(str_replace(',', '', $years), (array) request('vertical_end_year')) ? 'selected' : '' }}>
+                                                    {{ $years }}
+                                            </option>
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Budget From</option>
-                                            @foreach ($cars_array as $index => $car)
-                                              <option>${{$car['start_price']}}</option>
-                                            @endforeach
+                                        <select class="form-select p-3" name="vertical_budget_start" id="vertical_budget_start">
+                                            <option selected value="">Budget From</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Budget To</option>
-                                            @foreach ($cars_array as $index => $car)
-                                              <option>${{$car['start_price']}}</option>
-                                            @endforeach
+                                        <select class="form-select p-3" name="vertical_budget_end" id="vertical_budget_end">
+                                            <option selected value="">Budget To</option>  
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Mileage From</option>
-                                            @foreach ($distinctData['mileage'] as $index => $car)
-                                              <option>${{$car}}</option>
-                                            @endforeach
+                                        <select class="form-select p-3" id="vertical_mileage_from" name="vertical_mileage_from">
+                                            <option selected value="">Mileage From</option>
                                         </select>
                                     </div>
                                     <div class="col-md-2 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Mileage To</option>
-                                            @foreach ($distinctData['mileage'] as $index => $car)
-                                              <option>${{$car}}</option>
-                                            @endforeach
+                                        <select class="form-select p-3" id="vertical_mileage_to" name="vertical_mileage_to">
+                                            <option selected value="">Mileage To</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Transmission</option>
-                                            @foreach ($distinctData['transmission'] as $index => $car)
-                                              <option>{{$car}}</option>
-                                            @endforeach
+                                        <select class="form-select p-3" name="vertical_transmission" id="vertical_transmission">
+                                            <option selected value="">Transmission</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4 col-sm-6">
-                                        <select class="form-select p-3">
-                                            <option selected>Transmission</option>
-                                            @foreach ($distinctData['fuel'] as $index => $car)
-                                              <option>{{$car}}</option>
-                                            @endforeach
+                                        <select class="form-select p-3" name="vertical_fuel" id="vertical_fuel">
+                                            <option selected value="">Fuel</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1101,11 +1083,10 @@
 
 
 @push('js_section')
-
     <script>
          window.addEventListener("load", function() {
         // Hide the loader when the page is fully loaded
-        document.getElementById("pageLoader").classList.add("hidden");  
+         document.getElementById("pageLoader").classList.add("hidden");  
         });
 
         // Ensure the loader is visible when the page is reloaded or submitted
@@ -1113,11 +1094,205 @@
             // Show the loader before the page unloads (optional: depends on your needs)
             document.getElementById("pageLoader").classList.remove("hidden");
         });
+            function getQueryParamValues(param) {
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has(param)) {
+                    return urlParams.getAll(param);  // Returns an array of values for the parameter
+                } else {
+                    return "";  // Returns an empty array if the parameter does not exist
+                }
+            }
+            
+
+            function verticalFuel(distinctData,verticalFuel){
+                const selectElement = document.getElementById('vertical_fuel');
+                $("#vertical_fuel").empty();
+                $("#vertical_fuel").append('<option value="">Fuel</option>')
+                // selectElement;
+                
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.fuel.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            if (verticalFuel.includes(year)) {
+                                option.selected = true;
+                            }
+
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectElement.appendChild(option);
+                        });
+                    }
+                }
+            }
+            function verticalTransmission(distinctData,verticalFuel){
+                const selectTransmission = document.getElementById('vertical_transmission');
+                $("#vertical_transmission").empty();
+                $("#vertical_transmission").append('<option value="">Transmission</option>')
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.transmission.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                    if (verticalFuel.includes(year)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+            function verticalChassis(distinctData,verticalFuel){
+                const selectTransmission = document.getElementById('chassis_number');
+                $("#chassis_number").empty();
+                $("#chassis_number").append('<option value="">Chassis Number</option>')
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.chassis.forEach(chassisNumber => {
+                            const option = document.createElement('option');
+                            option.value = chassisNumber;
+
+                      
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                    if (verticalFuel.includes(chassisNumber)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = chassisNumber;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+            function verticalStartYear(distinctData,verticalFuel,yearparam){
+                const selectTransmission = document.getElementById(yearparam);
+                var option_value=yearparam == 'vertical_start_year' ? 'Year From' : 'Year To';
+                $("#"+yearparam).empty().append('<option value="">'+option_value+'</option>');
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.years.forEach(year => {
+                            const option = document.createElement('option');
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                    if (verticalFuel.includes(year)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+            function verticalStartBudget(distinctData,verticalFuel,yearparam){
+                const selectTransmission = document.getElementById(yearparam);
+                var option_value=yearparam == 'vertical_budget_start' ? 'Budget From' : 'Budget To';
+                $("#"+yearparam).empty().append('<option value="">'+option_value+'</option>');
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.price.forEach(year => {
+                            const option = document.createElement('option');
+                            const yearWithoutCommas = year.replace(/,/g, '');
+                            option.value = yearWithoutCommas;
+                            // option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                if (verticalFuel.includes(yearWithoutCommas)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = `$${year}`;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+            function verticalStartMileage(distinctData,verticalFuel,yearparam){
+                console.log(distinctData);
+                const selectTransmission = document.getElementById(yearparam);
+                var option_value=yearparam == 'vertical_mileage_from' ? 'Mileage From' : 'Mileage To';
+                $("#"+yearparam).empty().append('<option value="">'+option_value+'</option>');
+                // selectElement;
+                if(distinctData!=null){
+                    if(Object.keys(distinctData).length > 0){
+                        distinctData.mileage.forEach(year => {
+                            const option = document.createElement('option');
+                            const yearWithoutCommas = year.replace(/,/g, '');
+                            option.value = year;
+
+                            // Check if the year is in the selected verticalStartYear array
+                            
+                                if (verticalFuel.includes(year)) {
+                                    option.selected = true;
+                                }
+                            
+                            // Set the display text for the option
+                            option.textContent = year;
+                            // Append the option to the select element
+                            selectTransmission.appendChild(option);
+                        });
+                    }
+                }
+            }
+           
         (function($) {
+            if($("#vertical_filter_model").val()==""){
+                localStorage.removeItem('distinctData');
+            }
+
+            let distinctData = JSON.parse(localStorage.getItem('distinctData'));
+           
+            var fuel_check=getQueryParamValues('vertical_fuel');
+            var fuel_transmission=getQueryParamValues('vertical_transmission');
+            var fuel_chassis=getQueryParamValues('chassis_number');
+            var fuel_start_year=getQueryParamValues('vertical_start_year');
+            var fuel_end_year=getQueryParamValues('vertical_end_year');
+            var fuel_start_budget=getQueryParamValues('vertical_budget_start');
+            var fuel_end_budget=getQueryParamValues('vertical_budget_end');
+            var fuel_start_mileage=getQueryParamValues('vertical_mileage_from');
+            var fuel_end_mileage=getQueryParamValues('vertical_mileage_to');
+         
+                verticalFuel(distinctData,fuel_check[0])
+                verticalTransmission(distinctData,fuel_transmission[0])
+                verticalChassis(distinctData,fuel_chassis[0])
+                verticalStartYear(distinctData,fuel_start_year[0],"vertical_start_year")
+                verticalStartYear(distinctData,fuel_end_year[0],"vertical_end_year")
+                verticalStartMileage(distinctData,fuel_start_mileage[0],"vertical_mileage_from")
+                verticalStartMileage(distinctData,fuel_end_mileage[0],"vertical_mileage_to")
+                verticalStartBudget(distinctData,fuel_start_budget[0],"vertical_budget_start")
+                verticalStartBudget(distinctData,fuel_end_budget[0],"vertical_budget_end")
+
+
             document.getElementById("pageLoader").classList.remove("hidden");
             const initialMinPrice = $('#ex2').data('slider-min');
             const initialMaxPrice = $('#ex2').data('slider-max');
             $(".dropdown-click").on('click',function(){
+                clear_price_slider();   
                     const dropdownButton = document.querySelector('[aria-labelledby="defaultDropdown"]').previousElementSibling;
                     if (dropdownButton) {
                         dropdownButton.innerText = $(this).data('text');
@@ -1170,23 +1345,119 @@
                     $('input[name="price_range_scale"]').val('')
                     $("#search_form").submit();
                 })
-                $("#vertical_filter_model").on('change',function(e){
-                    e.preventDefault();    
+                $("#vertical_filter_model").on('change', function(e) {
+                    var model_value=$("#vertical_filter_model").val();
+                    var brand_value=$("#vertical_brand").val();
+                    var type=""
+                    e.preventDefault();  
+                    if($("#vertical_filter_model").val() !=""){
+                            $.ajax({
+                            type: 'POST',
+                            data: {
+                                'model': $("#vertical_filter_model").val(),
+                                'brand':$("#vertical_brand").val(),
+                                'type':"{{request()->segment(3)}}"
+                            },
+                            datatype: 'JSON',
+                            url: '{{ route("search.filter") }}',
+                            success: function(data) {
+                                var gasoline=data.response.fuel;
+                                var transmission=data.response.transmission;
+                                localStorage.setItem('distinctData', JSON.stringify(data.response));
+                            }
+                            });
+                    }  else {
+                        localStorage.setItem('distinctData', JSON.stringify({}));
+                    }
+                    $('#search_form')[0].reset(); 
+                    $("#vertical_filter_model").val(model_value)
+                    $("#vertical_brand").val(brand_value)
+
                     clear_price_slider();   
-                    $('#search_form').submit();
+                    $('#search_form').submit();  
                 });
+                 
+                
                 $("#chassis_number").on('change',function(e){
                     e.preventDefault();    
                     clear_price_slider();   
                     $('#search_form').submit();
                 });
+
+                $("#vertical_fuel").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                })
+                $("#vertical_transmission").on('change',function(e){
+                    e.preventDefault();    
+                    clear_price_slider();   
+                    $('#search_form').submit();
+                })
+
+
                 $("#vertical_start_year").on('change',function(e){
                      if($("#vertical_start_year").val()!="" && $("#vertical_end_year").val()!=""){
                           if($("#vertical_start_year").val() > $("#vertical_end_year").val()){
                             toastr.error("Start year should be less than end year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
                           }
-                          $('#search_form').submit(); 
+                         
                      } 
+                });
+                $("#vertical_end_year").on('change',function(e){
+                    if($("#vertical_start_year").val()!="" && $("#vertical_end_year").val()!=""){
+                          if($("#vertical_start_year").val() > $("#vertical_end_year").val()){
+                            toastr.error("End year should be greater than start year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                    } 
+                });
+                $("#vertical_budget_start").on('change',function(e){
+                     if($("#vertical_budget_start").val()!="" && $("#vertical_budget_end").val()!=""){
+                          if(parseInt($("#vertical_budget_start").val()) > parseInt($("#vertical_budget_end").val())){
+                            toastr.error("Start year should be less than end year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                         
+                     } 
+                });
+                $("#vertical_budget_end").on('change',function(e){
+                    if($("#vertical_budget_start").val()!="" && $("#vertical_budget_end").val()!=""){
+
+                          if(parseInt($("#vertical_budget_start").val()) > parseInt($("#vertical_budget_end").val())){
+                            toastr.error("End Budget should be greater than start year","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                    } 
+                });
+                $("#vertical_mileage_from").on('change',function(e){
+                     if($("#vertical_mileage_from").val()!="" && $("#vertical_mileage_to").val()!=""){
+                          if(parseInt($("#vertical_mileage_from").val()) > parseInt($("#vertical_mileage_to").val())){
+                            toastr.error("From Mileage should be less than To Mileage","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }  
+                     } 
+                });
+                $("#vertical_mileage_to").on('change',function(e){
+                    if($("#vertical_mileage_from").val()!="" && $("#vertical_mileage_to").val()!=""){
+                          if(parseInt($("#vertical_mileage_from").val()) > parseInt($("#vertical_mileage_to").val())){
+                            toastr.error("To Mileage should be greater than start Mileage","Failed");
+                          } else {
+                            clear_price_slider();   
+                            $('#search_form').submit(); 
+                          }
+                    } 
                 });
                 
                 // $(".brand-search").on('change',function(e){

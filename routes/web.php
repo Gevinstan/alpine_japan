@@ -72,6 +72,11 @@ Route::group(['middleware' => ['XSS','DEMO']], function () {
             Route::get('/howtobuy', 'howtobuy')->name('howtobuy');
 
 
+            Route::post('search.filter','searchFilter')->name('search.filter');
+            Route::post('search.filter.new-arrial','searchFilterOnePrice')->name('search.filter.new-arrial');
+            Route::post('search.filter.auction','searchFilterAuction')->name('search.filter.auction');
+
+
 
             Route::get('/compare', 'compare')->name('compare');
             Route::get('/add-to-compare/{id}', 'add_to_compare')->name('add-to-compare');
